@@ -3,7 +3,7 @@ title: "Pacotes (Zen do R parte 6)"
 date: "2019-08-07"
 tags: ["zen-do-r"]
 categories: ["livro", "r"]
-image: "images/posts/zen-do-r-6.jpg"
+image: "images/posts/banner/zen-do-r-6.jpg"
 author: ["Caio"]
 summary: "Pacotes: por que e como fazê-los?"
 draft: false
@@ -171,7 +171,7 @@ devtools::document()
 ```
 
 ```{r, echo=FALSE, fig.align='center', dpi=50}
-knitr::include_graphics("/img/blog/zen-do-r/04_doc.png")
+knitr::include_graphics("/images/posts/conteudo/zen-do-r/04_doc.png")
 ```
 
 Conforme o número de funções no pacote for crescendo, basta iterar nesse ciclo

@@ -3,10 +3,12 @@ title: "Predições XGBoost diretamente pelo SQL"
 date: "2020-08-29"
 tags: ["sql", "xgboost", "r", "machine learning"]
 categories: ["tutoriais", "r"]
-image: "images/posts/xgboost-sql.jpg"
+image: "images/posts/banner/xgboost-sql.jpg"
 author: ["Athos"]
 summary: "Criar um XGBoost no R e colocar para o SQL gerar as predições em uma linha de código com o {tidypredict}."
 draft: false
+type: featured
+featuredImage: "images/featured-post/post-2.jpg"
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +22,7 @@ knitr::opts_chunk$set(
 
 O que você vai aprender a fazer ao final da leitura é:
 
-<img src = "/img/blog/xgboost-sql/xgboost_para_sql.gif">
+<img src = "/images/posts/conteudo/xgboost-sql/xgboost_para_sql.gif">
 
 Ou seja, uma vez que você tenha um modelo de XGBoost ajustado dentro do seu R, dá para pedir para o {tidypredict} gerar a query de SQL que calcularia o score. PS: o XGBoost do gif tem 2 árvores. 
 

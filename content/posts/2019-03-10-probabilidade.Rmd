@@ -3,7 +3,7 @@ title: "Probabilidade e medida: intuição"
 date: "2019-03-10T00:00:00+00:00"
 categories: ["r", "tutoriais"]
 tags: ["r"]
-image: "images/posts/prob.jpg"
+image: "images/posts/banner/prob.jpg"
 author: ["Julio"]
 summary: "Esse é um post de matemática. Mesmo se você não curte essa faceta da ciência de dados, encorajo vocês a lerem e estudarem esse assunto. Nesse texto vou usar um pouco de teoria dos conjuntos e introduzir a teoria da medida, que é a base matemática de tudo que sabemos sobre probabilidade."
 draft: false
@@ -47,7 +47,7 @@ Probabilidade nada mais é que medir eventos, soltando números entre zero e um.
 
 O exemplo mais fácil de **medida** que consigo pensar é a régua. A régua é uma função $\lambda(\cdot)$ que recebe como input um intervalo $(a,b]$ e retorna $b-a$. Ou seja, a função de medida é uma função que trabalha com conjuntos e retorna números reais não-negativos. Mas $b-a$ pode ser maior que um, ou até infinito. Logo, a probabilidade é um caso particular de medida, que recebe como input um conjunto e como output um número no intervalo $[0,1]$. 
 
-![](/img/blog/probabilidade/ruler.jpg)
+![](images/posts/conteudo/probabilidade/ruler.jpg)
 
 No caso da régua, daria para resolver isso forçando $0 \leq a < b \leq 1$. Assim todos os intervalos teriam medida entre zero e um. De fato, quando trabalhamos com variáveis aleatórias
 
@@ -86,7 +86,7 @@ Agora vamos ao exemplo de conjunto não mensurável. O exemplo é um caso de mat
 **Passo 2**. Note que para cada conjunto $\alpha \in \Lambda$, sempre existe um elemento $a \in \alpha$ que está no intervalo $(0,1)$. Agora, para cada $\alpha \in \Lambda$, pegamos um elemento $a_\alpha \in  \alpha$ que está no intervalo $(0,1)$. Finalmente, chamamos $\Omega$ de todos esses conjuntos $a_\alpha$, e temos $\Omega \subseteq (0,1)$. Numa imagem:
 
 ```{r out.width="70%", eval=TRUE, echo=FALSE}
-knitr::include_graphics("/img/blog/probabilidade/exemplo-vitali.png")
+knitr::include_graphics("/images/posts/conteudo/probabilidade/exemplo-vitali.png")
 ```
 
 Muito bem. Agora, note que se $p,q \in \mathbb Q$, então $(\Omega+q)$ e $(\Omega+p)$ são disjuntos. Na verdade, se não fossem disjuntos, isso significaria que $p=q$ e os conjuntos coincidiriam. Isso acontece porque, se $x \in (\Omega+q)\cap (\Omega+p)$, então $x$ é um elemento dos dois conjuntos:

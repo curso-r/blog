@@ -3,7 +3,7 @@ title: "Unindo mapas: the tidy way"
 date: "2017-11-24T14:25:00+03:00"
 tags: ["sf", "tidyverse"]
 categories: ["tutoriais", "r"]
-image: "images/posts/sf.png"
+image: "images/posts/banner/sf.png"
 author: ["Julio"]
 summary: "Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. Dessa vez, o grande culpado foi o sf, um pacote ainda em estágio de desenvolvimento mas que já considero pacas..."
 draft: false
@@ -39,7 +39,7 @@ draft: false
 <p>P.S.: Não se esqueça do ciclo da ciência de dados! Vou falar disso sem parar para explicar. Na dúvida, leia o <a href="http://r4ds.had.co.nz/" class="uri">http://r4ds.had.co.nz/</a></p>
 </blockquote>
 <div class="figure">
-<img src="/img/blog/union-sf/data-science.png" />
+<img src="images/posts/conteudo/union-sf/data-science.png" />
 
 </div>
 <p><br/></p>
@@ -158,7 +158,7 @@ dplyr::glimpse(d_sf_municipio)
 <p>Se você quiser fazer um gráfico feinho só pra saber o que está rolando, use <code>plot()</code>:</p>
 <pre class="r"><code>plot(d_sf_municipio[, c(&quot;num_regiao&quot;, &quot;geometry&quot;)])</code></pre>
 <div class="figure">
-<img src="/img/blog/union-sf/sf_blog01.png" />
+<img src="images/posts/conteudo/union-sf/sf_blog01.png" />
 
 </div>
 </div>
@@ -209,7 +209,7 @@ dplyr::glimpse(d_sf_comarca)
 <pre class="r"><code>gridExtra::grid.arrange(grobs = graficos)</code></pre>
 <p>O resultado final é o gráfico abaixo.</p>
 <div class="figure">
-<img src="/img/blog/union-sf/sf_blog02.png" />
+<img src="images/posts/conteudo/union-sf/sf_blog02.png" />
 
 </div>
 <p>Coisa mais linda!</p>

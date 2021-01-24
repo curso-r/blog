@@ -3,7 +3,7 @@ title: "Web scraping do sistema de qualidade do ar da CETESB"
 date: "2018-03-19T14:25:00+03:00"
 tags: ["web-scraping", "dados-abertos"]  
 categories: ["tutoriais", "r"]
-image: "images/posts/scraper-cetesb.jpg"
+image: "images/posts/banner/scraper-cetesb.jpg"
 author: ["William"]
 summary: "Nem sempre dados públicos são disponibilizados de forma eficiente para a coleta. Neste post, vamos exercitar a arte do web scraping para raspar dados de poluição do ar da CETESB."
 draft: false
@@ -52,21 +52,21 @@ Para chegar na página que queremos raspar, precisamos passar pelas seguintes et
 **Login**: fazer o login [na página inicial](http://qualar.cetesb.sp.gov.br/qualar/home.do).
 
 ```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/img/blog/scraper-cetesb/qualar_login.png")
+knitr::include_graphics("/images/posts/conteudo/scraper-cetesb/qualar_login.png")
 ```
 
 
 **Pesquisa**: na próxima página, acessar "Consultas/Exportar Dados" no menu da esquerda e preencher a pesquisa com os dados do parâmetro que você quer acessar.
 
 ```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/img/blog/scraper-cetesb/qualar_form.png")
+knitr::include_graphics("/images/posts/conteudo/scraper-cetesb/qualar_form.png")
 ```
 
 
 **Dados**: na nova janela aberta pelo site estão os dados que queremos raspar.
 
 ```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/img/blog/scraper-cetesb/qualar_dados.png")
+knitr::include_graphics("/images/posts/conteudo/scraper-cetesb/qualar_dados.png")
 ```
 
 <br>
@@ -78,13 +78,13 @@ Para descobrir qual requisição é feita em cada momento, podemos utilizar o "I
 O login é uma submissão de formulário. Inspecionando o html da página, podemos ver que os itens que o formulário precisa enviar são o "cetesb_login" e o "cetesb_passoword".
 
 ```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/img/blog/scraper-cetesb/inspect-form-login.png")
+knitr::include_graphics("/images/posts/conteudo/scraper-cetesb/inspect-form-login.png")
 ```
 
 Para descobrir que tipo de requisição o login faz, basta abrir o Inspect element antes de fazer o login, logar no site e olhar a aba "Network". A requisição que queremos é a "autenticador". Ela faz uma requisição POST para a url "http://qualar.cetesb.sp.gov.br/qualar/autenticador".
 
 ```{r, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/img/blog/scraper-cetesb/inspect_login.png")
+knitr::include_graphics("/images/posts/conteudo/scraper-cetesb/inspect_login.png")
 ```
 
 Não vou mostrar aqui, mas a requisição que a pesquisa faz para acessar os dados também é a submissão de um formulário e pode ser encontrada de forma equivalente. 

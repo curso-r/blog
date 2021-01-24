@@ -3,7 +3,7 @@ title: "Arrumando BDs: o pacote janitor"
 date: "2017-07-24T23:26:00+03:00"
 tags: ["BDs", "pacotes", "janitor"]
 categories: ["tutoriais", "r"]
-image: "images/posts/janitor.jpg"
+image: "images/posts/banner/janitor.jpg"
 author: ["William"]
 summary: "Neste post, apresentaremos o pacote janitor, uma ótima alternativa na hora de dar aquele trato na base de dados."
 ---

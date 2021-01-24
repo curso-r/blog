@@ -3,7 +3,7 @@ title: "Versões e Releases (Zen do R parte 8)"
 date: "2020-02-21"
 tags: ["zen-do-r"]
 categories: ["livro", "r"]
-image: "images/posts/zen-do-r-8.jpg"
+image: "images/posts/banner/zen-do-r-8.jpg"
 author: ["Caio"]
 summary: "Como manter as versões de um pacote sobre controle."
 draft: false
@@ -187,7 +187,7 @@ fundo isso não passa de um versionamento semântico integrado ao site.
 Como exemplo, podemos ver a aba "Releases" do pacote `decryptr`:
 
 ```{r, echo=FALSE, fig.align='center', dpi=50}
-knitr::include_graphics("/img/blog/zen-do-r/03_ver.png")
+knitr::include_graphics("/images/posts/conteudo/zen-do-r/03_ver.png")
 ```
 
 É bom fazer esse tipo de versionamento externo porque os usuários passam a ter
@@ -204,7 +204,7 @@ a aba das releases e clicar em **Draft a new release**. Preencha os campos
 correspondentes e publique a versão.
 
 ```{r, echo=FALSE, fig.align='center', dpi=50}
-knitr::include_graphics("/img/blog/zen-do-r/03_tag.png")
+knitr::include_graphics("/images/posts/conteudo/zen-do-r/03_tag.png")
 ```
 
 Uma forma eficiente de manter todas as alterações realizadas no pacote de forma

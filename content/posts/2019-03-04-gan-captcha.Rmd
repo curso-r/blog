@@ -3,7 +3,7 @@ title: "Quebrando Captchas - Parte VI: Redes Generativas Adversariais com Classi
 date: "2019-03-11T00:00:00+00:00"
 categories: ["análises"]
 tags: ["captcha"]
-image: "images/posts/captcha_06.png"
+image: "images/posts/banner/captcha_06.png"
 author: ["Julio"]
 summary: "Nesse post vou trabalhar com Captchas e GANs. Se você não sabe o que é um Captcha e como estamos trabalhando para resolvê-los até agora, recomendo que você veja a série de posts da Curso-R sobre o tema. Se você não sabe nada de GAN, acredito que seja possível acompanhar esse post."
 draft: false
@@ -12,7 +12,7 @@ editor_options:
 ---
 
 ```{r, echo=FALSE, eval=FALSE, include=FALSE}
-# image_read('../../static/images/posts/captcha_01.png') %>% 
+# image_read('../../static/images/posts/banner/captcha_01.png') %>% 
 #   image_crop("420x100+0+101") %>% 
 #   image_border(color = 'white', "0x108") %>% 
 #   image_noise() %>% 
@@ -21,7 +21,7 @@ editor_options:
 #                  location = '+300+10', color = 'red') %>% 
 #   image_annotate('Modelo AC-GAN', size = 40, font = 'ubuntu',
 #                  color = 'black', location = '+10+240') %>% 
-#   image_write("../../static/images/posts/captcha_06.png")
+#   image_write("../../static/images/posts/banner/captcha_06.png")
 ```
 
 
@@ -39,11 +39,11 @@ Nesse post vou trabalhar com Captchas e GANs. Se você não sabe o que é um Cap
 **Base de dados**: ao invés de utilizar um Captcha real, vamos trabalhar com um Captcha sintético criado partir do MNIST. Chamarei esses carinhas de MNIST-Captcha. A ideia foi simplificar o problema para facilitar o desenvolvimento da solução. Um problema que enfrentamos no Deep Learning é que existem tantos hiperparâmetros a serem escolhidos que é muito difícil achar configurações que funcionam bem. Em problemas mais simples, é mais fácil achar esses parâmetros.
 
 ```{r, out.width="23%", echo=FALSE, eval=TRUE, fig.cap="Exemplo de imagem do MNIST."}
-knitr::include_graphics("/img/blog/gan/mnist.png")
+knitr::include_graphics("/images/posts/conteudo/gan/mnist.png")
 ```
 
 ```{r, out.width="50%", echo=FALSE, eval=TRUE, fig.cap="Exemplo de MNIST-Captcha."}
-knitr::include_graphics("/img/blog/gan/mnist-captcha.png")
+knitr::include_graphics("/images/posts/conteudo/gan/mnist-captcha.png")
 ```
 
 
@@ -403,7 +403,7 @@ gerar_imagem(c(1, 2, 4, 4))
 ```
 
 ```{r, out.width="50%", echo=FALSE, eval=TRUE}
-knitr::include_graphics("/img/blog/gan/1244.png")
+knitr::include_graphics("/images/posts/conteudo/gan/1244.png")
 ```
 
 ```{r eval=FALSE, echo=TRUE, out.width="50%"}
@@ -411,7 +411,7 @@ gerar_imagem(c(4, 0, 4, 7))
 ```
 
 ```{r, out.width="50%", echo=FALSE, eval=TRUE}
-knitr::include_graphics("/img/blog/gan/4047.png")
+knitr::include_graphics("/images/posts/conteudo/gan/4047.png")
 ```
 
 ```{r eval=FALSE, echo=TRUE, out.width="50%"}
@@ -419,7 +419,7 @@ gerar_imagem(c(9, 9, 9, 9))
 ```
 
 ```{r, out.width="50%", echo=FALSE, eval=TRUE}
-knitr::include_graphics("/img/blog/gan/9999.png")
+knitr::include_graphics("/images/posts/conteudo/gan/9999.png")
 ```
 
 O que achou? Note que a última está errada.

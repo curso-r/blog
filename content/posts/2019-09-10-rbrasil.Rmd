@@ -3,7 +3,7 @@ title: "Comunidade R Brasil no Telegram"
 date: "2019-11-13"
 tags: ["comunidade"]
 categories: ["análises", "r"]
-image: "images/posts/telegram-rbrasil.png"
+image: "images/posts/banner/telegram-rbrasil.png"
 author: ["Julio"]
 summary: "Nesse post, baixamos os dados do Telegram da comunidade RBrasil e fizemos alguns gráficos divertidos."
 draft: false
@@ -111,7 +111,7 @@ d_msg %>%
   theme_minimal(16)
 ```
 
-![](/img/blog/telegram/tempo-tot.png)
+![](images/posts/conteudo/telegram/tempo-tot.png)
 
 No gráfico seguinte, peguei as doze pessoas que falaram mais historicamente e avaliei a evolução mensal de mensagens. Temos de tudo: os constantes, os que sumiram, os que ressurgiram das cinzas e os que chegaram para ficar.
 
@@ -131,7 +131,7 @@ d_msg %>%
   theme_bw()
 ```
 
-![](/img/blog/telegram/tempo-pessoa.png)
+![](images/posts/conteudo/telegram/tempo-pessoa.png)
 
 E qual é o horário que as pessoas interagem mais? Parece que é às 16 horas, aquele horário que a pessoa está ferrada no trabalho e precisa pedir uma ajuda aos amigos...
 
@@ -144,7 +144,7 @@ d_msg %>%
   ggtitle("Hora das mensagens")
 ```
 
-![](/img/blog/telegram/hora.png)
+![](images/posts/conteudo/telegram/hora.png)
 
 E o dia da semana? Terça-feira wins!
 
@@ -157,7 +157,7 @@ d_msg %>%
   ggtitle("Dia da semana das mensagens")
 ```
 
-![](/img/blog/telegram/dia-semana.png)
+![](images/posts/conteudo/telegram/dia-semana.png)
 
 E claro, não poderia faltar um wordcloud...
 
@@ -188,7 +188,7 @@ d_msg %>%
   ))
 ```
 
-![](/img/blog/telegram/wordcloud.png)
+![](images/posts/conteudo/telegram/wordcloud.png)
 
 Fiz poucos gráficos para te deixar com vontade de brincar mais. Gostou da brincadeira? Então faça suas próprias análises do seu chat preferido do Telegram!
 

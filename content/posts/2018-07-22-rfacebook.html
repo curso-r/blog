@@ -3,7 +3,7 @@ title: "RFacebook: como conectar?"
 date: "2018-07-23T00:00:00+00:00"
 tags: ["app", "pacotes"]
 categories: ["tutoriais", "r"]
-image: "images/posts/marks.png"
+image: "images/posts/banner/marks.png"
 author: ["Julio", "Bruna Wundervald"]
 summary: "Hoje nosso amigo Marcio nos procurou pedindo ajuda pois não estava conseguindo fazer o pacote Rfacebook funcionar. O problema estava logo no começo: a autenticação com a API do Facebook. Nesse post identificar e corrigir esse problema."
 draft: false
@@ -38,12 +38,12 @@ Rfacebook::fbOAuth(client_id, client_secret)</code></pre>
 <pre class="r"><code>Rfacebook::fbOAuth(client_id, client_secret, 
                    extended_permissions = TRUE)</code></pre>
 <p>A opção <code>extended_permissions</code> serve para dar acesso à algumas opções adicionais como aniversário, cidade de nascimento, etc. O erro que aparece é esse aqui:</p>
-<p><img src="/img/blog/rfacebook/Erro.png" /><!-- --></p>
+<p><img src="images/posts/conteudo/rfacebook/Erro.png" /><!-- --></p>
 <p>Como somos pessoas espertinhas, o que fizemos? Abrimos os links que o Facebook sugeriu? Re-estudamos toda a API do Facebook? Não! Apenas lemos e interpretamos o erro. A API estava recusando acesso às opções <code>user_relationships</code> e <code>publish_actions</code>, que são requeridas por meio da função <code>Rfacebook::fbOAuth()</code>. Aha!</p>
 <p>Depois de estudar um pouquinho, notamos que a API do Facebook <a href="https://developers.facebook.com/docs/graph-api/changelog/breaking-changes/">mudou recentemente</a>. Isso ocorreu por conta de alterações na política de privacidade do Facebook, que é sempre algo polêmico. Hoje em dia não é mais possível autorizar aplicativos para terem acesso à rede de relacionamentos e ações do usuário.</p>
 <p>O problema é que infelizmente o mantenedor do <code>Rfacebook</code> parou de atualizar o pacote:</p>
 <hr />
-<p><img src="/img/blog/rfacebook/app.png" /><!-- --></p>
+<p><img src="images/posts/conteudo/rfacebook/app.png" /><!-- --></p>
 <hr />
 <p>Então, o que fazer? Quando temos uma ferramenta que não funciona mais ou que está obsoleta, podemos i) jogar fora e fazer outra do zero ou ii) tentar arrumá-la para ficar top novamente.</p>
 <p>Por sorte, o R é open-source e permite que (ii) seja feito sem maiores esforços. De fato, basta mudar <strong>uma linha</strong> de código para que tudo volte a funcionar como antes. Basta mudar o objeto <code>scope</code> de</p>

@@ -5,6 +5,7 @@ title = "Blog | Curso-R"
 theme = "parsa-hugo"
 summaryLength = "10"
 paginate = 6
+publishdir = "docs"
 
 # output
 [outputs]

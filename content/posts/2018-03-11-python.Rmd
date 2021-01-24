@@ -3,7 +3,7 @@ title: "É possível rodar python no RStudio?"
 date: "2018-03-11T14:25:00+03:00"
 tags: ["python", "rstudio", "reticulate"]
 categories: ["tutoriais", "r"]
-image: "images/posts/py.png"
+image: "images/posts/banner/py.png"
 author: ["Julio"]
 summary: "RStudio é a melhor IDE para fazer ciência de dados. R e python são, no momento, as melhores linguagens para fazer ciência de dados. O RStudio foi criado para rodar R. Será que também serve para rodar python? Nesse post curtinho eu respondo que sim e explico como..."
 draft: false
@@ -23,7 +23,7 @@ image_join(im1, im2) %>%
   image_append(stack = TRUE) %>% 
   image_join(im3) %>% 
   image_append() %>% 
-  image_write("../../static/images/posts/py.png")
+  image_write("../../static/images/posts/banner/py.png")
 ```
 
 ```{r setup, include=FALSE}

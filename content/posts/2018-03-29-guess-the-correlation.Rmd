@@ -3,7 +3,7 @@ title: "Chamada pra briga - Competição Kaggle Guess The Correlation"
 date: "2018-03-29"
 tags: ["kaggle", "deep learning"]
 categories: ["divulgação"]
-image: "images/posts/guess-the-correlation.jpg"
+image: "images/posts/banner/guess-the-correlation.jpg"
 author: ["Athos"]
 summary: "Criamos uma competição no Kaggle para aprender a máquina adivinhar a correlação de um scatterplot. Desafio lançado!"
 ---
@@ -23,7 +23,7 @@ O site [Guess The Correlation](http://guessthecorrelation.com/) coloca o ser hum
 No nosso desafio Kaggle, desafio similar foi construído. Por exemplo: quanto você chutaria que é a correlação entre os dados da figura abaixo?
 
 <center>
-![](/img/blog/2018-03-29-guess-the-correlation/exemplo_img.png)
+![](images/posts/conteudo/2018-03-29-guess-the-correlation/exemplo_img.png)
 </center>
 
 Foram geradas 200 mil imagens em png como a figura acima e cada uma delas tem a sua correleção anotada para treinarmos um modelinho.
@@ -35,7 +35,7 @@ O objetivo é simples e direto: construir um robô que calcula a correlação (l
 Em *machine lârnês*, queremos
 
 <center>
-![](/img/blog/2018-03-29-guess-the-correlation/f_img_92.png)
+![](images/posts/conteudo/2018-03-29-guess-the-correlation/f_img_92.png)
 </center>
 
 em que essa **f** seja digna de ser **f** de **F@!#**.

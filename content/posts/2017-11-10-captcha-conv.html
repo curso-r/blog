@@ -3,7 +3,7 @@ title: "Quebrando Captchas - Parte V: Fazendo redes convolucionais na mão"
 date: "2017-11-12T23:26:00+03:00"
 tags: ["captcha"]
 categories: ["análises"]
-image: "images/posts/captcha_05.png"
+image: "images/posts/banner/captcha_05.png"
 author: ["Julio"]
 summary: "Nesse post vou mostrar como ajustar redes neurais convolucionais na mão. Muita mão na massa envolvida, muitos captchas e muita diversão. Vamos juntos desmistificar a magia negra do deep learning..."
 draft: false
@@ -40,7 +40,7 @@ library(magick)
 </div>
 <div id="o-que-e-convolucao-afinal" class="section level2">
 <h2>O que é convolução, afinal?</h2>
-<p><img src="/img/blog/captcha-conv/vivalaconv.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/posts/conteudo/captcha-conv/vivalaconv.jpg" width="50%" style="display: block; margin: auto;" /></p>
 <p>Convolução é uma técnica usada há muito tempo na área de <em>visão computacional</em> para aplicar filtros em imagens e detectar padrões. Basicamente, o que ela faz é calcular um novo valor para um pixel da imagem com base nos pixels da vizinhança. Por exemplo, você pode fazer com que o pixel <span class="math inline">\((i,j)\)</span> da sua imagem seja atualizado pela soma ponderada dos valores dos pixels na vizinhança.</p>
 <blockquote>
 <p>Se você não está entendendo nada, Veja o vídeo abaixo para entender o que são pixels. No nosso caso, teremos uma matriz com valores entre zero e um, sendo zero = preto e um = branco.</p>
@@ -60,7 +60,7 @@ kern_horizontal
 <p>E considere essa imagem super complexa:</p>
 <p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-7-1.png" width="30%" style="display: block; margin: auto;" /></p>
 <p>Na prática, essa imagem é isso aqui (tirei algumas linhas e colunas):</p>
-<pre class="r"><code>emoji &lt;- load_image(&quot;../../static/img/blog/captcha-conv/emoji3.png&quot;)[,,1] 
+<pre class="r"><code>emoji &lt;- load_image(&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot;)[,,1] 
 round(emoji, 1)[1:10, 1:12]
 ##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
 ##  [1,]    1    1    1  1.0  1.0  1.0  1.0  1.0  1.0   1.0   1.0   1.0
@@ -110,7 +110,7 @@ round(emoji, 1)[1:10, 1:12]
 }</code></pre>
 <p>(desculpe aos amigos por usar <code>for</code>. Shame on me…)</p>
 <p>Voltando para nossa imagem agora. No nosso caso, o resultado fica assim:</p>
-<pre class="r"><code>&quot;../../static/img/blog/captcha-conv/emoji3.png&quot; %&gt;% 
+<pre class="r"><code>&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot; %&gt;% 
   load_image() %&gt;% 
   convolve(kern_horizontal) %&gt;% 
   image_read() %&gt;% 
@@ -127,7 +127,7 @@ kern_vertical
 ## [2,]   -1    0    1
 ## [3,]   -1    0    1
 
-&quot;../../static/img/blog/captcha-conv/emoji3.png&quot; %&gt;% 
+&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot; %&gt;% 
   load_image() %&gt;% 
   convolve(kern_vertical) %&gt;% 
   image_read() %&gt;% 
@@ -282,7 +282,7 @@ w_list[[1]]</code></pre>
 <p>E como será que ficam essas imagens? Abaixo, temos o resultado da aplicação dos doze kernels. A maioria parece estar extraindo partes das letras. A sétima (posição <code>(2,3)</code>) parece estar pegando o ruído e a quarta parece guardar a imagem original.</p>
 <p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-24-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>O gif animado abaixo mostra a aplicação do oitavo kernel da nossa lista. Com esse kernel dá pra pegar bem o padrão das letras, não é?</p>
-<p><img src="/img/blog/captcha-conv/captcha_conv.gif" /></p>
+<p><img src="images/posts/conteudo/captcha-conv/captcha_conv.gif" /></p>
 <p>No próximo nível, vamos convoluir mais 48 kernels. Essa operação será feita com todos os doze filtros atuais, ou seja, é uma contaiada que não acaba mais. Para simplificar as contas e para permitir a obtenção de padrões diferentes, faz sentido simplificar a imagem. Para isso, usamos o <em>max pooling</em>.</p>
 <div id="aplicando-max-pooling" class="section level4">
 <h4>Aplicando max pooling</h4>
@@ -431,7 +431,7 @@ all.equal(sort(res), sort(w_calculado), tolerance = 1e-6)</code></pre>
 <h4>Visualizando na imagem original</h4>
 <p>Aqui fiz um esforço para tentar entender de qual parte da imagem original esses resultados estão pegando informações. Para isso, re-escalei essas imagens de resolução mais baixa na última convolução para o tamanho original do captcha (<code>50x180</code>) e depois multipliquei os valores das matrizes pelos valores da imagem original.</p>
 <p>O resultado foi esse gif. Cada imagem é um dos canais obtidos.</p>
-<p><img src="/img/blog/captcha-conv/captcha_conv_final.gif" /></p>
+<p><img src="images/posts/conteudo/captcha-conv/captcha_conv_final.gif" /></p>
 <p>Parece que os filtros são capazes de pegar as curvas que as letras fazem no captcha. Mas não tenho opinião formada sobre isso. Digam aí nos comentários o que vocês acham!</p>
 </div>
 </div>

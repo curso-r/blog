@@ -3,12 +3,14 @@ title: "Movimento da faxina de dados"
 date: "2019-09-18"
 tags: ["janitor", "faxina"]
 categories: ["discussões"]
-image: "images/posts/janitor-mov.jpg"
+image: "images/posts/banner/janitor-mov.jpg"
 author: ["Julio"]
 summary: "A faxina de dados é uma etapa essencial do ciclo da ciência de dados, que nunca será automatizada. Seja parte desse movimento."
 draft: true
 editor_options: 
   chunk_output_type: console
+type: featured
+featuredImage: "images/featured-post/post-2.jpg"
 ---
 
 ```{r, include=FALSE}

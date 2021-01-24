@@ -3,7 +3,7 @@ title: "Quebrando Captchas - Parte VII: Oráculos"
 date: "2019-11-20"
 categories: ["r", "tutoriais"]
 tags: ["r", "captcha"]
-image: "images/posts/captcha_07.png"
+image: "images/posts/banner/captcha_07.png"
 author: ["Julio"]
 summary: "Nesse post não vou falar da companhia Oracle, muito menos de Pythia, a oráculo de Delphi. Aqui vou mostrar uma parte pouco discutida dos captchas, que é a possibilidade de usar oráculos para aprender."
 draft: false
@@ -12,7 +12,7 @@ editor_options:
 ---
 
 ```{r, echo=FALSE, eval=FALSE, include=FALSE}
-image_read('../../static/images/posts/captcha_01.png') %>%
+image_read('../../static/images/posts/banner/captcha_01.png') %>%
   image_crop("420x100+0+101") %>%
   image_border(color = 'white', "0x108") %>%
   image_noise() %>%
@@ -21,7 +21,7 @@ image_read('../../static/images/posts/captcha_01.png') %>%
                  location = '+300+10', color = 'red') %>%
   image_annotate('Oráculos', size = 40, font = 'ubuntu',
                  color = 'black', location = '+10+240') %>%
-  image_write("../../static/images/posts/captcha_07.png")
+  image_write("../../static/images/posts/banner/captcha_07.png")
 ```
 
 
@@ -35,7 +35,7 @@ O oráculo nem sempre existe em problemas reais, pois a verdade não costuma est
 
 Então o oráculo é como se fosse minha base de testes? Bem, sim, mas é um tipo muito especial de base de teste. No contexto de captchas, nós podemos gerar infinitas observações novas da base, criando uma base de dados de treino virtualmente infinita.
 
-![](/img/blog/captcha-oraculo-1/oraculo.gif)
+![](images/posts/conteudo/captcha-oraculo-1/oraculo.gif)
 
 O problema é que a resposta do oráculo não é sempre clara: usualmente, o oráculo não diz __o quê__ você errou, mas somente __se__ você errou. Ou seja, é uma informação incompleta, censurada.
 
@@ -100,7 +100,7 @@ result <- oracle_mnist(type = 0)
 ```
 
 
-![](/img/blog/captcha-oraculo-1/captcha1.png)
+![](images/posts/conteudo/captcha-oraculo-1/captcha1.png)
 
     Answer: 87685
 
@@ -126,7 +126,7 @@ E esse é um caso que errei, e mandei mostrar todos os outputs possíveis:
 result <- oracle_mnist(type = 2)
 ```
 
-![](/img/blog/captcha-oraculo-1/captcha2.png)
+![](images/posts/conteudo/captcha-oraculo-1/captcha2.png)
 
     Answer: 56198
 
@@ -352,7 +352,7 @@ result$res
 
 Veja qual foi o caso que o modelo errou:
 
-![](/img/blog/captcha-oraculo-1/captcha3.png)
+![](images/posts/conteudo/captcha-oraculo-1/captcha3.png)
 
 Não parece tão fácil de ver que é um 7, né?
 

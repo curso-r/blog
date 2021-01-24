@@ -3,7 +3,7 @@ title: "Skimr: estatísticas básicas com ❤️"
 date: "2017-06-17T13:07:31+02:00"
 tags: ["pacotes", "skimr"]
 categories: ["tutoriais", "r"]
-image: "images/posts/skimr.png"
+image: "images/posts/banner/skimr.png"
 author: ["Julio"]
 draft: false
 summary: "Uma coisa muito legal da ROpenSci Unconf 2017 é que ela funcionou como uma hackathon mega produtiva. Dentre os novos pacotes que olhei, o que mais me chamou atenção foi o skimr..."

@@ -3,7 +3,7 @@ title: "Quebrando CAPTCHAs - Parte II: O pacote decryptr"
 date: "2017-07-10T13:07:31+02:00"
 tags: ["captcha", "decryptr"]
 categories: ["tutoriais"]
-image: "images/posts/captcha_02.png"
+image: "images/posts/banner/captcha_02.png"
 author: ["Julio"]
 draft: false
 summary: "No último post sobre CAPTCHAs anunciei uma série de posts sobre CAPTCHAs. Uma da nossas iniciativas principais nesse tema é a criação do pacote decryptr, um framework completo para modelagem de CAPTCHAs. Hoje veremos como..."

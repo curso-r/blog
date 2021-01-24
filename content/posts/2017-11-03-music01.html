@@ -3,7 +3,7 @@ title: "Estatística e Música"
 date: "2017-11-03T23:26:00+03:00"
 tags: ["musica"]
 categories: ["análises", "r"]
-image: "images/posts/music01.jpg"
+image: "images/posts/banner/music01.jpg"
 author: ["Julio"]
 summary: "Já pensou em juntar estatística e música? Nessa série de posts mostro como estou pensando em fazer isso e os pacotes que vou criar nessa jornada..."
 draft: false
@@ -26,11 +26,11 @@ draft: false
 <h2>Computação musical numa casca de noz</h2>
 <p>Apesar da minha falta de conhecimento sobre o tema, acredito que a área de computação musical pode ser resumida em três frentes:</p>
 <p><strong>Leitura</strong>: extrair dados estruturados dos áudios. Envolve <em>Music Information Retrieval</em> - MIR</p>
-<p><img src="/img/blog/music01/music-download.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="images/posts/conteudo/music01/music-download.png" width="40%" style="display: block; margin: auto;" /></p>
 <p><strong>Composição</strong>: Criar ou completar músicas automaticamente</p>
-<p><img src="/img/blog/music01/music-generate.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="images/posts/conteudo/music01/music-generate.png" width="40%" style="display: block; margin: auto;" /></p>
 <p><strong>Edição</strong>: Adicionar efeitos na música para produção</p>
-<p><img src="/img/blog/music01/music-transform.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="images/posts/conteudo/music01/music-transform.png" width="40%" style="display: block; margin: auto;" /></p>
 <p>Meu foco será na parte de composição, com foco em harmonização, que significa criar e completar harmonias das músicas dado algum estilo (e.g. Bach ou Beatles). Também tentarei criar soluções de improviso, apesar de não garantir nada.</p>
 </div>
 <div id="music21" class="section level1">
@@ -63,7 +63,7 @@ note
 <pre class="r"><code>note %&gt;% 
   plot()</code></pre>
 <div class="figure">
-<img src="/img/blog/music01/note-1.png" />
+<img src="images/posts/conteudo/music01/note-1.png" />
 
 </div>
 </div>
@@ -89,7 +89,7 @@ note
 <pre class="r"><code>bach_music %&gt;% 
   plot()</code></pre>
 <div class="figure">
-<img src="/img/blog/music01/bach-1.png" />
+<img src="images/posts/conteudo/music01/bach-1.png" />
 
 </div>
 <p>No RStudio, você pode usar a função <code>view()</code> para visualizar a música em melhor resolução no Viewer Pane.</p>

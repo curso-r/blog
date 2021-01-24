@@ -3,7 +3,7 @@ title: "Pacote reticulate"
 date: "2017-11-20T14:25:00+03:00"
 tags: ["reticulate", "python"]
 categories: ["tutoriais", "r"]
-image: "images/posts/reticulate.png"
+image: "images/posts/banner/reticulate.png"
 author: ["Gabriela Lima Borges (convidada)"]
 summary: "Imagine se você pudesse aproveitar da quantidade e da variedade enorme de módulos e bibliotecas do Python no ambiente amigável do RStudio? Graças ao pacote..."
 draft: false
@@ -115,7 +115,7 @@ im.data %>%
   image(col = gray(seq(0, 1, length = 256)))
 ```
 
-![](/img/blog/reticulate/Rplot.png)
+![](images/posts/conteudo/reticulate/Rplot.png)
 
 
 

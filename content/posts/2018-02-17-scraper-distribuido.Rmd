@@ -3,7 +3,7 @@ title: "Web Scraper Distribuído"
 date: "2018-02-17"
 tags: ["web-scraping"]
 categories: ["tutoriais", "r"]
-image: "images/posts/scraper-distribuido.jpg"
+image: "images/posts/banner/scraper-distribuido.jpg"
 author: ["Caio"]
 summary: "Como aumentar em dezenas de vezes a velocidade de um web scraper sem mudar o seu código."
 ---

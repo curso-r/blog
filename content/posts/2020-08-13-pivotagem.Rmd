@@ -3,7 +3,7 @@ title: "As novas funções de pivotagem"
 date: "2020-08-13"
 tags: ["manipulação", "tidyr", "r"]
 categories: ["tutoriais", "r"]
-image: "images/posts/lego.jpeg"
+image: "images/posts/banner/lego.jpeg"
 author: ["Nicole Luduvice"]
 summary: "Apresentamos aqui as novas funções de pivotagem do {tidyr}."
 draft: false
@@ -26,7 +26,7 @@ O tidyr é um pacote muito útil para arrumar os dados, ou seja, deixá-los *tid
  
 O lançamento da versão 1.0.0 (em 09/11/19) apresentou uma grande mudança do pacote: a substituição das funções `gather()` e `spread()` pelas novas funções `pivot_longer()` e `pivot_wider()`.
 
-<img src = "/img/blog/pivotagem/tidyr-spread-gather.gif">
+<img src = "/images/posts/conteudo/pivotagem/tidyr-spread-gather.gif">
 ```{r, fig.cap="Fonte: https://www.garrickadenbuie.com/project/tidyexplain/#spread-and-gather"}
 ```
 

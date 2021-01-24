@@ -3,7 +3,7 @@ title: ".RData e .Rhistory (Zen do R parte 2)"
 date: "2019-07-10T00:00:00+00:00"
 tags: ["zen do R"]
 categories: ["livro", "r"]
-image: "images/posts/zen-do-r-2.jpg"
+image: "images/posts/banner/zen-do-r-2.jpg"
 author: ["Caio"]
 summary: "Como funcionam o .RData e o .Rhistory e porque você deveria desativá-los!"
 draft: false
@@ -95,7 +95,7 @@ e então ajustar três configurações. No final a página de opções gerais de
 ficar similar à da imagem abaixo:
   
 ```{r, echo=FALSE, fig.align='center', dpi=50}
-knitr::include_graphics("/img/blog/zen-do-r/02_config.png")
+knitr::include_graphics("/images/posts/conteudo/zen-do-r/02_config.png")
 ```
 
 Se acostumar com sessões efêmeras não é uma tarefa fácil e um desconforto

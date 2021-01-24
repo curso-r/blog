@@ -3,7 +3,7 @@ title: "Pacotes miojo - como fazer um pacote no R em 3 minutos"
 date: "2017-09-07T23:26:00+03:00"
 tags: ["miojo"]
 categories: ["tutoriais", "r"]
-image: "images/posts/package.png"
+image: "images/posts/banner/package.png"
 author: ["Julio"]
 summary: "Veja como fazer um pacote em R e fazer seus códigos voarem na velocidade da luz"
 draft: false
@@ -97,7 +97,7 @@ soma_2(1:10)
 
 Você também pode ver o help da função com `?soma_2`:
 
-![](/img/blog/pacote-miojo/documentacao.png)
+![](images/posts/conteudo/pacote-miojo/documentacao.png)
 
 ```{r echo=FALSE, eval=FALSE}
 library(magick)

@@ -25,15 +25,15 @@ ser representada por um banco de dados com 5 colunas (`x`, `y`,
 
 - Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da 
-[imagem purple_wave.jpg.](/img/blog/desafio-recuperacao-img/purple_wave.jpg)
+[imagem purple_wave.jpg.](images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg)
 
-![](/img/blog/desafio-recuperacao-img/purple_wave.jpg)
+![](images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg)
 
 - Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da 
-[imagem xadrez_colorido.jpg.](/img/blog/desafio-recuperacao-img/xadrez_colorido.jpg)
+[imagem xadrez_colorido.jpg.](images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg)
 
-![](/img/blog/desafio-recuperacao-img/xadrez_colorido.jpg)
+![](images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg)
 
 # Como começar?
 
@@ -44,7 +44,7 @@ imagens no R e transforme para data.frame:
 library(tidyverse)
 library(jpeg)
 # carrega uma imagem jpeg no R
-download.file("http://curso-r.com/img/blog/desafio-recuperacao-img/purple_wave.jpg", 
+download.file("http://curso-r.comimages/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg", 
               destfile = "purple_wave.jpg")
 
 img <- readJPEG("purple_wave.jpg")
@@ -71,7 +71,7 @@ library(jpeg)
 library(tidyverse)
 # carrega uma imagem jpeg no R
 
-img <- readJPEG("../../static/img/blog/desafio-recuperacao-img/purple_wave.jpg")
+img <- readJPEG("../../staticimages/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg")
 
 # transforma o array da imagem em data.frame com infos de posicao (x,y)
 # e cor (r,g,b) dimensões da imagem

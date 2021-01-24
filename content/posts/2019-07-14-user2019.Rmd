@@ -3,7 +3,7 @@ title: "Minha experiência na useR!2019"
 date: "2019-07-14T00:00:00+00:00"
 tags: ["comunidade", "useR"]
 categories: ["divulgação"]
-image: "images/posts/user2019.jpg"
+image: "images/posts/banner/user2019.jpg"
 author: ["Julio"]
 summary: "Highlights do maior evento sobre R do mundo."
 draft: false
@@ -28,7 +28,7 @@ Infelizmente eu não participei do evento, então não tenho muito para escrever
 Quem sabe a Bea ou a Angélica explicam melhor pra gente!
 
 ```{r, fig.cap="Bea e Angélica no tidy dev day."}
-knitr::include_graphics("/img/blog/user2019/tidydev.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/tidydev.jpg")
 ```
 
 ## Dia 0: Cursos!
@@ -44,8 +44,8 @@ https://github.com/sowla/useR2019-materials/
 O que dizer da palestra da [Julia Stewart Lowndes](https://www.youtube.com/watch?v=Z8PqwFPqn6Y)? Acho que a palavra é: **inspiradora**. Ela mostrou como fazer ciência aberta potencializa os trabalhos e gera resultados efetivos. E mostrou como o ecossistema do R é essencial para isso. E sério, usar desenhos com o tema Star Wars foi uma ideia genial.
 
 ```{r, fig.cap="Que vontade de abraçar esses slides."}
-knitr::include_graphics(c("/img/blog/user2019/julia-1.png", 
-                          "/img/blog/user2019/julia-2.png"))
+knitr::include_graphics(c("images/posts/conteudo/user2019/julia-1.png", 
+                          "images/posts/conteudo/user2019/julia-2.png"))
 ```
 
 ## Dia 2: shiny, ensino e comunidade
@@ -57,7 +57,7 @@ Outra coisa que ficou clara é como a comunidade R quer ajudar o resto do mundo 
 Destaque para a [palestra da Bea Milz](https://beatrizmilz.github.io/useR2019/), feita em conjunto com a [Bruna Wundervald](https://brunaw.com), sobre a experiência do RLadies no capítulo de São Paulo. Foi muito tocante, e nós da Curso-R ficamos muito felizes com o slide de agradecimento <3
 
 ```{r, fig.cap="Palestra da Bea Milz sobre o RLadies São Paulo."}
-knitr::include_graphics("/img/blog/user2019/bea.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/bea.jpg")
 ```
 
 
@@ -70,13 +70,13 @@ Outro highlight do dia foi a apresentação do pacote `vroom`, pelo [Jim Hester]
 E fala sério, olha que capa legal dos slides
 
 ```{r, fig.cap="Life's too short to read slow."}
-knitr::include_graphics("/img/blog/user2019/vroom.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/vroom.jpg")
 ```
 
 Nesse dia eu também apresentei sobre o [auth0](https://github.com/curso-r/auth0), um pacote que fizemos para facilitar a vida de quem quer adicionar autenticação em shiny apps. Foi uma experiência muito legal! Apesar de serem apenas 5 minutos e do meu inglês ruim, acho que deu para passar a ideia geral do pacote e tenho certeza de que mais pessoas vão utilizar!
 
 ```{r, fig.cap="Eu falando sobre o auth0, provavelmente a palavra 'Awesome', pois disseram que eu abusei dessa palavra na fala."}
-knitr::include_graphics("/img/blog/user2019/auth0.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/auth0.jpg")
 ```
 
 # Pacotes que definitivamente quero estudar
@@ -104,23 +104,23 @@ Outra coisa legal da useR é que as famosas da comunidade estão a uma cutucada 
 Por isso, vou encerrar meu post com algumas fotinhos legais
 
 ```{r, fig.cap="Fiquei tão nervoso na foto com o Hadley que coloquei o copo na frente da câmera."}
-knitr::include_graphics("/img/blog/user2019/hadley-copo.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/hadley-copo.jpg")
 ```
 
 ```{r, fig.cap="Depois pedi para tirar foto com ele e tampei o William, além de ter ficado com um sorriso horrível. O Hadley, obviamente, estava ótimo. Olha esses óculos, muito estilosos!"}
-knitr::include_graphics("/img/blog/user2019/hadley-mao.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/hadley-mao.jpg")
 ```
 
 ```{r, fig.cap="Lexie, filha do Romain François (o do cabelo colorido), brincando com o Daniel Falbel. Coisa mais fofa!", out.width="40%"}
-knitr::include_graphics("/img/blog/user2019/lexie.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/lexie.jpg")
 ```
 
 ```{r, fig.cap="Playmobil com um pipe no escudo, da ThinkR", out.width="80%"}
-knitr::include_graphics("/img/blog/user2019/playmobil.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/playmobil.jpg")
 ```
 
 ```{r, fig.cap="Turma dos BR (+Laurie) na useR!", out.width="100%"}
-knitr::include_graphics("/img/blog/user2019/brasileiros.jpg")
+knitr::include_graphics("/images/posts/conteudo/user2019/brasileiros.jpg")
 ```
 
 É isso. Happy coding ;)

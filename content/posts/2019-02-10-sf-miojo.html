@@ -3,7 +3,7 @@ title: "Gráficos Miojo: mapas temáticos, the tidy way"
 date: "2019-02-04T00:00:00+00:00"
 categories: ["r", "tutoriais"]
 tags: ["r"]
-image: "images/posts/mapinha.png"
+image: "images/posts/banner/mapinha.png"
 author: ["Julio"]
 summary: "Nesse post vamos fazer mapas temáticos do Brasil, usando princípios tidy."
 draft: false
@@ -25,7 +25,7 @@ get_brmap(&quot;City&quot;, geo.filter = list(State = 33)) %&gt;%
   left_join(pop2017, c(&quot;City&quot; = &quot;mun&quot;)) %&gt;% 
   ggplot() +
   geom_sf(aes(fill = pop2017/1e6))</code></pre>
-<p><img src="/img/blog/sf-miojo/mapa_rj.png" /></p>
+<p><img src="images/posts/conteudo/sf-miojo/mapa_rj.png" /></p>
 <p>No caso, estamos fazendo um mapa do Rio de Janeiro (Unidade Federativa de código 33) e colorindo o mapa dos municípios com a população das cidades em 2017 (<code>pop2017</code>, dividida por um milhão). A cidade em azul claro é a capital.</p>
 <p>OK, mas como fizemos isso, e como podemos criar mapas mais bonitos? É o que veremos a seguir!</p>
 </div>
@@ -85,7 +85,7 @@ glimpse(uf_map)</code></pre>
 <pre class="r"><code>uf_map %&gt;% 
   ggplot() +
   geom_sf(aes(fill = idh))</code></pre>
-<p><img src="/img/blog/sf-miojo/mapa_uf.png" /></p>
+<p><img src="images/posts/conteudo/sf-miojo/mapa_uf.png" /></p>
 <p>O gráfico mostra claramente o aspecto regional do IDH nos estados do Brasil.</p>
 <p>Para fazer o gráfico com os municípios, a lógica é a mesma: i) fazer um join das bases com <code>dplyr</code> e ii) usar o <code>ggplot2</code> para desenhar o mapa. O único problema é que o gráfico demora para rodar<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <pre class="r"><code>muni_map &lt;- get_brmap(&quot;City&quot;) %&gt;% 
@@ -94,13 +94,13 @@ glimpse(uf_map)</code></pre>
 muni_map %&gt;% 
   ggplot() +
   geom_sf(aes(fill = idhm))</code></pre>
-<p><img src="/img/blog/sf-miojo/mapa_muni_feio.png" /></p>
+<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_feio.png" /></p>
 <p>Podemos também quebrar pelas regiões com um simples <code>facet_wrap()</code>:</p>
 <pre class="r"><code>muni_map %&gt;% 
   ggplot() +
   geom_sf(aes(fill = idhm)) +
   facet_wrap(~Region)</code></pre>
-<p><img src="/img/blog/sf-miojo/mapa_muni_feio_facet.png" /></p>
+<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_feio_facet.png" /></p>
 <p>Parece que estamos indo bem. Alguns problemas que podemos notar:</p>
 <ol style="list-style-type: decimal">
 <li>As linhas estão muito largas.</li>
@@ -126,7 +126,7 @@ muni_map %&gt;%
         panel.background = element_blank(),
         axis.text = element_blank(),
         axis.ticks = element_blank())</code></pre>
-<p><img src="/img/blog/sf-miojo/mapa_muni_bonito.png" /></p>
+<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_bonito.png" /></p>
 <p>Outra coisa legal de fazer é demarcar os estados com outra largura da linha. Podemos fazer isso adicionando mais um <code>geom_sf()</code>:</p>
 <pre class="r"><code>muni_map %&gt;% 
   ggplot() +
@@ -143,7 +143,7 @@ muni_map %&gt;%
         panel.background = element_blank(),
         axis.text = element_blank(),
         axis.ticks = element_blank())</code></pre>
-<p><img src="/img/blog/sf-miojo/mapa_muni_bonito_uf.png" /></p>
+<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf.png" /></p>
 <p>No caso, usei a paleta de cores <code>viridis</code>. Eu gosto muito dessa paleta e uso sempre que possível :)</p>
 </div>
 <div id="categorizar-ou-nao-eis-a-questao" class="section level3">
@@ -167,7 +167,7 @@ muni_map %&gt;%
         panel.background = element_blank(),
         axis.text = element_blank(),
         axis.ticks = element_blank())</code></pre>
-<p><img src="/img/blog/sf-miojo/mapa_muni_bonito_uf_cat.png" /></p>
+<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png" /></p>
 <p>Não sei vocês, mas para mim faz muito mais sentido olhar o gráfico categorizado do que o contínuo.</p>
 </div>
 <div id="fazendo-facets-de-mapas" class="section level3">
@@ -201,7 +201,7 @@ mapas &lt;- map(1:5, grafico_regiao)</code></pre>
 <p>Agora, vamos somar esses mapas:</p>
 <pre class="r"><code>library(patchwork)
 reduce(mapas, magrittr::add)</code></pre>
-<p><img src="/img/blog/sf-miojo/mapa_muni_bonito_cat_facet.png" /></p>
+<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_bonito_cat_facet.png" /></p>
 <p>Pronto! Temos nossos mapas lindos maravilhosos no <em>tidy way</em>!</p>
 </div>
 </div>

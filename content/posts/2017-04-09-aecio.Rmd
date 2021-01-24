@@ -3,7 +3,7 @@ title: "Análise das emoções de Aécio Neves"
 date: "2017-04-15T13:07:31+02:00"
 tags: ["emoções", "API"]
 categories: ["análises", "r"]
-image: "images/posts/aecio.jpg"
+image: "images/posts/banner/aecio.jpg"
 author: ["Julio"]
 draft: false
 summary: "Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: 'Por quê ele sempre faz tanta cara de dor?'"
@@ -30,7 +30,7 @@ u_imagens <- c(
   'https://conteudo.imguol.com.br/c/noticias/6a/2016/10/03/3out2016---em-belo-horizonte-mg-o-presidente-nacional-do-psdb-e-senador-aecio-neves-faz-um-balanco-do-desempenho-do-partido-no-primeiro-turno-das-eleicoes-municipais-de-2016-aecio-se-disse-a-favor-de-1475526309974_615x300.jpg',
   'http://www.revistaforum.com.br/wp-content/uploads/2013/05/neves.jpg'
 )
-p_imagens <- dir('../../static/img/blog/aecio/', full.names = TRUE, pattern = 'aecio')
+p_imagens <- dir('../../staticimages/posts/conteudo/aecio/', full.names = TRUE, pattern = 'aecio')
 # knitr::include_graphics(p_imagens)
 plyr::l_ply(p_imagens, function(x) plot(magick::image_read(x)))
 ```
@@ -134,7 +134,7 @@ gridExtra::grid.arrange(grobs = plots, ncol = 2)
 ```
 
 ```{r grafinal, out.width="70%", echo=FALSE, fig.align="center", fig.cap='Emoções do Aécio em cada imagem.'}
-knitr::include_graphics("/img/blog/aecio/aecgrafs.png")
+knitr::include_graphics("/images/posts/conteudo/aecio/aecgrafs.png")
 ```
 
 ## Conclusão

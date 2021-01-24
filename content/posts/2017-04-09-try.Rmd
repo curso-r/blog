@@ -3,7 +3,7 @@ title: "Tratando erros: the tidy way"
 date: "2017-04-20T13:07:31+02:00"
 tags: ["coding", "pacotes", "purrr"]
 categories: ["tutoriais", "r"]
-image: "images/posts/error.jpg"
+image: "images/posts/banner/error.jpg"
 author: ["Julio"]
 draft: false
 summary: "Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão tidy dessas soluções."
@@ -50,7 +50,7 @@ Hoje em dia, o jeito mais arrumado de tratar erros é usando as funções `purrr
 
 ```{r, echo=FALSE, fig.cap='Admita, você não imaginava que teria de pensar em gramática para programar em R.', fig.width=8, fig.height=4}
 library(magick)
-x <- image_read('../../static/img/blog/try/adverbs.jpg')
+x <- image_read('../../staticimages/posts/conteudo/try/adverbs.jpg')
 plot(x)
 ```
 

@@ -3,7 +3,7 @@ title: "Git e GitHub (Zen do R parte 4)"
 date: "2019-07-23"
 tags: ["zen do R", "github"]
 categories: ["livro", "r"]
-image: "images/posts/zen-do-r-4.jpg"
+image: "images/posts/banner/zen-do-r-4.jpg"
 author: ["Caio"]
 summary: "Como usar o Git e o GitHub para fazer controle
 de versão dos seus projetos em R."
@@ -84,7 +84,7 @@ usethis::browse_github_token()
 ```
 
 ```{r, echo=FALSE, fig.align='center', dpi=50}
-knitr::include_graphics("/img/blog/zen-do-r/03_pat.png")
+knitr::include_graphics("/images/posts/conteudo/zen-do-r/03_pat.png")
 ```
 
 Independentemente de como um PAT foi gerado, o importante é seguir as instruções
@@ -164,7 +164,7 @@ versões do código e enviá-las ao GitHub para que sejam armazenadas com segura
 na nuvem.
 
 ```{r, echo=FALSE, fig.align='center', dpi=50}
-knitr::include_graphics("/img/blog/zen-do-r/03_git.png")
+knitr::include_graphics("/images/posts/conteudo/zen-do-r/03_git.png")
 ```
 
 Para testar se está tudo funcionando, crie um arquivo na pasta `R/` e abra a aba

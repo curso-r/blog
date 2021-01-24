@@ -3,7 +3,7 @@ title: "RFacebook: como conectar?"
 date: "2018-07-23T00:00:00+00:00"
 tags: ["app", "pacotes"]
 categories: ["tutoriais", "r"]
-image: "images/posts/marks.png"
+image: "images/posts/banner/marks.png"
 author: ["Julio", "Bruna Wundervald"]
 summary: "Hoje nosso amigo Marcio nos procurou pedindo ajuda pois não estava conseguindo fazer o pacote Rfacebook funcionar. O problema estava logo no começo: a autenticação com a API do Facebook. Nesse post identificar e corrigir esse problema."
 draft: false
@@ -42,7 +42,7 @@ Rfacebook::fbOAuth(client_id, client_secret,
 A opção `extended_permissions` serve para dar acesso à algumas opções adicionais como aniversário, cidade de nascimento, etc. O erro que aparece é esse aqui:
 
 ```{r echo=FALSE}
-knitr::include_graphics("/img/blog/rfacebook/Erro.png")
+knitr::include_graphics("/images/posts/conteudo/rfacebook/Erro.png")
 ```
 
 Como somos pessoas espertinhas, o que fizemos? Abrimos os links que o Facebook sugeriu? Re-estudamos toda a API do Facebook? Não! Apenas lemos e interpretamos o erro. A API estava recusando acesso às opções `user_relationships` e `publish_actions`, que são requeridas por meio da função `Rfacebook::fbOAuth()`. Aha!
@@ -54,7 +54,7 @@ O problema é que infelizmente o mantenedor do `Rfacebook` parou de atualizar o 
 -----------
 
 ```{r echo=FALSE}
-knitr::include_graphics("/img/blog/rfacebook/app.png")
+knitr::include_graphics("/images/posts/conteudo/rfacebook/app.png")
 ```
 
 -----------

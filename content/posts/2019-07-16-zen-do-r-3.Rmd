@@ -3,7 +3,7 @@ title: "Rproj e diretórios (Zen do R parte 3)"
 date: "2019-07-16"
 tags: ["zen do R"]
 categories: ["livro", "r"]
-image: "images/posts/zen-do-r-3.jpg"
+image: "images/posts/banner/zen-do-r-3.jpg"
 author: ["Caio"]
 summary: "Como usar projetos no R para nunca mais
 perder um arquivo importante."
@@ -45,7 +45,7 @@ trabalho no RStudio: basta selecioná-lo em
 **Tools > Global Options... > Browse**.
 
 ```{r, echo=FALSE, fig.align='center', dpi=50}
-knitr::include_graphics("/img/blog/zen-do-r/02_wd.png")
+knitr::include_graphics("/images/posts/conteudo/zen-do-r/02_wd.png")
 ```
 
 Desta forma, toda vez que você iniciar um novo projeto no R, ele por parão
@@ -106,7 +106,7 @@ disso, não se preocupe e continue assim, mas se você costuma usá-la, siga
 prestando atenção.
 
 ```{r, echo=FALSE, fig.align='center', dpi=50}
-knitr::include_graphics("/img/blog/zen-do-r/02_console.png")
+knitr::include_graphics("/images/posts/conteudo/zen-do-r/02_console.png")
 ```
 
 O R dá a possibilidade de mudar, instantaneamente, o diretório de trabalho.

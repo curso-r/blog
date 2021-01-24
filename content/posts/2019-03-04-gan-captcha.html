@@ -3,7 +3,7 @@ title: "Quebrando Captchas - Parte VI: Redes Generativas Adversariais com Classi
 date: "2019-03-11T00:00:00+00:00"
 categories: ["análises"]
 tags: ["captcha"]
-image: "images/posts/captcha_06.png"
+image: "images/posts/banner/captcha_06.png"
 author: ["Julio"]
 summary: "Nesse post vou trabalhar com Captchas e GANs. Se você não sabe o que é um Captcha e como estamos trabalhando para resolvê-los até agora, recomendo que você veja a série de posts da Curso-R sobre o tema. Se você não sabe nada de GAN, acredito que seja possível acompanhar esse post."
 draft: false
@@ -18,13 +18,13 @@ editor_options:
 <p><strong>Motivo</strong>: o motivo principal de usar modelos generativos é aproveitar o fato de existirem muito mais Captchas não classificados do que classificados. De certa forma, saber criar novos Captchas pode auxiliar no trabalho de resolvê-los.</p>
 <p><strong>Base de dados</strong>: ao invés de utilizar um Captcha real, vamos trabalhar com um Captcha sintético criado partir do MNIST. Chamarei esses carinhas de MNIST-Captcha. A ideia foi simplificar o problema para facilitar o desenvolvimento da solução. Um problema que enfrentamos no Deep Learning é que existem tantos hiperparâmetros a serem escolhidos que é muito difícil achar configurações que funcionam bem. Em problemas mais simples, é mais fácil achar esses parâmetros.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="/img/blog/gan/mnist.png" alt="Exemplo de imagem do MNIST." width="23%" />
+<img src="images/posts/conteudo/gan/mnist.png" alt="Exemplo de imagem do MNIST." width="23%" />
 <p class="caption">
 Figure 1: Exemplo de imagem do MNIST.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="/img/blog/gan/mnist-captcha.png" alt="Exemplo de MNIST-Captcha." width="50%" />
+<img src="images/posts/conteudo/gan/mnist-captcha.png" alt="Exemplo de MNIST-Captcha." width="50%" />
 <p class="caption">
 Figure 2: Exemplo de MNIST-Captcha.
 </p>
@@ -326,11 +326,11 @@ ________________________________________________________________________________
 }</code></pre>
 <p>Rodando para alguns exemplos:</p>
 <pre class="r"><code>gerar_imagem(c(1, 2, 4, 4))</code></pre>
-<p><img src="/img/blog/gan/1244.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/posts/conteudo/gan/1244.png" width="50%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>gerar_imagem(c(4, 0, 4, 7))</code></pre>
-<p><img src="/img/blog/gan/4047.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/posts/conteudo/gan/4047.png" width="50%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>gerar_imagem(c(9, 9, 9, 9))</code></pre>
-<p><img src="/img/blog/gan/9999.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/posts/conteudo/gan/9999.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>O que achou? Note que a última está errada.</p>
 </div>
 </div>

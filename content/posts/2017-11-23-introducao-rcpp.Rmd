@@ -3,7 +3,7 @@ title: "Fazendo o R Voar: uma Introdução ao Rcpp"
 date: "2017-11-23"
 tags: ["rcpp"]
 categories: ["tutoriais", "r"]
-image: "images/posts/rcpp-rocket.jpg"
+image: "images/posts/banner/rcpp-rocket.jpg"
 author: ["Caio"]
 summary: "Uma breve introdução ao pacote Rcpp e como ele pode aumentar a eficiência do seu código."
 ---

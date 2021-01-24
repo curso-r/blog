@@ -3,7 +3,7 @@ title: "Quem segura a barra do Porta dos Fundos?"
 date: "2020-01-06"
 categories: ["análises"]
 tags: ["api", "youtube", "porta dos fundos"]
-image: "images/posts/porta-elenco.jpg"
+image: "images/posts/banner/porta-elenco.jpg"
 author: ["Julio"]
 summary: "A base de dados de CNPJ da Receita Federal do Brasil (RFB) é, na minha opinião, uma das maiores conquistas de dados abertos do Brasil. Nesse post vou passar alguns links para ler a base e alguns gráficos simples."
 disable_codefolding: false
@@ -227,7 +227,7 @@ pdf_long &lt;- da_elenco_pdf %&gt;%
 }</code></pre>
 <p>O resultado de <code>n_corte=70</code> é o que observamos na Figura <a href="#fig:acu">1</a>. Podemos notar que os três sócios principais do PDF, Fabio Porchat, Gregorio Duvidier e Antonio Tabet dividem a liderança de visualizações em seus vídeos, seguidos pelo Rafael Portugal e Thati Lopes, que começaram a fazer vídeos mais recentemente.</p>
 <div class="figure"><span id="fig:acu"></span>
-<img src="/img/blog/porta/acu.png" alt="Gráfico do volume acumulado de visualizações por artista ao longo do tempo." width="150%" />
+<img src="images/posts/conteudo/porta/acu.png" alt="Gráfico do volume acumulado de visualizações por artista ao longo do tempo." width="150%" />
 <p class="caption">
 Figure 1: Gráfico do volume acumulado de visualizações por artista ao longo do tempo.
 </p>
@@ -247,7 +247,7 @@ Figure 1: Gráfico do volume acumulado de visualizações por artista ao longo d
   geom_smooth(se = FALSE, colour = &quot;red&quot;) +
   labs(x = &quot;Data&quot;, y = &quot;Visualizações (milhões)&quot;)</code></pre>
 <div class="figure"><span id="fig:historico"></span>
-<img src="/img/blog/porta/historico.png" alt="Volume de visualizações por vídeo por data de publicação." width="100%" />
+<img src="images/posts/conteudo/porta/historico.png" alt="Volume de visualizações por vídeo por data de publicação." width="100%" />
 <p class="caption">
 Figure 2: Volume de visualizações por vídeo por data de publicação.
 </p>
@@ -266,7 +266,7 @@ Figure 2: Volume de visualizações por vídeo por data de publicação.
   theme_minimal(14) +
   labs(x = &quot;Data&quot;, y = &quot;Visualizações / # Dias desde publicação&quot;)</code></pre>
 <div class="figure"><span id="fig:historico-taxa"></span>
-<img src="/img/blog/porta/historico_taxa.png" alt="Taxa do volume de visualizações por quantidade de dias desde a publicação do vídeo." width="100%" />
+<img src="images/posts/conteudo/porta/historico_taxa.png" alt="Taxa do volume de visualizações por quantidade de dias desde a publicação do vídeo." width="100%" />
 <p class="caption">
 Figure 3: Taxa do volume de visualizações por quantidade de dias desde a publicação do vídeo.
 </p>
@@ -303,7 +303,7 @@ grafico_roll &lt;- function(janela = lubridate::years(1), n_corte = 150) {
 grafico_roll(years(2), n_corte = 180)</code></pre>
 <p>A Figura <a href="#fig:roll">4</a> mostra os resultados da análise considerando uma janela de 2 anos. Considerei no gráfico somente os 5 artistas com mais visualizações. Nesse gráfico é possível visualizar que Rafael Portugal está dominando as visualizações desde que entrou. No entanto, recentemente a diferença entre os cinco artistas está diminuindo. Uma explicação é que, como a quantidade de visualizações dos vídeos estacionou na média da Figura <a href="#fig:historico">2</a>, as diferenças existentes entre os artistas passam a ser menos relevantes.</p>
 <div class="figure"><span id="fig:roll"></span>
-<img src="/img/blog/porta/roll.png" alt="Gráfico do volume acumulado de visualizações por artista ao longo do tempo, considerando uma janela de 2 anos."  />
+<img src="/images/posts/conteudo/porta/roll.png" alt="Gráfico do volume acumulado de visualizações por artista ao longo do tempo, considerando uma janela de 2 anos."  />
 <p class="caption">
 Figure 4: Gráfico do volume acumulado de visualizações por artista ao longo do tempo, considerando uma janela de 2 anos.
 </p>
