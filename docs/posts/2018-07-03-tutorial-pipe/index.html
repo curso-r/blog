@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/pipe.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Por que usar o %&gt;%</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Caio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            3 de
+            julho de
+            2018
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/pipe">pipe</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/tidyverse">tidyverse</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Provavelmente você já ouviu falar do operador pipe (<code>%&gt;%</code>). Muita gente acha que ele é uma sequência mágica de símbolos que muda completamente o visual do seu código, mas na verdade ele não passa de uma função como outra qualquer.</p>
+<p>Nesse post vou explorar um pouco da história do pipe, como ele funciona e por que utilizá-lo.</p>
+<div id="origem" class="section level2">
+<h2>Origem</h2>
+<p>O conceito de pipe existe pelo menos desde os anos 1970. De acordo com seu criador, o operador foi concebido em “uma noite febril” e tinha o objetivo de simplificar comandos cujos resultados deveriam ser passados para outros comandos.</p>
+<pre class="sh"><code>ls | cat
+#&gt; Desktop
+#&gt; Documents
+#&gt; Downloads
+#&gt; Music
+#&gt; Pictures
+#&gt; Public
+#&gt; Templates
+#&gt; Videos</code></pre>
+<p>Por essa descrição já conseguimos ter uma ideia de onde vem o seu nome: <em>pipe</em> em inglês significa “cano”, referindo-se ao transporte das saídas dos comandos. Em portugês o termo é traduzido como “canalização” ou “encadeamento”, mas no dia-a-dia é mais comum usar o termo em inglês.</p>
+<p>A partir daí o pipe tem aparecido nas mais diversas aplicações, desde HTML até o nosso tão querido R. Ele pode ter múltiplos disfarces, mas o seu objetivo é sempre o mesmo: transportar resultados.</p>
+</div>
+<div id="como-funciona" class="section level2">
+<h2>Como funciona</h2>
+<p>Em R o pipe tem uma cara meio estranha (<code>%&gt;%</code>), mas no fundo ele não passa de uma função infixa, ou seja, uma função que aparece entre os seus argumentos (como <code>a + b</code> ou <code>a %in% b</code>). Na verdade é por isso mesmo que ele tem porcentagens antes e depois: porque no R uma função infixa só pode ser declarada assim.</p>
+<p>Vamos começar demonstrando sua funcionalidade básica. Carregue o pacote <code>magrittr</code> e declare o pipe usando <em>Ctrl + Shift + M</em>.</p>
+<pre class="r"><code>library(magrittr)
+
+`%&gt;%`(&quot;oi&quot;, print)
+#&gt; [1] &quot;oi&quot;</code></pre>
+<p>Não ligue para os acentos graves em volta do pipe, o comando acima só serve para demonstrar que ele não é nada mais que uma função; perceba que o seu primeiro argumento (<code>&quot;oi&quot;</code>) virou a entrada do seu segundo argumento (<code>print</code>).</p>
+<pre class="r"><code>&quot;oi&quot; %&gt;% print()
+#&gt; [1] &quot;oi&quot;</code></pre>
+<p>Observe agora o comando abaixo. Queremos primeiro somar 3 a uma sequência de números e depois dividí-los por 2:</p>
+<pre class="r"><code>mais_tres &lt;- function(x) { x + 3 }
+sobre_dois &lt;- function(x) { x / 2 }
+
+x &lt;- 1:3
+
+sobre_dois(mais_tres(x))
+#&gt; [1] 2.0 2.5 3.0</code></pre>
+<p>Perceba como fica difícil de entender o que está acontecendo primeiro? A linha relevante começa com a divisão por 2, depois vem a soma com 3 e, por fim, os valores de entrada.</p>
+<p>Nesse tipo de situação é mais legível usar a notação de <a href="https://pt.wikipedia.org/wiki/Composi%C3%A7%C3%A3o_de_fun%C3%A7%C3%B5es">composição de funções</a>, com as funções sendo exibidas na ordem em que serão aplicadas: <span class="math inline">\(f \circ g\)</span>.</p>
+<p>Isso pode ser realizado se tivermos uma função que passa o resultado do que está à sua esquerda para a função que está à sua direita…</p>
+<pre class="r"><code>x %&gt;% mais_tres() %&gt;% sobre_dois()
+#&gt; [1] 2.0 2.5 3.0</code></pre>
+<p>No comando acima fica evidente que pegamos o objeto <code>x</code>, somamos 3 e dividimos por 2.</p>
+<p>Você pode já ter notado isso, mas a entrada (esquerda) de um pipe sempre é passada como o <em>primeiro</em> argumento agumento da sua saída (direita). Isso não impede que as funções utilizadas em uma sequência de pipes tenham outros argumentos.</p>
+<pre class="r"><code>mais_n &lt;- function(x, n) { x + n }
+
+x %&gt;% mais_n(4) %&gt;% sobre_dois()
+#&gt; [1] 2.5 3.0 3.5</code></pre>
+</div>
+<div id="vantagens" class="section level2">
+<h2>Vantagens</h2>
+<p>A grande vantagem do pipe não é só enxergar quais funções são aplicadas primeiro, mas sim nos ajudar a programar pipelines (“encanamento” em inglês) de tratamentos de dados.</p>
+<pre class="r"><code>library(dplyr)
+
+starwars %&gt;% 
+  mutate(bmi = mass/((height/100)^2)) %&gt;%
+  select(name, bmi, species) %&gt;%
+  group_by(species) %&gt;%
+  summarise(bmi = mean(bmi))
+#&gt; # A tibble: 38 x 2
+#&gt;    species     bmi
+#&gt;    &lt;chr&gt;     &lt;dbl&gt;
+#&gt;  1 Aleena     24.0
+#&gt;  2 Besalisk   26.0
+#&gt;  3 Cerean     20.9
+#&gt;  4 Chagrian   NA  
+#&gt;  5 Clawdite   19.5
+#&gt;  6 Droid      NA  
+#&gt;  7 Dug        31.9
+#&gt;  8 Ewok       25.8
+#&gt;  9 Geonosian  23.9
+#&gt; 10 Gungan     NA  
+#&gt; # ... with 28 more rows</code></pre>
+<p>Acima fica extremamente claro o que está acontecendo em cada passo da pipeline. Partindo da base <code>starwars</code>, primeiro transformamos, depois selecionamos, agrupamos e resumimos; em cada linha temos uma operação e elas são executadas em sequência.</p>
+<p>Isso não melhora só a legibilidade do código, mas também a sua <em>debugabilidade</em>! Se tivermos encontrado um bug na pipeline, basta executar linha a linha do encadeamento até que encontremos a linha problemática. Com o pipe podemos programar de forma mais compacta, legível e correta.</p>
+<p>Todos os exemplos acima envolvem passar a entrada do pipe como o primeiro argumento da função à direita, mas não é uma obrigatoriedade. Com um operador placeholder <code>.</code> podemos indicar exatamente onde deve ser colocado o valor que chega no pipe:</p>
+<pre class="r"><code>y_menos_x &lt;- function(x, y) { y - x }
+
+x %&gt;%
+  mais_tres() %&gt;%
+  purrr::map2(4:6, ., y_menos_x)
+# [[1]]
+# [1] 0
+# 
+# [[2]]
+# [1] 0
+# 
+# [[3]]
+# [1] 0</code></pre>
+</div>
+<div id="bonus" class="section level2">
+<h2>Bônus</h2>
+<p>Agora que você já sabe dos usos mais comuns do pipe, aqui está uma outra funcionalidade interessante: funções unárias. Se você estiver familiarizado com o <a href="http://ctlente.com/pt/purrr-magic/">pacote <code>purrr</code></a>, esse é um jeito bastante simples de criar funções descartáveis.</p>
+<pre class="r"><code>m3_s2 &lt;- . %&gt;%
+  mais_tres() %&gt;%
+  sobre_dois()
+
+m3_s2(x)
+#&gt; [1] 2.0 2.5 3.0</code></pre>
+<p>Usando novamente o <code>.</code> definimos uma função que recebe apenas um argumento com uma sequência de aplicações de outras funções.</p>
+</div>
+<div id="conclusao" class="section level2">
+<h2>Conclusão</h2>
+<p>O pipe não é apenas algo que deve ser usado pelos fãs do <a href="https://www.tidyverse.org/">tidyverse</a>. Ele é uma função extremamente útil que ajuda na legibilidade e programação de código, independentemente de quais pacotes utilizamos.</p>
+<p>Se quiser saber mais sobre o mundo do pipe, leia <a href="http://curso-r.com/blog/2017/02/15/2017-02-16-manifesto-tidy/">este post</a> do Daniel sobre o Manifesto Tidy e o <a href="http://material.curso-r.com/pipe/">nosso tutorial</a> mais aprofundado sobre o próprio pipe.</p>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/fastr.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">R 3.4 disponível!</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Julio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            24 de
+            abril de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/vers%c3%a3o">versão</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>A versão 3.4 do R (You Stupid Darkness) foi lançada nesse final de semana! A atualização tem foco principal na performance. Principais mudanças:</p>
+<ol style="list-style-type: decimal">
+<li>Agora temos um compilador JIT (Just In Time) como padrão! Isso significa que você não precisará mais usar a função <code>compiler::cmpfun()</code> para acelerar suas funções na maioria dos casos. Mais sobre isso abaixo.</li>
+<li>O <code>for</code> ficou mais eficiente. Agora a alocação dinâmica de vetores está mais rápida, diminuindo ainda mais a diferença entre utilizar <code>for</code> e funcionais como <code>sapply()</code>, que trabalham com um vetor pré alocado. Mais sobre isso abaixo.</li>
+<li>Otimizações em operações com matrizes. Não vou entrar em detalhes, mas talvez vocês notem algumas melhorias.</li>
+<li>Agora o método padrão para ordenar vetores é <code>radix</code>, o que pode aumentar a velocidade de ordenações para vetores com mais de mil entradas.</li>
+</ol>
+<p>Para uma lista completa de mudanças, <a href="https://www.r-bloggers.com/r-3-4-0-is-released-with-new-speed-upgrades-and-bug-fixes/">veja esse post</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="/blog/2017-04-24-r34_files/figure-html/unnamed-chunk-2-1.png" alt="R mais rápido! Imagem emprestada do time do [Rcpp](https://github.com/RcppCore)." width="672" />
+<p class="caption">
+Figure 1: R mais rápido! Imagem emprestada do time do <a href="https://github.com/RcppCore">Rcpp</a>.
+</p>
+</div>
+<div id="jit" class="section level1">
+<h1>Mais sobre o JIT compiler</h1>
+<p>Veja esse exemplo extraído do livro <a href="https://csgillespie.github.io/efficientR/programming.html">Efficient R</a>. Observe a existência de um <code>&lt;bytecode ...&gt;</code> na parte de baixo de uma das funções. Isso significa que o pacote <code>compiler</code> converteu essa função em um código que pode ser interpretado mais rápido.</p>
+<pre class="r"><code>mean_r = function(x) {
+  m = 0
+  n = length(x)
+  for(i in seq_len(n))
+    m = m + x[i] / n
+  m
+}
+cmp_mean_r &lt;- compiler::cmpfun(mean_r)
+
+mean_r
+## function(x) {
+##   m = 0
+##   n = length(x)
+##   for(i in seq_len(n))
+##     m = m + x[i] / n
+##   m
+## }
+cmp_mean_r
+## function(x) {
+##   m = 0
+##   n = length(x)
+##   for(i in seq_len(n))
+##     m = m + x[i] / n
+##   m
+## }
+## &lt;bytecode: 0x55b6999e8818&gt;</code></pre>
+<p>Para mostrar a mudança, vamos comparar o desempenho das funções usando <code>microbenchmark()</code>. Essa função calcula o tempo de execução de uma expressão cem vezes e calcula estatísticas básicas dos tempos obtidos.</p>
+<p>No meu servidor, que ainda está com o R 3.3.2, o resultado foi esse. Observe que o tempo da função compilada é quase dez vezes o tempo da função sem compilar.</p>
+<pre class="r"><code>set.seed(1)
+x &lt;- rnorm(5000)
+microbenchmark::microbenchmark(mean_r(x), cmp_mean_r(x), mean(x))
+# Unit: microseconds
+#           expr      min       lq       mean    median        uq      max neval
+#      mean_r(x) 1931.835 2010.295 2302.82298 2102.5995 2357.6715 6186.706   100
+#  cmp_mean_r(x)  308.847  311.045  333.26221  314.8935  334.7330  569.117   100
+#        mean(x)   14.593   15.443   19.94897   19.0410   21.0405   51.375   100</code></pre>
+<p>No meu computador com o R 3.4, o resultado foi esse. Agora, a diferença entre a função sem compilar e compilada é praticamente impoerceptível. Esse é o efeito do JIT compiler.</p>
+<pre class="r"><code>set.seed(1)
+x &lt;- rnorm(5000)
+microbenchmark::microbenchmark(mean_r(x), cmp_mean_r(x), mean(x))
+# Unit: microseconds
+#           expr     min       lq     mean   median       uq     max neval
+#      mean_r(x) 332.322 332.7220 336.2287 333.0125 334.3785 395.954   100
+#  cmp_mean_r(x) 332.305 332.7345 337.0889 333.1460 337.0930 381.306   100
+#        mean(x)  13.807  14.0960  14.7349  14.3060  14.5540  30.313   100</code></pre>
+</div>
+<div id="for" class="section level1">
+<h1>Mais sobre o for</h1>
+<p>Veja esse código que calcula a média de mil valores em 100 entradas de uma lista.</p>
+<pre class="r"><code>set.seed(1)
+input &lt;- lapply(1:100, function(x) runif(1000))
+
+mean_for &lt;- function(x) {
+  vet &lt;- c()
+  for(i in seq_along(x)) {
+    vet[i] &lt;- mean(x[[i]])
+  }
+}
+mean_sapply &lt;- function(x) {
+  sapply(x, mean)
+}</code></pre>
+<p>No meu servidor, que ainda está com o R 3.3.2, o resultado foi esse. Veja como o desempenho do <code>for</code> é assustadoramente inferior.</p>
+<pre class="r"><code>microbenchmark::microbenchmark(mean_for(x), mean_sapply(x))
+# Unit: milliseconds
+#            expr      min       lq     mean   median       uq      max neval
+#     mean_for(x) 41.28675 43.22318 47.39574 44.02713 45.59184 84.80818   100
+#  mean_sapply(x) 14.78590 15.46421 16.36619 16.23018 17.28495 19.70854   100</code></pre>
+<p>No meu computador com o R 3.4, o resultado foi esse. Agora o <code>for</code> está praticamente empatado!</p>
+<pre class="r"><code>microbenchmark::microbenchmark(mean_for(x), mean_sapply(x))
+# Unit: milliseconds
+#            expr      min       lq     mean   median       uq      max neval
+#     mean_for(x) 15.16583 15.45924 16.71064 16.14545 17.51002 25.61860   100
+#  mean_sapply(x) 14.43704 14.90485 16.20864 15.53319 16.56801 27.36536   100 </code></pre>
+<p>Mas cuidado! o <code>for</code> continua sendo uma ideia ruim no R, não só por desempenho, mas por questões de <em>design</em>. Utilizar funcionais ajuda na performance do computador e torna a vida do cientista de dados mais fácil (veja <a href="http://curso-r.com/blog/2017/04/10/2017-04-08-progress/">esse</a> e <a href="http://curso-r.com/blog/2017/03/19/2017-03-14-parallel/">esse</a> posts que discutem um pouco sobre isso.)</p>
+<div id="instalação" class="section level2">
+<h2>Instalação</h2>
+<p>Se você usa Windows, uma dica é usar o pacote <code>installr</code>. Basta rodar isso aqui e ser feliz:</p>
+<pre class="r"><code>install.packages(&quot;installr&quot;)
+installr::updateR()</code></pre>
+<p>É isso! Happy coding ;)</p>
+<p>OBS: Se você ficou curiosa sobre o nome da versão, encontrei essa tirinha de 1965 do Peanuts. Acho que foi isso que deu origem ao nome!</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="/blog/2017-04-24-r34_files/figure-html/unnamed-chunk-10-1.png" alt="You Stupid Darknes! http://www.gocomics.com/peanuts/1965/09/09." width="960" />
+<p class="caption">
+Figure 2: You Stupid Darknes! <a href="http://www.gocomics.com/peanuts/1965/09/09" class="uri">http://www.gocomics.com/peanuts/1965/09/09</a>.
+</p>
+</div>
+</div>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

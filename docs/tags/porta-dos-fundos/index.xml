@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Porta dos Fundos on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/porta-dos-fundos/</link>
+    <description>Recent content in Porta dos Fundos on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 06 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/porta-dos-fundos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quem segura a barra do Porta dos Fundos?</title>
+      <link>https://blog.curso-r.com/posts/2020-01-06-porta/</link>
+      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-01-06-porta/</guid>
+      <description>A base de dados de CNPJ da Receita Federal do Brasil (RFB) é, na minha opinião, uma das maiores conquistas de dados abertos do Brasil. Nesse post vou passar alguns links para ler a base e alguns gráficos simples.</description>
+    </item>
+    
+    <item>
+      <title>O Porta dos Fundos está em decadência? (REVISITED)</title>
+      <link>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</link>
+      <pubDate>Fri, 28 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</guid>
+      <description>Às vezes a venda de uma empresa é um sinal de que algo não vai bem. Além disso, a briga entre as novas mídias e as velhas mídias é brutal, então se um conglomerado televisivo compra um dos gigantes da internet brasileira deve ter acontecido algum um tipo de canibalismo. Motivados pela nova casa do PDF, neste post revisitamos a análise sobre a decadência do Porta dos Fundos.</description>
+    </item>
+    
+    <item>
+      <title>O Porta dos Fundos está em decadência?</title>
+      <link>https://blog.curso-r.com/posts/2017-03-20-porta-dos-fundos-decadencia/</link>
+      <pubDate>Mon, 20 Mar 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-20-porta-dos-fundos-decadencia/</guid>
+      <description>Há alguns anos eu acompanho o canal Porta dos Fundos no YouTube, assistindo os vídeos quase sempre no dia de lançamento. Nos últimos meses, no entanto, meu entusiasmo com o canal vem diminuindo. Não sei se eu que fiquei chato ou se outras pessoas compartilham a minha opinião de que o conteúdo do Porta piorou. Então resolvi scrapear informações do canal e montar algumas visualizações para tirar essa dúvida.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/dadosgovbr.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Verificando afirmações com dados abertos</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Julio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            25 de
+            setembro de
+            2019
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/evento">evento</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Uma forma poderosa de participar socialmente é utilizando dados abertos. Dados abertos tornam a sociedade mais democrática pois com eles podemos verificar afirmações baseadas em estatísticas e também buscar novas narrativas para os fenômenos estudados.</p>
+<p>Nesse post, mostramos um exemplo de como isso pode ser feito, utilizando os dados da Sistema Nacional de Informações de Segurança pública, o SINESP. O objetivo com esse texto é empoderar as pessoas que trabalham com ciência de dados e mostrar como podemos participar socialmente usando o R.</p>
+<p>No dia 16/julho o Ministro da Justiça, Sérgio Moro, fez a seguinte declaração no Twitter:</p>
+<blockquote class="twitter-tweet">
+<p lang="pt" dir="ltr">
+Abaixo notícia de verdade. Dados do Sinesp, estes, sim, oficiais, apontam queda no primeiro trimestre de 2019 do número dos principais crimes em todo o país em comparação com o mesmo período de 2018. Vamos trabalhar para aprofundar essa queda e levar segurança a cada cidadão. <a href="https://t.co/srnJZF4X6K">pic.twitter.com/srnJZF4X6K</a>
+</p>
+— Sergio Moro (<span class="citation">@SF_Moro</span>) <a href="https://twitter.com/SF_Moro/status/1151091133696684033?ref_src=twsrc%5Etfw">July 16, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>O legal de existirem dados abertos é que podemos checar esses informações e criar análises mais aprofundadas sobre o tema. Infelizmente, ainda não foram disponibilizados os dados do primeiro bimestre de 2019, que fazem parte do Tweet do Moro.</p>
+<p>Mas isso não é um problema, pois podemos fazer diversos cruzamentos com os dados que estão disponíveis. Nesta rápida análise, mostro como baixar os dados a partir do portal de dados abertos <a href="https://dados.gov.br" class="uri">https://dados.gov.br</a>. Para isso, utilizarei o <code>tidyverse</code>, <code>httr</code> e <code>xml2</code>.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<div id="parte-1-download" class="section level2">
+<h2>Parte 1: Download</h2>
+<p>Como o dados.gov.br é um portal muito bem feito, é possível baixar todos os dados em CSV com um pipeline simples:</p>
+<pre class="r"><code># caminho do diretório
+path_sinesp &lt;- &quot;~/data-raw/sinesp/&quot;
+# cria o diretório
+fs::dir_create(path_sinesp)
+
+# link do SINESP no dados.gov.br
+u_sinesp &lt;- paste0(&quot;http://dados.gov.br/dataset&quot;,
+                   &quot;/sistema-nacional-de-estatisticas-de-seguranca-publica&quot;)
+
+u_sinesp %&gt;%
+  # carrega a página
+  httr::GET() %&gt;%
+  # parseia o código fonte da página
+  xml2::read_html() %&gt;%
+  # identifica todas as tags que contêm os links
+  xml2::xml_find_all(&quot;//ul[@class=&#39;dropdown-menu&#39;]//a&quot;) %&gt;%
+  # extrai a lista todos os links
+  xml2::xml_attr(&quot;href&quot;) %&gt;%
+  # seleciona apenas os arquivos xlsx da lista
+  str_subset(&quot;xlsx&quot;) %&gt;%
+  # essa parte faz o loop de download. Demora ~1 minuto
+  walk(~httr::GET(.x, httr::write_disk(paste0(path_sinesp, basename(.x)))))</code></pre>
+<p>Nada impede o usuário de baixar esses arquivos CSV manualmente. Pode ser até que seja mais rápido baixar manualmente se for uma vez só. A vantagem desse código é que ele é reprodutível, a menos que o site mude sua estrutura. Ou seja, quando chegarem os dados de 2019, provavelmente poderemos baixar tudo novamente usando o mesmo código.</p>
+</div>
+<div id="parte-2-importacao-e-arrumacao" class="section level2">
+<h2>Parte 2: Importação e arrumação</h2>
+<p>O código abaixo carrega e arruma os dados para análise. Sempre existem inconsistências nos dados e devemos ficar atentos a eles.</p>
+<pre class="r"><code>d_sinesp &lt;- path_sinesp %&gt;% 
+  # lista os arquivos
+  fs::dir_ls() %&gt;%
+  # lê todos os arquivos xlsx e empilha
+  map_dfr(readxl::read_excel, col_types = &quot;text&quot;, .id = &quot;file&quot;) %&gt;%
+  # define os nomes das colunas
+  set_names(c(&quot;file&quot;, &quot;uf&quot;, &quot;tipo_crime&quot;, &quot;mes_ano&quot;, &quot;valor&quot;)) %&gt;%
+  # transforma os valores para os tipos corretos
+  transmute(
+    uf,
+    # transformando string em data
+    mes_ano = lubridate::dmy(paste0(&quot;01/&quot;, mes_ano)),
+    # arrumando tipo de crime
+    tipo_crime = str_to_title(tipo_crime),
+    valor = as.numeric(valor),
+    # cria uma coluna com o bimestre
+    bimestre = lubridate::floor_date(mes_ano, &quot;bimonth&quot;)
+  )</code></pre>
+<p>No caso, o maior problema era um tipo de crime que estava escrito com nomes ligeiramente diferentes. Um <code>stringr::str_to_title()</code> foi suficiente para resolver. A base de dados ficou assim:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">uf</th>
+<th align="left">mes_ano</th>
+<th align="left">tipo_crime</th>
+<th align="right">valor</th>
+<th align="left">bimestre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Estupro</td>
+<td align="right">6</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="even">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Furto De Veículo</td>
+<td align="right">0</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="odd">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Homicídio Doloso</td>
+<td align="right">13</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="even">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Lesão Corporal Seguida De Morte</td>
+<td align="right">0</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="odd">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Roubo A Instituição Financeira</td>
+<td align="right">0</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="even">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Roubo De Carga</td>
+<td align="right">0</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="odd">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Roubo De Veículo</td>
+<td align="right">NA</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="even">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Roubo Seguido De Morte (Latrocínio)</td>
+<td align="right">0</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="odd">
+<td align="left">Acre</td>
+<td align="left">2015-01-01</td>
+<td align="left">Tentativa De Homicídio</td>
+<td align="right">2</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="even">
+<td align="left">Acre</td>
+<td align="left">2015-02-01</td>
+<td align="left">Estupro</td>
+<td align="right">8</td>
+<td align="left">2015-01-01</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="parte-3-transformacao" class="section level2">
+<h2>Parte 3: Transformação</h2>
+<p>Nesse código, meu objetivo foi reproduzir a tabela do Ministro da Justiça, mas adicionando as mudanças ocorridas entre 2015-2016, 2016-2017 e 2017-2018. Não fiz a análise por trimestre, e sim por bimestre. O leitor interessado pode replicar as análises para trimestres.</p>
+<pre class="r"><code>results &lt;- d_sinesp %&gt;%
+  # agrupa por bimestre e sumariza
+  group_by(bimestre, tipo_crime) %&gt;%
+  summarise(valor = sum(valor, na.rm = TRUE)) %&gt;%
+  ungroup() %&gt;%
+  # apenas primeiro bimestre e tirar dados de antes de 2015
+  filter(lubridate::month(bimestre) == 1,
+         lubridate::year(bimestre) &gt;= 2015) %&gt;%
+  # ordenar e agrupar por tipo de crime
+  arrange(tipo_crime, bimestre) %&gt;%
+  group_by(tipo_crime) %&gt;%
+  # adicionar bimestre anterior
+  mutate(vl_lag = lag(valor)) %&gt;%
+  ungroup() %&gt;%
+  # tirar 2015
+  filter(!is.na(vl_lag)) %&gt;%
+  # calcula a razão
+  mutate(razao = scales::percent(valor / vl_lag - 1),
+         bim1 = lubridate::year(bimestre)) %&gt;%
+  # seleciona as colunas importantes
+  select(bim1, tipo_crime, razao) %&gt;%
+  # joga os bimestres nas colunas
+  spread(bim1, razao, sep = &quot;_&quot;)
+
+knitr::kable(results)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">tipo_crime</th>
+<th align="left">bim1_2016</th>
+<th align="left">bim1_2017</th>
+<th align="left">bim1_2018</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Estupro</td>
+<td align="left">4.3%</td>
+<td align="left">1.2%</td>
+<td align="left">11.5%</td>
+</tr>
+<tr class="even">
+<td align="left">Furto De Veículo</td>
+<td align="left">5.5%</td>
+<td align="left">-7.3%</td>
+<td align="left">-6.4%</td>
+</tr>
+<tr class="odd">
+<td align="left">Homicídio Doloso</td>
+<td align="left">3.3%</td>
+<td align="left">6.5%</td>
+<td align="left">-10.6%</td>
+</tr>
+<tr class="even">
+<td align="left">Lesão Corporal Seguida De Morte</td>
+<td align="left">21.6%</td>
+<td align="left">23.0%</td>
+<td align="left">-7.8%</td>
+</tr>
+<tr class="odd">
+<td align="left">Roubo A Instituição Financeira</td>
+<td align="left">-4.8%</td>
+<td align="left">-28.9%</td>
+<td align="left">-1.4%</td>
+</tr>
+<tr class="even">
+<td align="left">Roubo De Carga</td>
+<td align="left">-1.5%</td>
+<td align="left">13.1%</td>
+<td align="left">11.2%</td>
+</tr>
+<tr class="odd">
+<td align="left">Roubo De Veículo</td>
+<td align="left">9.8%</td>
+<td align="left">7.0%</td>
+<td align="left">-5.9%</td>
+</tr>
+<tr class="even">
+<td align="left">Roubo Seguido De Morte (Latrocínio)</td>
+<td align="left">12.5%</td>
+<td align="left">13.7%</td>
+<td align="left">-13.1%</td>
+</tr>
+<tr class="odd">
+<td align="left">Tentativa De Homicídio</td>
+<td align="left">-7.7%</td>
+<td align="left">-2.0%</td>
+<td align="left">-9.9%</td>
+</tr>
+</tbody>
+</table>
+<p>A tabela mostra que o primeiro bimestre de 2018, se comparado ao de 2017, também apresenta quedas em todos os tipos de crime, com exceção de estupro e roubo de cargas. Além disso, como será possível ver no próximo gráfico, as variações percentuais acima de 20% na tabela ocorrem em crimes com pequeno volume absoluto de ocorrências. Isso é esperado, pois quando o valor absoluto é pequeno, pequenas mudanças podem significar grandes variações percentuais. Por exemplo, se uma contagem vai de 150 para 120 (queda de 30), a queda é de 20%, mas se outra contagem vai de 1000 para 900 (queda de 100), a queda percentual é de 10%</p>
+</div>
+<div id="parte-4-visualizacao" class="section level2">
+<h2>Parte 4: Visualização</h2>
+<p>Nesse gráfico, mostrei a série bimestral de ocorrências por tipo de crime, buscando identificar tendências de subida ou queda.</p>
+<pre class="r"><code>d_sinesp %&gt;%
+  # soma por bimestre e tipo de crime
+  group_by(bimestre, tipo_crime) %&gt;%
+  summarise(valor = sum(valor, na.rm = TRUE)) %&gt;%
+  ungroup() %&gt;%
+  # apenas 2015 para frente
+  filter(lubridate::year(bimestre) &gt;= 2015) %&gt;%
+  # monta o grafico
+  ggplot(aes(x = bimestre, y = valor)) +
+  # adiciona linhas
+  geom_line() +
+  # adiciona uma linha vertical par 2018
+  geom_vline(xintercept = as.Date(&quot;2018-01-01&quot;), colour = &quot;red&quot;, linetype = 2) +
+  # divide o grafico por tipo de crime
+  facet_wrap(~tipo_crime, scales = &quot;free_y&quot;, ncol = 3) +
+  theme_bw()</code></pre>
+<p><img src="images/posts/conteudo/dadosgovbr/grafico_tempo.png" /></p>
+<p>Pelo gráfico, é possível identificar que, em diversos tipos de crime, existe uma tendência de queda após o primeiro bimestre de 2018. Ou seja, não se pode atribuir a queda nas estatísticas de ocorrências ao novo governo de 2019. A queda vertiginosa no volume de estupros é bem curiosa.</p>
+</div>
+<div id="wrap-up" class="section level2">
+<h2>Wrap-up</h2>
+<ul>
+<li>Dado aberto é a melhor forma de tornar as informações disponibilizadas publicamente auditáveis.</li>
+<li>Com o R, é fácil ingerir esses dados para realizar análises simples e complexas.</li>
+<li>Não se engane: dado aberto não é dado arrumado. O trabalho de faxina de dados é contínuo.</li>
+</ul>
+<p>É isso. Happy coding ;)</p>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

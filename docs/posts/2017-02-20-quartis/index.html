@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/quartis.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Medidas-resumo no tidyverse</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Julio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            11 de
+            março de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/tidyverse">tidyverse</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/dplyr">dplyr</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/purrr">purrr</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Hoje estava fazendo uma análise exploratória e precisava estudar os quartis de uma variável contínua. A solução usando o <code>tidyverse</code> é tão elegante que valeu um post no blog.</p>
+<p>Usaremos os pacotes <code>tibble</code>, <code>dplyr</code>, <code>tidyr</code> e <code>purrr</code>:</p>
+<pre class="r"><code>library(tibble)
+library(dplyr)
+library(tidyr)
+library(purrr)</code></pre>
+<p>Nesse exemplo, usamos a famosa base <code>mtcars</code></p>
+<pre class="r"><code>tab &lt;- mtcars %&gt;% 
+  group_by(am, vs) %&gt;% 
+  nest() %&gt;% 
+  mutate(quartis = map(data, ~enframe(quantile(.x$mpg, 1:3 / 4)))) %&gt;% 
+  unnest_legacy(quartis) %&gt;% 
+  spread(name, value)
+tab
+## # A tibble: 4 x 5
+## # Groups:   vs, am [4]
+##      vs    am `25%` `50%` `75%`
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0     0  14.0  15.2  16.6
+## 2     0     1  16.8  20.4  21  
+## 3     1     0  18.6  21.4  22.2
+## 4     1     1  25.0  30.4  31.4</code></pre>
+<ul>
+<li>A função <code>dplyr::group_by()</code> faz um grupo para cada combinação de <code>am</code> e <code>vs</code>.</li>
+<li>A função <code>tidyr::nest()</code> guarda os dados de cada grupo numa <em>list-column</em> chamada <code>data</code>.</li>
+<li>A função <code>purrr::map()</code> aplica elegantemente a função <code>quantile()</code> para cada grupo de datas, sendo ajudada pela função <code>tibble::enframe()</code>, que coloca o resultado de <code>quantile()</code> em uma <code>tibble</code>.</li>
+<li>A função <code>tidyr::unnest_legacy()</code> coloca os resultados de volta em colunas-vetores.</li>
+<li>Terminamos com <code>tidyr::spread()</code> para espalhar os quartis nas colunas.</li>
+</ul>
+<p>O resultado pode ser jogado diretamente numa tabela:</p>
+<pre class="r"><code>knitr::kable(tab)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">vs</th>
+<th align="right">am</th>
+<th align="right">25%</th>
+<th align="right">50%</th>
+<th align="right">75%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">14.050</td>
+<td align="right">15.20</td>
+<td align="right">16.625</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">16.775</td>
+<td align="right">20.35</td>
+<td align="right">21.000</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">18.650</td>
+<td align="right">21.40</td>
+<td align="right">22.150</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">25.050</td>
+<td align="right">30.40</td>
+<td align="right">31.400</td>
+</tr>
+</tbody>
+</table>
+<p>É possível mudar esse código para ter outras medidas-resumo, por exemplo. Para isso, podemos usar a função <code>summary()</code>, por exemplo, ou criar nossa própria função.</p>
+<pre class="r"><code>mtcars %&gt;%
+  group_by(am, vs) %&gt;% 
+  nest() %&gt;% 
+  mutate(s = map(data, ~enframe(summary(.x$mpg)))) %&gt;% 
+  unnest_legacy(s) %&gt;% 
+  spread(name, value) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">vs</th>
+<th align="right">am</th>
+<th align="right">1st Qu.</th>
+<th align="right">3rd Qu.</th>
+<th align="right">Max.</th>
+<th align="right">Mean</th>
+<th align="right">Median</th>
+<th align="right">Min.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">14.050</td>
+<td align="right">16.625</td>
+<td align="right">19.2</td>
+<td align="right">15.05000</td>
+<td align="right">15.20</td>
+<td align="right">10.4</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">16.775</td>
+<td align="right">21.000</td>
+<td align="right">26.0</td>
+<td align="right">19.75000</td>
+<td align="right">20.35</td>
+<td align="right">15.0</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">18.650</td>
+<td align="right">22.150</td>
+<td align="right">24.4</td>
+<td align="right">20.74286</td>
+<td align="right">21.40</td>
+<td align="right">17.8</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">25.050</td>
+<td align="right">31.400</td>
+<td align="right">33.9</td>
+<td align="right">28.37143</td>
+<td align="right">30.40</td>
+<td align="right">21.4</td>
+</tr>
+</tbody>
+</table>
+<p>Como você resolveria essa task? Escreva nos comentários!</p>
+<p><strong>OBS</strong>: Outra solução para a mesma task, mais concisa, usando <code>dplyr::do()</code>:</p>
+<pre class="r"><code>mtcars %&gt;% 
+  group_by(am, vs) %&gt;% 
+  do(enframe(summary(.$mpg))) %&gt;% 
+  spread(name, value) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">am</th>
+<th align="right">vs</th>
+<th align="right">1st Qu.</th>
+<th align="right">3rd Qu.</th>
+<th align="right">Max.</th>
+<th align="right">Mean</th>
+<th align="right">Median</th>
+<th align="right">Min.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">14.050</td>
+<td align="right">16.625</td>
+<td align="right">19.2</td>
+<td align="right">15.05000</td>
+<td align="right">15.20</td>
+<td align="right">10.4</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">18.650</td>
+<td align="right">22.150</td>
+<td align="right">24.4</td>
+<td align="right">20.74286</td>
+<td align="right">21.40</td>
+<td align="right">17.8</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">16.775</td>
+<td align="right">21.000</td>
+<td align="right">26.0</td>
+<td align="right">19.75000</td>
+<td align="right">20.35</td>
+<td align="right">15.0</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">25.050</td>
+<td align="right">31.400</td>
+<td align="right">33.9</td>
+<td align="right">28.37143</td>
+<td align="right">30.40</td>
+<td align="right">21.4</td>
+</tr>
+</tbody>
+</table>
+<p>Mas: tome cuidado! Se o Hadley diz…</p>
+<p><img src="http://lsru.github.io/r_workshop/img/purrr_do.png" /></p>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

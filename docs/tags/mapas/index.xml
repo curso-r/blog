@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mapas on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/mapas/</link>
+    <description>Recent content in mapas on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/mapas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Qual a capital mais distante de Brasília?</title>
+      <link>https://blog.curso-r.com/posts/2020-09-19-map-dist/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-09-19-map-dist/</guid>
+      <description>Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!</description>
+    </item>
+    
+    <item>
+      <title>Gráficos miojo: Mapas temáticos do Brasil em 3 minutos ou menos</title>
+      <link>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</link>
+      <pubDate>Thu, 04 May 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</guid>
+      <description>Impressionar é muito mais fácil se você usa mapas. Neste post vamos aprender a construir mapas temáticos do Brasil com muita agilidade.</description>
+    </item>
+    
+    <item>
+      <title>leaflet com markerCluster</title>
+      <link>https://blog.curso-r.com/posts/2017-02-21-markercluster/</link>
+      <pubDate>Wed, 01 Mar 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-21-markercluster/</guid>
+      <description>O leaflet é uma biblioteca javascript para criação de mapas interativos. O pacote leaflet do R é um htmlwidget que permite gerar esses mapas de forma direta no R, para usar em documentos &lt;code&gt;RMarkdown&lt;/code&gt; e Shiny.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/tufte.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Top 3 pacotes pra usar com rmarkdown</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Fernando
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            15 de
+            julho de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/r-markdown">r-markdown</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/rstudio">rstudio</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Os criadores do Markdown, segundo suas próprias palavras, criaram a linguagem com o objetivo de construir um “formato de texto fácil de ler, fácil de escrever e opcionalmente conversível para HTML”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Com o passar do tempo, esse objetivo foi expandido pela comunidade, pois a simplicidade também é útil para outros formatos.</p>
+<p>As extensões andam em dois sentidos. Um deles é construir tradutores universais entre todas as linguagens de marcação, como o <code>pandoc</code>, permitindo que seja fácil construir documentos a partir de textos em Markdown. A outra classe de extensões incorpora as vantagens obtidas a outras ferramentas, como o <code>Rmarkdown</code>, que adiciona o resultado de códigos em R aos textos escritos em Markdown.</p>
+<p>Essa segunda classe de extensões é particularmente importante para os estatísticos, já que a comunicação é uma parte muito importante do seu trabalho. Usando <code>Rmarkdown</code>, é fácil construir relatórios reprodutíveis, concisos e, por último mas não menos importante, bonitos.</p>
+<p>Neste post, vou listar pra vocês os meus 3 pacotes favoritos para formatar e organizar documentos em Rmarkdown, descrevendo brevemente o que eu mais gosto neles. Os três pacotes, assim como o próprio pacote <code>rmarkdown</code>, estão sendo desenvolvidos pela comunidade e pelo Rstudio, de tal forma que não vou mencionar explicitamente nenhuma das pessoas envolvidas nos projetos, mas antes de começar a lista quero deixar registrado que muito do que a gente tem hoje foi culpa do Yihui Xie. Muito obrigado, Yihui!</p>
+<div id="primeira-posicao-rticles" class="section level1">
+<h1>Primeira posição: <code>rticles</code></h1>
+<p>O pacote <code>rticles</code> contém vários templates para documentos em <code>rmarkdown</code>. Os modelos são todos baseados nos padrões de artigos acadêmicos, mas eles são bonitos e flexíveis o suficiente para garantir sua aplicabilidade em vários outros contextos.</p>
+<p>Pra aplicações mais gerais, acho o template da <em>Statistic in Medicine</em> bastante adequado.</p>
+</div>
+<div id="segunda-posicao-tufte" class="section level1">
+<h1>Segunda posição: <code>tufte</code></h1>
+<p>Na nossa segunda posição, vem o pacote <code>tufte</code>. Ele contém templates para documentos em <code>rmarkdown</code> e ferramentas gráficas que se baseiam nas práticas de visualização do Edward Tufte <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, sujeito que está no banner desse post. A ideia aqui é construir relatórios fluidos e que incorporem formas de informação quantitativas (gráficos e tabelas) de maneira mais fluida.</p>
+<p>Vendo alguns exemplos no <a href="http://rmarkdown.rstudio.com/tufte_handout_format.html">site do Rstudio</a> dá pra ver como a coisa é elegante e prática. A grande sacada é usar a margem com mais liberdade: algumas notas de rodapé, por exemplo, na verdade são pequenos comentários, então você pode inseri-los na margem da página pra sugerir essa relação mais íntima com o que você escreveu.</p>
+</div>
+<div id="terceira-posicao-bookdown" class="section level1">
+<h1>Terceira posição: <code>bookdown</code></h1>
+<p>Na terceira posição vem um pacote um pouco mais jovem do que os anteriores. Dessa vez o objetivo é construir documentos mais longos, como uma apostila ou um relatório. A estrutura de arquivos é bastante simples e é possível criar capítulos, seções, sumários etc como se você estivesse rascunhando alguma coisa em <code>rmarkdown</code>.</p>
+<p>Além de estruturar a escrita de um documento grande, esse pacote também se comunica bem com o <code>tufte</code> e já prevê alguma maneiras de publicar o seu trabalho. É possível compilar os <em>books</em> em um html, mais ou menos como os livros do <a href="http://rmarkdown.rstudio.com/tufte_handout_format.html">Hadley</a>, ou num pdf, sugerindo uma maneira bem legal de escrever uma dissertação ou uma tese. Se você integrar o <em>bookdown</em> com <a href="https://travis-ci.org/">Travis</a>, então, o céu é o limite.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://web.archive.org/web/20040402182332/http://daringfireball.net/projects/markdown/" class="uri">https://web.archive.org/web/20040402182332/http://daringfireball.net/projects/markdown/</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p><a href="https://www.edwardtufte.com/tufte/" class="uri">https://www.edwardtufte.com/tufte/</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>strings on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/strings/</link>
+    <description>Recent content in strings on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/strings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Remoção de Acentos e o Ano Novo Muçulmano</title>
+      <link>https://blog.curso-r.com/posts/2019-08-29-transliteracao/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-29-transliteracao/</guid>
+      <description>Transliteração é uma das tarefas mais complicadas do tratamento de strings, mas o pacote stringi pode nos salvar.</description>
+    </item>
+    
+    <item>
+      <title>Comportamentos imprevisíveis do lubridate</title>
+      <link>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</link>
+      <pubDate>Sat, 02 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</guid>
+      <description>R é uma linguagem maravilhosa. Ela possibilita uma ampla gama de aplicações interessantes. O seu maior trunfo está no rico ecossistema de pacotes, que são desenvolvidos e mantidos pela comunidade, sempre criativa na hora de lidar com os problemas. Entretanto, toda essa facilidade cobra um preço. Neste post vamos aprender que às vezes os programas não fazem exatamente o que estão dizendo que fazem.</description>
+    </item>
+    
+    <item>
+      <title>Colando textos</title>
+      <link>https://blog.curso-r.com/posts/2017-04-08-glue/</link>
+      <pubDate>Mon, 17 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-08-glue/</guid>
+      <description>Uma tarefa muito comum no R é colar textos. As funções mais importantes para isso são paste() e sprintf(), que vêm com o pacote base. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do tidyverse, o glue.</description>
+    </item>
+    
+  </channel>
+</rss>

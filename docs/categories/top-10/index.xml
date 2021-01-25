@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>top 10 on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/categories/top-10/</link>
+    <description>Recent content in top 10 on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 15 Jul 2017 23:26:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/top-10/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Top 3 pacotes pra usar com rmarkdown</title>
+      <link>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</link>
+      <pubDate>Sat, 15 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</guid>
+      <description>Neste post, vou listar três pacotes que são úteis pra fazer relatórios bonitos em Rmarkdown.</description>
+    </item>
+    
+    <item>
+      <title>Top 10 dicas do Curso R de verão 2017</title>
+      <link>https://blog.curso-r.com/posts/2017-04-08-top10-dicas-verao-2017/</link>
+      <pubDate>Sat, 08 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-08-top10-dicas-verao-2017/</guid>
+      <description>Em fevereiro desse ano ministramos o Curso de R de Verão 2017, parte do programa dos Cursos de Verão do IME-USP.</description>
+    </item>
+    
+    <item>
+      <title>Top 10 pacotes para data science</title>
+      <link>https://blog.curso-r.com/posts/2017-02-21-top10-pacotes-para-data-science/</link>
+      <pubDate>Tue, 21 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-21-top10-pacotes-para-data-science/</guid>
+      <description>O R mudou muito nos últimos 5 anos graças a criações de novos pacotes focados nas questões mais práticas do dia a dia de um cientista de dados.</description>
+    </item>
+    
+  </channel>
+</rss>

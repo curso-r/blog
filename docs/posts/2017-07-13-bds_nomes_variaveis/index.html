@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/bds_ruins.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Arrumando BDs: nome das variáveis</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por William
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            12 de
+            julho de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/bds">BDs</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/tidyverse">tidyverse</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Arrumar base de dados é uma tarefa chata, perigosa e pode consumir uma grande parcela do tempo total do projeto.</p>
+<p>A tarefa é chata porque é um grande retrabalho que muitas vezes cai na mão dos estatísticos. Mandar de volta para o responsável corrigir é uma opção, mas já passei por situações em que o tempo perdido no vai-e-vem da bd foi bem maior do que o tempo que eu gastaria para arrumar eu mesmo (e no fim, o banco ainda continha erros). Bds apropriadas para a análise poderiam (e deveriam) ser montados pelo pesquisador ou responsável desde o início, pois, em geral, são bem mais simples do que as que costumamos receber. Por isso, sempre vale espalhar as boas práticas de construção de bds na hora de pegar um trabalho.</p>
+<p>É uma tarefa perigosa porque mexer nos dados é sempre uma fonte de erro, principalmente quando fazemos alterações diretamente na planilha e/ou não temos conhecimento técnico sobre as variáveis.</p>
+<p>Por fim, se a base é muito grande e tem muitos erros, precisamos encontrar formas eficientes para corrigi-la, pois mexer em variável por variável, se não for inviável, pode demandar muito tempo.</p>
+<p>Sendo assim, vamos começar aqui uma pequena série de posts para ajudar nessa tarefa, utilizando sempre as ferramentas do <code>tidyverse</code>, em especial do pacote <code>stringr</code>. Neste post, começarei mostrando uma forma rápida para padronizar os nomes das variáveis da bd, deixando-os mais adequados para o restante da análise.</p>
+<p>Para isso, vou utilizar como exemplo algumas variáveis de uma base com que trabalhei alguns anos atrás. A bd original (que continha informações de pacientes do Instituto do Coração) tinha cerca 170 variáveis, então selecionei apenas algumas.</p>
+<pre class="r"><code>library(tidyverse)
+## Warning: package &#39;ggplot2&#39; was built under R version 3.4.4
+## Warning: package &#39;tidyr&#39; was built under R version 3.4.4
+## Warning: package &#39;purrr&#39; was built under R version 3.4.4
+## Warning: package &#39;dplyr&#39; was built under R version 3.4.4
+## Warning: package &#39;stringr&#39; was built under R version 3.4.4
+
+dados %&gt;% names
+##  [1] &quot;Sexo&quot;                 &quot;Nascimento&quot;           &quot;Idade&quot;               
+##  [4] &quot;Inclusão&quot;             &quot;Cor&quot;                  &quot;Peso&quot;                
+##  [7] &quot;Altura&quot;               &quot;cintura&quot;              &quot;IMC&quot;                 
+## [10] &quot;Superfície corporal&quot;  &quot;Tabagismo&quot;            &quot;cg.tabag (cig/dia)&quot;  
+## [13] &quot;Alcool (dose/semana)&quot; &quot;Drogas ilícitas&quot;      &quot;Cafeína/dia&quot;         
+## [16] &quot;Refrig/dia&quot;           &quot;Sedentario&quot;           &quot;ativ. Fisica&quot;</code></pre>
+<p>Vejam que os nomes têm letras maiúsculas, acentos, parênteses, pontos e barras. Não é impossível fazer a análise com esses nomes, mas geralmente atrapalha bastante quando precisamos selecionar algumas dessas colunas. O ideal seria ter os nomes padronizados, até para ficar mais fácil de lembrarmos deles.</p>
+<p>Para deixar o exemplo reprodutível sem a necessidade de baixar a bd, gerei o código para criar um vetor com o nome das variáveis.</p>
+<pre class="r"><code>dados %&gt;% 
+  names %&gt;% 
+  paste0(&quot;&#39;&quot;, ., &quot;&#39;&quot;,  collapse = &quot;, &quot;) %&gt;% 
+  paste0(&quot;c(&quot;, ., &quot;)&quot;)
+## [1] &quot;c(&#39;Sexo&#39;, &#39;Nascimento&#39;, &#39;Idade&#39;, &#39;Inclusão&#39;, &#39;Cor&#39;, &#39;Peso&#39;, &#39;Altura&#39;, &#39;cintura&#39;, &#39;IMC&#39;, &#39;Superfície corporal&#39;, &#39;Tabagismo&#39;, &#39;cg.tabag (cig/dia)&#39;, &#39;Alcool (dose/semana)&#39;, &#39;Drogas ilícitas&#39;, &#39;Cafeína/dia&#39;, &#39;Refrig/dia&#39;, &#39;Sedentario&#39;, &#39;ativ. Fisica&#39;)&quot;</code></pre>
+<p>Para padronizar os nomes (todos ao mesmo tempo), utilizei o código abaixo. Se você não está familiarizado com as expressões regulares (regex), temos um <a href="http://material.curso-r.com/stringr/#express%C3%B5es-regulares">pequeno tuturial no material do nosso curso</a>. Veja o que cada linha faz.</p>
+<ul>
+<li><code>stringr::str_trim()</code>: remove espaços do começo e do final. Não tinha nenhum caso neste exemplo, mas é sempre bom garantir.</li>
+<li><code>stringr::str_to_lower()</code>: transforma letras maiúsculas em minúsculas.</li>
+<li><code>abjutils::rm_accent()</code>: remove os acentos das palavras.</li>
+<li><code>stringr::str_replace_all(&quot;[/' '.()]&quot;, &quot;_&quot;)</code>: substitui barras, espaços e parênteses por subtraço <code>_</code>.</li>
+<li><code>stringr::str_replace_all(&quot;_+&quot;, &quot;_&quot;)</code>: substitui um ou mais subtraços juntos por apenas um subtraço.</li>
+<li><code>stringr::str_replace(&quot;_$&quot;, &quot;&quot;)</code>: remove os subtraços no final dos nomes.</li>
+</ul>
+<pre class="r"><code>nomes &lt;- dados %&gt;%
+  names %&gt;% 
+  stringr::str_trim() %&gt;% 
+  stringr::str_to_lower() %&gt;% 
+  abjutils::rm_accent() %&gt;% 
+  stringr::str_replace_all(&quot;[/&#39; &#39;.()]&quot;, &quot;_&quot;) %&gt;% 
+  stringr::str_replace_all(&quot;_+&quot;, &quot;_&quot;) %&gt;% 
+  stringr::str_replace(&quot;_$&quot;, &quot;&quot;)
+
+nomes
+##  [1] &quot;sexo&quot;                &quot;nascimento&quot;          &quot;idade&quot;              
+##  [4] &quot;inclusao&quot;            &quot;cor&quot;                 &quot;peso&quot;               
+##  [7] &quot;altura&quot;              &quot;cintura&quot;             &quot;imc&quot;                
+## [10] &quot;superficie_corporal&quot; &quot;tabagismo&quot;           &quot;cg_tabag_cig_dia&quot;   
+## [13] &quot;alcool_dose_semana&quot;  &quot;drogas_ilicitas&quot;     &quot;cafeina_dia&quot;        
+## [16] &quot;refrig_dia&quot;          &quot;sedentario&quot;          &quot;ativ_fisica&quot;</code></pre>
+<p>Agora basta atribuir os nomes de volta aos dados.</p>
+<pre class="r"><code>names(dados) &lt;- nomes</code></pre>
+<p>Claro que o código utilizado funciona bem para esse exemplo. Se os nomes tivessem outros problemas, precisaríamos acrescentar mais linhas contendo outras mudanças. No entanto, essas alterações já resolvem a maioria dos casos mais comuns e é bem fácil modificar o código para lidar com outros problemas.</p>
+<p>Dúvidas, críticas ou sugestões, deixe um comentário ou nos envie uma mensagem. :)</p>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

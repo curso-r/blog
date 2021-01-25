@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GoogleMaps on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/googlemaps/</link>
+    <description>Recent content in GoogleMaps on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 10 Apr 2017 23:26:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/googlemaps/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Você está a menos de 1 km de um Hambúrguer?</title>
+      <link>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</link>
+      <pubDate>Mon, 10 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</guid>
+      <description>Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos utilizar o pacote &lt;code&gt;leaflet&lt;/code&gt; para criar mapas com os dados coletados e descobrir se estamos a menos de 1 km de hospitais, delagacias, corpos de bombeiros e, o mais importante, de uma hamburgueria.</description>
+    </item>
+    
+  </channel>
+</rss>

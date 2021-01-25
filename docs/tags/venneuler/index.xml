@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>venneuler on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/venneuler/</link>
+    <description>Recent content in venneuler on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 29 Apr 2017 23:26:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/venneuler/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Diagramas de Venn em R</title>
+      <link>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</link>
+      <pubDate>Sat, 29 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</guid>
+      <description>Diagramas de Venn são representações eficientes das conjuntas de quantidades moderadas de variáveis binárias. Neste post você vai aprender a construir os principais tipos de diagramas de Venn que estão implementados em R.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dados abertos on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/dados-abertos/</link>
+    <description>Recent content in dados abertos on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/dados-abertos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A poluição do ar durante a greve dos caminhoneiros</title>
+      <link>https://blog.curso-r.com/posts/2018-06-18-poluicao-greve-caminhoneiros/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-06-18-poluicao-greve-caminhoneiros/</guid>
+      <description>Neste post, vamos avaliar descritivamente as concentrações de alguns poluentes durante a greve dos caminhoneiros</description>
+    </item>
+    
+    <item>
+      <title>Web scraping do sistema de qualidade do ar da CETESB</title>
+      <link>https://blog.curso-r.com/posts/2018-03-19-scraper-cetesb/</link>
+      <pubDate>Mon, 19 Mar 2018 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-03-19-scraper-cetesb/</guid>
+      <description>Nem sempre dados públicos são disponibilizados de forma eficiente para a coleta. Neste post, vamos exercitar a arte do web scraping para raspar dados de poluição do ar da CETESB.</description>
+    </item>
+    
+    <item>
+      <title>brcrimR</title>
+      <link>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</link>
+      <pubDate>Wed, 13 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</guid>
+      <description>brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.</description>
+    </item>
+    
+    <item>
+      <title>Web scraping do site da Secretaria de Segurança Pública de São Paulo</title>
+      <link>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</link>
+      <pubDate>Fri, 19 May 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</guid>
+      <description>Ao contrário de outros usos pro R, web-scrapping não tem uma receita bem definida. Mesmo definindo passos intermediários, alguns scrapers usam ideias que funcionam apenas em casos específicos. Neste post vamos estudar a construção de um Web Scraping com ideias facilmente generalizáveis.</description>
+    </item>
+    
+  </channel>
+</rss>

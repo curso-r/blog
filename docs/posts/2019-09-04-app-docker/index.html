@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/app-docker.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Shiny em Produção: dockerize seu app com 1 linha</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Caio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            13 de
+            setembro de
+            2019
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/docker">docker</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/shiny">shiny</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Recentemente, o Julio discutiu aqui no blog
+<a href="https://www.curso-r.com/blog/2019-07-16-golem/">como usar</a> o pacote <code>golem</code>
+para facilitar o desenvolvimento de shiny apps em forma de pacotes e
+<a href="https://www.curso-r.com/blog/2019-08-27-app-pacote/">como transformar</a> esses
+pacotes em “executáveis” de apenas uma linha. Nesse post eu vou continuar essa
+série e falar sobre como pegar esse app de uma linha e embrulhá-lo em um
+contêiner docker para que o seu deploy seja instantâneo.</p>
+<div id="inst" class="section level2">
+<h2>Inst</h2>
+<p>Essencialmente toda a magia da transformação de um app em um docker ocorre na
+pasta <code>/inst</code>. Esse diretório, pouco utilizado no dia-a-dia, é útil quando
+precisamos adicionar dados, templates ou qualquer conteúdo que pode ser
+necessário em algum momento para o pacote e, portanto, devem ser facilmente
+acessíveis.</p>
+<p>Quando você transformar seu shiny app em pacote utilizando o tutorial do Julio,
+você terá uma estrutura de diretórios padrão na raiz do seu app: pastas <code>/R</code>,
+<code>/man</code> e assim por diante. Crie a pasta <code>/inst</code> e dentro dela <code>/app</code>; aqui é
+onde seu app irá morar.</p>
+<p>Em princípio, você só precisa de um arquivo <code>app.R</code> dentro de <code>/inst/app</code>
+contendo aquela linha mágica que executa seu app todo:</p>
+<pre class="r"><code>shiny::shinyApp(meuPacote:::app_ui(), meuPacote:::app_server)</code></pre>
+<p>Se você estiver desenvolvendo um app mais complexo, talvez você precise
+criar também uma pasta <code>/www</code> ou um
+<a href="https://www.curso-r.com/blog/2019-07-19-auth0-pkg/">arquivo <code>_auth0.yml</code></a>, mas
+o resumo da ópera é que você deve ser capaz de rodar <code>shiny::runApp()</code> nesta
+pasta e ver o seu app funcionando perfeitamente. Durante o desenvolvimento, não
+se esqueça de <strong>sempre reinstalar</strong> o seu pacote para que <code>meuPacote:::app_ui()</code>
+e <code>meuPacote:::app_server</code> mantenham-se atualizados!</p>
+<p>O último arquivo que você pode querer adicionar a <code>/inst/app</code> é a configuração
+do seu servidor shiny. No meu caso, eu desenvolvo apps dockerizados para
+subí-los em máquinas virtuais na núvem que podem ser acessadas por qualquer um,
+então preciso deixar clara qual porta deve ser utilizada pelo meu shiny. Como
+minhas máquinas suportam o protocolo HTTP, meu <code>shiny-server.conf</code> é o seguinte:</p>
+<pre><code>run_as shiny;
+
+# Log all Shiny output to files in this directory
+log_dir /var/log/shiny-server;
+
+# Define a server that listens on port 80
+server {
+  listen 80;
+
+  # Define a location at the base URL
+  location / {
+    # Host the directory of Shiny Apps stored in this directory
+    site_dir /srv/shiny-server;
+
+    # When a user visits the base URL rather than a particular application,
+    # an index of the applications available in this directory will be shown.
+    directory_index off;
+  }
+}</code></pre>
+<p>Fazer com que o app seja ouvido na porta 80 permite que outra pessoas o acessem
+sem precisar especificar uma porta no URL! Sendo assim, você pode disponibilizar
+seu shiny app em <code>meuApp.dominio.com.br</code>.</p>
+</div>
+<div id="dockerfile" class="section level2">
+<h2>Dockerfile</h2>
+<p>Agora que a sua pasta <code>/inst</code> está devidamente configurada, você precisa criar
+um <code>Dockerfile</code> na raiz do seu app. Isso irá incomodar o <code>devtools::check()</code>,
+mas basta adicionar o nome desse arquivo ao seu <code>.Rbuildignore</code> para que ele
+seja ignorado durante a verificação.</p>
+<p>Se todas as dependências do seu aplicativo estiverem devidamente organizadas no
+<code>DESCRIPTION</code> e todas as suas bases internas estiverem propriamente exportadas
+como documentado pelo Julio, então o seu <code>Dockerfile</code> deve ser parecido com o
+seguinte:</p>
+<pre><code>FROM rocker/shiny-verse
+
+# Instalar bibliotecas para o tidyverse
+RUN apt-get update -qq &amp;&amp; apt-get -y --no-install-recommends install \
+  build-essential \
+  libcurl4-gnutls-dev \
+  libxml2-dev \
+  libssl-dev \
+  r-cran-curl \
+  r-cran-openssl \
+  curl \
+  gnupg1 \
+  r-cran-xml2
+
+# Instalar seu próprio app (e suas dependências)
+COPY ./ /tmp/app/
+RUN R -e &quot;remotes::install_local(&#39;/tmp/app/&#39;)&quot;
+
+# Copiar arquivos para o lugar certo
+EXPOSE 80/tcp
+RUN rm /srv/shiny-server/index.html
+COPY ./inst/app /srv/shiny-server/
+COPY ./inst/app/shiny-server.conf /etc/shiny-server/shiny-server.conf
+
+# Run
+CMD [&quot;/usr/bin/shiny-server.sh&quot;]</code></pre>
+</div>
+<div id="deploy" class="section level2">
+<h2>Deploy</h2>
+<p>Agora você já pode construir sua imagem docker e executá-la ou subí-la para
+alguma máquina virtual. Para testar localmente o app, execute os comandos a
+seguir no terminal e acesse <code>localhost:8080</code> no navegador:</p>
+<pre class="sh"><code>docker build -t meuApp pasta/para/meuApp
+docker run -p 8080:80 meuApp</code></pre>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

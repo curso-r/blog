@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data.frames on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/data.frames/</link>
+    <description>Recent content in data.frames on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 13 Sep 2017 10:12:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/data.frames/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>brcrimR</title>
+      <link>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</link>
+      <pubDate>Wed, 13 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</guid>
+      <description>brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.</description>
+    </item>
+    
+    <item>
+      <title>Comportamentos imprevisíveis do lubridate</title>
+      <link>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</link>
+      <pubDate>Sat, 02 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</guid>
+      <description>R é uma linguagem maravilhosa. Ela possibilita uma ampla gama de aplicações interessantes. O seu maior trunfo está no rico ecossistema de pacotes, que são desenvolvidos e mantidos pela comunidade, sempre criativa na hora de lidar com os problemas. Entretanto, toda essa facilidade cobra um preço. Neste post vamos aprender que às vezes os programas não fazem exatamente o que estão dizendo que fazem.</description>
+    </item>
+    
+    <item>
+      <title>Salvando data.frames: uma comparação</title>
+      <link>https://blog.curso-r.com/posts/2017-07-20-escrevendo-data-frames/</link>
+      <pubDate>Thu, 20 Jul 2017 00:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-20-escrevendo-data-frames/</guid>
+      <description>Salvar data.frames para ler depois é uma tarefa muito comum para quem trabalha com R. Veja aqui algumas maneiras de como fazer isso de forma rápida e de forma que possa te salvar tempo na hora de carregá-lo novamente.</description>
+    </item>
+    
+  </channel>
+</rss>

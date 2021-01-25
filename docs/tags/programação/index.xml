@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>programação on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</link>
+    <description>Recent content in programação on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Warnings no if_else(), mas não no ifelse()?</title>
+      <link>https://blog.curso-r.com/posts/2020-09-11-if_else_ifelse/</link>
+      <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-09-11-if_else_ifelse/</guid>
+      <description>Por que às vezes recebemos warnings no if_else(), mas não no ifelse()? Uma investigação revela que o problema pode não estar onde imaginamos&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

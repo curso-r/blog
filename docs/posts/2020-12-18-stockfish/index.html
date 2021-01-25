@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/stockfish.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Stockfish no R</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Caio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            18 de
+            dezembro de
+            2020
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/pacotes">pacotes</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/divulga%c3%a7%c3%a3o">divulgação</a></li>
+        </ul>
+        <article class="content">
+          
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p><code>{stockfish}</code> é um pacote R que implementa o protocolo aberto de comunicação
+<a href="http://wbec-ridderkerk.nl/html/UCIProtocol.html">UCI</a> e acompanha uma
+instalação do <a href="https://github.com/official-stockfish/Stockfish">Stockfish 11</a>,
+um motor de xadrez muito popular, open source e poderoso escrito em C++.</p>
+<div id="instalação" class="section level2">
+<h2>Instalação</h2>
+<pre class="r"><code>install.packages(&quot;stockfish&quot;)</code></pre>
+<p>Ou instale a versão em desenvolvimento do
+<a href="https://github.com/curso-r/stockfish">GitHub</a> com:</p>
+<pre class="r"><code># install.packages(&quot;remotes&quot;)
+remotes::install_github(&quot;curso-r/stockfish&quot;)</code></pre>
+<p>Você também pode encontrar mais (e mais recentes) versões do motor Stockfish
+para usar com o <code>{stockfish}</code> na
+<a href="https://stockfishchess.org/download/">página de download</a> do projeto.</p>
+</div>
+<div id="exemplo" class="section level2">
+<h2>Exemplo</h2>
+<p>É tão fácil usar o <code>{stockfish}</code> quanto qualquer outro pacote UCI. Você deve
+inicializar o motor com <code>fish$new()</code> e enviar comandos com os seus métodos
+internos, lembrando apenas de rodar <code>quit()</code> quando você terminar.</p>
+<pre class="r"><code>library(stockfish)
+
+# Inicializar o motor
+engine &lt;- fish$new()
+
+# Examinar o processo em plano de fundo
+engine$process
+#&gt; PROCESS &#39;stockfish&#39;, running, pid 173670.
+
+# Procurar a melhor jogada
+engine$go()
+#&gt; [1] &quot;bestmove e2e4 ponder d7d5&quot;
+
+# Começar um jogo a partir de um FEN
+engine$ucinewgame()
+engine$position(&quot;6rk/2Q3p1/5qBp/5P2/8/7P/6PK/8 w - - 15 51&quot;)
+engine$go()
+#&gt; [1] &quot;bestmove g6f7 ponder g8d8&quot;
+
+# Finalizar o motor
+engine$quit()</code></pre>
+</div>
+<div id="uso" class="section level2">
+<h2>Uso</h2>
+<p><code>fish</code>, a principal classe do pacote, representa um motor Stockfish, permitindo
+que o usuário envie comandos e receba saídas de acordo com o protocolo UCI.
+Resumindo, um objeto <code>fish</code>, quando criado, cria um processo Stockfish
+desacoplado e faz um <em>pipe</em> com as suas entrada e saída padrões.</p>
+<p>Para mais informações, veja a sua documentação completa executando <code>?fish</code>.</p>
+<div id="stockfish-incluso" class="section level3">
+<h3>Stockfish Incluso</h3>
+<p>O pacote acompanha uma instalação do
+<a href="https://github.com/official-stockfish/Stockfish">Stockfish</a>, um motor de xadrez
+muito popular, open source e poderoso escrito em C++. Ele consegue chegar em um
+ELO de 3516, roda no Windows, macOS, Linux, iOS e Android, e pode ser compilado
+em menos de um minuto.</p>
+<p>Quando o <code>{stockfish}</code> (inicial minúscula) estiver sendo instalado, o
+código-fonte do Stockfish (inicial maiúscula) é compilado e o executável
+resultante é armazenado junto com os seus pacote R. Isso não é uma instalação
+para todos os usuários! Você não precisa dar privilégios administrativos para
+ele rodar ou se preocupar com qualquer software adicional.</p>
+<p>O único ponto negativo é que a versão inclusa é o Stockfish 11, não a versão
+mais recente (Stockfish 12). Isso ocorre porque a versão 12 precisa de downloads
+adicionais, o que aumentaria dramaticamente o tempo de instalação. Se quiser,
+você pode <a href="https://stockfishchess.org/download/">baixar</a> a versão de sua escolha
+e passar o caminho para o executável como argumento para <code>fish$new()</code>.</p>
+</div>
+<div id="protocolo-uci" class="section level3">
+<h3>Protocolo UCI</h3>
+<p>UCI (<em>Universal Chess Interface</em>) é um protocolo aberto de comunicação que
+permite que motores de xadrez se comuniquem com interfaces de usuário. Na
+verdade, a classe <code>fish</code> implementa o
+<a href="http://wbec-ridderkerk.nl/html/UCIProtocol.html">protocolo UCI</a> como publicado
+por Stefan-Meyer Kahlen, apenas com um foco no Stockfish. Isso significa que
+alguns métodos não são implementados (veja <strong>Pegadinhas</strong>) e que todos os testes
+são feitos com o Stockfish, mas todo o resto deveria funcionar perfeitamente com
+outros motores.</p>
+<p>O texto entre aspas no fim da documentação de cada método foi extraído
+diretamente do protocolo UCI oficial para que você possa ver exatamente o que
+aquele comando pode fazer. No geral, os comandos são bem autoexplicativos,
+exceto pela LAN (<em>long algebraic notation</em>), a notação de jogadas usada pelo
+UCI. Nessa notação, jogadas são registradas usando as posições inicial e final
+da peça, por exemplo, e2e4, e7e5, e1g1 (roque pequeno das brancas), e7e8q
+(promoção), 0000 (jogada vazia).</p>
+</div>
+<div id="implementação" class="section level3">
+<h3>Implementação</h3>
+<p>Todo o trabalho duro da classe <code>fish</code> é feito pelo pacote <code>{processx}</code>. O
+processo do Stockfish é criado com <code>processx::process$new</code> e a entrada/saída é
+feita com <code>write_input()</code> e <code>read_output()</code>. Um aspecto importante do protocolo
+de comunicação de qualquer motor UCI é esperar por respostas, e aqui isso é
+feito com um loop que verifica o processo com <code>poll_io()</code> e para assim que a
+saída volta vazia.</p>
+<p>Antes de implementar o protocolo UCI manualmente, o pacote usava o <code>{bigchess}</code>.
+Ele é um pacote incrível criado por
+<a href="https://github.com/rosawojciech">@rosawojciech</a>, mas ele tem algumas
+dependências que estão além do escopo do <code>{stockfish}</code> e, no final, eu queria
+mais controle da API (por exemplo usando <code>{R6}</code>).</p>
+</div>
+<div id="pegadinhas" class="section level3">
+<h3>Pegadinhas</h3>
+<p>A classe <code>fish</code> tem algumas idiossincrasias que o usuário deve ter em mente
+quando tentar se comunicar com o Stockfish. Algumas são devidas a escolhas de
+implementação, mas outras estão relacionadas ao protocolo UCI em si. Esta não
+é uma lista completa (e você provavelmente deveria ler a
+<a href="http://wbec-ridderkerk.nl/html/UCIProtocol.html">documentação do UCI</a>), mas
+aqui vão algumas coisas para ficar de olho.</p>
+<ul>
+<li><p>Nem todos os métodos UCI foram implementados: como o <code>{stockfish}</code> foi feito
+com o Stockfish (e especialmente o Stockfish 11) em mente, dois métodos do UCI
+que não funcionam com o motor não foram implementados. Eles são <code>debug()</code> e
+<code>register()</code>.</p></li>
+<li><p>A maioria dos métodos retorna silenciosamente: como a maioria dos comandos UCI
+não retornam nada ou retornam texto padrão, a maioria dos métodos retorna
+silenciosamente. As exceções são <code>run()</code>, <code>isready()</code>, <code>go()</code> e <code>stop()</code>; você
+pode ver exatamente o que eles retornam lendo as suas documentações.</p></li>
+<li><p>Nem toda opção do Stockfish vai funcionar: pelo menos quando usando a versão
+inclusa do Stockfish, nem todas as opções documentadas vão funcionar com
+<code>setoption()</code>. Isso ocorre porque, como descrito acima, o pacote vem com o
+Stockfish 11, que não é a versão mais recente. Opções que não vão funcionar
+estão marcadas com um asterisco.</p></li>
+<li><p>Tempos são em milissegundos. diferentemente da maioria das funções do R, todo
+método que recebe um intervalo de tempo espera que o mesmo seja em milissegundos,
+não segundos.</p></li>
+</ul>
+</div>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+    <div class="widget">
+      <h4 class="mb-4">APRENDA R</h4>
+      
+        <a href="https://www.curso-r.com/cursos/r4ds-1/">R para Ciência de Dados I</a>
+      
+      </ul>
+    </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/banner-datasets.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Salvando data.frames: uma comparação</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Daniel
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            20 de
+            julho de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/data.frames">data.frames</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Salvar data.frames para ler depois é uma tarefa muito comum para quem trabalha com R, principalmente quando o seu processo possui algumas etapas mais demoradas e você não quer ter que rodar tudo de novo.</p>
+<p>Veja aqui 3 formas fáceis, e rápidas para salvar o seu banco de dados e não perder tempo lendo novamente.</p>
+<div id="saverds" class="section level1">
+<h1>saveRDS</h1>
+<p>Talvez a função mais conhecida para salvar objetos do R. Ela salva em um formato binário que só pode ser lido pelo R. Por padrão comprime o arquivo após salvar, o que economiza espaço no disco, mas pode fazê-la levar mais tempo para rodar.</p>
+<p>Considere um <code>data.frame</code> gerado pelo código abaixo:</p>
+<pre class="r"><code>nrOfRows &lt;- 1e7
+x &lt;- data.frame(
+  Integers = 1:nrOfRows,  # integer
+  Logicals = sample(c(TRUE, FALSE, NA), nrOfRows, replace = TRUE),  # logical
+  Text = factor(sample(state.name, nrOfRows, replace = TRUE)),  # text
+  Numericals = runif(nrOfRows, 0.0, 100),  # numericals
+  stringsAsFactors = FALSE)</code></pre>
+<p>Agora veja o tempo que demoramos para salvá-lo com o <code>saveRDS</code>.</p>
+<pre class="r"><code>system.time({
+  saveRDS(x, &quot;~/Desktop/saveRDS.rds&quot;)  
+})
+ #   user  system elapsed 
+ # 19.300   0.112  19.386 </code></pre>
+<p>O espaço ocupado pelo arquivo é de 95MB. Indicando para a função que você não deseja comprimir:</p>
+<pre class="r"><code>system.time({
+  saveRDS(x, &quot;~/Desktop/saveRDS2.rds&quot;, compress = FALSE)  
+})
+#  user  system elapsed 
+# 0.260   0.116   0.377 </code></pre>
+<p>O tempo vai para menos de 1s. Mas agora o arquivo ficou com 200MB. O pacote <code>readr</code> tem uma função chamada <code>write_rds</code> que é um wrapper de <code>saveRDS</code> que por padrão não comprime os arquivos, já que o Hadley diz que armazenamento é, em geral, muito mais barato do que tempo de processamento.</p>
+<p>É importante também verificar o tempo que demoramos para ler o arquivo novamente para o R. No caso ler o arquivo comprimido demora 2x mais do que o arquivo não comprimido.</p>
+<pre class="r"><code>system.time({
+  a &lt;- readRDS(&quot;~/Desktop/saveRDS.rds&quot;)  
+})
+#  user  system elapsed 
+# 1.068   0.040   1.105 
+system.time({
+  a &lt;- readRDS(&quot;~/Desktop/saveRDS2.rds&quot;)  
+})
+#  user  system elapsed 
+# 0.380   0.068   0.447 </code></pre>
+<p>Para salvar <code>data.frames</code> do R no disco, <code>saveRDS</code> é sempre a minha primeira opção: é relativamente rápido para ler e escrever e não exige instalação de nenhum pacote.</p>
+<p>Além disso, o <code>saveRDS</code> serve para praticamente qualquer tipo de objeto do R, ou seja, você pode usá-lo para salvar os modelos que você ajustou ou qualquer outra coisa.</p>
+<p>As principais desvantagens dessa função para as outras que mostrarei a seguir são:</p>
+<ul>
+<li>só pode ser lido pelo R</li>
+<li>não permite que você leia apenas um subset das linhas/ colunas.</li>
+</ul>
+</div>
+<div id="feather" class="section level1">
+<h1>feather</h1>
+<p><a href="https://github.com/wesm/feather"><code>feather</code> é um formato de arquivo</a> desenvolvido por duas pessoas muito fodas. Wes McKinney, autor do Pandas (principal biblioteca de manipulação de dados do python) e Hadley Wickham, principal desenvolvedor do <code>tidyverse</code>.</p>
+<p>O <code>feather</code> é bem rápido para salvar <code>data.frames</code> no disco, tempo comparável a salvar o arquivo sem comprimir usando o <code>saveRDS</code>. Mas só isso não é o suficiente para ser necessário usá-lo, já que neste caso o <code>saveRDS</code> rápido o suficiente.</p>
+<p>A principal vantagem do <code>feather</code> é que ele foi criado para ser um formato de compartilhamento de <code>data.frames</code> entre diversas linguagens de programação. Existem pacotes para ler arquivos <code>.feather</code> escritos em R, python, Julia: as três principais linguagens para análise de dados.</p>
+<p>O <code>feather</code> também permite que você leia apenas algumas linhas ou colunas do dataset, o que muitas vezes é útil para fazer consultas mais rápidas na base sem ter que ler tudo para a RAM de uma vez só.</p>
+<pre class="r"><code>library(feather)
+system.time({
+  write_feather(x, &quot;~/Desktop/feather.feather&quot;)
+})
+#  user  system elapsed 
+# 0.172   0.084   0.253 </code></pre>
+<p>O arquivo produzido pesa 162MB. Para ler o arquivo salvo:</p>
+<pre class="r"><code>system.time({
+  a &lt;- read_feather(&quot;~/Desktop/feather.feather&quot;)
+})
+#  user  system elapsed 
+# 0.112   0.020   0.131 </code></pre>
+<p>Usando o <code>feather</code> para ler apenas algumas linhas e colunas.</p>
+<pre class="r"><code>a &lt;- feather(&quot;~/Desktop/feather.feather&quot;)
+b &lt;- a[5000:6000, 1:3]</code></pre>
+</div>
+<div id="fst" class="section level1">
+<h1>fst</h1>
+<p><a href="https://github.com/fstpackage/fst"><code>fst</code> é um pacote</a> para ler e escrever <code>data.frames</code> de forma muito rápida.</p>
+<div class="figure">
+<img src="images/posts/conteudo/escrevendo-data-frames/README-speedCode-1.png" />
+
+</div>
+<p>A imagem (retirada <a href="https://github.com/fstpackage/fst">daqui</a>) acima mostra a sua velocidade. O <code>fst</code> é mais ou menos 3 vezes mais rápido para ler os arquivos salvos e cerca de 2x mais rápido para escrevê-los. O arquivo salvo pelo <code>fst</code> é também um pouco menor: 130MB.</p>
+<p>Ler e escrever é, assim como as outras opções, tão simples como usar uma função:</p>
+<pre class="r"><code>library(fst)
+# salvar
+write.fst(x, &quot;/home/daniel/Desktop/dataset.fst&quot;)
+  
+# ler
+a &lt;- read.fst(&quot;~/Desktop/dataset.fst&quot;)
+
+# ler apenas algumas linhas e colunas
+b &lt;- read.fst(&quot;~/Desktop/dataset.fst&quot;, c(&quot;Logicals&quot;, &quot;Text&quot;), 2000, 4990) </code></pre>
+<p><strong>Note</strong> Como o Sillas mencionou nos comentários, a versão do CRAN do <code>fst</code> salva datas como numericos no arquivo. Os números podedm sser convertidos para data novamente usando a função <code>as.Date</code> do pacote <code>zoo</code>, mas tem que tomar cuidado!</p>
+</div>
+<div id="conclusao" class="section level1">
+<h1>Conclusão</h1>
+<ul>
+<li><p>Use sempre <code>saveRDS</code> e <code>readRDS</code>, se precisar de velocidade, salve com o argumento <code>compress = FALSE</code> para não comprimir o arquivo.</p></li>
+<li><p>Se você for ler a base em python ou Julia e quiser um formato padronizado, use o <a href="https://github.com/wesm/feather"><code>feather</code></a>.</p></li>
+<li><p>Se você for realmente ler e escrever os seus dados muitas vezes e você precisar de velocidade, use o <a href="https://github.com/fstpackage/fst"><code>fst</code></a>.</p></li>
+</ul>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

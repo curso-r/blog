@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BDs on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/bds/</link>
+    <description>Recent content in BDs on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 13 Sep 2017 10:12:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/bds/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>brcrimR</title>
+      <link>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</link>
+      <pubDate>Wed, 13 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</guid>
+      <description>brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.</description>
+    </item>
+    
+    <item>
+      <title>Comportamentos imprevisíveis do lubridate</title>
+      <link>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</link>
+      <pubDate>Sat, 02 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</guid>
+      <description>R é uma linguagem maravilhosa. Ela possibilita uma ampla gama de aplicações interessantes. O seu maior trunfo está no rico ecossistema de pacotes, que são desenvolvidos e mantidos pela comunidade, sempre criativa na hora de lidar com os problemas. Entretanto, toda essa facilidade cobra um preço. Neste post vamos aprender que às vezes os programas não fazem exatamente o que estão dizendo que fazem.</description>
+    </item>
+    
+    <item>
+      <title>Arrumando BDs: o pacote janitor</title>
+      <link>https://blog.curso-r.com/posts/2017-07-24-janitor/</link>
+      <pubDate>Mon, 24 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-24-janitor/</guid>
+      <description>Neste post, apresentaremos o pacote janitor, uma ótima alternativa na hora de dar aquele trato na base de dados.</description>
+    </item>
+    
+    <item>
+      <title>Arrumando BDs: nome das variáveis</title>
+      <link>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</link>
+      <pubDate>Wed, 12 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</guid>
+      <description>Neste post, mostraremos uma forma rápida para padronizar os nomes das variáveis de uma base de dados, deixando-os mais adequados para o restante da análise.</description>
+    </item>
+    
+  </channel>
+</rss>

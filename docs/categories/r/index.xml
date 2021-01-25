@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>r on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/categories/r/</link>
+    <description>Recent content in r on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 08 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>{tabulizer}: Tabela do PDF para data.frame em segundos</title>
+      <link>https://blog.curso-r.com/posts/2021-01-08-tabulizer/</link>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-01-08-tabulizer/</guid>
+      <description>Como extrair uma tabela de um PDF facilmente com a função tabulizer::extract_tables()</description>
+    </item>
+    
+    <item>
+      <title>CNNs: Kernel Quadrado versus Kernel Retangular</title>
+      <link>https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/</link>
+      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/</guid>
+      <description>Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels retangulares podem ajudar. O post mostra um exemplo minimal em {torch} para ilustrar uma situação em que isso acontece.</description>
+    </item>
+    
+    <item>
+      <title>Stockfish no R</title>
+      <link>https://blog.curso-r.com/posts/2020-12-18-stockfish/</link>
+      <pubDate>Fri, 18 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-12-18-stockfish/</guid>
+      <description>Um pacote R para analisar jogos de xadrez com o Stockfish</description>
+    </item>
+    
+    <item>
+      <title>Feedback dos trabalhos do R para Ciência de Dados (Parte II): Dicas para Gráficos</title>
+      <link>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</link>
+      <pubDate>Thu, 17 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</guid>
+      <description>Comentamos algumas dicas sobre elaboração de gráficos em relatórios. Ilustração sobre o pacote ggplot2, criada por Allison Horst.</description>
+    </item>
+    
+    <item>
+      <title>Trabalhos premiados do curso R para Ciência de Dados I &#43; Dicas !</title>
+      <link>https://blog.curso-r.com/posts/2020-12-03-dicas-relatorios-r4ds1_tabelas/</link>
+      <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-12-03-dicas-relatorios-r4ds1_tabelas/</guid>
+      <description>Apresentamos os trabalhos de conclusão do nosso curso de R para Ciência de Dados I que foram premiados, e comentamos algumas dicas sobre elaboração de tabelas em relatórios.</description>
+    </item>
+    
+    <item>
+      <title>Xadrez no R com {chess}</title>
+      <link>https://blog.curso-r.com/posts/2020-11-25-chess/</link>
+      <pubDate>Wed, 25 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-11-25-chess/</guid>
+      <description>Um pacote em R para ler, escrever, criar e explorar jogos de xadrez</description>
+    </item>
+    
+    <item>
+      <title>Qual a capital mais distante de Brasília?</title>
+      <link>https://blog.curso-r.com/posts/2020-09-19-map-dist/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-09-19-map-dist/</guid>
+      <description>Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!</description>
+    </item>
+    
+    <item>
+      <title>Warnings no if_else(), mas não no ifelse()?</title>
+      <link>https://blog.curso-r.com/posts/2020-09-11-if_else_ifelse/</link>
+      <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-09-11-if_else_ifelse/</guid>
+      <description>Por que às vezes recebemos warnings no if_else(), mas não no ifelse()? Uma investigação revela que o problema pode não estar onde imaginamos&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Predições XGBoost diretamente pelo SQL</title>
+      <link>https://blog.curso-r.com/posts/2020-08-29-xgboost-sql/</link>
+      <pubDate>Sat, 29 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-08-29-xgboost-sql/</guid>
+      <description>Criar um XGBoost no R e colocar para o SQL gerar as predições em uma linha de código com o {tidypredict}.</description>
+    </item>
+    
+    <item>
+      <title>Aplauda-me</title>
+      <link>https://blog.curso-r.com/posts/2020-08-27-applause/</link>
+      <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-08-27-applause/</guid>
+      <description>Fizemos um teste do pacote {applause}.</description>
+    </item>
+    
+    <item>
+      <title>As novas funções de pivotagem</title>
+      <link>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</guid>
+      <description>Apresentamos aqui as novas funções de pivotagem do {tidyr}.</description>
+    </item>
+    
+    <item>
+      <title>Chamando o R do PostgreSQL</title>
+      <link>https://blog.curso-r.com/posts/2020-06-25-integracao-r-postgresql/</link>
+      <pubDate>Fri, 26 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-25-integracao-r-postgresql/</guid>
+      <description>Este tutorial irá mostrar como instalar o R e o PostgreSQL num mesmo servidor Ubuntu 18.04 ou 16.04 e, em seguida, sobre como chamar o R a partir do Postgres.</description>
+    </item>
+    
+    <item>
+      <title>Conectando o RStudio com o shinyapps.io</title>
+      <link>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</guid>
+      <description>Aprenda como conectar a sua conta do shinyapps.io com o RStudio para compartilhar aplicativos Shiny na internet em apenas alguns minutos.</description>
+    </item>
+    
+    <item>
+      <title>Melhores trabalhos do curso R para Ciência de dados I (maio de 2020)</title>
+      <link>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</guid>
+      <description>Apresentamos os melhores trabalhos de conclusão do nosso curso de R para Ciência de dados I e comentamos aspectos importantes sobre a comunicação dos resultados das nossas análises.</description>
+    </item>
+    
+    <item>
+      <title>Busca textual com R, Shiny e PostgreSQL</title>
+      <link>https://blog.curso-r.com/posts/2020-04-18-fts/</link>
+      <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-04-18-fts/</guid>
+      <description>Este tutorial mostrará como estruturar uma base de dados de textos no PostgreSQL, tokenizá-los e montar um índice invertido a fim de realizar buscas textuais em grande volumes de documentos em poucos segundos.</description>
+    </item>
+    
+    <item>
+      <title>Abaixo ao rvest!</title>
+      <link>https://blog.curso-r.com/posts/2020-04-09-xml2/</link>
+      <pubDate>Thu, 09 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-04-09-xml2/</guid>
+      <description>O rvest já não é mais o melhor pacote para web scraping. Está na hora de voltar para o xml2!</description>
+    </item>
+    
+    <item>
+      <title>Anunciando a comunidade Curso-R</title>
+      <link>https://blog.curso-r.com/posts/2020-02-21-discourse/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-21-discourse/</guid>
+      <description>A Curso-R lançou criou um lugar para vocÊ discutir R e outros assuntos relacionados.</description>
+    </item>
+    
+    <item>
+      <title>gghighlight</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</guid>
+      <description>O gghighlight é uma das extensões do ggplot2. Este post serve como uma pequena introdução é apresentação do que é possível fazer com ele.</description>
+    </item>
+    
+    <item>
+      <title>Versões e Releases (Zen do R parte 8)</title>
+      <link>https://blog.curso-r.com/posts/2020-02-21-zen-do-r-8/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-21-zen-do-r-8/</guid>
+      <description>Como manter as versões de um pacote sobre controle.</description>
+    </item>
+    
+    <item>
+      <title>A Poupança de Beethoven</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</guid>
+      <description>Explorando um pouco sobre currying e ggplot através da maluquice que são os juros compostos.</description>
+    </item>
+    
+    <item>
+      <title>Camadas de Fake News</title>
+      <link>https://blog.curso-r.com/posts/2020-01-21-fake-news/</link>
+      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-01-21-fake-news/</guid>
+      <description>Uma fake news dura de roer. Como um gráfico pode estar tecnicamente certo e ao mesmo tempo não ser correto.</description>
+    </item>
+    
+    <item>
+      <title>Quebrando Captchas - Parte VII: Oráculos</title>
+      <link>https://blog.curso-r.com/posts/2019-09-20-captcha-oraculo/</link>
+      <pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-20-captcha-oraculo/</guid>
+      <description>Nesse post não vou falar da companhia Oracle, muito menos de Pythia, a oráculo de Delphi. Aqui vou mostrar uma parte pouco discutida dos captchas, que é a possibilidade de usar oráculos para aprender.</description>
+    </item>
+    
+    <item>
+      <title>Comunidade R Brasil no Telegram</title>
+      <link>https://blog.curso-r.com/posts/2019-09-10-rbrasil/</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-10-rbrasil/</guid>
+      <description>Nesse post, baixamos os dados do Telegram da comunidade RBrasil e fizemos alguns gráficos divertidos.</description>
+    </item>
+    
+    <item>
+      <title>Verificando afirmações com dados abertos</title>
+      <link>https://blog.curso-r.com/posts/2019-09-03-sinesp/</link>
+      <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-03-sinesp/</guid>
+      <description>Nesse post, analisamos dados do SINESP para verificar as informações de um tweet do Ministro Sérgio Moro sobre a queda nas ocorrências de crimes no primeiro bimestre de 2018.</description>
+    </item>
+    
+    <item>
+      <title>Shiny em Produção: Deploy seu App em 20min</title>
+      <link>https://blog.curso-r.com/posts/2019-09-06-app-deploy/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-06-app-deploy/</guid>
+      <description>Quando você for capaz de tranformar um shiny app em pacote e em imagem de docker, só 20 minutos são necessários para fazer um deploy na nuvem.</description>
+    </item>
+    
+    <item>
+      <title>Shiny em Produção: dockerize seu app com 1 linha</title>
+      <link>https://blog.curso-r.com/posts/2019-09-04-app-docker/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-04-app-docker/</guid>
+      <description>Depois de transformar seu shiny app em pacote, agora só resta transformá-lo em docker.</description>
+    </item>
+    
+    <item>
+      <title>Escrevendo livros com R e bookdown</title>
+      <link>https://blog.curso-r.com/posts/2019-08-28-bookdown/</link>
+      <pubDate>Wed, 11 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-28-bookdown/</guid>
+      <description>Depois de ler esse post você conseguirá criar e publicar livros em 6 minutos.</description>
+    </item>
+    
+    <item>
+      <title>Shiny em Produção: Rodando seu App com 1 Linha</title>
+      <link>https://blog.curso-r.com/posts/2019-08-27-app-pacote/</link>
+      <pubDate>Fri, 06 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-27-app-pacote/</guid>
+      <description>Um adendo ao pacote para desenvolver shiny apps dentro de pacotes.</description>
+    </item>
+    
+    <item>
+      <title>Fazendo seu pacote passar no Travis</title>
+      <link>https://blog.curso-r.com/posts/2019-08-21-travis/</link>
+      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-21-travis/</guid>
+      <description>O Travis é um serviço de Integração Contínua utilizado para garantir que o código está funcionando bem. Nesse tutorial, mostramos como usar o Travis de maneira simples, usando o pacote usethis.</description>
+    </item>
+    
+    <item>
+      <title>Remoção de Acentos e o Ano Novo Muçulmano</title>
+      <link>https://blog.curso-r.com/posts/2019-08-29-transliteracao/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-29-transliteracao/</guid>
+      <description>Transliteração é uma das tarefas mais complicadas do tratamento de strings, mas o pacote stringi pode nos salvar.</description>
+    </item>
+    
+    <item>
+      <title>Programando com o tidyverse</title>
+      <link>https://blog.curso-r.com/posts/2019-08-21-nse/</link>
+      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-21-nse/</guid>
+      <description>Ao usar muito o {dplyr}, passamos a querer utilizá-lo em todos os contextos possíveis. Mas isso gera dificuldades na hora de criar funções. Nesse post vamos discutir como resolver isso usando os novos recursos do pacote {rlang}</description>
+    </item>
+    
+    <item>
+      <title>Programando com a comunidade</title>
+      <link>https://blog.curso-r.com/posts/2019-07-15-comunidade/</link>
+      <pubDate>Mon, 19 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-15-comunidade/</guid>
+      <description>Trabalhar em grupo é difícil, mas os esforços se pagam. Aqui discuto alguns aspectos importantes para tirar proveito da melhor parte do R: a comunidade (Imagem de Allison Holst).</description>
+    </item>
+    
+    <item>
+      <title>Tidyverse developer day 2019</title>
+      <link>https://blog.curso-r.com/posts/2019-08-12-tidydevday/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-12-tidydevday/</guid>
+      <description>Este post tem como objetivo relatar a experiência de participar do Tidyverse Developer Day 2019, e tem como autoras a Beatriz Milz e a Angélica Custódio.</description>
+    </item>
+    
+    <item>
+      <title>Data e data-raw (Zen do R parte 7)</title>
+      <link>https://blog.curso-r.com/posts/2019-08-13-zen-do-r-7/</link>
+      <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-13-zen-do-r-7/</guid>
+      <description>Como armazenar dados em um pacote: os diretórios data e data-raw.</description>
+    </item>
+    
+    <item>
+      <title>Autenticação em Shiny Apps com o pacote auth0</title>
+      <link>https://blog.curso-r.com/posts/2019-07-19-auth0-pkg/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-19-auth0-pkg/</guid>
+      <description>Atualização do post anterior no tema, mostrando como fazer autenticação em shiny apps usando o serviço Auth0.</description>
+    </item>
+    
+    <item>
+      <title>Pacotes (Zen do R parte 6)</title>
+      <link>https://blog.curso-r.com/posts/2019-08-07-zen-do-r-6/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-07-zen-do-r-6/</guid>
+      <description>Pacotes: por que e como fazê-los?</description>
+    </item>
+    
+    <item>
+      <title>Shiny Apps Empacotados com o golem</title>
+      <link>https://blog.curso-r.com/posts/2019-07-16-golem/</link>
+      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-16-golem/</guid>
+      <description>Pacote para desenvolver shiny apps dentro de pacotes.</description>
+    </item>
+    
+    <item>
+      <title>Funções e Dependências (Zen do R parte 5)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-30-zen-do-r-5/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-30-zen-do-r-5/</guid>
+      <description>Como tornar o seu código reprodutível com funções e dependências.</description>
+    </item>
+    
+    <item>
+      <title>Git e GitHub (Zen do R parte 4)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-23-zen-do-r-4/</link>
+      <pubDate>Tue, 23 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-23-zen-do-r-4/</guid>
+      <description>Como usar o Git e o GitHub para fazer controle de versão dos seus projetos em R.</description>
+    </item>
+    
+    <item>
+      <title>Rproj e diretórios (Zen do R parte 3)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-16-zen-do-r-3/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-16-zen-do-r-3/</guid>
+      <description>Como usar projetos no R para nunca mais perder um arquivo importante.</description>
+    </item>
+    
+    <item>
+      <title>.RData e .Rhistory (Zen do R parte 2)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-10-zen-do-r-2/</link>
+      <pubDate>Wed, 10 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-10-zen-do-r-2/</guid>
+      <description>Como funcionam o .RData e o .Rhistory e porque você deveria desativá-los!</description>
+    </item>
+    
+    <item>
+      <title>O Zen do R (Parte 1)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-02-zen-do-r-intro/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-02-zen-do-r-intro/</guid>
+      <description>O primeiro post em uma série sobre o nosso novo livro! Introduzindo O Zen do R.</description>
+    </item>
+    
+    <item>
+      <title>Analisando o seu histórico do Netflix</title>
+      <link>https://blog.curso-r.com/posts/2019-06-05-netflix/</link>
+      <pubDate>Thu, 06 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-06-05-netflix/</guid>
+      <description>Neste post, vamos brincar com o histórico de visualização do Netflix.</description>
+    </item>
+    
+    <item>
+      <title>Web Scraping Orquestrado</title>
+      <link>https://blog.curso-r.com/posts/2019-05-14-scraper-orquestrado/</link>
+      <pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-05-14-scraper-orquestrado/</guid>
+      <description>Uma introdução ao pacote Kuber: como usar o kubernetes e o Google Cloud Platform para fazer um scraper que roda na velocidade da luz.</description>
+    </item>
+    
+    <item>
+      <title>Probabilidade e medida: intuição</title>
+      <link>https://blog.curso-r.com/posts/2019-03-10-probabilidade/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-03-10-probabilidade/</guid>
+      <description>Esse é um post de matemática. Mesmo se você não curte essa faceta da ciência de dados, encorajo vocês a lerem e estudarem esse assunto. Nesse texto vou usar um pouco de teoria dos conjuntos e introduzir a teoria da medida, que é a base matemática de tudo que sabemos sobre probabilidade.</description>
+    </item>
+    
+    <item>
+      <title>pvec: O laço perfeito</title>
+      <link>https://blog.curso-r.com/posts/2019-02-10-pvec/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-02-10-pvec/</guid>
+      <description>Nesse post vou te mostrar minha função preferida e como ela funciona.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos Miojo: mapas temáticos, the tidy way</title>
+      <link>https://blog.curso-r.com/posts/2019-02-10-sf-miojo/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-02-10-sf-miojo/</guid>
+      <description>Nesse post vamos fazer mapas temáticos do Brasil, usando princípios tidy.</description>
+    </item>
+    
+    <item>
+      <title>Suavização exponencial simples com R</title>
+      <link>https://blog.curso-r.com/posts/2019-02-10-ses/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-02-10-ses/</guid>
+      <description>Nesse post vamos implementar o método de suavização exponencial simples com R.</description>
+    </item>
+    
+    <item>
+      <title>Regressão logística: aspectos computacionais</title>
+      <link>https://blog.curso-r.com/posts/2018-11-18-logistica-comp/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-11-18-logistica-comp/</guid>
+      <description>Nesse post vamos discutir um pouco sobre regressão logística, tensorflow e modelos lineares generalizados.</description>
+    </item>
+    
+    <item>
+      <title>Agendando scripts do R</title>
+      <link>https://blog.curso-r.com/posts/2018-10-04-hyper-cron/</link>
+      <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-10-04-hyper-cron/</guid>
+      <description>Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos sem gastar muito.</description>
+    </item>
+    
+    <item>
+      <title>Autenticação no Shiny com Auth0</title>
+      <link>https://blog.curso-r.com/posts/2018-09-24-shiny-auth0/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-09-24-shiny-auth0/</guid>
+      <description>Neste post vamos ensinar o passo a passo para adicionar autenticação em seu aplicativo Shiny usando o Auth0.</description>
+    </item>
+    
+    <item>
+      <title>Monty hall e diagramas de influência</title>
+      <link>https://blog.curso-r.com/posts/2018-09-03-monty-hall/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-09-03-monty-hall/</guid>
+      <description>O problema de Monty Hall é talvez o mais eloquente exemplo de como a probabilidade pode confundir a mente humana. Esse problema desafiou a comunidade científica no final do século XX e chegou até a ser considerado um paradoxo. Nesse post mostramos uma solução simples e elegante para o problema usando diagramas de influência e o pacote bnlearn.</description>
+    </item>
+    
+    <item>
+      <title>Uma forma de encontrar erros no R</title>
+      <link>https://blog.curso-r.com/posts/2018-09-03-funcoes/</link>
+      <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-09-03-funcoes/</guid>
+      <description>O foco deste post é dar uma noção sobre como podemos contornar dificuldades em entender como se dá a utilização de alguma função do R.</description>
+    </item>
+    
+    <item>
+      <title>Não use resultados de eleições para avaliar pesquisas eleitorais</title>
+      <link>https://blog.curso-r.com/posts/2018-08-31-eleitorais/</link>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-08-31-eleitorais/</guid>
+      <description>Será que a comparação de resultados de pesquisas eleitorais e resultados de eleições é correta? Nesse artigo, argumentarei que não e darei uma ideia de como as pesquisas eleitorais poderiam ser avaliadas na prática.</description>
+    </item>
+    
+    <item>
+      <title>Desafio de Dados - Recuperação de imagens</title>
+      <link>https://blog.curso-r.com/posts/2018-08-09-desafio-recuperacao-imagem/</link>
+      <pubDate>Thu, 09 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-08-09-desafio-recuperacao-imagem/</guid>
+      <description>Na segunda edição do Desafio de Dados vamos tentar recuperar a cor de uma imagem usando modelos de regressão e árvore de decisão.</description>
+    </item>
+    
+    <item>
+      <title>radix: um template RMarkdown</title>
+      <link>https://blog.curso-r.com/posts/2018-07-27-radix/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-27-radix/</guid>
+      <description>Neste post vamos apresentar o template Radix para RMarkdown: um formato criado especificamente para escrever artigos científicos para páginas da internet.</description>
+    </item>
+    
+    <item>
+      <title>Desafio de Dados - PesqEle (parte I)</title>
+      <link>https://blog.curso-r.com/posts/2018-07-26-desafio-pesqele/</link>
+      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-26-desafio-pesqele/</guid>
+      <description>Nessa primeira edição do Desafio de Dados vamos analisar a base de dados do pesqEle e criar um mapa da distribuição do número de pesquisas por estado.</description>
+    </item>
+    
+    <item>
+      <title>RFacebook: como conectar?</title>
+      <link>https://blog.curso-r.com/posts/2018-07-22-rfacebook/</link>
+      <pubDate>Mon, 23 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-22-rfacebook/</guid>
+      <description>Hoje nosso amigo Marcio nos procurou pedindo ajuda pois não estava conseguindo fazer o pacote Rfacebook funcionar. O problema estava logo no começo: a autenticação com a API do Facebook. Nesse post identificar e corrigir esse problema.</description>
+    </item>
+    
+    <item>
+      <title>Por que usar o %&gt;%</title>
+      <link>https://blog.curso-r.com/posts/2018-07-03-tutorial-pipe/</link>
+      <pubDate>Tue, 03 Jul 2018 20:13:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-03-tutorial-pipe/</guid>
+      <description>De onde vem e como funciona o operador pipe.</description>
+    </item>
+    
+    <item>
+      <title>A poluição do ar durante a greve dos caminhoneiros</title>
+      <link>https://blog.curso-r.com/posts/2018-06-18-poluicao-greve-caminhoneiros/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-06-18-poluicao-greve-caminhoneiros/</guid>
+      <description>Neste post, vamos avaliar descritivamente as concentrações de alguns poluentes durante a greve dos caminhoneiros</description>
+    </item>
+    
+    <item>
+      <title>pesqEle: dados de pesquisas eleitorais</title>
+      <link>https://blog.curso-r.com/posts/2018-05-30-pesqele/</link>
+      <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-30-pesqele/</guid>
+      <description>Nesse ano eleitoral, a preocupação com as pesquisas eleitorais é ainda maior. É nossa obrigação como cidadãos e cidadãs acompanhar e monitorar as pesquisas eleitorais registradas, detectando e apontando o dedo para possíveis fraudes. Esse post busca ajudar&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Modelos beseados em árvores são imunes à multicolinearidade?</title>
+      <link>https://blog.curso-r.com/posts/2018-05-22-arvore-e-multicolinearidade/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-22-arvore-e-multicolinearidade/</guid>
+      <description>Modelos baseados em árvores como árvores de decisão, random forest, ligthGBM e xgboost são conhecidos, dentre outras qualidades, pela sua robustês diante do problema de multicolinearidade. Esse post mostra que isso não é totalmente verdade.</description>
+    </item>
+    
+    <item>
+      <title>Agenda da Curso-R</title>
+      <link>https://blog.curso-r.com/posts/2018-05-21-agenda-cursor/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-21-agenda-cursor/</guid>
+      <description>Essa semana a Curso-R participará de 3 eventos relacionados à R e Estatística. Confira neste post!</description>
+    </item>
+    
+    <item>
+      <title>rfbCNPJ: Repositório de CNPJs da Receita</title>
+      <link>https://blog.curso-r.com/posts/2018-05-13-rfbcnpj/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-13-rfbcnpj/</guid>
+      <description>Durante nosso último curso de introdução a programação em R, um aluno me pediu ajuda para carregar os dados de CNPJs da Receita Federal. Eu me animei tanto com essa base que decidi montar um pacotinho para baixar ler e organizar esses dados&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>chorrrds: Analisando acordes de músicas brasileiras</title>
+      <link>https://blog.curso-r.com/posts/2018-04-25-chorrrds/</link>
+      <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-04-25-chorrrds/</guid>
+      <description>Esse post da nossa convidada Bruna é mais uma bela aplicação de estatística em música, usando o R. Novos pacotes, lindas visualizações e insights super legais sobre a música brasileira&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Webinar: Advanced Purrr</title>
+      <link>https://blog.curso-r.com/posts/2018-04-06-webinar-adv-purrr/</link>
+      <pubDate>Fri, 06 Apr 2018 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-04-06-webinar-adv-purrr/</guid>
+      <description>Nessa segunda feira, o Caio apresentará um Webinar sobre purrr avançado.</description>
+    </item>
+    
+    <item>
+      <title>Web scraping do sistema de qualidade do ar da CETESB</title>
+      <link>https://blog.curso-r.com/posts/2018-03-19-scraper-cetesb/</link>
+      <pubDate>Mon, 19 Mar 2018 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-03-19-scraper-cetesb/</guid>
+      <description>Nem sempre dados públicos são disponibilizados de forma eficiente para a coleta. Neste post, vamos exercitar a arte do web scraping para raspar dados de poluição do ar da CETESB.</description>
+    </item>
+    
+    <item>
+      <title>É possível rodar python no RStudio?</title>
+      <link>https://blog.curso-r.com/posts/2018-03-11-python/</link>
+      <pubDate>Sun, 11 Mar 2018 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-03-11-python/</guid>
+      <description>RStudio é a melhor IDE para fazer ciência de dados. R e python são, no momento, as melhores linguagens para fazer ciência de dados. O RStudio foi criado para rodar R. Será que também serve para rodar python? Nesse post curtinho eu respondo que sim e explico como&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Hospedando seu Shiny app no now</title>
+      <link>https://blog.curso-r.com/posts/2018-03-05-shiny-now/</link>
+      <pubDate>Mon, 05 Mar 2018 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-03-05-shiny-now/</guid>
+      <description>Neste post você aprenderá a hospedar o seu shiny app usando Docker e o serviço now.sh.</description>
+    </item>
+    
+    <item>
+      <title>Meus 2 Centavos: análise das notas</title>
+      <link>https://blog.curso-r.com/posts/2018-02-21-2cents/</link>
+      <pubDate>Fri, 23 Feb 2018 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-02-21-2cents/</guid>
+      <description>Tiago Belotti do canal do YouTube Meus 2 Centavos é o meu crítico de cinema favorito. Gasto uma quantidade de tempo que não me orgulho vendo os vídeos desse ser maravilhoso. Nesse post mostro como obtive as notas dele para verificar uma dúvida que estava me corroendo&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Web Scraper Distribuído</title>
+      <link>https://blog.curso-r.com/posts/2018-02-17-scraper-distribuido/</link>
+      <pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-02-17-scraper-distribuido/</guid>
+      <description>Como aumentar em dezenas de vezes a velocidade de um web scraper sem mudar o seu código.</description>
+    </item>
+    
+    <item>
+      <title>Estatística e programação</title>
+      <link>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</link>
+      <pubDate>Sat, 09 Dec 2017 11:54:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</guid>
+      <description>Neste post, encerraremos a nossa série sobre aprendizado e educação discutindo a importância da programação dentro da Estatística.</description>
+    </item>
+    
+    <item>
+      <title>Unindo mapas: the tidy way</title>
+      <link>https://blog.curso-r.com/posts/2017-11-23-union-sf/</link>
+      <pubDate>Fri, 24 Nov 2017 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-23-union-sf/</guid>
+      <description>Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. Dessa vez, o grande culpado foi o sf, um pacote ainda em estágio de desenvolvimento mas que já considero pacas&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Fazendo o R Voar: uma Introdução ao Rcpp</title>
+      <link>https://blog.curso-r.com/posts/2017-11-23-introducao-rcpp/</link>
+      <pubDate>Thu, 23 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-23-introducao-rcpp/</guid>
+      <description>Uma breve introdução ao pacote Rcpp e como ele pode aumentar a eficiência do seu código.</description>
+    </item>
+    
+    <item>
+      <title>Pacote reticulate</title>
+      <link>https://blog.curso-r.com/posts/2017-11-20-reticulate/</link>
+      <pubDate>Mon, 20 Nov 2017 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-20-reticulate/</guid>
+      <description>Imagine se você pudesse aproveitar da quantidade e da variedade enorme de módulos e bibliotecas do Python no ambiente amigável do RStudio? Graças ao pacote&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Matrizes Esparsas no R</title>
+      <link>https://blog.curso-r.com/posts/2017-11-16-matrizes-esparsas/</link>
+      <pubDate>Thu, 16 Nov 2017 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-16-matrizes-esparsas/</guid>
+      <description>Matrizes esparsas são matrizes em que a maior parte dos elementos é igual a zero. Existem maneiras muito eficientes de lidar com esse tipo de matrizes no R e é disso que vamos falar neste post.</description>
+    </item>
+    
+    <item>
+      <title>Usando o cronR para Agendar Scripts</title>
+      <link>https://blog.curso-r.com/posts/2017-11-13-tutorial-cronr/</link>
+      <pubDate>Mon, 13 Nov 2017 14:25:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-13-tutorial-cronr/</guid>
+      <description>Como agendar a execução de scripts usando o pacote cronR.</description>
+    </item>
+    
+    <item>
+      <title>Aprendendo assuntos difíceis</title>
+      <link>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</link>
+      <pubDate>Sat, 11 Nov 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</guid>
+      <description>Uma breve reflexão sobre o preconceito de estudar assuntos difíceis.</description>
+    </item>
+    
+    <item>
+      <title>Estatística e Música</title>
+      <link>https://blog.curso-r.com/posts/2017-11-03-music01/</link>
+      <pubDate>Fri, 03 Nov 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-03-music01/</guid>
+      <description>Já pensou em juntar estatística e música? Nessa série de posts mostro como estou pensando em fazer isso e os pacotes que vou criar nessa jornada&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Tidy Data, Teste T Pareado e Modelos Mistos</title>
+      <link>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</link>
+      <pubDate>Fri, 27 Oct 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</guid>
+      <description>O que teste t-pareado, modelos mistos e tidy data podem ter a ver? Veja neste post como a estrutura dos seus dados pode afetar a forma que você fará a sua análise.</description>
+    </item>
+    
+    <item>
+      <title>Curso-R na aMostra de Estatística 2017</title>
+      <link>https://blog.curso-r.com/posts/2017-10-19-cursor-amostra/</link>
+      <pubDate>Thu, 19 Oct 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-10-19-cursor-amostra/</guid>
+      <description>Nas últimas semanas sumimos um pouco aqui do blog, pois estávamos ocupados na aMostra de Estatística no IME-USP. Veja neste post o que apresentamos.</description>
+    </item>
+    
+    <item>
+      <title>Filtros de Bloom em R</title>
+      <link>https://blog.curso-r.com/posts/2017-09-18-bloom-filter/</link>
+      <pubDate>Mon, 18 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-18-bloom-filter/</guid>
+      <description>Filtro de Bloom é um algoritmo muito interessante para verificar a presença de um elemento em um conjunto. Veja aqui como implementá-lo no R!</description>
+    </item>
+    
+    <item>
+      <title>brcrimR</title>
+      <link>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</link>
+      <pubDate>Wed, 13 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</guid>
+      <description>brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.</description>
+    </item>
+    
+    <item>
+      <title>Pacotes miojo - como fazer um pacote no R em 3 minutos</title>
+      <link>https://blog.curso-r.com/posts/2017-09-07-pacote-miojo/</link>
+      <pubDate>Thu, 07 Sep 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-07-pacote-miojo/</guid>
+      <description>Veja como fazer um pacote em R e fazer seus códigos voarem na velocidade da luz</description>
+    </item>
+    
+    <item>
+      <title>Comportamentos imprevisíveis do lubridate</title>
+      <link>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</link>
+      <pubDate>Sat, 02 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</guid>
+      <description>R é uma linguagem maravilhosa. Ela possibilita uma ampla gama de aplicações interessantes. O seu maior trunfo está no rico ecossistema de pacotes, que são desenvolvidos e mantidos pela comunidade, sempre criativa na hora de lidar com os problemas. Entretanto, toda essa facilidade cobra um preço. Neste post vamos aprender que às vezes os programas não fazem exatamente o que estão dizendo que fazem.</description>
+    </item>
+    
+    <item>
+      <title>Por que amar Estatística?</title>
+      <link>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</link>
+      <pubDate>Thu, 31 Aug 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</guid>
+      <description>Neste post, vou contar como me apaixonei pela Estatística.</description>
+    </item>
+    
+    <item>
+      <title>Aquele 1% é Deep Learning - Gerando letras do Wesley Safadão</title>
+      <link>https://blog.curso-r.com/posts/2017-08-27-safadao/</link>
+      <pubDate>Mon, 28 Aug 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-27-safadao/</guid>
+      <description>Nesse funal de semana decidi assistir alguns vídeos do YouTube do Siraj Raval e acompanhar o curso do Andrew Ng. Depois de aprender várias coisas interessantes, fiquei com uma vontade insana de implementar um modelo pra gerar músicas aleatórias do Wesley Safadão. Eis o &amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Como fazer o R avisar pelo telegram que bitcoin tá barato</title>
+      <link>https://blog.curso-r.com/posts/2017-08-19-r-telegram-bitcoin/</link>
+      <pubDate>Sat, 19 Aug 2017 10:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-19-r-telegram-bitcoin/</guid>
+      <description>Uma brincadeira de fazer o R enviar uma mensagem ao seu celular via Telegram quando o preço da bitcoin subir ou cair muito!</description>
+    </item>
+    
+    <item>
+      <title>Eu, a Estatística e a programação</title>
+      <link>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</link>
+      <pubDate>Thu, 17 Aug 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</guid>
+      <description>Neste post, iniciarei uma série com algumas reflexões sobre temas que orbitam o ensino de Estatística e a importância da programação na vida do estatístico.</description>
+    </item>
+    
+    <item>
+      <title>São Paulo e o problema da mochila</title>
+      <link>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</link>
+      <pubDate>Sat, 12 Aug 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</guid>
+      <description>São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios.</description>
+    </item>
+    
+    <item>
+      <title>Mínimos quadrados com restrições lineares</title>
+      <link>https://blog.curso-r.com/posts/2017-08-07-minimos-quadrados-restrito/</link>
+      <pubDate>Mon, 07 Aug 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-07-minimos-quadrados-restrito/</guid>
+      <description>Às vezes a solução do seu problema está a um peteleco de uma regressão de mínimos quadrados. Neste post vamos implementar uma minimização de soma de quadrados quando os coeficientes da regressão são restritos linearmente.</description>
+    </item>
+    
+    <item>
+      <title>O melhor de 50 posts!</title>
+      <link>https://blog.curso-r.com/posts/2017-08-05-o-melhor-de-50-posts/</link>
+      <pubDate>Sat, 05 Aug 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-05-o-melhor-de-50-posts/</guid>
+      <description>Nosso blog completou 50 posts e para não deixar a marca passar em branco, elaboramos um resumão do que de melhor aconteceu aqui nos últimos 5 meses.</description>
+    </item>
+    
+    <item>
+      <title>Regressão Logística em: a menor deep learning do mundo</title>
+      <link>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</link>
+      <pubDate>Sat, 29 Jul 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</guid>
+      <description>Deep learning é uma grande novidade, mas há muitos mitos em sua volta que acaba espantando pessoas que poderiam usufruir e contribuir para a comunidade de analista de dados. Esse post tem o intuito de abrir um pouquinho a caixa preta para quebrar algumas dessas fábulas.</description>
+    </item>
+    
+    <item>
+      <title>Arrumando BDs: o pacote janitor</title>
+      <link>https://blog.curso-r.com/posts/2017-07-24-janitor/</link>
+      <pubDate>Mon, 24 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-24-janitor/</guid>
+      <description>Neste post, apresentaremos o pacote janitor, uma ótima alternativa na hora de dar aquele trato na base de dados.</description>
+    </item>
+    
+    <item>
+      <title>Salvando data.frames: uma comparação</title>
+      <link>https://blog.curso-r.com/posts/2017-07-20-escrevendo-data-frames/</link>
+      <pubDate>Thu, 20 Jul 2017 00:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-20-escrevendo-data-frames/</guid>
+      <description>Salvar data.frames para ler depois é uma tarefa muito comum para quem trabalha com R. Veja aqui algumas maneiras de como fazer isso de forma rápida e de forma que possa te salvar tempo na hora de carregá-lo novamente.</description>
+    </item>
+    
+    <item>
+      <title>RStudio e Github no dia a dia</title>
+      <link>https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/</link>
+      <pubDate>Mon, 17 Jul 2017 00:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/</guid>
+      <description>Versionamento de código é uma ferramenta que veio para ficar. Não dá para calcular o quanto de dor de cabeça, horas perdidas e frustrações ela economiza e já economizou na história da humanidade. Esse post mostra a rotina de um analista que usa Github no RStudio</description>
+    </item>
+    
+    <item>
+      <title>Top 3 pacotes pra usar com rmarkdown</title>
+      <link>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</link>
+      <pubDate>Sat, 15 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</guid>
+      <description>Neste post, vou listar três pacotes que são úteis pra fazer relatórios bonitos em Rmarkdown.</description>
+    </item>
+    
+    <item>
+      <title>Arrumando BDs: nome das variáveis</title>
+      <link>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</link>
+      <pubDate>Wed, 12 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</guid>
+      <description>Neste post, mostraremos uma forma rápida para padronizar os nomes das variáveis de uma base de dados, deixando-os mais adequados para o restante da análise.</description>
+    </item>
+    
+    <item>
+      <title>Greta</title>
+      <link>https://blog.curso-r.com/posts/2017-07-09-greta/</link>
+      <pubDate>Sat, 08 Jul 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-09-greta/</guid>
+      <description>Greta é um pacote de modelagem estatística que permite que você defina seus modelos interativamente em R e depois os estime usando MCMC.</description>
+    </item>
+    
+    <item>
+      <title>WoE em R com tidywoe</title>
+      <link>https://blog.curso-r.com/posts/2017-07-06-tidywoe/</link>
+      <pubDate>Thu, 06 Jul 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-06-tidywoe/</guid>
+      <description>WoE (weight of evidence) é uma ferramenta bastante usada em aplicações de regressão logística, principalmente na área de score de crédito. O pacote tidywoe oferece uma interface simples para facilitar essa tarefa.</description>
+    </item>
+    
+    <item>
+      <title>Forcats</title>
+      <link>https://blog.curso-r.com/posts/2017-07-01-forcats/</link>
+      <pubDate>Sat, 01 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-01-forcats/</guid>
+      <description>Neste post, falaremos sobre o forcats, um pacote recheado de excelentes funções para manipular fatores.</description>
+    </item>
+    
+    <item>
+      <title>Construindo Autoencoders</title>
+      <link>https://blog.curso-r.com/posts/2017-06-26-construindo-autoencoders/</link>
+      <pubDate>Mon, 26 Jun 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-26-construindo-autoencoders/</guid>
+      <description>Autoencoders são redes neurais treinadas com o objetdivo de copiar o seu input para o seu output. Aprenda a treinar o seu neste post.</description>
+    </item>
+    
+    <item>
+      <title>Componentes Principais - Intuição</title>
+      <link>https://blog.curso-r.com/posts/2017-06-24-componentes-principais-intuicao/</link>
+      <pubDate>Sat, 24 Jun 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-24-componentes-principais-intuicao/</guid>
+      <description>Uma ilustração gráfica simples para dar intuição sobre o que uma Análise de Componentes Principais faz.</description>
+    </item>
+    
+    <item>
+      <title>Environments</title>
+      <link>https://blog.curso-r.com/posts/2017-06-19-environments/</link>
+      <pubDate>Mon, 19 Jun 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-19-environments/</guid>
+      <description>Se você já utilizou o R algumas vezes, com certeza já se deparou com o termo environment. Neste post, vamos tentar responder as três perguntas básicas para entendermos alguma coisa no R: 1. o que é? 2. para que serve? e 3. como NÃO usar?</description>
+    </item>
+    
+    <item>
+      <title>bR Bloggers está no ar</title>
+      <link>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</link>
+      <pubDate>Mon, 19 Jun 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</guid>
+      <description>Está no ar o bR Bloggers! bR Bloggers é um agregador de blogs sobre R escritos em língua portuguesa.</description>
+    </item>
+    
+    <item>
+      <title>Skimr: estatísticas básicas com ❤️</title>
+      <link>https://blog.curso-r.com/posts/2017-06-17-skimr/</link>
+      <pubDate>Sat, 17 Jun 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-17-skimr/</guid>
+      <description>Uma coisa muito legal da ROpenSci Unconf 2017 é que ela funcionou como uma hackathon mega produtiva. Dentre os novos pacotes que olhei, o que mais me chamou atenção foi o skimr&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Instalando Anaconda &#43; TensorFlow &#43; Keras para R no Ubuntu 16.04 Server</title>
+      <link>https://blog.curso-r.com/posts/2017-06-08-keras-no-ubuntu/</link>
+      <pubDate>Thu, 08 Jun 2017 21:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-08-keras-no-ubuntu/</guid>
+      <description>Passo a passo de como preparar o Keras para R no Ubuntu 16.04 em cima do Anaconda.</description>
+    </item>
+    
+    <item>
+      <title>Keras: colocando deep learning no pipeline</title>
+      <link>https://blog.curso-r.com/posts/2017-06-05-keras/</link>
+      <pubDate>Mon, 05 Jun 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-05-keras/</guid>
+      <description>O keras é um novo pacote do R feito para ajustar modelos de redes neurais profundas. Esse é o primeiro de uma série de posts sobre o assunto. Primeiro, vamos falar dos autores desse pacote&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>A kind of magick</title>
+      <link>https://blog.curso-r.com/posts/2017-06-01-a-kind-of-magick/</link>
+      <pubDate>Thu, 01 Jun 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-01-a-kind-of-magick/</guid>
+      <description>Já vimos como o Rstudio se torna uma ferramanta poderosa quando combinado com certos pacotes, como o knitr e shiny, ou outros recursos, como o markdown e o git. Hoje, veremos como transformar o Rstudio em um elegante e interativo editor de imagens utilizando o pacote magick.</description>
+    </item>
+    
+    <item>
+      <title>PDF e OCR</title>
+      <link>https://blog.curso-r.com/posts/2017-05-27-ocr/</link>
+      <pubDate>Sun, 28 May 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-27-ocr/</guid>
+      <description>Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com jurimetria e preciso extrair dados de diários oficiais, petições, sentenças, então já viu né&amp;hellip; A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é digital ou digitalizado?</description>
+    </item>
+    
+    <item>
+      <title>Web scraping do site da Secretaria de Segurança Pública de São Paulo</title>
+      <link>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</link>
+      <pubDate>Fri, 19 May 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</guid>
+      <description>Ao contrário de outros usos pro R, web-scrapping não tem uma receita bem definida. Mesmo definindo passos intermediários, alguns scrapers usam ideias que funcionam apenas em casos específicos. Neste post vamos estudar a construção de um Web Scraping com ideias facilmente generalizáveis.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos miojo: Mapas temáticos do Brasil em 3 minutos ou menos</title>
+      <link>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</link>
+      <pubDate>Thu, 04 May 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</guid>
+      <description>Impressionar é muito mais fácil se você usa mapas. Neste post vamos aprender a construir mapas temáticos do Brasil com muita agilidade.</description>
+    </item>
+    
+    <item>
+      <title>As cores da Marvel vs DC</title>
+      <link>https://blog.curso-r.com/posts/2017-05-01-as-paletas-de-cores-da-marvel-vs-dc/</link>
+      <pubDate>Mon, 01 May 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-01-as-paletas-de-cores-da-marvel-vs-dc/</guid>
+      <description>A cor é uma diferença notável entre os filmes da Marvel e da DC. Enquanto a Disney/Marvel Studios costuma lançar filmes com tons mais claros e alegres, a Warner tem optado por cenários escuros, com um aspecto mais sombrios. Neste post, vamos utilizar o Kmeans para obter a paleta de cores mais utilizadas por cada estúdio.</description>
+    </item>
+    
+    <item>
+      <title>Diagramas de Venn em R</title>
+      <link>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</link>
+      <pubDate>Sat, 29 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</guid>
+      <description>Diagramas de Venn são representações eficientes das conjuntas de quantidades moderadas de variáveis binárias. Neste post você vai aprender a construir os principais tipos de diagramas de Venn que estão implementados em R.</description>
+    </item>
+    
+    <item>
+      <title>O Porta dos Fundos está em decadência? (REVISITED)</title>
+      <link>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</link>
+      <pubDate>Fri, 28 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</guid>
+      <description>Às vezes a venda de uma empresa é um sinal de que algo não vai bem. Além disso, a briga entre as novas mídias e as velhas mídias é brutal, então se um conglomerado televisivo compra um dos gigantes da internet brasileira deve ter acontecido algum um tipo de canibalismo. Motivados pela nova casa do PDF, neste post revisitamos a análise sobre a decadência do Porta dos Fundos.</description>
+    </item>
+    
+    <item>
+      <title>R 3.4 disponível!</title>
+      <link>https://blog.curso-r.com/posts/2017-04-24-r34/</link>
+      <pubDate>Mon, 24 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-24-r34/</guid>
+      <description>A versão 3.4 do R foi lançada nesse final de semana! A atualização tem foco principal em performance. Veja as mudanças.</description>
+    </item>
+    
+    <item>
+      <title>K-means e paleta de cores</title>
+      <link>https://blog.curso-r.com/posts/2017-04-21-paleta-de-cores/</link>
+      <pubDate>Sat, 22 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-21-paleta-de-cores/</guid>
+      <description>Uma aplicação interessante de algoritmos de clusterização é a obtenção de paletas de cores a partir de imagens. Veja como isso pode ser feito usando o R.</description>
+    </item>
+    
+    <item>
+      <title>Tratando erros: the tidy way</title>
+      <link>https://blog.curso-r.com/posts/2017-04-09-try/</link>
+      <pubDate>Thu, 20 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-09-try/</guid>
+      <description>Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão tidy dessas soluções.</description>
+    </item>
+    
+    <item>
+      <title>Colando textos</title>
+      <link>https://blog.curso-r.com/posts/2017-04-08-glue/</link>
+      <pubDate>Mon, 17 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-08-glue/</guid>
+      <description>Uma tarefa muito comum no R é colar textos. As funções mais importantes para isso são paste() e sprintf(), que vêm com o pacote base. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do tidyverse, o glue.</description>
+    </item>
+    
+    <item>
+      <title>Análise das emoções de Aécio Neves</title>
+      <link>https://blog.curso-r.com/posts/2017-04-09-aecio/</link>
+      <pubDate>Sat, 15 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-09-aecio/</guid>
+      <description>Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: &amp;lsquo;Por quê ele sempre faz tanta cara de dor?&amp;rsquo;</description>
+    </item>
+    
+    <item>
+      <title>Você está a menos de 1 km de um Hambúrguer?</title>
+      <link>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</link>
+      <pubDate>Mon, 10 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</guid>
+      <description>Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos utilizar o pacote &lt;code&gt;leaflet&lt;/code&gt; para criar mapas com os dados coletados e descobrir se estamos a menos de 1 km de hospitais, delagacias, corpos de bombeiros e, o mais importante, de uma hamburgueria.</description>
+    </item>
+    
+    <item>
+      <title>As barras do progresso</title>
+      <link>https://blog.curso-r.com/posts/2017-04-08-progress/</link>
+      <pubDate>Mon, 10 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-08-progress/</guid>
+      <description>Na jornada da ciência de dados, muitas vezes precisamos rodar um mesmo algoritmo em vários objetos distintos. Quando o algoritmo é pesado ou a lista de objetos é longa, é importante saber em que passo estamos e quanto vai demorar para terminar.</description>
+    </item>
+    
+    <item>
+      <title>Top 10 dicas do Curso R de verão 2017</title>
+      <link>https://blog.curso-r.com/posts/2017-04-08-top10-dicas-verao-2017/</link>
+      <pubDate>Sat, 08 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-08-top10-dicas-verao-2017/</guid>
+      <description>Em fevereiro desse ano ministramos o Curso de R de Verão 2017, parte do programa dos Cursos de Verão do IME-USP.</description>
+    </item>
+    
+    <item>
+      <title>Multas em São Paulo</title>
+      <link>https://blog.curso-r.com/posts/2017-04-01-multas-em-sp/</link>
+      <pubDate>Sat, 01 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-01-multas-em-sp/</guid>
+      <description>Há bastante tempo tenho vontade de fazer análises usando dados de multas de São Paulo.</description>
+    </item>
+    
+    <item>
+      <title>Requisições seguras</title>
+      <link>https://blog.curso-r.com/posts/2017-03-31-ssl/</link>
+      <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-31-ssl/</guid>
+      <description>No mundo do web scraping, muitas vezes precisamos acessar sites HTTPS, a versão segura do HTTP (Hyper Text Transfer Protocol). Esse protocolo é utilizado para encriptar as mensagens trocadas por usuário e servidor. O pacote httr utiliza um padrão SSL (Secure Sockets Layer) para lidar com HTTPS&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Lollapalooza segundo Spotify - Web Scraping, API do Spotify e tidyverse</title>
+      <link>https://blog.curso-r.com/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify/</link>
+      <pubDate>Mon, 27 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify/</guid>
+      <description>No dia em que fui ao Lollapalooza eu descobri o Rspotify, um wraper da API do Spotify e daí me veio a ideia de juntar infos dos dois assuntos.</description>
+    </item>
+    
+    <item>
+      <title>Knitr: mudando o diretório de trabalho</title>
+      <link>https://blog.curso-r.com/posts/2017-03-25-knitr-mudando-diretorio-de-trabalho/</link>
+      <pubDate>Sat, 25 Mar 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-25-knitr-mudando-diretorio-de-trabalho/</guid>
+      <description>O pacote &lt;code&gt;knitr&lt;/code&gt; é um mecanismo rápido, elegante e flexível para gerar relatórios dinâmicos no R. Ele trabalha lado a lado com o &lt;code&gt;rmarkdown&lt;/code&gt; para transformar arquivos &lt;code&gt;.Rmd&lt;/code&gt; em diversos formatos, como html, pdf e até mesmo word. Quando estamos trabalhando com arquivos Rmarkdown no Rstudio, mudar o diretório de trabalho pode levar a resultados inesperados se não for feito da maneira correta.</description>
+    </item>
+    
+    <item>
+      <title>O Porta dos Fundos está em decadência?</title>
+      <link>https://blog.curso-r.com/posts/2017-03-20-porta-dos-fundos-decadencia/</link>
+      <pubDate>Mon, 20 Mar 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-20-porta-dos-fundos-decadencia/</guid>
+      <description>Há alguns anos eu acompanho o canal Porta dos Fundos no YouTube, assistindo os vídeos quase sempre no dia de lançamento. Nos últimos meses, no entanto, meu entusiasmo com o canal vem diminuindo. Não sei se eu que fiquei chato ou se outras pessoas compartilham a minha opinião de que o conteúdo do Porta piorou. Então resolvi scrapear informações do canal e montar algumas visualizações para tirar essa dúvida.</description>
+    </item>
+    
+    <item>
+      <title>Paralelização no R</title>
+      <link>https://blog.curso-r.com/posts/2017-03-14-parallel/</link>
+      <pubDate>Sun, 19 Mar 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-14-parallel/</guid>
+      <description>Programadores eficientes não precisam escrever algoritmos que rodam rápido. Recomendo fortemente a leitura do livro Efficient R, que discute eficiência com o R de forma exaustiva. Também gosto muito da primeira parte dessa palestra do Hadley, onde ele defende que o cientista de dados deve usar seu tempo pensando no problema e não na forma que vai escrever seu código&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>rstudio::conf: Sessão Final</title>
+      <link>https://blog.curso-r.com/posts/2017-02-18-all-things-r-and-rstudio/</link>
+      <pubDate>Thu, 16 Mar 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-18-all-things-r-and-rstudio/</guid>
+      <description>No início de Janeiro desse ano ocorreu a primeira rstudio::conf, uma conferência sobre R promovida pela Rstudio.</description>
+    </item>
+    
+    <item>
+      <title>Medidas-resumo no tidyverse</title>
+      <link>https://blog.curso-r.com/posts/2017-02-20-quartis/</link>
+      <pubDate>Sat, 11 Mar 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-20-quartis/</guid>
+      <description>Hoje estava fazendo uma análise exploratória e precisava estudar os quartis de uma variável contínua. A solução usando o tidyverse é tão elegante que valeu um post no blog.</description>
+    </item>
+    
+    <item>
+      <title>Modelando a variância da normal</title>
+      <link>https://blog.curso-r.com/posts/2017-02-21-regressao-heterocedastica/</link>
+      <pubDate>Thu, 09 Mar 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-21-regressao-heterocedastica/</guid>
+      <description>Verificar as suposições dos modelos é muito importante quando fazemos inferência estatística. Em particular, a suposição de homocedasticidade dos modelos de regressão linear é especialmente importante, pois influencia o cálculo de erros padrão, intervalos de confiança e valores-p. Neste post, vou mostrar três pacotes do R que ajustam modelos de regressão linear heterocedastica.</description>
+    </item>
+    
+    <item>
+      <title>leaflet com markerCluster</title>
+      <link>https://blog.curso-r.com/posts/2017-02-21-markercluster/</link>
+      <pubDate>Wed, 01 Mar 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-21-markercluster/</guid>
+      <description>O leaflet é uma biblioteca javascript para criação de mapas interativos. O pacote leaflet do R é um htmlwidget que permite gerar esses mapas de forma direta no R, para usar em documentos &lt;code&gt;RMarkdown&lt;/code&gt; e Shiny.</description>
+    </item>
+    
+    <item>
+      <title>Top 10 pacotes para data science</title>
+      <link>https://blog.curso-r.com/posts/2017-02-21-top10-pacotes-para-data-science/</link>
+      <pubDate>Tue, 21 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-21-top10-pacotes-para-data-science/</guid>
+      <description>O R mudou muito nos últimos 5 anos graças a criações de novos pacotes focados nas questões mais práticas do dia a dia de um cientista de dados.</description>
+    </item>
+    
+    <item>
+      <title>O que é um gráfico estatístico?</title>
+      <link>https://blog.curso-r.com/posts/2017-02-20-o-que-e-um-grafico-estatistico/</link>
+      <pubDate>Mon, 20 Feb 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-20-o-que-e-um-grafico-estatistico/</guid>
+      <description>Os gráficos são técnicas estatísticas para visualização de dados amplamente utilizados em todas as áreas da pesquisa. A sua popularidade se deve à maneira como elucidam informações que estavam escondidas nas colunas do banco de dados, sendo que muitos deles podem ser compreendidos até mesmo por leigos no assunto em questão. Mas será que podemos definir formalmente o que é um gráfico estatístico?</description>
+    </item>
+    
+    <item>
+      <title>Pacote ggalt</title>
+      <link>https://blog.curso-r.com/posts/2017-02-18-ggalt/</link>
+      <pubDate>Sat, 18 Feb 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-18-ggalt/</guid>
+      <description>O pacote &lt;code&gt;ggalt&lt;/code&gt; é uma extensão ao &lt;code&gt;ggplot2&lt;/code&gt; que permite fazer algumas coisas muito úteis. Uma delas é a possibilidade de fazer faixas de confiança para gráficos do tipo escada. Isso permite adicionar intervalos de confiança para modelos Kaplan-Meier, muito utilizados em Análise de Sobrevivência.</description>
+    </item>
+    
+  </channel>
+</rss>

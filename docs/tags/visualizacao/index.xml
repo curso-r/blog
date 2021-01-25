@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>visualizacao on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/visualizacao/</link>
+    <description>Recent content in visualizacao on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/visualizacao/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Qual a capital mais distante de Brasília?</title>
+      <link>https://blog.curso-r.com/posts/2020-09-19-map-dist/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-09-19-map-dist/</guid>
+      <description>Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,8 +1,8 @@
 ---
 title: "Medidas-resumo no tidyverse"
-date: "2017-03-11T13:07:31+02:00"
+date: "2017-03-11"
 tags: ["tidyverse", "dplyr", "purrr"]
-categories: ["tutoriais", "r"]
+categories: ["tutoriais"]
 image: "images/posts/banner/quartis.png"
 author: ["Julio"]
 draft: false
@@ -33,7 +33,7 @@ tab <- mtcars %>%
   mutate(quartis = map(data, ~enframe(quantile(.x$mpg, 1:3 / 4)))) %>% 
   unnest_legacy(quartis) %>% 
   spread(name, value)
-tab
+tab 
 ```
 
 - A função `dplyr::group_by()` faz um grupo para cada combinação de `am` e `vs`.
@@ -45,7 +45,8 @@ tab
 O resultado pode ser jogado diretamente numa tabela:
 
 ```{r}
-knitr::kable(tab)
+knitr::kable(tab) %>% 
+  kableExtra::kable_styling()
 ```
 
 É possível mudar esse código para ter outras medidas-resumo, por exemplo. Para isso, podemos usar a função `summary()`, por exemplo, ou criar nossa própria função.
@@ -54,24 +55,15 @@ knitr::kable(tab)
 mtcars %>%
   group_by(am, vs) %>% 
   nest() %>% 
-  mutate(s = map(data, ~enframe(summary(.x$mpg)))) %>% 
+  mutate(
+    s = map(data, ~enframe(summary(.x$mpg))),
+    s = map(s, ~ .x %>% mutate(value = as.numeric(value)))
+  ) %>% 
+  select(vs, am, s) %>% 
   unnest_legacy(s) %>% 
   spread(name, value) %>% 
-  knitr::kable()
+  knitr::kable() %>% 
+  kableExtra::kable_styling()
 ```
 
 Como você resolveria essa task? Escreva nos comentários!
-
-**OBS**: Outra solução para a mesma task, mais concisa, usando `dplyr::do()`:
-
-```{r}
-mtcars %>% 
-  group_by(am, vs) %>% 
-  do(enframe(summary(.$mpg))) %>% 
-  spread(name, value) %>% 
-  knitr::kable()
-```
-
-Mas: tome cuidado! Se o Hadley diz...
-
-![](http://lsru.github.io/r_workshop/img/purrr_do.png)

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>modelo on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/modelo/</link>
+    <description>Recent content in modelo on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sun, 09 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/modelo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monty hall e diagramas de influência</title>
+      <link>https://blog.curso-r.com/posts/2018-09-03-monty-hall/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-09-03-monty-hall/</guid>
+      <description>O problema de Monty Hall é talvez o mais eloquente exemplo de como a probabilidade pode confundir a mente humana. Esse problema desafiou a comunidade científica no final do século XX e chegou até a ser considerado um paradoxo. Nesse post mostramos uma solução simples e elegante para o problema usando diagramas de influência e o pacote bnlearn.</description>
+    </item>
+    
+  </channel>
+</rss>

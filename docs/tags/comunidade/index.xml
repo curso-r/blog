@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>comunidade on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/comunidade/</link>
+    <description>Recent content in comunidade on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 13 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/comunidade/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Comunidade R Brasil no Telegram</title>
+      <link>https://blog.curso-r.com/posts/2019-09-10-rbrasil/</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-10-rbrasil/</guid>
+      <description>Nesse post, baixamos os dados do Telegram da comunidade RBrasil e fizemos alguns gráficos divertidos.</description>
+    </item>
+    
+    <item>
+      <title>Programando com a comunidade</title>
+      <link>https://blog.curso-r.com/posts/2019-07-15-comunidade/</link>
+      <pubDate>Mon, 19 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-15-comunidade/</guid>
+      <description>Trabalhar em grupo é difícil, mas os esforços se pagam. Aqui discuto alguns aspectos importantes para tirar proveito da melhor parte do R: a comunidade (Imagem de Allison Holst).</description>
+    </item>
+    
+    <item>
+      <title>Minha experiência na useR!2019</title>
+      <link>https://blog.curso-r.com/posts/2019-07-14-user2019/</link>
+      <pubDate>Sun, 14 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-14-user2019/</guid>
+      <description>Highlights do maior evento sobre R do mundo.</description>
+    </item>
+    
+    <item>
+      <title>Precisamos falar sobre a participação de mulheres em eventos de estatística</title>
+      <link>https://blog.curso-r.com/posts/2019-02-16-eventos-mf/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-02-16-eventos-mf/</guid>
+      <description>Nos últimos anos, vários grupos têm monitorado e denunciado ocorrências desse fenômeno na comunidade científica. Para enriquecer os debates aqui no Brasil, decidimos organizar os dados de três eventos recentes de estatística.</description>
+    </item>
+    
+  </channel>
+</rss>

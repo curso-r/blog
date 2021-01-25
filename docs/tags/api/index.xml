@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>API on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/api/</link>
+    <description>Recent content in API on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/api/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bechdel: Filme e Machismo</title>
+      <link>https://blog.curso-r.com/posts/2020-06-09-bechdel/</link>
+      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-09-bechdel/</guid>
+      <description>O teste de Bechdel avalia se um filme atende a uma condição simples: duas mulheres (com nomes) conversam entre si sobre algo que não seja homem. Existe um banco de dados de filmes avaliados por pelo índice Bechdel e nós analisamos.</description>
+    </item>
+    
+    <item>
+      <title>Quem segura a barra do Porta dos Fundos?</title>
+      <link>https://blog.curso-r.com/posts/2020-01-06-porta/</link>
+      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-01-06-porta/</guid>
+      <description>A base de dados de CNPJ da Receita Federal do Brasil (RFB) é, na minha opinião, uma das maiores conquistas de dados abertos do Brasil. Nesse post vou passar alguns links para ler a base e alguns gráficos simples.</description>
+    </item>
+    
+    <item>
+      <title>brcrimR</title>
+      <link>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</link>
+      <pubDate>Wed, 13 Sep 2017 10:12:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</guid>
+      <description>brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.</description>
+    </item>
+    
+    <item>
+      <title>O Porta dos Fundos está em decadência? (REVISITED)</title>
+      <link>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</link>
+      <pubDate>Fri, 28 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</guid>
+      <description>Às vezes a venda de uma empresa é um sinal de que algo não vai bem. Além disso, a briga entre as novas mídias e as velhas mídias é brutal, então se um conglomerado televisivo compra um dos gigantes da internet brasileira deve ter acontecido algum um tipo de canibalismo. Motivados pela nova casa do PDF, neste post revisitamos a análise sobre a decadência do Porta dos Fundos.</description>
+    </item>
+    
+    <item>
+      <title>Análise das emoções de Aécio Neves</title>
+      <link>https://blog.curso-r.com/posts/2017-04-09-aecio/</link>
+      <pubDate>Sat, 15 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-09-aecio/</guid>
+      <description>Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: &amp;lsquo;Por quê ele sempre faz tanta cara de dor?&amp;rsquo;</description>
+    </item>
+    
+    <item>
+      <title>Você está a menos de 1 km de um Hambúrguer?</title>
+      <link>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</link>
+      <pubDate>Mon, 10 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</guid>
+      <description>Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos utilizar o pacote &lt;code&gt;leaflet&lt;/code&gt; para criar mapas com os dados coletados e descobrir se estamos a menos de 1 km de hospitais, delagacias, corpos de bombeiros e, o mais importante, de uma hamburgueria.</description>
+    </item>
+    
+    <item>
+      <title>Lollapalooza segundo Spotify - Web Scraping, API do Spotify e tidyverse</title>
+      <link>https://blog.curso-r.com/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify/</link>
+      <pubDate>Mon, 27 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify/</guid>
+      <description>No dia em que fui ao Lollapalooza eu descobri o Rspotify, um wraper da API do Spotify e daí me veio a ideia de juntar infos dos dois assuntos.</description>
+    </item>
+    
+    <item>
+      <title>O Porta dos Fundos está em decadência?</title>
+      <link>https://blog.curso-r.com/posts/2017-03-20-porta-dos-fundos-decadencia/</link>
+      <pubDate>Mon, 20 Mar 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-20-porta-dos-fundos-decadencia/</guid>
+      <description>Há alguns anos eu acompanho o canal Porta dos Fundos no YouTube, assistindo os vídeos quase sempre no dia de lançamento. Nos últimos meses, no entanto, meu entusiasmo com o canal vem diminuindo. Não sei se eu que fiquei chato ou se outras pessoas compartilham a minha opinião de que o conteúdo do Porta piorou. Então resolvi scrapear informações do canal e montar algumas visualizações para tirar essa dúvida.</description>
+    </item>
+    
+  </channel>
+</rss>

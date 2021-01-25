@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/git/</link>
+    <description>Recent content in git on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 27 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Abandonando o Termo &#39;master&#39; no GitHub</title>
+      <link>https://blog.curso-r.com/posts/2020-07-27-github-main-branch/</link>
+      <pubDate>Mon, 27 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-07-27-github-main-branch/</guid>
+      <description>Assim como algumas linguagens de programação no passado, o GitHub está abandonado o termo &amp;lsquo;master&amp;rsquo;. Veja como se adiantar e adotar o &amp;lsquo;main&amp;rsquo; a partir de já.</description>
+    </item>
+    
+    <item>
+      <title>RStudio e Github no dia a dia</title>
+      <link>https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/</link>
+      <pubDate>Mon, 17 Jul 2017 00:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/</guid>
+      <description>Versionamento de código é uma ferramenta que veio para ficar. Não dá para calcular o quanto de dor de cabeça, horas perdidas e frustrações ela economiza e já economizou na história da humanidade. Esse post mostra a rotina de um analista que usa Github no RStudio</description>
+    </item>
+    
+  </channel>
+</rss>

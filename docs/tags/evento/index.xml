@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>evento on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/evento/</link>
+    <description>Recent content in evento on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 25 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/evento/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Verificando afirmações com dados abertos</title>
+      <link>https://blog.curso-r.com/posts/2019-09-03-sinesp/</link>
+      <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-03-sinesp/</guid>
+      <description>Nesse post, analisamos dados do SINESP para verificar as informações de um tweet do Ministro Sérgio Moro sobre a queda nas ocorrências de crimes no primeiro bimestre de 2018.</description>
+    </item>
+    
+    <item>
+      <title>Tidyverse developer day 2019</title>
+      <link>https://blog.curso-r.com/posts/2019-08-12-tidydevday/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-12-tidydevday/</guid>
+      <description>Este post tem como objetivo relatar a experiência de participar do Tidyverse Developer Day 2019, e tem como autoras a Beatriz Milz e a Angélica Custódio.</description>
+    </item>
+    
+  </channel>
+</rss>

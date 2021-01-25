@@ -18,6 +18,10 @@ link = "plugins/bootstrap/bootstrap.min.css"
 link = "plugins/slick/slick.css"
 [[params.plugins.css]]
 link = "plugins/themify-icons/themify-icons.css"
+[[params.plugins.css]]
+link = "css/custom.css"
+[[params.plugins.css]]
+link = "css/github.css"
 
 # JS Plugins
 [[params.plugins.js]]
@@ -42,6 +46,8 @@ link = "plugins/search/fuse.min.js"
 link = "plugins/search/mark.js"
 [[params.plugins.js]]
 link = "plugins/search/search.js"
+[[params.plugins.js]]
+link = "js/highlight.pack.js"
 
 # navigation
 [[menu.main]]
@@ -73,7 +79,7 @@ preloader = true
 # search
 search = true
 # about author
-author = "John Doe"
+author = "Curso-R"
 author_image = "images/banner-img.png"
 bio = "I’m a Freelance Interactive Art Director based in France. Focusing across branding and identity, digital and print."
 # Contact info

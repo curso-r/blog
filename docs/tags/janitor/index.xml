@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>janitor on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/janitor/</link>
+    <description>Recent content in janitor on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 24 Jul 2017 23:26:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/janitor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Arrumando BDs: o pacote janitor</title>
+      <link>https://blog.curso-r.com/posts/2017-07-24-janitor/</link>
+      <pubDate>Mon, 24 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-24-janitor/</guid>
+      <description>Neste post, apresentaremos o pacote janitor, uma ótima alternativa na hora de dar aquele trato na base de dados.</description>
+    </item>
+    
+  </channel>
+</rss>

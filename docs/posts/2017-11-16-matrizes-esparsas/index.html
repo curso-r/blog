@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/banner-sparse-matrix.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Matrizes Esparsas no R</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Daniel
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            16 de
+            novembro de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/matriz">matriz</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/esparsa">esparsa</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Matrizes esparsas são matrizes em que a maior parte dos elementos é igual a zero. Matrizes dessa forma surgem em diversos problemas relacionados a Machine Learning e análise de dados.</p>
+<p>Por exemplo, é comum em <em>text mining</em> representar os documentos usando o chamado <a href="https://en.wikipedia.org/wiki/Bag-of-words_model"><em>Bag of Words</em></a>. <em>Bag of Words</em> nada mais é do que listar as palavras que aparecem em todos os documentos e em seguida criar uma matriz em que cada linha é um documento e cada coluna é uma palavra que foi listada anteriormente. Cada elemento <span class="math inline">\((i,j)\)</span> desssa matriz é 1 se a palavra <span class="math inline">\(j\)</span> aparace no documento <span class="math inline">\(i\)</span> e 0 caso contrário. Naturalmente, o número de palavras que podem aparecer é muito maior do que o número de palavras que de fato aparecem em um documento, por isso a maioria dos elementos dessa matriz será 0.</p>
+<p>Matrizes esparsas também aparecem muito em problemas de recomendação. Nesse tipo de aplciação representamos as transações em uma matriz em que cada linha é um cliente e cada coluna um produto que ele poderia ter comprado. Para recomendar filmes no Netflix, por exemplo, cada linha seria um cliente e cada coluna um filme que está no catálogo do Netflix. Em seguida marcaríamos cada elemento <span class="math inline">\((i,j)\)</span> dessa matriz com 1 se o cliente <span class="math inline">\(i\)</span> assistiu o filme <span class="math inline">\(j\)</span> e 0 caso contrário. Como o catálogo de filmes é muito grande, a mairoia dos elementos dessa matriz será 0.</p>
+<p>Essa <a href="https://www.quora.com/What-is-the-significance-of-sparse-matrices-What-are-some-common-applications-in-computer-science">pergunta do Quora</a> tem mais algumas aplicações importantes de matrizes esparsas.</p>
+<p>Note que nos problemas que eu mencionei, encontramos dimensões muito altas. O número de palavras distintas em um conjunto de documentos pode facilmente passar de 20.000. O número de filmes no catálogo do netflix pode passar de 100.000. Agora vamos definir uma matriz como esta no R da forma usual. Vou preenchê-la aleatoriamente com 0’s e 1’s, sendo 1’s aproximadamente 1%. Considere que essa matriz seria utilizada em um problema de classificação de textos com 1 milhão de documentos com apenas 500 palavras distintas. Veja que aqui estou reduzindo bastante o número de palavras possíveis, na prática esse número é muito maior.</p>
+<pre class="r"><code>nrow &lt;- 1e6
+ncol &lt;- 500
+x &lt;- matrix(sample(c(0,1), size = nrow*ncol, replace = TRUE,prob = c(0.99, 0.1)), nrow = nrow, ncol = ncol)</code></pre>
+<p>Se você tiver um computador com bastante RAM, talvez consiga rodar isso, mas provavelmente você terá um erro do tipo <code>Error: cannot allocate vector of size 74.5 Gb</code>.</p>
+<p>De fato, essa matriz ocupa bastante memória:</p>
+<pre class="r"><code>pryr::object_size(x)
+#&gt; 4 GB</code></pre>
+<p>Será que existe uma forma mais eficiente de representar essa matriz na memória do computador? A resposta é sim! E no R vamos usar o pacote <code>Matrix</code>.</p>
+<p>Existem diversas formas de transformar a matriz <code>x</code> em uma matriz esparsa, a forma mais simples é:</p>
+<pre class="r"><code>library(Matrix)
+x_s &lt;- Matrix(x)
+pryr::object_size(x_s)
+#&gt; 550 MB</code></pre>
+<p>Ou seja, a matriz esparsa ocupa quase 1/8 menos memória do que a matriz densa. A maioria dos métodos para matrizes no R estão também implementados para matrizes esparsas. Isso quer dizer que você pode fazer <code>x*y</code>, <code>x+y</code>, <code>x/y</code>, <code>x%*%y</code>, <code>x[1,1]</code>, etc. como se fossem matrizes normais. Na prática o pacote <code>Matrix</code> representa as matrizes esparsas internamente de uma forma muito mais inteligente, sem gastar memória com os valores nulos.</p>
+<p>Uma outra grande vantagem é que muitos pacotes possuem implementações mais eficientes (tanto em tempo de execução quanto em memória utilizada) para matrizes esparsas, por exemplo o <a href="https://cran.r-project.org/web/packages/glmnet/"><code>glmnet</code></a> muito usado para fazer regressão do tipo LASSO. O <a href="https://github.com/mhahsler/recommenderlab"><code>recommenderlab</code></a> que implementa alguns algoritmos de recomendação também é inteiramente baseado em matrizes esparsas. O pacote <a href="http://text2vec.org/index.html"><code>text2vec</code></a> que implementa algoritmos como GloVe também usa muito esse tipo de matrizes.</p>
+<p>Vale lembrar que na maioria das vezes você possui uma base <em>transacional</em> que precisa ser representada como uma matriz. Algo mais ou menos assim:</p>
+<pre class="r"><code>bd &lt;- data.frame(
+  cliente = c(1,1,1,2,2,3,3,4,5,6,7,7,8,8,8,8,9,9,9,9),
+  itens = sample(1:50, 20)
+  )</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">cliente</th>
+<th align="right">itens</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">17</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">50</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">40</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">22</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">36</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">23</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">18</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">25</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">29</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">46</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">42</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">15</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">35</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">48</td>
+</tr>
+</tbody>
+</table>
+<p>Nesse caso, faz mais sentido criar a matriz esparsa usando a função <code>sparseMatrix</code>. Assim, você só especifica as coordenadas da matriz que têm algum 1.</p>
+<pre class="r"><code>library(Matrix)
+## Warning: package &#39;Matrix&#39; was built under R version 3.4.4
+sparseMatrix(bd$cliente, bd$itens)
+## 9 x 50 sparse Matrix of class &quot;ngCMatrix&quot;
+##                                                                          
+##  [1,] . . . . . . . . . . . . . . . . | . . . . . . . . . . . . . . . . .
+##  [2,] . . . . . . . . . . . . . . . . . . . . . | . . . . . . . . . . . .
+##  [3,] . . | . . . . . . . . . . . . . . . . . . . | . . . . . . . . . . .
+##  [4,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##  [5,] . . . . . . . . . . . . . . . . . | . . . . . . . . . . . . . . . .
+##  [6,] | . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##  [7,] . . . . . . . . . . . . . . . . . . . . . . . . | . . . | . . . . .
+##  [8,] . | . . . | . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##  [9,] . . . . . . . . . | . . . . | . . . . . . . . . . . . . . . . . . .
+##                                      
+##  [1,] . . . . . | . . . . . . . . . |
+##  [2,] . | . . . . . . . . . . . . . .
+##  [3,] . . . . . . . . . . . . . . . .
+##  [4,] . . . . . . . . . . | . . . . .
+##  [5,] . . . . . . . . . . . . . . . .
+##  [6,] . . . . . . . . . . . . . . . .
+##  [7,] . . . . . . . . . . . . . . . .
+##  [8,] . . . . . . . | . . . | . . . .
+##  [9,] | . . . . . . . . . . . . | . .</code></pre>
+<p>Outra função importante é a <code>sparse.model.matrix</code>. Ela é equivalente à função <code>model.matrix</code> mas cria uma matriz de modelo esparsa o que pode ser útil quando você tem um fator que possui muitos níveis no seu modelo. A vignette <a href="https://cran.r-project.org/web/packages/Matrix/vignettes/sparseModels.pdf"><em>Sparse Model Matrices</em></a> fala sobre isso.</p>
+<p>Também é possível programar em Rcpp usando matrizes esparsas usando o RcppArmadillo, veja <a href="http://gallery.rcpp.org/articles/armadillo-sparse-matrix/">esse exemplo</a> para mais detalhes.</p>
+<p>Para saber mais leia as vignettes do pacote <a href="https://cran.r-project.org/web/packages/Matrix/index.html">Matrix</a>. Em especial, vale a pena ler as seguintes <a href="https://cran.r-project.org/web/packages/Matrix/vignettes/Intro2Matrix.pdf">2nd Introduction to the Matrix Package</a>.</p>
+<p>PS: a inspiração para esse texto foi <a href="http://www.johnmyleswhite.com/notebook/2011/10/31/using-sparse-matrices-in-r/">esse post</a> de 2011 do John Myles White</p>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

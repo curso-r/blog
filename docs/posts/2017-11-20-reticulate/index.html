@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/reticulate.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Pacote reticulate</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Gabriela Lima Borges (convidada)
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            20 de
+            novembro de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/reticulate">reticulate</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/python">python</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<blockquote>
+<p>Se você também quiser escrever um post como convidada, entre em contato a gente em <a href="mailto:contato@curso-r.com">contato@curso-r.com</a>!</p>
+</blockquote>
+<div id="pacote-reticulate" class="section level2">
+<h2>Pacote Reticulate</h2>
+<p>Imagine se você pudesse aproveitar da quantidade e da variedade enorme de módulos e bibliotecas do Python no ambiente amigável do RStudio? Graças ao pacote <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a> isso é possível de uma maneira familiar para quem quem já é usuário do R.</p>
+<p>O <code>reticulate</code> é um pacote que proporciona a integração Python &amp; R via R e pode ser bastante útil se você quiser fazer todas as análises no ambiente do Rstudio. Os módulos, classes e funções do Python importados podem ser utilizados como se fossem funções nativas do R.</p>
+<p>Para utilizar o pacote são necessárias a instalação do Python com versão superior a 2.7, a instalação dos módulos do Python que serão utilizados durante a análise e a instalação do pacote via <code>install.packages()</code>.</p>
+<pre class="r"><code># install.packages(&quot;reticulate&quot;)
+library(reticulate)</code></pre>
+<p>Quando for utilizada uma função do Python em um objeto do R, ele será convertido para seu formato equivalente do Python e vice-versa. Os tipos de conversões de objetos são explicitadas <a href="https://rstudio.github.io/reticulate/articles/introduction.html">neste link</a>.</p>
+<pre class="r"><code>## Data frame do R é convertido em Dict do Python
+a &lt;- r_to_py(mtcars)
+class(a)
+## [1] &quot;pandas.core.frame.DataFrame&quot;       
+## [2] &quot;pandas.core.generic.NDFrame&quot;       
+## [3] &quot;pandas.core.base.PandasObject&quot;     
+## [4] &quot;pandas.core.base.StringMixin&quot;      
+## [5] &quot;pandas.core.accessor.DirNamesMixin&quot;
+## [6] &quot;pandas.core.base.SelectionMixin&quot;   
+## [7] &quot;python.builtin.object&quot;
+
+## Dict do Python é convertido em List do R
+class(py_to_r(a))
+## [1] &quot;data.frame&quot;</code></pre>
+</div>
+<div id="importando-modulos" class="section level2">
+<h2>Importando módulos</h2>
+<p>A importação de módulos do Python para o R é bem simples. Basta usar a função <code>import()</code> do pacote <code>reticulate</code> e o nome do módulo que você quer importar, em seguida guardar isso em um objeto no R.</p>
+<pre class="r"><code>np &lt;- import(&quot;numpy&quot;)
+pandas &lt;- import(&quot;pandas&quot;)
+os &lt;- import(&quot;os&quot;)</code></pre>
+<p>Use a função <code>py_module_available()</code> pra checar se um módulo do Python está disponível no seu computador.</p>
+<pre class="r"><code>py_module_available(&quot;matplotlib&quot;)
+## [1] TRUE</code></pre>
+<p>As funções que estão dentro de módulos ou classes do Python podem ser acessadas utilizando o operador <code>$</code>:</p>
+<pre class="r"><code>os$getcwd()
+## [1] &quot;/Users/dfalbel/Documents/site-v2/content/blog&quot;
+np$abs(-1)
+## [1] 1</code></pre>
+<p>E podemos misturar funções do R e do python:</p>
+<pre class="r"><code>library(magrittr)
+
+rnorm(10) %&gt;% 
+  np$abs() %&gt;% 
+  np$cumproduct() %&gt;% 
+  plot()</code></pre>
+<p><img src="/blog/2017-11-20-reticulate_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="exemplo" class="section level1">
+<h1>Exemplo</h1>
+<p>Para ilustrar a integração Python &amp; R via R, vamos usar o Astropy, que é uma biblioteca do Python desenvolvida para a astronomia. Vamos tentar reproduzir <a href="http://docs.astropy.org/en/stable/generated/examples/io/plot_fits-image.html#sphx-glr-generated-examples-io-plot-fits-image-py">esse exemplo que foi implementado no python</a>. Primeiro, precisamos instalar o módulo:</p>
+<pre><code>pip install astropy</code></pre>
+<p>No ambiente do RStudio, vamos importar os módulos do Astropy que usaremos.</p>
+<pre class="r"><code>down &lt;- import(&quot;astropy.utils.data&quot;)
+fits &lt;- import(&quot;astropy.io.fits&quot;)</code></pre>
+<p>Em seguida, vamos baixar a imagem em arquivo FITS e verificar se está tudo ok usando a função info do Python que está no pacote Astropy.io.fits.</p>
+<pre class="r"><code>url &lt;- &quot;https://astropy.stsci.edu/data/tutorials/FITS-images/HorseHead.fits&quot;
+im.file &lt;- down$download_file(url, cache=TRUE)
+fits$info(im.file)</code></pre>
+<pre><code>Filename: ~/.astropy/cache/download/py2/2c9202ae878ecfcb60878ceb63837f5f
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     161   (891, 893)   int16   
+  1  er.mask       1 TableHDU        25   1600R x 4C   [F6.2, F6.2, F6.2, F6.2]</code></pre>
+<p>Agora vamos transformar nossa imagem em uma matriz de pixels e plotar com a função image do R.</p>
+<pre class="r"><code>im.data &lt;- fits$getdata(im.file)
+im.data %&gt;% 
+  t() %&gt;% 
+  image(col = gray(seq(0, 1, length = 256)))</code></pre>
+<div class="figure">
+<img src="images/posts/conteudo/reticulate/Rplot.png" />
+
+</div>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

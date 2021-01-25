@@ -1,0 +1,2570 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/captcha_03.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Quebrando CAPTCHAs - Parte III: Segmentação de imagens</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Julio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            22 de
+            julho de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/captcha">captcha</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Nesse post vamos discutir um pouco sobre modelar CAPTCHAs. Vou assumir que você já viu o post de introdução e o post sobre download, leitura e classificação manual de CAPTCHAs.</p>
+<p>Digamos que você tenha uma base de dados de treino composta por <span class="math inline">\(N\)</span> imagens com os textos classificados. Nossa resposta nesse caso é uma <em>palavra</em> de <span class="math inline">\(k\)</span> caracteres (vamos considerar <span class="math inline">\(k\)</span> fixado), sendo que cada caractere <span class="math inline">\(c\)</span> pode ter <span class="math inline">\(p\)</span> valores.</p>
+<p>O problema de modelar o CAPTCHA diretamente é que a variável resposta tem um número exponencial de combinações de acordo com o número de caracteres:</p>
+<p><span class="math display">\[
+\Omega = p^k.
+\]</span></p>
+<p>Por exemplo, um CAPTCHA com <span class="math inline">\(k=6\)</span> e <span class="math inline">\(p=36\)</span> (26 letras e 10 números), que é muito comum, possui um total de 2.176.782.336 (&gt; 2 bilhões) combinações! E não preciso dizer que é completamente inviável baixar e modelar tudo isso de CAPTCHAs.</p>
+<p>A alternativa imediata que aparece é tentar separar a imagem em um pedaço para cada caractere e fazer um modelo para prever caracteres. Assim nossa resposta é reduzida para <span class="math inline">\(p\)</span> categorias, que é bem mais fácil de tratar.</p>
+<p>Vamos usar como exemplo o CAPTCHA dos TRTs. Primeiro, o download:</p>
+<pre class="r"><code>library(decryptr)
+library(tidyverse)
+arq_captcha &lt;- decryptr::download_trt(dest = &#39;img&#39;, n = 1)</code></pre>
+<p>Visualizando a imagem:</p>
+<pre class="r"><code>&quot;../../static/data/captcha-segment/captcha705f7bad4a3d.jpeg&quot;  %&gt;% 
+  read_captcha() %&gt;% 
+  purrr::pluck(1) %&gt;%
+  plot()</code></pre>
+<p><img src="/blog/2017-06-29-captcha-segment_files/figure-html/plotimg1-1.png" width="672" /></p>
+<p>Infelizmente, segmentar a imagem nos lugares corretos é <a href="https://www.usenix.org/node/185129">uma tarefa difícil</a>. Pior até do que predizer as letras. Para simplificar, vamos fazer um corte fixado das letras:</p>
+<pre class="r"><code>arq_captcha %&gt;% read_captcha() %&gt;% purrr::pluck(1) %&gt;% plot()
+abline(v = 30 + 15 * 0:5, col = &#39;red&#39;)</code></pre>
+<p><img src="/blog/2017-06-29-captcha-segment_files/figure-html/imglines-1.png" width="672" /></p>
+<p>Podemos também limitar os eixos <code>x</code> (tirar os espaços vazios à esquerda e à direita) e <code>y</code> (superiores e inferiores).</p>
+<pre class="r"><code>&quot;../../static/data/captcha-segment/captcha705f7bad4a3d.jpeg&quot; %&gt;%
+  decryptr:::load_image() %&gt;%
+  magrittr::extract(-c(1:9, 31:dim(.)[1]), -c(1:15, 106:dim(.)[2]), TRUE) %&gt;% 
+  grDevices::as.raster() %&gt;% 
+  graphics::plot()
+abline(v = 15 * 1:5, col = &#39;red&#39;)
+abline(v = 15 * c(0, 6), col = &#39;black&#39;)
+abline(h = c(0, 21), col = &#39;blue&#39;)</code></pre>
+<p><img src="/blog/2017-06-29-captcha-segment_files/figure-html/imglines2-1.png" width="672" /></p>
+<p>Agora temos uma imagem de tamanho dimensões <code>21x15</code> por caractere. Nosso próximo desafio é transformar isso em algo tratável por modelos de regressão. Para isso, colocamos cada pixel em uma coluna da nossa base de dados.</p>
+<p>No caso do TRT, cada CAPTCHA gerará uma tabela de 6 linhas e 315 (<code>21 * 15</code>) colunas. Podemos usar esse código para montar:</p>
+<pre class="r"><code>arq_captcha %&gt;% 
+  decryptr:::load_image() %&gt;% 
+  magrittr::extract(-c(1:9, 31:dim(.)[1]), -c(1:15, 106:dim(.)[2]), 1) %&gt;% 
+  as_tibble() %&gt;% 
+  rownames_to_column(&#39;y&#39;) %&gt;% 
+  gather(x, value, -y) %&gt;% 
+  mutate_at(vars(x, y), funs(parse_number)) %&gt;% 
+  mutate(letra = (x - 1) %/% 15 + 1,
+         x = x - (letra - 1) * 15) %&gt;% 
+  mutate_at(vars(x, y), funs(sprintf(&#39;%02d&#39;, .))) %&gt;% 
+  unite(xy, x, y) %&gt;% 
+  spread(xy, value, sep = &#39;&#39;) %&gt;% 
+  mutate(y = c(&#39;a&#39;, &#39;f&#39;, &#39;3&#39;, &#39;d&#39;, &#39;w&#39;, &#39;x&#39;)) %&gt;% 
+  select(y, everything(), -letra)
+## # A tibble: 6 x 316
+##   y     xy01_01 xy01_02 xy01_03 xy01_04 xy01_05 xy01_06 xy01_07 xy01_08
+##   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 a       0.961   0.961   0.961   0.961   0.961   0.961   0.961   0.945
+## 2 f       0.961   0.961   0.961   0.961   0.961   0.961   0.961   0.961
+## 3 3       0.980   1       0.871   0.557   0.565   0.871   0.937   0.937
+## 4 d       0.976   0.929   0.976   0.945   0.933   0.941   0.976   0.976
+## 5 w       0.961   0.961   0.961   0.961   0.961   0.961   0.961   0.533
+## 6 x       0.929   0.953   0.988   0.933   0.992   0.945   0.588   0.557
+## # … with 307 more variables: xy01_09 &lt;dbl&gt;, xy01_10 &lt;dbl&gt;, xy01_11 &lt;dbl&gt;,
+## #   xy01_12 &lt;dbl&gt;, xy01_13 &lt;dbl&gt;, xy01_14 &lt;dbl&gt;, xy01_15 &lt;dbl&gt;,
+## #   xy01_16 &lt;dbl&gt;, xy01_17 &lt;dbl&gt;, xy01_18 &lt;dbl&gt;, xy01_19 &lt;dbl&gt;,
+## #   xy01_20 &lt;dbl&gt;, xy01_21 &lt;dbl&gt;, xy02_01 &lt;dbl&gt;, xy02_02 &lt;dbl&gt;,
+## #   xy02_03 &lt;dbl&gt;, xy02_04 &lt;dbl&gt;, xy02_05 &lt;dbl&gt;, xy02_06 &lt;dbl&gt;,
+## #   xy02_07 &lt;dbl&gt;, xy02_08 &lt;dbl&gt;, xy02_09 &lt;dbl&gt;, xy02_10 &lt;dbl&gt;,
+## #   xy02_11 &lt;dbl&gt;, xy02_12 &lt;dbl&gt;, xy02_13 &lt;dbl&gt;, xy02_14 &lt;dbl&gt;,
+## #   xy02_15 &lt;dbl&gt;, xy02_16 &lt;dbl&gt;, xy02_17 &lt;dbl&gt;, xy02_18 &lt;dbl&gt;,
+## #   xy02_19 &lt;dbl&gt;, xy02_20 &lt;dbl&gt;, xy02_21 &lt;dbl&gt;, xy03_01 &lt;dbl&gt;,
+## #   xy03_02 &lt;dbl&gt;, xy03_03 &lt;dbl&gt;, xy03_04 &lt;dbl&gt;, xy03_05 &lt;dbl&gt;,
+## #   xy03_06 &lt;dbl&gt;, xy03_07 &lt;dbl&gt;, xy03_08 &lt;dbl&gt;, xy03_09 &lt;dbl&gt;,
+## #   xy03_10 &lt;dbl&gt;, xy03_11 &lt;dbl&gt;, xy03_12 &lt;dbl&gt;, xy03_13 &lt;dbl&gt;,
+## #   xy03_14 &lt;dbl&gt;, xy03_15 &lt;dbl&gt;, xy03_16 &lt;dbl&gt;, xy03_17 &lt;dbl&gt;,
+## #   xy03_18 &lt;dbl&gt;, xy03_19 &lt;dbl&gt;, xy03_20 &lt;dbl&gt;, xy03_21 &lt;dbl&gt;,
+## #   xy04_01 &lt;dbl&gt;, xy04_02 &lt;dbl&gt;, xy04_03 &lt;dbl&gt;, xy04_04 &lt;dbl&gt;,
+## #   xy04_05 &lt;dbl&gt;, xy04_06 &lt;dbl&gt;, xy04_07 &lt;dbl&gt;, xy04_08 &lt;dbl&gt;,
+## #   xy04_09 &lt;dbl&gt;, xy04_10 &lt;dbl&gt;, xy04_11 &lt;dbl&gt;, xy04_12 &lt;dbl&gt;,
+## #   xy04_13 &lt;dbl&gt;, xy04_14 &lt;dbl&gt;, xy04_15 &lt;dbl&gt;, xy04_16 &lt;dbl&gt;,
+## #   xy04_17 &lt;dbl&gt;, xy04_18 &lt;dbl&gt;, xy04_19 &lt;dbl&gt;, xy04_20 &lt;dbl&gt;,
+## #   xy04_21 &lt;dbl&gt;, xy05_01 &lt;dbl&gt;, xy05_02 &lt;dbl&gt;, xy05_03 &lt;dbl&gt;,
+## #   xy05_04 &lt;dbl&gt;, xy05_05 &lt;dbl&gt;, xy05_06 &lt;dbl&gt;, xy05_07 &lt;dbl&gt;,
+## #   xy05_08 &lt;dbl&gt;, xy05_09 &lt;dbl&gt;, xy05_10 &lt;dbl&gt;, xy05_11 &lt;dbl&gt;,
+## #   xy05_12 &lt;dbl&gt;, xy05_13 &lt;dbl&gt;, xy05_14 &lt;dbl&gt;, xy05_15 &lt;dbl&gt;,
+## #   xy05_16 &lt;dbl&gt;, xy05_17 &lt;dbl&gt;, xy05_18 &lt;dbl&gt;, xy05_19 &lt;dbl&gt;,
+## #   xy05_20 &lt;dbl&gt;, xy05_21 &lt;dbl&gt;, xy06_01 &lt;dbl&gt;, xy06_02 &lt;dbl&gt;,
+## #   xy06_03 &lt;dbl&gt;, …</code></pre>
+<p>Muito bem! Agora basta rodar o mesmo para toda a base de treino e rodar um modelo. Para esse post, vamos usar uma base de 2300 CAPTCHAs classificados. Essa base fica com 13800 linhas e 315 colunas. Vamos usar 11000 linhas para treino e as 2800 restantes para teste. O modelo utilizado será um <code>randomForest</code> padrão.</p>
+<pre class="r"><code>library(randomForest)
+dados &lt;- readRDS(&#39;../../static/data/captcha-segment/d_segment_captcha.rds&#39;) %&gt;% 
+  mutate(y = factor(y))
+
+# monta bases de treino e teste
+set.seed(4747) # reprodutibilidade
+ids_treino &lt;- sample(seq_len(nrow(dados)), 11000, replace = FALSE)
+d_train &lt;- dados[ids_treino, ]
+d_test &lt;- dados[-ids_treino, ]</code></pre>
+<pre class="r"><code>model &lt;- randomForest(y ~ . - captcha_id, data = d_train) </code></pre>
+<p>O resultado do modelo pode ser verificado na tabela de observados <em>versus</em> preditos na base de teste. O acerto foi de 99.4% em cada caractere! O maior erro ocorreu no confundimento da letra <code>n</code> com a letra <code>h</code>. Assumindo que o erro não depende da posição do caractere no CAPTCHA, teremos um acerto de aproximadamente 96.7% para a imagem.</p>
+<pre class="r"><code>d_test %&gt;% 
+  mutate(pred = predict(model, newdata = .)) %&gt;% 
+  count(y, pred) %&gt;% 
+  spread(pred, n, fill = &#39;.&#39;) %&gt;% 
+  remove_rownames() %&gt;% 
+  knitr::kable(caption = &#39;Tabela de acertos e erros.&#39;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">y</th>
+<th align="left">2</th>
+<th align="left">3</th>
+<th align="left">4</th>
+<th align="left">5</th>
+<th align="left">6</th>
+<th align="left">7</th>
+<th align="left">8</th>
+<th align="left">9</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">d</th>
+<th align="left">e</th>
+<th align="left">f</th>
+<th align="left">h</th>
+<th align="left">j</th>
+<th align="left">k</th>
+<th align="left">m</th>
+<th align="left">n</th>
+<th align="left">r</th>
+<th align="left">s</th>
+<th align="left">t</th>
+<th align="left">u</th>
+<th align="left">v</th>
+<th align="left">w</th>
+<th align="left">x</th>
+<th align="left">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">109</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">105</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">116</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">97</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">108</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">111</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">120</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">51</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">a</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">63</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">b</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">110</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">d</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">108</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">e</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">110</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">f</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">116</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">h</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">116</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">j</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">115</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">k</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">126</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">m</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">122</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">n</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">132</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">r</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">91</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">s</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">113</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">t</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">106</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">u</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">99</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">v</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">99</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">w</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">107</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">x</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">132</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">y</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">102</td>
+</tr>
+</tbody>
+</table>
+<div id="nem-tudo-sao-rosas" class="section level2">
+<h2>Nem tudo são rosas</h2>
+<p>O resultado para o CAPTCHA do TRT é bastante satisfatório, mas infelizmente não generaliza para outros CAPTCHAs. Tome por exemplo o CAPTCHA da Receita Federal abaixo. Nesse caso, a posição dos caracteres muda significativamente de imagem para imagem, e assim fica difícil cortar em pedaços.</p>
+<p>O mesmo modelo aplicado ao CAPTCHA da Receita possui acerto de 78.8% do caractere, o que equivale a apenas 23.8% de acerto para toda a imagem. Veja os resultados na tabela abaixo.</p>
+<pre class="r"><code>model &lt;- randomForest(y ~ . - captcha_id, data = d_train) </code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">y</th>
+<th align="left">1</th>
+<th align="left">2</th>
+<th align="left">3</th>
+<th align="left">4</th>
+<th align="left">5</th>
+<th align="left">6</th>
+<th align="left">7</th>
+<th align="left">8</th>
+<th align="left">9</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">c</th>
+<th align="left">d</th>
+<th align="left">e</th>
+<th align="left">f</th>
+<th align="left">g</th>
+<th align="left">h</th>
+<th align="left">i</th>
+<th align="left">j</th>
+<th align="left">k</th>
+<th align="left">l</th>
+<th align="left">m</th>
+<th align="left">n</th>
+<th align="left">o</th>
+<th align="left">p</th>
+<th align="left">q</th>
+<th align="left">r</th>
+<th align="left">s</th>
+<th align="left">t</th>
+<th align="left">u</th>
+<th align="left">v</th>
+<th align="left">w</th>
+<th align="left">x</th>
+<th align="left">y</th>
+<th align="left">z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">28</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">10</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">28</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">8</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">29</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">6</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">35</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">30</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">38</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">38</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">31</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">41</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">a</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">79</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">b</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">60</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">c</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">62</td>
+<td align="left">1</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">6</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">d</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">35</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">8</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">12</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">e</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">83</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">f</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">79</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">g</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">64</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">17</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">h</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">87</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">i</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">36</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">j</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">70</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">k</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">79</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">l</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">38</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">12</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">m</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">101</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">n</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">8</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">67</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">o</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">15</td>
+<td align="left">4</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">62</td>
+<td align="left">2</td>
+<td align="left">9</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">p</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">75</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">q</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">7</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">79</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">r</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">8</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">65</td>
+<td align="left">.</td>
+<td align="left">4</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">s</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">87</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">t</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">78</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">u</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">80</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">v</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">93</td>
+<td align="left">3</td>
+<td align="left">.</td>
+<td align="left">5</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">w</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">100</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">x</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">3</td>
+<td align="left">91</td>
+<td align="left">1</td>
+<td align="left">.</td>
+</tr>
+<tr class="even">
+<td align="left">y</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">15</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">75</td>
+<td align="left">.</td>
+</tr>
+<tr class="odd">
+<td align="left">z</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">2</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">1</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">.</td>
+<td align="left">85</td>
+</tr>
+</tbody>
+</table>
+<p>Claro que seria possível melhorar o poder preditivo com uma modelagem mais cuidadosa: nós usamos todos os parâmetros padrão da <code>randomForest</code> e não consideramos outros possíveis modelos. Mas acreditamos que o problema essencial está na segmentação, e não na modelagem após a segmentação.</p>
+<p>Nos próximos posts, vamos mostrar como resolver o CAPTCHA da Receita com maior acurácia utilizando técnicas de Deep Learning que consideram a etapa de segmentação dentro da modelagem.</p>
+</div>
+<div id="wrap-up" class="section level2">
+<h2>Wrap-up</h2>
+<ul>
+<li>Não dá para considerar todas as combinações de valores de um CAPTCHA diretamente num modelo de regressão.</li>
+<li>Uma forma de resolver um CAPTCHA é segmentando a imagem em pedaços de mesma largura.</li>
+<li>Para montar a base de treino, criamos uma coluna para cada pixel. Um CAPTCHA corresponde a uma base com <span class="math inline">\(k\)</span> linhas e número de colunas igual ao número de pixels.</li>
+<li>No CAPTCHA do TRT os resultados são satisfatórios.</li>
+<li>Já para CAPTCHA da Receita essa estratégia pode ser ineficaz.</li>
+<li>Vamos evoluir essa análise para técnicas que consideram a etapa de segmentação dentro da modelagem.</li>
+</ul>
+<p>É isso. Happy coding ;)</p>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

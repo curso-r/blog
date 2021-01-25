@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/laco_perfeito.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">pvec: O laço perfeito</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Julio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            5 de
+            fevereiro de
+            2019
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
+        </ul>
+        <article class="content">
+          
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><strong>AVISO: Infelizmente a função <code>pvec()</code> não está mais no pacote <code>abjutils</code>! No final deste texto deixamos o seu código para que o leitor possa implementá-la por conta própria.</strong></p>
+<p>Quando usamos laços para rodar algoritmos complexos em uma lista de <em>inputs</em>, podemos pensar em <em>power-ups</em>. Tratam-se de funcionalidades que ajudam na aplicação dos laços, tanto do ponto de vista de eficiência do código quanto do ponto de vista de eficiência do trabalho do cientista de dados.</p>
+<p>Aqui na Curso-R nós já vimos três desses power-ups:</p>
+<ul>
+<li>Como fazer <a href="https://www.curso-r.com/blog/2017-03-14-parallel/">laços em paralelo</a>.</li>
+<li>Como usar <a href="https://www.curso-r.com/blog/2017-04-08-progress/">barras de progresso</a></li>
+<li>Como fazer <a href="https://www.curso-r.com/blog/2017-04-09-try/">tratamento de erros</a>.</li>
+</ul>
+<p>Mas será que tem um jeito de juntar essas três funcionalidades em apenas uma operação?</p>
+<p><img src="images/posts/conteudo/pvec/nao_tinha_agora_tem.jpg" /></p>
+<p>Sim, é claro que tem. E se algo é possível no R, o <a href="https://lente.dev">Caio Lente</a> já fez. Trata-se da operação <code>pvec()</code>, do pacote <code>abjutils</code>.</p>
+<p>Para utilizá-la, você precisará instalar a versão de desenvolvimento do <code>abjutils</code> no GitHub:</p>
+<pre class="r"><code>devtools::install_github(&quot;abjur/abjutils&quot;)</code></pre>
+<p>Pode ser que o <code>pvec()</code> não funcione muito bem no Windows. Isso é algo que vamos trabalhar no futuro.</p>
+<div id="como-funciona" class="section level2">
+<h2>Como funciona</h2>
+<p>O <code>pvec()</code> recebe duas informações de entrada: uma lista ou vetor de <code>inputs</code> e uma função a ser aplicada. O <code>pvec()</code> funciona exatamente como um <code>purrr::map()</code>, mas retorna um <code>data.frame</code> com os outputs.</p>
+<p>Por exemplo, digamos que nosso objetivo seja aplicar a função</p>
+<pre class="r"><code>funcao &lt;- function(x) {
+  # dorme 1s
+  Sys.sleep(1)
+  # aplica o log
+  log(x)
+}</code></pre>
+<p>em uma lista de entradas, dada por</p>
+<pre class="r"><code>input &lt;- list(1, 2, -1, &quot;a&quot;)</code></pre>
+<p>O resultado é dado por:</p>
+<pre class="r"><code>resultado &lt;- abjutils::pvec(input, funcao)
+resultado</code></pre>
+<pre><code># A tibble: 4 x 3
+     id return output           
+  &lt;int&gt; &lt;chr&gt;  &lt;list&gt;           
+1     1 result &lt;dbl [1]&gt;        
+2     2 result &lt;dbl [1]&gt;        
+3     3 result &lt;dbl [1]&gt;        
+4     4 error  &lt;S3: simpleError&gt;</code></pre>
+<p>Ou seja, o resultado é um <code>data.frame</code>, que tem o número de linhas exatamente igual ao comprimento do vetor ou lista de entrada, e três colunas específicas.</p>
+<ol style="list-style-type: decimal">
+<li><code>id</code>, que guarda o índice de entrada. Se a lista de entrada é nomeada, <code>id</code> guarda esses nomes.</li>
+<li><code>return</code> identifica se a aplicação retornou num resultado (<code>result</code>) ou erro (<code>error</code>)</li>
+<li><code>output</code> é uma coluna-lista que contém os resultados. Quando o resultado é um erro, o erro é capturado e colocado no elemento correspondente.</li>
+</ol>
+<p>Ou seja, uma característica do <code>pvec()</code> é que ele <strong>nunca irá travar</strong>. Se essa operação travar, é porque o computador todo travou.</p>
+<p>É importante notar que alguns resultados nesse caso são <code>NaN</code>. Isso ocorre pois <code>log(-1)</code> resulta em <code>NaN</code>, acompanhado de um warning. O <code>pvec()</code> não trabalha com warnings.</p>
+<p>Outra característica importante do <code>pvec()</code> é que ele roda em paralelo. Você pode controlar a quantidade de núcleos de processamento com o parâmetro <code>.cores</code>. Por padrão, ele usará o número de núcleos da sua máquina.</p>
+<p>Finalmente, o que não poderia faltar no <code>pvec()</code> é a utilização de barras de progresso. Por exemplo, considerando como input</p>
+<pre class="r"><code>input &lt;- list(a = 1, b = 2, c = -1, d = &quot;a&quot;,
+              e = 2, f = 3, g = -2, h = &quot;b&quot;)</code></pre>
+<p>O resultado é</p>
+<pre class="r"><code>abjutils::pvec(input, funcao)</code></pre>
+<pre><code>Progress: ───────────────────────────────                              100%
+
+Progress: ──────────────────────────────────────────────────────────── 100%
+
+# A tibble: 8 x 3
+  id    return output           
+  &lt;chr&gt; &lt;chr&gt;  &lt;list&gt;           
+1 a     result &lt;dbl [1]&gt;        
+2 b     result &lt;dbl [1]&gt;        
+3 c     result &lt;dbl [1]&gt;        
+4 d     error  &lt;S3: simpleError&gt;
+5 e     result &lt;dbl [1]&gt;        
+6 f     result &lt;dbl [1]&gt;        
+7 g     result &lt;dbl [1]&gt;        
+8 h     error  &lt;S3: simpleError&gt;</code></pre>
+<p>Se você quiser desligar a barra de progresso, basta adicionar <code>.progress = FALSE</code>.</p>
+</div>
+<div id="o-parâmetro-.flatten" class="section level2">
+<h2>O parâmetro <code>.flatten</code></h2>
+<p>Esse é o parâmetro dos preguiçosos (eu que pedi para o Caio adicionar). Em muitas operações, o resultado que sai no <code>output</code> é uma lista de <code>data.frame</code>s ou uma lista de vetores. A opção <code>.flatten</code> faz <code>tidyr::unnest()</code>, empilhando os resultados e colando tudo num vetor ou <code>data.frame</code>.</p>
+<p>O único problema é que nesse caso não é possível guardar os erros. Por isso, o <code>pvec()</code> retorna um warning:</p>
+<pre class="r"><code>abjutils::pvec(input, funcao, .flatten = TRUE)</code></pre>
+<pre><code>Progress: ──────────────────────────────────────────────────────────── 100%
+
+# A tibble: 6 x 2
+  id     output
+  &lt;chr&gt;   &lt;dbl&gt;
+1 a       0    
+2 b       0.693
+3 c     NaN    
+4 e       0.693
+5 f       1.10 
+6 g     NaN    
+
+Warning message:
+Since &#39;.flatten = TRUE&#39;, a total of 2 errors are being ignored     </code></pre>
+<p>Note que o resultado tem 6 linhas, menor que a entrada, que tem 8 elementos. Por isso, use <code>.flatten</code> somente quando você tem certeza do que está fazendo.</p>
+</div>
+<div id="por-trás-dos-panos-o-furrr" class="section level2">
+<h2>Por trás dos panos: o <code>furrr</code></h2>
+<p>O <code>pvec()</code> só funciona por conta de dois excelentes pacotes:</p>
+<ul>
+<li>o <code>future</code>, que é um novo paradigma de computação em paralelo no R.</li>
+<li>o <code>furrr</code>, que faz todo o trabalho sujo e implementa a maioria das operações do <code>purrr</code> usando <code>future</code>.</li>
+</ul>
+<p>Se quiser estudar esses pacotes e implementar suas próprias soluções, recomendo acessar <a href="https://github.com/HenrikBengtsson/future">aqui</a> e <a href="https://github.com/DavisVaughan/furrr">aqui</a>. Não incluí detalhes desses pacotes aqui para não sair do foco.</p>
+<p>Se quiser adicionar opções do <code>future</code> no <code>pvec()</code>, basta adicioná-las na opção <code>.options</code>. Por padrão, passamos <code>furrr::future_options()</code> nesse argumento.</p>
+<div id="discussão-o-future-é-o-futuro-do-purrr" class="section level3">
+<h3>Discussão: o <code>future</code> é o futuro do <code>purrr</code>?</h3>
+<p>O <code>purrr</code> contém uma série de <a href="https://github.com/tidyverse/purrr/milestone/2">discussões no GitHub</a> sobre a possibilidade de rodar funções em paralelo e com barras de progresso. Pode ser que a funcionalidade do <code>pvec()</code> passe a ser parte oficial no futuro.</p>
+<p>Veremos!</p>
+</div>
+</div>
+<div id="wrap-up" class="section level2">
+<h2>Wrap-up</h2>
+<ol style="list-style-type: decimal">
+<li><code>abjutils::pvec()</code> é um <code>map()</code> que roda em paralelo, tem barras de progresso e trata erros automaticamente.</li>
+<li>Você pode brincar com as opções <code>.cores</code>, <code>.progress</code> e <code>.flatten</code> para controlar o comportamento do <code>pvec()</code>. Tome muito cuidado com o <code>.flatten</code>, pois ele pode não tratar os erros da forma que você imagina!</li>
+<li>Estude <code>future</code> e <code>furrr</code> se quiser estender as funcionalidades do <code>pvec()</code>.</li>
+</ol>
+<p>É isso pessoal. Happy coding ;)</p>
+</div>
+<div id="p.s.-código" class="section level2">
+<h2>P.S.: Código</h2>
+<p>Como dito no começo deste post, a função <code>pvec()</code> foi removida do <code>abjutils</code> por causa de alguns problemas nas dependências que dificultavam a sua manutenção em um pacote. O código dela está preservado aqui para que você possa implementá-la por conta própria e ainda é possível acessá-la no <a href="https://github.com/abjur/abjutils/blob/cc3ec0c3474a4d29820e5dde4322799cdb0317b0/R/pvec.R">arquivo</a> do <code>abjutils</code>.</p>
+<pre class="r"><code>#&#39; @title Verbose, parallel, and safe map-like
+#&#39;
+#&#39; @description Using the same argument notation as [purrr::map()], this function
+#&#39; iterates over a list of inputs `.x`, applying `.f` to each element. It
+#&#39; returns a tibble with the id, whether the function returned an error
+#&#39; and the output.
+#&#39;
+#&#39; @importFrom magrittr %&gt;%
+#&#39;
+#&#39; @param .x A list or atomic vector
+#&#39; @param .f A function, formula, or atomic vector (see [purrr::map()])
+#&#39; @param ... Other parameters passed on to `.f`
+#&#39; @param .cores Number of cores to use when multiprocessing
+#&#39; @param .progress Whether or not to display progress
+#&#39; @param .flatten If `TRUE`, the errors are filtered from the output,
+#&#39; and the returned object is flattened (a vector, a list, or a tibble)
+#&#39; @param .options Options passed on to [furrr::future_map()]
+#&#39; ([furrr::future_options()] by default)
+#&#39;
+#&#39; @seealso [purrr::map()], [furrr::future_map()], [furrr::future_options()]
+#&#39;
+#&#39; @return A tibble with 3 columns: input, return, and output
+#&#39; @export
+pvec &lt;- function(.x, .f, ..., .cores = get_cores(), .progress = TRUE, .flatten = FALSE, .options = future_options()) {
+  .Deprecated(&quot;furrr::future_map&quot;)
+
+  # Preserve execution plan
+  oplan &lt;- future::plan()
+  on.exit(future::plan(oplan), add = TRUE)
+
+  # Set execution plan to multicore
+  future::plan(future::multicore, workers = .cores)
+
+  # Capture function side-effects
+  .f &lt;- purrr::safely(purrr::as_mapper(.f))
+
+  # Run future map
+  out &lt;- furrr::future_map(.x, .f, ..., .progress = .progress, .options = .options)
+
+  # Compact with care
+  compact_ &lt;- function(x) {
+    if (is.null(x[[1]]) &amp;&amp; is.null(x[[2]])) {
+      return(list(result = NULL))
+    }
+    else {
+      if (length(x$result) == 0) {
+        return(list(result = NULL))
+      }
+      return(purrr::compact(x))
+    }
+  }
+
+  # Process output
+  pout &lt;- out %&gt;%
+    purrr::map(compact_) %&gt;%
+    purrr::flatten() %&gt;%
+    dplyr::tibble(
+      id = purrr::`%||%`(names(.x), seq_along(.x)),
+      return = names(.), output = .
+    )
+
+  # Flatten results if necessary
+  if (.flatten) {
+    n_error &lt;- length(pout$return[pout$return == &quot;error&quot;])
+    if (n_error &gt; 0) {
+      warning(
+        &quot;Since &#39;.flatten = TRUE&#39;, a total of &quot;, n_error,
+        &quot; errors are being ignored&quot;,
+        call. = FALSE
+      )
+    }
+
+    pout &lt;- pout %&gt;%
+      dplyr::filter(return != &quot;error&quot;) %&gt;%
+      dplyr::select(-return) %&gt;%
+      tidyr::unnest()
+
+    if (ncol(pout) == 1) {
+      pout &lt;- dplyr::pull(pout, output)
+    }
+  }
+
+  return(pout)
+}
+
+# Get number of available cores
+get_cores &lt;- purrr::partial(future::availableCores, constraints = &quot;multicore&quot;)
+
+# Import of future_options()
+future_options &lt;- furrr::future_options</code></pre>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

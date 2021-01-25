@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rlang on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/rlang/</link>
+    <description>Recent content in rlang on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 28 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/rlang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Programando com o tidyverse</title>
+      <link>https://blog.curso-r.com/posts/2019-08-21-nse/</link>
+      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-21-nse/</guid>
+      <description>Ao usar muito o {dplyr}, passamos a querer utilizá-lo em todos os contextos possíveis. Mas isso gera dificuldades na hora de criar funções. Nesse post vamos discutir como resolver isso usando os novos recursos do pacote {rlang}</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pacotes on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/pacotes/</link>
+    <description>Recent content in pacotes on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 18 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/pacotes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stockfish no R</title>
+      <link>https://blog.curso-r.com/posts/2020-12-18-stockfish/</link>
+      <pubDate>Fri, 18 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-12-18-stockfish/</guid>
+      <description>Um pacote R para analisar jogos de xadrez com o Stockfish</description>
+    </item>
+    
+    <item>
+      <title>Xadrez no R com {chess}</title>
+      <link>https://blog.curso-r.com/posts/2020-11-25-chess/</link>
+      <pubDate>Wed, 25 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-11-25-chess/</guid>
+      <description>Um pacote em R para ler, escrever, criar e explorar jogos de xadrez</description>
+    </item>
+    
+    <item>
+      <title>Desafio de Dados - Recuperação de imagens</title>
+      <link>https://blog.curso-r.com/posts/2018-08-09-desafio-recuperacao-imagem/</link>
+      <pubDate>Thu, 09 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-08-09-desafio-recuperacao-imagem/</guid>
+      <description>Na segunda edição do Desafio de Dados vamos tentar recuperar a cor de uma imagem usando modelos de regressão e árvore de decisão.</description>
+    </item>
+    
+    <item>
+      <title>Desafio de Dados - PesqEle (parte I)</title>
+      <link>https://blog.curso-r.com/posts/2018-07-26-desafio-pesqele/</link>
+      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-26-desafio-pesqele/</guid>
+      <description>Nessa primeira edição do Desafio de Dados vamos analisar a base de dados do pesqEle e criar um mapa da distribuição do número de pesquisas por estado.</description>
+    </item>
+    
+    <item>
+      <title>RFacebook: como conectar?</title>
+      <link>https://blog.curso-r.com/posts/2018-07-22-rfacebook/</link>
+      <pubDate>Mon, 23 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-22-rfacebook/</guid>
+      <description>Hoje nosso amigo Marcio nos procurou pedindo ajuda pois não estava conseguindo fazer o pacote Rfacebook funcionar. O problema estava logo no começo: a autenticação com a API do Facebook. Nesse post identificar e corrigir esse problema.</description>
+    </item>
+    
+    <item>
+      <title>pesqEle: dados de pesquisas eleitorais</title>
+      <link>https://blog.curso-r.com/posts/2018-05-30-pesqele/</link>
+      <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-30-pesqele/</guid>
+      <description>Nesse ano eleitoral, a preocupação com as pesquisas eleitorais é ainda maior. É nossa obrigação como cidadãos e cidadãs acompanhar e monitorar as pesquisas eleitorais registradas, detectando e apontando o dedo para possíveis fraudes. Esse post busca ajudar&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>rfbCNPJ: Repositório de CNPJs da Receita</title>
+      <link>https://blog.curso-r.com/posts/2018-05-13-rfbcnpj/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-13-rfbcnpj/</guid>
+      <description>Durante nosso último curso de introdução a programação em R, um aluno me pediu ajuda para carregar os dados de CNPJs da Receita Federal. Eu me animei tanto com essa base que decidi montar um pacotinho para baixar ler e organizar esses dados&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Arrumando BDs: o pacote janitor</title>
+      <link>https://blog.curso-r.com/posts/2017-07-24-janitor/</link>
+      <pubDate>Mon, 24 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-24-janitor/</guid>
+      <description>Neste post, apresentaremos o pacote janitor, uma ótima alternativa na hora de dar aquele trato na base de dados.</description>
+    </item>
+    
+    <item>
+      <title>Forcats</title>
+      <link>https://blog.curso-r.com/posts/2017-07-01-forcats/</link>
+      <pubDate>Sat, 01 Jul 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-01-forcats/</guid>
+      <description>Neste post, falaremos sobre o forcats, um pacote recheado de excelentes funções para manipular fatores.</description>
+    </item>
+    
+    <item>
+      <title>Skimr: estatísticas básicas com ❤️</title>
+      <link>https://blog.curso-r.com/posts/2017-06-17-skimr/</link>
+      <pubDate>Sat, 17 Jun 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-17-skimr/</guid>
+      <description>Uma coisa muito legal da ROpenSci Unconf 2017 é que ela funcionou como uma hackathon mega produtiva. Dentre os novos pacotes que olhei, o que mais me chamou atenção foi o skimr&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>A kind of magick</title>
+      <link>https://blog.curso-r.com/posts/2017-06-01-a-kind-of-magick/</link>
+      <pubDate>Thu, 01 Jun 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-01-a-kind-of-magick/</guid>
+      <description>Já vimos como o Rstudio se torna uma ferramanta poderosa quando combinado com certos pacotes, como o knitr e shiny, ou outros recursos, como o markdown e o git. Hoje, veremos como transformar o Rstudio em um elegante e interativo editor de imagens utilizando o pacote magick.</description>
+    </item>
+    
+    <item>
+      <title>PDF e OCR</title>
+      <link>https://blog.curso-r.com/posts/2017-05-27-ocr/</link>
+      <pubDate>Sun, 28 May 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-27-ocr/</guid>
+      <description>Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com jurimetria e preciso extrair dados de diários oficiais, petições, sentenças, então já viu né&amp;hellip; A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é digital ou digitalizado?</description>
+    </item>
+    
+    <item>
+      <title>Diagramas de Venn em R</title>
+      <link>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</link>
+      <pubDate>Sat, 29 Apr 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</guid>
+      <description>Diagramas de Venn são representações eficientes das conjuntas de quantidades moderadas de variáveis binárias. Neste post você vai aprender a construir os principais tipos de diagramas de Venn que estão implementados em R.</description>
+    </item>
+    
+    <item>
+      <title>Tratando erros: the tidy way</title>
+      <link>https://blog.curso-r.com/posts/2017-04-09-try/</link>
+      <pubDate>Thu, 20 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-09-try/</guid>
+      <description>Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão tidy dessas soluções.</description>
+    </item>
+    
+    <item>
+      <title>Colando textos</title>
+      <link>https://blog.curso-r.com/posts/2017-04-08-glue/</link>
+      <pubDate>Mon, 17 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-08-glue/</guid>
+      <description>Uma tarefa muito comum no R é colar textos. As funções mais importantes para isso são paste() e sprintf(), que vêm com o pacote base. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do tidyverse, o glue.</description>
+    </item>
+    
+    <item>
+      <title>As barras do progresso</title>
+      <link>https://blog.curso-r.com/posts/2017-04-08-progress/</link>
+      <pubDate>Mon, 10 Apr 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-08-progress/</guid>
+      <description>Na jornada da ciência de dados, muitas vezes precisamos rodar um mesmo algoritmo em vários objetos distintos. Quando o algoritmo é pesado ou a lista de objetos é longa, é importante saber em que passo estamos e quanto vai demorar para terminar.</description>
+    </item>
+    
+    <item>
+      <title>Top 10 pacotes para data science</title>
+      <link>https://blog.curso-r.com/posts/2017-02-21-top10-pacotes-para-data-science/</link>
+      <pubDate>Tue, 21 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-21-top10-pacotes-para-data-science/</guid>
+      <description>O R mudou muito nos últimos 5 anos graças a criações de novos pacotes focados nas questões mais práticas do dia a dia de um cientista de dados.</description>
+    </item>
+    
+    <item>
+      <title>Pacote ggalt</title>
+      <link>https://blog.curso-r.com/posts/2017-02-18-ggalt/</link>
+      <pubDate>Sat, 18 Feb 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-18-ggalt/</guid>
+      <description>O pacote &lt;code&gt;ggalt&lt;/code&gt; é uma extensão ao &lt;code&gt;ggplot2&lt;/code&gt; que permite fazer algumas coisas muito úteis. Uma delas é a possibilidade de fazer faixas de confiança para gráficos do tipo escada. Isso permite adicionar intervalos de confiança para modelos Kaplan-Meier, muito utilizados em Análise de Sobrevivência.</description>
+    </item>
+    
+  </channel>
+</rss>

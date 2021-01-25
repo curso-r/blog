@@ -2,12 +2,14 @@
 title: "Pacote ggalt"
 date: "2017-02-18T13:07:31+02:00"
 tags: ["gráficos", "pacotes", "survival"]
-categories: ["tutoriais", "r"]
+categories: ["tutoriais"]
 image: "images/posts/banner/ggalt.png"
 author: ["Julio"]
 summary: "O pacote `ggalt` é uma extensão ao `ggplot2` que permite fazer algumas coisas muito úteis. Uma delas é a possibilidade de fazer faixas de confiança para gráficos do tipo escada. Isso permite adicionar intervalos de confiança para modelos Kaplan-Meier, muito utilizados em Análise de Sobrevivência."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>O pacote <code>ggalt</code> é uma extensão ao <code>ggplot2</code> que permite fazer algumas coisas muito úteis. Uma delas é a possibilidade de fazer faixas de confiança para gráficos do tipo escada. Isso permite adicionar intervalos de confiança para modelos Kaplan-Meier, muito utilizados em Análise de Sobrevivência.</p>
@@ -116,20 +118,20 @@ knitr::kable(head(d_km))</code></pre>
   geom_step() +
   theme_bw(16)</code></pre>
 <div class="figure"><span id="fig:ruim"></span>
-<img src="/blog/2017-02-18-ggalt_files/figure-html/ruim-1.png" alt="Intervalos de confiança usando apenas `ggplot2` e `geom_ribbon()`." width="672" />
+<img src="/posts/2017-02-18-ggalt_files/figure-html/ruim-1.png" alt="Intervalos de confiança usando apenas `ggplot2` e `geom_ribbon()`." width="672" />
 <p class="caption">
-Figure 1: Intervalos de confiança usando apenas <code>ggplot2</code> e <code>geom_ribbon()</code>.
+Figura 1: Intervalos de confiança usando apenas <code>ggplot2</code> e <code>geom_ribbon()</code>.
 </p>
 </div>
-<p>Na Figura <a href="#fig:bom">2</a>, adicionamos o parâmetro <code>stat = &quot;stepribbon&quot;</code>, que faz com que o <code>ggplot</code> utilize a função <code>stat_stepribbon()</code> do <code>ggalt</code> para o cálculo da faixa. Isso faz com que os intervalos tenham comportamento de escada, como queríamos.</p>
+<p>Na Figura <a href="#fig:bom">2</a>, adicionamos o parâmetro <code>stat = "stepribbon"</code>, que faz com que o <code>ggplot</code> utilize a função <code>stat_stepribbon()</code> do <code>ggalt</code> para o cálculo da faixa. Isso faz com que os intervalos tenham comportamento de escada, como queríamos.</p>
 <pre class="r"><code>ggplot(d_km, aes(x = time, y = estimate, colour = strata)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = strata), 
               stat = &#39;stepribbon&#39;, alpha = .1, size = .1) +
   geom_step() +
   theme_bw(16)</code></pre>
 <div class="figure"><span id="fig:bom"></span>
-<img src="/blog/2017-02-18-ggalt_files/figure-html/bom-1.png" alt="Intervalos de confiança usando `stat = 'stepribbon'." width="672" />
+<img src="/posts/2017-02-18-ggalt_files/figure-html/bom-1.png" alt="Intervalos de confiança usando `stat = 'stepribbon'`." width="672" />
 <p class="caption">
-Figure 2: Intervalos de confiança usando `stat = ‘stepribbon’.
+Figura 2: Intervalos de confiança usando <code>stat = 'stepribbon'</code>.
 </p>
 </div>

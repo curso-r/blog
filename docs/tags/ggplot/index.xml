@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ggplot on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/ggplot/</link>
+    <description>Recent content in ggplot on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 21 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/ggplot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gghighlight</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</guid>
+      <description>O gghighlight é uma das extensões do ggplot2. Este post serve como uma pequena introdução é apresentação do que é possível fazer com ele.</description>
+    </item>
+    
+    <item>
+      <title>A Poupança de Beethoven</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</guid>
+      <description>Explorando um pouco sobre currying e ggplot através da maluquice que são os juros compostos.</description>
+    </item>
+    
+  </channel>
+</rss>

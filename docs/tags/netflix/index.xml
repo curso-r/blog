@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Netflix on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/netflix/</link>
+    <description>Recent content in Netflix on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 06 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/netflix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Analisando o seu histórico do Netflix</title>
+      <link>https://blog.curso-r.com/posts/2019-06-05-netflix/</link>
+      <pubDate>Thu, 06 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-06-05-netflix/</guid>
+      <description>Neste post, vamos brincar com o histórico de visualização do Netflix.</description>
+    </item>
+    
+  </channel>
+</rss>

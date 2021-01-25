@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+  <title>Blog | Curso-R</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blog da Curso-R">
+  <meta name="author" content="John Doe">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" width = "30%"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com">Home</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4" action="https://blog.curso-r.com/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/captcha_07.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Quebrando Captchas - Parte VII: Oráculos</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por Julio
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            20 de
+            novembro de
+            2019
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/captcha">captcha</a></li>
+        </ul>
+        <article class="content">
+          
+
+
+<p>Um oráculo é uma função que diz para se uma predição está correta ou incorreta. Ou seja, ela diz a verdade sobre a variável resposta de um novo caso da sua base no qual você só observa as explicativas.</p>
+<p>O oráculo nem sempre existe em problemas reais, pois a verdade não costuma estar disponível no momento em que fazemos a predição. Por exemplo, se estamos predizendo as vendas do próximo mês, só saberemos a taxa de acerto com certeza no próximo mês. Antes disso, só podemos fazer estimativas.</p>
+<p>Então o oráculo é como se fosse minha base de testes? Bem, sim, mas é um tipo muito especial de base de teste. No contexto de captchas, nós podemos gerar infinitas observações novas da base, criando uma base de dados de treino virtualmente infinita.</p>
+<p><img src="images/posts/conteudo/captcha-oraculo-1/oraculo.gif" /></p>
+<p>O problema é que a resposta do oráculo não é sempre clara: usualmente, o oráculo não diz <strong>o quê</strong> você errou, mas somente <strong>se</strong> você errou. Ou seja, é uma informação incompleta, censurada.</p>
+<p>E como nós fazemos para tratar informação incompleta nos nossos estudos? Botamos na verossimilhança! Essa é uma possível ideia para atingir nosso objetivo final: criar modelos que aprendem a resolver captchas automaticamente.</p>
+<p>Na prática, no entanto, isso é uma tarefa difícil! Nesse post vou me ater em mostrar um <em>toy model</em> de oráculo e, nos próximos posts sobre o tema, vou desenvolver mais a parte estatística.</p>
+<div id="construindo-um-oráculo" class="section level2">
+<h2>Construindo um oráculo</h2>
+<p>Um oráculo precisa ter três partes implementadas: i) obtenção de uma imagem nova, ii) teste do modelo e iii) retorno, que deve envolver a matriz de entrada, o valor predito e a resposta (completa ou incompleta).</p>
+<p>Vamos então ao código:</p>
+<pre class="r"><code>#&#39; Oráculo do MNIST
+#&#39;
+#&#39; @param model modelo que resolve o captcha do MNIST. Por padrão
+#&#39;   é &quot;ask&quot;, significando que ele vai perguntar para o usuário.
+#&#39; @param type se for 0, fala só se acertou. Se for 1, 
+#&#39;   informa quais letras acertou e quais errou. Se for 2,
+#&#39;   informa o gabarito.
+#&#39;
+oracle_mnist &lt;- function(model = &quot;ask&quot;, type = 0) {
+  
+  mnist &lt;- keras::dataset_mnist()
+
+  # gerando um captcha
+  N &lt;- nrow(mnist$train$x)
+  sample_nums &lt;- sample(N, 5)
+  sample_list &lt;- purrr::map(sample_nums, ~mnist$train$x[.x,,])
+  X &lt;- abind::abind(sample_list, along = 2)
+  Y &lt;- as.numeric(mnist$train$y[sample_nums])
+
+  # teste do modelo
+  if (is.character(model)[1] &amp;&amp; model == &quot;ask&quot;) {
+    par(mar=rep(0,4))
+    plot(as.raster(X/256))
+    ans &lt;- readline(&quot;Answer: &quot;)
+    ans &lt;- as.numeric(unlist(strsplit(ans, &quot;&quot;)))
+  } else {
+    pred &lt;- predict(model, tensorflow::array_reshape(X, c(1, dim(X), 1)))
+    ans &lt;- apply(pred[1,,], 1, which.max) - 1
+  }
+
+  # retorno
+  res &lt;- list(
+    predito = ans,
+    acertou = all(ans == Y),
+    quais = if (type &gt; 0) (ans == Y),
+    gabarito = if (type &gt; 1) Y
+  )
+
+  list(x = X, res = res)
+}</code></pre>
+<p>Vamos testar! Esse é um caso que acertei</p>
+<pre class="r"><code>result &lt;- oracle_mnist(type = 0)</code></pre>
+<p><img src="images/posts/conteudo/captcha-oraculo-1/captcha1.png" /></p>
+<pre><code>Answer: 87685</code></pre>
+<pre class="r"><code>result$res</code></pre>
+<pre><code>$predito
+[1] 8 7 6 8 5
+
+$acertou
+[1] TRUE
+
+$quais
+NULL
+
+$gabarito
+NULL</code></pre>
+<p>E esse é um caso que errei, e mandei mostrar todos os outputs possíveis:</p>
+<pre class="r"><code>result &lt;- oracle_mnist(type = 2)</code></pre>
+<p><img src="images/posts/conteudo/captcha-oraculo-1/captcha2.png" /></p>
+<pre><code>Answer: 56198</code></pre>
+<pre class="r"><code>result$res</code></pre>
+<pre><code>$predito
+[1] 5 6 1 9 8
+
+$acertou
+[1] FALSE
+
+$quais
+[1]  TRUE  TRUE  TRUE  TRUE FALSE
+
+$gabarito
+[1] 5 6 1 9 0</code></pre>
+<p>Em seguida, mostro como podemos ajustar um modelo preditivo e como utilizar o oráculo com esse modelo. Essa é a operação que utilizaremos para aprimorar nosso modelo no futuro.</p>
+</div>
+<div id="dados" class="section level2">
+<h2>Dados</h2>
+<p>Os dados que vou utilizar para esse exemplo vêm da base MNIST, colando horizontalmente os caracteres de cinco em cinco para formar os captchas.</p>
+<pre class="r"><code>library(keras)
+
+mnist &lt;- dataset_mnist()
+
+# cola as imagens lado a lado
+montar_x &lt;- function(x) {
+  pos_x &lt;- (seq_len(nrow(x))-1) %% 5 + 1
+  xizes &lt;- purrr::map(1:5, ~x[pos_x == .x,,]/256)
+  X &lt;- abind::abind(xizes, along = 3)
+  tensorflow::array_reshape(X, c(dim(X), 1))
+}
+
+# monta a variável resposta usando
+# decryptr:::resize_answer()
+# a variável resposta de um captcha
+# é uma matriz nesse formato 
+# (lab = label, pos = posição)
+# 
+# lab|0 1 2 3 4 5 6 7 8 9
+# pos|-------------------
+#  1 |0 0 0 0 0 1 0 0 0 0
+#  2 |1 0 0 0 0 0 0 0 0 0
+#  3 |0 0 0 0 1 0 0 0 0 0
+#  4 |0 1 0 0 0 0 0 0 0 0
+#  5 |0 0 0 0 0 0 0 0 0 1
+
+montar_y &lt;- function(y) {
+  pos_y &lt;- seq(0, ceiling(length(y)/5) - 1)
+  y &lt;- as.numeric(y)
+  yizes &lt;- purrr::map(
+    .x = pos_y, 
+    .f = ~decryptr:::resize_answer(y[.x * 5 + 1:5], 0:9)
+  )
+  abind::abind(yizes, along = 0)
+}
+
+# montando os dados numa lista
+data &lt;- list(
+  train = list(
+    x = montar_x(mnist$train$x),
+    y = montar_y(mnist$train$y)
+  ),
+  test  = list(
+    x = montar_x(mnist$test$x),
+    y = montar_y(mnist$test$y)
+  )
+)</code></pre>
+</div>
+<div id="modelo" class="section level2">
+<h2>Modelo</h2>
+<p>Meu modelo é uma rede neural convolucional simples, igual ao que está implementado no <code>decryptr</code>. Essa rede foi treinada com as 12 mil observações de treino montadas anteriormente. O modelo possui uma taxa de acerto de 92% para o captcha completo, ou seja, para todas as 5 letras.</p>
+<pre class="r"><code># meu input, começando com as dimensões de X
+input &lt;- layer_input(shape = dim(data$train$x)[-1])
+
+# uma camada convolucional customizada, 
+# já com o max pooling
+my_conv &lt;- function(obj, f, k) {
+  obj %&gt;%
+    layer_conv_2d(
+      filters = f,
+      kernel_size = c(k,k),
+      padding = &quot;same&quot;,
+      activation = &quot;relu&quot;
+    ) %&gt;%
+    layer_max_pooling_2d()
+}
+
+# dimensões das bases
+dims &lt;- list(
+  x = dim(data$train$x)[-1],
+  y = dim(data$train$y)[-1]
+)
+
+# rede completa
+output &lt;- input %&gt;%
+  my_conv(16, 5) %&gt;%
+  my_conv(32, 3) %&gt;%
+  my_conv(64, 3) %&gt;%
+  layer_flatten() %&gt;%
+  layer_dense(units = 64) %&gt;%
+  layer_dropout(.1) %&gt;%
+  # fixar o número de parâmetros
+  # para o output do modelo
+  layer_dense(units = prod(dims$y)) %&gt;%
+  layer_reshape(target_shape = dims$y) %&gt;%
+  layer_activation(&quot;softmax&quot;)
+
+# definição do modelo
+model &lt;- keras_model(input, output)
+
+# métrica customizada para o captcha
+metric_captcha &lt;- custom_metric(
+  name = &quot;captcha&quot;, 
+  metric_fn = function(y_true, y_pred) {
+    k_equal(k_argmax(y_true), k_argmax(y_pred)) %&gt;% 
+      k_all(axis = -1) %&gt;% 
+      k_cast(k_floatx())
+  })
+
+# adicionando regras de otimização, 
+# função de perda e métrica a acompanhar
+model %&gt;%
+  compile(
+    optimizer = optimizer_adam(),
+    loss = loss_categorical_crossentropy,
+    metrics = metric_captcha
+  )
+
+# ajustando modelo
+model %&gt;%
+  fit(
+    x = data$train$x, y = data$train$y,
+    validation_data = list(data$test$x, data$test$y),
+    batch_size = 64,
+    epochs = 10
+  )</code></pre>
+<p>A estrutura do modelo ajustado é dada abaixo:</p>
+<pre><code>__________________________________________________________
+Layer (type)              Output Shape           Param #  
+==========================================================
+input_1 (InputLayer)      (None, 28, 140, 1)     0        
+__________________________________________________________
+conv2d (Conv2D)           (None, 28, 140, 16)    416      
+__________________________________________________________
+max_pooling2d (MaxPooling (None, 14, 70, 16)     0        
+__________________________________________________________
+conv2d_1 (Conv2D)         (None, 14, 70, 32)     4640     
+__________________________________________________________
+max_pooling2d_1 (MaxPooli (None, 7, 35, 32)      0        
+__________________________________________________________
+conv2d_2 (Conv2D)         (None, 7, 35, 64)      18496    
+__________________________________________________________
+max_pooling2d_2 (MaxPooli (None, 3, 17, 64)      0        
+__________________________________________________________
+flatten (Flatten)         (None, 3264)           0        
+__________________________________________________________
+dense (Dense)             (None, 64)             208960   
+__________________________________________________________
+dropout (Dropout)         (None, 64)             0        
+__________________________________________________________
+dense_1 (Dense)           (None, 50)             3250     
+__________________________________________________________
+reshape (Reshape)         (None, 5, 10)          0        
+__________________________________________________________
+activation (Activation)   (None, 5, 10)          0        
+==========================================================
+Total params: 235,762
+Trainable params: 235,762
+Non-trainable params: 0
+__________________________________________________________</code></pre>
+<p>Agora, podemos utilizar o oráculo com o modelo:</p>
+<pre class="r"><code>result &lt;- oracle_mnist(model, 0)
+result$res</code></pre>
+<pre><code>$predito
+[1] 8 6 6 0 1
+
+$acertou
+[1] TRUE
+
+$quais
+NULL
+
+$gabarito
+NULL</code></pre>
+<pre class="r"><code>set.seed(13)
+result &lt;- oracle_mnist(model, 2)
+result$res</code></pre>
+<pre><code>$predito
+[1] 7 2 2 7 7
+
+$acertou
+[1] FALSE
+
+$quais
+[1] FALSE  TRUE  TRUE  TRUE  TRUE
+
+$gabarito
+[1] 1 2 2 7 7</code></pre>
+<p>Veja qual foi o caso que o modelo errou:</p>
+<p><img src="images/posts/conteudo/captcha-oraculo-1/captcha3.png" /></p>
+<p>Não parece tão fácil de ver que é um 7, né?</p>
+</div>
+<div id="pacote-mimir" class="section level2">
+<h2>Pacote mimir</h2>
+<p>Estou montando um pacote chamado <code>{mimir}</code> para construir oráculos e trabalhar com eles. O nome <a href="https://en.wikipedia.org/wiki/M%C3%ADmir">Mimir</a> vem da figura da mitologia nórdica, conhecida por ser muito sábia. Eu achei o nome legal pois i) mimi lembra gatos, o que interage bem com as brincadeiras <code>purrr</code> e <code>forcats</code> e ii) por ter um R no final, que é sempre legal em pacotes! O pacote ainda não está disponível, mas assim que estiver eu aviso nas redes.</p>
+<p>No próximo post do tema, vou apresentar algumas formas de aproveitar a informação do oráculo na verossimilhança e alguns testes que venho desenvolvendo.</p>
+<p>É isso pessoal. Happy coding ;)</p>
+</div>
+
+        </article>
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/tabulizer.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
+        <p>Por [Athos], em Jan 08, 2021 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/quadrado-vs-retangulo.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
+        <p>Por [Athos], em Dec 30, 2020 </p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2020-12-18-stockfish/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/stockfish.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
+        <p>Por [Caio], em Dec 18, 2020 </p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="widget">
+    <h4 class="mb-4">CATEGORIAS</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-secondary">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pb-3">
+    <p class="mb-0">Copyright © 2021 Curso-R</p>
+  </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

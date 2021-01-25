@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tokenization on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/tokenization/</link>
+    <description>Recent content in tokenization on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 18 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/tokenization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Busca textual com R, Shiny e PostgreSQL</title>
+      <link>https://blog.curso-r.com/posts/2020-04-18-fts/</link>
+      <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-04-18-fts/</guid>
+      <description>Este tutorial mostrará como estruturar uma base de dados de textos no PostgreSQL, tokenizá-los e montar um índice invertido a fim de realizar buscas textuais em grande volumes de documentos em poucos segundos.</description>
+    </item>
+    
+  </channel>
+</rss>

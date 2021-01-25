@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>estatística on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/estat%C3%ADstica/</link>
+    <description>Recent content in estatística on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 09 Dec 2017 11:54:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/estat%C3%ADstica/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Estatística e programação</title>
+      <link>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</link>
+      <pubDate>Sat, 09 Dec 2017 11:54:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</guid>
+      <description>Neste post, encerraremos a nossa série sobre aprendizado e educação discutindo a importância da programação dentro da Estatística.</description>
+    </item>
+    
+    <item>
+      <title>Aprendendo assuntos difíceis</title>
+      <link>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</link>
+      <pubDate>Sat, 11 Nov 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</guid>
+      <description>Uma breve reflexão sobre o preconceito de estudar assuntos difíceis.</description>
+    </item>
+    
+    <item>
+      <title>Por que amar Estatística?</title>
+      <link>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</link>
+      <pubDate>Thu, 31 Aug 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</guid>
+      <description>Neste post, vou contar como me apaixonei pela Estatística.</description>
+    </item>
+    
+    <item>
+      <title>Aquele 1% é Deep Learning - Gerando letras do Wesley Safadão</title>
+      <link>https://blog.curso-r.com/posts/2017-08-27-safadao/</link>
+      <pubDate>Mon, 28 Aug 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-27-safadao/</guid>
+      <description>Nesse funal de semana decidi assistir alguns vídeos do YouTube do Siraj Raval e acompanhar o curso do Andrew Ng. Depois de aprender várias coisas interessantes, fiquei com uma vontade insana de implementar um modelo pra gerar músicas aleatórias do Wesley Safadão. Eis o &amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Eu, a Estatística e a programação</title>
+      <link>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</link>
+      <pubDate>Thu, 17 Aug 2017 23:26:00 +0300</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</guid>
+      <description>Neste post, iniciarei uma série com algumas reflexões sobre temas que orbitam o ensino de Estatística e a importância da programação na vida do estatístico.</description>
+    </item>
+    
+  </channel>
+</rss>
