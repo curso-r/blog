@@ -38,40 +38,56 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
+h2, h3, h4, h5, h6 {
+  margin-top: 30px;
+}
+
 h1, .h1 {
-  font-size: 80px;
+  font-size: 38px;
 }
 
 @media (max-width: 767px) {
   h1, .h1 {
-    font-size: 55px;
+    font-size: 35px;
   }
 }
 
 h2, .h2 {
-  font-size: 50px;
+  font-size: 30px;
 }
 
 @media (max-width: 767px) {
   h2, .h2 {
-    font-size: 45px;
+    font-size: 25px;
   }
 }
 
 h3, .h3 {
-  font-size: 40px;
+  font-size: 25px;
 }
 
 h4, .h4 {
-  font-size: 30px;
-}
-
-h5, .h5 {
   font-size: 20px;
 }
 
-h6, .h6 {
+h5, .h5 {
   font-size: 16px;
+}
+
+h6, .h6 {
+  font-size: 13px;
+}
+
+.media-body > h5 {
+  margin-top: 0;
+}
+
+.media-body > p {
+  font-size: 13px;
+}
+
+.title-border {
+  margin-top: 0;
 }
 
 /* Button style */
@@ -275,8 +291,13 @@ a.text-dark:hover {
 }
 
 .section {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.content .section {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .section-sm {
@@ -530,6 +551,10 @@ textarea.form-control {
           transform: translateY(-50%);
 }
 
+.card-img {
+  opacity: 0.4;
+}
+
 .card-img-overlay::before {
   position: absolute;
   content: "";
@@ -545,7 +570,7 @@ textarea.form-control {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 30px;
+  bottom: 35%;
 }
 
 .title-border {

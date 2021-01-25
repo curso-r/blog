@@ -4,7 +4,7 @@ date: "2021-01-08"
 tags: ["faxina", "pdf", "tabulizer", "pdftools"]
 categories: ["tutoriais", "r"]
 image: "images/posts/banner/tabulizer.png"
-author: ["Athos"]
+author: "Athos"
 summary: "Como extrair uma tabela de um PDF facilmente com a função tabulizer::extract_tables()"
 draft: false
 ---

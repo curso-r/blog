@@ -4,9 +4,12 @@ date: "2020-12-18"
 tags: ["r", "pacotes", "divulgação"]
 categories: ["r", "pacotes", "divulgação"]
 image: "images/posts/banner/stockfish.jpg"
-author: ["Caio"]
+author: "Caio"
 summary: "Um pacote R para analisar jogos de xadrez com o Stockfish"
 draft: false
+cursos:
+  - name: R para Ciência de Dados I
+    link: "https://www.curso-r.com/cursos/r4ds-1/"
 ---
 
 `{stockfish}` é um pacote R que implementa o protocolo aberto de comunicação

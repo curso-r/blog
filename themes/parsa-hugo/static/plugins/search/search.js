@@ -34,7 +34,7 @@ function executeSearch(searchQuery){
     if(result.length > 0){
       populateResults(result);
     }else{
-      $('#search-results').append("<h3 class=\"text-center\">No matches found</h3>");
+      $('#search-results').append("<h3 class=\"text-center\">Não encontramos resultados para a sua busca :(</h3>");
     }
   });
 }
