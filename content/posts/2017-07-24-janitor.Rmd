@@ -1,8 +1,8 @@
 ---
 title: "Arrumando BDs: o pacote janitor"
-date: "2017-07-24T23:26:00+03:00"
-tags: ["BDs", "pacotes", "janitor"]
-categories: ["tutoriais", "r"]
+date: "2017-07-24"
+tags: ["base de dados", "pacotes", "janitor"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/janitor.jpg"
 author: ["William"]
 summary: "Neste post, apresentaremos o pacote janitor, uma ótima alternativa na hora de dar aquele trato na base de dados."
@@ -82,14 +82,14 @@ Esse banco de dados também tinha outro problema: linhas vazias. Na verdade, ela
 dados[3,]
 ```
 
-Essa foi a solução que eu pensei para resolver o problema utilizando a função `remove_empty_row()`.
+Essa foi a solução que eu pensei para resolver o problema utilizando a função `remove_empty()`.
 
 ```{r}
 dados %<>% 
   as.data.frame %>% 
   `row.names<-`(dados$id) %>%
   select(-id) %>% 
-  remove_empty_rows() %>% 
+  remove_empty(which = c("rows")) %>% 
   mutate(id = row.names(.)) %>%
   select(id, everything())
 
@@ -123,7 +123,6 @@ Todas as linhas na `tibble` resultante representam uma combinação de nome-sobr
 Por fim, o `janitor` também tem funções equivalentes à `table()` para produzir tabelas de frequência:
 
 - `tabyl()` - similar a `table()`, mas pipe-ável e com mais recursos.
-- `crosstab()` - para tabelas de contingência.
 - `adorn_totals()` - acrescenta o total das linhas ou colunas.
 - `adorn_crosstab()` - deixa tabelas de contingência mais bonitas.
 
@@ -135,13 +134,6 @@ mtcars %>%
 mtcars %>% 
   tabyl(cyl) %>% 
   adorn_totals
-
-mtcars %>% 
-  crosstab(cyl, am)
-
-mtcars %>% 
-  crosstab(cyl, am) %>% 
-  adorn_crosstab
 ```
 
 É isso! Espero que essas dicas e o pacote `janitor` ajudem a agilizar as suas análises. Dúvidas, críticas ou sugestões, deixe um comentário ou nos envie uma mensagem. :)

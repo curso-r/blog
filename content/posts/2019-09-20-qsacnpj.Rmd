@@ -6,7 +6,6 @@ tags: ["rfb", "banco de dados"]
 image: "images/posts/banner/qsacnpj.jpg"
 author: ["Julio"]
 summary: "A base de dados de CNPJ da Receita Federal do Brasil (RFB) é, na minha opinião, uma das maiores conquistas de dados abertos do Brasil. Nesse post vou passar alguns links para ler a base e alguns gráficos simples."
-draft: false
 ---
 
 ```{r, include=FALSE}
@@ -97,43 +96,43 @@ Para dar um cheirinho de como essa base é rica, fiz alguns gráficos descritivo
 A Figura \@ref(fig:abertura) mostra o volume de empresas na base por ano de abertura. É interessante notar a evolução a partir do ano de 2004.
   
 ```{r abertura, fig.cap='Quantidade de empresas abertas por ano.', eval=TRUE, echo=FALSE}
-knitr::include_graphics('images/posts/conteudo/qsacnpj/abertura.png')
+knitr::include_graphics('/images/posts/conteudo/qsacnpj/abertura.png')
 ```
  
 A Figura \@ref(fig:atividade) mostra as atividades principais das empresas. Eu fiquei surpreso com o fato de mais um quarto das empresas serem relacionadas a comércio, reparação de veículos automotores e motocicletas. Seria interessante aprofundar essa análise criando um Treemap, por exemplo, para entender o que acontece nos subníveis dessa categoria.
   
 ```{r atividade, fig.cap='Distribuição da atividade principal (CNAE), considerando apenas o nível mais genérico.', eval=TRUE, echo=FALSE}
-knitr::include_graphics('images/posts/conteudo/qsacnpj/atividade.png')
+knitr::include_graphics('/images/posts/conteudo/qsacnpj/atividade.png')
 ```
 
 A Figura \@ref(fig:capital) mostra a distribuição do capital social das empresas. Quase metade das empresas tem capital social de até mil reais! Essa análise, no entanto, pode estar distorcida, pois existem várias empresas na base que não têm capital social por conta do tipo societário.
   
 ```{r capital, fig.cap='Distribuição do capital social das empresas.', eval=TRUE, echo=FALSE}
-knitr::include_graphics('images/posts/conteudo/qsacnpj/capital.png')
+knitr::include_graphics('/images/posts/conteudo/qsacnpj/capital.png')
 ```
 
 A Figura \@ref(fig:mapa) mostra os municípios de registro das empresas. Aqui não tem nada de impressionante, apenas o esperado: cidades mais populosas têm mais empresas. Seria interessante aprofundar a análise para taxa de empresas por 100 mil habitantes, por exemplo.
   
 ```{r mapa, fig.cap='Mapa dos municípios de origem.', eval=TRUE, echo=FALSE}
-knitr::include_graphics('images/posts/conteudo/qsacnpj/mapa.png')
+knitr::include_graphics('/images/posts/conteudo/qsacnpj/mapa.png')
 ```
 
 A Figura \@ref(fig:natureza) mostra a distribuição da natureza jurídica das empresas. Eu fiquei surpreso com o fato de que 60% das empresas são empresários individuais!
   
 ```{r natureza, fig.cap='Distribuição da natureza jurídica das empresas.', eval=TRUE, echo=FALSE}
-knitr::include_graphics('images/posts/conteudo/qsacnpj/natureza.png')
+knitr::include_graphics('/images/posts/conteudo/qsacnpj/natureza.png')
 ```
 
 A Figura \@ref(fig:qtd-socios1) mostra a distribuição da quantidade de sócios. É esperado que a maioria das empresas tenham dois sócios, já que as LTDAs devem ter pelo menos dois sócios.
   
 ```{r qtd-socios1, fig.cap='Distribuição da quantidade de sócios.', eval=TRUE, echo=FALSE}
-knitr::include_graphics('images/posts/conteudo/qsacnpj/qtd_socios1.png')
+knitr::include_graphics('/images/posts/conteudo/qsacnpj/qtd_socios1.png')
 ```
 
 A Figura \@ref(fig:qtd-socios2) mostra a distribuição da quantidade de sócios, considerando apenas Limitada e SA. É possível notar que as Sociedades Anônimas possuem mais sócios.
   
 ```{r qtd-socios2, fig.cap='Distribuição da quantidade de sócios, comparando Limitada e SA.', eval=TRUE, echo=FALSE}
-knitr::include_graphics('images/posts/conteudo/qsacnpj/qtd_socios2.png')
+knitr::include_graphics('/images/posts/conteudo/qsacnpj/qtd_socios2.png')
 ```
 
 É isso pessoal. Happy coding ;)

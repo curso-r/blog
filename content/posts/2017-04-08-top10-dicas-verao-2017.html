@@ -2,11 +2,13 @@
 title: "Top 10 dicas do Curso R de verão 2017"
 date: "2017-04-08"
 tags: ["Curso-R"]
-categories: ["top 10", "r"]
+categories: ["top 10"]
 author: ["Athos"]
 image: "images/posts/banner/lampada-curso-r.png"
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Em fevereiro desse ano ministramos o Curso de R de Verão 2017, parte do programa dos Cursos de Verão do IME-USP.
@@ -45,7 +47,7 @@ ggplot(mtcars_para_grafico, aes(x = valor, y = mpg)) +
   geom_point(aes(colour = variavel), show.legend = FALSE) +
   geom_smooth(se = FALSE) +
   facet_wrap(~variavel, scales = &quot;free_x&quot;)</code></pre>
-<p><img src="/blog/2017-04-08-top10-dicas-verao-2017_files/figure-html/unnamed-chunk-1-1.png" width="864" /></p>
+<p><img src="/posts/2017-04-08-top10-dicas-verao-2017_files/figure-html/unnamed-chunk-1-1.png" width="864" /></p>
 <p>Frequentemente o que se quer é construir um gráfico do mesmo tipo para diferentes colunas, por isso o <code>gather()</code> é útil nesses casos. E o <code>facet_wrap()</code> do ggplot2 faz o serviço de construir um gráfico para cada coluna.</p>
 </div>
 <div id="web-scraping-é-uma-habilidade-visada-no-mercado" class="section level3">
@@ -108,7 +110,7 @@ ggplot(mtcars_para_grafico, aes(x = valor, y = mpg)) +
 </div>
 <div id="aprenda-regex" class="section level3">
 <h3>8. Aprenda Regex</h3>
-<p><strong>Reg</strong>ular <strong>Ex</strong>pressions servem para descrever padrões de textos. Por exemplo, para pedir para o R encontrar “todas as palavras que comecem com a letra A” em <em>regex</em> escrevemos <code>str_detect(palavras, &quot;^A&quot;)</code>. O pequeno pedaço de símbolos <code>&quot;^A&quot;</code> é a maneira de traduzir em regex o padrão “palavras que começam em A”.</p>
+<p><strong>Reg</strong>ular <strong>Ex</strong>pressions servem para descrever padrões de textos. Por exemplo, para pedir para o R encontrar “todas as palavras que comecem com a letra A” em <em>regex</em> escrevemos <code>str_detect(palavras, "^A")</code>. O pequeno pedaço de símbolos <code>"^A"</code> é a maneira de traduzir em regex o padrão “palavras que começam em A”.</p>
 <p>Para quem quiser se aprofundar no assunto, consulte a documentação do regex no R: <code>?regex</code>.</p>
 <p>Os pacotes <code>stringi</code> e <code>stringr</code> tiram proveito do <em>regex</em> e valem a pena serem explorados! Data mining passará a ser mamão com açúcar.</p>
 </div>

@@ -2,7 +2,7 @@
 title: "Shiny Apps Empacotados com o golem"
 date: "2019-07-31"
 tags: ["golem", "shiny"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/golem.png"
 author: ["Julio"]
 summary: "Pacote para desenvolver shiny apps dentro de pacotes."

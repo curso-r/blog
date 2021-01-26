@@ -1,14 +1,17 @@
 ---
 title: "Quebrando CAPTCHAs - Parte III: Segmentação de imagens"
-date: "2017-07-22T13:07:31+02:00"
+date: "2017-07-22"
 tags: ["captcha"]
 categories: ["análises"]
 image: "images/posts/banner/captcha_03.png"
 author: ["Julio"]
-draft: false
 summary: "Digamos que você tenha uma base de dados de treino composta por N imagens com os textos classificados. Nossa resposta nesse caso é uma palavra de k caracteres, com p valores possíveis cada. O problema de modelar o CAPTCHA diretamente é que a variável resposta tem um..."
+retired: true
+alternativa: ""
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Nesse post vamos discutir um pouco sobre modelar CAPTCHAs. Vou assumir que você já viu o post de introdução e o post sobre download, leitura e classificação manual de CAPTCHAs.</p>
@@ -28,11 +31,9 @@ arq_captcha &lt;- decryptr::download_trt(dest = &#39;img&#39;, n = 1)</code></pr
   read_captcha() %&gt;% 
   purrr::pluck(1) %&gt;%
   plot()</code></pre>
-<p><img src="/blog/2017-06-29-captcha-segment_files/figure-html/plotimg1-1.png" width="672" /></p>
 <p>Infelizmente, segmentar a imagem nos lugares corretos é <a href="https://www.usenix.org/node/185129">uma tarefa difícil</a>. Pior até do que predizer as letras. Para simplificar, vamos fazer um corte fixado das letras:</p>
 <pre class="r"><code>arq_captcha %&gt;% read_captcha() %&gt;% purrr::pluck(1) %&gt;% plot()
 abline(v = 30 + 15 * 0:5, col = &#39;red&#39;)</code></pre>
-<p><img src="/blog/2017-06-29-captcha-segment_files/figure-html/imglines-1.png" width="672" /></p>
 <p>Podemos também limitar os eixos <code>x</code> (tirar os espaços vazios à esquerda e à direita) e <code>y</code> (superiores e inferiores).</p>
 <pre class="r"><code>&quot;../../static/data/captcha-segment/captcha705f7bad4a3d.jpeg&quot; %&gt;%
   decryptr:::load_image() %&gt;%
@@ -42,7 +43,6 @@ abline(v = 30 + 15 * 0:5, col = &#39;red&#39;)</code></pre>
 abline(v = 15 * 1:5, col = &#39;red&#39;)
 abline(v = 15 * c(0, 6), col = &#39;black&#39;)
 abline(h = c(0, 21), col = &#39;blue&#39;)</code></pre>
-<p><img src="/blog/2017-06-29-captcha-segment_files/figure-html/imglines2-1.png" width="672" /></p>
 <p>Agora temos uma imagem de tamanho dimensões <code>21x15</code> por caractere. Nosso próximo desafio é transformar isso em algo tratável por modelos de regressão. Para isso, colocamos cada pixel em uma coluna da nossa base de dados.</p>
 <p>No caso do TRT, cada CAPTCHA gerará uma tabela de 6 linhas e 315 (<code>21 * 15</code>) colunas. Podemos usar esse código para montar:</p>
 <pre class="r"><code>arq_captcha %&gt;% 
@@ -58,42 +58,7 @@ abline(h = c(0, 21), col = &#39;blue&#39;)</code></pre>
   unite(xy, x, y) %&gt;% 
   spread(xy, value, sep = &#39;&#39;) %&gt;% 
   mutate(y = c(&#39;a&#39;, &#39;f&#39;, &#39;3&#39;, &#39;d&#39;, &#39;w&#39;, &#39;x&#39;)) %&gt;% 
-  select(y, everything(), -letra)
-## # A tibble: 6 x 316
-##   y     xy01_01 xy01_02 xy01_03 xy01_04 xy01_05 xy01_06 xy01_07 xy01_08
-##   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1 a       0.961   0.961   0.961   0.961   0.961   0.961   0.961   0.945
-## 2 f       0.961   0.961   0.961   0.961   0.961   0.961   0.961   0.961
-## 3 3       0.980   1       0.871   0.557   0.565   0.871   0.937   0.937
-## 4 d       0.976   0.929   0.976   0.945   0.933   0.941   0.976   0.976
-## 5 w       0.961   0.961   0.961   0.961   0.961   0.961   0.961   0.533
-## 6 x       0.929   0.953   0.988   0.933   0.992   0.945   0.588   0.557
-## # … with 307 more variables: xy01_09 &lt;dbl&gt;, xy01_10 &lt;dbl&gt;, xy01_11 &lt;dbl&gt;,
-## #   xy01_12 &lt;dbl&gt;, xy01_13 &lt;dbl&gt;, xy01_14 &lt;dbl&gt;, xy01_15 &lt;dbl&gt;,
-## #   xy01_16 &lt;dbl&gt;, xy01_17 &lt;dbl&gt;, xy01_18 &lt;dbl&gt;, xy01_19 &lt;dbl&gt;,
-## #   xy01_20 &lt;dbl&gt;, xy01_21 &lt;dbl&gt;, xy02_01 &lt;dbl&gt;, xy02_02 &lt;dbl&gt;,
-## #   xy02_03 &lt;dbl&gt;, xy02_04 &lt;dbl&gt;, xy02_05 &lt;dbl&gt;, xy02_06 &lt;dbl&gt;,
-## #   xy02_07 &lt;dbl&gt;, xy02_08 &lt;dbl&gt;, xy02_09 &lt;dbl&gt;, xy02_10 &lt;dbl&gt;,
-## #   xy02_11 &lt;dbl&gt;, xy02_12 &lt;dbl&gt;, xy02_13 &lt;dbl&gt;, xy02_14 &lt;dbl&gt;,
-## #   xy02_15 &lt;dbl&gt;, xy02_16 &lt;dbl&gt;, xy02_17 &lt;dbl&gt;, xy02_18 &lt;dbl&gt;,
-## #   xy02_19 &lt;dbl&gt;, xy02_20 &lt;dbl&gt;, xy02_21 &lt;dbl&gt;, xy03_01 &lt;dbl&gt;,
-## #   xy03_02 &lt;dbl&gt;, xy03_03 &lt;dbl&gt;, xy03_04 &lt;dbl&gt;, xy03_05 &lt;dbl&gt;,
-## #   xy03_06 &lt;dbl&gt;, xy03_07 &lt;dbl&gt;, xy03_08 &lt;dbl&gt;, xy03_09 &lt;dbl&gt;,
-## #   xy03_10 &lt;dbl&gt;, xy03_11 &lt;dbl&gt;, xy03_12 &lt;dbl&gt;, xy03_13 &lt;dbl&gt;,
-## #   xy03_14 &lt;dbl&gt;, xy03_15 &lt;dbl&gt;, xy03_16 &lt;dbl&gt;, xy03_17 &lt;dbl&gt;,
-## #   xy03_18 &lt;dbl&gt;, xy03_19 &lt;dbl&gt;, xy03_20 &lt;dbl&gt;, xy03_21 &lt;dbl&gt;,
-## #   xy04_01 &lt;dbl&gt;, xy04_02 &lt;dbl&gt;, xy04_03 &lt;dbl&gt;, xy04_04 &lt;dbl&gt;,
-## #   xy04_05 &lt;dbl&gt;, xy04_06 &lt;dbl&gt;, xy04_07 &lt;dbl&gt;, xy04_08 &lt;dbl&gt;,
-## #   xy04_09 &lt;dbl&gt;, xy04_10 &lt;dbl&gt;, xy04_11 &lt;dbl&gt;, xy04_12 &lt;dbl&gt;,
-## #   xy04_13 &lt;dbl&gt;, xy04_14 &lt;dbl&gt;, xy04_15 &lt;dbl&gt;, xy04_16 &lt;dbl&gt;,
-## #   xy04_17 &lt;dbl&gt;, xy04_18 &lt;dbl&gt;, xy04_19 &lt;dbl&gt;, xy04_20 &lt;dbl&gt;,
-## #   xy04_21 &lt;dbl&gt;, xy05_01 &lt;dbl&gt;, xy05_02 &lt;dbl&gt;, xy05_03 &lt;dbl&gt;,
-## #   xy05_04 &lt;dbl&gt;, xy05_05 &lt;dbl&gt;, xy05_06 &lt;dbl&gt;, xy05_07 &lt;dbl&gt;,
-## #   xy05_08 &lt;dbl&gt;, xy05_09 &lt;dbl&gt;, xy05_10 &lt;dbl&gt;, xy05_11 &lt;dbl&gt;,
-## #   xy05_12 &lt;dbl&gt;, xy05_13 &lt;dbl&gt;, xy05_14 &lt;dbl&gt;, xy05_15 &lt;dbl&gt;,
-## #   xy05_16 &lt;dbl&gt;, xy05_17 &lt;dbl&gt;, xy05_18 &lt;dbl&gt;, xy05_19 &lt;dbl&gt;,
-## #   xy05_20 &lt;dbl&gt;, xy05_21 &lt;dbl&gt;, xy06_01 &lt;dbl&gt;, xy06_02 &lt;dbl&gt;,
-## #   xy06_03 &lt;dbl&gt;, …</code></pre>
+  select(y, everything(), -letra)</code></pre>
 <p>Muito bem! Agora basta rodar o mesmo para toda a base de treino e rodar um modelo. Para esse post, vamos usar uma base de 2300 CAPTCHAs classificados. Essa base fica com 13800 linhas e 315 colunas. Vamos usar 11000 linhas para treino e as 2800 restantes para teste. O modelo utilizado será um <code>randomForest</code> padrão.</p>
 <pre class="r"><code>library(randomForest)
 dados &lt;- readRDS(&#39;../../static/data/captcha-segment/d_segment_captcha.rds&#39;) %&gt;% 
@@ -901,7 +866,7 @@ d_test &lt;- dados[-ids_treino, ]</code></pre>
 </tr>
 </tbody>
 </table>
-<div id="nem-tudo-sao-rosas" class="section level2">
+<div id="nem-tudo-são-rosas" class="section level2">
 <h2>Nem tudo são rosas</h2>
 <p>O resultado para o CAPTCHA do TRT é bastante satisfatório, mas infelizmente não generaliza para outros CAPTCHAs. Tome por exemplo o CAPTCHA da Receita Federal abaixo. Nesse caso, a posição dos caracteres muda significativamente de imagem para imagem, e assim fica difícil cortar em pedaços.</p>
 <p>O mesmo modelo aplicado ao CAPTCHA da Receita possui acerto de 78.8% do caractere, o que equivale a apenas 23.8% de acerto para toda a imagem. Veja os resultados na tabela abaixo.</p>

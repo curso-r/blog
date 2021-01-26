@@ -20,7 +20,7 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por {{ delimit .Params.author ", " " e "}}
+            Escrito por {{ delimit .Params.author ", " " e "}} em <a href="{{ "categories/" | relLangURL }}{{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 | title}}</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -35,7 +35,17 @@
           {{- end }}
         </ul>
         <article class="content">
-          {{.Content}}
+          {{ if eq .Params.Retired true }}
+            <blockquote>Este post foi aposentado.
+            {{ if .Params.alternativa }}
+              Veja a nova versão deste post
+                <a href = "{{ .Params.alternativa }}">aqui.</a>
+            {{ end }}
+            </blockquote>
+            <img src = "{{ "images/retired.jpg" | absURL }}" style = "margin: auto; display: block; width: 100%;">
+          {{ else }}
+            {{.Content}}
+          {{ end }}
         </article>
       </div>
       {{partial "sidebar.html" . }}

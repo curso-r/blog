@@ -6,7 +6,7 @@
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Curso-R">
   <meta name="generator" content="Hugo 0.80.0" />
 
   <!-- plugins -->
@@ -17,6 +17,10 @@
   
   <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
   
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
 
   <!-- Main Stylesheet -->
   
@@ -25,8 +29,8 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
   <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
-
-</head><body>
+</head>
+<body>
 <!-- preloader start -->
 <div class="preloader">
   <div class="loader">
@@ -101,7 +105,7 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Daniel
+            Escrito por Daniel em <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,6 +120,7 @@
         </ul>
         <article class="content">
           
+            
 
 
 <p>Existem diversas formas de hospedar o seu app feito <a href="https://shiny.rstudio.com">em shiny</a>. A maneira mais simples é usando o <a href="http://www.shinyapps.io">shinyapps.io</a>, SaaS desenvolvido pela própria RStudio. No entanto, na versão Free o seu app fica com um logotipo do RStudio no canto e não é permitido configurar um domínio próprio, ou seja, a url do seu app sempre vai ser algo do tipo: <code>dfalbel.shinyapps.io/meuapp</code>.</p>
@@ -215,6 +220,7 @@ Sending build context to Docker daemon 6.656 kBkB
 <p>O <a href="https://zeit.co/now">now</a> é um serviço gratuito que permite a hospedagem de containers <a href="https://www.docker.com">Docker</a>. Neste post configuramos um Dockerfile para instalar hospedar um app shiny e usando o comando <code>now</code> rapidamente enviamos o nosso aplicativo para o now e iniciamos a hospedagem.</p>
 </div>
 
+          
         </article>
       </div>
       <div class="col-lg-1">
@@ -358,6 +364,14 @@ Sending build context to Docker daemon 6.656 kBkB
 
 <script src="https://blog.curso-r.com/plugins/search/search.js"></script>
 
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 <!-- Main Script -->
 

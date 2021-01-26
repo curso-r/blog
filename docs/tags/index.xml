@@ -161,24 +161,6 @@
     </item>
     
     <item>
-      <title>manipulação</title>
-      <link>https://blog.curso-r.com/tags/manipula%C3%A7%C3%A3o/</link>
-      <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/tags/manipula%C3%A7%C3%A3o/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tidyr</title>
-      <link>https://blog.curso-r.com/tags/tidyr/</link>
-      <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/tags/tidyr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>git</title>
       <link>https://blog.curso-r.com/tags/git/</link>
       <pubDate>Mon, 27 Jul 2020 00:00:00 +0000</pubDate>
@@ -193,15 +175,6 @@
       <pubDate>Mon, 27 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/github/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>postgresql</title>
-      <link>https://blog.curso-r.com/tags/postgresql/</link>
-      <pubDate>Fri, 26 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/tags/postgresql/</guid>
       <description></description>
     </item>
     
@@ -256,6 +229,15 @@
       <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgresql</title>
+      <link>https://blog.curso-r.com/tags/postgresql/</link>
+      <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/tags/postgresql/</guid>
       <description></description>
     </item>
     
@@ -1063,7 +1045,7 @@
     <item>
       <title>glue</title>
       <link>https://blog.curso-r.com/tags/glue/</link>
-      <pubDate>Mon, 17 Apr 2017 13:07:31 +0200</pubDate>
+      <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/glue/</guid>
       <description></description>
@@ -1108,7 +1090,7 @@
     <item>
       <title>sptrans</title>
       <link>https://blog.curso-r.com/tags/sptrans/</link>
-      <pubDate>Sat, 01 Apr 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sat, 01 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/sptrans/</guid>
       <description></description>
@@ -1153,7 +1135,7 @@
     <item>
       <title>paralelização</title>
       <link>https://blog.curso-r.com/tags/paraleliza%C3%A7%C3%A3o/</link>
-      <pubDate>Sun, 19 Mar 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/paraleliza%C3%A7%C3%A3o/</guid>
       <description></description>
@@ -1162,7 +1144,7 @@
     <item>
       <title>dplyr</title>
       <link>https://blog.curso-r.com/tags/dplyr/</link>
-      <pubDate>Sat, 11 Mar 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sat, 11 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/dplyr/</guid>
       <description></description>
@@ -1171,7 +1153,7 @@
     <item>
       <title>modelagem</title>
       <link>https://blog.curso-r.com/tags/modelagem/</link>
-      <pubDate>Thu, 09 Mar 2017 13:07:31 +0200</pubDate>
+      <pubDate>Thu, 09 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/modelagem/</guid>
       <description></description>

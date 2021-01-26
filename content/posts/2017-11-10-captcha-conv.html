@@ -1,21 +1,24 @@
 ---
 title: "Quebrando Captchas - Parte V: Fazendo redes convolucionais na mão"
-date: "2017-11-12T23:26:00+03:00"
+date: "2017-11-12"
 tags: ["captcha"]
 categories: ["análises"]
 image: "images/posts/banner/captcha_05.png"
 author: ["Julio"]
 summary: "Nesse post vou mostrar como ajustar redes neurais convolucionais na mão. Muita mão na massa envolvida, muitos captchas e muita diversão. Vamos juntos desmistificar a magia negra do deep learning..."
-draft: false
+retired: true
+alternativa: ""
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Voltando aos saudosos captchas. Demorei para fazer esse post pois estava esperando o lançamento do <a href="https://www.coursera.org/learn/convolutional-neural-networks">curso de redes neurais convolucionais do Andrew Ng</a>. O curso foi muito bom, valeu à pena! E, como prometido, vamos agora trabalhar com modelagem dos captchas.</p>
 <div id="objetivo" class="section level2">
 <h2>Objetivo</h2>
 <p>Nosso objetivo é aprender a aplicar a <strong>operação da convolução</strong> em imagens, replicando o modelo já ajustado dos captchas. O jeito que fazemos para ajustar o modelo ficará para um próximo post.</p>
-<div id="pre-requisitos" class="section level3">
+<div id="pré-requisitos" class="section level3">
 <h3>Pré-requisitos</h3>
 <p>Na nossa jornada, utilizaremos o pacote <code>decryptr</code> e teremos como o base o captcha da Receita Federal. Para baixar um captcha e plotar na sua tela, rode o código abaixo. Utilizaremos o caminho do arquivo em <code>arq</code> várias vezes no decorrer do post. Instale também o pacote <code>decryptrModels</code> para carregar o modelo ajustado do captcha da receita.</p>
 <pre class="r"><code># devtools::install_github(&quot;decryptr/decryptr&quot;)
@@ -26,21 +29,16 @@ arq %&gt;%
   read_captcha() %&gt;% 
   purrr::pluck(1) %&gt;%
   plot()</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-2-1.png" width="288" style="display: block; margin: auto;" /></p>
 <p>Também precisaremos do <a href="https://keras.rstudio.com/"><code>keras</code></a>, um pacote maravilhoso feito pela turma do <a href="https://rstudio.com">RStudio</a>, com contribuições do <a href="http://curso-r.com/author/daniel/">Daniel Falbel</a>. Não esqueça de fazer o <code>tensorflow</code> funcionar na sua máquina! <a href="http://curso-r.com/blog/2017/06/08/2017-06-08-keras-no-ubuntu/">Esse post</a> do <a href="http://curso-r.com/author/athos/">Athos Damiani</a> pode ajudar.</p>
 <pre class="r"><code># install.packages(&quot;keras&quot;)
 library(keras)</code></pre>
 <p>Para os retoques finais nas imagens, vamos usar o pacote <code>magick</code>. Meu intuito inicial era usar a função <code>image_convolve()</code> desse pacote, mas infelizmente essa operação é limitada. Acabei usando apenas funções para juntar imagens e fazer gifs. Se quiser mais detalhes sobre o <code>magick</code>, veja o excelente post <a href="http://curso-r.com/blog/2017/06/01/2017-06-01-a-kind-of-magick/">A kind of magick</a>, feito pelo <a href="http://curso-r.com/author/william/">William Amorim</a>.</p>
 <pre class="r"><code># install.packages(&quot;magick&quot;)
-library(magick)
-## Linking to ImageMagick 6.9.9.39
-## Enabled features: cairo, fontconfig, freetype, lcms, pango, rsvg, webp
-## Disabled features: fftw, ghostscript, x11</code></pre>
+library(magick)</code></pre>
 </div>
 </div>
-<div id="o-que-e-convolucao-afinal" class="section level2">
+<div id="o-que-é-convolução-afinal" class="section level2">
 <h2>O que é convolução, afinal?</h2>
-<p><img src="images/posts/conteudo/captcha-conv/vivalaconv.jpg" width="50%" style="display: block; margin: auto;" /></p>
 <p>Convolução é uma técnica usada há muito tempo na área de <em>visão computacional</em> para aplicar filtros em imagens e detectar padrões. Basicamente, o que ela faz é calcular um novo valor para um pixel da imagem com base nos pixels da vizinhança. Por exemplo, você pode fazer com que o pixel <span class="math inline">\((i,j)\)</span> da sua imagem seja atualizado pela soma ponderada dos valores dos pixels na vizinhança.</p>
 <blockquote>
 <p>Se você não está entendendo nada, Veja o vídeo abaixo para entender o que são pixels. No nosso caso, teremos uma matriz com valores entre zero e um, sendo zero = preto e um = branco.</p>
@@ -52,36 +50,15 @@ library(magick)
 <pre class="r"><code>kern_horizontal &lt;- rbind(c(-1,-1,-1),
                          c( 0, 0, 0),
                          c( 1, 1, 1))
-kern_horizontal
-##      [,1] [,2] [,3]
-## [1,]   -1   -1   -1
-## [2,]    0    0    0
-## [3,]    1    1    1</code></pre>
+kern_horizontal</code></pre>
 <p>E considere essa imagem super complexa:</p>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-7-1.png" width="30%" style="display: block; margin: auto;" /></p>
 <p>Na prática, essa imagem é isso aqui (tirei algumas linhas e colunas):</p>
 <pre class="r"><code>emoji &lt;- load_image(&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot;)[,,1] 
-round(emoji, 1)[1:10, 1:12]
-##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
-##  [1,]    1    1    1  1.0  1.0  1.0  1.0  1.0  1.0   1.0   1.0   1.0
-##  [2,]    1    1    1  1.0  1.0  1.0  1.0  1.0  1.0   1.0   1.0   1.0
-##  [3,]    1    1    1  1.0  1.0  1.0  1.0  1.0  1.0   1.0   1.0   1.0
-##  [4,]    1    1    1  1.0  1.0  1.0  1.0  1.0  0.8   0.7   0.7   0.7
-##  [5,]    1    1    1  1.0  1.0  1.0  0.9  0.6  0.8   1.0   1.0   1.0
-##  [6,]    1    1    1  1.0  1.0  0.8  0.7  1.0  1.0   1.0   1.0   1.0
-##  [7,]    1    1    1  1.0  0.9  0.7  1.0  1.0  1.0   1.0   1.0   1.0
-##  [8,]    1    1    1  1.0  0.6  1.0  1.0  1.0  1.0   1.0   1.0   1.0
-##  [9,]    1    1    1  0.8  0.8  1.0  1.0  0.9  0.9   1.0   1.0   1.0
-## [10,]    1    1    1  0.7  1.0  1.0  0.7  0.4  0.2   0.7   0.9   1.0</code></pre>
+round(emoji, 1)[1:10, 1:12]</code></pre>
 <p>Tome por exemplo o ponto <span class="math inline">\((i,j) = (12,16)\)</span>. A vizinhança 3x3 em torno desse ponto é dada por</p>
-<pre class="r"><code>emoji[12 + (-1):1, 16 + (-1):1]
-##           [,1]      [,2]      [,3]
-## [1,] 0.9843137 0.5294118 0.7921569
-## [2,] 0.9725490 0.9882353 1.0000000
-## [3,] 0.9843137 1.0000000 0.9960784</code></pre>
+<pre class="r"><code>emoji[12 + (-1):1, 16 + (-1):1]</code></pre>
 <p>A operação de convolução é feita da seguinte forma:</p>
-<pre class="r"><code>sum(emoji[12 + (-1):1, 16 + (-1):1] * kern_horizontal)
-## [1] 0.6745098</code></pre>
+<pre class="r"><code>sum(emoji[12 + (-1):1, 16 + (-1):1] * kern_horizontal)</code></pre>
 <p>Pronto, esse é o valor a ser colocado no ponto <span class="math inline">\((i,j)\)</span>. Fazemos isso para todos os outros pontos. Algumas dúvidas que podem rolar nesse ponto:</p>
 <p><strong>Q</strong>: Mas os números não devem variar de 0 a 1?</p>
 <p><strong>R</strong>: Não! Para visualizar a imagem, você poderia normalizar essas quantidades (por exemplo, dividindo pelo máximo). Mas quem disse que o resultado da sua operação precisa ser visualizável? O resultado pode até ser negativo. Sem problemas.</p>
@@ -115,24 +92,18 @@ round(emoji, 1)[1:10, 1:12]
   convolve(kern_horizontal) %&gt;% 
   image_read() %&gt;% 
   plot()</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-12-1.png" width="30%" style="display: block; margin: auto;" /></p>
 <p>Ficou um pouco assustador, não? Essa matriz não foi escolhida por acaso. Ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada <code>-1</code>s e a última é formada por <code>1</code>s, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca (<code>grande * 1 + pequeno * (-1)</code>). A parte destacada da imagem acabou sendo os olhos (pois temos maior concentração de pixels pretos ali), além das extremidades superior e inferior do rosto.</p>
 <p>Com esse kernel aqui (vertical), a parte destacada do rosto são as extremidades dos lados:</p>
 <pre class="r"><code>kern_vertical &lt;- rbind(c(-1, 0, 1),
                        c(-1, 0, 1),
                        c(-1, 0, 1))
 kern_vertical
-##      [,1] [,2] [,3]
-## [1,]   -1    0    1
-## [2,]   -1    0    1
-## [3,]   -1    0    1
 
 &quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot; %&gt;% 
   load_image() %&gt;% 
   convolve(kern_vertical) %&gt;% 
   image_read() %&gt;% 
   plot()</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-13-1.png" width="30%" style="display: block; margin: auto;" /></p>
 <p><hline /></p>
 </div>
 <div id="aplicando-nos-captchas" class="section level2">
@@ -146,7 +117,6 @@ kern_vertical
   add_bias(.8) %&gt;% 
   image_read() %&gt;% 
   plot()</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-15-1.png" width="345.6" style="display: block; margin: auto;" /></p>
 <p>Agora o kernel na horizontal. Note que identificamos padrões das linhas horizontais que tentam atrapalhar a visão das letras.</p>
 <pre class="r"><code>arq %&gt;% 
   load_image() %&gt;% 
@@ -154,7 +124,6 @@ kern_vertical
   add_bias(.8) %&gt;% 
   image_read() %&gt;% 
   plot()</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-16-1.png" width="345.6" style="display: block; margin: auto;" /></p>
 <p>Colocando um após o outro, temos um resultado bem esquisito:</p>
 <pre class="r"><code>arq %&gt;% 
   load_image() %&gt;% 
@@ -163,13 +132,10 @@ kern_vertical
   add_bias(.7) %&gt;% 
   image_read() %&gt;% 
   plot()</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-17-1.png" width="345.6" style="display: block; margin: auto;" /></p>
 <p>Também vou introduzir uma função chamada <code>relu()</code> aqui. <strong>ReLu</strong> significa <em>Restricted Linear Unit</em> e é uma função bem simples que zera tudo aquilo que é negativo e mantém tudo aquilo que é positivo. Assim, temos:</p>
 <pre class="r"><code>relu &lt;- function(x) (x + abs(x)) / 2
 relu(-1)
-## [1] 0
-relu( 3)
-## [1] 3</code></pre>
+relu( 3)</code></pre>
 <p>Para visualização, essa função não serve para muita coisa, pois já fazemos a substituição de valores negativos por zero. No entanto, podemos fazer combos com a aplicação de várias convoluções. O resultado dos combos não seria possível somente com somas e multiplicações. Na prática, o que estou afirmando é que com a aplicação de convoluções, bias e ReLu, podemos montar operações <strong>não lineares</strong> para extrair componentes da imagem.</p>
 <p>Olhe o exemplo abaixo. Parece que consegui identificar bem as coisas que são inúteis na imagem. Isso pode ser útil… ou não.</p>
 <pre class="r"><code>arq %&gt;% 
@@ -183,7 +149,6 @@ relu( 3)
   add_bias(.1) %&gt;% 
   image_read() %&gt;% 
   plot()</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-19-1.png" width="345.6" style="display: block; margin: auto;" /></p>
 <p>Isso tudo nos leva a pensar: será que eu consigo pensar em kernels que me ajudem a identificar as letras de uma forma razoável?</p>
 <p><hline /></p>
 </div>
@@ -254,7 +219,7 @@ ________________________________________________________________________________
 <li>Pegar os pesos finais e normalizar (usando, por exemplo, <em>softmax</em>) para obter probabilidades dos resultados.</li>
 </ol>
 <p>No nosso caso, repetimos o passo 2 três vezes, aplicando três convoluções seguidas.</p>
-<div id="primeira-convolucao" class="section level3">
+<div id="primeira-convolução" class="section level3">
 <h3>Primeira convolução</h3>
 <p>Para obter os valores de kernels ajustados pelo modelo, podemos usar a função <code>get_weights()</code> do <code>keras</code>. Nessa primeira parte, utilizamos 12 kernels 5x5.</p>
 <pre class="r"><code>w &lt;- keras::get_weights(m$model$layers[[1]])[[1]]
@@ -280,9 +245,8 @@ w_list[[1]]</code></pre>
     relu()
 })</code></pre>
 <p>E como será que ficam essas imagens? Abaixo, temos o resultado da aplicação dos doze kernels. A maioria parece estar extraindo partes das letras. A sétima (posição <code>(2,3)</code>) parece estar pegando o ruído e a quarta parece guardar a imagem original.</p>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-24-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>O gif animado abaixo mostra a aplicação do oitavo kernel da nossa lista. Com esse kernel dá pra pegar bem o padrão das letras, não é?</p>
-<p><img src="images/posts/conteudo/captcha-conv/captcha_conv.gif" /></p>
+<p><img src="/images/posts/conteudo/captcha-conv/captcha_conv.gif" /></p>
 <p>No próximo nível, vamos convoluir mais 48 kernels. Essa operação será feita com todos os doze filtros atuais, ou seja, é uma contaiada que não acaba mais. Para simplificar as contas e para permitir a obtenção de padrões diferentes, faz sentido simplificar a imagem. Para isso, usamos o <em>max pooling</em>.</p>
 <div id="aplicando-max-pooling" class="section level4">
 <h4>Aplicando max pooling</h4>
@@ -312,13 +276,12 @@ w_list[[1]]</code></pre>
     max_pool()
 })</code></pre>
 <p>No final, temos essas imagens com resolução <code>25x90</code> (as originais são <code>50x180</code>).</p>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-27-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>Ficou bem parecido com o anterior!</p>
 <p>Ao final da convolução, é como se tivéssemos uma nova imagem, menor e alterada, mas com 12 cores. Como não faz muito sentido pensar em 12 cores primárias, vamos chamá-las de canais.</p>
 <p><hline /></p>
 </div>
 </div>
-<div id="segunda-convolucao" class="section level3">
+<div id="segunda-convolução" class="section level3">
 <h3>Segunda convolução</h3>
 <p>Os parâmetros da segunda convolução são obtidos novamente pelo <code>keras</code>. Sugiro que você dê uma olhada nesses índices para entender o que exatamente estamos pegando.</p>
 <pre class="r"><code>w2 &lt;- keras::get_weights(m$model$layers[[3]])[[1]]
@@ -349,10 +312,9 @@ dim(w2)</code></pre>
     max_pool()
 })</code></pre>
 <p>Plotamos os 48 resultados abaixo. Alguns resultados foram completamente zerados (eles devem ser úteis em outros captchas mais esquisitos), enquanto os demais pegam pedaços da imagem anterior que mal lembram o captcha original. A imagem da posição <code>(4,1)</code> é uma das únicas que mostra o captcha claramente. Isso mostra uma coisa comum do deep learning: quanto mais profundo vamos, menos entendemos o que de fato o modelo está fazendo. Recomendo fortemente a leitura <a href="https://distill.pub/2017/feature-visualization/">desse blog do distill</a>, que discute o assunto detalhadamente</p>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-30-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>Agora temos 48 canais de uma imagem com dimensões <code>12x45</code>. Vamos em frente.</p>
 </div>
-<div id="terceira-convolucao" class="section level3">
+<div id="terceira-convolução" class="section level3">
 <h3>Terceira convolução</h3>
 <p>A terceira convolução é feita de forma idêntica à segunda. A única diferença é que teremos no final 96 canais, pois estamos ajustando essa quantidade de kernels para cada canal.</p>
 <pre class="r"><code>w3 &lt;- keras::get_weights(m$model$layers[[5]])[[1]]
@@ -373,7 +335,6 @@ dim(w3)</code></pre>
     max_pool()
 })</code></pre>
 <p>Plotando os resultados, temos</p>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-33-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>No final, ficamos com 96 imagens com resolução <code>6x22</code> cada. Várias imagens ficaram zeradas e as que não ficaram parecem apenas feixes de luz no meio do breu. Pode ser que a posição dessas luzes tenha a ver com a posição de pedaços importantes do captcha original, que por sua vez seriam importantes para determinar o valor do captcha.</p>
 <div id="verificando-se-funcionou-mesmo" class="section level4">
 <h4>Verificando se funcionou mesmo</h4>
@@ -419,7 +380,6 @@ purrr::walk(seq_len(dim(res)[4]), ~{
   image_read() %&gt;% 
   plot()
 })</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-36-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>Ufa, ficou igualzinho!</p>
 <p>Apenas um check final: quero ver se os pesos obtidos são todos iguais. Para isso, ordeno todos os pesos obtidos diretamente pelo <code>keras</code> ou aplicando as minhas funções feitas no braço:</p>
 <pre class="r"><code>w_calculado &lt;- unlist(purrr::map(result_conv3, ~.x[,,1]))
@@ -431,7 +391,7 @@ all.equal(sort(res), sort(w_calculado), tolerance = 1e-6)</code></pre>
 <h4>Visualizando na imagem original</h4>
 <p>Aqui fiz um esforço para tentar entender de qual parte da imagem original esses resultados estão pegando informações. Para isso, re-escalei essas imagens de resolução mais baixa na última convolução para o tamanho original do captcha (<code>50x180</code>) e depois multipliquei os valores das matrizes pelos valores da imagem original.</p>
 <p>O resultado foi esse gif. Cada imagem é um dos canais obtidos.</p>
-<p><img src="images/posts/conteudo/captcha-conv/captcha_conv_final.gif" /></p>
+<p><img src="/images/posts/conteudo/captcha-conv/captcha_conv_final.gif" /></p>
 <p>Parece que os filtros são capazes de pegar as curvas que as letras fazem no captcha. Mas não tenho opinião formada sobre isso. Digam aí nos comentários o que vocês acham!</p>
 </div>
 </div>
@@ -451,343 +411,12 @@ probabilidades &lt;- res2[1,,] %&gt;%
   dplyr::ungroup() %&gt;% 
   dplyr::mutate(prob = dplyr::if_else(prob &lt; 5e-5, &quot;.&quot;, as.character(round(prob, 6))) ) %&gt;% 
   tidyr::spread(pos, prob, sep = &quot;&quot;)</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">letra</th>
-<th align="left">pos1</th>
-<th align="left">pos2</th>
-<th align="left">pos3</th>
-<th align="left">pos4</th>
-<th align="left">pos5</th>
-<th align="left">pos6</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">2</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">3</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">5</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">0.999999</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">6</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">7</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">0.999987</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">0.000317</td>
-</tr>
-<tr class="even">
-<td align="left">8</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">9</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">a</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">b</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">c</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">d</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">e</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">f</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">g</td>
-<td align="left">.</td>
-<td align="left">0.999949</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">0.001286</td>
-</tr>
-<tr class="odd">
-<td align="left">h</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">i</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">j</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">k</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">l</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">m</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">n</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">o</td>
-<td align="left">0.999887</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">p</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">q</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">0.998395</td>
-</tr>
-<tr class="odd">
-<td align="left">r</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">s</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">t</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">u</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">v</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">0.999997</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">w</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">x</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">y</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">z</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-</tr>
-</tbody>
-</table>
 <p>Ficamos então com “o” na primeira posição, “g” na segunda posição, “7” na terceira posição, “v” na quarta posição, “5” na quinta posição e “q” na sexta posição. Ou seja, “og7v5q”.</p>
 <p>Vamos ver a imagem novamente:</p>
 <pre class="r"><code>arq %&gt;% 
   read_captcha() %&gt;% 
   purrr::pluck(1) %&gt;%
   plot()</code></pre>
-<p><img src="/blog/2017-11-10-captcha-conv_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Parece que funcionou!</p>
 </div>
 <div id="wrap-up" class="section level2">

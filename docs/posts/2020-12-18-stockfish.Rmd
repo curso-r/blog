@@ -2,7 +2,7 @@
 title: "Stockfish no R"
 date: "2020-12-18"
 tags: ["r", "pacotes", "divulgação"]
-categories: ["r", "pacotes", "divulgação"]
+categories: ["pacotes"]
 image: "images/posts/banner/stockfish.jpg"
 author: ["Caio"]
 summary: "Um pacote R para analisar jogos de xadrez com o Stockfish"

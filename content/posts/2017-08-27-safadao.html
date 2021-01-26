@@ -1,13 +1,15 @@
 ---
 title: "Aquele 1% é Deep Learning - Gerando letras do Wesley Safadão"
-date: "2017-08-28T23:26:00+03:00"
-tags: ["estatística"]
-categories: ["análises", "r"]
+date: "2017-08-28"
+tags: ["música"]
+categories: ["análises"]
 image: "images/posts/banner/wesley.png"
 author: ["Julio"]
 summary: "Nesse funal de semana decidi assistir alguns vídeos do YouTube do Siraj Raval e acompanhar o curso do Andrew Ng. Depois de aprender várias coisas interessantes, fiquei com uma vontade insana de implementar um modelo pra gerar músicas aleatórias do Wesley Safadão. Eis o ..."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Nesse final de semana decidi assistir a alguns vídeos do YouTube do <a href="https://www.youtube.com/channel/UCWN3xxRkmTPmbKwht9FuE5A">Siraj Raval</a> e ao curso do <a href="https://www.coursera.org/learn/nlp-sequence-models">Andrew Ng sobre deep learning</a>. Após assistir alguns vídeos, fiquei com uma vontade insana de implementar um modelo pra gerar músicas aleatórias do <a href="https://pt.wikipedia.org/wiki/Wesley_Safad%C3%A3o">Wesley Safadão</a>!</p>
@@ -30,8 +32,7 @@ summary: "Nesse funal de semana decidi assistir alguns vídeos do YouTube do Sir
   });
 </script>
 <input type="button" value="E aquele 1%?" id="MyButton" >
-<textarea id="safadao" class="form-control" style="height:400px;">
-</textarea>
+<textarea id="safadao" class="form-control" style="height:400px;"></textarea>
 <div id="comofas" class="section level1">
 <h1>#comofas</h1>
 <p>O trabalho foi feito em 3 passos: download, modelagem e implantação. Descrevemos cada um dos passos a seguir.</p>
@@ -164,7 +165,7 @@ model %&gt;% fit(
   s_final
 }</code></pre>
 </div>
-<div id="implantacao" class="section level2">
+<div id="implantação" class="section level2">
 <h2>Implantação</h2>
 <p>Para deixar o modelo acessível pela internet, utilizei o maravilhoso <code>OpenCPU</code>. Trata-se de um pacote em R e também um software para transformar códigos R em API. Basicamente, o que fazemos é:</p>
 <ol style="list-style-type: decimal">

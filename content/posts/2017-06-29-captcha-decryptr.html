@@ -1,22 +1,22 @@
 ---
 title: "Quebrando CAPTCHAs - Parte II: O pacote decryptr"
-date: "2017-07-10T13:07:31+02:00"
+date: "2017-07-10"
 tags: ["captcha", "decryptr"]
-categories: ["tutoriais"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/captcha_02.png"
 author: ["Julio"]
 draft: false
 summary: "No último post sobre CAPTCHAs anunciei uma série de posts sobre CAPTCHAs. Uma da nossas iniciativas principais nesse tema é a criação do pacote decryptr, um framework completo para modelagem de CAPTCHAs. Hoje veremos como..."
+retired: true
+alternativa: ""
 ---
 
-<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="/rmarkdown-libs/viz/viz.js"></script>
-<link href="/rmarkdown-libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/grViz-binding/grViz.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>No meu último post anunciei que começaríamos uma série sobre CAPTCHAs. Uma da nossas iniciativas principais nesse tema é a criação do <a href="https://github.com/decryptr/decryptr">pacote decryptr</a>. Hoje veremos como usar algumas das funções principais desse pacote.</p>
-<div id="suposicoes-do-decryptr" class="section level2">
+<div id="suposições-do-decryptr" class="section level2">
 <h2>Suposições do <code>decryptr</code></h2>
 <p>Ao criar o <code>decryptr</code> reduzimos um pouco o escopo de CAPTCHAs que gostaríamos de incluir. Fizemos isso para não ficarmos malucos, pois existem diversos tipos de testes disponíveis na web!</p>
 <p>As suposições são:</p>
@@ -28,7 +28,7 @@ summary: "No último post sobre CAPTCHAs anunciei uma série de posts sobre CAPT
 <li>Não conseguimos nem queremos quebrar o <a href="https://www.google.com/recaptcha/intro/invisible.html">reCAPTCHA</a>.</li>
 </ol>
 </div>
-<div id="instalacao" class="section level2">
+<div id="instalação" class="section level2">
 <h2>Instalação</h2>
 <p>O <code>decryptr</code> ainda não está no CRAN. Isso significa que para instalá-lo você precisará do <code>devtools</code>:</p>
 <pre class="r"><code>if (!require(devtools)) install.packages(&#39;devtools&#39;)
@@ -44,16 +44,9 @@ devtools::install_github(&#39;decryptr/decryptr&#39;)</code></pre>
 <li><code>model.captcha()</code>: método <code>S3</code> para modelar os CAPTCHAs.</li>
 <li><code>predict.captcha()</code>: método <code>S3</code> para classificar um CAPTCHA a partir de um modelo ajustado e um caminho de imagem.</li>
 </ul>
-<div id="fluxo-de-utilizacao" class="section level3">
+<div id="fluxo-de-utilização" class="section level3">
 <h3>Fluxo de utilização</h3>
-<p>O modo de uso planejado do <code>decryptr</code> está descrito na Figura <a href="#fig:fluxo">1</a>.</p>
-<div class="figure"><span id="fig:fluxo"></span>
-<div id="htmlwidget-1" style="width:750px;height:400px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"diagram":"\ndigraph rmarkdown {\ngraph [layout = circo]\ndownload->read\nread->plot\nread->classify\nread->prepare\nprepare->model\nmodel->predict\nread->predict\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-<p class="caption">
-Figure 1: Fluxo de utilização do pacote <code>decryptr</code>.
-</p>
-</div>
+<p>O modo de uso planejado do <code>decryptr</code> está descrito na Figura <a href="#fig:fluxo"><strong>??</strong></a>.</p>
 <p>Como ainda não temos a teoria completa para ajuste de modelos, nesse post vamos ficar com a utilização das funções de download, visualização e classificação.</p>
 </div>
 </div>
@@ -81,7 +74,7 @@ Figure 1: Fluxo de utilização do pacote <code>decryptr</code>.
 <pre class="r"><code>library(decryptr)
 download_tjmg(&#39;img/tjmg&#39;, n = 5) # salva arquivo em ./img/tjmg/captcha&lt;id&gt;.jpeg</code></pre>
 </div>
-<div id="visualizacao" class="section level2">
+<div id="visualização" class="section level2">
 <h2>Visualização</h2>
 <p>Para plotar um CAPTCHA basta ler o arquivo com <code>read_captcha()</code> e depois usar a função <code>plot()</code>. Exemplo:</p>
 <pre class="r"><code>library(decryptr)
@@ -89,15 +82,9 @@ download_tjmg(&#39;img/tjmg&#39;, n = 5) # salva arquivo em ./img/tjmg/captcha&l
   read_captcha() %&gt;% 
   purrr::pluck(1) %&gt;%
   plot()</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="/blog/2017-06-29-captcha-decryptr_files/figure-html/unnamed-chunk-3-1.png" alt="CAPTCHA do TJMG." width="384" />
-<p class="caption">
-Figure 2: CAPTCHA do TJMG.
-</p>
-</div>
 <p>Vale mencionar que esse não é um <code>ggplot()</code> então nem tente somar layers nesse gráfico 😄.</p>
 </div>
-<div id="classificacao" class="section level2">
+<div id="classificação" class="section level2">
 <h2>Classificação</h2>
 <p>A classificação manual de CAPTCHAs é importante para possibilitar o treino de modelos preditivos. Para classificar um CAPTCHA você pode utilizar a função <code>classify()</code>, assim:</p>
 <pre class="r"><code>&#39;img/tjmg/captcha4d2f795d4e4_92522.jpeg&#39; %&gt;% 

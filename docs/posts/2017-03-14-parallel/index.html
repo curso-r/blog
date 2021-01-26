@@ -6,7 +6,7 @@
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Curso-R">
   <meta name="generator" content="Hugo 0.80.0" />
 
   <!-- plugins -->
@@ -17,6 +17,10 @@
   
   <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
   
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
 
   <!-- Main Stylesheet -->
   
@@ -25,8 +29,8 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
   <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
-
-</head><body>
+</head>
+<body>
 <!-- preloader start -->
 <div class="preloader">
   <div class="loader">
@@ -101,7 +105,7 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Julio
+            Escrito por Julio em <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,6 +120,9 @@
         </ul>
         <article class="content">
           
+            
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Programadores eficientes não precisam escrever algoritmos que rodam rápido. Recomendo fortemente a leitura do livro <a href="https://csgillespie.github.io/efficientR/">Efficient R</a>, que discute eficiência com o R de forma exaustiva. Também gosto muito da primeira parte <a href="https://www.youtube.com/watch?v=wki0BqlztCo">dessa palestra do Hadley</a>, onde ele defende que o cientista de dados deve usar seu tempo pensando no problema e não na forma que vai escrever seu código.</p>
@@ -130,15 +137,15 @@
 <pre class="r"><code>system.time({
   dormir()
 })
-##   usuário   sistema decorrido 
-##     0.000     0.000     1.001</code></pre>
+##    user  system elapsed 
+##   0.000   0.000   1.003</code></pre>
 <p>Nosso interesse é aplicar <code>dormir()</code> em cada elemento do vetor <code>c(1, 2)</code>. Esse algoritmo demora <code>1 + 2 = 3</code> segundos.</p>
 <pre class="r"><code>segundos &lt;- c(1, 2)
 system.time({
   plyr::llply(segundos, dormir)
 })
-##   usuário   sistema decorrido 
-##     0.006     0.001     3.010</code></pre>
+##    user  system elapsed 
+##   0.115   0.011   3.298</code></pre>
 <p>Agora vamos executar o mesmo código usando paralelização. Antes, precisamos</p>
 <ol style="list-style-type: decimal">
 <li>criar e registrar as cópias de R que rodam em paralelo; e</li>
@@ -151,18 +158,19 @@ doParallel::registerDoParallel(cl)  # registra as cópias do R para serem usadas
 system.time({
   plyr::llply(segundos, dormir, .parallel = TRUE)
 })
-##   usuário   sistema decorrido 
-##     0.037     0.000     2.114</code></pre>
+##    user  system elapsed 
+##   0.114   0.012   2.256</code></pre>
 <p>O tempo total de execução foi de ~2.2 segundos, um pouco mais do que <code>dormir(2)</code>. Os dois décimos de segundo adicionais são necessários para preparar o terreno da paralelização. Inclusive, se você rodar o código em paralelo novamente, o tempo adicional cai para quase nada:</p>
 <pre class="r"><code>system.time({
   plyr::llply(segundos, dormir, .parallel = TRUE)
 })
-##   usuário   sistema decorrido 
-##     0.008     0.000     2.011</code></pre>
+##    user  system elapsed 
+##   0.007   0.000   2.009</code></pre>
 <p>Se quiser parar de rodar coisas em paralelo, basta rodar <code>stopCluster()</code>:</p>
 <pre class="r"><code>parallel::stopCluster(cl) # para de rodar coisas em paralelo</code></pre>
 <p>E é isso, caros errantes. Rappy coding :)</p>
 
+          
         </article>
       </div>
       <div class="col-lg-1">
@@ -306,6 +314,14 @@ system.time({
 
 <script src="https://blog.curso-r.com/plugins/search/search.js"></script>
 
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 <!-- Main Script -->
 

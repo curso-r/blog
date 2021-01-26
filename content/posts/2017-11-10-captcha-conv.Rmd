@@ -1,16 +1,17 @@
 ---
 title: "Quebrando Captchas - Parte V: Fazendo redes convolucionais na mão"
-date: "2017-11-12T23:26:00+03:00"
+date: "2017-11-12"
 tags: ["captcha"]
 categories: ["análises"]
 image: "images/posts/banner/captcha_05.png"
 author: ["Julio"]
 summary: "Nesse post vou mostrar como ajustar redes neurais convolucionais na mão. Muita mão na massa envolvida, muitos captchas e muita diversão. Vamos juntos desmistificar a magia negra do deep learning..."
-draft: false
+retired: true
+alternativa: ""
 ---
 
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, fig.align = "center", cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, fig.align = "center", cache = TRUE, eval = FALSE)
 knitr::knit_hooks$set(
   no.mar = function() par(mar = c(0,0,0,0)),
   small.mar = function() par(mar = c(.1,.1,.1,.1))
@@ -420,7 +421,7 @@ arq %>%
   image_write("img/captcha_conv.gif")
 ```
 
-![](images/posts/conteudo/captcha-conv/captcha_conv.gif)
+![](/images/posts/conteudo/captcha-conv/captcha_conv.gif)
 
 No próximo nível, vamos convoluir mais 48 kernels. Essa operação será feita com todos os doze filtros atuais, ou seja, é uma contaiada que não acaba mais. Para simplificar as contas e para permitir a obtenção de padrões diferentes, faz sentido simplificar a imagem. Para isso, usamos o *max pooling*.
 
@@ -665,7 +666,7 @@ imagens_alteradas <- purrr::imap(result_conv3, ~{
   image_write("img/captcha_conv_final.gif")
 ```
 
-![](images/posts/conteudo/captcha-conv/captcha_conv_final.gif)
+![](/images/posts/conteudo/captcha-conv/captcha_conv_final.gif)
 
 Parece que os filtros são capazes de pegar as curvas que as letras fazem no captcha. Mas não tenho opinião formada sobre isso. Digam aí nos comentários o que vocês acham!
 

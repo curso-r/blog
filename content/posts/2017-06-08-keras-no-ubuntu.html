@@ -1,18 +1,20 @@
 ---
 title: "Instalando Anaconda + TensorFlow + Keras para R no Ubuntu 16.04 Server"
-date: "2017-06-08T21:12:00+03:00"
+date: "2017-06-08"
 tags: ["deep learning", "tensorflow", "keras"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/keras_no_ubuntu2.png"
 author: ["Athos"]
 summary: "Passo a passo de como preparar o Keras para R no Ubuntu 16.04 em cima do Anaconda."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Compilei um passo a passo mais simplificado dos posts que usei pra conseguir usar o Keras num servidor Ubuntu.</p>
 <p>Esse tutorial ensinará como instalar o <a href="https://docs.continuum.io/">Anaconda</a> com Python 3.5 em um servidor Ubuntu 16.04 + Keras para R. Então ao final desse post você terá o Keras direto do seu R pronto para abalar os profundos mares da aprendizagem de máquinas.</p>
-<div id="pre-requisitos" class="section level2">
+<div id="pré-requisitos" class="section level2">
 <h2>Pré-requisitos</h2>
 <p>O tutorial supõe que você possui um servidor Ubuntu 16.04 com R 3.4.0 ou versão superior instalado.</p>
 </div>
@@ -51,7 +53,7 @@ to PATH in your /home/athos/.bashrc ? [yes|no]
 <p>Neste momento você terá o Anaconda 4.2.0 pronto para rodar.</p>
 <p><strong>Agora, ao R!</strong></p>
 </div>
-<div id="instalacao-do-keras-no-r" class="section level2">
+<div id="instalação-do-keras-no-r" class="section level2">
 <h2>instalação do Keras no R</h2>
 <p><strong>Passo 8)</strong> Essa parte é fácil. Rode os códigos abaixo para para instalar o pacote Keras e o <a href="https://www.tensorflow.org/">Tensorflow</a>.</p>
 <pre class="r"><code>devtools::install_github(&quot;rstudio/keras&quot;) # instalar o pacote do Keras para R

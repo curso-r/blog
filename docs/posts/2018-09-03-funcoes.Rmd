@@ -1,7 +1,7 @@
 ---
 title: "Uma forma de encontrar erros no R"
 date: "2018-09-03T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+categories: ["tutoriais"]
 tags: ["r", "funções"]
 image: "images/posts/banner/funcoes.png"
 author: ["Bruna Wundervald"]

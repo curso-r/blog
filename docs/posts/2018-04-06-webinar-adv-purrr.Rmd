@@ -2,7 +2,7 @@
 title: "Webinar: Advanced Purrr"
 date: "2018-04-06T13:07:31+02:00"
 tags: ["curso-R"]
-categories: ["divulgação", "r"]
+categories: ["divulgação"]
 image: "images/posts/banner/adv-purrr.jpg"
 author: ["Daniel"]
 ---

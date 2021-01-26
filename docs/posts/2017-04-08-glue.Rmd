@@ -1,8 +1,8 @@
 ---
 title: "Colando textos"
-date: "2017-04-17T13:07:31+02:00"
+date: "2017-04-17"
 tags: ["strings", "pacotes", "glue"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/glue.png"
 author: ["Julio"]
 draft: false

@@ -1,14 +1,15 @@
 ---
 title: "RFacebook: como conectar?"
-date: "2018-07-23T00:00:00+00:00"
+date: "2018-07-23"
 tags: ["app", "pacotes"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/marks.png"
 author: ["Julio", "Bruna Wundervald"]
 summary: "Hoje nosso amigo Marcio nos procurou pedindo ajuda pois não estava conseguindo fazer o pacote Rfacebook funcionar. O problema estava logo no começo: a autenticação com a API do Facebook. Nesse post identificar e corrigir esse problema."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Hoje nosso amigo <a href="https://www.facebook.com/marcio.chiara">Marcio Chiara</a> nos procurou pedindo ajuda pois não estava conseguindo fazer o pacote <a href="https://github.com/pablobarbera/Rfacebook">Rfacebook</a> funcionar. O problema estava logo no começo: a autenticação com a API do Facebook.</p>
@@ -38,12 +39,12 @@ Rfacebook::fbOAuth(client_id, client_secret)</code></pre>
 <pre class="r"><code>Rfacebook::fbOAuth(client_id, client_secret, 
                    extended_permissions = TRUE)</code></pre>
 <p>A opção <code>extended_permissions</code> serve para dar acesso à algumas opções adicionais como aniversário, cidade de nascimento, etc. O erro que aparece é esse aqui:</p>
-<p><img src="images/posts/conteudo/rfacebook/Erro.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/rfacebook/Erro.png" /><!-- --></p>
 <p>Como somos pessoas espertinhas, o que fizemos? Abrimos os links que o Facebook sugeriu? Re-estudamos toda a API do Facebook? Não! Apenas lemos e interpretamos o erro. A API estava recusando acesso às opções <code>user_relationships</code> e <code>publish_actions</code>, que são requeridas por meio da função <code>Rfacebook::fbOAuth()</code>. Aha!</p>
 <p>Depois de estudar um pouquinho, notamos que a API do Facebook <a href="https://developers.facebook.com/docs/graph-api/changelog/breaking-changes/">mudou recentemente</a>. Isso ocorreu por conta de alterações na política de privacidade do Facebook, que é sempre algo polêmico. Hoje em dia não é mais possível autorizar aplicativos para terem acesso à rede de relacionamentos e ações do usuário.</p>
 <p>O problema é que infelizmente o mantenedor do <code>Rfacebook</code> parou de atualizar o pacote:</p>
 <hr />
-<p><img src="images/posts/conteudo/rfacebook/app.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/rfacebook/app.png" /><!-- --></p>
 <hr />
 <p>Então, o que fazer? Quando temos uma ferramenta que não funciona mais ou que está obsoleta, podemos i) jogar fora e fazer outra do zero ou ii) tentar arrumá-la para ficar top novamente.</p>
 <p>Por sorte, o R é open-source e permite que (ii) seja feito sem maiores esforços. De fato, basta mudar <strong>uma linha</strong> de código para que tudo volte a funcionar como antes. Basta mudar o objeto <code>scope</code> de</p>
@@ -54,7 +55,7 @@ Rfacebook::fbOAuth(client_id, client_secret)</code></pre>
 <pre class="r"><code>scope &lt;- c(&quot;user_birthday&quot;, &quot;user_hometown&quot;, &quot;user_location&quot;, 
            &quot;user_status&quot;, &quot;user_likes&quot;)</code></pre>
 </div>
-<div id="a-solucao" class="section level3">
+<div id="a-solução" class="section level3">
 <h3>A solução</h3>
 <p>Com base nessas alterações, a <a href="http://brunaw.com">Bruna</a> sugere a utilização da função modificada abaixo:</p>
 <pre class="r"><code>new_fbOAuth &lt;- function (app_id, app_secret, extended_permissions = FALSE, 

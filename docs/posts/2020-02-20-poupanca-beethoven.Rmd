@@ -2,7 +2,7 @@
 title: "A Poupança de Beethoven"
 date: "2020-02-20"
 tags: ["ggplot", "pib"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/poupanca-beethoven.jpg"
 author: ["Caio"]
 summary: "Explorando um pouco sobre currying e ggplot através da maluquice que são os juros compostos."

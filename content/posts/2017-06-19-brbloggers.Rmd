@@ -1,10 +1,12 @@
 ---
 title: "bR Bloggers está no ar"
-date: "2017-06-19T13:07:31+02:00"
+date: "2017-06-19"
 tags: ["curso-R", "br bloggers"]
-categories: ["divulgação", "r"]
+categories: ["divulgação"]
 image: "images/posts/banner/banner-brbloggers.png"
 author: ["Daniel"]
+retired: true
+alternativa: ""
 ---
 
 ```{r echo=F}

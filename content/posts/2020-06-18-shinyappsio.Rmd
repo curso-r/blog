@@ -2,7 +2,7 @@
 title: "Conectando o RStudio com o shinyapps.io"
 date: "2020-06-18"
 tags: ["shiny", "rstudio", "deploy"]
-categories: ["tutorial", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/shiny.jpg"
 author: ["William"]
 summary: "Aprenda como conectar a sua conta do shinyapps.io com o RStudio para compartilhar aplicativos Shiny na internet em apenas alguns minutos."

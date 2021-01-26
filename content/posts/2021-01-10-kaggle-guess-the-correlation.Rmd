@@ -1,8 +1,8 @@
 ---
 title: "Kaggle: Guess The Correlation (feat. {torchdatasets})"
 date: "2021-01-10"
-tags: ["torch", "deep learning", "r", "machine learning"]
-categories: ["tutoriais", "r"]
+tags: ["torch", "deep learning", "machine learning"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/guess-the-correlation.png"
 author: ["Athos"]
 summary: "Solução para o Kaggle Guess The Correlation com {torch}."

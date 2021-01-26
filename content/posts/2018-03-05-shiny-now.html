@@ -1,21 +1,22 @@
 ---
 title: "Hospedando seu Shiny app no now"
-date: "2018-03-05T14:25:00+03:00"
+date: "2018-03-05"
 tags: ["shiny"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/shiny-now.png"
 author: ["Daniel"]
 summary: "Neste post você aprenderá a hospedar o seu shiny app usando Docker e o serviço now.sh."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Existem diversas formas de hospedar o seu app feito <a href="https://shiny.rstudio.com">em shiny</a>. A maneira mais simples é usando o <a href="http://www.shinyapps.io">shinyapps.io</a>, SaaS desenvolvido pela própria RStudio. No entanto, na versão Free o seu app fica com um logotipo do RStudio no canto e não é permitido configurar um domínio próprio, ou seja, a url do seu app sempre vai ser algo do tipo: <code>dfalbel.shinyapps.io/meuapp</code>.</p>
 <p>Uma alternativa gratuita e que não possui essas contra-partidas é usar o serviço <a href="https://zeit.co/now">now.sh</a>. O <a href="https://zeit.co/now">now</a>, originalmente, foi desenvolvido para hospedar aplicativos feitos em nodejs e javascript, mas recentemente eles possibilitaram a hospedagem de aplicativos feitos com <a href="https://www.docker.com">Docker</a>.</p>
 <p>Além dessas vantagens o now conta com infraestrutura, segundo os desenvolvedores “auto scaling ready”, isto é o número de instâncias servindo o seu aplicativo pode variar de acordo com tráfego que o seu app está recebendo. No plano free o número de instâncias pode ser 0 ou 1, ou seja, seu app fica desligado se ninguém estiver usando. Nos <a href="https://zeit.co/account/plan">planos pagos</a> você pode fazer esse número variar da forma que quiser. Tudo isso está na <a href="https://zeit.co/docs/getting-started/scaling">documentação</a>.</p>
 <p>É difícil explicar o que é o <a href="https://www.docker.com">Docker</a> em poucas palavras, mas ele é uma plataforma de containers que facilita a configuração e preparação do ambiente para a hospedagem de um app. Em outras palavras, você escreve em um arquivo chamado <code>Dockerfile</code> especificando como você quer que seja o ambiente, o que você precisa instalar, que arquivos você quer colocar lá dentro. Para este tutorial você só precisará fazer pequenas modificações no <code>Dockerfile</code> e não precisará entender profundamente como ele funciona.</p>
-<div id="instalacao" class="section level3">
+<div id="instalação" class="section level3">
 <h3>Instalação:</h3>
 <p>Para seguir o tutorial você precisa instalar o <a href="https://zeit.co/now">now</a> e criar uma conta. Siga <a href="https://zeit.co/download">este link</a> para instalação e configuração do <a href="https://zeit.co/now">now</a>.</p>
 </div>
@@ -47,7 +48,8 @@ COPY /app/ /srv/shiny-server/</code></pre>
 </div>
 <div id="app" class="section level3">
 <h3>App</h3>
-<p>Dentro da pasta app, coloque o seu código shiny. A princípio, você não precisa fazer nenhuma modificação. No meu exemplo, coloquei o arquivo <code>app.R</code> contendo um aplicativo usando o <a href="https://rstudio.github.io/shinydashboard/get_started.html"><code>shinydashboard</code> (copiado da documentação do pacote)</a>.</p>
+<p>Dentro da pasta app, coloque o seu código shiny. A princípio, você não precisa fazer nenhuma modificação.
+No meu exemplo, coloquei o arquivo <code>app.R</code> contendo um aplicativo usando o <a href="https://rstudio.github.io/shinydashboard/get_started.html"><code>shinydashboard</code> (copiado da documentação do pacote)</a>.</p>
 <p>O conteúdo do arquivo do arquivo <code>app.R</code> está abaixo:</p>
 <pre><code>library(shinydashboard)
 
@@ -103,7 +105,7 @@ Sending build context to Docker daemon 6.656 kBkB
 <p>Na sexta linha dessa mensagem, temos o endereço do nosso aplicativo. Basta abrir essa url no navegador e ver o aplicativo funcionando. Por enquanto, o <a href="https://zeit.co/now">now</a> colocou um endereço para testes, mas tudo isso é configurável.</p>
 <p>Para mudar a url do seu app você vai precisar usar o comando <code>now alias</code>. A documentação desse comando é muito boa e vai ser melhor do que qualquer coisa que eu escrever aqui. Vá para <a href="https://zeit.co/docs/features/aliases">este link</a>!</p>
 </div>
-<div id="conclusao" class="section level3">
+<div id="conclusão" class="section level3">
 <h3>Conclusão</h3>
 <p>O <a href="https://zeit.co/now">now</a> é um serviço gratuito que permite a hospedagem de containers <a href="https://www.docker.com">Docker</a>. Neste post configuramos um Dockerfile para instalar hospedar um app shiny e usando o comando <code>now</code> rapidamente enviamos o nosso aplicativo para o now e iniciamos a hospedagem.</p>
 </div>

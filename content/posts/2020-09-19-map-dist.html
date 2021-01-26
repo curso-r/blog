@@ -1,15 +1,18 @@
 ---
 title: "Qual a capital mais distante de Brasília?"
 date: "2020-09-19"
-tags: ["r", "visualizacao", "mapas"]
-categories: ["tutorial", "r"]
+tags: ["visualizacao", "mapas"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/map-dist.png"
 author: ["Julio"]
 summary: "Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!"
 draft: false
 ---
 
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <p>Hoje acordei curioso para saber qual era a capital mais distante de Brasília. Essa não é uma questão tão trivial quanto parece, pois, como a Terra é esférica (apesar de todas as controvérsias), podemos chegar em um ponto por mais de um caminho. Por isso, resolvi calcular todas as distâncias e montar um mapinha!</p>
@@ -85,128 +88,264 @@ da_countries_tidy &lt;- da_countries_raw %&gt;%
 <div id="visualizando" class="section level2">
 <h2>Visualizando</h2>
 <p>As capitais mais próximas estão na Tabela <a href="#tab:proximas">1</a>. Sem muitas surpresas aqui: como Brasília fica na região central do país, a capital mais próxima é a do Paraguai, seguida por outros países da América do Sul.</p>
-<table>
-<caption><span id="tab:proximas">Table 1: </span>Capitais mais próximas de Brasília.</caption>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:proximas">Tabela 1: </span>Capitais mais próximas de Brasília.
+</caption>
 <thead>
-<tr class="header">
-<th align="left">País</th>
-<th align="left">Capital</th>
-<th align="right">Distância (km)</th>
+<tr>
+<th style="text-align:left;">
+País
+</th>
+<th style="text-align:left;">
+Capital
+</th>
+<th style="text-align:right;">
+Distância (km)
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Paraguay</td>
-<td align="left">Asuncion</td>
-<td align="right">1473</td>
+<tr>
+<td style="text-align:left;">
+Paraguay
+</td>
+<td style="text-align:left;">
+Asuncion
+</td>
+<td style="text-align:right;">
+1473
+</td>
 </tr>
-<tr class="even">
-<td align="left">Bolivia</td>
-<td align="left">La Paz (administrative) / Sucre (legislative)</td>
-<td align="right">2202</td>
+<tr>
+<td style="text-align:left;">
+Bolivia
+</td>
+<td style="text-align:left;">
+La Paz (administrative) / Sucre (legislative)
+</td>
+<td style="text-align:right;">
+2202
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Uruguay</td>
-<td align="left">Montevideo</td>
-<td align="right">2276</td>
+<tr>
+<td style="text-align:left;">
+Uruguay
+</td>
+<td style="text-align:left;">
+Montevideo
+</td>
+<td style="text-align:right;">
+2276
+</td>
 </tr>
-<tr class="even">
-<td align="left">French Guiana</td>
-<td align="left">Cayenne</td>
-<td align="right">2326</td>
+<tr>
+<td style="text-align:left;">
+French Guiana
+</td>
+<td style="text-align:left;">
+Cayenne
+</td>
+<td style="text-align:right;">
+2326
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Suriname</td>
-<td align="left">Paramaribo</td>
-<td align="right">2464</td>
+<tr>
+<td style="text-align:left;">
+Suriname
+</td>
+<td style="text-align:left;">
+Paramaribo
+</td>
+<td style="text-align:right;">
+2464
+</td>
 </tr>
-<tr class="even">
-<td align="left">Argentina</td>
-<td align="left">Buenos Aires</td>
-<td align="right">2618</td>
+<tr>
+<td style="text-align:left;">
+Argentina
+</td>
+<td style="text-align:left;">
+Buenos Aires
+</td>
+<td style="text-align:right;">
+2618
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Guyana</td>
-<td align="left">Georgetown</td>
-<td align="right">2695</td>
+<tr>
+<td style="text-align:left;">
+Guyana
+</td>
+<td style="text-align:left;">
+Georgetown
+</td>
+<td style="text-align:right;">
+2695
+</td>
 </tr>
-<tr class="even">
-<td align="left">Chile</td>
-<td align="left">Santiago</td>
-<td align="right">3028</td>
+<tr>
+<td style="text-align:left;">
+Chile
+</td>
+<td style="text-align:left;">
+Santiago
+</td>
+<td style="text-align:right;">
+3028
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Peru</td>
-<td align="left">Lima</td>
-<td align="right">3206</td>
+<tr>
+<td style="text-align:left;">
+Peru
+</td>
+<td style="text-align:left;">
+Lima
+</td>
+<td style="text-align:right;">
+3206
+</td>
 </tr>
-<tr class="even">
-<td align="left">Barbados</td>
-<td align="left">Bridgetown</td>
-<td align="right">3409</td>
+<tr>
+<td style="text-align:left;">
+Barbados
+</td>
+<td style="text-align:left;">
+Bridgetown
+</td>
+<td style="text-align:right;">
+3409
+</td>
 </tr>
 </tbody>
 </table>
 <p>As coisas ficam mais interessantes quando visualizamos as capitais mais distantes, na Tabela <a href="#tab:distantes">2</a>. E temos nosso resultado: Koror (Palau) é a capital mais distante da capital, Brasília, seguida por Manila (Filipinas) e Saipan (Ilhas Mariana do Norte).</p>
-<table>
-<caption><span id="tab:distantes">Table 2: </span>Capitais mais distantes de Brasília.</caption>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:distantes">Tabela 2: </span>Capitais mais distantes de Brasília.
+</caption>
 <thead>
-<tr class="header">
-<th align="left">País</th>
-<th align="left">Capital</th>
-<th align="right">Distância (km)</th>
+<tr>
+<th style="text-align:left;">
+País
+</th>
+<th style="text-align:left;">
+Capital
+</th>
+<th style="text-align:right;">
+Distância (km)
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Palau</td>
-<td align="left">Koror</td>
-<td align="right">19069</td>
+<tr>
+<td style="text-align:left;">
+Palau
+</td>
+<td style="text-align:left;">
+Koror
+</td>
+<td style="text-align:right;">
+19069
+</td>
 </tr>
-<tr class="even">
-<td align="left">Philippines</td>
-<td align="left">Manila</td>
-<td align="right">18801</td>
+<tr>
+<td style="text-align:left;">
+Philippines
+</td>
+<td style="text-align:left;">
+Manila
+</td>
+<td style="text-align:right;">
+18801
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Northern Mariana Islands</td>
-<td align="left">Saipan</td>
-<td align="right">18639</td>
+<tr>
+<td style="text-align:left;">
+Northern Mariana Islands
+</td>
+<td style="text-align:left;">
+Saipan
+</td>
+<td style="text-align:right;">
+18639
+</td>
 </tr>
-<tr class="even">
-<td align="left">Macao, China</td>
-<td align="left">Macau</td>
-<td align="right">17887</td>
+<tr>
+<td style="text-align:left;">
+Macao, China
+</td>
+<td style="text-align:left;">
+Macau
+</td>
+<td style="text-align:right;">
+17887
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Brunei Darussalam</td>
-<td align="left">Bandar Seri Begawan</td>
-<td align="right">17765</td>
+<tr>
+<td style="text-align:left;">
+Brunei Darussalam
+</td>
+<td style="text-align:left;">
+Bandar Seri Begawan
+</td>
+<td style="text-align:right;">
+17765
+</td>
 </tr>
-<tr class="even">
-<td align="left">Republic of Korea</td>
-<td align="left">Seoul</td>
-<td align="right">17517</td>
+<tr>
+<td style="text-align:left;">
+Republic of Korea
+</td>
+<td style="text-align:left;">
+Seoul
+</td>
+<td style="text-align:right;">
+17517
+</td>
 </tr>
-<tr class="odd">
-<td align="left">North Korea</td>
-<td align="left">Pyongyang</td>
-<td align="right">17296</td>
+<tr>
+<td style="text-align:left;">
+North Korea
+</td>
+<td style="text-align:left;">
+Pyongyang
+</td>
+<td style="text-align:right;">
+17296
+</td>
 </tr>
-<tr class="even">
-<td align="left">East Timor</td>
-<td align="left">Dili</td>
-<td align="right">17264</td>
+<tr>
+<td style="text-align:left;">
+East Timor
+</td>
+<td style="text-align:left;">
+Dili
+</td>
+<td style="text-align:right;">
+17264
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Viet Nam</td>
-<td align="left">Hanoi</td>
-<td align="right">17126</td>
+<tr>
+<td style="text-align:left;">
+Viet Nam
+</td>
+<td style="text-align:left;">
+Hanoi
+</td>
+<td style="text-align:right;">
+17126
+</td>
 </tr>
-<tr class="even">
-<td align="left">Micronesia (Federated States of)</td>
-<td align="left">Palikir</td>
-<td align="right">17066</td>
+<tr>
+<td style="text-align:left;">
+Micronesia (Federated States of)
+</td>
+<td style="text-align:left;">
+Palikir
+</td>
+<td style="text-align:right;">
+17066
+</td>
 </tr>
 </tbody>
 </table>

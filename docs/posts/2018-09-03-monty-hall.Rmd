@@ -1,7 +1,7 @@
 ---
 title: "Monty hall e diagramas de influência"
 date: "2018-09-09T00:00:00+00:00"
-categories: ["r", "conceitos"]
+categories: ["conceitos"]
 tags: ["r", "modelo", "historia"]
 image: "images/posts/banner/montyhall.png"
 author: ["Julio"]

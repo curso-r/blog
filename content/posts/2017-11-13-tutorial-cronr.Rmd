@@ -1,8 +1,8 @@
 ---
 title: "Usando o cronR para Agendar Scripts"
-date: "2017-11-13T14:25:00+03:00"
+date: "2017-11-13"
 tags: ["cron"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/cron-clock.jpg"
 author: ["Caio"]
 summary: "Como agendar a execução de scripts usando o pacote cronR."

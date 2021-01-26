@@ -6,7 +6,7 @@
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Curso-R">
   <meta name="generator" content="Hugo 0.80.0" />
 
   <!-- plugins -->
@@ -17,6 +17,10 @@
   
   <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
   
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
 
   <!-- Main Stylesheet -->
   
@@ -25,8 +29,8 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
   <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
-
-</head><body>
+</head>
+<body>
 <!-- preloader start -->
 <div class="preloader">
   <div class="loader">
@@ -101,7 +105,7 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Caio
+            Escrito por Caio em <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,7 +120,8 @@
             <li class="list-inline-item m-1"><a href="/tags/git">git</a></li>
         </ul>
         <article class="content">
-          <p>A terminologia <em>master/slave</em> (mestre/escravo) existe há muitas décadas na computação e parece ter <a href="https://en.wikipedia.org/wiki/Master/slave_(technology)">migrado</a> para a indústria da tecnologia já no início do século XX. Esses conceitos normalmente estão associados a um modelo de comunicação assimétrico no qual um processo ou aparelho (o &ldquo;mestre&rdquo;) controla outros processos ou aparelhos (os &ldquo;escravos&rdquo;). Não é necessário dizer que os termos vêm sendo contestados há anos devido à evidente conotação racista, mas o debate ganhou nova vida após os protestos do Black Lives Matter em 2020.</p>
+          
+            <p>A terminologia <em>master/slave</em> (mestre/escravo) existe há muitas décadas na computação e parece ter <a href="https://en.wikipedia.org/wiki/Master/slave_(technology)">migrado</a> para a indústria da tecnologia já no início do século XX. Esses conceitos normalmente estão associados a um modelo de comunicação assimétrico no qual um processo ou aparelho (o &ldquo;mestre&rdquo;) controla outros processos ou aparelhos (os &ldquo;escravos&rdquo;). Não é necessário dizer que os termos vêm sendo contestados há anos devido à evidente conotação racista, mas o debate ganhou nova vida após os protestos do Black Lives Matter em 2020.</p>
 <p>Várias linguagens de programação já abandonaram essa terminologia. Em 2018, no caso em que possivelmente houve maior repercussão até hoje, o Python <a href="https://www.vice.com/en_us/article/8x7akv/masterslave-terminology-was-removed-from-python-programming-language">abandonou</a> a palavra <em>master</em> por <em>parent process</em> (processo pai) e a palavra <em>slave</em> por <em>worker</em> (trabalhador) ou <em>helper</em> (ajudante) após um <a href="https://bugs.python.org/issue34605">debate</a> acalorado.</p>
 <p>Enquanto isso, já em 2014, o Django passou a adotar a terminologia <em>primary/replica</em> (primário/réplica) e foi seguido pelo Drupal. Em 2017, o Internet Systems Consortium optou por <em>primary/secondary</em> (primário/secundário). Como se pode ver, não faltam alternativas para uma referência à escravidão.</p>
 <p>Enfim, este ano foi a vez do GitHub. Desde sua criação, a plataforma de controle de versão tem utilizado o termo <em>master</em> para tratar do <em>branch</em> principal de um repositório e, apesar de nem existir uma analogia para algo como um <em>slave branch</em>, a palavra continua até hoje. Antes tarde do que nunca, a empresa <a href="https://www.vice.com/en_us/article/k7qbyv/github-to-remove-masterslave-terminology-from-its-platform">anunciou</a> que vai fazer uma transição em breve para o termo <em>main</em> (principal) e aposentar seu antecessor.</p>
@@ -143,6 +148,7 @@ git push origin --delete master
 </code></pre></div><p>Note apenas que o Passo 4 deve ser realizado diretamente no GitHub de acordo com a <a href="https://docs.github.com/pt/github/administering-a-repository/setting-the-default-branch">documentação</a> (disponível em português).</p>
 <p>Caso você queira que o processo seja completamente automatizado, existe um <a href="https://eyqs.ca/tools/rename/">aplicativo web</a> que faz tudo para você. Para saber mais sobre os esforços do próprio GitHub, acesse <a href="https://github.com/github/renaming">a página</a> na qual estão sendo discutidas as mudanças.</p>
 
+          
         </article>
       </div>
       <div class="col-lg-1">
@@ -286,6 +292,14 @@ git push origin --delete master
 
 <script src="https://blog.curso-r.com/plugins/search/search.js"></script>
 
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 <!-- Main Script -->
 

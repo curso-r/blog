@@ -2,7 +2,7 @@
 title: "Predições XGBoost diretamente pelo SQL"
 date: "2020-08-29"
 tags: ["sql", "xgboost", "r", "machine learning"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/xgboost-sql.jpg"
 author: ["Athos"]
 summary: "Criar um XGBoost no R e colocar para o SQL gerar as predições em uma linha de código com o {tidypredict}."

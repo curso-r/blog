@@ -136,7 +136,7 @@
     <item>
       <title>Colando textos</title>
       <link>https://blog.curso-r.com/posts/2017-04-08-glue/</link>
-      <pubDate>Mon, 17 Apr 2017 13:07:31 +0200</pubDate>
+      <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-08-glue/</guid>
       <description>Uma tarefa muito comum no R é colar textos. As funções mais importantes para isso são paste() e sprintf(), que vêm com o pacote base. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do tidyverse, o glue.</description>

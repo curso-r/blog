@@ -1,13 +1,15 @@
 ---
 title: "Você está a menos de 1 km de um Hambúrguer?"
-date: "2017-04-10T23:26:00+03:00"
+date: "2017-04-10"
 tags: ["GoogleMaps", "API", "leaflet"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/man-with-a-map.jpg"
 author: ["William"]
 summary: "Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos utilizar o pacote `leaflet` para criar mapas com os dados coletados e descobrir se estamos a menos de 1 km de hospitais, delagacias, corpos de bombeiros e, o mais importante, de uma hamburgueria."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
 <script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
 <link href="/rmarkdown-libs/leaflet/leaflet.css" rel="stylesheet" />
@@ -93,7 +95,7 @@ library(leaflet)</code></pre>
   return(df)
 }
 </code></pre>
-<p>Com a função <code>get_googlemaps_data()</code> em mão, basta rodar o código <code>get_googlemaps_data(&quot;mercado&quot;, key = sua_API_key)</code> para obter a geolocalização de até 200 mercados em um raio de até 15 Km do centro de São Paulo. Sim, o limite é de 200 resultados. Não encontrei maneiras de aumentar esse limite.</p>
+<p>Com a função <code>get_googlemaps_data()</code> em mão, basta rodar o código <code>get_googlemaps_data("mercado", key = sua_API_key)</code> para obter a geolocalização de até 200 mercados em um raio de até 15 Km do centro de São Paulo. Sim, o limite é de 200 resultados. Não encontrei maneiras de aumentar esse limite.</p>
 <p>Também podemos utilizar a função <code>purrr:map_df()</code> para gerar um data frame com várias buscas. A função <em>map</em> mapeia uma determinada função em cada elemento de um vetor/lista, retornando um data frame. Ainda não estamos construindo os mapas.</p>
 <pre class="r"><code>places &lt;- c(&quot;pronto socorro&quot;, &quot;delegacia&quot;, &quot;bombeiros&quot;, &quot;hamburguer&quot;, &quot;pizza&quot;)
 

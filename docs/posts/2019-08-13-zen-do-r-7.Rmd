@@ -2,7 +2,7 @@
 title: "Data e data-raw (Zen do R parte 7)"
 date: "2019-08-13"
 tags: ["zen-do-r"]
-categories: ["livro", "r"]
+categories: ["livro"]
 image: "images/posts/banner/zen-do-r-7.jpg"
 author: ["Caio"]
 summary: "Como armazenar dados em um pacote: os diretórios data e data-raw."

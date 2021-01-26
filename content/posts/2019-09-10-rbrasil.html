@@ -2,13 +2,14 @@
 title: "Comunidade R Brasil no Telegram"
 date: "2019-11-13"
 tags: ["comunidade"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/telegram-rbrasil.png"
 author: ["Julio"]
 summary: "Nesse post, baixamos os dados do Telegram da comunidade RBrasil e fizemos alguns gráficos divertidos."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>O que faz o R ser tão legal é a comunidade que está por trás dela. Existem várias formas de acessar essa comunidade: pelo <a href="https://stackoverflow.com/questions/tagged/r">stackoverflow</a>, <a href="https://twitter.com/search?q=%23rstats">twitter</a>, <a href="https://pt-br.facebook.com/groups/1410023525939155/">facebook</a>, entre outras. Nesse post vou falar um pouquinho sobre a comunidade RBrasil no <a href="https://t.me/rbrasiloficial">telegram</a>, usando dados!</p>
@@ -136,7 +137,7 @@ d_msg %&gt;%
   geom_line() +
   geom_point() +
   theme_minimal(16)</code></pre>
-<p><img src="images/posts/conteudo/telegram/tempo-tot.png" /></p>
+<p><img src="/images/posts/conteudo/telegram/tempo-tot.png" /></p>
 <p>No gráfico seguinte, peguei as doze pessoas que falaram mais historicamente e avaliei a evolução mensal de mensagens. Temos de tudo: os constantes, os que sumiram, os que ressurgiram das cinzas e os que chegaram para ficar.</p>
 <pre class="r"><code>d_msg %&gt;% 
   dplyr::filter(nome != &quot;Deleted Account&quot;) %&gt;% 
@@ -151,7 +152,7 @@ d_msg %&gt;%
   facet_wrap(~nome) +
   labs(x = &quot;Mês&quot;, y = &quot;Quantidade de mensagens&quot;) +
   theme_bw()</code></pre>
-<p><img src="images/posts/conteudo/telegram/tempo-pessoa.png" /></p>
+<p><img src="/images/posts/conteudo/telegram/tempo-pessoa.png" /></p>
 <p>E qual é o horário que as pessoas interagem mais? Parece que é às 16 horas, aquele horário que a pessoa está ferrada no trabalho e precisa pedir uma ajuda aos amigos…</p>
 <pre class="r"><code>d_msg %&gt;% 
   dplyr::mutate(hora = factor(lubridate::hour(data_hora))) %&gt;% 
@@ -159,7 +160,7 @@ d_msg %&gt;%
   geom_bar(fill = &quot;royalblue&quot;) +
   theme_minimal(14) +
   ggtitle(&quot;Hora das mensagens&quot;)</code></pre>
-<p><img src="images/posts/conteudo/telegram/hora.png" /></p>
+<p><img src="/images/posts/conteudo/telegram/hora.png" /></p>
 <p>E o dia da semana? Terça-feira wins!</p>
 <pre class="r"><code>d_msg %&gt;% 
   dplyr::mutate(wd = lubridate::wday(data_hora, label = TRUE)) %&gt;% 
@@ -167,7 +168,7 @@ d_msg %&gt;%
   geom_bar(fill = &quot;pink2&quot;) +
   theme_minimal(14) +
   ggtitle(&quot;Dia da semana das mensagens&quot;)</code></pre>
-<p><img src="images/posts/conteudo/telegram/dia-semana.png" /></p>
+<p><img src="/images/posts/conteudo/telegram/dia-semana.png" /></p>
 <p>E claro, não poderia faltar um wordcloud…</p>
 <pre class="r"><code># dá pra criar funções anônimas assim ;)
 # esse é um limpador bem safado que fiz em 1 min
@@ -193,7 +194,7 @@ d_msg %&gt;%
     min.freq = 80, random.order = FALSE,
     colors = cores
   ))</code></pre>
-<p><img src="images/posts/conteudo/telegram/wordcloud.png" /></p>
+<p><img src="/images/posts/conteudo/telegram/wordcloud.png" /></p>
 <p>Fiz poucos gráficos para te deixar com vontade de brincar mais. Gostou da brincadeira? Então faça suas próprias análises do seu chat preferido do Telegram!</p>
 <p>É isso. Happy coding ;)</p>
 </div>

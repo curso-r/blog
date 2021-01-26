@@ -1,7 +1,7 @@
 ---
 title: "Quebrando Captchas - Parte VII: Oráculos"
 date: "2019-11-20"
-categories: ["r", "tutoriais"]
+categories: ["tutoriais"]
 tags: ["r", "captcha"]
 image: "images/posts/banner/captcha_07.png"
 author: ["Julio"]
@@ -35,7 +35,7 @@ O oráculo nem sempre existe em problemas reais, pois a verdade não costuma est
 
 Então o oráculo é como se fosse minha base de testes? Bem, sim, mas é um tipo muito especial de base de teste. No contexto de captchas, nós podemos gerar infinitas observações novas da base, criando uma base de dados de treino virtualmente infinita.
 
-![](images/posts/conteudo/captcha-oraculo-1/oraculo.gif)
+![](/images/posts/conteudo/captcha-oraculo-1/oraculo.gif)
 
 O problema é que a resposta do oráculo não é sempre clara: usualmente, o oráculo não diz __o quê__ você errou, mas somente __se__ você errou. Ou seja, é uma informação incompleta, censurada.
 
@@ -100,7 +100,7 @@ result <- oracle_mnist(type = 0)
 ```
 
 
-![](images/posts/conteudo/captcha-oraculo-1/captcha1.png)
+![](/images/posts/conteudo/captcha-oraculo-1/captcha1.png)
 
     Answer: 87685
 
@@ -126,7 +126,7 @@ E esse é um caso que errei, e mandei mostrar todos os outputs possíveis:
 result <- oracle_mnist(type = 2)
 ```
 
-![](images/posts/conteudo/captcha-oraculo-1/captcha2.png)
+![](/images/posts/conteudo/captcha-oraculo-1/captcha2.png)
 
     Answer: 56198
 
@@ -352,7 +352,7 @@ result$res
 
 Veja qual foi o caso que o modelo errou:
 
-![](images/posts/conteudo/captcha-oraculo-1/captcha3.png)
+![](/images/posts/conteudo/captcha-oraculo-1/captcha3.png)
 
 Não parece tão fácil de ver que é um 7, né?
 

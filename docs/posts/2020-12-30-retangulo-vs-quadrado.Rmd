@@ -3,7 +3,7 @@ title: "CNNs: Kernel Quadrado versus Kernel Retangular"
 date: "2020-12-30"
 tags: ["torch", "deep learning", "r", "machine learning"]
 bibliography: bibliography.bib
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/quadrado-vs-retangulo.png"
 author: ["Athos"]
 summary: "Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels retangulares podem ajudar. O post mostra um exemplo minimal em {torch} para ilustrar uma situação em que isso acontece."

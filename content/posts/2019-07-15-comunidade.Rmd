@@ -1,8 +1,8 @@
 ---
 title: "Programando com a comunidade"
 date: "2019-08-19"
-tags: ["discussões", "comunidade"]
-categories: ["discussões", "r"]
+tags: ["comunidade"]
+categories: ["discussões"]
 image: "images/posts/banner/comunidade.png"
 author: ["Julio"]
 summary: "Trabalhar em grupo é difícil, mas os esforços se pagam. Aqui discuto alguns aspectos importantes para tirar proveito da melhor parte do R: a comunidade (Imagem de Allison Holst)."

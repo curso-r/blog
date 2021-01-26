@@ -2,11 +2,10 @@
 title: "Anunciando a comunidade Curso-R"
 date: "2020-02-21"
 tags: ["r"]
-categories: ["divulgação", "r"]
+categories: ["divulgação"]
 image: "images/posts/banner/welcome_to_rstats.png"
 author: ["Daniel"]
 summary: "A Curso-R lançou criou um lugar para vocÊ discutir R e outros assuntos relacionados."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

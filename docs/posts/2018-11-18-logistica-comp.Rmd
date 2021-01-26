@@ -1,7 +1,7 @@
 ---
 title: "Regressão logística: aspectos computacionais"
 date: "2018-11-18T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+categories: ["tutoriais"]
 tags: ["r"]
 image: "images/posts/banner/logistic-comp.jpg"
 author: ["Julio"]

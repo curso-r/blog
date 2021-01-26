@@ -6,7 +6,7 @@
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Curso-R">
   <meta name="generator" content="Hugo 0.80.0" />
 
   <!-- plugins -->
@@ -17,6 +17,10 @@
   
   <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
   
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
 
   <!-- Main Stylesheet -->
   
@@ -25,8 +29,8 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
   <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
-
-</head><body>
+</head>
+<body>
 <!-- preloader start -->
 <div class="preloader">
   <div class="loader">
@@ -101,7 +105,7 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Fernando
+            Escrito por Fernando em <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -117,6 +121,7 @@
         </ul>
         <article class="content">
           
+            
 
 
 <p>Quando eu trabalhei no Núcleo de Estudos da Violência da USP, obter informações da Secretaria de Segurança Pública de São Paulo (SSP) era uma tarefa meio esotérica. Coletávamos os dados de todos os DP’s de São Paulo, que são aproximadamente 100, e, como fazer isso manualmente era demorado, aplicávamos uma solução automática em dois passos. Primeiro <em>raspávamos</em> o site da SSP em Python<!--, com um script desenvolvido antes da minha entrada,--> e depois rodávamos uma macro em VBA chamada “Mestre Dos Magos”, que era responsável por consolidar as séries históricas em excel. Eu achava o procedimento um pouco hermético porque nenhum deles tinha sido feito por mim ou pela minha equipe, era uma herança que a gente não sabia como consertar se desse algum problema. Para dar um exemplo, no final da minha breve estadia no NEV o script não funcionava mais, então era necessário baixar tudo manualmente.</p>
@@ -291,6 +296,7 @@ D &lt;- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = &quot;ocorrencias&quot
 <p><img src="/blog/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 
+          
         </article>
       </div>
       <div class="col-lg-1">
@@ -434,6 +440,14 @@ D &lt;- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = &quot;ocorrencias&quot
 
 <script src="https://blog.curso-r.com/plugins/search/search.js"></script>
 
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 <!-- Main Script -->
 

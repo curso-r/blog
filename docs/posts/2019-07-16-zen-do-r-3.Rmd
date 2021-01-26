@@ -2,7 +2,7 @@
 title: "Rproj e diretórios (Zen do R parte 3)"
 date: "2019-07-16"
 tags: ["zen do R"]
-categories: ["livro", "r"]
+categories: ["livro"]
 image: "images/posts/banner/zen-do-r-3.jpg"
 author: ["Caio"]
 summary: "Como usar projetos no R para nunca mais

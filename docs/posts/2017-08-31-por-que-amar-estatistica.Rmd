@@ -2,7 +2,7 @@
 title: "Por que amar Estatística?"
 date: "2017-08-31T23:26:00+03:00"
 tags: ["estatística"]
-categories: ["discussões", "r"]
+categories: ["discussões"]
 image: "images/posts/banner/o-mascara.png"
 author: ["William"]
 summary: "Neste post, vou contar como me apaixonei pela Estatística."

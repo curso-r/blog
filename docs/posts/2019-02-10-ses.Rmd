@@ -1,7 +1,7 @@
 ---
 title: "Suavização exponencial simples com R"
 date: "2019-02-04T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+categories: ["tutoriais"]
 tags: ["r"]
 image: "images/posts/banner/ses.png"
 author: ["Daniel"]

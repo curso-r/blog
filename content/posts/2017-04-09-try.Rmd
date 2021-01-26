@@ -1,11 +1,10 @@
 ---
 title: "Tratando erros: the tidy way"
-date: "2017-04-20T13:07:31+02:00"
+date: "2017-04-20"
 tags: ["coding", "pacotes", "purrr"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/error.jpg"
 author: ["Julio"]
-draft: false
 summary: "Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão tidy dessas soluções."
 ---
 
@@ -48,10 +47,8 @@ Hoje em dia, o jeito mais arrumado de tratar erros é usando as funções `purrr
 - `possibly()` é uma versão mais otimista do `safely()`, que exige a definição de `otherwise = ` e não guarda as mensagens de erro.
 - `quietly()` não trata erros (ou seja, ela trava quando dá erro), mas guarda informações sobre *warnings* e *messages*.
 
-```{r, echo=FALSE, fig.cap='Admita, você não imaginava que teria de pensar em gramática para programar em R.', fig.width=8, fig.height=4}
-library(magick)
-x <- image_read('../../staticimages/posts/conteudo/try/adverbs.jpg')
-plot(x)
+```{r, echo=FALSE, fig.cap='Admita, você não imaginava que teria de pensar em gramática para programar em R.', fig.width=8, fig.height=4, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/try/adverbs.jpg", error = FALSE)
 ```
 
 Vamos ver as três funções colocadas em prática. Como exemplo usaremos a função `log`, que i) retorna um número quando a entrada é um número positivo, ii) dá um warning quando a entrada é um número menor ou igual a zero, e iii) dá um erro se a entrada não é um número.

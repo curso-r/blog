@@ -53,15 +53,6 @@
     </item>
     
     <item>
-      <title>Resumo da rstudio::conf 2019</title>
-      <link>https://blog.curso-r.com/posts/2019-01-30-rconf/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2019-01-30-rconf/</guid>
-      <description>Nesse post a Bruna conta como foi a sua expericência na rstudio conf que aconteceu esse mês em Austin.</description>
-    </item>
-    
-    <item>
       <title>Desafio de Dados - Recuperação de imagens</title>
       <link>https://blog.curso-r.com/posts/2018-08-09-desafio-recuperacao-imagem/</link>
       <pubDate>Thu, 09 Aug 2018 00:00:00 +0000</pubDate>
@@ -154,7 +145,7 @@
     <item>
       <title>rstudio::conf: Sessão Final</title>
       <link>https://blog.curso-r.com/posts/2017-02-18-all-things-r-and-rstudio/</link>
-      <pubDate>Thu, 16 Mar 2017 13:07:31 +0200</pubDate>
+      <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-18-all-things-r-and-rstudio/</guid>
       <description>No início de Janeiro desse ano ocorreu a primeira rstudio::conf, uma conferência sobre R promovida pela Rstudio.</description>

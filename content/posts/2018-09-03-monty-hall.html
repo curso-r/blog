@@ -1,14 +1,15 @@
 ---
 title: "Monty hall e diagramas de influência"
-date: "2018-09-09T00:00:00+00:00"
-categories: ["r", "conceitos"]
-tags: ["r", "modelo", "historia"]
+date: "2018-09-09"
+categories: ["conceitos"]
+tags: ["modelo", "historia"]
 image: "images/posts/banner/montyhall.png"
 author: ["Julio"]
 summary: "O problema de Monty Hall é talvez o mais eloquente exemplo de como a probabilidade pode confundir a mente humana. Esse problema desafiou a comunidade científica no final do século XX e chegou até a ser considerado um paradoxo. Nesse post mostramos uma solução simples e elegante para o problema usando diagramas de influência e o pacote bnlearn."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
 <script src="/rmarkdown-libs/d3/d3.min.js"></script>
 <script src="/rmarkdown-libs/dagre/dagre-d3.min.js"></script>
@@ -25,7 +26,7 @@ draft: false
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="https://imgs.xkcd.com/comics/monty_hall.png" alt="Brincadeira do [XKCD](https://xkcd.com/1282/)."  />
 <p class="caption">
-Figure 1: Brincadeira do <a href="https://xkcd.com/1282/">XKCD</a>.
+Figura 1: Brincadeira do <a href="https://xkcd.com/1282/">XKCD</a>.
 </p>
 </div>
 </center>
@@ -58,7 +59,7 @@ p(x_1, \dots, x_p) = \prod_j p(x_j|\pi_j).
 p(x_1, \dots, x_5) = p(x_1)p(x_2|x_1)p(x_3|x_1)p(x_4|x_3,x_2)p(x_5|x_4).
 \]</span></p>
 </div>
-<div id="diagrama-de-influencias" class="section level3">
+<div id="diagrama-de-influências" class="section level3">
 <h3>Diagrama de influências</h3>
 <p>Um diagrama e influências é uma rede Bayesiana com nós de decisão e utilidade (ganhos). Ou seja, é uma junção de três conceitos:</p>
 <p><span class="math display">\[

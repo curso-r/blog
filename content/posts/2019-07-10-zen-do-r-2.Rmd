@@ -1,12 +1,11 @@
 ---
 title: ".RData e .Rhistory (Zen do R parte 2)"
-date: "2019-07-10T00:00:00+00:00"
-tags: ["zen do R"]
-categories: ["livro", "r"]
+date: "2019-07-10"
+tags: ["Zen do R"]
+categories: ["conceitos"]
 image: "images/posts/banner/zen-do-r-2.jpg"
 author: ["Caio"]
 summary: "Como funcionam o .RData e o .Rhistory e porque você deveria desativá-los!"
-draft: false
 ---
 
 ```{r setup, include=FALSE}

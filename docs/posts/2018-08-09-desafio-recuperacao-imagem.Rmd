@@ -2,7 +2,7 @@
 title: "Desafio de Dados - Recuperação de imagens"
 date: "2018-08-09T00:00:00+00:00"
 tags: ["app", "pacotes"]
-categories: ["divulgação", "r"]
+categories: ["divulgação"]
 image: "img/blog/desafio-recuperacao-img/purple_wave.jpg"
 author: ["Athos","Daniel", "Bruna Wundervald"]
 summary: "Na segunda edição do Desafio de Dados vamos tentar recuperar a cor de uma imagem usando modelos de regressão e árvore de decisão."
@@ -27,13 +27,13 @@ ser representada por um banco de dados com 5 colunas (`x`, `y`,
 mais adequado para recuperar a o componente azul da 
 [imagem purple_wave.jpg.](images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg)
 
-![](images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg)
+![](/images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg)
 
 - Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da 
 [imagem xadrez_colorido.jpg.](images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg)
 
-![](images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg)
+![](/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg)
 
 # Como começar?
 

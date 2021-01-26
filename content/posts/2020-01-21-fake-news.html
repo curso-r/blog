@@ -1,16 +1,15 @@
 ---
 title: "Camadas de Fake News"
 date: "2020-01-21"
-tags: ["fake-news", "pib"]
-categories: ["análises", "r"]
+tags: ["fake news", "pib"]
+categories: ["análises"]
 image: "images/posts/banner/fake-news.jpg"
 author: ["Caio"]
 summary: "Uma fake news dura de roer. Como um gráfico pode estar tecnicamente certo e ao mesmo tempo não ser correto."
-draft: false
 ---
 
-<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
-<script src="/rmarkdown-libs/elevate-section-attrs/elevate-section-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="eu-tenho-um-problema" class="section level2">
@@ -35,7 +34,7 @@ Mas ontem aconteceu algo inédito: a mentira lutou contra mim.</p>
 <h2>A “Notícia”</h2>
 <p>A “notícia” falsa em questão é na verdade uma imagem. Uma imagem
 alterada, por sinal.</p>
-<p><img src="/blog/2020-01-21-fake-news_files/photo_2020-01-21_12-37-31.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2020-01-21-fake-news_files/photo_2020-01-21_12-37-31.jpg" style="display: block; margin: auto;" /></p>
 <p>Vamos por partes. Meu espanhol não é dos melhores, mas acho que qualquer
 lusófono consegue compreender bem o que está sendo mostrado: o gráfico
 representa a posição de dois países no ranking de PIB per capita. Além
@@ -79,7 +78,7 @@ passam de uma planilha Excel com um país por coluna e um ano por linha,
 com cada célula contendo o PIB per capita daquele país naquele ano em
 dólares constantes de 2011.</p>
 <p>Usando o <code>ggplot2</code> podemos reproduzir a imagem com facilidade:</p>
-<p><img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /></p>
 <p>Quando vi o gráfico, fiquei boquiaberto. Uma imagem em baixa resolução,
 com Photoshop mal feito, linguagem tendenciosa e veiculada via WhatsApp
 parecia não estar errada. Analisando o ranking da Argentina em 2016, o
@@ -93,7 +92,7 @@ está correto. A próxima visualização que fiz pretendia explorar não o ranki
 dos países, mas os seus PIBs per capita diretamente; isso é relevante
 porque a suposta alegação do gráfico diz respeito à economia da
 Argentina e não sobre ela em relação às de todos os outros países.</p>
-<p><img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /></p>
 <p>O que me chamou a atenção no gráfico acima foi que os PIBs per capita da
 Argentina e da Austrália parecem estar se descolando consistentemente
 desde 1905. Por que então o descolamento dos rankings só ocorre após
@@ -123,7 +122,7 @@ que a Argentina tinha o maior PIB per capita do mundo em 1895 e dizer
 que ela tinha o maior PIB per capita (estimado) entre 28 países
 selecionados. Abaixo é possível ver o ranking até 2016 se filtrarmos
 apenas os 28 países iniciais:</p>
-<p><img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /></p>
 <p>Fiz questão de manter a escala deste gráfico igual à do anterior porque
 assim fica fácil de ver o problema com a visualização da “notícia”. De
 fato a Argentina perdeu posições no ranking, isso é indiscutível, mas é
@@ -132,7 +131,7 @@ muito diferente perder algo em torno de 10 posições em 50 anos e perder
 <p>Para entender ainda melhor o que a imagem original está escondendo,
 basta exibir no gráfico os dados de <strong>todos</strong> os países contemplados
 pela base.</p>
-<p><img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /></p>
 <p>Note como a quantidade de países presentes na tabela cresce
 significativamente depois do início da década de 1950 dado que a métrica
 foi colocada em vigor apenas 6 anos antes. Sendo assim, é de se esperar
@@ -144,7 +143,7 @@ pela comunidade internacional).</p>
 mesmo gráfico, é possível utilizar a função <code>dplyr::percent_rank()</code> que,
 ao invés de atribuir números naturais como ranking, retorna o ranking
 dividido pelo total de elementos na comparação.</p>
-<p><img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /></p>
 <p>Aqui fica claro que, mesmo depois de piorar muito no ranking do PIB per
 capita, a Argentina ainda não está tão ruim quanto estava no início dos
 anos 1880 (em relação a todos os países disponíveis para cada ano).
@@ -175,7 +174,7 @@ Constitución Nacional sancionada en 1853, con las reformas de 1860, 1866
 y 1898, y exclusión de la de 1949”.</p>
 <p>Agora acho importante fazer uma visualização final, destacando a
 vigência da Constituição que deu início à “justiça social”:</p>
-<p><img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /></p>
 <p>Sugiro que os autores da imagem original façam a mesma montagem com o
 gráfico acima.</p>
 </div>

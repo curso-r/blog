@@ -1,7 +1,7 @@
 ---
 title: "Probabilidade e medida: intuição"
 date: "2019-03-10T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+categories: ["tutoriais"]
 tags: ["r"]
 image: "images/posts/banner/prob.jpg"
 author: ["Julio"]
@@ -47,7 +47,7 @@ Probabilidade nada mais é que medir eventos, soltando números entre zero e um.
 
 O exemplo mais fácil de **medida** que consigo pensar é a régua. A régua é uma função $\lambda(\cdot)$ que recebe como input um intervalo $(a,b]$ e retorna $b-a$. Ou seja, a função de medida é uma função que trabalha com conjuntos e retorna números reais não-negativos. Mas $b-a$ pode ser maior que um, ou até infinito. Logo, a probabilidade é um caso particular de medida, que recebe como input um conjunto e como output um número no intervalo $[0,1]$. 
 
-![](images/posts/conteudo/probabilidade/ruler.jpg)
+![](/images/posts/conteudo/probabilidade/ruler.jpg)
 
 No caso da régua, daria para resolver isso forçando $0 \leq a < b \leq 1$. Assim todos os intervalos teriam medida entre zero e um. De fato, quando trabalhamos com variáveis aleatórias
 

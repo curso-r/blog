@@ -1,14 +1,15 @@
 ---
 title: "Agendando scripts do R"
-date: "2018-10-04T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+date: "2018-10-04"
+categories: ["tutoriais"]
 tags: ["r"]
 image: "images/posts/banner/hyper-cron-r.jpg"
 author: ["Daniel"]
 summary: "Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos sem gastar muito."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>O <a href="https://ctlente.com">Caio</a> já escreveu <a href="https://www.curso-r.com/blog/2017-11-13-tutorial-cronr/">aqui no blog</a> sobre o CronR, um pacote do R que permite agendar scripts do R para rodar de tempos em tempos. O problema do CronR é que ele necessita que o computador que hospeda o processo fique ligado o tempo todo.</p>
@@ -34,7 +35,7 @@ draft: false
 <p>Se você estiver no RStudio, isso vai abrir o arquivo <code>.Renviron</code>. Adicione a linha:</p>
 <pre><code>R_TELEGRAM_BOT_RBot=6768271902:AAGKFXUz7P_Qg2X_pE0ZjKSLPZ45TEX9Z5QL4</code></pre>
 <p><strong>Não esqueça</strong> de trocar o token que está aí pelo seu token, gerado pelo BotFather.</p>
-<p>Agora vamos testar se está tudo certo. Instale o pacote <code>telegram</code> (<code>install.packages(&quot;telegram&quot;)</code>) e rode:</p>
+<p>Agora vamos testar se está tudo certo. Instale o pacote <code>telegram</code> (<code>install.packages("telegram")</code>) e rode:</p>
 <pre class="r"><code>library(telegram)
 bot &lt;- TGBot$new(token = bot_token(&#39;RBot&#39;))
 bot$getMe()</code></pre>
@@ -59,11 +60,10 @@ A função <code>fortunes</code> solta aleatóriamente frases famosas que aparec
 <pre class="r"><code>library(fortunes)
 fortune()
 ## 
-## My solution when I run into mysteries like this is to put &#39;browser()&#39; in
-## the function just before or after the line of interest. The magnitude and
-## direction of my stupidity usually become clear quickly.
-##    -- Patrick Burns
-##       R-help (February 2006)</code></pre>
+## This should be FAQ 0.0. No other thing is asked as frequently as this. This is
+## the FAQest of all FAQs, and a mother of all FAQs.
+##    -- Jari Oksanen (answering yet another question related to FAQ 7.31)
+##       R-help (February 2013)</code></pre>
 <p>Vamos criar uma função que envia uma mensagem aleatoriamente pelo Telegram. A função poderia ser algo assim:</p>
 <pre class="r"><code>main &lt;- function() {
   bot &lt;- TGBot$new(token = bot_token(&#39;RBot&#39;))
@@ -109,8 +109,8 @@ CMD [&quot;Rscript&quot;, &quot;/service/send_fortune.R&quot;]</code></pre>
 <ul>
 <li><code>FROM rocker/tidyverse</code> indica que vamos usar como base para o nosso <em>container</em> a imagem do <code>rocker/tidyverse</code>.</li>
 <li><code>COPY . /service</code> copia todos os arquivos da pasta (indicado pelo <code>.</code>) para a pasta <code>/service</code> dentro do container.</li>
-<li><code>RUN R -e &quot;install.packages(c('telegram', 'fortunes'), repos = 'http://cran.us.r-project.org')&quot;</code> instala os pacotes necessários para a execução do script.</li>
-<li><code>CMD [&quot;Rscript&quot;, &quot;/service/send_fortune.R&quot;]</code> indica o comando que será executado. No nosso caso: execute o script <code>send_fortune.R</code> que está na pasta <code>service/</code>.</li>
+<li><code>RUN R -e "install.packages(c('telegram', 'fortunes'), repos = 'http://cran.us.r-project.org')"</code> instala os pacotes necessários para a execução do script.</li>
+<li><code>CMD ["Rscript", "/service/send_fortune.R"]</code> indica o comando que será executado. No nosso caso: execute o script <code>send_fortune.R</code> que está na pasta <code>service/</code>.</li>
 </ul>
 </div>
 <div id="construindo-e-subindo-o-container" class="section level1">
@@ -164,7 +164,7 @@ passando o <code>--env R_TELEGRAM_BOT_RBot=6793020822:AAGKFXUz7P_Qg2X_pshau8432X
 hyper rmi dfalbel/hyper-cron-r</code></pre>
 <p>Substituindo os devidos nomes.</p>
 </div>
-<div id="conclusao" class="section level1">
+<div id="conclusão" class="section level1">
 <h1>Conclusão</h1>
 <p>Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos.
 Sei que tem bastante coisa e não dá para descrever todos os passos com toda precisão necessária para quem está fora do contexto. Por favor, se tiverem problemas ou dúvidas entre em contato para que possa melhorar o post.</p>

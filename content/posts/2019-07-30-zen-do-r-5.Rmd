@@ -1,12 +1,11 @@
 ---
 title: "Funções e Dependências (Zen do R parte 5)"
 date: "2019-07-30"
-tags: ["zen do R"]
-categories: ["livro", "r"]
+tags: ["Zen do R"]
+categories: ["conceitos"]
 image: "images/posts/banner/zen-do-r-5.jpg"
 author: ["Caio"]
 summary: "Como tornar o seu código reprodutível com funções e dependências."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

@@ -1,12 +1,11 @@
 ---
 title: "radix: um template RMarkdown"
-date: "2018-07-27T00:00:00+00:00"
+date: "2018-07-27"
 tags: ["rmarkdown"]
-categories: ["r", "divulgação"]
-image: "img/blog/radix/radix.png"
+categories: ["divulgação"]
+image: "images/posts/banner/radix.png"
 author: ["Daniel"]
 summary: "Neste post vamos apresentar o template Radix para RMarkdown: um formato criado especificamente para escrever artigos científicos para páginas da internet."
-draft: false
 ---
 
 O [radix](https://radixpub.github.io/radix-r/) é um formato do [RMarkdown](https://rmarkdown.rstudio.com) para publicações técnicas e ciêntíficas. Esse template tem entre suas vantagens:
@@ -50,7 +49,7 @@ output: radix::radix_article
 ---
 ```
 
-![](images/posts/conteudo/radix/radix.png)
+![](/images/posts/conteudo/radix/radix.png)
 
 Além disso, e talvez o mais legal do radix é que ele permite que você crie [sites](https://radixpub.github.io/radix-r/website.html) e [blogs](https://radixpub.github.io/radix-r/blog.html) com conjuntos de artigos. Não vamos falar sobre isso nesse post mas, você pode ler mais na [documentação do pacote](https://radixpub.github.io/radix-r/).
 

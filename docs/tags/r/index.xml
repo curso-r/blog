@@ -80,33 +80,6 @@
     </item>
     
     <item>
-      <title>Aplauda-me</title>
-      <link>https://blog.curso-r.com/posts/2020-08-27-applause/</link>
-      <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2020-08-27-applause/</guid>
-      <description>Fizemos um teste do pacote {applause}.</description>
-    </item>
-    
-    <item>
-      <title>As novas funções de pivotagem</title>
-      <link>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</link>
-      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</guid>
-      <description>Apresentamos aqui as novas funções de pivotagem do {tidyr}.</description>
-    </item>
-    
-    <item>
-      <title>Chamando o R do PostgreSQL</title>
-      <link>https://blog.curso-r.com/posts/2020-06-25-integracao-r-postgresql/</link>
-      <pubDate>Fri, 26 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2020-06-25-integracao-r-postgresql/</guid>
-      <description>Este tutorial irá mostrar como instalar o R e o PostgreSQL num mesmo servidor Ubuntu 18.04 ou 16.04 e, em seguida, sobre como chamar o R a partir do Postgres.</description>
-    </item>
-    
-    <item>
       <title>Anunciando a comunidade Curso-R</title>
       <link>https://blog.curso-r.com/posts/2020-02-21-discourse/</link>
       <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
@@ -176,15 +149,6 @@
       
       <guid>https://blog.curso-r.com/posts/2019-02-10-ses/</guid>
       <description>Nesse post vamos implementar o método de suavização exponencial simples com R.</description>
-    </item>
-    
-    <item>
-      <title>Resumo da rstudio::conf 2019</title>
-      <link>https://blog.curso-r.com/posts/2019-01-30-rconf/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2019-01-30-rconf/</guid>
-      <description>Nesse post a Bruna conta como foi a sua expericência na rstudio conf que aconteceu esse mês em Austin.</description>
     </item>
     
     <item>

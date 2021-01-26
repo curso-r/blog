@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tutoriais on Blog | Curso-R</title>
+    <title>Tutoriais on Blog | Curso-R</title>
     <link>https://blog.curso-r.com/categories/tutoriais/</link>
-    <description>Recent content in tutoriais on Blog | Curso-R</description>
+    <description>Recent content in Tutoriais on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <lastBuildDate>Fri, 08 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/tutoriais/index.xml" rel="self" type="application/rss+xml" />
@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>Qual a capital mais distante de Brasília?</title>
+      <link>https://blog.curso-r.com/posts/2020-09-19-map-dist/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-09-19-map-dist/</guid>
+      <description>Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!</description>
+    </item>
+    
+    <item>
       <title>Predições XGBoost diretamente pelo SQL</title>
       <link>https://blog.curso-r.com/posts/2020-08-29-xgboost-sql/</link>
       <pubDate>Sat, 29 Aug 2020 00:00:00 +0000</pubDate>
@@ -35,30 +44,30 @@
     </item>
     
     <item>
-      <title>Aplauda-me</title>
-      <link>https://blog.curso-r.com/posts/2020-08-27-applause/</link>
-      <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
+      <title>Abandonando o Termo &#39;master&#39; no GitHub</title>
+      <link>https://blog.curso-r.com/posts/2020-07-27-github-main-branch/</link>
+      <pubDate>Mon, 27 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.curso-r.com/posts/2020-08-27-applause/</guid>
-      <description>Fizemos um teste do pacote {applause}.</description>
+      <guid>https://blog.curso-r.com/posts/2020-07-27-github-main-branch/</guid>
+      <description>Assim como algumas linguagens de programação no passado, o GitHub está abandonado o termo &amp;lsquo;master&amp;rsquo;. Veja como se adiantar e adotar o &amp;lsquo;main&amp;rsquo; a partir de já.</description>
     </item>
     
     <item>
-      <title>As novas funções de pivotagem</title>
-      <link>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</link>
-      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      <title>Conectando o RStudio com o shinyapps.io</title>
+      <link>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</guid>
-      <description>Apresentamos aqui as novas funções de pivotagem do {tidyr}.</description>
+      <guid>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</guid>
+      <description>Aprenda como conectar a sua conta do shinyapps.io com o RStudio para compartilhar aplicativos Shiny na internet em apenas alguns minutos.</description>
     </item>
     
     <item>
-      <title>Chamando o R do PostgreSQL</title>
-      <link>https://blog.curso-r.com/posts/2020-06-25-integracao-r-postgresql/</link>
-      <pubDate>Fri, 26 Jun 2020 00:00:00 +0000</pubDate>
+      <title>Melhores trabalhos do curso R para Ciência de dados I (maio de 2020)</title>
+      <link>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.curso-r.com/posts/2020-06-25-integracao-r-postgresql/</guid>
-      <description>Este tutorial irá mostrar como instalar o R e o PostgreSQL num mesmo servidor Ubuntu 18.04 ou 16.04 e, em seguida, sobre como chamar o R a partir do Postgres.</description>
+      <guid>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</guid>
+      <description>Apresentamos os melhores trabalhos de conclusão do nosso curso de R para Ciência de dados I e comentamos aspectos importantes sobre a comunicação dos resultados das nossas análises.</description>
     </item>
     
     <item>
@@ -532,7 +541,7 @@
     <item>
       <title>Colando textos</title>
       <link>https://blog.curso-r.com/posts/2017-04-08-glue/</link>
-      <pubDate>Mon, 17 Apr 2017 13:07:31 +0200</pubDate>
+      <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-08-glue/</guid>
       <description>Uma tarefa muito comum no R é colar textos. As funções mais importantes para isso são paste() e sprintf(), que vêm com o pacote base. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do tidyverse, o glue.</description>
@@ -559,7 +568,7 @@
     <item>
       <title>Paralelização no R</title>
       <link>https://blog.curso-r.com/posts/2017-03-14-parallel/</link>
-      <pubDate>Sun, 19 Mar 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-03-14-parallel/</guid>
       <description>Programadores eficientes não precisam escrever algoritmos que rodam rápido. Recomendo fortemente a leitura do livro Efficient R, que discute eficiência com o R de forma exaustiva. Também gosto muito da primeira parte dessa palestra do Hadley, onde ele defende que o cientista de dados deve usar seu tempo pensando no problema e não na forma que vai escrever seu código&amp;hellip;</description>
@@ -568,7 +577,7 @@
     <item>
       <title>Medidas-resumo no tidyverse</title>
       <link>https://blog.curso-r.com/posts/2017-02-20-quartis/</link>
-      <pubDate>Sat, 11 Mar 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sat, 11 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-20-quartis/</guid>
       <description>Hoje estava fazendo uma análise exploratória e precisava estudar os quartis de uma variável contínua. A solução usando o tidyverse é tão elegante que valeu um post no blog.</description>
@@ -577,7 +586,7 @@
     <item>
       <title>Modelando a variância da normal</title>
       <link>https://blog.curso-r.com/posts/2017-02-21-regressao-heterocedastica/</link>
-      <pubDate>Thu, 09 Mar 2017 13:07:31 +0200</pubDate>
+      <pubDate>Thu, 09 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-21-regressao-heterocedastica/</guid>
       <description>Verificar as suposições dos modelos é muito importante quando fazemos inferência estatística. Em particular, a suposição de homocedasticidade dos modelos de regressão linear é especialmente importante, pois influencia o cálculo de erros padrão, intervalos de confiança e valores-p. Neste post, vou mostrar três pacotes do R que ajustam modelos de regressão linear heterocedastica.</description>
@@ -586,7 +595,7 @@
     <item>
       <title>leaflet com markerCluster</title>
       <link>https://blog.curso-r.com/posts/2017-02-21-markercluster/</link>
-      <pubDate>Wed, 01 Mar 2017 23:26:00 +0300</pubDate>
+      <pubDate>Wed, 01 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-21-markercluster/</guid>
       <description>O leaflet é uma biblioteca javascript para criação de mapas interativos. O pacote leaflet do R é um htmlwidget que permite gerar esses mapas de forma direta no R, para usar em documentos &lt;code&gt;RMarkdown&lt;/code&gt; e Shiny.</description>

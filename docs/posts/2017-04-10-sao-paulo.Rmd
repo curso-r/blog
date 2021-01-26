@@ -2,7 +2,7 @@
 title: "São Paulo e o problema da mochila"
 date: "2017-08-12T13:07:31+02:00"
 tags: ["r"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/pug_knapsack.png"
 author: ["Julio"]
 draft: false

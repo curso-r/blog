@@ -1,21 +1,22 @@
 ---
 title: "Autenticação no Shiny com Auth0"
-date: "2018-09-27T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+date: "2018-09-27"
+categories: ["tutoriais"]
 tags: ["r", "shiny"]
 image: "images/posts/banner/shiny-auth0.jpg"
 author: ["Daniel", "José"]
 summary: "Neste post vamos ensinar o passo a passo para adicionar autenticação em seu aplicativo Shiny usando o Auth0."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Neste post vamos criar um Shiny App simples usando o Auth0 como servidor de autenticação. O Auth0 implementa o OAuth2, o principal protocolo de autorização utilizado atualmente na indústria de software. Ele permite que os aplicativos tenham acesso limitado às contas de usuário em serviços HTTP.</p>
 <div id="como-funciona-o-oauth2.0" class="section level2">
 <h2>Como funciona o oauth2.0?</h2>
 <p>Antes de começarmos - nesta parte do post resumi um pouco o que está escrito <a href="https://aaronparecki.com/oauth-2-simplified/">aqui</a>. Para se aprofundar, vale a pena ler essa postagem do <a href="https://aaronparecki.com/oauth-2-simplified/">Aaron Parecki</a>.</p>
-<div id="papeis" class="section level3">
+<div id="papéis" class="section level3">
 <h3>Papéis</h3>
 <p>A autorização/autenticação feita por meio de OAuth2 envolve 4 papéis:</p>
 <ul>
@@ -30,7 +31,7 @@ draft: false
 <p>Antes de começar o processo de autenticação com o OAuth, você deve registrar o seu app com o serviço - no nosso caso, vamos registrá-lo com o Auth0. Ao registrar em geral passamos informações básicas sobre o app e o principal é o <em>redirect URI</em> - que será chamado de <em>callback URL</em> pelo Auth0. O servidor de autenticação só pode redirecionar o usuário para essas URL’s cadastradas após completar a autorização - isso ajuda a evitar alguns tipos de ataques.</p>
 <p>Depois de registrar o seu app você receberá um <em>client ID</em> e um <em>client secret</em>. Em teoria o <em>client ID</em> é informação pública e o <em>client secret</em> (é segredo) e não pode ser divulgado.</p>
 </div>
-<div id="o-fluxo-da-autenticacao" class="section level3">
+<div id="o-fluxo-da-autenticação" class="section level3">
 <h3>O fluxo da autenticação</h3>
 <p>Existem 4 fluxos distintos de autenticação no OAuth2.0, cada um utilizado em circuntâncias diferentes. No nosso caso vamos usar um método chamado de * Authorization Code*. Esse método funciona da seguinte forma:</p>
 <p>Criamos um link de autenticação para o usuário com as seguintes informações:</p>
@@ -45,7 +46,7 @@ draft: false
   client_id=CLIENT_ID&amp;redirect_uri=REDIRECT_URI&amp;scope=photos&amp;state=1234zyx</code></pre>
 <p>Ao acessar este link o usuário vê o que chamamos de prompt de autorização. Algo do tipo:</p>
 <div class="figure">
-<img src="https://camo.githubusercontent.com/f5f44dbf0abc7642d83fe366e97f29fdd3233d9e/68747470733a2f2f6161726f6e70617265636b692e636f6d2f6f617574682d322d73696d706c69666965642f6f617574682d617574686f72697a6174696f6e2d70726f6d70742e706e67" alt="Img do post https://aaronparecki.com/oauth-2-simplified/" />
+<img src="https://camo.githubusercontent.com/f5f44dbf0abc7642d83fe366e97f29fdd3233d9e/68747470733a2f2f6161726f6e70617265636b692e636f6d2f6f617574682d322d73696d706c69666965642f6f617574682d617574686f72697a6174696f6e2d70726f6d70742e706e67" alt="" />
 <p class="caption">Img do post <a href="https://aaronparecki.com/oauth-2-simplified/" class="uri">https://aaronparecki.com/oauth-2-simplified/</a></p>
 </div>
 <p>Se o usuário clicar em <em>Autorizar</em>, ele será redirecionado para o seu app passando um código gerado pelo servidor de autorização e o <em>state</em>. A URL será algo do tipo:</p>
@@ -89,7 +90,7 @@ library(httr)</code></pre>
 <h3>Setup do Oauth</h3>
 <p>Os códigos nesta sessão podem ser incluidos no arquivo <code>global.R</code> ( se você estiver desenvolvendo o seu shiny separando por arquivos <code>ui.R</code> e <code>server.R</code>) se você estiver usando apenas um <code>app.R</code>, esses blocos podem ser incluídos no início do arquivo - antes da chamada por <code>shinyApp(uiFunc, server)</code>.</p>
 <p>Neste primeiro bloco de código vamos definir qual é a URL que o app está sendo servido.
-Criamos um bloco que faz o seguinte - quando estivermos em uma sessão interativa (por exemplo, rodando pelo RStudio) use a url <code>APP_URL &lt;- &quot;https://localhost:8100/&quot;</code>. Já quando estiver em uma sessão não interativa, use <code>https://shiny.curso-r.com</code>.</p>
+Criamos um bloco que faz o seguinte - quando estivermos em uma sessão interativa (por exemplo, rodando pelo RStudio) use a url <code>APP_URL &lt;- "https://localhost:8100/"</code>. Já quando estiver em uma sessão não interativa, use <code>https://shiny.curso-r.com</code>.</p>
 <pre class="r"><code>if (interactive()) {
   # testing url
   options(shiny.port = 8100)
@@ -223,7 +224,7 @@ print(content(resp, &quot;parsed&quot;))</code></pre>
 # [1] &quot;2018-09-24T17:44:49.768Z&quot;</code></pre>
 </div>
 </div>
-<div id="mais-opcoes-do-auth0" class="section level2">
+<div id="mais-opções-do-auth0" class="section level2">
 <h2>Mais opções do Auth0</h2>
 <p>No Auth0 existem diversas opções de login que podem ser configuradas na aba <a href="https://manage.auth0.com/#/connections/social"><em>Connections</em></a>.</p>
 <p><img src="https://user-images.githubusercontent.com/4706822/45973605-53f1c580-c015-11e8-9206-d7d18b7d27c3.png" /></p>

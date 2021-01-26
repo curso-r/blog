@@ -1,8 +1,8 @@
 ---
 title: "As novas funções de pivotagem"
 date: "2020-08-13"
-tags: ["manipulação", "tidyr", "r"]
-categories: ["tutoriais", "r"]
+tags: ["manipulação", "tidyr"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/lego.jpeg"
 author: ["Nicole Luduvice"]
 summary: "Apresentamos aqui as novas funções de pivotagem do {tidyr}."

@@ -1,13 +1,12 @@
 ---
 title: "Por que usar o %>%"
-date: "2018-07-03T20:13:00+03:00"
+date: "2018-07-03"
 tags: ["pipe", "tidyverse"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/pipe.jpg"
 author: ["Caio"]
 summary: "De onde vem e como funciona o operador pipe."
 ---
-
 
 Provavelmente você já ouviu falar do operador pipe (`%>%`). Muita gente acha
 que ele é uma sequência mágica de símbolos que muda completamente o visual do

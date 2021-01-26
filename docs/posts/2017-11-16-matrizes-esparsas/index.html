@@ -6,7 +6,7 @@
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Curso-R">
   <meta name="generator" content="Hugo 0.80.0" />
 
   <!-- plugins -->
@@ -17,6 +17,10 @@
   
   <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
   
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
 
   <!-- Main Stylesheet -->
   
@@ -25,8 +29,8 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
   <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
-
-</head><body>
+</head>
+<body>
 <!-- preloader start -->
 <div class="preloader">
   <div class="loader">
@@ -101,7 +105,7 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Daniel
+            Escrito por Daniel em <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -117,6 +121,7 @@
         </ul>
         <article class="content">
           
+            
 
 
 <p>Matrizes esparsas são matrizes em que a maior parte dos elementos é igual a zero. Matrizes dessa forma surgem em diversos problemas relacionados a Machine Learning e análise de dados.</p>
@@ -264,6 +269,7 @@ sparseMatrix(bd$cliente, bd$itens)
 <p>Para saber mais leia as vignettes do pacote <a href="https://cran.r-project.org/web/packages/Matrix/index.html">Matrix</a>. Em especial, vale a pena ler as seguintes <a href="https://cran.r-project.org/web/packages/Matrix/vignettes/Intro2Matrix.pdf">2nd Introduction to the Matrix Package</a>.</p>
 <p>PS: a inspiração para esse texto foi <a href="http://www.johnmyleswhite.com/notebook/2011/10/31/using-sparse-matrices-in-r/">esse post</a> de 2011 do John Myles White</p>
 
+          
         </article>
       </div>
       <div class="col-lg-1">
@@ -407,6 +413,14 @@ sparseMatrix(bd$cliente, bd$itens)
 
 <script src="https://blog.curso-r.com/plugins/search/search.js"></script>
 
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 <!-- Main Script -->
 

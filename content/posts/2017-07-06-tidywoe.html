@@ -1,13 +1,15 @@
 ---
 title: "WoE em R com tidywoe"
-date: "2017-07-06T10:12:00+03:00"
+date: "2017-07-06"
 tags: ["woe"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/tidywoe_hex2.png"
 author: ["Athos"]
 summary: "WoE (weight of evidence) é uma ferramenta bastante usada em aplicações de regressão logística, principalmente na área de score de crédito. O pacote tidywoe oferece uma interface simples para facilitar essa tarefa."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>WoE (weight of evidence) é uma ferramenta bastante usada em aplicações de regressão logística, principalmente na área de score de crédito. Simploriamente falando, ele transforma categorias em números que refletem a diferença entre elas pelo critério de separação do <strong>Y = 1</strong> e <strong>Y = 0</strong>.</p>
@@ -16,7 +18,7 @@ summary: "WoE (weight of evidence) é uma ferramenta bastante usada em aplicaç�
 <li><a href="http://multithreaded.stitchfix.com/blog/2015/08/13/weight-of-evidence/">Data Exploration with Weight of Evidence and Information Value in R</a></li>
 </ul>
 <p>O autor desse texto é o Kim Larsen, criador do pacote <a href="https://cran.r-project.org/web/packages/Information/index.html">Information</a> que é completo e cheio de ferramentas sofisticadas em torno do WoE. Porém, no dia a dia do meu trabalho volta e meia eu tinha que construir rotinas próprias para fazer as versões em WoE das minhas variáveis, mesmo com vários pacotes completos disponíveis. A principal motivação era que eles não eram muito práticos e não se encaixavam na filosofia do tidyverse. Daí acabei juntando essas rotinas num pacote chamado <code>tidywoe</code> e deixando no ar. A ideia é que ela faça o analista ganhar em tempo, legibilidade e reprodutibilidade. Abaixo segue como usar.</p>
-<div id="instalacao" class="section level2">
+<div id="instalação" class="section level2">
 <h2>Instalação</h2>
 <p>Para instalar, basta rodar abaixo.</p>
 <pre class="r"><code># install.packages(&quot;devtools&quot;)
@@ -35,7 +37,9 @@ tea_mini &lt;- tea %&gt;% select(breakfast, how, where, price)</code></pre>
 </div>
 <div id="como-usar" class="section level2">
 <h2>Como usar</h2>
-<p>Tem duas funções que importam: - <code>add_woe()</code> - adiciona os woe’s num data frame. - <code>woe_dictionary()</code> - cria dicionário que mapeia as categorias com os woe’s.</p>
+<p>Tem duas funções que importam:
+- <code>add_woe()</code> - adiciona os woe’s num data frame.
+- <code>woe_dictionary()</code> - cria dicionário que mapeia as categorias com os woe’s.</p>
 <div id="add_woe" class="section level3">
 <h3>add_woe()</h3>
 <p>A função <code>add_woe()</code> serve para adicionar as versões WoE’s das variáveis em sua amostra de dados.</p>
@@ -99,6 +103,16 @@ tea_mini &lt;- tea %&gt;% select(breakfast, how, where, price)</code></pre>
 <p>A função <code>woe_dictionary()</code> é uma das duas partes necessárias para fazer o <code>add_woe()</code> funcionar (a outra parte são os dados). Ele constrói o dicionário de categorias e seus respectivos woe’s.</p>
 <pre class="r"><code>tea_mini %&gt;% woe_dictionary(breakfast)</code></pre>
 <table>
+<colgroup>
+<col width="8%" />
+<col width="18%" />
+<col width="5%" />
+<col width="11%" />
+<col width="15%" />
+<col width="11%" />
+<col width="15%" />
+<col width="10%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">variable</th>
@@ -155,7 +169,7 @@ tea_mini &lt;- tea %&gt;% select(breakfast, how, where, price)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="usando-um-dicionario-customizado" class="section level3">
+<div id="usando-um-dicionário-customizado" class="section level3">
 <h3>Usando um dicionário customizado</h3>
 <p>Muitas vezes há o interesse em ajustar na mão alguns valores de woe para consertar a ordem dos efeitos de uma dada variável ordinal. Esse é o motivo de o <code>add_woe()</code> poder receber um dicionário passado pelo usuário. Isso se faz por meio do argumento <code>.woe_dictionary</code>.</p>
 <p>A maneira mais fácil de se fazer isso é montar um dicionário inicial com o <code>woe_dictionary()</code> e depois alterar os valores nele para alcançar os ajustes desejados. Exemplo:</p>
@@ -220,7 +234,7 @@ tea_mini %&gt;% add_woe(breakfast, .woe_dictionary = tea_mini_woe_dic_arrumado)<
 </table>
 </div>
 </div>
-<div id="exemplo-de-exploracao" class="section level2">
+<div id="exemplo-de-exploração" class="section level2">
 <h2>Exemplo de exploração</h2>
 <p>O <code>woe_dictionary()</code> devolve uma tabela arrumada, bem conveniente para explorar mais. Por exemplo, a tabela está pronta para o ggplot.</p>
 <pre class="r"><code>tea_mini_woe_dic_arrumado %&gt;%
@@ -230,7 +244,7 @@ tea_mini %&gt;% add_woe(breakfast, .woe_dictionary = tea_mini_woe_dic_arrumado)<
     geom_bar(aes(x = explanatory, y = woe), stat = &quot;identity&quot;) +
     facet_wrap(~variable, scales = &quot;free_x&quot;) +
   theme(axis.text.x = element_text(angle = 30))</code></pre>
-<p><img src="/blog/2017-07-06-tidywoe_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/posts/2017-07-06-tidywoe_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Aqui está o <a href="https://github.com/Athospd/tidywoe">github do pacote</a> para contribuições. Pretendo colocar bastante coisa nova no pacote ainda.</p>
 <p>Abs</p>
 </div>

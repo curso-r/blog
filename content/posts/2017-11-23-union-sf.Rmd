@@ -1,12 +1,11 @@
 ---
 title: "Unindo mapas: the tidy way"
-date: "2017-11-24T14:25:00+03:00"
+date: "2017-11-24"
 tags: ["sf", "tidyverse"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/sf.png"
 author: ["Julio"]
 summary: "Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. Dessa vez, o grande culpado foi o sf, um pacote ainda em estágio de desenvolvimento mas que já considero pacas..."
-draft: false
 ---
 
 ```{r setup, include=FALSE}
@@ -43,7 +42,7 @@ O problema é que não existe uma base de dados pública que relacione todos os 
 
 > P.S.: Não se esqueça do ciclo da ciência de dados! Vou falar disso sem parar para explicar. Na dúvida, leia o http://r4ds.had.co.nz/
 
-![](images/posts/conteudo/union-sf/data-science.png)
+![](/images/posts/conteudo/union-sf/data-science.png)
 
 <br/>
 
@@ -211,7 +210,7 @@ Se você quiser fazer um gráfico feinho só pra saber o que está rolando, use 
 plot(d_sf_municipio[, c("num_regiao", "geometry")])
 ```
 
-![](images/posts/conteudo/union-sf/sf_blog01.png)
+![](/images/posts/conteudo/union-sf/sf_blog01.png)
 
 ### Parte 2: agrupando os municípios
 
@@ -286,7 +285,7 @@ gridExtra::grid.arrange(grobs = graficos)
 O resultado final é o gráfico abaixo.
 
 
-![](images/posts/conteudo/union-sf/sf_blog02.png)
+![](/images/posts/conteudo/union-sf/sf_blog02.png)
 
 Coisa mais linda!
 

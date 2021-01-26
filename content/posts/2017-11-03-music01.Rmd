@@ -1,16 +1,17 @@
 ---
 title: "Estatística e Música"
-date: "2017-11-03T23:26:00+03:00"
+date: "2017-11-03"
 tags: ["musica"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/music01.jpg"
 author: ["Julio"]
 summary: "Já pensou em juntar estatística e música? Nessa série de posts mostro como estou pensando em fazer isso e os pacotes que vou criar nessa jornada..."
-draft: false
+retired: true
+alternativa: ""
 ---
 
 ```{r echo=FALSE, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
 ```
 
 
@@ -48,21 +49,21 @@ Apesar da minha falta de conhecimento sobre o tema, acredito que a área de comp
 **Leitura**: extrair dados estruturados dos áudios. Envolve *Music Information Retrieval* - MIR
 
 ```{r, echo=FALSE, out.width='40%', fig.align='center'}
-knitr::include_graphics('images/posts/conteudo/music01/music-download.png')
+knitr::include_graphics('/images/posts/conteudo/music01/music-download.png')
 ```
 
 
 **Composição**: Criar ou completar músicas automaticamente
 
 ```{r, echo=FALSE, out.width='40%', fig.align='center'}
-knitr::include_graphics('images/posts/conteudo/music01/music-generate.png')
+knitr::include_graphics('/images/posts/conteudo/music01/music-generate.png')
 ```
 
 
 **Edição**: Adicionar efeitos na música para produção
 
 ```{r, echo=FALSE, out.width='40%', fig.align='center'}
-knitr::include_graphics('images/posts/conteudo/music01/music-transform.png')
+knitr::include_graphics('/images/posts/conteudo/music01/music-transform.png')
 ```
 
 Meu foco será na parte de composição, com foco em harmonização, que significa criar e completar harmonias das músicas dado algum estilo (e.g. Bach ou Beatles). Também tentarei criar soluções de improviso, apesar de não garantir nada.
@@ -124,7 +125,7 @@ note %>%
   plot()
 ```
 
-![](images/posts/conteudo/music01/note-1.png)
+![](/images/posts/conteudo/music01/note-1.png)
 
 ## Exemplo
 
@@ -151,7 +152,7 @@ bach_music %>%
   plot()
 ```
 
-![](images/posts/conteudo/music01/bach-1.png)
+![](/images/posts/conteudo/music01/bach-1.png)
 
 No RStudio, você pode usar a função `view()` para visualizar a música em melhor resolução no Viewer Pane.
 

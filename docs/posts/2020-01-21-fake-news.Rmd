@@ -2,7 +2,7 @@
 title: "Camadas de Fake News"
 date: "2020-01-21"
 tags: ["fake-news", "pib"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/fake-news.jpg"
 author: ["Caio"]
 summary: "Uma fake news dura de roer. Como um gráfico pode estar tecnicamente certo e ao mesmo tempo não ser correto."

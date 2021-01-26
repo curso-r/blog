@@ -1,0 +1,52 @@
+/* Título dos posts */
+
+.bg-posts {
+  position: relative;
+}
+
+.bg-posts:before {
+  content: '';
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.titulo-post {
+  color: #fff;
+}
+
+
+/* Geral */
+
+h2, h3, h4, h5, h6 {
+  margin-top: 30px;
+}
+
+.media-body > h5 {
+  margin-top: 0;
+}
+
+.media-body > p {
+  font-size: 13px;
+}
+
+.title-border {
+  margin-top: 0;
+}
+
+footer {
+  margin-top: 30px;
+}
+
+.widget > h4 {
+  margin-top: 0;
+}
+
+.content p >img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,17 +1,19 @@
 ---
 title: "Environments"
-date: "2017-06-19T23:26:00+03:00"
+date: "2017-06-19"
 tags: ["environments"]
-categories: ["conceitos", "r"]
+categories: ["conceitos"]
 image: "images/posts/banner/parallel-universe.jpg"
 author: ["William"]
 summary: "Se você já utilizou o R algumas vezes, com certeza já se deparou com o termo environment. Neste post, vamos tentar responder as três perguntas básicas para entendermos alguma coisa no R: 1. o que é? 2. para que serve? e 3. como NÃO usar?"
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Se você utiliza o R regularmente, com certeza já se deparou com o termo <em>environment</em>. Ele aparece como um painel do RStudio, quando acessamos o código de uma função e (implicitamente) quando carregamos pacotes. Neste post, vamos tentar responder as três perguntas básicas sobre qualquer coisa no R: 1. o que é? 2. para que serve? e 3. como NÃO usar?</p>
-<div id="o-que-e" class="section level2">
+<div id="o-que-é" class="section level2">
 <h2>O que é?</h2>
 <p>Definindo de uma maneira bem simples, <em>environments</em> são locais onde objetos são armazenados, isto é, conjuntos de ligações entre símbolos e valores. Por exemplo, quando fazemos a atribuição abaixo,</p>
 <pre class="r"><code>a &lt;- 4</code></pre>
@@ -76,21 +78,20 @@ f(108)
 ## [1] 112</code></pre>
 <p>Neste caso, como o R não encontrou o símbolo <code>a</code> dentro do <em>environment</em> de avaliação, ele foi buscar no pai, o <em>global</em>.</p>
 </div>
-<div id="como-nao-usar" class="section level2">
+<div id="como-não-usar" class="section level2">
 <h2>Como não usar?</h2>
 <p>Agora que temos uma visão ao menos superficial da estrutura de <em>environments</em>, podemos entender melhor porque usar a função <code>attach()</code> é uma prática não recomendada ao programar em R.</p>
 <p>Se utilizarmos a função <code>search()</code>, ela nos devolverá o “caminho” de <em>environments</em>, começando do <em>global</em> (<em>magrathea</em> não será exibido).</p>
 <pre class="r"><code>search()
-## [1] &quot;.GlobalEnv&quot;        &quot;package:methods&quot;   &quot;package:stats&quot;    
-## [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
-## [7] &quot;package:datasets&quot;  &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+## [1] &quot;.GlobalEnv&quot;        &quot;package:stats&quot;     &quot;package:graphics&quot; 
+## [4] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
+## [7] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
 <p>Repare que os pacotes carregados geram um novo <em>environment</em> na árvore.</p>
 <pre class="r"><code>library(ggplot2)
-## Warning: package &#39;ggplot2&#39; was built under R version 3.4.4
 search()
-##  [1] &quot;.GlobalEnv&quot;        &quot;package:ggplot2&quot;   &quot;package:methods&quot;  
-##  [4] &quot;package:stats&quot;     &quot;package:graphics&quot;  &quot;package:grDevices&quot;
-##  [7] &quot;package:utils&quot;     &quot;package:datasets&quot;  &quot;Autoloads&quot;        
+##  [1] &quot;.GlobalEnv&quot;        &quot;package:ggplot2&quot;   &quot;package:stats&quot;    
+##  [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
+##  [7] &quot;package:datasets&quot;  &quot;package:methods&quot;   &quot;Autoloads&quot;        
 ## [10] &quot;package:base&quot;</code></pre>
 <p>É por isso que, ao carregar um pacote, podemos utilizar as suas funções sem a necessidade de escrever coisas do tipo <code>ggplot2::geom_point()</code>. Agora, veja o que acontece quando usamos a função <code>attach()</code></p>
 <pre class="r"><code>mighty &lt;- list(&quot;Jason&quot; = &quot;vermelho&quot;, &quot;Zach&quot; = &quot;Preto&quot;, &quot;Billy&quot; = &quot;Azul&quot;, 
@@ -99,12 +100,11 @@ search()
 attach(mighty)
 search()
 ##  [1] &quot;.GlobalEnv&quot;        &quot;mighty&quot;            &quot;package:ggplot2&quot;  
-##  [4] &quot;package:methods&quot;   &quot;package:stats&quot;     &quot;package:graphics&quot; 
-##  [7] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
+##  [4] &quot;package:stats&quot;     &quot;package:graphics&quot;  &quot;package:grDevices&quot;
+##  [7] &quot;package:utils&quot;     &quot;package:datasets&quot;  &quot;package:methods&quot;  
 ## [10] &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
 <p>Um novo <em>environment mighty</em> é criado acima do <em>global</em>! Isso quer dizer que se você não tiver total conhecimento dos objetos que estão sendo anexados, você estará criando uma lista de objetos “invisíveis” que podem ser avaliados mesmo dentro de funções. E veja o que acontece quando carregamos mais pacotes</p>
 <pre class="r"><code>library(dplyr)
-## Warning: package &#39;dplyr&#39; was built under R version 3.4.4
 ## 
 ## Attaching package: &#39;dplyr&#39;
 ## The following objects are masked from &#39;package:stats&#39;:
@@ -115,20 +115,19 @@ search()
 ##     intersect, setdiff, setequal, union
 search()
 ##  [1] &quot;.GlobalEnv&quot;        &quot;package:dplyr&quot;     &quot;mighty&quot;           
-##  [4] &quot;package:ggplot2&quot;   &quot;package:methods&quot;   &quot;package:stats&quot;    
-##  [7] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
-## [10] &quot;package:datasets&quot;  &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+##  [4] &quot;package:ggplot2&quot;   &quot;package:stats&quot;     &quot;package:graphics&quot; 
+##  [7] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
+## [10] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
 <p>O <em>environment</em> do pacote <code>dplyr</code> aparece antes do <code>mighty</code>. Isso quer dizer que os objetos do <em>mighty</em> podem ser mascarados por todos os pacotes que você carregar a seguir. Veja um simples exemplo de como as coisas podem dar errado.</p>
 <pre class="r"><code>dados &lt;- tibble::tibble(paciente = 1:30, 
                         cancer = rbinom(30, size = 1, prob = 0.5))
 
 attach(dados)
 cancer
-##  [1] 0 1 0 1 1 1 0 0 1 1 0 0 1 1 1 0 1 0 1 1 0 1 0 0 1 0 0 0 0 1</code></pre>
+##  [1] 1 0 0 0 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 0 0 1 0 1 0 1 0</code></pre>
 <p>Com o código acima, criamos um banco de dados representando 30 pacientes com (1) ou sem (0) um certo tipo de câncer. As variáveis <code>paciente</code> e <code>cancer</code> foram anexadas ao rodarmos <code>attach(dados)</code>.</p>
 <p>Agora, imagine se esse banco de dados tiver informações de tempo até a remissão do câncer e quisermos rodar modelos de sobrevivência. Um passo natural seria carregar a biblioteca <code>survival</code>.</p>
 <pre class="r"><code>library(survival)
-## Warning: package &#39;survival&#39; was built under R version 3.4.4
 ## 
 ## Attaching package: &#39;survival&#39;
 ## The following object is masked from &#39;dados&#39;:
@@ -137,8 +136,8 @@ cancer
 search()
 ##  [1] &quot;.GlobalEnv&quot;        &quot;package:survival&quot;  &quot;dados&quot;            
 ##  [4] &quot;package:dplyr&quot;     &quot;mighty&quot;            &quot;package:ggplot2&quot;  
-##  [7] &quot;package:methods&quot;   &quot;package:stats&quot;     &quot;package:graphics&quot; 
-## [10] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
+##  [7] &quot;package:stats&quot;     &quot;package:graphics&quot;  &quot;package:grDevices&quot;
+## [10] &quot;package:utils&quot;     &quot;package:datasets&quot;  &quot;package:methods&quot;  
 ## [13] &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
 <p>O pacote <code>survival</code> também tem um objeto chamado <em>cancer</em>. Assim, ao carregá-lo, o <em>environment survival</em> ficará na frente do <em>environment dados</em> na árvore e, se não prestarmos atenção com o <em>warning</em>, esse será o nosso novo objeto <code>cancer</code>.</p>
 <pre class="r"><code>head(cancer)

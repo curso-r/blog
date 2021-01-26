@@ -6,7 +6,7 @@
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Curso-R">
   <meta name="generator" content="Hugo 0.80.0" />
 
   <!-- plugins -->
@@ -17,6 +17,10 @@
   
   <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
   
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
 
   <!-- Main Stylesheet -->
   
@@ -25,8 +29,8 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
   <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
-
-</head><body>
+</head>
+<body>
 <!-- preloader start -->
 <div class="preloader">
   <div class="loader">
@@ -101,7 +105,7 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por William
+            Escrito por William em <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -118,6 +122,9 @@
         </ul>
         <article class="content">
           
+            
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Há alguns anos eu acompanho o canal Porta dos fundos no YouTube, assistindo os vídeos quase sempre no dia de lançamento. Mesmo dividido entre esquetes boas e ruins, me considero um fã da trupe de humoristas (e do Totoro também), principalmente pelo humor sarcástico e pela satirização de diversos tabus da nossa sociedade.</p>
@@ -127,7 +134,7 @@
 <div id="passo-1-instalar-e-configurar-o-pacote-tuber" class="section level1">
 <h1>Passo 1: instalar e configurar o pacote <code>tuber</code></h1>
 <p>O pacote <code>tuber</code> contém funções que permitem acessar a API do YouTube utilizando o R. Assim, podemos ter acesso a diversas estatísticas como número de likes, número de views, comentários de vídeos, entre outras.</p>
-<p>Para instalar o pacote, rode o código <code>install.packages(&quot;tuber&quot;)</code> ou <code>devtools::install_github(&quot;soodoku/tuber&quot;, build_vignettes = TRUE)</code> para baixar a versão de desenvolvimento mais recente.</p>
+<p>Para instalar o pacote, rode o código <code>install.packages("tuber")</code> ou <code>devtools::install_github("soodoku/tuber", build_vignettes = TRUE)</code> para baixar a versão de desenvolvimento mais recente.</p>
 <p>Para utilizar o <code>tuber</code> é preciso um <em>id</em> e um <em>secret</em> do <a href="https://developers.google.com/youtube/v3/getting-started">Console de Desenvolvimento da Google</a>. Após criar uma conta, basta habilitar todas as APIs do YouTube e a Freebase API.</p>
 <p>Feito isso, rode o código abaixo com o <em>id</em> e <em>secret</em> obtidos pela plataforma para configurar o acesso do <code>tuber</code> à API.</p>
 <pre class="r"><code>library(tuber)
@@ -145,8 +152,8 @@ library(tibble)         # Criação de dataframes
 library(lubridate)      # Manipulação de datas
 library(purrr)          # Funcionais
 library(ggplot2)        # Gráficos</code></pre>
-<p>Precisamos do <em>id</em> de cada vídeo do Porta dos Fundos para baixar as suas estatísticas. A função <code>tuber::yt_search()</code> pesquisa por vídeos e suas informações. Rodando <code>yt_search(term = &quot;Porta dos fundos&quot;)</code>, obtemos informações de alguns vídeos do canal, inclusive que o seu <em>channel id</em> é “UCEWHPFNilsT0IfQfutVzsag”. O <em>channel id</em> é essencial para obtermos todos os vídeos do Porta.</p>
-<p>Por default, a função <code>yt_search()</code> retorna no máximo 50 resultados. Contudo, se setarmos os parâmetros <code>type = &quot;video&quot;</code> e <code>channal_id = &quot;id_de_algum_canal&quot;</code>, o número máximo passa a ser 500 resultados.</p>
+<p>Precisamos do <em>id</em> de cada vídeo do Porta dos Fundos para baixar as suas estatísticas. A função <code>tuber::yt_search()</code> pesquisa por vídeos e suas informações. Rodando <code>yt_search(term = "Porta dos fundos")</code>, obtemos informações de alguns vídeos do canal, inclusive que o seu <em>channel id</em> é “UCEWHPFNilsT0IfQfutVzsag”. O <em>channel id</em> é essencial para obtermos todos os vídeos do Porta.</p>
+<p>Por default, a função <code>yt_search()</code> retorna no máximo 50 resultados. Contudo, se setarmos os parâmetros <code>type = "video"</code> e <code>channal_id = "id_de_algum_canal"</code>, o número máximo passa a ser 500 resultados.</p>
 <p>Para facilitar o trabalho, eu criei a função <code>get_videos_porta()</code>. Ela recebe uma data de início e de término (em um dataframe com apenas uma linha) e devolve todos os vídeos do canal Porta dos Fundos nesse período.</p>
 <pre class="r"><code>get_videos_porta &lt;- function(dates) {
   
@@ -196,7 +203,7 @@ videos &lt;- by_row(.d = dates, ..f = get_videos_porta, .to = &quot;videos_info&
   geom_line() +
   labs(x = &quot;Data de publicação&quot;, y = &quot;Visualizações&quot;) +
   theme_bw()</code></pre>
-<p><img src="images/posts/conteudo/porta-dos-fundos-decadencia/views_porta_png.png" /></p>
+<p><img src="/images/posts/conteudo/porta-dos-fundos-decadencia/views_porta_png.png" /></p>
 <p>Também fiz um gráfico da proporção likes/dislikes pela data de publicação do vídeo. Parece haver uma leve redução dessa proporção no último ano, mas é arriscado tirar uma conclusão. Refazendo essa análise no fim de 2017, talvez fique mais claro se o público do canal concorda comigo sobre a qualidade do conteúdo nos últimos tempos.</p>
 <pre class="r"><code>dados %&gt;% 
   mutate(likes = map(videos_stats, .f = &#39;likeCount&#39;),
@@ -210,11 +217,12 @@ videos &lt;- by_row(.d = dates, ..f = get_videos_porta, .to = &quot;videos_info&
   geom_line(aes(y = prop)) +
   labs(x = &quot;Data de publicação&quot;, y = &quot;Likes/Dislikes&quot;) +
   theme_bw()</code></pre>
-<p><img src="images/posts/conteudo/porta-dos-fundos-decadencia/likes-dislikes_porta_png.png" /></p>
+<p><img src="/images/posts/conteudo/porta-dos-fundos-decadencia/likes-dislikes_porta_png.png" /></p>
 <p>O Porta dos Fundos é sem dúvida um gigante no YouTube, mas os indícios dessa sucinta análise colaboram com a minha opinião de que o canal já viveu dias (bem) melhores. Apesar de essa decadência poder ser só uma fase ruim, nunca é cedo para se reinventar, ter novas ideias, definir as regras do jogo, assim como eles fizeram no início.</p>
 <p>E se faltar ideias, vídeos com o Totoro são sempre uma boa alternativa.</p>
 </div>
 
+          
         </article>
       </div>
       <div class="col-lg-1">
@@ -358,6 +366,14 @@ videos &lt;- by_row(.d = dates, ..f = get_videos_porta, .to = &quot;videos_info&
 
 <script src="https://blog.curso-r.com/plugins/search/search.js"></script>
 
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 <!-- Main Script -->
 

@@ -1,15 +1,15 @@
 ---
 title: "pvec: O laço perfeito"
-date: "2019-02-05T00:00:00+00:00"
-categories: ["r", "tutoriais"]
-tags: ["r"]
+date: "2019-02-05"
+categories: ["tutoriais"]
+tags: ["algoritmos"]
 image: "images/posts/banner/laco_perfeito.png"
 author: ["Julio"]
 summary: "Nesse post vou te mostrar minha função preferida e como ela funciona."
-draft: false
 ---
 
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p><strong>AVISO: Infelizmente a função <code>pvec()</code> não está mais no pacote <code>abjutils</code>! No final deste texto deixamos o seu código para que o leitor possa implementá-la por conta própria.</strong></p>
@@ -21,7 +21,7 @@ draft: false
 <li>Como fazer <a href="https://www.curso-r.com/blog/2017-04-09-try/">tratamento de erros</a>.</li>
 </ul>
 <p>Mas será que tem um jeito de juntar essas três funcionalidades em apenas uma operação?</p>
-<p><img src="images/posts/conteudo/pvec/nao_tinha_agora_tem.jpg" /></p>
+<p><img src="/images/posts/conteudo/pvec/nao_tinha_agora_tem.jpg" /></p>
 <p>Sim, é claro que tem. E se algo é possível no R, o <a href="https://lente.dev">Caio Lente</a> já fez. Trata-se da operação <code>pvec()</code>, do pacote <code>abjutils</code>.</p>
 <p>Para utilizá-la, você precisará instalar a versão de desenvolvimento do <code>abjutils</code> no GitHub:</p>
 <pre class="r"><code>devtools::install_github(&quot;abjur/abjutils&quot;)</code></pre>

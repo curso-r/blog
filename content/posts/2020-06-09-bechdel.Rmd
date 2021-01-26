@@ -6,7 +6,6 @@ categories: ["análises"]
 image: "images/posts/banner/bechdel.png"
 author: ["Athos"]
 summary: "O teste de Bechdel avalia se um filme atende a uma condição simples: duas mulheres (com nomes) conversam entre si sobre algo que não seja homem. Existe um banco de dados de filmes avaliados por pelo índice Bechdel e nós analisamos."
-draft: false
 editor_options: 
   chunk_output_type: console
 ---

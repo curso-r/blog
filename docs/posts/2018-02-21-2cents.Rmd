@@ -2,7 +2,7 @@
 title: "Meus 2 Centavos: análise das notas"
 date: "2018-02-23T14:25:00+03:00"
 tags: ["sf", "tidyverse"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/out_0262.png"
 author: ["Julio"]
 summary: "Tiago Belotti do canal do YouTube Meus 2 Centavos é o meu crítico de cinema favorito. Gasto uma quantidade de tempo que não me orgulho vendo os vídeos desse ser maravilhoso. Nesse post mostro como obtive as notas dele para verificar uma dúvida que estava me corroendo..."

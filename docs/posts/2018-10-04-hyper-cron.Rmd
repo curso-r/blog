@@ -1,7 +1,7 @@
 ---
 title: "Agendando scripts do R"
 date: "2018-10-04T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+categories: ["tutoriais"]
 tags: ["r"]
 image: "images/posts/banner/hyper-cron-r.jpg"
 author: ["Daniel"]

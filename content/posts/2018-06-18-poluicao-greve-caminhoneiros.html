@@ -1,14 +1,15 @@
 ---
 title: "A poluição do ar durante a greve dos caminhoneiros"
-date: "2018-06-18T00:00:00+00:00"
-tags: ["web-scraping", "dados-abertos"]  
-categories: ["análises", "r"]
+date: "2018-06-18"
+tags: ["web scraping", "dados abertos"]  
+categories: ["análises"]
 image: "images/posts/banner/truck.png"
 author: ["William"]
 summary: "Neste post, vamos avaliar descritivamente as concentrações de alguns poluentes durante a greve dos caminhoneiros"
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
 <script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
 <link href="/rmarkdown-libs/leaflet/leaflet.css" rel="stylesheet" />
@@ -108,7 +109,7 @@ draft: false
 <p>Os dados desta análise foram extraídos do sistema Qualar, como discutido <a href="http://curso-r.com/blog/2018/03/19/2018-03-19-scraper-cetesb/">neste post</a>. O período considerado foi 01/05/2018 a 14/06/2018. Também considerei esse mesmo período nos anos de 2016 e 2017 para pode comparar o comportamento dos poluentes com e sem a greve de caminhoneiros.</p>
 <p>O código utilizado pode ser acessado <a href="https://github.com/williamorim/tese/blob/master/data/cetesb-greve-caminhoneiros/manip.R">aqui</a>. Repare que, para facilitar o acompanhamento do processo, as requisições foram feitas separadamente para cada estação/ano, pois requisições com um volume muito grande de dados demoravam muito para serem concluídas. Após todos os arquivos serem baixados, os dados foram consolidados em uma única base, que pode ser acessada <a href="https://github.com/williamorim/tese/blob/master/data/cetesb-greve-caminhoneiros/data-greve-caminhoneiros.rds">neste link</a>.</p>
 </div>
-<div id="funcoes-usadas-para-gerar-os-graficos" class="section level2">
+<div id="funções-usadas-para-gerar-os-gráficos" class="section level2">
 <h2>Funções usadas para gerar os gráficos</h2>
 <p>Dado um poluente, um ano e um conjunto de horas, a função abaixo devolve um plot com os gráficos da série temporal das quatro estações, utilizando a média diária do poluente nas horas especificadas.</p>
 <pre class="r"><code>make_series_plot &lt;- function(df, pollutant, year_, hours) {
@@ -204,26 +205,26 @@ draft: false
   facet_grid(polluent ~ dayofweek, scales = &quot;free_y&quot;) +
   theme_bw() +
   labs(x = &quot;Hora&quot;, y = &quot;Concentração&quot;)</code></pre>
-<p><img src="/blog/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/posts/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Usando então a função <code>make_grid_plot()</code> e as informações do gráfico acima, podemos construir e analisar as séries de cada poluente. Nos gráficos abaixo, o intervalo entre as retas pontilhadas representa o período de greve.</p>
 <p>O gráfico abaixo mostra as séries do monóxido de carbono (CO), utilizando a média diária das 7 às 11 horas. Os fins de semana foram retirados da amostra.</p>
 <pre class="r"><code>df %&gt;% 
   filter(!dayofweek %in% c(&quot;sáb&quot;,&quot;dom&quot;)) %&gt;% 
   make_grid_plot(&quot;CO&quot;, 7:11)</code></pre>
-<p><img src="/blog/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/posts/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Agora, o gráfico do monóxido de nitrogênio (NO), também com média diária das 7 às 11 horas. Os domingos foram retirados da amostra.</p>
 <pre class="r"><code>df %&gt;% 
   filter(!dayofweek %in% c(&quot;dom&quot;)) %&gt;% 
   make_grid_plot(&quot;NO&quot;, 7:11)</code></pre>
-<p><img src="/blog/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/posts/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>E o gráfico do ozônio, com média diária das 12 às 17 horas. Osasco foi retirada pois não há dados de ozônio nessa estação.</p>
 <pre class="r"><code>df %&gt;%
   filter(!stationname == &quot;Osasco&quot;) %&gt;% 
   make_grid_plot(&quot;O3&quot;, 12:17)</code></pre>
-<p><img src="/blog/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/posts/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>O gráfico abaixo apresenta a média das médias diárias de CO (das 7h às 11h) em um período anterior (09/05 a 16/05), durante (23/05 a 30/05) e em um período posterior à greve (06/06 a 14/06). Os três períodos têm o mesmo número de dias da semana e fins de semana.</p>
 <pre class="r"><code>make_bar_plot(df, &quot;CO&quot;, 7:11)</code></pre>
-<p><img src="/blog/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/posts/2018-06-18-poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Como comentei anteriormente, os gráficos restantes podem ser visualizados <a href="/flexdashboards/greve-caminhoneiros/flexdash-greve-caminhoneiros.html">neste dashboard</a>.</p>
 <p>Por fim, eu juntei os períodos anterior (09/05 a 16/05) e posterior (06/06 a 14/06), calculei a média dos poluentes nesses dias e comparei com a média durante o período de greve. A variação dos poluentes para cada estação está apresentada na tabela abaixo. O CO pela manhã, por exemplo, diminuiu 58.62% em Pinheiros durante a greve, enquanto o ozônio aumentou 111.75%.</p>
 <pre class="r"><code>tab</code></pre>
@@ -290,7 +291,7 @@ draft: false
 </tbody>
 </table>
 </div>
-<div id="comentarios" class="section level2">
+<div id="comentários" class="section level2">
 <h2>Comentários</h2>
 <ul>
 <li><p>Com exceção do ozônio, a concentração média dos poluentes durante o período de paralisação diminuiu. A maior redução foi a de NO, que é diretamente produzido pela queima de combustíveis, principalmente gasolina e diesel. A greve não parece ter influenciado muito nos níveis de MP2.5.</p></li>

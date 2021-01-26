@@ -1,14 +1,17 @@
 ---
 title: "Web scraping do sistema de qualidade do ar da CETESB"
-date: "2018-03-19T14:25:00+03:00"
+date: "2018-03-19"
 tags: ["web-scraping", "dados-abertos"]  
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/scraper-cetesb.jpg"
 author: ["William"]
 summary: "Nem sempre dados públicos são disponibilizados de forma eficiente para a coleta. Neste post, vamos exercitar a arte do web scraping para raspar dados de poluição do ar da CETESB."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <p>A minha tese de doutorado envolve a análise de dados de poluição do ar. Parte do trabalho está em encontrar bases de dados que exemplifiquem temas que eu precise discutir. Informações sobre poluição do ar geralmente são disponibilizados por órgãos públicos de monitoramento ambiental, o que deveria, por princípio, garantir a fácil acesso e a coleta eficiente dos dados. Como sabemos, nem sempre é isso que acontece.</p>
@@ -172,52 +175,109 @@ dados_cetesb &lt;- dados_cetesb %&gt;%
 <pre class="r"><code>dados_cetesb %&gt;% 
   dplyr::select(`Nome Estação`:`Média Horária`) %&gt;% 
   head %&gt;% 
-  knitr::kable()</code></pre>
-<table>
+  knitr::kable() %&gt;% 
+  kableExtra::kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">Nome Estação</th>
-<th align="left">Nome Parâmetro</th>
-<th align="left">Unidade de Medida</th>
-<th align="left">Média Horária</th>
+<tr>
+<th style="text-align:left;">
+Nome Estação
+</th>
+<th style="text-align:left;">
+Nome Parâmetro
+</th>
+<th style="text-align:left;">
+Unidade de Medida
+</th>
+<th style="text-align:left;">
+Média Horária
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Parque D.Pedro II</td>
-<td align="left">O3 (Ozônio)</td>
-<td align="left">µg/m3</td>
-<td align="left">20</td>
+<tr>
+<td style="text-align:left;">
+Parque D.Pedro II
+</td>
+<td style="text-align:left;">
+O3 (Ozônio)
+</td>
+<td style="text-align:left;">
+µg/m3
+</td>
+<td style="text-align:left;">
+20
+</td>
 </tr>
-<tr class="even">
-<td align="left">Parque D.Pedro II</td>
-<td align="left">O3 (Ozônio)</td>
-<td align="left">µg/m3</td>
-<td align="left">19</td>
+<tr>
+<td style="text-align:left;">
+Parque D.Pedro II
+</td>
+<td style="text-align:left;">
+O3 (Ozônio)
+</td>
+<td style="text-align:left;">
+µg/m3
+</td>
+<td style="text-align:left;">
+19
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Parque D.Pedro II</td>
-<td align="left">O3 (Ozônio)</td>
-<td align="left">µg/m3</td>
-<td align="left">18</td>
+<tr>
+<td style="text-align:left;">
+Parque D.Pedro II
+</td>
+<td style="text-align:left;">
+O3 (Ozônio)
+</td>
+<td style="text-align:left;">
+µg/m3
+</td>
+<td style="text-align:left;">
+18
+</td>
 </tr>
-<tr class="even">
-<td align="left">Parque D.Pedro II</td>
-<td align="left">O3 (Ozônio)</td>
-<td align="left">µg/m3</td>
-<td align="left">12</td>
+<tr>
+<td style="text-align:left;">
+Parque D.Pedro II
+</td>
+<td style="text-align:left;">
+O3 (Ozônio)
+</td>
+<td style="text-align:left;">
+µg/m3
+</td>
+<td style="text-align:left;">
+12
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Parque D.Pedro II</td>
-<td align="left">O3 (Ozônio)</td>
-<td align="left">µg/m3</td>
-<td align="left">11</td>
+<tr>
+<td style="text-align:left;">
+Parque D.Pedro II
+</td>
+<td style="text-align:left;">
+O3 (Ozônio)
+</td>
+<td style="text-align:left;">
+µg/m3
+</td>
+<td style="text-align:left;">
+11
+</td>
 </tr>
-<tr class="even">
-<td align="left">Parque D.Pedro II</td>
-<td align="left">O3 (Ozônio)</td>
-<td align="left">µg/m3</td>
-<td align="left">12</td>
+<tr>
+<td style="text-align:left;">
+Parque D.Pedro II
+</td>
+<td style="text-align:left;">
+O3 (Ozônio)
+</td>
+<td style="text-align:left;">
+µg/m3
+</td>
+<td style="text-align:left;">
+12
+</td>
 </tr>
 </tbody>
 </table>

@@ -73,7 +73,7 @@
     <item>
       <title>Medidas-resumo no tidyverse</title>
       <link>https://blog.curso-r.com/posts/2017-02-20-quartis/</link>
-      <pubDate>Sat, 11 Mar 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sat, 11 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-20-quartis/</guid>
       <description>Hoje estava fazendo uma análise exploratória e precisava estudar os quartis de uma variável contínua. A solução usando o tidyverse é tão elegante que valeu um post no blog.</description>
@@ -82,7 +82,7 @@
     <item>
       <title>Manifesto tidy</title>
       <link>https://blog.curso-r.com/posts/2017-02-16-manifesto-tidy/</link>
-      <pubDate>Wed, 15 Feb 2017 13:07:31 +0200</pubDate>
+      <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-16-manifesto-tidy/</guid>
       <description>O manifesto das ferramentas tidy do Hadley Wickham é um dos documentos mais importantes sobre R dos últimos tempos.</description>

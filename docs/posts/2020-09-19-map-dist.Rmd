@@ -2,7 +2,7 @@
 title: "Qual a capital mais distante de Brasília?"
 date: "2020-09-19"
 tags: ["r", "visualizacao", "mapas"]
-categories: ["tutorial", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/map-dist.png"
 author: ["Julio"]
 summary: "Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!"

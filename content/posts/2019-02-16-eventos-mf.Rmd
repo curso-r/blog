@@ -1,12 +1,11 @@
 ---
 title: "Precisamos falar sobre a participação de mulheres em eventos de estatística"
-date: "2019-02-16T00:00:00+00:00"
+date: "2019-02-16"
 categories: ["análises"]
 tags: ["comunidade"]
 image: "images/posts/banner/gender_eq.png"
 author: ["Bruna Wundervald", "Julio"]
 summary: "Nos últimos anos, vários grupos têm monitorado e denunciado ocorrências desse fenômeno na comunidade científica. Para enriquecer os debates aqui no Brasil, decidimos organizar os dados de três eventos recentes de estatística."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

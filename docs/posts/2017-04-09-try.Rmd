@@ -2,7 +2,7 @@
 title: "Tratando erros: the tidy way"
 date: "2017-04-20T13:07:31+02:00"
 tags: ["coding", "pacotes", "purrr"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/error.jpg"
 author: ["Julio"]
 draft: false

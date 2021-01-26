@@ -2,17 +2,19 @@
 title: "Fazendo o R Voar: uma Introdução ao Rcpp"
 date: "2017-11-23"
 tags: ["rcpp"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/rcpp-rocket.jpg"
 author: ["Caio"]
 summary: "Uma breve introdução ao pacote Rcpp e como ele pode aumentar a eficiência do seu código."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>O que fazer quando precisamos que o nosso script rode mais rápido? Geralmente a primeira ideia que temos é otimizar o código: reduzir a quantidade de laços, diminuir o tamanho das estruturas, utilizar programação paralela, etc… Mas quando se trata de R, temos a possibilidade de aumentar a velocidade do código sem alterar praticamente nada da sua estrutura.</p>
 <p>Neste post darei uma introdução básica ao pacote <code>Rcpp</code>, uma ferramenta que nos permite rodar código em C++ de dentro do R.</p>
-<div id="o-basico" class="section level2">
+<div id="o-básico" class="section level2">
 <h2>O básico</h2>
 <p>C++ é uma linguagem de programação muito famosa e versátil. Ela têm elementos de programação genérica, imperativa e orientada a objeto e também fornece uma interface para manipulação de memória de baixo nível.</p>
 <p>Uma característica interessante do C++ é que ele é <em>extremamente</em> veloz. Diferentemente do R, ela é uma linguagem compilada, com tipagem estática e que não fornece tantas abstrações de operações, permitindo que seu código execute com eficiência incrível.</p>
@@ -63,7 +65,7 @@ dist_c(10, 20:25)
 #&gt; [1] 10 11 12 13 14 15</code></pre>
 <p>A estrutura <code>NumericVector</code> abstrai um vetor numérico do R, nos permitindo trabalhar com ele de uma maneira mais familiar. Com o método <code>.size()</code> obtemos o seu comprimento (equivalente a <code>length()</code>) e podemos declarar um novo com o construtor <code>NumericVector nome(comprimento);</code>. O único ponto de diferença fundamental entre o C++ e o R é que o primeiro não possui operações vetorizadas propriamente ditas, fazendo com que precisemos usar laços para toda e qualquer iteração.</p>
 </div>
-<div id="velocidade-maxima" class="section level2">
+<div id="velocidade-máxima" class="section level2">
 <h2>Velocidade máxima</h2>
 <p>Certos aspectos da filosofia do R o tornam uma linguagem extremamente versátil, mas isso vem com certas desvantagens. Alguns pontos em que a performance do R deixa a desejar são laço não vetorizáveis (por uma iteração depender da anterior), funções recursivas e estruturas de dados complexas.</p>
 <p>Nestas e em muitas outras situações, usar C++ pode ser extremamente vantajoso. No exemplo a seguir veremos a diferença entre a performance de um laço em C++ e um em R; note que esta nem é uma das 3 situações listadas no parágrafo anterior e que mesmo assim o código em C++ é <em>6 vezes mais rápido</em>.</p>
@@ -98,7 +100,7 @@ microbenchmark::microbenchmark(soma_r(v), soma_c(v))
 #&gt;  soma_c(v) 1.045805 1.063956 1.161585 1.097920 1.210052  1.955702   100</code></pre>
 <p><strong>Obs.</strong>: Os símbolos <code>+=</code> e <code>-=</code> são equivalentes a <code>a = a +/- b</code>, já o símbolo <code>++</code> é equivalente a <code>a = a + 1</code>.</p>
 </div>
-<div id="conclusao" class="section level2">
+<div id="conclusão" class="section level2">
 <h2>Conclusão</h2>
 <p>Com o pacote <code>Rcpp</code>, podemos rodar código em C++ de dentro do próprio R. Através dessa técnica conseguimos otimizar nosso código ou mesmo ter acesso a estruturas de dados complexas disponibilizadas pelo C++.</p>
 <p>Para saber mais sobre o assunto, dê uma olhada no <a href="http://adv-r.had.co.nz/Rcpp.html">tutorial</a> escrito por Hadley Wickham no livro <em>Advanced R</em>. Também recomendo a própria <a href="http://www.rcpp.org/">página</a> do <code>Rcpp</code> e sua extensa <a href="http://gallery.rcpp.org/">galeria de exemplos</a>.</p>

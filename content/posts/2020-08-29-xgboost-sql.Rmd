@@ -1,12 +1,11 @@
 ---
 title: "Predições XGBoost diretamente pelo SQL"
 date: "2020-08-29"
-tags: ["sql", "xgboost", "r", "machine learning"]
-categories: ["tutoriais", "r"]
+tags: ["sql", "xgboost", "machine learning"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/xgboost-sql.jpg"
 author: ["Athos"]
 summary: "Criar um XGBoost no R e colocar para o SQL gerar as predições em uma linha de código com o {tidypredict}."
-draft: false
 type: featured
 featuredImage: "images/posts/banner/feat-xgboost.jpg"
 ---
@@ -124,8 +123,8 @@ library(DiagrammeR)
 xgb.plot.tree(model=xgb_fit$fit)
 ```
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
 cat(getwd())
-file.remove("../../meu_sqlite_db.db")
+file.remove("meu_sqlite_db.db")
 ```
 

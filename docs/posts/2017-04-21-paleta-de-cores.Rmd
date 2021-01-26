@@ -2,7 +2,7 @@
 title: "K-means e paleta de cores"
 date: "2017-04-22T13:07:31+02:00"
 tags: ["imagens", "cluster", "kmeans"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/paleta-cores.png"
 author: ["Daniel"]
 summary: "Uma aplicação interessante de algoritmos de clusterização é a obtenção de 
@@ -47,7 +47,7 @@ Podemos exibir a imagem no R, convertendo o array, primeiro em um obheto do tipo
 plot(as.raster(img))
 ```
 
-![](images/posts/conteudo/paleta-de-cores/david-bowie.jpg)
+![](/images/posts/conteudo/paleta-de-cores/david-bowie.jpg)
 
 O problema de obter a paleta de cores de uma imagem pode ser formulado como um
 problema de clusterização: "obter grupos de individuos que possuem a menor diferença dentro de cada um e a maior diferença possível entre os grupos de 
@@ -157,7 +157,7 @@ moonrise <- readJPEG("img/moonrise-kingdom.jpg")
 plot(as.raster(moonrise))
 ```
 
-![](images/posts/conteudo/paleta-de-cores/moonrise-kingdom.jpg)
+![](/images/posts/conteudo/paleta-de-cores/moonrise-kingdom.jpg)
 
 ```{r eval=FALSE}
 paleta <- criar_paleta(moonrise, 6)

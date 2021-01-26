@@ -1,12 +1,11 @@
 ---
 title: "Meus 2 Centavos: análise das notas"
-date: "2018-02-23T14:25:00+03:00"
+date: "2018-02-23"
 tags: ["sf", "tidyverse"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/out_0262.png"
 author: ["Julio"]
 summary: "Tiago Belotti do canal do YouTube Meus 2 Centavos é o meu crítico de cinema favorito. Gasto uma quantidade de tempo que não me orgulho vendo os vídeos desse ser maravilhoso. Nesse post mostro como obtive as notas dele para verificar uma dúvida que estava me corroendo..."
-draft: false
 ---
 
 ```{r setup, include=FALSE}
@@ -18,7 +17,7 @@ knitr::opts_chunk$set(collapse = TRUE,
 [Tiago Belotti](https://www.youtube.com/channel/UCiSarBtpSphUrxtKDIW9c_A) é o meu crítico de cinema favorito. Gasto uma quantidade de tempo que não me orgulho vendo os vídeos desse ser maravilhoso. Atualmente, muitas vezes eu prefiro ver a crítica dele do filme que o próprio filme, seguindo cegamente as indicações dele a partir das notas que ele coloca no final da crítica. Recomendo fortemente que acessem o canal do Belotti.
 
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
-knitr::include_graphics("/blog/2018-02-21-2cents/out_0045.png")
+knitr::include_graphics("/images/posts/conteudo/2018-02-21-2cents/out_0045.png")
 ```
 
 O Tiago já mencionou várias vezes que as notas que ele dá aos filmes não representam toda a crítica realizada. Por exemplo, ele já montou listas de Top 10 colocando filmes com notas medianas à frente de filmes com notas altas. Mesmo assim, não dá pra não querer saber a nota que ele dá aos filmes, é um vício!
@@ -99,8 +98,8 @@ Basta fazer um loop (com `purrr`, não `for`, rs) para processar todos os arquiv
 # aff %>% 
 #   image_read() %>% 
 #   image_append() %>% 
-#   image_write("../../static/blog/2018-02-21-2cents/frames.png")
-knitr::include_graphics("/blog/2018-02-21-2cents/frames.png")
+#   image_write("../../static/images/posts/conteudo/2018-02-21-2cents/frames.png")
+knitr::include_graphics("/images/posts/conteudo/2018-02-21-2cents/frames.png")
 ```
 
 ### Passo 3: Encontrar a imagem que tem a nota
@@ -108,7 +107,7 @@ knitr::include_graphics("/blog/2018-02-21-2cents/frames.png")
 A nota geralmente aparece no canto superior direito da imagem: 
 
 ```{r, eval=TRUE, fig.align='center', echo=FALSE}
-knitr::include_graphics("/blog/2018-02-21-2cents/out_0277.png")
+knitr::include_graphics("/images/posts/conteudo/2018-02-21-2cents/out_0277.png")
 ```
 
 Então, vamos recortar esse pedaço e pegar qual imagem tem maior concentração de vermelho. A função `cortar_canto()` utiliza o `magick` para pegar o canto da imagem e salva num arquivo temporário.
@@ -171,13 +170,13 @@ limpar_imagem <- function(img_cut) {
 ```
 
 ```{r eval=TRUE, echo=FALSE, fig.align='center'}
-# "../../static/blog/2018-02-21-2cents/out_0277.png" %>%
+# "../../static/images/posts/conteudo/2018-02-21-2cents/out_0277.png" %>%
 #   cortar_canto() %>% 
 #   limpar_imagem() %>% 
 #   magick::image_read() %>% 
-#   image_write("../../static/blog/2018-02-21-2cents/out_raw.png")
+#   image_write("../../static/images/posts/conteudo/2018-02-21-2cents/out_raw.png")
 # 
-knitr::include_graphics("/blog/2018-02-21-2cents/out_raw.png")
+knitr::include_graphics("/images/posts/conteudo/2018-02-21-2cents/out_raw.png")
 ```
 
 
@@ -237,7 +236,7 @@ Usei esses metadados para extrair a data de disponibilização dos vídeos. No f
 
 ```{r, eval = TRUE, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-notas_2cents <- readr::read_rds("../../static/blog/2018-02-21-2cents/notas_2cents.rds")
+notas_2cents <- readr::read_rds("../../static/data/2018-02-21-2cents/notas_2cents.rds")
 ```
 
 |id          |nm                                                    |data       | nota|
@@ -305,7 +304,7 @@ notas_2cents %>%
 </div>
 
 ```{r, echo=FALSE, eval=TRUE, fig.align='center'}
-knitr::include_graphics("/blog/2018-02-21-2cents/out_0301.png")
+knitr::include_graphics("/images/posts/conteudo/2018-02-21-2cents/out_0301.png")
 ```
 
 
@@ -374,7 +373,7 @@ Para essas investigações, seria necessário cruzar essa base com a base do Rot
 É isso pessoal. Um abraço, e até a próxima.
 
 ```{r, echo=FALSE, eval=TRUE, fig.align='center'}
-knitr::include_graphics("/blog/2018-02-21-2cents/out_0266.png")
+knitr::include_graphics("/images/posts/conteudo/2018-02-21-2cents/out_0266.png")
 ```
 
 ### Agradecimentos

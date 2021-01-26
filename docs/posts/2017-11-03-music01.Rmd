@@ -2,7 +2,7 @@
 title: "Estatística e Música"
 date: "2017-11-03T23:26:00+03:00"
 tags: ["musica"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/music01.jpg"
 author: ["Julio"]
 summary: "Já pensou em juntar estatística e música? Nessa série de posts mostro como estou pensando em fazer isso e os pacotes que vou criar nessa jornada..."
@@ -124,7 +124,7 @@ note %>%
   plot()
 ```
 
-![](images/posts/conteudo/music01/note-1.png)
+![](/images/posts/conteudo/music01/note-1.png)
 
 ## Exemplo
 
@@ -151,7 +151,7 @@ bach_music %>%
   plot()
 ```
 
-![](images/posts/conteudo/music01/bach-1.png)
+![](/images/posts/conteudo/music01/bach-1.png)
 
 No RStudio, você pode usar a função `view()` para visualizar a música em melhor resolução no Viewer Pane.
 

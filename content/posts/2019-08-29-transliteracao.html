@@ -1,16 +1,17 @@
 ---
 title: "Remoção de Acentos e o Ano Novo Muçulmano"
 date: "2019-08-29"
-categories: ["r", "tutoriais"]
-tags: ["r", "strings"]
+categories: ["tutoriais"]
+tags: ["strings"]
 image: "images/posts/banner/corao.jpg"
 author: ["Caio"]
 summary: "Transliteração é uma das tarefas mais complicadas do tratamento de strings, mas o pacote stringi pode nos salvar."
-draft: false
 editor_options: 
   chunk_output_type: inline
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Qual a relação entre as duas partes do título deste post? O que a remoção de
@@ -52,7 +53,7 @@ stri_trans_toupper(&quot;groß&quot;, locale = &quot;de_DE&quot;)</code></pre>
 <pre class="r"><code>stri_trans_totitle(&quot;ijsvrij&quot;, locale = &quot;nl_NL&quot;)</code></pre>
 <pre><code>## [1] &quot;IJsvrij&quot;</code></pre>
 </div>
-<div id="acentos-do-portugues" class="section level2">
+<div id="acentos-do-português" class="section level2">
 <h2>Acentos do português</h2>
 <p>O segundo uso da transliteração (e provavelmente mais comum no dia a dia) é a
 remoção dos acentos do português. Muitas vezes recebemos arquivos e tabelas nos
@@ -73,7 +74,7 @@ nosso alfabeto) para <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> (o 
 restrito de caracteres sem nenhum tipo de diacrítico) e, portanto, utilizamos o
 ID <code>"Latin-ASCII"</code>.</p>
 </div>
-<div id="ano-novo-muculmano" class="section level2">
+<div id="ano-novo-muçulmano" class="section level2">
 <h2>Ano Novo muçulmano</h2>
 <p>O terceiro e último uso da transliteração serve para quando lidamos com línguas
 que apresentam ligaduras (duas ou mais letras unidas em um único glifo). O árabe

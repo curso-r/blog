@@ -1,14 +1,15 @@
 ---
 title: "Não use resultados de eleições para avaliar pesquisas eleitorais"
-date: "2018-08-31T00:00:00+00:00"
+date: "2018-08-31"
 tags: ["eleições"]
-categories: ["discussões", "r"]
+categories: ["discussões"]
 image: "images/posts/banner/candidatos.jpg"
 author: ["Julio"]
 summary: "Será que a comparação de resultados de pesquisas eleitorais e resultados de eleições é correta? Nesse artigo, argumentarei que não e darei uma ideia de como as pesquisas eleitorais poderiam ser avaliadas na prática."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>A pesquisa eleitoral é a forma mais comum de conectar a população geral com conceitos básicos de estatística, como amostragem e inferência. Por isso, a descrença nas pesquisas eleitorais pode levar à descrença na estatística como um todo. Isso é prejudicial para nossos profissionais e, consequentemente, para a sociedade.</p>
@@ -30,7 +31,7 @@ draft: false
 <p>Pesquisas eleitorais são levantamentos de intenção de voto. Seu objetivo é entender as opiniões da sociedade sobre os candidatos, hoje. O objetivo <strong>não é predizer qual será o resultado da eleição.</strong></p>
 <p>Isso significa que utilizar resultados de eleições para avaliar a qualidade das pesquisas é uma comparação, no mínimo, injusta. É como avaliar a qualidade de um livro pela sua capacidade de servir como peso de papel, uma vez que esta não é sua finalidade.</p>
 </div>
-<div id="pesquisas-eleitorais-podem-ser-utilizadas-para-predizer-eleicoes" class="section level2">
+<div id="pesquisas-eleitorais-podem-ser-utilizadas-para-predizer-eleições" class="section level2">
 <h2>Pesquisas eleitorais podem ser utilizadas para predizer eleições?</h2>
 <p>Claro que sim! Modelos estatísticos sempre têm propriedades preditivas. Um modelo preditivo para as eleições, no entanto, deve utilizar muito mais informações do que apenas as intenções de voto dos eleitores. Alguns exemplos de dados adicionais que poderiam ser utilizados:</p>
 <ul>
@@ -60,7 +61,7 @@ draft: false
 <p>O único critério estatístico coerente para avaliar uma pesquisa eleitoral desse tipo seria a comparação dos resultados da pesquisa com outras pesquisas que têm o mesmo objetivo. Por exemplo, se no dia 03 desse mês foram divulgadas dez pesquisas para presidente e uma das pesquisas coloca o candidato <span class="math inline">\(A\)</span> com 15% de vantagem em relação à média das dez pesquisas, existem evidências de que algo pode estar errado nesse levantamento.</p>
 <p>Hoje em dia temos alguns agregadores de pesquisas eleitorais que podem ser utilizados para monitorar os resultados das pesquisas e avaliar a qualidade dos resultados. Os meus preferidos são o do <a href="https://data.jota.info/agregador/">Agregador do JOTA</a>, elaborado pelo <a href="https://www.linkedin.com/in/guilherme-jardim-duarte-93b82077/?locale=en_US">Guilherme Jardim Duarte</a> e o do <a href="https://www.poder360.com.br/pesquisas-de-opiniao/">Poder360</a>, elaborado pelo <a href="https://www.voltdata.info/">Volt Data Lab</a>.</p>
 </div>
-<div id="como-poderiamos-mudar-essa-realidade" class="section level2">
+<div id="como-poderíamos-mudar-essa-realidade" class="section level2">
 <h2>Como poderíamos mudar essa realidade?</h2>
 <p>Se o interesse da sociedade está em (2), por quê não divulgar exatamente isso? Nos Estados Unidos, é o que o famoso portal <a href="https://fivethirtyeight.com">FiveThirtyEight</a> se dispôs a fazer. Eles soltam predições periódicas dos resultados de eleições e de eventos esportivos. No Brasil, iniciativas como o <a href="http://www.pollingdata.com.br">PollingData</a> do <a href="https://www.linkedin.com/in/neale/?locale=pt_BR">Neale El-Dash</a> fazem o mesmo, com diferentes metodologias.</p>
 <p>Avaliar a qualidade de estudos preditivos para responder (2) é muito mais fácil. Bastaria comparar o resultado do estudo com os resultados das eleições. O único cuidado seria o de, eventualmente, não dar o mesmo peso para pesquisas mais antigas e mais recentes. Uma forma de fazer isso é utilizando uma adaptação dos <a href="https://en.wikipedia.org/wiki/Brier_score">scores de Brier</a>:</p>

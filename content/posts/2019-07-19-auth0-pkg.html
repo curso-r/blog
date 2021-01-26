@@ -2,18 +2,19 @@
 title: "Autenticação em Shiny Apps com o pacote auth0"
 date: "2019-08-12"
 tags: ["auth0"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/auth0-pkg.png"
 author: ["Julio"]
 summary: "Atualização do post anterior no tema, mostrando como fazer autenticação em shiny apps usando o serviço Auth0."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Alguns meses atrás o <a href="https://github.com/dfalbel">Daniel</a> fez um post demonstrando como colocar autenticação em shiny apps, baseado numa implementação do <a href="https://jjesusfilho.github.io/curso_jurimetria/bio.html">José Jesus Filho</a>. Depois disso, trabalhamos bastante e conseguimos desenvolver o pacote <a href="https://github.com/curso-r/auth0"><code>auth0</code></a>, que foi apresentado na <a href="http://user2019.r-project.org">useR!2019</a>.</p>
 <p>Nesse post, darei uma ideia básica de como o pacote funciona, seus desafios atuais e próximos passos. Novamente, a melhor forma de utilizar o pacote é lendo a <a href="https://curso-r.github.io/auth0">documentação completa</a>, então aqui vou me ater a alguns detalhes.</p>
-<div id="video" class="section level2">
+<div id="vídeo" class="section level2">
 <h2>Vídeo</h2>
 <p>Fiz um vídeo demonstrando a utilização do auth0 aqui:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_qoHMePxFhY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -22,7 +23,7 @@ draft: false
 </div>
 <div id="dicas" class="section level2">
 <h2>Dicas</h2>
-<div id="configuracao-com-_auth0.yml" class="section level3">
+<div id="configuração-com-_auth0.yml" class="section level3">
 <h3>Configuração com <code>_auth0.yml</code></h3>
 <p>O arquivo <code>yml</code> pode ser criado com <code>auth0::use_auth0()</code> e começa assim:</p>
 <pre class="yaml"><code>name: myApp
@@ -36,7 +37,7 @@ auth0_config:
     secret: !expr Sys.getenv(&quot;AUTH0_SECRET&quot;)</code></pre>
 <p>O ideal é que você use <code>usethis::edit_r_environ()</code> para adicionar as variáveis de configuração <code>AUTH0_USER</code>, <code>AUTH0_KEY</code> e <code>AUTH0_SECRET</code>, por questões de segurança.</p>
 </div>
-<div id="arrumando-as-informacoes-no-auth0" class="section level3">
+<div id="arrumando-as-informações-no-auth0" class="section level3">
 <h3>Arrumando as informações no Auth0</h3>
 <p>Pelo que notei dos feedbacks da comunidade, a parte mais difícil de configurar o <code>auth0</code> é colocar as URLs no aplicativo. Primeiro, lembre-se sempre de que você precisa colocar essas informações em três lugares:</p>
 <ul>

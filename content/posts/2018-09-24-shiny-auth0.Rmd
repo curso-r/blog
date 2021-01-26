@@ -1,12 +1,11 @@
 ---
 title: "Autenticação no Shiny com Auth0"
-date: "2018-09-27T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+date: "2018-09-27"
+categories: ["tutoriais"]
 tags: ["r", "shiny"]
 image: "images/posts/banner/shiny-auth0.jpg"
 author: ["Daniel", "José"]
 summary: "Neste post vamos ensinar o passo a passo para adicionar autenticação em seu aplicativo Shiny usando o Auth0."
-draft: false
 ---
 
 ```{r echo = FALSE}

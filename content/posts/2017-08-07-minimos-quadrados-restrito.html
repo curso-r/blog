@@ -1,19 +1,21 @@
 ---
 title: "Mínimos quadrados com restrições lineares"
-date: "2017-08-07T10:12:00+03:00"
+date: "2017-08-07"
 tags: ["análises", "conceitos", "r", "regressão"]
-categories: ["conceitos", "r"]
+categories: ["conceitos"]
 image: "images/posts/banner/jackie_chan.jpg"
 author: ["Fernando"]
 summary: "Às vezes a solução do seu problema está a um peteleco de uma regressão de mínimos quadrados. Neste post vamos implementar uma minimização de soma de quadrados quando os coeficientes da regressão são restritos linearmente."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>A característica mais importante de um modelo estatístico é a sua flexibilidade. Esse termo pode ser entendido de várias formas, mas neste texto vou considerar que um modelo é flexível se ele <em>explica coerentemente</em> uma ampla gama de fenômenos reais.</p>
 <p>Pensando assim, a regressão linear pode ser considerada um modelo flexível, já que muitas relações funcionais cotidianas são do tipo <span class="math inline">\(y = \beta x\)</span>. É justamente por causa dessa flexibilidade que a boa e velha regressão de mínimos quadrados é tão usada, até mesmo aonde não deveria. O seu uso é tão indiscriminado que uma vez, em aula, um professor extraordinariamente admirável me disse que “90% dos problemas do mundo podem ser resolvidos com uma regressão linear”.</p>
 <p>Sendo bastante honesto, é provável que o meu professor esteja certo, mas este post não é sobre isso. Este é um post sobre o que fazer quando a regressão linear simples não basta. No que segue, vamos discutir uma pequena (e poderosa) extensão do modelo de regressão linear simples, mas antes de prosseguir para o problema propriamente dito (e sua implementação em R), vamos discutir da teoria que existe por trás dele.</p>
-<div id="regressao-linear-e-programacao-quadratica" class="section level2">
+<div id="regressão-linear-é-programação-quadrática" class="section level2">
 <h2>Regressão linear é programação quadrática</h2>
 <p>Embora seja pouco enfatizado nos bacharelados de estatística, uma regressão linear pode ser formulada como um problema de programação quadrática. Entrando nos detalhes, essa afirmação deve-se a dois fatos:</p>
 <ol style="list-style-type: decimal">
@@ -30,10 +32,10 @@ summary: "Às vezes a solução do seu problema está a um peteleco de uma regre
 <p><span class="math display">\[ \min_\beta -2Y&#39;X\beta + \beta&#39;X&#39;X\beta.\]</span></p>
 <p>Logo, tomando <span class="math inline">\(Q = 2X&#39;X\)</span> e <span class="math inline">\(c = \frac{1}{2}X&#39;Y\)</span> tem-se que esse é um problema de programação quadrática, que por sua vez é um problema convexo, que, segundo a teoria, tem uma única solução no ponto <span class="math inline">\(\beta = (X&#39;X)^{-1}X&#39;Y\)</span>.</p>
 </div>
-<div id="uma-regressao-linear-simples-mais-flexivel" class="section level2">
+<div id="uma-regressão-linear-simples-mais-flexível" class="section level2">
 <h2>Uma regressão linear simples mais flexível</h2>
-<p>Talvez o jeito mais simples de flexibilizar uma regressão linear no sentido mencionado no começo desse texto é restringir os seus parâmetros. Em muitos contextos, esse é o único jeito de colocar conhecimentos prévios na modelagem<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
-<p>Um caso bastante emblemático aparece nas curvas de crédito divulgadas pela ANBIMA<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. Lá, ajusta-se um conjunto de curvas que depende de 6 parâmetros e cada curva representa uma classificação de risco (que nem aquela em que o Brasil pode tomar <em>downgrade</em><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>). Como os níveis de risco estão ordenados, é natural exigir que também exista uma ordenação entre as curvas. Sem entrar em detalhes, a ideia pode ser expressa assim:</p>
+<p>Talvez o jeito mais simples de flexibilizar uma regressão linear no sentido mencionado no começo desse texto é restringir os seus parâmetros. Em muitos contextos, esse é o único jeito de colocar conhecimentos prévios na modelagem<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Um caso bastante emblemático aparece nas curvas de crédito divulgadas pela ANBIMA<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Lá, ajusta-se um conjunto de curvas que depende de 6 parâmetros e cada curva representa uma classificação de risco (que nem aquela em que o Brasil pode tomar <em>downgrade</em><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>). Como os níveis de risco estão ordenados, é natural exigir que também exista uma ordenação entre as curvas. Sem entrar em detalhes, a ideia pode ser expressa assim:</p>
 <p><span class="math display">\[\beta_{AAA} &lt; \beta_{AA} &lt; \beta_{A} &lt; \beta_{BBB} &lt; ...\]</span></p>
 <p>O que é que isso tem a ver com programação quadrática? A resposta é que a inequação acima pode ser escrita como <span class="math inline">\(A\beta \geq 0\)</span>, de tal forma já existe uma teoria para resolver uma regressão linear simples com restrições desse tipo! Basta que ela seja vista como um problema de programação quadrática.</p>
 </div>
@@ -81,9 +83,9 @@ solucao &lt;- solve.QP(Q,  # X&#39;X
                     A,  # A transposta
                     c(0,0,0,0,0,0,0,0,0))  # vetor de comparação</code></pre>
 <p>Para checar como valeu a pena todo esse esforço, dá uma olhada na diferença entre as estimativas! Os pontinhos vermelhos são as estimativas do modelo irrestrito, enquanto as barras são as estimativas do modelo com restrições.</p>
-<p><img src="/blog/2017-08-07-minimos-quadrados-restrito_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/posts/2017-08-07-minimos-quadrados-restrito_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="conclusoes" class="section level2">
+<div id="conclusões" class="section level2">
 <h2>Conclusões</h2>
 <ul>
 <li>Regressão linear simples é um problema de programação quadrática.</li>
@@ -95,8 +97,8 @@ solucao &lt;- solve.QP(Q,  # X&#39;X
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>A menos que você seja <s>uma pessoa razoável</s> bayesiano.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p><a href="http://www.anbima.com.br/data/files/05/43/3E/84/E12D7510E7FCF875262C16A8/metodologia-curvas_20credito_20131104_v2_1_.pdf" class="uri">http://www.anbima.com.br/data/files/05/43/3E/84/E12D7510E7FCF875262C16A8/metodologia-curvas_20credito_20131104_v2_1_.pdf</a><a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p><a href="http://economia.estadao.com.br/noticias/geral,agravamento-da-crise-politica-eleva-risco-de-rebaixamento-do-brasil-diz-sep,70001824274" class="uri">http://economia.estadao.com.br/noticias/geral,agravamento-da-crise-politica-eleva-risco-de-rebaixamento-do-brasil-diz-sep,70001824274</a><a href="#fnref3">↩</a></p></li>
+<li id="fn1"><p>A menos que você seja <s>uma pessoa razoável</s> bayesiano.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="http://www.anbima.com.br/data/files/05/43/3E/84/E12D7510E7FCF875262C16A8/metodologia-curvas_20credito_20131104_v2_1_.pdf" class="uri">http://www.anbima.com.br/data/files/05/43/3E/84/E12D7510E7FCF875262C16A8/metodologia-curvas_20credito_20131104_v2_1_.pdf</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="http://economia.estadao.com.br/noticias/geral,agravamento-da-crise-politica-eleva-risco-de-rebaixamento-do-brasil-diz-sep,70001824274" class="uri">http://economia.estadao.com.br/noticias/geral,agravamento-da-crise-politica-eleva-risco-de-rebaixamento-do-brasil-diz-sep,70001824274</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

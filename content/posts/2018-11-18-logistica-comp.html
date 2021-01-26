@@ -1,14 +1,15 @@
 ---
 title: "Regressão logística: aspectos computacionais"
-date: "2018-11-18T00:00:00+00:00"
-categories: ["r", "tutoriais"]
-tags: ["r"]
+date: "2018-11-18"
+categories: ["tutoriais"]
+tags: ["estatística"]
 image: "images/posts/banner/logistic-comp.jpg"
 author: ["Julio"]
 summary: "Nesse post vamos discutir um pouco sobre regressão logística, tensorflow e modelos lineares generalizados."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Nesse post vamos discutir um pouco sobre regressão logística, tensorflow e Modelos Lineares Generalizados (<em>Generalized Linear Models</em>, GLMs). Não vou economizar nas matemáticas nem nos códigos.</p>
@@ -17,7 +18,7 @@ draft: false
 <li>Se você não conhece o Tensorflow, recomendo ver <a href="https://tensorflow.rstudio.com/">a página do RStudio sobre Tensorflow</a>.</li>
 <li>Se você curte a parte computacional da estatística, <a href="http://www.leg.ufpr.br/~paulojus/mcie/MCIE.pdf">esse livro do LEG-UFPR é obrigatório</a>. Eles são os melhores.</li>
 </ul>
-<div id="introducao-o-tensorglm" class="section level2">
+<div id="introdução-o-tensorglm" class="section level2">
 <h2>Introdução: o <code>tensorglm</code></h2>
 <p>Um de meus interesses no momento é implementar GLMs usando <a href="https://tensorflow.org">Tensorflow</a>. O Tensorflow é uma biblioteca computacional mantida pela Google que utiliza paralelização e o poder das GPUs (<em>Graphical Processing Units</em>) para fazer contas. O Tensorflow foi especialmente desenhado para facilitar o ajuste de redes neurais profundas e outros modelos sofisticados.</p>
 <p>GLMs são casos particulares de redes neurais. Uma rede neural com apenas uma camada e com funções de perda / verossimilhanças baseadas na Divergência de Kullback-Leibler são exatamente iguais aos GLMs. Por exemplo, essa divergência equivale ao erro quadrático médio para a distribuição gaussiana e <em>binary-crossentropy</em> para logística.</p>
@@ -28,7 +29,7 @@ draft: false
 </ol>
 <p>Meu intuito é, então, montar uma solução alternativa que funcione igual à função <code>glm()</code> do R, mas usando Tensorflow no backend ao invés do algoritmo atual, que é em Fortran. Com isso, espero que o ajuste seja mais eficiente quando os dados são grandes e permita trabalhar com dados que não cabem na memória.</p>
 </div>
-<div id="a-regressao-logistica" class="section level2">
+<div id="a-regressão-logística" class="section level2">
 <h2>A regressão logística</h2>
 <p>Meu primeiro experimento com o <code>tensorglm</code> foi implementar a regressão logística usando tensorflow, com descida de gradiente. Considere o problema</p>
 <p><span class="math display">\[P(Y=1\;|\;\mu, x) = \mu = \sigma(\alpha + \beta x),\]</span></p>

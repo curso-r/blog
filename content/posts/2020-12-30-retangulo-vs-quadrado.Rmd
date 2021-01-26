@@ -1,13 +1,13 @@
 ---
 title: "CNNs: Kernel Quadrado versus Kernel Retangular"
 date: "2020-12-30"
-tags: ["torch", "deep learning", "r", "machine learning"]
+tags: ["torch", "deep learning", "machine learning"]
 bibliography: bibliography.bib
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/quadrado-vs-retangulo.png"
 author: ["Athos"]
 summary: "Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels retangulares podem ajudar. O post mostra um exemplo minimal em {torch} para ilustrar uma situação em que isso acontece."
-draft: false
+retired: true
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +15,8 @@ knitr::opts_chunk$set(
   echo = TRUE,
   warning = FALSE, 
   message = FALSE, 
-  collapse = TRUE
+  collapse = TRUE,
+  eval = FALSE
 )
 ```
  
@@ -55,14 +56,14 @@ Repare que a saída resultante de cada convolução é bem diferente! Para o ker
 
 #### CNN Quadrada
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 conv_quadrada <- nn_conv2d(in_channels = 1, kernel_size = c(3,3), out_channels = 1, bias = FALSE)
 conv_quadrada(x)
 ```
 
 #### CNN Retangular
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 conv_retangular <- nn_conv2d(in_channels = 1, kernel_size = c(8,1), out_channels = 1, bias = FALSE)
 conv_retangular(x)
 ```
@@ -71,7 +72,7 @@ Comentário: A saída `1x6` pode ser vista como uma média ponderada das frequê
 
 ### Ajuste
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 # otimizadores
 optim_quadrado <- optim_adam(conv_quadrada$parameters, lr = 0.1)
 optim_retangulo <- optim_adam(conv_retangular$parameters, lr = 0.1)
@@ -137,7 +138,7 @@ erros %>%
 
 #### Pesos finais
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 # quadrado
 pesos_kernel_quadrado <- conv_quadrada$parameters$weight$squeeze(1)$squeeze(1)
 pesos_kernel_quadrado
@@ -151,7 +152,7 @@ pesos_kernel_retangular
 1. No kernel quadrado os pesos estão com aspecto que aleatório.
 2. No kernel retangular os pesos em rosa estão relacionados com as duas frequências relativas ao passarinho e ao sapo.
 
-```{r, eval = TRUE, echo=FALSE}
+```{r, eval = FALSE, echo=FALSE}
 library(patchwork)
 
 rbind(
@@ -174,7 +175,7 @@ rbind(
 
 As predições da convolução quadrada deu tudo 50%, ou seja, não foi possível separar os dois pontos! Ou chutamos tudo sapo, ou chutamos tudo passarinho. Sempre iremos cometer algum erro.
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 # quadrado
 conv_quadrada(x) %>% nnf_sigmoid() %>% torch_mean(dim = c(2,3,4))
 # retangular

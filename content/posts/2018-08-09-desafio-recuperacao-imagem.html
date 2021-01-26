@@ -1,14 +1,16 @@
 ---
 title: "Desafio de Dados - Recuperação de imagens"
-date: "2018-08-09T00:00:00+00:00"
+date: "2018-08-09"
 tags: ["app", "pacotes"]
-categories: ["divulgação", "r"]
-image: "img/blog/desafio-recuperacao-img/purple_wave.jpg"
+categories: ["divulgação"]
+image: "images/posts/banner/purple_wave.jpg"
 author: ["Athos","Daniel", "Bruna Wundervald"]
 summary: "Na segunda edição do Desafio de Dados vamos tentar recuperar a cor de uma imagem usando modelos de regressão e árvore de decisão."
 draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Arquivos com extensão <em>.jpg</em> guardam 5 coordenadas, que são
@@ -27,17 +29,17 @@ ser representada por um banco de dados com 5 colunas (<code>x</code>, <code>y</c
 <ul>
 <li>Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da
-<a href="images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg">imagem purple_wave.jpg.</a></li>
+<a href="/images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg">imagem purple_wave.jpg.</a></li>
 </ul>
-<p><img src="images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg" /></p>
+<p><img src="/images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg" /></p>
 <ul>
 <li>Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da
-<a href="images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg">imagem xadrez_colorido.jpg.</a></li>
+<a href="/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg">imagem xadrez_colorido.jpg.</a></li>
 </ul>
-<p><img src="images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg" /></p>
+<p><img src="/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg" /></p>
 </div>
-<div id="como-comecar" class="section level1">
+<div id="como-começar" class="section level1">
 <h1>Como começar?</h1>
 <p>Com auxílio da função <code>readJPEG()</code> do pacote <code>jpeg</code>, carregue uma das
 imagens no R e transforme para data.frame:</p>
@@ -83,7 +85,7 @@ ggplot(data = img_df_parte1, aes(x = x, y = y)) +
   labs(x = &quot;x&quot;, y = &quot;y&quot;, title = &quot;Imagem sem B (azul)&quot;) +
   coord_fixed(ratio = 1) +
   theme_bw()</code></pre>
-<p><img src="/blog/2018-08-09-desafio-recuperacao-imagem_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/posts/2018-08-09-desafio-recuperacao-imagem_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>A sua tarefa é recuperar o azul (que nós apagamos da imagem) da Parte 1,
 utilizando modelos preditivos construídos com a Parte 2 (que ainda tem o azul!) para as duas imagens (<code>xadrez_colorido</code> e <code>purple_wave</code>).</p>
 </div>

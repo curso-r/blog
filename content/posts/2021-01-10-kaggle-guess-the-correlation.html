@@ -1,0 +1,207 @@
+---
+title: "Kaggle: Guess The Correlation (feat. {torchdatasets})"
+date: "2021-01-10"
+tags: ["torch", "deep learning", "machine learning"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/guess-the-correlation.png"
+author: ["Athos"]
+summary: "Solução para o Kaggle Guess The Correlation com {torch}."
+draft: true
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<pre class="r"><code>library(torch)
+library(torchdatasets)
+library(torchvision)
+library(tidyverse)
+library(mestrado)
+library(patchwork)</code></pre>
+<div id="dados-com-torchdatasets" class="section level2">
+<h2>Dados com {torchdatasets}</h2>
+<pre class="r"><code>train &lt;- guess_the_correlation_dataset(
+  root = &quot;~/datasets&quot;, 
+  token = &quot;kaggle.json&quot;, 
+  download = TRUE, 
+  split = &quot;train&quot;
+)
+
+submition &lt;- guess_the_correlation_dataset(
+  root = &quot;~/datasets&quot;, 
+  token = &quot;kaggle.json&quot;,
+  download = TRUE, 
+  split = &quot;submition&quot;
+)</code></pre>
+<p>Olhada no banco de dados</p>
+<pre class="r"><code># Número de imagens na base de treino
+length(train)
+# lista de ids e Y da base de treino
+head(train$images)
+# Dimensão das imagens
+dim(train[2]$x)</code></pre>
+<pre class="r"><code>cria_template_bolinha &lt;- function(kernel_size = 5) {
+  conv &lt;- torch::nn_conv2d(1, 1, kernel_size, bias = FALSE)
+  template_bolinha &lt;- torch::torch_tensor(array(c(0, 1, 1, 1, 0,
+                                                  1, 1, 1, 1, 1,
+                                                  1, 1, 1, 1, 1,
+                                                  1, 1, 1, 1, 1,
+                                                  0, 1, 1, 1, 0), dim = c(5,5)))
+  conv$parameters$weight$requires_grad_(FALSE) # torch, não otimizar esses params
+  conv$weight[1,1] &lt;- template_bolinha
+  conv
+}
+
+transforma_imagem &lt;- function(x) {
+  conv_bolinha &lt;- cria_template_bolinha()
+  
+  # retira os eixos da imagem
+  x &lt;- x %&gt;%
+    torchvision::transform_crop(5, 22, 125, 127) 
+  
+  ldim_x &lt;- length(dim(x))
+  while(length(dim(x)) &lt; 4) x &lt;- x$unsqueeze(if(ldim_x == 2) 1 else 2)
+  
+  # passa convolucao para encontrar o centro das bolinhas
+  x &lt;- conv_bolinha(x) 
+  
+  # cria a máscara de centros das bolinhas
+  x &lt;- x %&gt;%
+    torch::torch_squeeze() %&gt;%
+    torch::torch_less(0.1)
+  
+  x
+}
+
+# x tem dimensao (H, W)
+transforma_correlacao &lt;- function(x) {
+  # encontra as coordenadas dos centros das bolinhas (X, Y)
+  x &lt;- torch::torch_nonzero(x)
+  
+  # calcula a correlação de pearson entre as coordenadas das bolinhas (X, Y)
+  # mean((x - mean(x)) * (y - mean(y)))/(sd(x)*sd(y))
+  media_desvpad &lt;- torch::torch_std_mean(x$to(dtype = torch::torch_float()), dim = 1)
+  desvpad &lt;- media_desvpad[[1]]
+  media &lt;- media_desvpad[[2]]
+  
+  corr &lt;- x %&gt;% 
+    torch_subtract(media) %&gt;% 
+    torch_prod(dim = 2) %&gt;% 
+    torch_mean() %&gt;%
+    torch_divide(torch_prod(desvpad)) %&gt;%
+    torch_multiply(-1)
+  
+  corr
+}</code></pre>
+<pre class="r"><code>#
+formato_para_o_ggplot &lt;- function(item_do_df) {
+  item_do_df$x %&gt;%
+    image_tensors_to_tbl() %&gt;% 
+    mutate(resp = paste(&quot;corr: &quot;, scales::percent(item_do_df$y)))
+}
+
+map(1:4, ~train[.x]) %&gt;% 
+  map(~{.x$x &lt;- transforma_imagem(.x$x); .x}) %&gt;%
+  map_dfr(formato_para_o_ggplot) %&gt;% 
+  mutate(c1 = c1/max(c1)) %&gt;%
+  ggpixelgrid(ncol = 4, label = resp) </code></pre>
+</div>
+<div id="dataloader" class="section level2">
+<h2>Dataloader</h2>
+<pre class="r"><code>minha_collate_fn &lt;- function(batch) {
+  
+  batch_transposto &lt;- purrr::transpose(batch)
+  
+  x &lt;- torch::torch_stack(batch_transposto$x)
+  y &lt;- torch::torch_tensor(unlist(batch_transposto$y), dtype = torch::torch_float())
+  id &lt;- unlist(batch_transposto$id)
+  
+  list(x = x, y = y, id = id)
+}</code></pre>
+<pre class="r"><code>train_dl &lt;- dataloader(
+  train, batch_size = 2, 
+  shuffle = TRUE, 
+  collate_fn = minha_collate_fn
+)</code></pre>
+</div>
+<div id="device" class="section level2">
+<h2>Device</h2>
+<pre class="r"><code>device &lt;- torch_device(if(cuda_is_available()) &quot;cuda&quot; else &quot;cpu&quot;)</code></pre>
+</div>
+<div id="modelo" class="section level2">
+<h2>Modelo</h2>
+<div id="modelo1" class="section level3">
+<h3>Modelo1</h3>
+<p>Apelar para calcular a correlação de pearson dos pontos da imagem.
+1) achar o centro dos pontos
+2) calcular a correlação entre X e Y desses centros</p>
+<pre class="r"><code># NN module
+modelo_corr &lt;- torch::nn_module(
+  &quot;ModeloCorr&quot;,
+  initialize = function() {
+    self$lin &lt;- nn_linear(
+      in_features = 1, 
+      out_features = 1, 
+      bias = TRUE
+    )
+  },
+  
+  forward = function(batch) {
+    # ceu estrelado
+    x &lt;- batch %&gt;% transforma_imagem() 
+    
+    # correlação de pearson
+    x &lt;- purrr::map(
+      torch::torch_unbind(x), 
+      transforma_correlacao
+    ) %&gt;%
+      torch::torch_stack()
+    
+    x &lt;- x$unsqueeze(2) %&gt;% self$lin()
+    
+    x$squeeze()
+  }
+)
+
+modelo1 &lt;- modelo_corr()
+
+print(modelo1)</code></pre>
+<pre class="r"><code>modelo1$parameters</code></pre>
+</div>
+</div>
+<div id="loss" class="section level2">
+<h2>Loss</h2>
+<pre class="r"><code>criterio &lt;- torch::nn_mse_loss()</code></pre>
+</div>
+<div id="optimizer" class="section level2">
+<h2>Optimizer</h2>
+<pre class="r"><code>otimizador &lt;- torch::optim_adam(modelo1$parameters, lr = 0.001)</code></pre>
+</div>
+<div id="loop-de-treinamento" class="section level2">
+<h2>Loop de treinamento</h2>
+<pre class="r"><code>losses &lt;- c()
+# we can then loop trough the elements of the dataloader with
+i &lt;- 0
+for(batch in enumerate(train_dl)) {
+  i &lt;- i + 1
+  otimizador$zero_grad()
+  y_pred &lt;- modelo1(batch[[1]])
+  y_obs &lt;- batch[[2]]
+  loss &lt;- criterio(y_pred, y_obs)
+  loss$backward()
+  losses &lt;- c(losses, as.numeric(loss))
+  if(i %% 20 == 0) 
+    print(glue::glue(&quot;Batch {i} de {length(train_dl)} - train loss: {as.numeric(loss)}&quot;))
+}
+
+plot(1:length(losses), losses, type = &quot;l&quot;, color = &quot;royalblue&quot;)</code></pre>
+<div id="modelo2" class="section level3">
+<h3>Modelo2</h3>
+<p>CNN tradicional —&gt; invariante no espaço</p>
+</div>
+<div id="modelo3" class="section level3">
+<h3>Modelo3</h3>
+<p>CNN com kernel retangular —-&gt; considera a posicao das coisas</p>
+</div>
+</div>

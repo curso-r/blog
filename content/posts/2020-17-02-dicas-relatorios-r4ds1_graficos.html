@@ -1,8 +1,8 @@
 ---
 title: "Feedback dos trabalhos do R para Ciência de Dados (Parte II): Dicas para Gráficos"
 date: "2020-12-17"
-tags: ["r", "rstudio"]
-categories: ["r", "tutorial"]
+tags: ["gráficos"]
+categories: ["divulgação"]
 image: "images/posts/banner/ggplot2_blank.jpg"
 author: ["Beatriz Milz", "William"]
 summary: "Comentamos algumas dicas sobre elaboração de gráficos em relatórios. Ilustração sobre o pacote ggplot2, criada por Allison Horst."
@@ -19,7 +19,7 @@ Neste post, apresentaremos algumas dicas para elaborar gráficos com o pacote <a
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-blanks/ggplot2_blank.png" alt="Ilustração sobre o pacote ggplot2, criada por &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;." width="50%" />
 <p class="caption">
-Figure 1: Ilustração sobre o pacote ggplot2, criada por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>.
+Figura 1: Ilustração sobre o pacote ggplot2, criada por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>.
 </p>
 </div>
 <div id="dicas-para-formatar-melhor-seus-gráficos" class="section level2">
@@ -90,13 +90,13 @@ imdb_top_diretores</code></pre>
 <pre class="r"><code>imdb_top_diretores %&gt;% 
   ggplot() + 
   geom_col(aes(x = diretor, y = media_lucro))</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>A primeira dica é: quando os nomes no eixo x estiverem se sobrepondo (no caso deste gráfico, o nome dos diretores), podemos inverter os eixos. Uma forma de fazer isso é utilizando a função <code>coord_flip()</code>:</p>
 <pre class="r"><code>imdb_top_diretores %&gt;% 
   ggplot() + 
   geom_col(aes(x = diretor, y = media_lucro)) +
   coord_flip()</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Agora está muito mais fácil de ler os nomes dos diretores!</p>
 <p>Quando trabalhamos com variáveis que representam dinheiro (como no caso da variável lucro), podemos formatar os valores para que fiquem formatados como dinheiro, utilizando a função <code>scales::dollar()</code> :</p>
 <pre class="r"><code>imdb_top_diretores %&gt;% 
@@ -104,7 +104,7 @@ imdb_top_diretores</code></pre>
   geom_col(aes(x = diretor, y = media_lucro)) +
   scale_y_continuous(labels = scales::dollar) +
   coord_flip()</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Agora que os eixos estão bem formatados, podemos formatar a legenda para ficar claro o que cada eixo significa! A função <code>labs()</code> permite escrever o que desejamos que apareça como legenda em cada elemento (por exemplo: <code>labs(x = "Legenda do eixo X", y = "Legenda do eixo Y")</code> .</p>
 <pre class="r"><code>imdb_top_diretores %&gt;% 
   ggplot() + 
@@ -112,7 +112,7 @@ imdb_top_diretores</code></pre>
   scale_y_continuous(labels = scales::dollar) +
   labs(x = &quot;Pessoas diretoras&quot;, y = &quot;Lucro médio&quot;) +
   coord_flip()</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>É interessante também ordenar as barras do gráfico de barras, pois facilita a comparação das categorias (neste caso, as pessoas diretoras).</p>
 <p>Para isso, podemos tratar a variável diretor como um fator (<code>factor</code>) <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, e ordenar os níveis (<code>levels</code>) de diretores segundo a variável <code>media_lucro</code>. A função <code>fct_reorder()</code> do pacote <a href="https://forcats.tidyverse.org/"><code>forcats</code></a> pode ser utilizada para isso, pois ela ordena os níveis de um fator utilizando a ordem de outra variável.</p>
 <pre class="r"><code>imdb_top_diretores %&gt;%
@@ -122,7 +122,7 @@ imdb_top_diretores</code></pre>
   scale_y_continuous(labels = scales::dollar) +
   coord_flip() +
   labs(x = &quot;Pessoas diretoras&quot;, y = &quot;Lucro médio&quot;)</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Por último (mas também importante) é uma dica estética, porém tem o poder de deixar o gráfico muito mais atrativo! Existem várias funções no pacote <code>ggplot2</code> com temas para os gráficos, e elas usam o prefixo <code>theme_</code> (por exemplo, <code>theme_light()</code>). Além disso, existem pacotes que oferecem mais temas, como o <a href="https://github.com/Mikata-Project/ggthemr">ggthemr</a> e o <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/">ggthemes</a>!</p>
 <p>O exemplo abaixo utiliza o tema <code>theme_light()</code>:</p>
 <pre class="r"><code>imdb_top_diretores %&gt;%
@@ -133,7 +133,7 @@ imdb_top_diretores</code></pre>
   labs(x = &quot;Pessoas diretoras&quot;, y = &quot;Lucro médio&quot;) +
   coord_flip()  +
   theme_bw()</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>O exemplo abaixo utiliza o tema <code>flat</code> do pacote <a href="https://github.com/Mikata-Project/ggthemr">ggthemr</a>:</p>
 <pre class="r"><code>imdb_top_diretores %&gt;%
   mutate(diretor = forcats::fct_reorder(diretor, media_lucro)) %&gt;%

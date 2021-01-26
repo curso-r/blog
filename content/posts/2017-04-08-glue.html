@@ -1,23 +1,25 @@
 ---
 title: "Colando textos"
-date: "2017-04-17T13:07:31+02:00"
+date: "2017-04-17"
 tags: ["strings", "pacotes", "glue"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/glue.png"
 author: ["Julio"]
 draft: false
 summary: "Uma tarefa muito comum no R é colar textos. As funções mais importantes para isso são paste() e sprintf(), que vêm com o pacote base. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do tidyverse, o glue."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Uma tarefa muito comum no <code>R</code> é colar textos. As funções mais importantes para isso são <code>paste()</code> e <code>sprintf()</code>, que vêm com o pacote <code>base</code>. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do <code>tidyverse</code>, o <code>glue</code>.</p>
 <div id="paste" class="section level2">
 <h2><code>paste()</code></h2>
-<p>A função <code>paste()</code> recebe um conjunto indeterminado de objetos como argumento através do <code>...</code> e vai colando os objetos passados elemento a elemento. Isso significa que se você passar dois vetores de tamanho <code>n</code>, a função <code>paste()</code> retornará um vetor de tamanho <code>n</code> sendo cada posição a colagem dos dois vetores nessa posição. Por padrão, a colagem é feita com um separador de espaço simples (<code>&quot; &quot;</code>). Exemplo:</p>
+<p>A função <code>paste()</code> recebe um conjunto indeterminado de objetos como argumento através do <code>...</code> e vai colando os objetos passados elemento a elemento. Isso significa que se você passar dois vetores de tamanho <code>n</code>, a função <code>paste()</code> retornará um vetor de tamanho <code>n</code> sendo cada posição a colagem dos dois vetores nessa posição. Por padrão, a colagem é feita com um separador de espaço simples (<code>" "</code>). Exemplo:</p>
 <pre class="r"><code>paste(c(1, 2, 3), c(4, 5, 6))
 ## [1] &quot;1 4&quot; &quot;2 5&quot; &quot;3 6&quot;</code></pre>
-<p>É possível alterar o separador pelo argumento <code>sep =</code>. Um atalho útil para o separador vazio (<code>&quot;&quot;</code>) é a função <code>paste0</code>:</p>
+<p>É possível alterar o separador pelo argumento <code>sep =</code>. Um atalho útil para o separador vazio (<code>""</code>) é a função <code>paste0</code>:</p>
 <pre class="r"><code>paste0(c(1, 2, 3), c(4, 5, 6))
 ## [1] &quot;14&quot; &quot;25&quot; &quot;36&quot;</code></pre>
 <p>Algumas vezes nosso interesse não é juntar vetores elemento a elemento, mas sim passar um vetor e colar todos seus elementos. Isso é feito com o parâmetro <code>collapse =</code>:</p>
@@ -48,7 +50,7 @@ summary: "Uma tarefa muito comum no R é colar textos. As funções mais importa
 ## [1] &quot;Abacaxi&quot; &quot;Abacate&quot;</code></pre>
 <p>Isso não funciona:</p>
 <pre class="r"><code>sprintf(&#39;Aba%s%s&#39;, c(&#39;ca&#39;, &#39;ixaste&#39;), c(&#39;xi&#39;, &#39;te&#39;, &#39;.&#39;))
-## Error in sprintf(&quot;Aba%s%s&quot;, c(&quot;ca&quot;, &quot;ixaste&quot;), c(&quot;xi&quot;, &quot;te&quot;, &quot;.&quot;)): argumentos não podem ser reciclados para o mesmo tamanho</code></pre>
+## Error in sprintf(&quot;Aba%s%s&quot;, c(&quot;ca&quot;, &quot;ixaste&quot;), c(&quot;xi&quot;, &quot;te&quot;, &quot;.&quot;)): arguments cannot be recycled to the same length</code></pre>
 <p>Nem sempre queremos substituir pedaços do nosso texto por outros textos. No lugar do <code>%s</code>, é possível colocar padrões para números, por exemplo. Eu uso bastante o <code>%d</code>, que recebe inteiros. Uma funcionalidade legal do <code>%d</code> é a possibilidade de adicionar zeros à esquerda quando um número não atinge certa quantidade de dígitos. Assim, quando ordenamos um vetor de textos que começa com números, a ordenação é a mesma da versão numérica do vetor.</p>
 <p>Exemplo:</p>
 <pre class="r"><code>nums &lt;- 1:11
@@ -73,9 +75,9 @@ glue(&#39;{p * 100}% das pessoas adoram R.&#39;)
 ## 112% das pessoas adoram R.</code></pre>
 <p>A função <code>collapse()</code> é parecida com o <code>paste()</code> quando <code>collapse = ''</code>, mas só aceita um objeto como entrada:</p>
 <pre class="r"><code>x &lt;- collapse(1:10)
-## Warning: &#39;collapse&#39; é obsoleto.
-## Use &#39;glue_collapse&#39; em seu lugar
-## Veja help(&quot;Deprecated&quot;) e help(&quot;glue-deprecated&quot;).
+## Warning: &#39;collapse&#39; is deprecated.
+## Use &#39;glue_collapse&#39; instead.
+## See help(&quot;Deprecated&quot;) and help(&quot;glue-deprecated&quot;).
 x
 ## 12345678910
 all.equal(x, paste(1:10, collapse = &#39;&#39;))
@@ -87,9 +89,9 @@ all.equal(x, paste(1:10, collapse = &#39;&#39;))
 <p>Se quiser colar os objetos elemento a elemento e depois colapsar, faça isso explicitamente em duas operações:</p>
 <pre class="r"><code>glue(&#39;{letters}/{LETTERS}&#39;) %&gt;% 
   collapse(&#39;, &#39;)
-## Warning: &#39;collapse&#39; é obsoleto.
-## Use &#39;glue_collapse&#39; em seu lugar
-## Veja help(&quot;Deprecated&quot;) e help(&quot;glue-deprecated&quot;).
+## Warning: &#39;collapse&#39; is deprecated.
+## Use &#39;glue_collapse&#39; instead.
+## See help(&quot;Deprecated&quot;) and help(&quot;glue-deprecated&quot;).
 ## a/A, b/B, c/C, d/D, e/E, f/F, g/G, h/H, i/I, j/J, k/K, l/L, m/M, n/N, o/O, p/P, q/Q, r/R, s/S, t/T, u/U, v/V, w/W, x/X, y/Y, z/Z</code></pre>
 <p>O <code>glue</code> também tem uma função extra para trabalhar melhor com o <code>%&gt;%</code>, o <code>glue_data()</code>. O primeiro argumento dessa função é uma lista ou <code>data.frame</code>, e seus nomes são utilizados como variáveis para alimentar as chaves das strings. Use o <code>.</code> para fazer operações com toda a base de dados:</p>
 <pre class="r"><code>mtcars %&gt;% 
@@ -126,6 +128,6 @@ all.equal(x, paste(1:10, collapse = &#39;&#39;))
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Mais sobre isso no livro <a href="http://www.burns-stat.com/pages/Tutor/R_inferno.pdf">R inferno</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>Mais sobre isso no livro <a href="http://www.burns-stat.com/pages/Tutor/R_inferno.pdf">R inferno</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

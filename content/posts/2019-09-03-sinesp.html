@@ -2,13 +2,14 @@
 title: "Verificando afirmações com dados abertos"
 date: "2019-09-25"
 tags: ["evento"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/dadosgovbr.png"
 author: ["Julio"]
 summary: "Nesse post, analisamos dados do SINESP para verificar as informações de um tweet do Ministro Sérgio Moro sobre a queda nas ocorrências de crimes no primeiro bimestre de 2018."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Uma forma poderosa de participar socialmente é utilizando dados abertos. Dados abertos tornam a sociedade mais democrática pois com eles podemos verificar afirmações baseadas em estatísticas e também buscar novas narrativas para os fenômenos estudados.</p>
@@ -51,7 +52,7 @@ u_sinesp %&gt;%
   walk(~httr::GET(.x, httr::write_disk(paste0(path_sinesp, basename(.x)))))</code></pre>
 <p>Nada impede o usuário de baixar esses arquivos CSV manualmente. Pode ser até que seja mais rápido baixar manualmente se for uma vez só. A vantagem desse código é que ele é reprodutível, a menos que o site mude sua estrutura. Ou seja, quando chegarem os dados de 2019, provavelmente poderemos baixar tudo novamente usando o mesmo código.</p>
 </div>
-<div id="parte-2-importacao-e-arrumacao" class="section level2">
+<div id="parte-2-importação-e-arrumação" class="section level2">
 <h2>Parte 2: Importação e arrumação</h2>
 <p>O código abaixo carrega e arruma os dados para análise. Sempre existem inconsistências nos dados e devemos ficar atentos a eles.</p>
 <pre class="r"><code>d_sinesp &lt;- path_sinesp %&gt;% 
@@ -157,7 +158,7 @@ u_sinesp %&gt;%
 </tbody>
 </table>
 </div>
-<div id="parte-3-transformacao" class="section level2">
+<div id="parte-3-transformação" class="section level2">
 <h2>Parte 3: Transformação</h2>
 <p>Nesse código, meu objetivo foi reproduzir a tabela do Ministro da Justiça, mas adicionando as mudanças ocorridas entre 2015-2016, 2016-2017 e 2017-2018. Não fiz a análise por trimestre, e sim por bimestre. O leitor interessado pode replicar as análises para trimestres.</p>
 <pre class="r"><code>results &lt;- d_sinesp %&gt;%
@@ -253,7 +254,7 @@ knitr::kable(results)</code></pre>
 </table>
 <p>A tabela mostra que o primeiro bimestre de 2018, se comparado ao de 2017, também apresenta quedas em todos os tipos de crime, com exceção de estupro e roubo de cargas. Além disso, como será possível ver no próximo gráfico, as variações percentuais acima de 20% na tabela ocorrem em crimes com pequeno volume absoluto de ocorrências. Isso é esperado, pois quando o valor absoluto é pequeno, pequenas mudanças podem significar grandes variações percentuais. Por exemplo, se uma contagem vai de 150 para 120 (queda de 30), a queda é de 20%, mas se outra contagem vai de 1000 para 900 (queda de 100), a queda percentual é de 10%</p>
 </div>
-<div id="parte-4-visualizacao" class="section level2">
+<div id="parte-4-visualização" class="section level2">
 <h2>Parte 4: Visualização</h2>
 <p>Nesse gráfico, mostrei a série bimestral de ocorrências por tipo de crime, buscando identificar tendências de subida ou queda.</p>
 <pre class="r"><code>d_sinesp %&gt;%
@@ -272,7 +273,7 @@ knitr::kable(results)</code></pre>
   # divide o grafico por tipo de crime
   facet_wrap(~tipo_crime, scales = &quot;free_y&quot;, ncol = 3) +
   theme_bw()</code></pre>
-<p><img src="images/posts/conteudo/dadosgovbr/grafico_tempo.png" /></p>
+<p><img src="/images/posts/conteudo/dadosgovbr/grafico_tempo.png" /></p>
 <p>Pelo gráfico, é possível identificar que, em diversos tipos de crime, existe uma tendência de queda após o primeiro bimestre de 2018. Ou seja, não se pode atribuir a queda nas estatísticas de ocorrências ao novo governo de 2019. A queda vertiginosa no volume de estupros é bem curiosa.</p>
 </div>
 <div id="wrap-up" class="section level2">

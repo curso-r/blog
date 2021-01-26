@@ -1,16 +1,17 @@
 ---
 title: "Quebrando Captchas - Parte VI: Redes Generativas Adversariais com Classificador Auxiliar"
-date: "2019-03-11T00:00:00+00:00"
+date: "2019-03-11"
 categories: ["análises"]
 tags: ["captcha"]
 image: "images/posts/banner/captcha_06.png"
 author: ["Julio"]
 summary: "Nesse post vou trabalhar com Captchas e GANs. Se você não sabe o que é um Captcha e como estamos trabalhando para resolvê-los até agora, recomendo que você veja a série de posts da Curso-R sobre o tema. Se você não sabe nada de GAN, acredito que seja possível acompanhar esse post."
-draft: false
 editor_options: 
   chunk_output_type: inline
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Nesse post vou trabalhar com Captchas e GANs. Se você não sabe o que é um Captcha e como estamos trabalhando para resolvê-los até agora, recomendo que você veja a <a href="https://www.curso-r.com/tags/captcha/">série de posts da Curso-R</a> sobre o tema. Se você não sabe nada de GAN, acredito que seja possível acompanhar esse post. No entanto, não acho que esse é o exemplo mais simples possível de GAN: se você quiser um “hello world” no tema, recomendo ver <a href="https://tensorflow.rstudio.com/keras/articles/examples/mnist_acgan.html">esse exemplo</a> e <a href="https://arxiv.org/pdf/1406.2661.pdf">esse paper</a>.</p>
@@ -18,26 +19,26 @@ editor_options:
 <p><strong>Motivo</strong>: o motivo principal de usar modelos generativos é aproveitar o fato de existirem muito mais Captchas não classificados do que classificados. De certa forma, saber criar novos Captchas pode auxiliar no trabalho de resolvê-los.</p>
 <p><strong>Base de dados</strong>: ao invés de utilizar um Captcha real, vamos trabalhar com um Captcha sintético criado partir do MNIST. Chamarei esses carinhas de MNIST-Captcha. A ideia foi simplificar o problema para facilitar o desenvolvimento da solução. Um problema que enfrentamos no Deep Learning é que existem tantos hiperparâmetros a serem escolhidos que é muito difícil achar configurações que funcionam bem. Em problemas mais simples, é mais fácil achar esses parâmetros.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="images/posts/conteudo/gan/mnist.png" alt="Exemplo de imagem do MNIST." width="23%" />
+<img src="/images/posts/conteudo/gan/mnist.png" alt="Exemplo de imagem do MNIST." width="23%" />
 <p class="caption">
-Figure 1: Exemplo de imagem do MNIST.
+Figura 1: Exemplo de imagem do MNIST.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="images/posts/conteudo/gan/mnist-captcha.png" alt="Exemplo de MNIST-Captcha." width="50%" />
+<img src="/images/posts/conteudo/gan/mnist-captcha.png" alt="Exemplo de MNIST-Captcha." width="50%" />
 <p class="caption">
-Figure 2: Exemplo de MNIST-Captcha.
+Figura 2: Exemplo de MNIST-Captcha.
 </p>
 </div>
-<div id="o-que-e-gan" class="section level3">
+<div id="o-que-é-gan" class="section level3">
 <h3>O que é GAN?</h3>
 <p>A sigla GAN significa <em>Generative Adversarial Networks</em>. Não confunda com GAM (<em>Generalized Additive Models</em>)! Trata-se de um modelo recente, introduzido em 2014 pelo Ian Goodfellow, autor do famoso livro <a href="">DeepLearningBook</a>, que está ganhando cada vez mais espaço na comunidade científica, por conta de seus impressionantes resultados.</p>
 <p>GAN, na verdade, são dois modelos co-dependentes, o <strong>gerador</strong> e o <strong>discriminador</strong>. O gerador tenta gerar novos Captchas a partir de nada, indistinguíveis dos originais, e o discriminador tenta discriminar se os Captchas criados pelo gerador são reais ou não. Ou seja, um fica brigando com o outro, e no final temos um excelente gerador de novos Captchas e um excelente discriminador de Captchas.</p>
 </div>
-<div id="o-que-e-ac-gan" class="section level3">
+<div id="o-que-é-ac-gan" class="section level3">
 <h3>O que é AC-GAN?</h3>
 <p>Quando nosso interesse está na predição, simples GANs não ajudam, pois o discriminadores só sabem verificar se uma imagem é original ou fake. No entanto, podemos adicionar respostas no discriminador, tornando-o um modelo duplo, capaz de discriminar imagens reais e falsas e, ao mesmo tempo, capaz de predizer o valor do Captcha.</p>
-<div id="ok-mas-nao-esta-claro" class="section level4">
+<div id="ok-mas-não-está-claro" class="section level4">
 <h4>OK, mas não está claro</h4>
 <p>Não mesmo. Esses carinhas não são simples. O ideal é sentar na cadeira e tentar entender o que o modelo faz. Eu fiz minha lição de casa, e consegui extrair esses passos:</p>
 <ol style="list-style-type: decimal">
@@ -292,11 +293,11 @@ ________________________________________________________________________________
 <p>É uma pergunta natural. Esse modelo é meio maluco, pois usa uma parte do modelo para avaliar a qualidade do outro. Mas sim, temos alguns resultados matemáticos que garantem que estamos em um bom território.</p>
 <p>Meu desejo era colocá-los aqui, mas ainda não sei explicar todos os detalhes. Pretendo estudar mais e adicionar em novos posts.</p>
 </div>
-<div id="exemplo-de-aplicacao-nos-mnist-captcha" class="section level2">
+<div id="exemplo-de-aplicação-nos-mnist-captcha" class="section level2">
 <h2>Exemplo de aplicação nos MNIST-Captcha</h2>
 <p>O exemplo completo que rodei com os MNIST-Captchas está <a href="https://gist.github.com/jtrecenti/149fc2ae4fe66652624f2c37f11d9286/">neste link</a>. Decidi não colocar o código completo aqui pois <del>a minha implementação está muito feia</del> o post ficaria muito longo.</p>
 <p>Muito bem, se o modelo serve para prever e para gerar, vamos avaliar a qualidade nesses quesitos.</p>
-<div id="preve-bem" class="section level3">
+<div id="prevê-bem" class="section level3">
 <h3>Prevê bem?</h3>
 <p>A taxa de acerto de cada dígito do MNIST-Captcha foi de 95%. Como temos 4 dígitos nesse caso, o acerto de todo o Captcha seria de 81%. Comparado com os modelos funcionando em produção do pacote <code>decryptr</code>, esse resultado é ruim. Lá, as taxas de acerto do Captcha são de no mínimo 93% e tem casos que acertamos tudo. Mas eu acredito que o motivo disso é que não ajustamos bem os hiperparâmetros. Se fizermos isso, provavelmente ficará melhor.</p>
 </div>
@@ -326,15 +327,15 @@ ________________________________________________________________________________
 }</code></pre>
 <p>Rodando para alguns exemplos:</p>
 <pre class="r"><code>gerar_imagem(c(1, 2, 4, 4))</code></pre>
-<p><img src="images/posts/conteudo/gan/1244.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/gan/1244.png" width="50%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>gerar_imagem(c(4, 0, 4, 7))</code></pre>
-<p><img src="images/posts/conteudo/gan/4047.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/gan/4047.png" width="50%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>gerar_imagem(c(9, 9, 9, 9))</code></pre>
-<p><img src="images/posts/conteudo/gan/9999.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/gan/9999.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>O que achou? Note que a última está errada.</p>
 </div>
 </div>
-<div id="proximos-passos" class="section level2">
+<div id="próximos-passos" class="section level2">
 <h2>Próximos passos</h2>
 <ul>
 <li>Fazer o GAN funcionar para mais Captchas.</li>

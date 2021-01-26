@@ -1,14 +1,16 @@
 ---
 title: "Desafio de Dados - PesqEle (parte I)"
-date: "2018-07-26T00:00:00+00:00"
+date: "2018-07-26"
 tags: ["app", "pacotes"]
-categories: ["divulgação", "r"]
+categories: ["divulgação"]
 image: "img/desafio-dados/1-pesqele.png"
 author: ["Daniel", "Bruna Wundervald"]
 summary: "Nessa primeira edição do Desafio de Dados vamos analisar a base de dados do pesqEle e criar um mapa da distribuição do número de pesquisas por estado."
 draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Bem vindos à primeira edição do <a href="/desafio-dados/">Desafio de Dados</a>.</p>
@@ -16,7 +18,7 @@ draft: false
 <p>O CONRE3 fez um <a href="https://github.com/conre3/pesqEle">pacote para o R</a> que permite acessar esses dados de forma mais organizada. Leia mais sobre o pacote neste <a href="http://curso-r.com/blog/2018/05/30/2018-05-30-pesqele/">post do blog</a>.</p>
 <p>Junto com o pacote, o CONRE3 fez também um aplicativo em shiny, disponível <a href="http://pesqele.conre3.org.br/app/">neste link</a>.</p>
 <p>A ideia dessa primeira edição do Desafio de Dados é replicar o mapa da página inicial do aplicativo que mostra a distribuição de pesquisas eleitorais por estado do Brasil.</p>
-<p><img src="/img/desafio-dados/1-pesqele.png" /></p>
+<p><img src="/images/posts/conteudo/desafio-dados/1-pesqele.png" /></p>
 <p>Os dados podem ser obtidos rodando o trecho de código abaixo:</p>
 <pre><code># devtools::install_github(&quot;conre3/pesqEle&quot;) # instalação do pacote;
 library(pesqEle)

@@ -2,7 +2,7 @@
 title: "PDF e OCR"
 date: "2017-05-28T13:07:31+02:00"
 tags: ["pdf", "pacotes", "ocr"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/pdf-to-text.jpg"
 author: ["Julio"]
 draft: false

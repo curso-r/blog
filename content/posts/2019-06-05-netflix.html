@@ -1,14 +1,15 @@
 ---
 title: "Analisando o seu histórico do Netflix"
-date: "2019-06-06T00:00:00+00:00"
-categories: ["r", "análises"]
-tags: ["r", "Netflix"]
+date: "2019-06-06"
+categories: ["análises"]
+tags: ["Netflix"]
 image: "images/posts/banner/binge.jpg"
 author: ["William"]
 summary: "Neste post, vamos brincar com o histórico de visualização do Netflix."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Motivado pelo tweet da jornalista de dados <a href="https://twitter.com/gabrielacaesar">Gabriela Caesar</a>, resolvi pegar a base do meu histórico no Netflix e montar algumas visualizações para descobrir como venho utilizando a plataforma nesses últimos anos.</p>
@@ -31,7 +32,7 @@ Qual foi o primeiro filme ou a primeira série a que você assistiu quando assin
 <li><p>No final da página, clicar em <strong>Download all</strong>.</p></li>
 </ul>
 </div>
-<div id="lendo-a-base-e-fazendo-algumas-manipulacoes" class="section level2">
+<div id="lendo-a-base-e-fazendo-algumas-manipulações" class="section level2">
 <h2>2. Lendo a base e fazendo algumas manipulações</h2>
 <p>A base vem em um arquivo <code>.csv</code> com duas colunas:</p>
 <ul>
@@ -94,7 +95,7 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
     color = &quot;red&quot;
   ) +
   labs(x = &quot;Ano&quot;, y = &quot;Frequência&quot;)</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Para ver quais meses do ano eu assisto mais netflix, eu fiz um gráfico do número médio de títulos assistido por mês do ano. Talvez um reflexo de 12 anos na universidade, julho, mês de férias letivas, é o que em média eu mais assisti Netflix.</p>
 <pre class="r"><code>netflix %&gt;% 
   count(mes, ano, categoria) %&gt;% 
@@ -104,7 +105,7 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
   ggplot(aes(x = mes, y = freq_media, fill = categoria)) +
   geom_col() +
   labs(x = &quot;Mês&quot;, y = &quot;Frequência média&quot;)</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Fiz também o gráfico por ano, contando o número de programas assistidos por ano. 2018 foi o campeão, mas com certeza foi influência do meu pai e da minhã irmã, que usaram o meu perfil por um tempo.</p>
 <pre class="r"><code>netflix %&gt;% 
   count(ano, categoria) %&gt;% 
@@ -112,14 +113,14 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
   geom_col() +
   labs(x = &quot;Ano&quot;, y = &quot;Frequência total&quot;, fill = &quot;&quot;) +
   scale_x_continuous(breaks = min(netflix$ano):max(netflix$ano))</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Analisando agora o dia da semana, sem surpresa: fins de semana ganham. Mas é curioso que eu costumo assistir mais filmes às sextas do que no resto da semana.</p>
 <pre class="r"><code>netflix %&gt;% 
   count(dia_sem, categoria) %&gt;% 
   ggplot(aes(x = dia_sem, y = n, fill = categoria)) +
   geom_col() +
   labs(x = &quot;Dia da semana&quot;, y = &quot;Frequência total&quot;, fill = &quot;&quot;)</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Por fim, contei as séries que mais assisti. O resultado representa bem o meu gosto: 8 das 10 séries são comédias (sendo que o desenho Avatar nem fui eu quem assistiu).</p>
 <pre class="r"><code>netflix %&gt;% 
   filter(categoria  == &quot;Séries&quot;) %&gt;% 
@@ -131,9 +132,9 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
   geom_text(aes(label = n, y = n/2), color = &quot;white&quot;) +
   labs(x = &quot;Série&quot;, y = &quot;Total de visualizações&quot;) +
   coord_flip()</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="faca-os-graficos-para-os-seus-dados" class="section level2">
+<div id="faça-os-gráficos-para-os-seus-dados" class="section level2">
 <h2>4. Faça os gráficos para os seus dados</h2>
 <p>Eu criei um aplicativo web usando Shiny para que você possa fazer essa mesma análise com apenas alguns cliques. Para isso,</p>
 <ul>

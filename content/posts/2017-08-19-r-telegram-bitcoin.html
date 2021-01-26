@@ -1,22 +1,24 @@
 ---
 title: "Como fazer o R avisar pelo telegram que bitcoin tá barato"
-date: "2017-08-19T10:26:00+03:00"
+date: "2017-08-19"
 tags: ["telegram", "bitcoin"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/r_telegram_bitcoin.png"
 author: ["Athos"]
 summary: "Uma brincadeira de fazer o R enviar uma mensagem ao seu celular via Telegram quando o preço da bitcoin subir ou cair muito!"
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>O ponto máximo da história é o R mandando mensagem pro Telegram. Só para motivar, vou contar o que fiz de divertido usando telegram e preços de bitcoin.</p>
-<p><img src="images/posts/conteudo/r-telegram-bitcoin/r_telegram.gif" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/r-telegram-bitcoin/r_telegram.gif" style="display: block; margin: auto;" /></p>
 <p>Herói do dia: <a href="https://github.com/lbraglia">Luca Biglia</a>, autor do pacote <code>telegram</code> do R.</p>
 <div id="o-que-faremos" class="section level1">
 <h1>O que faremos</h1>
 <p>Como mencionei, Vou construir um <strong>Acompanhador de bitcoin</strong> pra ilustrar e ao fim do post teremos feito o R mandar um telegram quando o preço da bitcoin atingir um dado patamar.</p>
-<p><img src="images/posts/conteudo/r-telegram-bitcoin/serie_bitcoin.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/r-telegram-bitcoin/serie_bitcoin.png" style="display: block; margin: auto;" /></p>
 <div id="ingredientes" class="section level2">
 <h2>Ingredientes</h2>
 <p>Na arte de hoje vamos precisar de:</p>
@@ -38,7 +40,7 @@ summary: "Uma brincadeira de fazer o R enviar uma mensagem ao seu celular via Te
 <li>(extra) Pensar em ideias mirabolantes do que fazer com telegram + R.</li>
 </ol>
 </div>
-<div id="introducao-aos-componentes" class="section level2">
+<div id="introdução-aos-componentes" class="section level2">
 <h2>Introdução aos componentes</h2>
 <p>Antes de mais nada, uma breve introdução às coisas que aparecerão por aqui:</p>
 <ul>
@@ -50,7 +52,7 @@ summary: "Uma brincadeira de fazer o R enviar uma mensagem ao seu celular via Te
 </div>
 <div id="acompanhador-de-bitcoin" class="section level2">
 <h2>Acompanhador de bitcoin</h2>
-<p>Já crie o seu .Rproj, rode <code>install.packages(&quot;telegram&quot;);library(telegram)</code> e vamos direto ao terceiro passo.</p>
+<p>Já crie o seu .Rproj, rode <code>install.packages("telegram");library(telegram)</code> e vamos direto ao terceiro passo.</p>
 <div id="passo-3-bot-do-telegram---criar-um-bot" class="section level3">
 <h3>Passo 3: Bot do telegram - Criar um bot</h3>
 <p>Bot é como se fosse uma pessoa a mais na sua lista de contato do telegram, mas que são máquinas em vez de humanos e respondem a comandos específicos. A graça é que você pode customizar esses comandos do jeito que quiser! Basta ter um propósito e saber programá-lo.</p>
@@ -60,7 +62,7 @@ summary: "Uma brincadeira de fazer o R enviar uma mensagem ao seu celular via Te
 <li>Envie o texto “/start” e em seguida “/newbot”. Dê um nome ao seu bot (pode ser um nome fofo) e depois um nome de usuário para o seu bot que necessariamente termina em <em>bot</em>.</li>
 <li>Agora copie e cole o token que o BotFather te enviou no <code>.Renviron</code>. O meu bot tem o username <code>AthosDamianiBot</code>, então eu devo colocar o nome da variável assim:</li>
 </ol>
-<p><img src="images/posts/conteudo/r-telegram-bitcoin/Renvirom_1.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/r-telegram-bitcoin/Renvirom_1.png" style="display: block; margin: auto;" /></p>
 <p>Se você usar essa convenção de nome você poderá usar a função <code>bot_token()</code> pra pegar o seu token. Caso contrário vai ter que apelar para a <code>Sys.getenv()</code>.</p>
 <p><strong>OBS:</strong> Reinicie o R para o <code>.Renviron</code> ficar configurado.</p>
 </div>
@@ -89,7 +91,7 @@ msgs$message$chat$id[1]
 <pre class="r"><code>bot$set_default_chat_id(135717340)</code></pre>
 <p>Neste momento já estamos prontos para interagir com o nosso bot!</p>
 </div>
-<div id="passo-5-consultar-precos-da-bitcoin" class="section level3">
+<div id="passo-5-consultar-preços-da-bitcoin" class="section level3">
 <h3>Passo 5: Consultar preços da bitcoin</h3>
 <p>Os preços da bitcoin são fornecidos pela API da <a href="https://blinktrade.com/docs/">BlinkTrade</a> que é bem simples usar: basta pegar o json que a url do código abaixo solta. Aproveito e dou um tapinha para deixar em forma de data.frame e com a data de consulta junto.</p>
 <pre class="r"><code>library(jsonlite)
@@ -109,7 +111,7 @@ nova_consulta
 1 14438.21 511.5911 14077.01 14200 13801.04 BTCBRL 14200 7257317 2017-08-18 17:09:44</code></pre>
 <p><strong>OBS:</strong> Usei o advérbio <code>safely()</code> porque a API pode engasgar a qualquer momento, fazendo assim o R retornar um erro que interromperia o acompanhamento do preço.</p>
 </div>
-<div id="passo-6-loop-infinito-para-acompanhar-os-precos" class="section level3">
+<div id="passo-6-loop-infinito-para-acompanhar-os-preços" class="section level3">
 <h3>Passo 6: Loop infinito para acompanhar os preços</h3>
 <p>O esqueleto do acompanhador é composto por um loop infinito (<code>while(TRUE)</code>), um data.frame <code>historico.RData</code>, um tempo entre uma consulta e outra (30 segundos por padrão) e a consulta propriamente dita.</p>
 <pre class="r"><code># inicializa o historico.RData
@@ -172,7 +174,8 @@ print(p)</code></pre>
 <p>Também é possível programar comandos para serem passados ao Bot para que ele construa algo para a gente, por exemplo, vc poderia criar um comando para comprar ou vender bitcoins em tempo real!</p>
 <p>O Julio uma vez criou um bot que era praticamente o próprio R, vc enviava código como mensagem e ele retornava o output do R! Depois vou pedir pra ele postar algo sobre isso.</p>
 <p>Enfim, dá pra ser engenhoso aí. Basta ter aquela ideia de chuveiro genial.</p>
-<p>Exercício para casa: - Enviar o gemidão do zap para 3 amigos via linha de código.</p>
+<p>Exercício para casa:
+- Enviar o gemidão do zap para 3 amigos via linha de código.</p>
 <p>abs!</p>
 </div>
 </div>

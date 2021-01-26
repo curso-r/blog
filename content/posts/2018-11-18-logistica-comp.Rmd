@@ -1,12 +1,11 @@
 ---
 title: "Regressão logística: aspectos computacionais"
-date: "2018-11-18T00:00:00+00:00"
-categories: ["r", "tutoriais"]
-tags: ["r"]
+date: "2018-11-18"
+categories: ["tutoriais"]
+tags: ["estatística"]
 image: "images/posts/banner/logistic-comp.jpg"
 author: ["Julio"]
 summary: "Nesse post vamos discutir um pouco sobre regressão logística, tensorflow e modelos lineares generalizados."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

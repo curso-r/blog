@@ -2,6 +2,8 @@
 
 .bg-posts {
   position: relative;
+  background-size: cover;
+  background-position: center;
 }
 
 .bg-posts:before {
@@ -17,6 +19,7 @@
 .titulo-post {
   color: #fff;
 }
+
 
 /* Geral */
 
@@ -44,8 +47,18 @@ footer {
   margin-top: 0;
 }
 
-.content p >img {
+.content img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.content p > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.caption {
+  text-align: center;
 }

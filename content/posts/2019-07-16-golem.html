@@ -2,13 +2,14 @@
 title: "Shiny Apps Empacotados com o golem"
 date: "2019-07-31"
 tags: ["golem", "shiny"]
-categories: ["tutoriais", "r"]
-image: "images/posts/banner/golem.png"
+categories: ["Tutoriais"]
+image: "images/posts/banner/golem.jpg"
 author: ["Julio"]
 summary: "Pacote para desenvolver shiny apps dentro de pacotes."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Desenvolver shiny apps é muito divertido, mas dá trabalho. Os apps começam com uma ideia simples, mas vão crescendo até o ponto que não conseguimos mais entender onde estão os pedaços do app.</p>
@@ -48,7 +49,7 @@ myapp.Rproj           # projeto
 </ul>
 <p>O mais interessante de um app criado dessa forma é que os arquivos <code>ui.R</code> e <code>server.R</code> ficam praticamente vazios. Isso acontece porque todo o trabalho sujo está sendo feito pelas funções <code>app_ui()</code> e <code>app_server()</code>, que agora são funções documentadas do seu pacote.</p>
 </div>
-<div id="caracteristicas-interessantes" class="section level2">
+<div id="características-interessantes" class="section level2">
 <h2>Características interessantes</h2>
 <ul>
 <li>Com o <code>golem</code>, é fácil de criar uma imagem Docker do seu app, o que facilita o deploy em escala. Atualmente, estou testando formas de integrar essa funcionalidade com a Google Cloud Platform, e parece bem promissor.</li>
@@ -56,7 +57,7 @@ myapp.Rproj           # projeto
 <li>Existem funções que facilitam a utilização de <em>javascript</em> e <em>css</em> no app, o que geralmente é algo doloroso no desenvolvimento de apps no shiny.</li>
 </ul>
 </div>
-<div id="video" class="section level2">
+<div id="vídeo" class="section level2">
 <h2>Vídeo</h2>
 <p>Montei um vídeo rápido mostrando a utilização do golem na construção de um app simples, colocado no shinyapps.io. Se quiser acessar esse app, o link está na descrição do vídeo!</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CRYxSBMxaSI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>

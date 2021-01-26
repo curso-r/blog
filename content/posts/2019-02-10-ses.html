@@ -1,14 +1,15 @@
 ---
 title: "Suavização exponencial simples com R"
-date: "2019-02-04T00:00:00+00:00"
-categories: ["r", "tutoriais"]
-tags: ["r"]
+date: "2019-02-04"
+categories: ["tutoriais"]
+tags: ["estatística"]
 image: "images/posts/banner/ses.png"
 author: ["Daniel"]
 summary: "Nesse post vamos implementar o método de suavização exponencial simples com R."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Esse post serve como introdução aos modelos de suavização exponencial e replica
@@ -19,7 +20,7 @@ para o mesmo problema usando como referência o paper <a href="https://forecaste
 <p>Vamos portanto começar descrevendo o modelo de suavização exponencial simples.
 Fazer um exemplo inicial usando o conhecido pacote <code>forecast</code> e partir para a implementação
 com <code>rstan</code>.</p>
-<div id="suavizacao-exponencial-simples" class="section level2">
+<div id="suavização-exponencial-simples" class="section level2">
 <h2>Suavização exponencial simples</h2>
 <p>Suavização exponencial é uma das principais classes de modelos usados em previsão
 de séries temporais. Essa classe inclui diversos tipos de modelos como o bem conhecido
@@ -96,6 +97,9 @@ também do Hyndman et al.</p>
 Esse banco de dados contém a produção anual de petróleo na Arábia Saudita.</p>
 <p>Para o exemplo pegamos dados desde 1996 até 2010.</p>
 <pre class="r"><code>library(forecast)
+## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo
 library(fpp)
 ## Loading required package: fma
 ## Loading required package: expsmooth
@@ -110,7 +114,7 @@ library(fpp)
 data(oil)
 oildata &lt;- window(oil, start=1996)
 plot(oildata)</code></pre>
-<p><img src="/blog/2019-02-10-ses_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/posts/2019-02-10-ses_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Para ajustar um modelo de suavização exponencial simples com o <code>forecast</code> podemos usar a função
 <code>ses</code>, mas ela já retorna os valores preditos para os próximos anos e não nos dá a oportunidade
 de ver os valores de <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(l_0\)</span> que ela escolheu.</p>
@@ -129,7 +133,7 @@ de ver os valores de <span class="math inline">\(\alpha\)</span> e <span class="
 <p>Na nomenclatura do Hyndman para os modelos da classe de suavização exponencial,
 a suavização exponencial simples é chamada de ANN. Não vou entrar em detalhes mas,
 isto está descrito <a href="https://otexts.com/fpp2/taxonomy.html">aqui</a>.</p>
-<p>Usamos então a função <code>ets</code> com o argumento <code>model = &quot;ANN&quot;</code>.</p>
+<p>Usamos então a função <code>ets</code> com o argumento <code>model = "ANN"</code>.</p>
 <pre class="r"><code>modelo &lt;- ets(oildata, &quot;ANN&quot;)
 modelo
 ## ETS(A,N,N) 
@@ -149,7 +153,7 @@ modelo
 ## 144.4110 146.5929 146.5352</code></pre>
 <p>Agora sim, podemos ver os valores estimados para <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(l_0\)</span>.</p>
 <pre class="r"><code>plot(forecast(modelo, h=5))</code></pre>
-<p><img src="/blog/2019-02-10-ses_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/posts/2019-02-10-ses_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Até aqui vimos como funciona o método de suavização exponencial simples, como o pacote
 <code>forecast</code> estima os seus parâmetros (método de máxima verossimilhança) e como fazer
 para ajustar esse modelo com o <code>forecast</code>, bem como obter os valores estimados para
@@ -230,11 +234,11 @@ model &lt;- sampling(ann, data = data)</code></pre>
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##         mean se_mean    sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-## sigma  28.69    0.11  5.77  19.87  24.62  27.85  31.86  42.07  2627    1
-## l_0   460.73    0.40 20.87 420.83 446.55 460.23 474.43 503.35  2782    1
-## alpha   0.71    0.00  0.20   0.25   0.59   0.73   0.86   0.99  3198    1
+## sigma  28.72    0.10  5.87  19.78  24.70  27.79  31.85  42.15  3184    1
+## l_0   460.02    0.36 20.76 419.79 446.52 459.43 473.98 501.41  3260    1
+## alpha   0.71    0.00  0.19   0.25   0.59   0.74   0.86   0.98  3852    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Feb  5 00:04:54 2019.
+## Samples were drawn using NUTS(diag_e) at Mon Jan 25 20:11:49 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -244,10 +248,10 @@ model &lt;- sampling(ann, data = data)</code></pre>
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
-##         mean se_mean  sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-## l[15] 471.88    0.07 4.4 467.73 468.31 470.27 474.21 482.97  3956    1
+##         mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+## l[15] 471.88    0.07 4.46 467.73 468.31 470.13 474.18 483.14  4029    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Feb  5 00:04:54 2019.
+## Samples were drawn using NUTS(diag_e) at Mon Jan 25 20:11:49 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -276,7 +280,7 @@ production mode.</p>
 <p>Escrevendo o modelo probabilístico com Stan, podemos lidar com cada um desses pontos
 para definir um modelo mais adequado.</p>
 </div>
-<div id="conclusao" class="section level2">
+<div id="conclusão" class="section level2">
 <h2>Conclusão</h2>
 <p>Aprendemos:</p>
 <ul>

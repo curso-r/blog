@@ -2,13 +2,14 @@
 title: "{tabulizer}: Tabela do PDF para data.frame em segundos"
 date: "2021-01-08"
 tags: ["faxina", "pdf", "tabulizer", "pdftools"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/tabulizer.png"
-author: ["Athos"]
+author: "Athos"
 summary: "Como extrair uma tabela de um PDF facilmente com a função tabulizer::extract_tables()"
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="resumo" class="section level2">
@@ -29,11 +30,10 @@ draft: false
 <pre class="r"><code># tira print da pagina 153 e salva como imagem PNG.
 pdftools::pdf_convert(url_pdf, pages = 153, filenames = &quot;pag153.png&quot;)
 ## Converting page 153 to pag153.png... done!
-## [1] &quot;pag153.png&quot;
-
-# mostra a imagem PNG.
-magick::image_read(&quot;pag153.png&quot;)</code></pre>
-<p><img src="/blog/2021-01-08-tabulizer_files/figure-html/unnamed-chunk-3-1.png" width="306" /></p>
+## [1] &quot;pag153.png&quot;</code></pre>
+<pre class="r"><code># mostra a imagem PNG.
+knitr::include_graphics(&quot;/images/posts/conteudo/tabulizer/pag153.png&quot;)</code></pre>
+<p><img src="/images/posts/conteudo/tabulizer/pag153.png" /><!-- --></p>
 </div>
 <div id="extração-da-tabela-pdf---r" class="section level2">
 <h2>Extração da tabela PDF -&gt; R</h2>

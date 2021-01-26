@@ -2,12 +2,11 @@
 title: "Web Scraping Orquestrado"
 date: "2019-05-14"
 tags: ["web-scraping"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/kuber.jpg"
 author: ["Caio"]
 summary: "Uma introdução ao pacote Kuber: como usar o kubernetes e o Google
 Cloud Platform para fazer um scraper que roda na velocidade da luz."
-draft: false
 ---
 
 O objetivo principal do pacote [Kuber](https://github.com/curso-r/kuber) é

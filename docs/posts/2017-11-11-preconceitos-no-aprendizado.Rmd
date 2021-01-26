@@ -2,7 +2,7 @@
 title: "Aprendendo assuntos difíceis"
 date: "2017-11-11T23:26:00+03:00"
 tags: ["estatística"]
-categories: ["discussões", "r"]
+categories: ["discussões"]
 image: "images/posts/banner/studying-hard.jpg"
 author: ["William"]
 summary: "Uma breve reflexão sobre o preconceito de estudar assuntos difíceis."

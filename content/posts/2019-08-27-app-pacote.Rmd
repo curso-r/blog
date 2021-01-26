@@ -2,11 +2,10 @@
 title: "Shiny em Produção: Rodando seu App com 1 Linha"
 date: "2019-09-06"
 tags: ["golem", "shiny"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/golem.jpg"
 author: ["Julio"]
 summary: "Um adendo ao pacote para desenvolver shiny apps dentro de pacotes."
-draft: false
 ---
 
 ```{r, include=FALSE}

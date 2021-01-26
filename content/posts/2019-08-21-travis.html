@@ -2,20 +2,21 @@
 title: "Fazendo seu pacote passar no Travis"
 date: "2019-09-04"
 tags: ["travis", "ci"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/travis.png"
 author: ["Julio"]
 summary: "O Travis é um serviço de Integração Contínua utilizado para garantir que o código está funcionando bem. Nesse tutorial, mostramos como usar o Travis de maneira simples, usando o pacote usethis."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Quando você acessa um pacote no GitHub, muitas vezes você se depara com essas coisas verdinhas:</p>
-<p><img src="images/posts/conteudo/travis/badges.png" width="50%" /></p>
+<p><img src="/images/posts/conteudo/travis/badges.png" width="50%" /></p>
 <p>Essas coisas são chamadas distintivos (“badges”). Indo da esquerda para a direita: a primeira delas serve para garantir ao leitor que o pacote é instalável no Linux, a segunda serve para garantir que o pacote é instalável no Windows, e a terceira serve para garantir que o pacote está no CRAN. Esses distintivos dão maior confiabilidade ao pacote e é considerado como boa prática de programação.</p>
 <p>Nesse post, vou discutir sobre o primeiro distintivo, e mostrar um exemplo de como você pode conseguir criá-la usando o pacote <code>{usethis}</code> e o serviço Travis.</p>
-<div id="o-que-e-o-travis" class="section level2">
+<div id="o-que-é-o-travis" class="section level2">
 <h2>O que é o Travis?</h2>
 <p><a href="https://travis-ci.org">Travis</a> é um serviço de integração contínua (Continuous Integration, CI), que automatiza a aplicação de um conjunto de testes do seu código. De forma muito simplificada, o Travis funciona assim:</p>
 <ol style="list-style-type: decimal">
@@ -34,7 +35,7 @@ da <a href="">Jenny Bryan</a></p>
 <p>Para (2), é necessário definir que testes você quer fazer. Por padrão, o R já tem uma rotina na <a href="https://docs.travis-ci.com/user/languages/r/">documentação do Travis</a>. O que essa rotina faz é passar o <code>R CMD CHECK</code> no seu pacote, que é basicamente o que seu pacote precisa passar para que seja aceito no CRAN.</p>
 <p>Para (3), você precisa adicionar o distintivo do seu pacote corretamente no seu arquivo <code>README.md</code>. A melhor forma de fazer isso é utilizando a função <code>usethis::use_travis()</code></p>
 </div>
-<div id="video" class="section level2">
+<div id="vídeo" class="section level2">
 <h2>Vídeo</h2>
 <p>Nesse vídeo, usei minha conta do GitHub e criei um pacote do zero usando o pacote <code>usethis</code>, vinculei ao Travis, e fiz ele dar build.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/AFZOiHR7USw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>

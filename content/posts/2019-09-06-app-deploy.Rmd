@@ -2,11 +2,10 @@
 title: "Shiny em Produção: Deploy seu App em 20min"
 date: "2019-09-20"
 tags: ["gcp", "shiny"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/deploy.jpg"
 author: ["Caio"]
 summary: "Quando você for capaz de tranformar um shiny app em pacote e em imagem de docker, só 20 minutos são necessários para fazer um deploy na nuvem."
-draft: false
 ---
 
 ```{r, include=FALSE}

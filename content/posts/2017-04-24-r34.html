@@ -1,13 +1,15 @@
 ---
 title: "R 3.4 disponível!"
-date: "2017-04-24T13:07:31+02:00"
-tags: ["r", "versão"]
-categories: ["divulgação", "r"]
+date: "2017-04-24"
+tags: ["update"]
+categories: ["divulgação"]
 image: "images/posts/banner/fastr.jpg"
 author: ["Julio"]
 summary: "A versão 3.4 do R foi lançada nesse final de semana! A atualização tem foco principal em performance. Veja as mudanças."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>A versão 3.4 do R (You Stupid Darkness) foi lançada nesse final de semana! A atualização tem foco principal na performance. Principais mudanças:</p>
@@ -19,9 +21,9 @@ summary: "A versão 3.4 do R foi lançada nesse final de semana! A atualização
 </ol>
 <p>Para uma lista completa de mudanças, <a href="https://www.r-bloggers.com/r-3-4-0-is-released-with-new-speed-upgrades-and-bug-fixes/">veja esse post</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="/blog/2017-04-24-r34_files/figure-html/unnamed-chunk-2-1.png" alt="R mais rápido! Imagem emprestada do time do [Rcpp](https://github.com/RcppCore)." width="672" />
+<img src="/images/posts/banner/fastr.jpg" alt="R mais rápido! Imagem emprestada do time do [Rcpp](https://github.com/RcppCore)."  />
 <p class="caption">
-Figure 1: R mais rápido! Imagem emprestada do time do <a href="https://github.com/RcppCore">Rcpp</a>.
+Figura 1: R mais rápido! Imagem emprestada do time do <a href="https://github.com/RcppCore">Rcpp</a>.
 </p>
 </div>
 <div id="jit" class="section level1">
@@ -52,7 +54,7 @@ cmp_mean_r
 ##     m = m + x[i] / n
 ##   m
 ## }
-## &lt;bytecode: 0x55b6999e8818&gt;</code></pre>
+## &lt;bytecode: 0x7fb86252dfd8&gt;</code></pre>
 <p>Para mostrar a mudança, vamos comparar o desempenho das funções usando <code>microbenchmark()</code>. Essa função calcula o tempo de execução de uma expressão cem vezes e calcula estatísticas básicas dos tempos obtidos.</p>
 <p>No meu servidor, que ainda está com o R 3.3.2, o resultado foi esse. Observe que o tempo da função compilada é quase dez vezes o tempo da função sem compilar.</p>
 <pre class="r"><code>set.seed(1)
@@ -109,9 +111,9 @@ installr::updateR()</code></pre>
 <p>É isso! Happy coding ;)</p>
 <p>OBS: Se você ficou curiosa sobre o nome da versão, encontrei essa tirinha de 1965 do Peanuts. Acho que foi isso que deu origem ao nome!</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="/blog/2017-04-24-r34_files/figure-html/unnamed-chunk-10-1.png" alt="You Stupid Darknes! http://www.gocomics.com/peanuts/1965/09/09." width="960" />
+<img src="/images/posts/conteudo/r34/darkness.jpg" alt="You Stupid Darknes! http://www.gocomics.com/peanuts/1965/09/09."  />
 <p class="caption">
-Figure 2: You Stupid Darknes! <a href="http://www.gocomics.com/peanuts/1965/09/09" class="uri">http://www.gocomics.com/peanuts/1965/09/09</a>.
+Figura 2: You Stupid Darknes! <a href="http://www.gocomics.com/peanuts/1965/09/09" class="uri">http://www.gocomics.com/peanuts/1965/09/09</a>.
 </p>
 </div>
 </div>

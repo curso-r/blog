@@ -1,7 +1,7 @@
 ---
 title: "Minha experiência ao publicar no JSS"
-date: "2019-02-05T00:00:00+00:00"
-categories: ["r", "tutoriais"]
+date: "2019-02-05"
+categories: ["discussões"]
 tags: ["r"]
 image: "images/posts/banner/jss.png"
 author: ["Julio"]
@@ -9,9 +9,11 @@ summary: "."
 draft: true
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
-<div id="introducao" class="section level2">
+<div id="introdução" class="section level2">
 <h2>Introdução</h2>
 <p>Eu não sou fã de journals. Eu tenho a polêmica opinião de que um paper publicado no <a href="https://arxiv.org"><em>Arxiv</em></a> tem o mesmo valor que um paper publicado na <a href="https://www.nature.com/"><em>Nature</em></a>. Mas minha opinião não vale nada se eu não tiver publicado em algum lugar. Sem publicações “reais”, meu problema com a academia não passa de uma reclamação de menino mimado.</p>
 <p>Por isso, depois de muitos puxões de orelha de meu orientador no Doutorado e de meus amigos, eu decidi que vou realmente tentar publicar um paper. Para isso, estou tendo de superar todas as barreiras que minha mente impõe, incluindo uma série de técnicas de procastinação. De certa forma, esse post também é uma procastinação.</p>
@@ -34,7 +36,7 @@ draft: true
 <p>Também inclui na leitura um autor que eu gosto muito: <a href="http://hadley.nz">Hadley Wickham</a> e seu artigo <a href="https://img1.wsimg.com/blobby/go/48119c9a-d3e2-49bc-a380-883861a5de98/downloads/1ceacuvb9_987654.pdf">Tidy data</a></p>
 <p>Outro texto que li foi o do Robert Hyndman sobre <a href="https://robjhyndman.com/hyndsight/jss-rpackages/">publicações na JSS</a>. Também usei como base <a href="https://andrewcparnell.github.io/how_to_publish_a_paper/publish_a_paper.html#1">essa apresentação do Andrew Parnell</a> sobre como publicar.</p>
 <p>Finalmente, mas não menos importante, fiz a leitura dos textos que fazem parte da <a href="https://www.jstatsoft.org/pages/view/mission">missão</a>, <a href="https://www.jstatsoft.org/pages/view/authors">instrução para autores</a> e <a href="https://www.jstatsoft.org/pages/view/style">Style Guide</a> do JSS.</p>
-<div id="analise-dos-papers" class="section level3">
+<div id="análise-dos-papers" class="section level3">
 <h3>Análise dos papers</h3>
 <p>Algumas características preliminares dos artigos:</p>
 <ul>
@@ -46,7 +48,7 @@ draft: true
 <li>Apenas o textmining tem um apêndice</li>
 </ul>
 </div>
-<div id="resumo-das-leituras-das-instrucoes" class="section level3">
+<div id="resumo-das-leituras-das-instruções" class="section level3">
 <h3>Resumo das leituras das instruções</h3>
 </div>
 </div>
@@ -66,7 +68,7 @@ draft: true
 </ul>
 <p>Eu ainda não estou plenamente satisfeito com o framework atual, mas dificilmente existirá uma breaking change. Por isso, algumas alterações vão acontecer durante o trabalho.</p>
 </div>
-<div id="escolhas-dificeis" class="section level2">
+<div id="escolhas-difíceis" class="section level2">
 <h2>Escolhas difíceis</h2>
 <ul>
 <li>Apesar de não ser o padrão usado nos papers famosos, escolhi escrever em Rmarkdown e sofrer as consequências. Escolhi isso pois tenho muito mais familiaridade com o RMarkdown e acredito que vale à pena tomar o risco de precisar transcrever depois para Rnw.</li>
@@ -74,8 +76,14 @@ draft: true
 <li>Sobre o termo Captcha. CAPTCHA é uma sigla e teoricamente deveria ser tudo maiúsculo. No entanto, um texto cheio de CAPTCHAs escritos não é gostoso de ler. Por isso, decidi utilizar a forma Captcha, tratando a sigla como um nome próprio.</li>
 <li>Esqueleto do artigo:</li>
 </ul>
+<div id="notação" class="section level3">
+<h3>Notação</h3>
+<p>Uma parte bastante complicada para mim foi a escolha da notação a ser utilizada. Por um lado, eu gosto muito da notação estatística das coisas, escolhendo uma distribuição para a variável resposta e escrevendo a verossimilhança. Por outro lado, na área de redes neurais, já existe muito material disponível com as definições de ativação (função de ligação), função de perda (verossimilhança) e outros cognatos.</p>
+<p>$$</p>
+<p>$$</p>
 </div>
-<div id="tempo-de-publicacao" class="section level2">
+</div>
+<div id="tempo-de-publicação" class="section level2">
 <h2>Tempo de publicação</h2>
 <p>Todos os artigos publicados no JSS têm uma data de submissão e uma data de publicação. Analisando esses tempos, é possível ter uma ideia de quanto demora para publicar no JSS. O único problema dessa análise é que não temos os dados de casos que ainda estão em processo de revisão.</p>
 <p>Essa análise será realizada somente depois da submissão. Enquanto isso, podemos usar como <em>proxy</em> <a href="https://ntguardian.wordpress.com/2018/08/05/time-to-accept-it-publishing-in-the-journal-of-statistical-software/">esse texto</a> que discute o tema e é razoavelmente recente.</p>

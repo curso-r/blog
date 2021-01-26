@@ -2,7 +2,7 @@
 title: "As barras do progresso"
 date: "2017-04-10T13:07:31+02:00"
 tags: ["coding", "pacotes", "progress"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/progress.png"
 author: ["Julio"]
 draft: false

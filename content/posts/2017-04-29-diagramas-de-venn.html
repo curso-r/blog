@@ -1,30 +1,37 @@
 ---
 title: "Diagramas de Venn em R"
-date: "2017-04-29T23:26:00+03:00"
-tags: ["gráficos", "pacotes", "venneuler"]
-categories: ["tutoriais", "r"]
+date: "2017-04-29"
+tags: ["gráficos", "pacotes"]
+categories: ["tutoriais"]
 image: "images/posts/banner/venn.png"
 author: ["Fernando"]
 summary: "Diagramas de Venn são representações eficientes das conjuntas de quantidades moderadas de variáveis binárias. Neste post você vai aprender a construir os principais tipos de diagramas de Venn que estão implementados em R."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Diagramas de Venn são como slides de PowerPoint. Se eles tem poucos elementos concisos em uma ordem inteligente, um leitor consegue conectar as ideias expostas e aprender alguma coisa. Em caso contrário, o excesso de informação se transforma em um obstáculo para a comunicação.</p>
 <p>Bons diagramas de Venn são capazes de te fazer perceber cruzamentos que não estão no seu radar. <a href="http://andrewgelman.com/2006/03/29/the_serenity_pr/">No blog do Andrew Gelman</a> tem um exemplo interessante. Ele considera uma oração, em inglês, que pede:</p>
 <blockquote>
-<p>God give me the serenity to accept things which cannot be changed; Give me courage to change things which must be changed; And the wisdom to distinguish one from the other.</p>
+<p>God give me the serenity to accept things which cannot be changed;
+Give me courage to change things which must be changed;
+And the wisdom to distinguish one from the other.</p>
 </blockquote>
 <p>Pelo jeito em que ela foi escrita, parece que só existem dois tipos de coisas: aquelas que não podem ser modificadas e aquelas que nós devemos mudar. Entretanto, esse não é o caso:</p>
 <ul>
 <li>Se uma coisa pode ser modificada e eu não devo mudá-la, ela não é importante.</li>
 <li>Se uma coisa coisa não pode ser modificada e eu devo mudá-la, eu preciso aceitá-la.</li>
 </ul>
-<pre><code>FALSE Warning: package &#39;rJava&#39; was built under R version 3.4.4</code></pre>
-<p><img src="/blog/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/posts/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Considerando esse diagrama, O Gelman até sugere uma prece mais cuidadosa:</p>
 <blockquote>
-<p>Lord, grant me the serenity to accept things that cannot be changed, courage to change things that must be changed; discernment to ignore things that don’t need changing; acceptance that some things I need to change, i can’t; And the wisdom to understand Venn Diagrams.</p>
+<p>Lord, grant me the serenity to accept things that cannot be changed,
+courage to change things that must be changed;
+discernment to ignore things that don’t need changing;
+acceptance that some things I need to change, i can’t;
+And the wisdom to understand Venn Diagrams.</p>
 </blockquote>
 <!--É claro que existem diagramas complicados demais para serem úteis, mas, assim como slides ruins, a complexidade pode ser superada se houver muita boa vontade. O pior que pode acontecer é alguém-->
 <p>A despeito da utilidade de Diagramas de Venn bem feitos, o R oferece poucas maneiras de construí-los. No CRAN, existem apenas três pacotes especializados em construir esses gráficos, mas duas delas são um pouco insatisfatórias. Neste post, vamos descobrir como fazer diagramas de Venn usando o pacote <code>VennDiagram</code>.</p>
@@ -38,13 +45,7 @@ summary: "Diagramas de Venn são representações eficientes das conjuntas de qu
 <p>Codificar os gráficos no pacote <code>VennDiagram</code> é um pouco chato, por isso vamos precisar de outros pacotes pra ajudar. No geral, apenas as coisas do <code>tidyverse</code> já vão servir.</p>
 <p>O comando abaixo chama os pacotes que vamos usar neste post.</p>
 <pre class="r"><code>library(VennDiagram)
-FALSE Warning: package &#39;VennDiagram&#39; was built under R version 3.4.4
-library(tidyverse)
-FALSE Warning: package &#39;ggplot2&#39; was built under R version 3.4.4
-FALSE Warning: package &#39;tidyr&#39; was built under R version 3.4.4
-FALSE Warning: package &#39;purrr&#39; was built under R version 3.4.4
-FALSE Warning: package &#39;dplyr&#39; was built under R version 3.4.4
-FALSE Warning: package &#39;stringr&#39; was built under R version 3.4.4</code></pre>
+library(tidyverse)</code></pre>
 </div>
 <div id="diagramas-de-venn-usando-o-pacote-venndiagram" class="section level2">
 <h2>Diagramas de Venn usando o pacote <code>VennDiagram</code></h2>
@@ -53,7 +54,6 @@ FALSE Warning: package &#39;stringr&#39; was built under R version 3.4.4</code><
 <pre class="r"><code>numero_de_pessoas_que_gostam_de_cachorros &lt;- dataset %&gt;% 
   dplyr::filter(Dog == 1) %&gt;% 
   nrow()
-FALSE Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4
 
 grid.newpage()
 invisible(draw.single.venn(numero_de_pessoas_que_gostam_de_cachorros,
@@ -67,7 +67,7 @@ invisible(draw.single.venn(numero_de_pessoas_que_gostam_de_cachorros,
                  alpha = 0.5
                  #Transparência do conjunto. Varia de 0 a 1
                  ))</code></pre>
-<p><img src="/blog/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/posts/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>Complicando um pouco mais, dessa vez vamos fazer um diagrama que represente as pessoas que gostam de gatos ou de cachorros.</p>
 <pre class="r"><code>numero_de_pessoas_que_gostam_de_cachorros &lt;- dataset %&gt;% 
   dplyr::filter(Dog == 1) %&gt;% 
@@ -102,7 +102,7 @@ invisible(draw.pairwise.venn(area1 = numero_de_pessoas_que_gostam_de_cachorros,
                    scaled = F
                    #Constrói as áreas sem escala
                    ))</code></pre>
-<p><img src="/blog/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/posts/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>A falta de escalas deixou esse gráfico simétrico e esteticamente agradável. Entretanto, em algumas situações é mais legal representar os conjuntos em escala.</p>
 <pre class="r"><code>numero_de_pessoas_que_gostam_de_cachorros &lt;- dataset %&gt;% 
   dplyr::filter(Dog == 1) %&gt;% 
@@ -137,7 +137,7 @@ invisible(draw.pairwise.venn(area1 = numero_de_pessoas_que_gostam_de_cachorros,
                    scaled = T
                    #Constrói as áreas sem escala
                    ))</code></pre>
-<p><img src="/blog/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/posts/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>Até aqui tudo vai mais ou menos bem, mas a coisa fica bem mais chata quando você precisa representar um diagrama com três conjuntos. Você vai precisar passar pra função o tamanho de todos os pedacinhos.</p>
 <pre class="r"><code>
 numero_de_pessoas_que_gostam_de_gatos &lt;- dataset %&gt;% 
@@ -184,5 +184,5 @@ invisible(draw.triple.venn(area1 = numero_de_pessoas_que_gostam_de_gatos,
                  fill = c(&quot;light blue&quot;, &quot;green&quot;, &quot;light green&quot;),
                  cat.pos = c(45,45,45),
                  scaled = T))</code></pre>
-<p><img src="/blog/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/posts/2017-04-29-diagramas-de-venn_files/figure-html/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>

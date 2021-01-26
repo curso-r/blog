@@ -1,14 +1,15 @@
 ---
 title: "Tratando erros: the tidy way"
-date: "2017-04-20T13:07:31+02:00"
+date: "2017-04-20"
 tags: ["coding", "pacotes", "purrr"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/error.jpg"
 author: ["Julio"]
-draft: false
 summary: "Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão tidy dessas soluções."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão <code>tidy</code> dessas soluções.</p>
@@ -42,20 +43,17 @@ x
 <li><code>possibly()</code> é uma versão mais otimista do <code>safely()</code>, que exige a definição de <code>otherwise =</code> e não guarda as mensagens de erro.</li>
 <li><code>quietly()</code> não trata erros (ou seja, ela trava quando dá erro), mas guarda informações sobre <em>warnings</em> e <em>messages</em>.</li>
 </ul>
-<pre><code>## Linking to ImageMagick 6.9.7.4
-## Enabled features: fontconfig, freetype, fftw, lcms, pango, x11
-## Disabled features: cairo, ghostscript, rsvg, webp</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-5"></span>
-<img src="/blog/2017-04-09-try_files/figure-html/unnamed-chunk-5-1.png" alt="Admita, você não imaginava que teria de pensar em gramática para programar em R." width="768" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="/images/posts/conteudo/try/adverbs.jpg" alt="Admita, você não imaginava que teria de pensar em gramática para programar em R."  />
 <p class="caption">
-Figure 1: Admita, você não imaginava que teria de pensar em gramática para programar em R.
+Figura 1: Admita, você não imaginava que teria de pensar em gramática para programar em R.
 </p>
 </div>
 <p>Vamos ver as três funções colocadas em prática. Como exemplo usaremos a função <code>log</code>, que i) retorna um número quando a entrada é um número positivo, ii) dá um warning quando a entrada é um número menor ou igual a zero, e iii) dá um erro se a entrada não é um número.</p>
 <pre class="r"><code>log(10)
 ## [1] 2.302585
 log(-1)
-## Warning in log(-1): NaNs produzidos
+## Warning in log(-1): NaNs produced
 ## [1] NaN
 log(&#39;a&#39;)
 ## Error in log(&quot;a&quot;): non-numeric argument to mathematical function</code></pre>
@@ -69,14 +67,14 @@ quiet_log &lt;- quietly(log)</code></pre>
 <p>Agora, os resultados:</p>
 <pre class="r"><code>## Esse código vai travar
 map(entradas, log) 
-## Warning in .Primitive(&quot;log&quot;)(x, base): NaNs produzidos
+## Warning in .Primitive(&quot;log&quot;)(x, base): NaNs produced
 ## Error in .Primitive(&quot;log&quot;)(x, base): non-numeric argument to mathematical function</code></pre>
 <ul>
 <li><code>safely()</code>:</li>
 </ul>
 <pre class="r"><code>## Retorna uma lista com erros e resultados NULL
 map(entradas, safe_log)
-## Warning in .Primitive(&quot;log&quot;)(x, base): NaNs produzidos
+## Warning in .Primitive(&quot;log&quot;)(x, base): NaNs produced
 ## [[1]]
 ## [[1]]$result
 ## [1] 2.302585
@@ -104,7 +102,7 @@ map(entradas, safe_log)
 </ul>
 <pre class="r"><code>## Retorna uma lista com os resultados que deram certo
 map(entradas, possible_log)
-## Warning in .Primitive(&quot;log&quot;)(x, base): NaNs produzidos
+## Warning in .Primitive(&quot;log&quot;)(x, base): NaNs produced
 ## [[1]]
 ## [1] 2.302585
 ## 
@@ -144,7 +142,7 @@ map(entradas[1:2], quiet_log)
 ## [1] &quot;&quot;
 ## 
 ## [[2]]$warnings
-## [1] &quot;NaNs produzidos&quot;
+## [1] &quot;NaNs produced&quot;
 ## 
 ## [[2]]$messages
 ## character(0)</code></pre>

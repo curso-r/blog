@@ -6,7 +6,6 @@ categories: ["divulgação"]
 image: "images/posts/banner/user2019.jpg"
 author: ["Julio"]
 summary: "Highlights do maior evento sobre R do mundo."
-draft: false
 ---
 
 ```{r, include=FALSE}
@@ -44,8 +43,11 @@ https://github.com/sowla/useR2019-materials/
 O que dizer da palestra da [Julia Stewart Lowndes](https://www.youtube.com/watch?v=Z8PqwFPqn6Y)? Acho que a palavra é: **inspiradora**. Ela mostrou como fazer ciência aberta potencializa os trabalhos e gera resultados efetivos. E mostrou como o ecossistema do R é essencial para isso. E sério, usar desenhos com o tema Star Wars foi uma ideia genial.
 
 ```{r, fig.cap="Que vontade de abraçar esses slides."}
-knitr::include_graphics(c("images/posts/conteudo/user2019/julia-1.png", 
-                          "images/posts/conteudo/user2019/julia-2.png"))
+knitr::include_graphics("/images/posts/conteudo/user2019/julia-1.png")
+```
+
+```{r, fig.cap="Que vontade de abraçar esses slides."}
+knitr::include_graphics("/images/posts/conteudo/user2019/julia-2.png")
 ```
 
 ## Dia 2: shiny, ensino e comunidade

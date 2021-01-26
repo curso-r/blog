@@ -1,22 +1,23 @@
 ---
 title: "Quebrando Captchas - Parte VII: Oráculos"
 date: "2019-11-20"
-categories: ["r", "tutoriais"]
-tags: ["r", "captcha"]
+categories: ["tutoriais"]
+tags: ["captcha"]
 image: "images/posts/banner/captcha_07.png"
 author: ["Julio"]
 summary: "Nesse post não vou falar da companhia Oracle, muito menos de Pythia, a oráculo de Delphi. Aqui vou mostrar uma parte pouco discutida dos captchas, que é a possibilidade de usar oráculos para aprender."
-draft: false
 editor_options: 
   chunk_output_type: inline
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Um oráculo é uma função que diz para se uma predição está correta ou incorreta. Ou seja, ela diz a verdade sobre a variável resposta de um novo caso da sua base no qual você só observa as explicativas.</p>
 <p>O oráculo nem sempre existe em problemas reais, pois a verdade não costuma estar disponível no momento em que fazemos a predição. Por exemplo, se estamos predizendo as vendas do próximo mês, só saberemos a taxa de acerto com certeza no próximo mês. Antes disso, só podemos fazer estimativas.</p>
 <p>Então o oráculo é como se fosse minha base de testes? Bem, sim, mas é um tipo muito especial de base de teste. No contexto de captchas, nós podemos gerar infinitas observações novas da base, criando uma base de dados de treino virtualmente infinita.</p>
-<p><img src="images/posts/conteudo/captcha-oraculo-1/oraculo.gif" /></p>
+<p><img src="/images/posts/conteudo/captcha-oraculo-1/oraculo.gif" /></p>
 <p>O problema é que a resposta do oráculo não é sempre clara: usualmente, o oráculo não diz <strong>o quê</strong> você errou, mas somente <strong>se</strong> você errou. Ou seja, é uma informação incompleta, censurada.</p>
 <p>E como nós fazemos para tratar informação incompleta nos nossos estudos? Botamos na verossimilhança! Essa é uma possível ideia para atingir nosso objetivo final: criar modelos que aprendem a resolver captchas automaticamente.</p>
 <p>Na prática, no entanto, isso é uma tarefa difícil! Nesse post vou me ater em mostrar um <em>toy model</em> de oráculo e, nos próximos posts sobre o tema, vou desenvolver mais a parte estatística.</p>
@@ -66,7 +67,7 @@ oracle_mnist &lt;- function(model = &quot;ask&quot;, type = 0) {
 }</code></pre>
 <p>Vamos testar! Esse é um caso que acertei</p>
 <pre class="r"><code>result &lt;- oracle_mnist(type = 0)</code></pre>
-<p><img src="images/posts/conteudo/captcha-oraculo-1/captcha1.png" /></p>
+<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha1.png" /></p>
 <pre><code>Answer: 87685</code></pre>
 <pre class="r"><code>result$res</code></pre>
 <pre><code>$predito
@@ -82,7 +83,7 @@ $gabarito
 NULL</code></pre>
 <p>E esse é um caso que errei, e mandei mostrar todos os outputs possíveis:</p>
 <pre class="r"><code>result &lt;- oracle_mnist(type = 2)</code></pre>
-<p><img src="images/posts/conteudo/captcha-oraculo-1/captcha2.png" /></p>
+<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha2.png" /></p>
 <pre><code>Answer: 56198</code></pre>
 <pre class="r"><code>result$res</code></pre>
 <pre><code>$predito
@@ -280,7 +281,7 @@ $quais
 $gabarito
 [1] 1 2 2 7 7</code></pre>
 <p>Veja qual foi o caso que o modelo errou:</p>
-<p><img src="images/posts/conteudo/captcha-oraculo-1/captcha3.png" /></p>
+<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha3.png" /></p>
 <p>Não parece tão fácil de ver que é um 7, né?</p>
 </div>
 <div id="pacote-mimir" class="section level2">

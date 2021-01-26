@@ -1,12 +1,11 @@
 ---
 title: "Analisando o seu histórico do Netflix"
-date: "2019-06-06T00:00:00+00:00"
-categories: ["r", "análises"]
-tags: ["r", "Netflix"]
+date: "2019-06-06"
+categories: ["análises"]
+tags: ["Netflix"]
 image: "images/posts/banner/binge.jpg"
 author: ["William"]
 summary: "Neste post, vamos brincar com o histórico de visualização do Netflix."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

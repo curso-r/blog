@@ -1,12 +1,14 @@
 ---
-title: "Lollapalooza segundo Spotify - Web Scraping, API do Spotify e tidyverse"
+title: "Lollapalooza segundo o Spotify"
 date: "2017-03-27"
 tags: ["spotify", "lolapalooza", "API"]
-categories: ["análises", "r"]
+categories: ["análises"]
 author: ["Athos"]
 image: "images/posts/banner/lolla-spotify_s.png"
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>No dia em que fui ao Lollapalooza eu descobri o <a href="https://github.com/tiagomendesdantas/Rspotify">Rspotify</a>, um wraper da API do Spotify e daí me veio a ideia de juntar infos dos dois assuntos.</p>
@@ -232,7 +234,16 @@ artistas_fora_da_playlist &lt;- lolla2017_programacao %&gt;%
   select(-id, -name) %&gt;%
   dplyr::filter(followers %&gt;% is.na %&gt;% not) </code></pre>
 <p><strong>Base final</strong></p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="7%" />
+<col width="11%" />
+<col width="18%" />
+<col width="20%" />
+<col width="20%" />
+<col width="11%" />
+<col width="10%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">dia</th>
@@ -336,9 +347,9 @@ artistas_fora_da_playlist &lt;- lolla2017_programacao %&gt;%
   group_by(dia, hora, palco) %&gt;%
   summarise(artist = first(artist),
             n = n(),
-            mean_popularity = mean(popularity))
-
-lolla2017_grafico %&gt;%
+            mean_popularity = mean(popularity))</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;dia&#39;, &#39;hora&#39; (override with `.groups` argument)</code></pre>
+<pre class="r"><code>lolla2017_grafico %&gt;%
   ggplot(aes(x = ymd_hm(format(hora, &quot;2017-03-26 %H%M&quot;)), y = mean_popularity, colour = palco)) +
   geom_line() +
   geom_point() +
@@ -347,7 +358,7 @@ lolla2017_grafico %&gt;%
   facet_wrap(~dia) +
   labs(x = &quot;Hora do dia&quot;, y = &quot;Popularidade média&quot;) +
   theme(text = element_text(size = 16))</code></pre>
-<p><img src="/blog/2017-03-27-lollapalooza-sp-2017-segundo-spotify_files/figure-html/unnamed-chunk-12-1.png" width="864" /></p>
+<p><img src="/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify_files/figure-html/unnamed-chunk-12-1.png" width="864" /></p>
 <p>O gráfico acima vai de acordo com o senso comum de que os populares ficam para o final, não ajudando a confirmar a hipótese de que o <em>Cage The Elefant</em> estava mal posicionado.</p>
 </div>
 <div id="hipótese-ii" class="section level3">
@@ -361,12 +372,12 @@ lolla2017_grafico %&gt;%
   geom_bar(aes(x = artist, y = popularity, fill = dia), stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
   theme(text = element_text(size = 16),
         axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.4))</code></pre>
-<p><img src="/blog/2017-03-27-lollapalooza-sp-2017-segundo-spotify_files/figure-html/unnamed-chunk-13-1.png" width="864" /></p>
+<p><img src="/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify_files/figure-html/unnamed-chunk-13-1.png" width="864" /></p>
 <pre class="r"><code>ggplot(lolla2017) +
  geom_density(aes(fill = dia, x = popularity, colour = dia), fill = NA) +
   theme(text = element_text(size = 16),
         axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.4))</code></pre>
-<p><img src="/blog/2017-03-27-lollapalooza-sp-2017-segundo-spotify_files/figure-html/unnamed-chunk-14-1.png" width="864" /></p>
+<p><img src="/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify_files/figure-html/unnamed-chunk-14-1.png" width="864" /></p>
 <p>Conclusão: nada indica que houve desbalanceamento. Acho que meu círculo de amigos tem algum viés estranho.</p>
 </div>
 <div id="hipótese-iii" class="section level3">
@@ -381,7 +392,7 @@ lolla2017_grafico %&gt;%
   theme(text = element_text(size = 16),
         axis.text.x = element_blank()) +
   labs(x = &quot;&quot;)</code></pre>
-<p><img src="/blog/2017-03-27-lollapalooza-sp-2017-segundo-spotify_files/figure-html/unnamed-chunk-15-1.png" width="864" /></p>
+<p><img src="/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify_files/figure-html/unnamed-chunk-15-1.png" width="864" /></p>
 <p>O palco Skol teve menor variação de popularidade, costumou contar sempre com artistas de média a alta popularidade, mas os palcos AXE e Onix foram visitados por artista de peso. O palco Perry’s foi o mais visitado por artistas de menor expressão.</p>
 </div>
 </div>

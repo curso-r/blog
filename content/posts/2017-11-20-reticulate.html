@@ -1,18 +1,21 @@
 ---
 title: "Pacote reticulate"
-date: "2017-11-20T14:25:00+03:00"
+date: "2017-11-20"
 tags: ["reticulate", "python"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/reticulate.png"
 author: ["Gabriela Lima Borges (convidada)"]
 summary: "Imagine se você pudesse aproveitar da quantidade e da variedade enorme de módulos e bibliotecas do Python no ambiente amigável do RStudio? Graças ao pacote..."
-draft: false
+retired: true
+alternativa: ""
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <blockquote>
-<p>Se você também quiser escrever um post como convidada, entre em contato a gente em <a href="mailto:contato@curso-r.com">contato@curso-r.com</a>!</p>
+<p>Se você também quiser escrever um post como convidada, entre em contato a gente em <a href="mailto:contato@curso-r.com" class="email">contato@curso-r.com</a>!</p>
 </blockquote>
 <div id="pacote-reticulate" class="section level2">
 <h2>Pacote Reticulate</h2>
@@ -25,32 +28,21 @@ library(reticulate)</code></pre>
 <pre class="r"><code>## Data frame do R é convertido em Dict do Python
 a &lt;- r_to_py(mtcars)
 class(a)
-## [1] &quot;pandas.core.frame.DataFrame&quot;       
-## [2] &quot;pandas.core.generic.NDFrame&quot;       
-## [3] &quot;pandas.core.base.PandasObject&quot;     
-## [4] &quot;pandas.core.base.StringMixin&quot;      
-## [5] &quot;pandas.core.accessor.DirNamesMixin&quot;
-## [6] &quot;pandas.core.base.SelectionMixin&quot;   
-## [7] &quot;python.builtin.object&quot;
 
 ## Dict do Python é convertido em List do R
-class(py_to_r(a))
-## [1] &quot;data.frame&quot;</code></pre>
+class(py_to_r(a))</code></pre>
 </div>
-<div id="importando-modulos" class="section level2">
+<div id="importando-módulos" class="section level2">
 <h2>Importando módulos</h2>
 <p>A importação de módulos do Python para o R é bem simples. Basta usar a função <code>import()</code> do pacote <code>reticulate</code> e o nome do módulo que você quer importar, em seguida guardar isso em um objeto no R.</p>
 <pre class="r"><code>np &lt;- import(&quot;numpy&quot;)
 pandas &lt;- import(&quot;pandas&quot;)
 os &lt;- import(&quot;os&quot;)</code></pre>
 <p>Use a função <code>py_module_available()</code> pra checar se um módulo do Python está disponível no seu computador.</p>
-<pre class="r"><code>py_module_available(&quot;matplotlib&quot;)
-## [1] TRUE</code></pre>
+<pre class="r"><code>py_module_available(&quot;matplotlib&quot;)</code></pre>
 <p>As funções que estão dentro de módulos ou classes do Python podem ser acessadas utilizando o operador <code>$</code>:</p>
 <pre class="r"><code>os$getcwd()
-## [1] &quot;/Users/dfalbel/Documents/site-v2/content/blog&quot;
-np$abs(-1)
-## [1] 1</code></pre>
+np$abs(-1)</code></pre>
 <p>E podemos misturar funções do R e do python:</p>
 <pre class="r"><code>library(magrittr)
 
@@ -58,7 +50,6 @@ rnorm(10) %&gt;%
   np$abs() %&gt;% 
   np$cumproduct() %&gt;% 
   plot()</code></pre>
-<p><img src="/blog/2017-11-20-reticulate_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="exemplo" class="section level1">
 <h1>Exemplo</h1>
@@ -80,8 +71,5 @@ No.    Name      Ver    Type      Cards   Dimensions   Format
 im.data %&gt;% 
   t() %&gt;% 
   image(col = gray(seq(0, 1, length = 256)))</code></pre>
-<div class="figure">
-<img src="images/posts/conteudo/reticulate/Rplot.png" />
-
-</div>
+<p><img src="/images/posts/conteudo/reticulate/Rplot.png" /></p>
 </div>

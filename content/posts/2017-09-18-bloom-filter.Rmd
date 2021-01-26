@@ -1,8 +1,8 @@
 ---
 title: "Filtros de Bloom em R"
-date: "2017-09-18T10:12:00+03:00"
+date: "2017-09-18"
 tags: ["algoritmos"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/bloom-filter.png"
 author: ["Daniel"]
 summary: "Filtro de Bloom é um algoritmo muito interessante para verificar a presença de um elemento em um conjunto. Veja aqui como implementá-lo no R!"

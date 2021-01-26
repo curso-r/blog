@@ -1,12 +1,11 @@
 ---
 title: "Web scraping do sistema de qualidade do ar da CETESB"
-date: "2018-03-19T14:25:00+03:00"
+date: "2018-03-19"
 tags: ["web-scraping", "dados-abertos"]  
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/scraper-cetesb.jpg"
 author: ["William"]
 summary: "Nem sempre dados públicos são disponibilizados de forma eficiente para a coleta. Neste post, vamos exercitar a arte do web scraping para raspar dados de poluição do ar da CETESB."
-draft: false
 ---
 
 ```{r setup, include=FALSE}
@@ -247,16 +246,18 @@ Assim obtemos os dados que queríamos:
 dados_cetesb %>% 
   dplyr::select(`Nome Estação`:`Média Horária`) %>% 
   head %>% 
-  knitr::kable()
+  knitr::kable() %>% 
+  kableExtra::kable_styling()
 ```
 
 ```{r, echo = FALSE, eval=TRUE}
 library(magrittr)
 
-readr::read_rds(path = "../../static/data/scraper-cetesb/dados_cetesb.rds") %>% 
+readr::read_rds("../../static/data/scraper-cetesb/dados_cetesb.rds") %>% 
   dplyr::select(`Nome Estação`:`Média Horária`) %>% 
   head %>% 
-  knitr::kable()
+  knitr::kable() %>% 
+  kableExtra::kable_styling()
 ```
 
 Iterando essa função fica fácil repetir o processo para diversas estações e parâmetros.

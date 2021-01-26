@@ -1,14 +1,16 @@
 ---
 title: "Multas em São Paulo"
-date: "2017-04-01T13:07:31+02:00"
+date: "2017-04-01"
 tags: ["sptrans"]
-categories: ["análises", "r"]
+categories: ["análises"]
 image: "images/posts/banner/banner-multas-sp.jpg"
 author: ["Daniel"]
+retired: true
+alternativa: ""
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
 ```
 
 Há bastante tempo tenho vontade de fazer análises usando dados de multas de São Paulo. 
@@ -144,6 +146,7 @@ carros_summary_enquad <- carros_eletronicas %>%
 
 ```{r}
 carros_summary_enquad %>% 
+  ungroup() %>% 
   ggplot(aes(data, qtd, color = agrup_enquadramento)) +
   geom_line()
 ```
@@ -248,4 +251,4 @@ Por incrível que pareça, nos dois radares com mais multas, o motivo da multa �
 A foto de onde fica esse radar saiu em uma [notícia sobre o mesmo tema](http://www1.folha.uol.com.br/cotidiano/2015/07/1660793-radar-campeao-aplica-375-mil-multas-em-um-ano-na-ponte-das-bandeiras.shtml) na Folha de
 São Paulo.
 
-![](images/posts/conteudo/multas-em-sp/radar-chateubriant.jpeg)
+![](/images/posts/conteudo/multas-em-sp/radar-chateubriant.jpeg)

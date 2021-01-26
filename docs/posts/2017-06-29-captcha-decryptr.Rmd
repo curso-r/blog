@@ -2,7 +2,7 @@
 title: "Quebrando CAPTCHAs - Parte II: O pacote decryptr"
 date: "2017-07-10T13:07:31+02:00"
 tags: ["captcha", "decryptr"]
-categories: ["tutoriais"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/captcha_02.png"
 author: ["Julio"]
 draft: false

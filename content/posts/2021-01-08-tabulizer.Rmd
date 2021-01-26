@@ -2,11 +2,10 @@
 title: "{tabulizer}: Tabela do PDF para data.frame em segundos"
 date: "2021-01-08"
 tags: ["faxina", "pdf", "tabulizer", "pdftools"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/tabulizer.png"
 author: "Athos"
 summary: "Como extrair uma tabela de um PDF facilmente com a função tabulizer::extract_tables()"
-draft: false
 ---
 
 ```{r, include=FALSE}
@@ -40,9 +39,11 @@ url_pdf <- "https://curso-r.github.io/main-regressao-linear/referencias/Ci%C3%AA
 ```{r}
 # tira print da pagina 153 e salva como imagem PNG.
 pdftools::pdf_convert(url_pdf, pages = 153, filenames = "pag153.png")
+```
 
+```{r}
 # mostra a imagem PNG.
-magick::image_read("pag153.png")
+knitr::include_graphics("/images/posts/conteudo/tabulizer/pag153.png")
 ```
 
 ## Extração da tabela PDF -> R
@@ -84,3 +85,8 @@ Sugiro a leitura do post [PDF e OCR](https://www.curso-r.com/blog/2017-05-27-ocr
 Aproveitem para conhecer o livro [**Ciência de dados: Fundamentos e Prática**](https://docplayer.com.br/156868089-Ciencia-de-dados-fundamentos-e-aplicacoes-versao-parcial-preliminar-maio-pedro-a-morettin-julio-m-singer.html) de 2020 dos Professores Julio Singer e Renato Morettin.
 
 Valeu!
+
+```{r, include=FALSE}
+file.remove("pag153.png")
+```
+

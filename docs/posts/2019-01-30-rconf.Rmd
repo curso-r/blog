@@ -1,7 +1,7 @@
 ---
 title: "Resumo da rstudio::conf 2019"
 date: "2019-01-30T00:00:00+00:00"
-categories: ["divulgação", "discussões"]
+categories: ["divulgação"]
 tags: ["r"]
 image: "images/posts/banner/rstudio-conf.jpg"
 author: ["Bruna Wundervald"]
@@ -105,7 +105,7 @@ torne-a "automática", o que nesse contexto significa
 Fenomenal. Essa palestra vale muito a pena e eu com certeza vou
 usar ela como referência futura.
 
-![](images/posts/conteudo/rstudio-conf/david.jpg)
+![](/images/posts/conteudo/rstudio-conf/david.jpg)
 
 
 - ["A guide to modern reproducible data science with R", Karthik Ram](https://github.com/karthik/rstudio2019): 
@@ -128,7 +128,7 @@ antes dessa palestra, eu não poderia dizer que entendia
 casos sobre por que, quando e como usar NSE de forma correta, o que
 clarificou bastante a ideia pra mim. 
 
-![](images/posts/conteudo/rstudio-conf/jenny.jpg)
+![](/images/posts/conteudo/rstudio-conf/jenny.jpg)
 
 # Bonus: `tidyverse` developer day
 

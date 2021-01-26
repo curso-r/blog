@@ -1,12 +1,11 @@
 ---
 title: "pvec: O laço perfeito"
-date: "2019-02-05T00:00:00+00:00"
-categories: ["r", "tutoriais"]
-tags: ["r"]
+date: "2019-02-05"
+categories: ["tutoriais"]
+tags: ["algoritmos"]
 image: "images/posts/banner/laco_perfeito.png"
 author: ["Julio"]
 summary: "Nesse post vou te mostrar minha função preferida e como ela funciona."
-draft: false
 ---
 
 **AVISO: Infelizmente a função `pvec()` não está mais no pacote `abjutils`! No final deste texto deixamos o seu código para que o leitor possa implementá-la por conta própria.**
@@ -25,7 +24,7 @@ Aqui na Curso-R nós já vimos três desses power-ups:
 
 Mas será que tem um jeito de juntar essas três funcionalidades em apenas uma operação?
 
-![](images/posts/conteudo/pvec/nao_tinha_agora_tem.jpg)
+![](/images/posts/conteudo/pvec/nao_tinha_agora_tem.jpg)
 
 Sim, é claro que tem. E se algo é possível no R, o [Caio Lente](https://lente.dev) já fez. Trata-se da operação `pvec()`, do pacote `abjutils`.
 

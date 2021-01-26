@@ -2,7 +2,7 @@
 title: "Componentes Principais - Intuição"
 date: "2017-06-24T10:12:00+03:00"
 tags: ["pca", "componentes principais", "plotly"]
-categories: ["conceitos", "r"]
+categories: ["conceitos"]
 image: "images/posts/banner/componentes_principais.png"
 author: ["Athos"]
 summary: "Uma ilustração gráfica simples para dar intuição sobre o que uma Análise de Componentes Principais faz."

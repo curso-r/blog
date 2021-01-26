@@ -2,19 +2,20 @@
 title: "Escrevendo livros com R e bookdown"
 date: "2019-09-11"
 tags: ["bookdown"]
-categories: ["tutoriais", "r"]
+categories: ["Tutoriais"]
 image: "images/posts/banner/bookdown.png"
 author: ["Julio"]
 summary: "Depois de ler esse post você conseguirá criar e publicar livros em 6 minutos."
-draft: false
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Esse post é um tutorial rápido de como você pode criar um livro usando o pacote <code>{bookdown}</code>. Eu uso esse pacote para escrever todos os meus grandes relatórios e até minha tese de mestrado. A filosofia dele é a mesma que a do markdown: o foco é o conteúdo; o formato fica pra depois.</p>
 <p>Esse é um pacote maravilhoso, mas um pouco espinhudo, pois não é fácil lidar com vários formatos distintos. Para dominar o <code>{bookdown}</code>, recomendo que você leia o livro feito pelo Yihui Xie: <a href="https://bookdown.org/yihui/bookdown/" class="uri">https://bookdown.org/yihui/bookdown/</a>. O Yihui é também o autor do <code>{knitr}</code>, <code>{rmarkdown}</code>, <code>{pagedown}</code>, e do excepcional <code>{xaringan}</code>. Os pacotes dele têm todos a mesma característica: são extremamente úteis, mas às vezes te mordem.</p>
 <p>Nesse post, apresento um vídeo-tutorial faço apenas alguns comentários adicionais</p>
-<div id="video" class="section level3">
+<div id="vídeo" class="section level3">
 <h3>Vídeo</h3>
 <p>Prometo que vou melhorar o áudio nos próximos tutoriais.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/q84H6UTyGU0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -43,7 +44,7 @@ não é necessário adicionar a tag <code>site: bookdown::bookdown_site</code> n
 <code>index.Rmd</code>/<code>index.md</code>.</p>
 </blockquote>
 </div>
-<div id="e-se-eu-quiser-que-meu-site-tenha-varios-formatos" class="section level3">
+<div id="e-se-eu-quiser-que-meu-site-tenha-vários-formatos" class="section level3">
 <h3>E se eu quiser que meu site tenha vários formatos?</h3>
 <p>Você pode fazer isso trocando <code>output_format</code> por um vetor. No entanto, existem formas mais organizadas. Nesse caso, a recomendação é criar um arquivo <code>_output.yml</code>, contendo os outputs que você quer ter, por exemplo</p>
 <pre class="yaml"><code>bookdown::gitbook:
@@ -61,7 +62,7 @@ output:
 
 # meu livro </code></pre>
 </div>
-<div id="e-se-eu-quiser-quebrar-meu-livro-em-varios-arquivos" class="section level3">
+<div id="e-se-eu-quiser-quebrar-meu-livro-em-vários-arquivos" class="section level3">
 <h3>E se eu quiser quebrar meu livro em vários arquivos?</h3>
 <p>Sem problemas. Basta criar arquivos com uma ordem específica, como <code>01_introducao.Rmd</code>, <code>02_introducao.Rmd</code>, etc. Esses arquivos são agregados num grande <code>Rmd</code> antes de ser compilado.</p>
 <p>Por enquanto é isso. Farei mais posts sobre markdown, pois é muito útil e divertido! Happy coding ;)</p>
