@@ -6,6 +6,7 @@ theme = "parsa-hugo"
 summaryLength = "10"
 paginate = 6
 publishdir = "docs"
+disqusShortname = "curso-r-com"
 
 # output
 [outputs]
@@ -69,7 +70,9 @@ weight = 3
 # deult parameter
 [params]
 logo = "images/logo.png"
+footerLogo = "images/footerLogo.png"
 home = "Home"
+footerImage = "images/footerImage.jpg"
 # theme layout ( two layout is available, "1" and "2" )
 layout = "1"
 # Meta data

@@ -1,9 +1,9 @@
-<footer class="bg-secondary">
+<footer class="bg-footer" style = "background-image: url('{{ .Site.Params.footerImage | absURL }}')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="{{site.BaseURL}}"><img src="{{site.Params.logo | absURL }}" alt="{{site.Title}}" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="{{site.Params.Footerlogo | absURL }}" alt="{{site.Title}}" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           {{ if .Site.Params.address }}
@@ -30,16 +30,16 @@
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             {{ range site.Params.social }}
-            <li class="list-inline-item"><a href="{{ .URL }}" class="text-dark"><i class="{{ .icon }}"></i></a></li>
+            <li class="list-inline-item"><a href="{{ .url }}" class="text-dark" target = "_blank"><i class="{{ .icon }}"></i></a></li>
             {{ end }}
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">{{ site.Params.copyright | markdownify }}</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">{{ site.Params.copyright | markdownify }}</h6>
+    </div>
 </footer>
 
 

@@ -47,11 +47,14 @@
             {{.Content}}
           {{ end }}
         </article>
+        {{partial "disqus.html" . }}
       </div>
       {{partial "sidebar.html" . }}
     </div>
   </div>
 </section>
 <!-- /blog single -->
+
+
 
 {{ end }}

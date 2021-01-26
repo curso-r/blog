@@ -1,20 +1,6 @@
 <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
-  <div class="widget">
-    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
-    {{ range first 3 ( where (where site.RegularPages "Type" "posts") ".Params.draft" false ) }}
-    <div class="media mb-4">
-      <div class="post-thumb-sm mr-3">
-        <a href="{{ .Permalink }}"><img class="mr-3 post-thumb-sm" src="{{ .Params.Image | absURL }}"></a>
-      </div>
-      <div class="media-body">
-        <h5><a class="text-dark" href="{{ .Permalink }}">{{.Title}}</a></h5>
-        <p>Por {{.Params.author}}, em {{ .PublishDate.Format "Jan 02, 2006" }} </p>
-      </div>
-    </div>
-    {{ end }}
-  </div>
   {{ if .Params.cursos }}
     <div class="widget">
       <h4 class="mb-4">APRENDA R</h4>
@@ -25,7 +11,21 @@
     </div>
   {{ end }}
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    {{ range first 3 ( where (where site.RegularPages "Type" "posts") ".Params.draft" false ) }}
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="{{ .Permalink }}"><img class="mr-3 post-thumb-sm" src="{{ .Params.Image | absURL }}"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="{{ .Permalink }}">{{.Title}}</a></h5>
+        <p>Por {{ delimit .Params.author ", " " e "}} em <a href="{{ "categories/" | relLangURL }}{{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 | title}}</a></p>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     {{- if isset site.Taxonomies "categories" }}
     {{- if not (eq (len site.Taxonomies.categories) 0) }}
     <ul class="list-inline tag-list">
