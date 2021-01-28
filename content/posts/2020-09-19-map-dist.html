@@ -1,7 +1,7 @@
 ---
 title: "Qual a capital mais distante de Brasília?"
 date: "2020-09-19"
-tags: ["visualizacao", "mapas"]
+tags: ["visualizacao", "mapas", "leaflet", "plotly"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/map-dist.png"
 author: ["Julio"]
@@ -9,8 +9,7 @@ summary: "Qual é a capital mais próxima de Brasília? E a mais distante? Tutor
 draft: false
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 <script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
 <link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
@@ -375,7 +374,7 @@ p_leaflet &lt;- da_countries %&gt;%
 
 p_leaflet</code></pre>
 <p><img src="/images/posts/conteudo/map-dist/leaflet.png" /></p>
-<p>Acesse o mapa dinâmico <a href="/blog/2020-09-19-map-dist_files/p_leaflet_world.html">neste link</a>.</p>
+<p>Acesse o mapa dinâmico <a href="/posts/2020-09-19-map-dist_files/p_leaflet_world.html">neste link</a>.</p>
 <p>Olhando o mapa (e considerando que a terra é esférica), parece mesmo que esses países estão bem longe, mesmo tentando acessar pelo leste ou pelo oeste.</p>
 <p>E, já que a terra é esférica, que tal criar um mapa 3D? Fiz isso usando o <code>{plotly}</code>, com base no tutorial disponível <a href="https://github.com/ropensci/plotly/blob/master/demo/sf-plotly-3D-globe.R">neste link</a>.</p>
 <pre class="r"><code>library(plotly)
@@ -407,7 +406,7 @@ p_plotly &lt;- plot_ly(height = 1000) %&gt;%
 
 p_plotly</code></pre>
 <p><img src="/images/posts/conteudo/map-dist/plotly.png" /></p>
-<p>Acesse o mapa dinâmico <a href="/blog/2020-09-19-map-dist_files/p_plotly_world.html">neste link</a>.</p>
+<p>Acesse o mapa dinâmico <a href="/posts/2020-09-19-map-dist_files/p_plotly_world.html">neste link</a>.</p>
 </div>
 <div id="wrap-up" class="section level2">
 <h2>Wrap-up</h2>

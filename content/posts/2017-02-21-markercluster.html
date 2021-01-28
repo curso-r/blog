@@ -6,25 +6,69 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/markercluster.png"
 author: ["Julio"]
 summary: "O leaflet é uma biblioteca javascript para criação de mapas interativos. O pacote leaflet do R é um htmlwidget que permite gerar esses mapas de forma direta no R, para usar em documentos `RMarkdown` e Shiny."
-retired: true
+retired: false
 alternativa: ""
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>O <a href="leafletjs.com"><em>leaflet</em></a> é uma biblioteca javascript para criação de mapas interativos. O pacote <a href="https://rstudio.github.io/leaflet/"><code>leaflet</code></a> do R é um <a href="www.htmlwidgets.org/"><code>htmlwidget</code></a> que permite gerar esses mapas de forma direta no R, para usar em documentos <code>RMarkdown</code> e Shiny.</p>
 <p>Uma das ferramentas que mais gosto do leaflet é a função <code>markerClusterOptions()</code>, que permite agrupar pontos no mapa em conjuntos de vários pontos.</p>
-<p>Como exemplo, utilizaremos uma base de dados que contém a localização e informações das varas da Justiça Estadual no Brasil. A Tabela <a href="#tab:aj"><strong>??</strong></a> mostra as cinco primeiras linhas dessa base. A coluna <code>lab</code> já foi trabalhada para ser adicionada nos marcadores do mapa como popup.</p>
-<p>Para utilizar o pacote <code>leaflet</code>, basta instalar o pacote via <code>install.packages()</code>. Na Figura <a href="#fig:mapa"><strong>??</strong></a>, experimente passear pelo mapa. Procure também algum lugar que tenha várias varas juntas, para ver o que o <code>markerCluster</code> faz nesse caso.</p>
-<pre class="r"><code>library(dplyr)
-library(leaflet)
-dados_aj_lab %&gt;% 
+<p>Como exemplo, utilizaremos uma base de dados que contém a localização e informações das varas da Justiça Estadual no Brasil. A tabela abaixo mostra as cinco primeiras linhas dessa base. A coluna <code>lab</code> já foi trabalhada para ser adicionada nos marcadores do mapa como popup.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">muni_id</th>
+<th align="left">muni_nm</th>
+<th align="right">lon</th>
+<th align="right">lat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1100015</td>
+<td align="left">Alta Floresta D’oeste</td>
+<td align="right">-62.27467</td>
+<td align="right">-12.47017</td>
+</tr>
+<tr class="even">
+<td align="left">1100023</td>
+<td align="left">Ariquemes</td>
+<td align="right">-62.95718</td>
+<td align="right">-9.95190</td>
+</tr>
+<tr class="odd">
+<td align="left">1100031</td>
+<td align="left">Cabixi</td>
+<td align="right">-60.63986</td>
+<td align="right">-13.47489</td>
+</tr>
+<tr class="even">
+<td align="left">1100049</td>
+<td align="left">Cacoal</td>
+<td align="right">-61.32475</td>
+<td align="right">-11.30123</td>
+</tr>
+<tr class="odd">
+<td align="left">1100056</td>
+<td align="left">Cerejeiras</td>
+<td align="right">-61.26095</td>
+<td align="right">-13.20351</td>
+</tr>
+</tbody>
+</table>
+<p>Para utilizar o pacote <code>leaflet</code>, basta instalar o pacote via <code>install.packages()</code>. Acesse o mapa dinâmico <a href="/posts/2017-02-21-markercluster/leaf.html">neste link</a>. Experimente passear pelo mapa. Procure também algum lugar que tenha várias varas juntas, para ver o que o <code>markerCluster</code> faz nesse caso.</p>
+<pre class="r"><code>library(leaflet)
+abjData::muni %&gt;% 
   leaflet() %&gt;% 
   addTiles() %&gt;% 
-  addMarkers(lng = ~long, lat = ~lat, popup = ~lab,
-             clusterOptions = markerClusterOptions())</code></pre>
+  addMarkers(
+    lng = ~lon, 
+    lat = ~lat, 
+    popup = ~muni_nm,
+    clusterOptions = markerClusterOptions()
+  )</code></pre>
 <ul>
 <li>A função <code>leaflet()</code> carrega o motor do <em>leaflet</em>, ainda em branco.</li>
 <li>A função <code>addTiles()</code> adiciona as camadas de mapas de acordo com o zoom. É possível escolher temas para essas camadas.</li>
