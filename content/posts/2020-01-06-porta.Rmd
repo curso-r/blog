@@ -8,6 +8,8 @@ author: ["Julio"]
 summary: "O Porta dos Fundos (PDF) é um dos meus canais preferidos do youtube. Muitos consideram que é um dos maiores grupos de humor do século. Outros acreditam que eles começaram muito bem, mas que agora já perderam a graça."
 disable_codefolding: false
 codefolding_nobutton: false
+type: "featured"
+featuredImage: "images/featured-post/feat-porta.jpg"
 ---
 
 ```{r, include=FALSE}
