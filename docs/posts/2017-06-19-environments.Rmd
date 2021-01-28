@@ -1,6 +1,6 @@
 ---
 title: "Environments"
-date: "2017-06-19T23:26:00+03:00"
+date: "2017-06-19"
 tags: ["environments"]
 categories: ["conceitos"]
 image: "images/posts/banner/parallel-universe.jpg"

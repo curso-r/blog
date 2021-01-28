@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por William em <a href="/categories/tutoriais">Tutoriais</a>
+            Escrito por
+            
+            
+              <a href = "https://wamorim.com/" target = "_blank">William</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -123,6 +129,8 @@
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Se você ainda não é adepta ou adepto do <a href="http://tidyverse.org/">tidyverse</a>, provavelmente precisa setar <code>stringsAsFactors = FALSE</code> em algum momento ou sempre trabalha com fatores em vez de <em>strings</em>.</p>
@@ -131,12 +139,7 @@
 <p>Além de não transformar <em>strings</em> em fatores, o <code>tidyverse</code> também dispõe de um pacote só para manipular fatores: o <code>forcats</code> (<em>for</em> <em>cat</em>egorial variable<em>s</em>). Para começar a usá-lo, instale e carregue o pacote.</p>
 <pre class="r"><code>install.packages(&quot;forcats&quot;)</code></pre>
 <pre class="r"><code>library(forcats)
-library(tidyverse)
-## Warning: package &#39;ggplot2&#39; was built under R version 3.4.4
-## Warning: package &#39;tidyr&#39; was built under R version 3.4.4
-## Warning: package &#39;purrr&#39; was built under R version 3.4.4
-## Warning: package &#39;dplyr&#39; was built under R version 3.4.4
-## Warning: package &#39;stringr&#39; was built under R version 3.4.4</code></pre>
+library(tidyverse)</code></pre>
 <p>O <code>forcats</code> é um pacote bastante simples. Basicamente, ele é composto por funções de apenas dois tipos:</p>
 <ul>
 <li>Funções que começam com <code>fct_</code>, que recebem uma lista de fatores e devolvem um fator.</li>
@@ -175,28 +178,28 @@ per_fav&lt;- sample(x = nomes, size = 100, replace = T) %&gt;%
   as.factor
 
 head(per_fav)           
-## [1] Sheldon Lily    Robin   Ted     Howard  Pam    
-## 15 Levels: Andy Barney Dwight Howard Jim Leonard Lily Marshall ... Ted
+## [1] Marshall Robin    Rajesh   Ted      Marshall Penny   
+## 15 Levels: Andy Barney Dwight Howard Jim Leonard Lily Marshall Michael ... Ted
 
 # Conta o número de observações em cada categoria
 fct_count(per_fav)        
 ## # A tibble: 15 x 2
 ##    f            n
 ##    &lt;fct&gt;    &lt;int&gt;
-##  1 Andy         6
+##  1 Andy         7
 ##  2 Barney       5
-##  3 Dwight       9
+##  3 Dwight       7
 ##  4 Howard       7
-##  5 Jim          4
-##  6 Leonard      6
-##  7 Lily        10
-##  8 Marshall     5
-##  9 Michael      6
-## 10 Pam          6
-## 11 Penny        8
-## 12 Rajesh       6
-## 13 Robin        7
-## 14 Sheldon     10
+##  5 Jim          6
+##  6 Leonard      7
+##  7 Lily         5
+##  8 Marshall     7
+##  9 Michael      9
+## 10 Pam          5
+## 11 Penny       12
+## 12 Rajesh       4
+## 13 Robin        5
+## 14 Sheldon      9
 ## 15 Ted          5
 
 # Junta as categorias
@@ -206,15 +209,15 @@ per_fav2 &lt;- fct_collapse(per_fav,
              TheOffice = c(&quot;Michael&quot;, &quot;Jim&quot;, &quot;Pam&quot;, &quot;Dwight&quot;, &quot;Andy&quot;))
 
 head(per_fav2)
-## [1] TBBT      HIMYM     HIMYM     HIMYM     TBBT      TheOffice
+## [1] HIMYM HIMYM TBBT  HIMYM HIMYM TBBT 
 ## Levels: TheOffice HIMYM TBBT
 fct_count(per_fav2)
 ## # A tibble: 3 x 2
 ##   f             n
 ##   &lt;fct&gt;     &lt;int&gt;
-## 1 TheOffice    31
-## 2 HIMYM        32
-## 3 TBBT         37</code></pre>
+## 1 TheOffice    34
+## 2 HIMYM        27
+## 3 TBBT         39</code></pre>
 </div>
 <div id="fct_reorder" class="section level2">
 <h2>fct_reorder</h2>
@@ -222,70 +225,65 @@ fct_count(per_fav2)
 <pre class="r"><code>mtcars %&gt;% 
   ggplot(aes(x = as.factor(carb), y = mpg)) +
   geom_boxplot()</code></pre>
-<p><img src="/blog/2017-07-01-forcats_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/posts/2017-07-01-forcats_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>mtcars %&gt;% 
   mutate(carb = fct_reorder(.f = as.factor(carb), 
                             .x = mpg,
                             .fun = median)) %&gt;% 
   ggplot(aes(x = carb, y = mpg)) +
-  geom_boxplot()
-## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4</code></pre>
-<p><img src="/blog/2017-07-01-forcats_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+  geom_boxplot()</code></pre>
+<p><img src="/posts/2017-07-01-forcats_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 </div>
 <div id="fct_lump" class="section level2">
 <h2>fct_lump</h2>
 <p>Agrupa as categorias menos (ou mais) comuns.</p>
 <pre class="r"><code>letras &lt;- factor(letters[rpois(100, 5)])
 fct_count(letras)
-## # A tibble: 11 x 2
+## # A tibble: 10 x 2
 ##    f         n
 ##    &lt;fct&gt; &lt;int&gt;
-##  1 a         4
-##  2 b        12
-##  3 c        16
-##  4 d        12
-##  5 e        14
-##  6 f        14
-##  7 g         8
-##  8 h         9
-##  9 i         3
-## 10 j         5
-## 11 k         2
+##  1 a         6
+##  2 b         9
+##  3 c        10
+##  4 d        18
+##  5 e        24
+##  6 f        13
+##  7 g        11
+##  8 h         3
+##  9 i         5
+## 10 j         1
 
 # Por default, a categoria &quot;Other&quot; sempre será menor
 # que as outras categorias.
 letras %&gt;%                  
   fct_lump(other_level = &quot;Outros&quot;) %&gt;%       
   fct_count
-## # A tibble: 11 x 2
-##    f          n
-##    &lt;fct&gt;  &lt;int&gt;
-##  1 a          4
-##  2 b         12
-##  3 c         16
-##  4 d         12
-##  5 e         14
-##  6 f         14
-##  7 g          8
-##  8 h          9
-##  9 i          3
-## 10 j          5
-## 11 Outros     2
+## # A tibble: 9 x 2
+##   f          n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 a          6
+## 2 b          9
+## 3 c         10
+## 4 d         18
+## 5 e         24
+## 6 f         13
+## 7 g         11
+## 8 i          5
+## 9 Outros     4
 
 # Espeficicando o argumento &quot;n = 4&quot;, preservamos os
 # 4 valores mais comuns
 letras %&gt;% 
   fct_lump(n = 4, other_level = &quot;Outros&quot;) %&gt;% 
   fct_count
-## # A tibble: 6 x 2
+## # A tibble: 5 x 2
 ##   f          n
 ##   &lt;fct&gt;  &lt;int&gt;
-## 1 b         12
-## 2 c         16
-## 3 d         12
-## 4 e         14
-## 5 f         14
-## 6 Outros    31
+## 1 d         18
+## 2 e         24
+## 3 f         13
+## 4 g         11
+## 5 Outros    34
 
 # Espeficicando o argumento &quot;n = -4&quot;, preservamos
 # apenas os 4 valores que menos aparecem
@@ -295,10 +293,10 @@ letras %&gt;%
 ## # A tibble: 5 x 2
 ##   f              n
 ##   &lt;fct&gt;      &lt;int&gt;
-## 1 a              4
-## 2 i              3
-## 3 j              5
-## 4 k              2
+## 1 a              6
+## 2 h              3
+## 3 i              5
+## 4 j              1
 ## 5 Principais    85</code></pre>
 </div>
 <div id="lvls_reorder" class="section level2">
@@ -318,10 +316,36 @@ lvls_reorder(fator, c(3, 1, 2, 4))
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -331,7 +355,7 @@ lvls_reorder(fator, c(3, 1, 2, 4))
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -341,7 +365,7 @@ lvls_reorder(fator, c(3, 1, 2, 4))
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -351,25 +375,21 @@ lvls_reorder(fator, c(3, 1, 2, 4))
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -379,12 +399,14 @@ lvls_reorder(fator, c(3, 1, 2, 4))
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -409,24 +431,24 @@ lvls_reorder(fator, c(3, 1, 2, 4))
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

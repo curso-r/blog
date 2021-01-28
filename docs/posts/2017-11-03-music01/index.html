@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Julio em <a href="/categories/an%c3%a1lises">Análises</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/jtrecenti" target = "_blank">Julio</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -120,170 +126,42 @@
         </ul>
         <article class="content">
           
+            <blockquote>Este post foi aposentado.
             
-
-
-<blockquote>
-<p>Para quem está esperando posts sobre captchas, esperem mais um pouquinho 😆. Em novembro voltarei a postar sobre esse assunto.</p>
-</blockquote>
-<p>Em setembro de 2017, participei do <a href="http://compmus.ime.usp.br/sbcm/2017">16th Symposium on Computer Music</a>, organizado pelo prof. Marcelo Queiroz do IME-USP. O evento foi muito legal! Estou estudando música nos últimos meses e acho que farei meu doutorado em soluções que ligam estatística e música. É uma área realmente apaixonante.</p>
-<p>Uma das formas que usarei para aprender os métodos e estudar os conceitos será esse blog! Assim vocês poderão acompanhar meus avanços e propor ideias para colaborar com meus trabalhos. Pretendo desenvolver tanto modelos estatísticos e programação quanto teoria musical.</p>
-<p>Até o momento, tenho três posts planejados ou prontos:</p>
-<ul>
-<li>pacote <code>music21</code>: esse post! Veja abaixo.</li>
-<li>pacote <code>chordgen</code>: pacote que criei para gerar sequências aleatórias de acordes com o R</li>
-<li>artigo <code>deepbach</code>: um modelo de redes neurais capaz de imitar corais de Bach.</li>
-</ul>
-<div id="computacao-musical-numa-casca-de-noz" class="section level2">
-<h2>Computação musical numa casca de noz</h2>
-<p>Apesar da minha falta de conhecimento sobre o tema, acredito que a área de computação musical pode ser resumida em três frentes:</p>
-<p><strong>Leitura</strong>: extrair dados estruturados dos áudios. Envolve <em>Music Information Retrieval</em> - MIR</p>
-<p><img src="images/posts/conteudo/music01/music-download.png" width="40%" style="display: block; margin: auto;" /></p>
-<p><strong>Composição</strong>: Criar ou completar músicas automaticamente</p>
-<p><img src="images/posts/conteudo/music01/music-generate.png" width="40%" style="display: block; margin: auto;" /></p>
-<p><strong>Edição</strong>: Adicionar efeitos na música para produção</p>
-<p><img src="images/posts/conteudo/music01/music-transform.png" width="40%" style="display: block; margin: auto;" /></p>
-<p>Meu foco será na parte de composição, com foco em harmonização, que significa criar e completar harmonias das músicas dado algum estilo (e.g. Bach ou Beatles). Também tentarei criar soluções de improviso, apesar de não garantir nada.</p>
-</div>
-<div id="music21" class="section level1">
-<h1>music21</h1>
-<p>O objetivo do pacote <code>music21</code> é funcionar como um port pipeável (<code>%&gt;%</code>-able) da <a href="http://web.mit.edu/music21/doc/index.html">biblioteca music21, em python</a>. Ele usa o excelente pacote <a href="https://github.com/rstudio/reticulate"><code>reticulate</code></a> do RStudio como backend.</p>
-<p>Atualmente, o <code>music21</code> é mais limitado que a bibloteca em python. No entanto, graças ao <code>reticulate</code> é fácil rodar qualquer função do <code>music21</code> no R.</p>
-<div id="instalacao" class="section level2">
-<h2>Instalação</h2>
-<p>Como o <code>music21</code> utiliza bibliotecas python, é necessário instalar algumas dependências antes. No Ubuntu, basta rodar</p>
-<pre class="bash"><code>sudo apt-get install python-pip
-sudo pip install pip --upgrade
-sudo pip install music21</code></pre>
-<p>Em outros sistemas opetacionais, veja a <a href="http://web.mit.edu/music21/">documentação oficial</a> da biblioteca.</p>
-<p>Eu tenho o péssimo hábito de não subir meus pacotes para o CRAN. Mas prometo que esse vou subir e manter. Por enquanto, para instalar o pacote <code>music21</code> é necessário rodar</p>
-<pre class="r"><code>devtools::install_github(&quot;jtrecenti/music21&quot;)</code></pre>
-<p>Você pode carregar o pacote rodando</p>
-<pre class="r"><code>library(music21)</code></pre>
-<p>Para usar a função de plotar uma partitura, você também precisara do <a href="http://lilypond.org/">lilypond</a>:</p>
-<pre class="bash"><code>sudo apt-get install lilypond</code></pre>
-</div>
-<div id="o-objeto-music21" class="section level2">
-<h2>O objeto <code>music21</code></h2>
-<pre class="r"><code>library(music21)
-music21
-## Module(music21)</code></pre>
-<p>O objeto <code>music21</code> é um módulo do python. Com ele é possível rodar qualquer função do pacote usando <code>$</code>, tratando o objeto como uma <a href="http://adv-r.had.co.nz/R5.html">Reference Class</a>.</p>
-<pre class="r"><code>note &lt;- music21$note$Note(&quot;C#&quot;)
-note
-## &lt;music21.note.Note C#&gt;</code></pre>
-<pre class="r"><code>note %&gt;% 
-  plot()</code></pre>
-<div class="figure">
-<img src="images/posts/conteudo/music01/note-1.png" />
-
-</div>
-</div>
-<div id="exemplo" class="section level2">
-<h2>Exemplo</h2>
-<div id="corais-do-bach" class="section level3">
-<h3>Corais do Bach</h3>
-<pre class="r"><code>get_composer(&quot;bach&quot;) %&gt;% 
-  head()
-## [1] &quot;/Library/Python/2.7/site-packages/music21/corpus/bach/bwv1.6.mxl&quot;  
-## [2] &quot;/Library/Python/2.7/site-packages/music21/corpus/bach/bwv10.7.mxl&quot; 
-## [3] &quot;/Library/Python/2.7/site-packages/music21/corpus/bach/bwv101.7.mxl&quot;
-## [4] &quot;/Library/Python/2.7/site-packages/music21/corpus/bach/bwv102.7.mxl&quot;
-## [5] &quot;/Library/Python/2.7/site-packages/music21/corpus/bach/bwv103.6.mxl&quot;
-## [6] &quot;/Library/Python/2.7/site-packages/music21/corpus/bach/bwv104.6.mxl&quot;</code></pre>
-<p>Vamos pegar uma delas e guardar numa variável</p>
-<pre class="r"><code>bach_music &lt;- get_composer(&quot;bach&quot;)[61] %&gt;% 
-  read_music()</code></pre>
-</div>
-<div id="plotando-a-musica-bwv165.6" class="section level3">
-<h3>Plotando a música <em>bwv165.6</em></h3>
-<p>Basta rodar <code>plot()</code>!!</p>
-<pre class="r"><code>bach_music %&gt;% 
-  plot()</code></pre>
-<div class="figure">
-<img src="images/posts/conteudo/music01/bach-1.png" />
-
-</div>
-<p>No RStudio, você pode usar a função <code>view()</code> para visualizar a música em melhor resolução no Viewer Pane.</p>
-</div>
-<div id="imprimindo-bwv165.6-so-o-soprano" class="section level3">
-<h3>Imprimindo <em>bwv165.6</em> (só o soprano)</h3>
-<p>Para visualizar as notas de uma música basta rodar o objeto no console. A música é organizada por Measures (compassos) e cada compasso vai mostrar seus componentes. No primeiro compasso, podemos ver a clave de sol (TrebleClef), as definições do tom (sol maior) e do tempo (4/4). Nos demais, observamos as notas e os temos associados a cada nota. Por exemplo, temos uma nota F# no primeiro tempo.</p>
-<pre class="r"><code>bach_music[[1]]
-## {0.0} &lt;music21.instrument.Instrument P1: Soprano: Instrument 1&gt;
-## {0.0} &lt;music21.stream.Measure 0 offset=0.0&gt;
-##     {0.0} &lt;music21.clef.TrebleClef&gt;
-##     {0.0} &lt;music21.key.Key of G major&gt;
-##     {0.0} &lt;music21.meter.TimeSignature 4/4&gt;
-##     {0.0} &lt;music21.note.Note G&gt;
-## {1.0} &lt;music21.stream.Measure 1 offset=1.0&gt;
-##     {0.0} &lt;music21.note.Note G&gt;
-##     {1.0} &lt;music21.note.Note F#&gt;
-##     {2.0} &lt;music21.note.Note E&gt;
-##     {2.5} &lt;music21.note.Note F#&gt;
-##     {3.0} &lt;music21.note.Note G&gt;
-##     {3.5} &lt;music21.note.Note A&gt;
-## {5.0} &lt;music21.stream.Measure 2 offset=5.0&gt;
-##     {0.0} &lt;music21.note.Note B&gt;
-##     {0.5} &lt;music21.note.Note C&gt;
-##     {1.0} &lt;music21.note.Note A&gt;
-##     {2.0} &lt;music21.note.Note G&gt;
-##     {3.0} &lt;music21.note.Note G&gt;
-## {9.0} &lt;music21.stream.Measure 3 offset=9.0&gt;
-##     {0.0} &lt;music21.note.Note G&gt;
-##     {1.0} &lt;music21.note.Note A&gt;
-##     {1.5} &lt;music21.note.Note G&gt;
-##     {2.0} &lt;music21.note.Note F#&gt;
-##     {2.5} &lt;music21.note.Note E&gt;
-##     {3.0} &lt;music21.note.Note D&gt;
-## {13.0} &lt;music21.stream.Measure 4 offset=13.0&gt;
-##     {0.0} &lt;music21.note.Note G&gt;
-##     {2.0} &lt;music21.note.Note F#&gt;
-##     {3.0} &lt;music21.note.Note F#&gt;
-## {17.0} &lt;music21.stream.Measure 5 offset=17.0&gt;
-##     {0.0} &lt;music21.layout.SystemLayout&gt;
-##     {0.0} &lt;music21.note.Note G&gt;
-##     {1.0} &lt;music21.note.Note G&gt;
-##     {2.0} &lt;music21.note.Note A&gt;
-##     {3.0} &lt;music21.note.Note B&gt;
-## {21.0} &lt;music21.stream.Measure 6 offset=21.0&gt;
-##     {0.0} &lt;music21.note.Note A&gt;
-##     {2.0} &lt;music21.note.Note A&gt;
-##     {3.0} &lt;music21.note.Note B&gt;
-## {25.0} &lt;music21.stream.Measure 7 offset=25.0&gt;
-##     {0.0} &lt;music21.note.Note C&gt;
-##     {1.0} &lt;music21.note.Note B&gt;
-##     {2.0} &lt;music21.note.Note A&gt;
-##     {3.0} &lt;music21.note.Note B&gt;
-##     {3.5} &lt;music21.note.Note C&gt;
-## {29.0} &lt;music21.stream.Measure 8 offset=29.0&gt;
-##     {0.0} &lt;music21.note.Note A&gt;
-##     {2.0} &lt;music21.note.Note G&gt;
-##     {3.0} &lt;music21.bar.Barline style=final&gt;</code></pre>
-<p>Você pode tratar esse objeto como uma lista. Se você entrar numa nota, você poderá ver algumas características dela</p>
-<pre class="r"><code># Nota F#
-bach_music[[1]][[2]][[3]]
-## &lt;music21.note.Note F#&gt;
-
-# duração da nota
-bach_music[[1]][[2]][[3]]$duration
-## &lt;music21.duration.Duration 0.5&gt;
-
-# som exato
-bach_music[[1]][[2]][[3]]$pitch
-## F#4</code></pre>
-<p>Por enquanto vou acabar por aqui. Convido vocês a usarem o <code>music21</code> e experimentar suas funcionalidades. Adicionem issues em <a href="https://github.com/jtrecenti/music21/issues" class="uri">https://github.com/jtrecenti/music21/issues</a> e mandem pergundas nos comentários.</p>
-<p>É isso! Happy coding ;)</p>
-</div>
-</div>
-</div>
-
+            </blockquote>
+            <img src = "https://blog.curso-r.com/images/retired.jpg" style = "margin: auto; display: block; width: 100%;">
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -293,7 +171,7 @@ bach_music[[1]][[2]][[3]]$pitch
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -303,7 +181,7 @@ bach_music[[1]][[2]][[3]]$pitch
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -313,25 +191,21 @@ bach_music[[1]][[2]][[3]]$pitch
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -341,12 +215,14 @@ bach_music[[1]][[2]][[3]]$pitch
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -371,24 +247,24 @@ bach_music[[1]][[2]][[3]]$pitch
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

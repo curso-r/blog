@@ -1,7 +1,7 @@
 ---
 title: "Aquele 1% é Deep Learning - Gerando letras do Wesley Safadão"
-date: "2017-08-28T23:26:00+03:00"
-tags: ["estatística"]
+date: "2017-08-28"
+tags: ["música"]
 categories: ["análises"]
 image: "images/posts/banner/wesley.png"
 author: ["Julio"]

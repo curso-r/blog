@@ -6,7 +6,11 @@
     <description>Recent content in conceitos on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/conceitos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/categories/conceitos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Warnings no if_else(), mas não no ifelse()?</title>
       <link>https://blog.curso-r.com/posts/2020-09-11-if_else_ifelse/</link>
@@ -14,6 +18,69 @@
       
       <guid>https://blog.curso-r.com/posts/2020-09-11-if_else_ifelse/</guid>
       <description>Por que às vezes recebemos warnings no if_else(), mas não no ifelse()? Uma investigação revela que o problema pode não estar onde imaginamos&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Versões e Releases (Zen do R parte 8)</title>
+      <link>https://blog.curso-r.com/posts/2020-02-21-zen-do-r-8/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-21-zen-do-r-8/</guid>
+      <description>Como manter as versões de um pacote sobre controle.</description>
+    </item>
+    
+    <item>
+      <title>Data e data-raw (Zen do R parte 7)</title>
+      <link>https://blog.curso-r.com/posts/2019-08-13-zen-do-r-7/</link>
+      <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-13-zen-do-r-7/</guid>
+      <description>Como armazenar dados em um pacote: os diretórios data e data-raw.</description>
+    </item>
+    
+    <item>
+      <title>Pacotes (Zen do R parte 6)</title>
+      <link>https://blog.curso-r.com/posts/2019-08-07-zen-do-r-6/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-07-zen-do-r-6/</guid>
+      <description>Pacotes: por que e como fazê-los?</description>
+    </item>
+    
+    <item>
+      <title>Funções e Dependências (Zen do R parte 5)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-30-zen-do-r-5/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-30-zen-do-r-5/</guid>
+      <description>Como tornar o seu código reprodutível com funções e dependências.</description>
+    </item>
+    
+    <item>
+      <title>Git e GitHub (Zen do R parte 4)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-23-zen-do-r-4/</link>
+      <pubDate>Tue, 23 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-23-zen-do-r-4/</guid>
+      <description>Como usar o Git e o GitHub para fazer controle de versão dos seus projetos em R.</description>
+    </item>
+    
+    <item>
+      <title>Rproj e diretórios (Zen do R parte 3)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-16-zen-do-r-3/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-16-zen-do-r-3/</guid>
+      <description>Como usar projetos no R para nunca mais perder um arquivo importante.</description>
+    </item>
+    
+    <item>
+      <title>.RData e .Rhistory (Zen do R parte 2)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-10-zen-do-r-2/</link>
+      <pubDate>Wed, 10 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-10-zen-do-r-2/</guid>
+      <description>Como funcionam o .RData e o .Rhistory e porque você deveria desativá-los!</description>
     </item>
     
     <item>
@@ -44,9 +111,18 @@
     </item>
     
     <item>
+      <title>Tidy Data, Teste T Pareado e Modelos Mistos</title>
+      <link>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</guid>
+      <description>O que teste t-pareado, modelos mistos e tidy data podem ter a ver? Veja neste post como a estrutura dos seus dados pode afetar a forma que você fará a sua análise.</description>
+    </item>
+    
+    <item>
       <title>Comportamentos imprevisíveis do lubridate</title>
       <link>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</link>
-      <pubDate>Sat, 02 Sep 2017 10:12:00 +0300</pubDate>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</guid>
       <description>R é uma linguagem maravilhosa. Ela possibilita uma ampla gama de aplicações interessantes. O seu maior trunfo está no rico ecossistema de pacotes, que são desenvolvidos e mantidos pela comunidade, sempre criativa na hora de lidar com os problemas. Entretanto, toda essa facilidade cobra um preço. Neste post vamos aprender que às vezes os programas não fazem exatamente o que estão dizendo que fazem.</description>
@@ -55,7 +131,7 @@
     <item>
       <title>Mínimos quadrados com restrições lineares</title>
       <link>https://blog.curso-r.com/posts/2017-08-07-minimos-quadrados-restrito/</link>
-      <pubDate>Mon, 07 Aug 2017 10:12:00 +0300</pubDate>
+      <pubDate>Mon, 07 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-08-07-minimos-quadrados-restrito/</guid>
       <description>Às vezes a solução do seu problema está a um peteleco de uma regressão de mínimos quadrados. Neste post vamos implementar uma minimização de soma de quadrados quando os coeficientes da regressão são restritos linearmente.</description>
@@ -64,7 +140,7 @@
     <item>
       <title>Regressão Logística em: a menor deep learning do mundo</title>
       <link>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</link>
-      <pubDate>Sat, 29 Jul 2017 10:12:00 +0300</pubDate>
+      <pubDate>Sat, 29 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</guid>
       <description>Deep learning é uma grande novidade, mas há muitos mitos em sua volta que acaba espantando pessoas que poderiam usufruir e contribuir para a comunidade de analista de dados. Esse post tem o intuito de abrir um pouquinho a caixa preta para quebrar algumas dessas fábulas.</description>
@@ -73,7 +149,7 @@
     <item>
       <title>Construindo Autoencoders</title>
       <link>https://blog.curso-r.com/posts/2017-06-26-construindo-autoencoders/</link>
-      <pubDate>Mon, 26 Jun 2017 10:12:00 +0300</pubDate>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-26-construindo-autoencoders/</guid>
       <description>Autoencoders são redes neurais treinadas com o objetdivo de copiar o seu input para o seu output. Aprenda a treinar o seu neste post.</description>
@@ -82,7 +158,7 @@
     <item>
       <title>Componentes Principais - Intuição</title>
       <link>https://blog.curso-r.com/posts/2017-06-24-componentes-principais-intuicao/</link>
-      <pubDate>Sat, 24 Jun 2017 10:12:00 +0300</pubDate>
+      <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-24-componentes-principais-intuicao/</guid>
       <description>Uma ilustração gráfica simples para dar intuição sobre o que uma Análise de Componentes Principais faz.</description>
@@ -91,7 +167,7 @@
     <item>
       <title>Environments</title>
       <link>https://blog.curso-r.com/posts/2017-06-19-environments/</link>
-      <pubDate>Mon, 19 Jun 2017 23:26:00 +0300</pubDate>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-19-environments/</guid>
       <description>Se você já utilizou o R algumas vezes, com certeza já se deparou com o termo environment. Neste post, vamos tentar responder as três perguntas básicas para entendermos alguma coisa no R: 1. o que é? 2. para que serve? e 3. como NÃO usar?</description>

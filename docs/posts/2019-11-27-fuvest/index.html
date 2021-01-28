@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Daniel em <a href="/categories/an%c3%a1lises">Análises</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/dfalbel" target = "_blank">Daniel</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -122,6 +128,8 @@
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>A partir do vestibular de 2019 a FUVEST alterou o seu sistema cotas. Antes de 2019,
@@ -144,19 +152,19 @@ de concorrência no Concurso Vestibular FUVEST 2019.</p>
 proporção maior de 40% de alunos oriundos de escola pública. Esse ponto foi
 <a href="https://www.adusp.org.br/index.php/defesauniv/3206-opiniao-armadilhas-comprometem-o-sistema-de-cotas-adotado-pela-usp">levantado em janeiro de 2019 pela ADUSP</a> e mesmo em <a href="https://diaonline.com.br/2018/11/25/cotista-tera-tarefa-mais-complicada-na-fuvest/?utm_source=Estad%C3%A3o+Conte%C3%BAdo&amp;utm_campaign=diaonline-author">2018 pela imprensa</a>.</p>
 <p>Vejamos os dados.</p>
-<p>Para 37,1% das carreiras na primeira fase da FUVEST a nota de corte para
+<p>Para 37% das carreiras na primeira fase da FUVEST a nota de corte para
 ser convocado para a segunda fase para candidatos cotistas foi maior do que a nota
 para candidatos que se candidataram em ampla concorrência. Consideramos nas análises
 apenas as modalidades que tiveram todas as vagas preenchidas - isto é, foram convocados
 para a segunda fase mais candidatos do que o número de vagas disponíveis.</p>
 <p>O gráfico a seguir mostra a diferença entre a nota de corte para candidatos
 cotistas de escola pública (EP) e candidatos da ampla concorrência (AC).</p>
-<p><img src="/blog/2019-11-27-fuvest_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
+<p><img src="/posts/2019-11-27-fuvest_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
 <p>Veja que para o curso de Filosofia, a nota de corte para alunos cotistas de escolas
 públicas foi <strong>11</strong> pontos maior do que a nota para alunos da ampla concorrência.</p>
 <p>Quando comparamos candidatos da modalidade PPI (estudaram na rede pública e se autodeclaram
 pretos, pardos ou indígenas) com candidatos da modalidade EP, a situação se repete.</p>
-<p><img src="/blog/2019-11-27-fuvest_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+<p><img src="/posts/2019-11-27-fuvest_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
 <p>As notas de corte para candidatos PPI dos cursos de Saúde Pública e de Ciências dos alimentos
 foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
 <p>As tabelas a seguir mostram os cursos que apresentaram maiores diferenças:</p>
@@ -164,439 +172,339 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tpxfajrdkk .gt_table {
+#vcrweikojf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
-  /* table.margin.left */
   margin-right: auto;
-  /* table.margin.right */
   color: #333333;
   font-size: 16px;
-  /* table.font.size */
+  font-weight: normal;
+  font-style: normal;
   background-color: #FFFFFF;
-  /* table.background.color */
   width: auto;
-  /* table.width */
   border-top-style: solid;
-  /* table.border.top.style */
   border-top-width: 2px;
-  /* table.border.top.width */
   border-top-color: #A8A8A8;
-  /* table.border.top.color */
-  border-bottom-style: solid;
-  /* table.border.bottom.style */
-  border-bottom-width: 2px;
-  /* table.border.bottom.width */
-  border-bottom-color: #A8A8A8;
-  /* table.border.bottom.color */
-}
-
-#tpxfajrdkk .gt_heading {
-  background-color: #FFFFFF;
-  /* heading.background.color */
-  border-bottom-color: #FFFFFF;
-  /* table.background.color */
-  border-left-style: hidden;
-  /* heading.border.lr.style */
-  border-left-width: 1px;
-  /* heading.border.lr.width */
-  border-left-color: #D3D3D3;
-  /* heading.border.lr.color */
-  border-right-style: hidden;
-  /* heading.border.lr.style */
-  border-right-width: 1px;
-  /* heading.border.lr.width */
+  border-right-style: none;
+  border-right-width: 2px;
   border-right-color: #D3D3D3;
-  /* heading.border.lr.color */
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
 }
 
-#tpxfajrdkk .gt_title {
+#vcrweikojf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vcrweikojf .gt_title {
   color: #333333;
   font-size: 125%;
-  /* heading.title.font.size */
   font-weight: initial;
-  /* heading.title.font.weight */
   padding-top: 4px;
-  /* heading.top.padding - not yet used */
   padding-bottom: 4px;
   border-bottom-color: #FFFFFF;
-  /* table.background.color */
   border-bottom-width: 0;
 }
 
-#tpxfajrdkk .gt_subtitle {
+#vcrweikojf .gt_subtitle {
   color: #333333;
   font-size: 85%;
-  /* heading.subtitle.font.size */
   font-weight: initial;
-  /* heading.subtitle.font.weight */
   padding-top: 0;
   padding-bottom: 4px;
-  /* heading.bottom.padding - not yet used */
   border-top-color: #FFFFFF;
-  /* table.background.color */
   border-top-width: 0;
 }
 
-#tpxfajrdkk .gt_bottom_border {
-  border-bottom-style: solid;
-  /* heading.border.bottom.style */
-  border-bottom-width: 2px;
-  /* heading.border.bottom.width */
-  border-bottom-color: #D3D3D3;
-  /* heading.border.bottom.color */
-}
-
-#tpxfajrdkk .gt_column_spanner {
+#vcrweikojf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
-  padding-top: 4px;
-  padding-bottom: 4px;
 }
 
-#tpxfajrdkk .gt_col_headings {
+#vcrweikojf .gt_col_headings {
   border-top-style: solid;
-  /* column_labels.border.top.style */
   border-top-width: 2px;
-  /* column_labels.border.top.width */
   border-top-color: #D3D3D3;
-  /* column_labels.border.top.color */
   border-bottom-style: solid;
-  /* column_labels.border.bottom.style */
   border-bottom-width: 2px;
-  /* column_labels.border.bottom.width */
   border-bottom-color: #D3D3D3;
-  /* column_labels.border.bottom.color */
   border-left-style: none;
-  /* column_labels.border.lr.style */
   border-left-width: 1px;
-  /* column_labels.border.lr.width */
   border-left-color: #D3D3D3;
-  /* column_labels.border.lr.color */
   border-right-style: none;
-  /* column_labels.border.lr.style */
   border-right-width: 1px;
-  /* column_labels.border.lr.width */
   border-right-color: #D3D3D3;
-  /* column_labels.border.lr.color */
 }
 
-#tpxfajrdkk .gt_col_heading {
+#vcrweikojf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
-  /* column_labels.background.color */
   font-size: 100%;
-  /* column_labels.font.size */
   font-weight: normal;
-  /* column_labels.font.weight */
   text-transform: inherit;
-  /* column_labels.text_transform */
-  vertical-align: middle;
-  padding: 5px;
-  margin: 10px;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   overflow-x: hidden;
 }
 
-#tpxfajrdkk .gt_sep_right {
-  border-right: 5px solid #FFFFFF;
-}
-
-#tpxfajrdkk .gt_group_heading {
-  padding: 8px;
-  /* row_group.padding */
+#vcrweikojf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
-  /* row_group.background.color */
   font-size: 100%;
-  /* row_group.font.size */
-  font-weight: initial;
-  /* row_group.font.weight */
+  font-weight: normal;
   text-transform: inherit;
-  /* row_group.text_transform */
-  border-top-style: solid;
-  /* row_group.border.top.style */
-  border-top-width: 2px;
-  /* row_group.border.top.width */
-  border-top-color: #D3D3D3;
-  /* row_group.border.top.color */
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vcrweikojf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vcrweikojf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vcrweikojf .gt_column_spanner {
   border-bottom-style: solid;
-  /* row_group.border.bottom.style */
   border-bottom-width: 2px;
-  /* row_group.border.bottom.width */
   border-bottom-color: #D3D3D3;
-  /* row_group.border.bottom.color */
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vcrweikojf .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
   border-left-style: none;
-  /* row_group.border.left.style */
   border-left-width: 1px;
-  /* row_group.border.left.width */
   border-left-color: #D3D3D3;
-  /* row_group.border.left.color */
   border-right-style: none;
-  /* row_group.border.right.style */
   border-right-width: 1px;
-  /* row_group.border.right.width */
   border-right-color: #D3D3D3;
-  /* row_group.border.right.color */
   vertical-align: middle;
 }
 
-#tpxfajrdkk .gt_empty_group_heading {
+#vcrweikojf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
-  /* row_group.background.color */
   font-size: 100%;
-  /* row_group.font.size */
   font-weight: initial;
-  /* row_group.font.weight */
   border-top-style: solid;
-  /* row_group.border.top.style */
   border-top-width: 2px;
-  /* row_group.border.top.width */
   border-top-color: #D3D3D3;
-  /* row_group.border.top.color */
   border-bottom-style: solid;
-  /* row_group.border.bottom.style */
   border-bottom-width: 2px;
-  /* row_group.border.bottom.width */
   border-bottom-color: #D3D3D3;
-  /* row_group.border.bottom.color */
   vertical-align: middle;
 }
 
-#tpxfajrdkk .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-  /* row.striping.background_color */
-}
-
-#tpxfajrdkk .gt_from_md > :first-child {
+#vcrweikojf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tpxfajrdkk .gt_from_md > :last-child {
+#vcrweikojf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tpxfajrdkk .gt_row {
+#vcrweikojf .gt_row {
   padding-top: 8px;
-  /* data_row.padding */
   padding-bottom: 8px;
-  /* data_row.padding */
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
   border-top-style: solid;
-  /* table_body.hlines.style */
   border-top-width: 1px;
-  /* table_body.hlines.width */
   border-top-color: #D3D3D3;
-  /* table_body.hlines.color */
   border-left-style: none;
-  /* table_body.vlines.style */
   border-left-width: 1px;
-  /* table_body.vlines.width */
   border-left-color: #D3D3D3;
-  /* table_body.vlines.color */
   border-right-style: none;
-  /* table_body.vlines.style */
   border-right-width: 1px;
-  /* table_body.vlines.width */
   border-right-color: #D3D3D3;
-  /* table_body.vlines.color */
   vertical-align: middle;
   overflow-x: hidden;
 }
 
-#tpxfajrdkk .gt_stub {
+#vcrweikojf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
-  /* stub.background.color */
+  font-size: 100%;
   font-weight: initial;
-  /* stub.font.weight */
   text-transform: inherit;
-  /* stub.text_transform */
   border-right-style: solid;
-  /* stub.border.style */
   border-right-width: 2px;
-  /* stub.border.width */
   border-right-color: #D3D3D3;
-  /* stub.border.color */
   padding-left: 12px;
 }
 
-#tpxfajrdkk .gt_summary_row {
+#vcrweikojf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
-  /* summary_row.background.color */
   text-transform: inherit;
-  /* summary_row.text_transform */
   padding-top: 8px;
-  /* summary_row.padding */
   padding-bottom: 8px;
-  /* summary_row.padding */
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#tpxfajrdkk .gt_first_summary_row {
+#vcrweikojf .gt_first_summary_row {
   padding-top: 8px;
-  /* summary_row.padding */
   padding-bottom: 8px;
-  /* summary_row.padding */
   padding-left: 5px;
   padding-right: 5px;
   border-top-style: solid;
-  /* summary_row.border.style */
   border-top-width: 2px;
-  /* summary_row.border.width */
   border-top-color: #D3D3D3;
-  /* summary_row.border.color */
 }
 
-#tpxfajrdkk .gt_grand_summary_row {
+#vcrweikojf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
-  /* grand_summary_row.background.color */
   text-transform: inherit;
-  /* grand_summary_row.text_transform */
   padding-top: 8px;
-  /* grand_summary_row.padding */
   padding-bottom: 8px;
-  /* grand_summary_row.padding */
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#tpxfajrdkk .gt_first_grand_summary_row {
+#vcrweikojf .gt_first_grand_summary_row {
   padding-top: 8px;
-  /* grand_summary_row.padding */
   padding-bottom: 8px;
-  /* grand_summary_row.padding */
   padding-left: 5px;
   padding-right: 5px;
   border-top-style: double;
-  /* grand_summary_row.border.style */
   border-top-width: 6px;
-  /* grand_summary_row.border.width */
   border-top-color: #D3D3D3;
-  /* grand_summary_row.border.color */
 }
 
-#tpxfajrdkk .gt_table_body {
+#vcrweikojf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vcrweikojf .gt_table_body {
   border-top-style: solid;
-  /* table_body.border.top.style */
   border-top-width: 2px;
-  /* table_body.border.top.width */
   border-top-color: #D3D3D3;
-  /* table_body.border.top.color */
   border-bottom-style: solid;
-  /* table_body.border.bottom.style */
   border-bottom-width: 2px;
-  /* table_body.border.bottom.width */
   border-bottom-color: #D3D3D3;
-  /* table_body.border.bottom.color */
 }
 
-#tpxfajrdkk .gt_footnotes {
+#vcrweikojf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
-  /* footnotes.background.color */
   border-bottom-style: none;
-  /* footnotes.border.bottom.style */
   border-bottom-width: 2px;
-  /* footnotes.border.bottom.width */
   border-bottom-color: #D3D3D3;
-  /* footnotes.border.bottom.color */
   border-left-style: none;
-  /* footnotes.border.lr.color */
   border-left-width: 2px;
-  /* footnotes.border.lr.color */
   border-left-color: #D3D3D3;
-  /* footnotes.border.lr.color */
   border-right-style: none;
-  /* footnotes.border.lr.color */
   border-right-width: 2px;
-  /* footnotes.border.lr.color */
   border-right-color: #D3D3D3;
-  /* footnotes.border.lr.color */
 }
 
-#tpxfajrdkk .gt_footnote {
+#vcrweikojf .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  /* footnotes.font.size */
   padding: 4px;
-  /* footnotes.padding */
 }
 
-#tpxfajrdkk .gt_sourcenotes {
+#vcrweikojf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
-  /* source_notes.background.color */
   border-bottom-style: none;
-  /* source_notes.border.bottom.style */
   border-bottom-width: 2px;
-  /* source_notes.border.bottom.width */
   border-bottom-color: #D3D3D3;
-  /* source_notes.border.bottom.color */
   border-left-style: none;
-  /* source_notes.border.lr.style */
   border-left-width: 2px;
-  /* source_notes.border.lr.style */
   border-left-color: #D3D3D3;
-  /* source_notes.border.lr.style */
   border-right-style: none;
-  /* source_notes.border.lr.style */
   border-right-width: 2px;
-  /* source_notes.border.lr.style */
   border-right-color: #D3D3D3;
-  /* source_notes.border.lr.style */
 }
 
-#tpxfajrdkk .gt_sourcenote {
+#vcrweikojf .gt_sourcenote {
   font-size: 90%;
-  /* source_notes.font.size */
   padding: 4px;
-  /* source_notes.padding */
 }
 
-#tpxfajrdkk .gt_left {
+#vcrweikojf .gt_left {
   text-align: left;
 }
 
-#tpxfajrdkk .gt_center {
+#vcrweikojf .gt_center {
   text-align: center;
 }
 
-#tpxfajrdkk .gt_right {
+#vcrweikojf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tpxfajrdkk .gt_font_normal {
+#vcrweikojf .gt_font_normal {
   font-weight: normal;
 }
 
-#tpxfajrdkk .gt_font_bold {
+#vcrweikojf .gt_font_bold {
   font-weight: bold;
 }
 
-#tpxfajrdkk .gt_font_italic {
+#vcrweikojf .gt_font_italic {
   font-style: italic;
 }
 
-#tpxfajrdkk .gt_super {
+#vcrweikojf .gt_super {
   font-size: 65%;
 }
 
-#tpxfajrdkk .gt_footnote_marks {
+#vcrweikojf .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="tpxfajrdkk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="vcrweikojf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -604,7 +512,9 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
       <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1"># vagas</th>
       <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1"># inscritos</th>
       <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1"># convocados 2ª fase</th>
-      <th class="gt_col_heading gt_center gt_columns_top_border gt_column_spanner" rowspan="1" colspan="2">Pontuação</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2">
+        <span class="gt_column_spanner">Pontuação</span>
+      </th>
     </tr>
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Mínima</th>
@@ -625,11 +535,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
-      <td class="gt_row gt_right gt_striped">17</td>
-      <td class="gt_row gt_right gt_striped">179</td>
-      <td class="gt_row gt_right gt_striped">72</td>
-      <td class="gt_row gt_right gt_striped">38</td>
-      <td class="gt_row gt_right gt_striped">60</td>
+      <td class="gt_row gt_right">17</td>
+      <td class="gt_row gt_right">179</td>
+      <td class="gt_row gt_right">72</td>
+      <td class="gt_row gt_right">38</td>
+      <td class="gt_row gt_right">60</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
@@ -644,11 +554,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">AC</td>
-      <td class="gt_row gt_right gt_striped">108</td>
-      <td class="gt_row gt_right gt_striped">469</td>
-      <td class="gt_row gt_right gt_striped">377</td>
-      <td class="gt_row gt_right gt_striped">27</td>
-      <td class="gt_row gt_right gt_striped">64</td>
+      <td class="gt_row gt_right">108</td>
+      <td class="gt_row gt_right">469</td>
+      <td class="gt_row gt_right">377</td>
+      <td class="gt_row gt_right">27</td>
+      <td class="gt_row gt_right">64</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
@@ -660,11 +570,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
-      <td class="gt_row gt_right gt_striped">0</td>
-      <td class="gt_row gt_right gt_striped">0</td>
-      <td class="gt_row gt_right gt_striped">0</td>
-      <td class="gt_row gt_right gt_striped">NA</td>
-      <td class="gt_row gt_right gt_striped">NA</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">NA</td>
+      <td class="gt_row gt_right">NA</td>
     </tr>
     <tr class="gt_group_heading_row">
       <td colspan="6" class="gt_group_heading">Ciências Físicas e Biomoleculares − São Carlos</td>
@@ -679,11 +589,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
-      <td class="gt_row gt_right gt_striped">2</td>
-      <td class="gt_row gt_right gt_striped">15</td>
-      <td class="gt_row gt_right gt_striped">8</td>
-      <td class="gt_row gt_right gt_striped">35</td>
-      <td class="gt_row gt_right gt_striped">51</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">15</td>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">35</td>
+      <td class="gt_row gt_right">51</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
@@ -698,11 +608,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">AC</td>
-      <td class="gt_row gt_right gt_striped">30</td>
-      <td class="gt_row gt_right gt_striped">144</td>
-      <td class="gt_row gt_right gt_striped">122</td>
-      <td class="gt_row gt_right gt_striped">29</td>
-      <td class="gt_row gt_right gt_striped">65</td>
+      <td class="gt_row gt_right">30</td>
+      <td class="gt_row gt_right">144</td>
+      <td class="gt_row gt_right">122</td>
+      <td class="gt_row gt_right">29</td>
+      <td class="gt_row gt_right">65</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
@@ -714,11 +624,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
-      <td class="gt_row gt_right gt_striped">0</td>
-      <td class="gt_row gt_right gt_striped">0</td>
-      <td class="gt_row gt_right gt_striped">0</td>
-      <td class="gt_row gt_right gt_striped">NA</td>
-      <td class="gt_row gt_right gt_striped">NA</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">0</td>
+      <td class="gt_row gt_right">NA</td>
+      <td class="gt_row gt_right">NA</td>
     </tr>
     <tr class="gt_group_heading_row">
       <td colspan="6" class="gt_group_heading">Informática Biomédica − Ribeirão Preto</td>
@@ -733,11 +643,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
-      <td class="gt_row gt_right gt_striped">3</td>
-      <td class="gt_row gt_right gt_striped">17</td>
-      <td class="gt_row gt_right gt_striped">12</td>
-      <td class="gt_row gt_right gt_striped">33</td>
-      <td class="gt_row gt_right gt_striped">45</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">17</td>
+      <td class="gt_row gt_right">12</td>
+      <td class="gt_row gt_right">33</td>
+      <td class="gt_row gt_right">45</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
@@ -752,11 +662,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">AC</td>
-      <td class="gt_row gt_right gt_striped">20</td>
-      <td class="gt_row gt_right gt_striped">68</td>
-      <td class="gt_row gt_right gt_striped">57</td>
-      <td class="gt_row gt_right gt_striped">27</td>
-      <td class="gt_row gt_right gt_striped">66</td>
+      <td class="gt_row gt_right">20</td>
+      <td class="gt_row gt_right">68</td>
+      <td class="gt_row gt_right">57</td>
+      <td class="gt_row gt_right">27</td>
+      <td class="gt_row gt_right">66</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
@@ -768,11 +678,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
-      <td class="gt_row gt_right gt_striped">4</td>
-      <td class="gt_row gt_right gt_striped">4</td>
-      <td class="gt_row gt_right gt_striped">2</td>
-      <td class="gt_row gt_right gt_striped">33</td>
-      <td class="gt_row gt_right gt_striped">35</td>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">33</td>
+      <td class="gt_row gt_right">35</td>
     </tr>
     <tr class="gt_group_heading_row">
       <td colspan="6" class="gt_group_heading">Licenciatura em Educomunicação</td>
@@ -787,11 +697,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
-      <td class="gt_row gt_right gt_striped">3</td>
-      <td class="gt_row gt_right gt_striped">20</td>
-      <td class="gt_row gt_right gt_striped">13</td>
-      <td class="gt_row gt_right gt_striped">32</td>
-      <td class="gt_row gt_right gt_striped">43</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">20</td>
+      <td class="gt_row gt_right">13</td>
+      <td class="gt_row gt_right">32</td>
+      <td class="gt_row gt_right">43</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
@@ -806,11 +716,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">AC</td>
-      <td class="gt_row gt_right gt_striped">30</td>
-      <td class="gt_row gt_right gt_striped">100</td>
-      <td class="gt_row gt_right gt_striped">75</td>
-      <td class="gt_row gt_right gt_striped">27</td>
-      <td class="gt_row gt_right gt_striped">65</td>
+      <td class="gt_row gt_right">30</td>
+      <td class="gt_row gt_right">100</td>
+      <td class="gt_row gt_right">75</td>
+      <td class="gt_row gt_right">27</td>
+      <td class="gt_row gt_right">65</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
@@ -822,11 +732,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
-      <td class="gt_row gt_right gt_striped">3</td>
-      <td class="gt_row gt_right gt_striped">25</td>
-      <td class="gt_row gt_right gt_striped">12</td>
-      <td class="gt_row gt_right gt_striped">27</td>
-      <td class="gt_row gt_right gt_striped">45</td>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">25</td>
+      <td class="gt_row gt_right">12</td>
+      <td class="gt_row gt_right">27</td>
+      <td class="gt_row gt_right">45</td>
     </tr>
     <tr class="gt_group_heading_row">
       <td colspan="6" class="gt_group_heading">Licenciatura em Ciências Exatas − São Carlos</td>
@@ -841,11 +751,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
-      <td class="gt_row gt_right gt_striped">2</td>
-      <td class="gt_row gt_right gt_striped">17</td>
-      <td class="gt_row gt_right gt_striped">8</td>
-      <td class="gt_row gt_right gt_striped">32</td>
-      <td class="gt_row gt_right gt_striped">50</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">17</td>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">32</td>
+      <td class="gt_row gt_right">50</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
@@ -860,11 +770,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">AC</td>
-      <td class="gt_row gt_right gt_striped">25</td>
-      <td class="gt_row gt_right gt_striped">173</td>
-      <td class="gt_row gt_right gt_striped">103</td>
-      <td class="gt_row gt_right gt_striped">34</td>
-      <td class="gt_row gt_right gt_striped">67</td>
+      <td class="gt_row gt_right">25</td>
+      <td class="gt_row gt_right">173</td>
+      <td class="gt_row gt_right">103</td>
+      <td class="gt_row gt_right">34</td>
+      <td class="gt_row gt_right">67</td>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">EP</td>
@@ -876,11 +786,11 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
     </tr>
     <tr>
       <td class="gt_row gt_left gt_stub">PPI</td>
-      <td class="gt_row gt_right gt_striped">4</td>
-      <td class="gt_row gt_right gt_striped">23</td>
-      <td class="gt_row gt_right gt_striped">12</td>
-      <td class="gt_row gt_right gt_striped">28</td>
-      <td class="gt_row gt_right gt_striped">54</td>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">23</td>
+      <td class="gt_row gt_right">12</td>
+      <td class="gt_row gt_right">28</td>
+      <td class="gt_row gt_right">54</td>
     </tr>
   </tbody>
   
@@ -890,7 +800,7 @@ foram 4 pontos superiores às notas dos cotistas do ensino público.</p>
 modalidade do vestibular. Por exemplo, o gráfico abaixo mostra a diferença
 percentual entre a relação candidato/vaga para da ampla concorrência e cotistas
 de escola pública. Note que em alguns casos a relação aumentou mais de 400%.</p>
-<p><img src="/blog/2019-11-27-fuvest_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
+<p><img src="/posts/2019-11-27-fuvest_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
 <p>Em suma, este artigo tem por objetivo apresentar dados que contestam a eficácia
 do sistema de cotas da fuvest. É notável que para a maior parte dos cursos o sistema
 de cotas teve efeito benéfico, no entanto, não faz sentido melhorar de um lado
@@ -902,10 +812,36 @@ possui dados tal como a relação candidato vaga para cada uma das modalidades.<
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -915,7 +851,7 @@ possui dados tal como a relação candidato vaga para cada uma das modalidades.<
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -925,7 +861,7 @@ possui dados tal como a relação candidato vaga para cada uma das modalidades.<
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -935,25 +871,21 @@ possui dados tal como a relação candidato vaga para cada uma das modalidades.<
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -963,12 +895,14 @@ possui dados tal como a relação candidato vaga para cada uma das modalidades.<
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -993,24 +927,24 @@ possui dados tal como a relação candidato vaga para cada uma das modalidades.<
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

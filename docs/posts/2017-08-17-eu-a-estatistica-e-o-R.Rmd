@@ -1,6 +1,6 @@
 ---
 title: "Eu, a Estatística e a programação"
-date: "2017-08-17T23:26:00+03:00"
+date: "2017-08-17"
 tags: ["estatística"]
 categories: ["discussões"]
 image: "images/posts/banner/michael-kyle.jpg"

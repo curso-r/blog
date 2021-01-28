@@ -6,7 +6,11 @@
     <description>Recent content in text mining on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 18 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/text-mining/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/text-mining/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Busca textual com R, Shiny e PostgreSQL</title>
       <link>https://blog.curso-r.com/posts/2020-04-18-fts/</link>

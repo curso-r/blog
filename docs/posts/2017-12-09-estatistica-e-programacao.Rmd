@@ -1,6 +1,6 @@
 ---
 title: "Estatística e programação"
-date: "2017-12-09T11:54:00+03:00"
+date: "2017-12-09"
 tags: ["estatística"]
 categories: ["discussões"]
 image: "images/posts/banner/dog-pc.jpg"

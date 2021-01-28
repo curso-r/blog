@@ -1,7 +1,7 @@
 ---
 title: "Salvando data.frames: uma comparação"
-date: "2017-07-20T00:26:00+03:00"
-tags: ["r", "data.frames"]
+date: "2017-07-20"
+tags: ["base de dados"]
 categories: ["tutoriais"]
 image: "images/posts/banner/banner-datasets.jpg"
 author: ["Daniel"]

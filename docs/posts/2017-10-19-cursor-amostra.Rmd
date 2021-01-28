@@ -1,6 +1,6 @@
 ---
 title: "Curso-R na aMostra de Estatística 2017"
-date: "2017-10-19T10:12:00+03:00"
+date: "2017-10-19"
 tags: ["curso-r"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/amostra-estat.jpg"

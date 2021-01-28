@@ -8,7 +8,6 @@ author: ["Julio"]
 summary: "A base de dados de CNPJ da Receita Federal do Brasil (RFB) é, na minha opinião, uma das maiores conquistas de dados abertos do Brasil. Nesse post vou passar alguns links para ler a base e alguns gráficos simples."
 disable_codefolding: false
 codefolding_nobutton: false
-draft: false
 ---
 
 ```{r, include=FALSE}
@@ -343,5 +342,4 @@ Ou seja, verifiquei minha hipótese, mas com um 🤷 no final.
 
 É isso pessoal. Happy coding ;)
 
-O código para gerar os gráficos segue abaixo:
 

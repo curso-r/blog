@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,12 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Daniel e José em <a href="/categories/tutoriais">Tutoriais</a>
+            Escrito por
+            
+              Daniel e José
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,19 +121,20 @@
         </ul>
         <ul class="list-inline tag-list">
           
-            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
             <li class="list-inline-item m-1"><a href="/tags/shiny">shiny</a></li>
         </ul>
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Neste post vamos criar um Shiny App simples usando o Auth0 como servidor de autenticação. O Auth0 implementa o OAuth2, o principal protocolo de autorização utilizado atualmente na indústria de software. Ele permite que os aplicativos tenham acesso limitado às contas de usuário em serviços HTTP.</p>
 <div id="como-funciona-o-oauth2.0" class="section level2">
 <h2>Como funciona o oauth2.0?</h2>
 <p>Antes de começarmos - nesta parte do post resumi um pouco o que está escrito <a href="https://aaronparecki.com/oauth-2-simplified/">aqui</a>. Para se aprofundar, vale a pena ler essa postagem do <a href="https://aaronparecki.com/oauth-2-simplified/">Aaron Parecki</a>.</p>
-<div id="papeis" class="section level3">
+<div id="papéis" class="section level3">
 <h3>Papéis</h3>
 <p>A autorização/autenticação feita por meio de OAuth2 envolve 4 papéis:</p>
 <ul>
@@ -143,7 +149,7 @@
 <p>Antes de começar o processo de autenticação com o OAuth, você deve registrar o seu app com o serviço - no nosso caso, vamos registrá-lo com o Auth0. Ao registrar em geral passamos informações básicas sobre o app e o principal é o <em>redirect URI</em> - que será chamado de <em>callback URL</em> pelo Auth0. O servidor de autenticação só pode redirecionar o usuário para essas URL’s cadastradas após completar a autorização - isso ajuda a evitar alguns tipos de ataques.</p>
 <p>Depois de registrar o seu app você receberá um <em>client ID</em> e um <em>client secret</em>. Em teoria o <em>client ID</em> é informação pública e o <em>client secret</em> (é segredo) e não pode ser divulgado.</p>
 </div>
-<div id="o-fluxo-da-autenticacao" class="section level3">
+<div id="o-fluxo-da-autenticação" class="section level3">
 <h3>O fluxo da autenticação</h3>
 <p>Existem 4 fluxos distintos de autenticação no OAuth2.0, cada um utilizado em circuntâncias diferentes. No nosso caso vamos usar um método chamado de * Authorization Code*. Esse método funciona da seguinte forma:</p>
 <p>Criamos um link de autenticação para o usuário com as seguintes informações:</p>
@@ -158,7 +164,7 @@
   client_id=CLIENT_ID&amp;redirect_uri=REDIRECT_URI&amp;scope=photos&amp;state=1234zyx</code></pre>
 <p>Ao acessar este link o usuário vê o que chamamos de prompt de autorização. Algo do tipo:</p>
 <div class="figure">
-<img src="https://camo.githubusercontent.com/f5f44dbf0abc7642d83fe366e97f29fdd3233d9e/68747470733a2f2f6161726f6e70617265636b692e636f6d2f6f617574682d322d73696d706c69666965642f6f617574682d617574686f72697a6174696f6e2d70726f6d70742e706e67" alt="Img do post https://aaronparecki.com/oauth-2-simplified/" />
+<img src="https://camo.githubusercontent.com/f5f44dbf0abc7642d83fe366e97f29fdd3233d9e/68747470733a2f2f6161726f6e70617265636b692e636f6d2f6f617574682d322d73696d706c69666965642f6f617574682d617574686f72697a6174696f6e2d70726f6d70742e706e67" alt="" />
 <p class="caption">Img do post <a href="https://aaronparecki.com/oauth-2-simplified/" class="uri">https://aaronparecki.com/oauth-2-simplified/</a></p>
 </div>
 <p>Se o usuário clicar em <em>Autorizar</em>, ele será redirecionado para o seu app passando um código gerado pelo servidor de autorização e o <em>state</em>. A URL será algo do tipo:</p>
@@ -202,7 +208,7 @@ library(httr)</code></pre>
 <h3>Setup do Oauth</h3>
 <p>Os códigos nesta sessão podem ser incluidos no arquivo <code>global.R</code> ( se você estiver desenvolvendo o seu shiny separando por arquivos <code>ui.R</code> e <code>server.R</code>) se você estiver usando apenas um <code>app.R</code>, esses blocos podem ser incluídos no início do arquivo - antes da chamada por <code>shinyApp(uiFunc, server)</code>.</p>
 <p>Neste primeiro bloco de código vamos definir qual é a URL que o app está sendo servido.
-Criamos um bloco que faz o seguinte - quando estivermos em uma sessão interativa (por exemplo, rodando pelo RStudio) use a url <code>APP_URL &lt;- &quot;https://localhost:8100/&quot;</code>. Já quando estiver em uma sessão não interativa, use <code>https://shiny.curso-r.com</code>.</p>
+Criamos um bloco que faz o seguinte - quando estivermos em uma sessão interativa (por exemplo, rodando pelo RStudio) use a url <code>APP_URL &lt;- "https://localhost:8100/"</code>. Já quando estiver em uma sessão não interativa, use <code>https://shiny.curso-r.com</code>.</p>
 <pre class="r"><code>if (interactive()) {
   # testing url
   options(shiny.port = 8100)
@@ -336,7 +342,7 @@ print(content(resp, &quot;parsed&quot;))</code></pre>
 # [1] &quot;2018-09-24T17:44:49.768Z&quot;</code></pre>
 </div>
 </div>
-<div id="mais-opcoes-do-auth0" class="section level2">
+<div id="mais-opções-do-auth0" class="section level2">
 <h2>Mais opções do Auth0</h2>
 <p>No Auth0 existem diversas opções de login que podem ser configuradas na aba <a href="https://manage.auth0.com/#/connections/social"><em>Connections</em></a>.</p>
 <p><img src="https://user-images.githubusercontent.com/4706822/45973605-53f1c580-c015-11e8-9206-d7d18b7d27c3.png" /></p>
@@ -355,10 +361,36 @@ print(content(resp, &quot;parsed&quot;))</code></pre>
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -368,7 +400,7 @@ print(content(resp, &quot;parsed&quot;))</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -378,7 +410,7 @@ print(content(resp, &quot;parsed&quot;))</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -388,25 +420,21 @@ print(content(resp, &quot;parsed&quot;))</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -416,12 +444,14 @@ print(content(resp, &quot;parsed&quot;))</code></pre>
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -446,24 +476,24 @@ print(content(resp, &quot;parsed&quot;))</code></pre>
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

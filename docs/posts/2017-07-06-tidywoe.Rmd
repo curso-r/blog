@@ -1,6 +1,6 @@
 ---
 title: "WoE em R com tidywoe"
-date: "2017-07-06T10:12:00+03:00"
+date: "2017-07-06"
 tags: ["woe"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/tidywoe_hex2.png"

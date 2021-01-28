@@ -6,7 +6,6 @@ categories: ["pacotes"]
 image: "images/posts/banner/xml2.jpg"
 author: ["Caio"]
 summary: "O rvest já não é mais o melhor pacote para web scraping. Está na hora de voltar para o xml2!"
-draft: false
 ---
 
 ```{r setup, include=FALSE}

@@ -68,28 +68,8 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/r/</loc>
-    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.curso-r.com/tags/torch/</loc>
     <lastmod>2020-12-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/divulga%C3%A7%C3%A3o/</loc>
-    <lastmod>2020-12-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/categories/divulga%C3%A7%C3%A3o/</loc>
-    <lastmod>2020-12-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/pacotes/</loc>
-    <lastmod>2020-12-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -103,18 +83,28 @@
   </url>
   
   <url>
+    <loc>https://blog.curso-r.com/tags/xadrez/</loc>
+    <lastmod>2020-12-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/categories/divulga%C3%A7%C3%A3o/</loc>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</loc>
     <lastmod>2020-12-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/rstudio/</loc>
+    <loc>https://blog.curso-r.com/tags/gr%C3%A1ficos/</loc>
     <lastmod>2020-12-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/categories/tutorial/</loc>
-    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
+    <loc>https://blog.curso-r.com/tags/relat%C3%B3rios/</loc>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -140,11 +130,6 @@
   <url>
     <loc>https://blog.curso-r.com/tags/visualizacao/</loc>
     <lastmod>2020-09-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/avan%C3%A7ado/</loc>
-    <lastmod>2020-09-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -178,6 +163,31 @@
   </url>
   
   <url>
+    <loc>https://blog.curso-r.com/posts/2020-08-27-applause/</loc>
+    <lastmod>2020-08-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/manipula%C3%A7%C3%A3o/</loc>
+    <lastmod>2020-08-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/tidy/</loc>
+    <lastmod>2020-08-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/tidyr/</loc>
+    <lastmod>2020-08-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</loc>
+    <lastmod>2020-08-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.curso-r.com/posts/2020-07-27-github-main-branch/</loc>
     <lastmod>2020-07-27T00:00:00+00:00</lastmod>
   </url>
@@ -193,6 +203,16 @@
   </url>
   
   <url>
+    <loc>https://blog.curso-r.com/posts/2020-06-25-integracao-r-postgresql/</loc>
+    <lastmod>2020-06-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/postgresql/</loc>
+    <lastmod>2020-06-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</loc>
     <lastmod>2020-06-18T00:00:00+00:00</lastmod>
   </url>
@@ -204,6 +224,11 @@
   
   <url>
     <loc>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/rstudio/</loc>
     <lastmod>2020-06-18T00:00:00+00:00</lastmod>
   </url>
   
@@ -248,11 +273,6 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/postgresql/</loc>
-    <lastmod>2020-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.curso-r.com/tags/text-mining/</loc>
     <lastmod>2020-04-18T00:00:00+00:00</lastmod>
   </url>
@@ -283,17 +303,12 @@
   </url>
   
   <url>
+    <loc>https://blog.curso-r.com/tags/comunidade/</loc>
+    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</loc>
-    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/ggplot/</loc>
-    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/categories/livro/</loc>
     <lastmod>2020-02-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -313,7 +328,7 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/pib/</loc>
+    <loc>https://blog.curso-r.com/tags/finan%C3%A7as/</loc>
     <lastmod>2020-02-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -363,6 +378,21 @@
   </url>
   
   <url>
+    <loc>https://blog.curso-r.com/tags/arrow/</loc>
+    <lastmod>2019-11-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/dados/</loc>
+    <lastmod>2019-11-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/posts/2019-08-30-arrow/</loc>
+    <lastmod>2019-11-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.curso-r.com/tags/captcha/</loc>
     <lastmod>2019-11-20T00:00:00+00:00</lastmod>
   </url>
@@ -373,17 +403,12 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/comunidade/</loc>
-    <lastmod>2019-11-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.curso-r.com/posts/2019-09-10-rbrasil/</loc>
     <lastmod>2019-11-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/evento/</loc>
+    <loc>https://blog.curso-r.com/tags/dados-abertos/</loc>
     <lastmod>2019-09-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -400,6 +425,21 @@
   <url>
     <loc>https://blog.curso-r.com/posts/2019-09-06-app-deploy/</loc>
     <lastmod>2019-09-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/categories/discuss%C3%B5es/</loc>
+    <lastmod>2019-09-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/janitor/</loc>
+    <lastmod>2019-09-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/posts/2019-08-30-faxina/</loc>
+    <lastmod>2019-09-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -468,18 +508,13 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/discuss%C3%B5es/</loc>
-    <lastmod>2019-08-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/categories/discuss%C3%B5es/</loc>
-    <lastmod>2019-08-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.curso-r.com/posts/2019-07-15-comunidade/</loc>
     <lastmod>2019-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/eventos/</loc>
+    <lastmod>2019-08-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -533,11 +568,6 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/user/</loc>
-    <lastmod>2019-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.curso-r.com/posts/2019-07-10-zen-do-r-2/</loc>
     <lastmod>2019-07-10T00:00:00+00:00</lastmod>
   </url>
@@ -578,6 +608,11 @@
   </url>
   
   <url>
+    <loc>https://blog.curso-r.com/tags/estat%C3%ADstica/</loc>
+    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.curso-r.com/posts/2019-03-10-probabilidade/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url>
@@ -585,6 +620,11 @@
   <url>
     <loc>https://blog.curso-r.com/posts/2019-02-16-eventos-mf/</loc>
     <lastmod>2019-02-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/algoritmos/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -603,6 +643,11 @@
   </url>
   
   <url>
+    <loc>https://blog.curso-r.com/posts/2019-01-30-rconf/</loc>
+    <lastmod>2019-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.curso-r.com/posts/2018-11-18-logistica-comp/</loc>
     <lastmod>2018-11-18T00:00:00+00:00</lastmod>
   </url>
@@ -613,17 +658,17 @@
   </url>
   
   <url>
+    <loc>https://blog.curso-r.com/tags/cron/</loc>
+    <lastmod>2018-10-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.curso-r.com/posts/2018-09-24-shiny-auth0/</loc>
     <lastmod>2018-09-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/historia/</loc>
-    <lastmod>2018-09-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/modelo/</loc>
+    <loc>https://blog.curso-r.com/tags/modelagem/</loc>
     <lastmod>2018-09-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -633,7 +678,7 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/fun%C3%A7%C3%B5es/</loc>
+    <loc>https://blog.curso-r.com/tags/debug/</loc>
     <lastmod>2018-09-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -663,12 +708,17 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/posts/2018-07-27-radix/</loc>
+    <loc>https://blog.curso-r.com/tags/pacotes/</loc>
+    <lastmod>2018-08-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/r-markdown/</loc>
     <lastmod>2018-07-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/rmarkdown/</loc>
+    <loc>https://blog.curso-r.com/posts/2018-07-27-radix/</loc>
     <lastmod>2018-07-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -684,21 +734,16 @@
   
   <url>
     <loc>https://blog.curso-r.com/tags/pipe/</loc>
-    <lastmod>2018-07-03T20:13:00+03:00</lastmod>
+    <lastmod>2018-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2018-07-03-tutorial-pipe/</loc>
-    <lastmod>2018-07-03T20:13:00+03:00</lastmod>
+    <lastmod>2018-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2018-06-18-poluicao-greve-caminhoneiros/</loc>
-    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/dados-abertos/</loc>
     <lastmod>2018-06-18T00:00:00+00:00</lastmod>
   </url>
   
@@ -723,16 +768,6 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/agenda/</loc>
-    <lastmod>2018-05-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/posts/2018-05-21-agenda-cursor/</loc>
-    <lastmod>2018-05-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.curso-r.com/posts/2018-05-13-rfbcnpj/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
   </url>
@@ -748,16 +783,6 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/curso-r/</loc>
-    <lastmod>2018-04-06T13:07:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/posts/2018-04-06-webinar-adv-purrr/</loc>
-    <lastmod>2018-04-06T13:07:31+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.curso-r.com/posts/2018-03-29-guess-the-correlation/</loc>
     <lastmod>2018-03-29T00:00:00+00:00</lastmod>
   </url>
@@ -769,37 +794,37 @@
   
   <url>
     <loc>https://blog.curso-r.com/posts/2018-03-19-scraper-cetesb/</loc>
-    <lastmod>2018-03-19T14:25:00+03:00</lastmod>
+    <lastmod>2018-03-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/python/</loc>
-    <lastmod>2018-03-11T14:25:00+03:00</lastmod>
+    <lastmod>2018-03-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/reticulate/</loc>
-    <lastmod>2018-03-11T14:25:00+03:00</lastmod>
+    <lastmod>2018-03-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2018-03-11-python/</loc>
-    <lastmod>2018-03-11T14:25:00+03:00</lastmod>
+    <lastmod>2018-03-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2018-03-05-shiny-now/</loc>
-    <lastmod>2018-03-05T14:25:00+03:00</lastmod>
+    <lastmod>2018-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2018-02-21-2cents/</loc>
-    <lastmod>2018-02-23T14:25:00+03:00</lastmod>
+    <lastmod>2018-02-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/sf/</loc>
-    <lastmod>2018-02-23T14:25:00+03:00</lastmod>
+    <lastmod>2018-02-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -813,18 +838,13 @@
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/estat%C3%ADstica/</loc>
-    <lastmod>2017-12-09T11:54:00+03:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</loc>
-    <lastmod>2017-12-09T11:54:00+03:00</lastmod>
+    <lastmod>2017-12-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-11-23-union-sf/</loc>
-    <lastmod>2017-11-24T14:25:00+03:00</lastmod>
+    <lastmod>2017-11-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -839,377 +859,332 @@
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-11-20-reticulate/</loc>
-    <lastmod>2017-11-20T14:25:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/esparsa/</loc>
-    <lastmod>2017-11-16T14:25:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/matriz/</loc>
-    <lastmod>2017-11-16T14:25:00+03:00</lastmod>
+    <lastmod>2017-11-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-11-16-matrizes-esparsas/</loc>
-    <lastmod>2017-11-16T14:25:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/cron/</loc>
-    <lastmod>2017-11-13T14:25:00+03:00</lastmod>
+    <lastmod>2017-11-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-11-13-tutorial-cronr/</loc>
-    <lastmod>2017-11-13T14:25:00+03:00</lastmod>
+    <lastmod>2017-11-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-11-10-captcha-conv/</loc>
-    <lastmod>2017-11-12T23:26:00+03:00</lastmod>
+    <lastmod>2017-11-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</loc>
-    <lastmod>2017-11-11T23:26:00+03:00</lastmod>
+    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-11-03-music01/</loc>
-    <lastmod>2017-11-03T23:26:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/categories/r/</loc>
-    <lastmod>2017-10-27T10:12:00+03:00</lastmod>
+    <lastmod>2017-11-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</loc>
-    <lastmod>2017-10-27T10:12:00+03:00</lastmod>
+    <lastmod>2017-10-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/curso-r/</loc>
+    <lastmod>2017-10-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-10-19-cursor-amostra/</loc>
-    <lastmod>2017-10-19T10:12:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/algoritmos/</loc>
-    <lastmod>2017-09-18T10:12:00+03:00</lastmod>
+    <lastmod>2017-10-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-09-18-bloom-filter/</loc>
-    <lastmod>2017-09-18T10:12:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/bds/</loc>
-    <lastmod>2017-09-13T10:12:00+03:00</lastmod>
+    <lastmod>2017-09-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</loc>
-    <lastmod>2017-09-13T10:12:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/data.frames/</loc>
-    <lastmod>2017-09-13T10:12:00+03:00</lastmod>
+    <lastmod>2017-09-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/miojo/</loc>
-    <lastmod>2017-09-07T23:26:00+03:00</lastmod>
+    <lastmod>2017-09-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-09-07-pacote-miojo/</loc>
-    <lastmod>2017-09-07T23:26:00+03:00</lastmod>
+    <lastmod>2017-09-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</loc>
-    <lastmod>2017-09-02T10:12:00+03:00</lastmod>
+    <lastmod>2017-09-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</loc>
-    <lastmod>2017-08-31T23:26:00+03:00</lastmod>
+    <lastmod>2017-08-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-08-27-safadao/</loc>
-    <lastmod>2017-08-28T23:26:00+03:00</lastmod>
+    <lastmod>2017-08-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/m%C3%BAsica/</loc>
+    <lastmod>2017-08-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/bitcoin/</loc>
-    <lastmod>2017-08-19T10:26:00+03:00</lastmod>
+    <lastmod>2017-08-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-08-19-r-telegram-bitcoin/</loc>
-    <lastmod>2017-08-19T10:26:00+03:00</lastmod>
+    <lastmod>2017-08-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/telegram/</loc>
-    <lastmod>2017-08-19T10:26:00+03:00</lastmod>
+    <lastmod>2017-08-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</loc>
-    <lastmod>2017-08-17T23:26:00+03:00</lastmod>
+    <lastmod>2017-08-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</loc>
-    <lastmod>2017-08-12T13:07:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/an%C3%A1lises/</loc>
-    <lastmod>2017-08-07T10:12:00+03:00</lastmod>
+    <lastmod>2017-08-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/conceitos/</loc>
-    <lastmod>2017-08-07T10:12:00+03:00</lastmod>
+    <lastmod>2017-08-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-08-07-minimos-quadrados-restrito/</loc>
-    <lastmod>2017-08-07T10:12:00+03:00</lastmod>
+    <lastmod>2017-08-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/regress%C3%A3o/</loc>
-    <lastmod>2017-08-07T10:12:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/posts/2017-08-05-o-melhor-de-50-posts/</loc>
-    <lastmod>2017-08-05T23:26:00+03:00</lastmod>
+    <lastmod>2017-08-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-29-captcha-dados/</loc>
-    <lastmod>2017-07-31T13:07:31+02:00</lastmod>
+    <lastmod>2017-07-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/glm/</loc>
-    <lastmod>2017-07-29T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/keras/</loc>
-    <lastmod>2017-07-29T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/redes-neurais/</loc>
-    <lastmod>2017-07-29T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/regress%C3%A3o-log%C3%ADstica/</loc>
-    <lastmod>2017-07-29T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</loc>
-    <lastmod>2017-07-29T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-24-janitor/</loc>
-    <lastmod>2017-07-24T23:26:00+03:00</lastmod>
+    <lastmod>2017-07-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/janitor/</loc>
-    <lastmod>2017-07-24T23:26:00+03:00</lastmod>
+    <loc>https://blog.curso-r.com/tags/base-de-dados/</loc>
+    <lastmod>2017-07-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-29-captcha-segment/</loc>
-    <lastmod>2017-07-22T13:07:31+02:00</lastmod>
+    <lastmod>2017-07-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-20-escrevendo-data-frames/</loc>
-    <lastmod>2017-07-20T00:26:00+03:00</lastmod>
+    <lastmod>2017-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/</loc>
-    <lastmod>2017-07-17T00:26:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/r-markdown/</loc>
-    <lastmod>2017-07-15T23:26:00+03:00</lastmod>
+    <lastmod>2017-07-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/categories/top-10/</loc>
-    <lastmod>2017-07-15T23:26:00+03:00</lastmod>
+    <lastmod>2017-07-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</loc>
-    <lastmod>2017-07-15T23:26:00+03:00</lastmod>
+    <lastmod>2017-07-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</loc>
-    <lastmod>2017-07-12T23:26:00+03:00</lastmod>
+    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/decryptr/</loc>
-    <lastmod>2017-07-10T13:07:31+02:00</lastmod>
+    <lastmod>2017-07-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-29-captcha-decryptr/</loc>
-    <lastmod>2017-07-10T13:07:31+02:00</lastmod>
+    <lastmod>2017-07-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/bayes/</loc>
-    <lastmod>2017-07-08T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-09-greta/</loc>
-    <lastmod>2017-07-08T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/tensorflow/</loc>
-    <lastmod>2017-07-08T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/woe/</loc>
-    <lastmod>2017-07-06T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-06-tidywoe/</loc>
-    <lastmod>2017-07-06T10:12:00+03:00</lastmod>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/fatores/</loc>
-    <lastmod>2017-07-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-07-01-forcats/</loc>
-    <lastmod>2017-07-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/forcats/</loc>
-    <lastmod>2017-07-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-29-captcha-intro/</loc>
-    <lastmod>2017-06-28T13:07:31+02:00</lastmod>
+    <lastmod>2017-06-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/autoencoders/</loc>
-    <lastmod>2017-06-26T10:12:00+03:00</lastmod>
+    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-26-construindo-autoencoders/</loc>
-    <lastmod>2017-06-26T10:12:00+03:00</lastmod>
+    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/componentes-principais/</loc>
-    <lastmod>2017-06-24T10:12:00+03:00</lastmod>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-24-componentes-principais-intuicao/</loc>
-    <lastmod>2017-06-24T10:12:00+03:00</lastmod>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/pca/</loc>
-    <lastmod>2017-06-24T10:12:00+03:00</lastmod>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/plotly/</loc>
-    <lastmod>2017-06-24T10:12:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/posts/2017-06-19-environments/</loc>
-    <lastmod>2017-06-19T23:26:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/environments/</loc>
-    <lastmod>2017-06-19T23:26:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/br-bloggers/</loc>
-    <lastmod>2017-06-19T13:07:31+02:00</lastmod>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</loc>
-    <lastmod>2017-06-19T13:07:31+02:00</lastmod>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/posts/2017-06-19-environments/</loc>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/environments/</loc>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/skimr/</loc>
-    <lastmod>2017-06-17T13:07:31+02:00</lastmod>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-17-skimr/</loc>
-    <lastmod>2017-06-17T13:07:31+02:00</lastmod>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-08-keras-no-ubuntu/</loc>
-    <lastmod>2017-06-08T21:12:00+03:00</lastmod>
+    <lastmod>2017-06-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-05-keras/</loc>
-    <lastmod>2017-06-05T13:07:31+02:00</lastmod>
+    <lastmod>2017-06-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-06-01-a-kind-of-magick/</loc>
-    <lastmod>2017-06-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/imagens/</loc>
-    <lastmod>2017-06-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/magick/</loc>
-    <lastmod>2017-06-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -1224,82 +1199,72 @@
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</loc>
-    <lastmod>2017-05-19T23:26:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/gr%C3%A1ficos/</loc>
-    <lastmod>2017-05-04T23:26:00+03:00</lastmod>
+    <lastmod>2017-05-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</loc>
-    <lastmod>2017-05-04T23:26:00+03:00</lastmod>
+    <lastmod>2017-05-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-05-01-as-paletas-de-cores-da-marvel-vs-dc/</loc>
-    <lastmod>2017-05-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/cinema/</loc>
-    <lastmod>2017-05-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/kmeans/</loc>
-    <lastmod>2017-05-01T23:26:00+03:00</lastmod>
+    <lastmod>2017-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</loc>
-    <lastmod>2017-04-29T23:26:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/venneuler/</loc>
-    <lastmod>2017-04-29T23:26:00+03:00</lastmod>
+    <lastmod>2017-04-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</loc>
-    <lastmod>2017-04-28T23:26:00+03:00</lastmod>
+    <lastmod>2017-04-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-04-24-r34/</loc>
-    <lastmod>2017-04-24T13:07:31+02:00</lastmod>
+    <lastmod>2017-04-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.curso-r.com/tags/vers%C3%A3o/</loc>
-    <lastmod>2017-04-24T13:07:31+02:00</lastmod>
+    <loc>https://blog.curso-r.com/tags/update/</loc>
+    <lastmod>2017-04-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/cluster/</loc>
-    <lastmod>2017-04-22T13:07:31+02:00</lastmod>
+    <lastmod>2017-04-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-04-21-paleta-de-cores/</loc>
-    <lastmod>2017-04-22T13:07:31+02:00</lastmod>
+    <lastmod>2017-04-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/coding/</loc>
-    <lastmod>2017-04-20T13:07:31+02:00</lastmod>
+    <lastmod>2017-04-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/purrr/</loc>
-    <lastmod>2017-04-20T13:07:31+02:00</lastmod>
+    <lastmod>2017-04-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-04-09-try/</loc>
-    <lastmod>2017-04-20T13:07:31+02:00</lastmod>
+    <lastmod>2017-04-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -1314,37 +1279,32 @@
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-04-09-aecio/</loc>
-    <lastmod>2017-04-15T13:07:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/emo%C3%A7%C3%B5es/</loc>
-    <lastmod>2017-04-15T13:07:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/googlemaps/</loc>
-    <lastmod>2017-04-10T23:26:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/leaflet/</loc>
-    <lastmod>2017-04-10T23:26:00+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</loc>
-    <lastmod>2017-04-10T23:26:00+03:00</lastmod>
+    <lastmod>2017-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-04-08-progress/</loc>
-    <lastmod>2017-04-10T13:07:31+02:00</lastmod>
+    <lastmod>2017-04-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/googlemaps/</loc>
+    <lastmod>2017-04-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/tags/leaflet/</loc>
+    <lastmod>2017-04-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/tags/progress/</loc>
-    <lastmod>2017-04-10T13:07:31+02:00</lastmod>
+    <lastmod>2017-04-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</loc>
+    <lastmod>2017-04-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -1389,12 +1349,12 @@
   
   <url>
     <loc>https://blog.curso-r.com/tags/knitr/</loc>
-    <lastmod>2017-03-25T23:26:00+03:00</lastmod>
+    <lastmod>2017-03-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.curso-r.com/posts/2017-03-25-knitr-mudando-diretorio-de-trabalho/</loc>
-    <lastmod>2017-03-25T23:26:00+03:00</lastmod>
+    <lastmod>2017-03-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -1415,21 +1375,6 @@
   <url>
     <loc>https://blog.curso-r.com/posts/2017-02-18-all-things-r-and-rstudio/</loc>
     <lastmod>2017-03-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/dplyr/</loc>
-    <lastmod>2017-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/posts/2017-02-20-quartis/</loc>
-    <lastmod>2017-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.curso-r.com/tags/modelagem/</loc>
-    <lastmod>2017-03-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>

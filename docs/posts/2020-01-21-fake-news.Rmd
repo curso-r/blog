@@ -1,12 +1,11 @@
 ---
 title: "Camadas de Fake News"
 date: "2020-01-21"
-tags: ["fake-news", "pib"]
+tags: ["fake news"]
 categories: ["análises"]
 image: "images/posts/banner/fake-news.jpg"
 author: ["Caio"]
 summary: "Uma fake news dura de roer. Como um gráfico pode estar tecnicamente certo e ao mesmo tempo não ser correto."
-draft: false
 ---
 
 ## Eu Tenho um Problema
@@ -33,7 +32,7 @@ Mas ontem aconteceu algo inédito: a mentira lutou contra mim.
 A “notícia” falsa em questão é na verdade uma imagem. Uma imagem
 alterada, por sinal.
 
-<img src="/blog/2020-01-21-fake-news_files/photo_2020-01-21_12-37-31.jpg" style="display: block; margin: auto;" />
+<img src="/images/posts/conteudo/2020-01-21-fake-news_files/photo_2020-01-21_12-37-31.jpg" style="display: block; margin: auto;" />
 
 Vamos por partes. Meu espanhol não é dos melhores, mas acho que qualquer
 lusófono consegue compreender bem o que está sendo mostrado: o gráfico
@@ -84,7 +83,7 @@ dólares constantes de 2011.
 
 Usando o `ggplot2` podemos reproduzir a imagem com facilidade:
 
-<img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 
 Quando vi o gráfico, fiquei boquiaberto. Uma imagem em baixa resolução,
 com Photoshop mal feito, linguagem tendenciosa e veiculada via WhatsApp
@@ -100,7 +99,7 @@ dos países, mas os seus PIBs per capita diretamente; isso é relevante
 porque a suposta alegação do gráfico diz respeito à economia da
 Argentina e não sobre ela em relação às de todos os outros países.
 
-<img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+<img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 
 O que me chamou a atenção no gráfico acima foi que os PIBs per capita da
 Argentina e da Austrália parecem estar se descolando consistentemente
@@ -135,7 +134,7 @@ que ela tinha o maior PIB per capita (estimado) entre 28 países
 selecionados. Abaixo é possível ver o ranking até 2016 se filtrarmos
 apenas os 28 países iniciais:
 
-<img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
 Fiz questão de manter a escala deste gráfico igual à do anterior porque
 assim fica fácil de ver o problema com a visualização da “notícia”. De
@@ -147,7 +146,7 @@ Para entender ainda melhor o que a imagem original está escondendo,
 basta exibir no gráfico os dados de **todos** os países contemplados
 pela base.
 
-<img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 Note como a quantidade de países presentes na tabela cresce
 significativamente depois do início da década de 1950 dado que a métrica
@@ -162,7 +161,7 @@ mesmo gráfico, é possível utilizar a função `dplyr::percent_rank()` que,
 ao invés de atribuir números naturais como ranking, retorna o ranking
 dividido pelo total de elementos na comparação.
 
-<img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 Aqui fica claro que, mesmo depois de piorar muito no ranking do PIB per
 capita, a Argentina ainda não está tão ruim quanto estava no início dos
@@ -199,7 +198,7 @@ y 1898, y exclusión de la de 1949”.
 Agora acho importante fazer uma visualização final, destacando a
 vigência da Constituição que deu início à “justiça social”:
 
-<img src="/blog/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="/images/posts/conteudo/2020-01-21-fake-news_files/figure-gfm/unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 Sugiro que os autores da imagem original façam a mesma montagem com o
 gráfico acima.

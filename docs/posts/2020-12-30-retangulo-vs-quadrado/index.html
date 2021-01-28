@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Athos em <a href="/categories/tutoriais">Tutoriais</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/athos_damiani" target = "_blank">Athos</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -118,212 +124,46 @@
           
             <li class="list-inline-item m-1"><a href="/tags/torch">torch</a></li>
             <li class="list-inline-item m-1"><a href="/tags/deep-learning">deep learning</a></li>
-            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
             <li class="list-inline-item m-1"><a href="/tags/machine-learning">machine learning</a></li>
         </ul>
         <article class="content">
           
+            <blockquote>Este post foi aposentado.
             
-
-
-<div id="exemplo-passarinho-versus-sapo" class="section level2">
-<h2>Exemplo: Passarinho versus Sapo</h2>
-<p>Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels com outros formatos podem ajudar como mostrado em <span class="citation">(Sun, Ozay, and Okatani 2016)</span>! Um exemplo é o kernel retangular quando se está mexendo com sons e seus respectivos espectrogramas. Para ilustar eu vou criar dois “espectrogramas” bem simples, assim:</p>
-<pre class="r"><code>library(torch)
-library(tidyverse)
-library(mestrado)
-
-imagem_passarinho &lt;- torch_ones(8,6) * 0.9
-imagem_passarinho[3, 1:3] &lt;- torch_zeros(3)
-imagem_sapo &lt;- torch_ones(8,6) * 0.9
-imagem_sapo[6, 1:3] &lt;- torch_zeros(3)
-
-# (N, C, F, T) ---&gt; spectrogramas (numero de imagens, canais de cores, faixas de freq, duracao do audio)
-x &lt;- torch_stack(c(imagem_passarinho, imagem_sapo))
-# coloca a dimensão do &quot;canal&quot;: se forem 3 canais é colorido (RGB), se for 1 é preto e branco.
-x$unsqueeze_(2)
-## torch_tensor
-## (1,1,.,.) = 
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.0000  0.0000  0.0000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-## 
-## (2,1,.,.) = 
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.0000  0.0000  0.0000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-##   0.9000  0.9000  0.9000  0.9000  0.9000  0.9000
-## [ CPUFloatType{2,1,8,6} ]</code></pre>
-<pre class="r"><code>image_tensors_to_tbl(x) %&gt;% 
-  mutate(label = factor(i, labels = c(&quot;passarinho&quot;, &quot;sapo&quot;))) %&gt;%
-  ggpixelgrid(grid_tickness = 2, grid_colour = &quot;white&quot;, label = label) +
-  theme_void(30) +
-  labs(x = &quot;Tempo (ms)&quot;, y = &quot;Frequência (Hz)&quot;)</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
-<img src="/blog/2020-12-30-retangulo-vs-quadrado_files/figure-html/unnamed-chunk-2-1.png" alt="Espectrogramas para um sapo e um passarinho. Os animais fazem sons em diferentes faixas de frequência." width="672" />
-<p class="caption">
-Figure 1: Espectrogramas para um sapo e um passarinho. Os animais fazem sons em diferentes faixas de frequência.
-</p>
-</div>
-<div id="cnns" class="section level3">
-<h3>CNNs</h3>
-<p>Aqui, as cnns são definidas pela função <code>nn_conv2d()</code> do {torch}. O parâmetro que irá variar para compararmos convolução quadrada vs retângular é o <code>kernel_size</code>: para o quadrado, kernel <code>3x3</code>; para o retangular, kernel <code>8x1</code>, como mostra o código abaixo.</p>
-<p>Repare que a saída resultante de cada convolução é bem diferente! Para o kernel quadrado o tensor resultante é <code>6x4</code> enquanto que para o kernel retangular é <code>1x6</code>.</p>
-<div id="cnn-quadrada" class="section level4">
-<h4>CNN Quadrada</h4>
-<pre class="r"><code>conv_quadrada &lt;- nn_conv2d(in_channels = 1, kernel_size = c(3,3), out_channels = 1, bias = FALSE)
-conv_quadrada(x)
-## torch_tensor
-## (1,1,.,.) = 
-##   0.2844  0.1517  0.2313  0.4015
-##  -0.1726  0.0824  0.3337  0.4015
-##   0.6913  0.5324  0.2523  0.4015
-##   0.4015  0.4015  0.4015  0.4015
-##   0.4015  0.4015  0.4015  0.4015
-##   0.4015  0.4015  0.4015  0.4015
-## 
-## (2,1,.,.) = 
-##   0.4015  0.4015  0.4015  0.4015
-##   0.4015  0.4015  0.4015  0.4015
-##   0.4015  0.4015  0.4015  0.4015
-##   0.2844  0.1517  0.2313  0.4015
-##  -0.1726  0.0824  0.3337  0.4015
-##   0.6913  0.5324  0.2523  0.4015
-## [ CPUFloatType{2,1,6,4} ]</code></pre>
-</div>
-<div id="cnn-retangular" class="section level4">
-<h4>CNN Retangular</h4>
-<pre class="r"><code>conv_retangular &lt;- nn_conv2d(in_channels = 1, kernel_size = c(8,1), out_channels = 1, bias = FALSE)
-conv_retangular(x)
-## torch_tensor
-## (1,1,.,.) = 
-##  -0.3380 -0.3380 -0.3380 -0.4634 -0.4634 -0.4634
-## 
-## (2,1,.,.) = 
-##  -0.6774 -0.6774 -0.6774 -0.4634 -0.4634 -0.4634
-## [ CPUFloatType{2,1,1,6} ]</code></pre>
-<p>Comentário: A saída <code>1x6</code> pode ser vista como uma média ponderada das frequências em cada um dos 6 instantes de tempo. E essa ponderação é feita pelos 8 pesos do kernel. Intuitivamente, se algum peso der zero, quer dizer que aquela faixa de frequência não é boa para distinguir passarinho de sapo.</p>
-</div>
-</div>
-<div id="ajuste" class="section level3">
-<h3>Ajuste</h3>
-<pre class="r"><code># otimizadores
-optim_quadrado &lt;- optim_adam(conv_quadrada$parameters, lr = 0.1)
-optim_retangulo &lt;- optim_adam(conv_retangular$parameters, lr = 0.1)
-
-# critério de perda
-loss &lt;- torch::nnf_binary_cross_entropy
-
-# rótulos encodados: 1 para passarinho, 0 para sapo.
-y &lt;- c(1,0)
-
-# loop para a otimização para os dois modelos simultaneamente
-erros_da_conv_quadrada &lt;- c()
-erros_da_conv_retangular &lt;- c()
-for(i in 1:100) {
-  # zera grads
-  optim_quadrado$zero_grad()
-  optim_retangulo$zero_grad()
-  
-  # valores preditos
-  pred_quadrado &lt;- conv_quadrada(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
-  pred_retangulo &lt;- conv_retangular(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
-  
-  # erros
-  erro_conv_quadrada &lt;- loss(pred_quadrado, y)
-  erro_conv_retangular &lt;- loss(pred_retangulo, y)
-  erros_da_conv_quadrada &lt;- c(erros_da_conv_quadrada, as.numeric(erro_conv_quadrada))
-  erros_da_conv_retangular &lt;- c(erros_da_conv_retangular, as.numeric(erro_conv_retangular))
-  
-  # propagação dos erros (gradientes de cada param)
-  erro_conv_quadrada$backward()
-  erro_conv_retangular$backward()
-  
-  # atualização dos pesos em direção oposta ao gradiente
-  optim_quadrado$step()
-  optim_retangulo$step()
-}</code></pre>
-<p><img src="/blog/2020-12-30-retangulo-vs-quadrado_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<div id="pesos-finais" class="section level4">
-<h4>Pesos finais</h4>
-<pre class="r"><code># quadrado
-pesos_kernel_quadrado &lt;- conv_quadrada$parameters$weight$squeeze(1)$squeeze(1)
-pesos_kernel_quadrado
-## torch_tensor
-##  0.1122 -0.3657 -0.2282
-##  0.0341  0.2376  0.2391
-##  0.1440  0.0419 -0.1955
-## [ CPUFloatType{3,3} ]
-# retangular
-pesos_kernel_retangular &lt;- conv_retangular$parameters$weight$squeeze(1)$squeeze(1)
-pesos_kernel_retangular
-## torch_tensor
-## -0.1688
-##  0.1600
-## -4.5302
-## -0.1044
-## -0.0353
-##  4.5600
-##  0.1299
-## -0.0066
-## [ CPUFloatType{8,1} ]</code></pre>
-<p>É possível observar que:</p>
-<ol style="list-style-type: decimal">
-<li>No kernel quadrado os pesos estão com aspecto que aleatório.</li>
-<li>No kernel retangular os pesos em rosa estão relacionados com as duas frequências relativas ao passarinho e ao sapo.</li>
-</ol>
-<p><img src="/blog/2020-12-30-retangulo-vs-quadrado_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-</div>
-<div id="predições" class="section level4">
-<h4>Predições</h4>
-<p>As predições da convolução quadrada deu tudo 50%, ou seja, não foi possível separar os dois pontos! Ou chutamos tudo sapo, ou chutamos tudo passarinho. Sempre iremos cometer algum erro.</p>
-<pre class="r"><code># quadrado
-conv_quadrada(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
-## torch_tensor
-##  0.4996
-##  0.4996
-## [ CPUFloatType{2} ]
-# retangular
-conv_retangular(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
-## torch_tensor
-##  0.7422
-##  0.2587
-## [ CPUFloatType{2} ]</code></pre>
-</div>
-</div>
-</div>
-<div id="resumo" class="section level2">
-<h2>Resumo</h2>
-<ul>
-<li>Kernels de formatos diferentes do quadrado têm potencial melhorar o modelo, a depender da natureza do problema.</li>
-<li>Basta apenas alterar o parâmetro <code>kernel_size</code> para testar novos kernels!</li>
-</ul>
-<p>Em próximas postagens vou conduzir essa comparação em outros bancos de dados mais interessantes: um de brincadeira (Guess The Correlation) e um real (Sons de Pássaros).</p>
-</div>
-<div id="referências" class="section level2 unnumbered">
-<h2>Referências</h2>
-<div id="refs" class="references">
-<div id="ref-inproceedings">
-<p>Sun, Zhun, Mete Ozay, and Takayuki Okatani. 2016. “Design of Kernels in Convolutional Neural Networks for Image Classification.” In, 9911:51–66. <a href="https://doi.org/10.1007/978-3-319-46478-7_4">https://doi.org/10.1007/978-3-319-46478-7_4</a>.</p>
-</div>
-</div>
-</div>
-
+            </blockquote>
+            <img src = "https://blog.curso-r.com/images/retired.jpg" style = "margin: auto; display: block; width: 100%;">
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -333,7 +173,7 @@ conv_retangular(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -343,7 +183,7 @@ conv_retangular(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -353,25 +193,21 @@ conv_retangular(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -381,12 +217,14 @@ conv_retangular(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -411,24 +249,24 @@ conv_retangular(x) %&gt;% nnf_sigmoid() %&gt;% torch_mean(dim = c(2,3,4))
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

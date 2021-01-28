@@ -1,6 +1,6 @@
 ---
 title: "Desafio de Dados - PesqEle (parte I)"
-date: "2018-07-26T00:00:00+00:00"
+date: "2018-07-26"
 tags: ["app", "pacotes"]
 categories: ["divulgação"]
 image: "img/desafio-dados/1-pesqele.png"
@@ -19,7 +19,7 @@ Junto com o pacote, o CONRE3 fez também um aplicativo em shiny, disponível [ne
 
 A ideia dessa primeira edição do Desafio de Dados é replicar o mapa da página inicial do aplicativo que mostra a distribuição de pesquisas eleitorais por estado do Brasil.
 
-![](/img/desafio-dados/1-pesqele.png)
+![](/images/posts/conteudo/desafio-dados/1-pesqele.png)
 
 Os dados podem ser obtidos rodando o trecho de código abaixo:
 

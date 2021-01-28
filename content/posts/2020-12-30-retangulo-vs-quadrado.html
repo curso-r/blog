@@ -7,21 +7,16 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/quadrado-vs-retangulo.png"
 author: ["Athos"]
 summary: "Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels retangulares podem ajudar. O post mostra um exemplo minimal em {torch} para ilustrar uma situação em que isso acontece."
-retired: true
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="exemplo-passarinho-versus-sapo" class="section level2">
 <h2>Exemplo: Passarinho versus Sapo</h2>
-<p>Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels com outros formatos podem ajudar como mostrado em <span class="citation">(Sun, Ozay, and Okatani 2016)</span>! Um exemplo é o kernel retangular quando se está mexendo com sons e seus respectivos espectrogramas. Para ilustar eu vou criar dois “espectrogramas” bem simples, assim:</p>
+<p>Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels com outros formatos podem ajudar como mostrado em <span class="citation">(Sun, Ozay, and Okatani <a href="#ref-inproceedings" role="doc-biblioref">2016</a>)</span>! Um exemplo é o kernel retangular quando se está mexendo com sons e seus respectivos espectrogramas. Para ilustar eu vou criar dois “espectrogramas” bem simples, assim:</p>
 <pre class="r"><code>library(torch)
-library(tidyverse)
-library(mestrado)
-
-imagem_passarinho &lt;- torch_ones(8,6) * 0.9
+library(tidyverse)</code></pre>
+<pre class="r"><code>imagem_passarinho &lt;- torch_ones(8,6) * 0.9
 imagem_passarinho[3, 1:3] &lt;- torch_zeros(3)
 imagem_sapo &lt;- torch_ones(8,6) * 0.9
 imagem_sapo[6, 1:3] &lt;- torch_zeros(3)
@@ -35,6 +30,7 @@ x$unsqueeze_(2)</code></pre>
   ggpixelgrid(grid_tickness = 2, grid_colour = &quot;white&quot;, label = label) +
   theme_void(30) +
   labs(x = &quot;Tempo (ms)&quot;, y = &quot;Frequência (Hz)&quot;)</code></pre>
+<p>PS: códigos das funções <a href="https://github.com/Athospd/mestrado/blob/master/R/utils.R"><code>image_tensors_to_tbl()</code> e <code>ggpixelgrid()</code></a></p>
 <div id="cnns" class="section level3">
 <h3>CNNs</h3>
 <p>Aqui, as cnns são definidas pela função <code>nn_conv2d()</code> do {torch}. O parâmetro que irá variar para compararmos convolução quadrada vs retângular é o <code>kernel_size</code>: para o quadrado, kernel <code>3x3</code>; para o retangular, kernel <code>8x1</code>, como mostra o código abaixo.</p>

@@ -6,7 +6,11 @@
     <description>Recent content in mapas on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/mapas/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/mapas/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Qual a capital mais distante de Brasília?</title>
       <link>https://blog.curso-r.com/posts/2020-09-19-map-dist/</link>
@@ -17,9 +21,27 @@
     </item>
     
     <item>
+      <title>Gráficos Miojo: mapas temáticos, the tidy way</title>
+      <link>https://blog.curso-r.com/posts/2019-02-10-sf-miojo/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-02-10-sf-miojo/</guid>
+      <description>Nesse post vamos fazer mapas temáticos do Brasil, usando princípios tidy.</description>
+    </item>
+    
+    <item>
+      <title>São Paulo e o problema da mochila</title>
+      <link>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</link>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</guid>
+      <description>São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios.</description>
+    </item>
+    
+    <item>
       <title>Gráficos miojo: Mapas temáticos do Brasil em 3 minutos ou menos</title>
       <link>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</link>
-      <pubDate>Thu, 04 May 2017 23:26:00 +0300</pubDate>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</guid>
       <description>Impressionar é muito mais fácil se você usa mapas. Neste post vamos aprender a construir mapas temáticos do Brasil com muita agilidade.</description>

@@ -1,12 +1,11 @@
 ---
 title: "Gráficos Miojo: mapas temáticos, the tidy way"
-date: "2019-02-04T00:00:00+00:00"
+date: "2019-02-04"
 categories: ["tutoriais"]
-tags: ["r"]
+tags: ["mapas"]
 image: "images/posts/banner/mapinha.png"
 author: ["Julio"]
 summary: "Nesse post vamos fazer mapas temáticos do Brasil, usando princípios tidy."
-draft: false
 editor_options: 
   chunk_output_type: console
 ---

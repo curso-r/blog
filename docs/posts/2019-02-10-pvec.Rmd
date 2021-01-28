@@ -1,12 +1,11 @@
 ---
 title: "pvec: O laço perfeito"
-date: "2019-02-05T00:00:00+00:00"
+date: "2019-02-05"
 categories: ["tutoriais"]
-tags: ["r"]
+tags: ["algoritmos"]
 image: "images/posts/banner/laco_perfeito.png"
 author: ["Julio"]
 summary: "Nesse post vou te mostrar minha função preferida e como ela funciona."
-draft: false
 ---
 
 **AVISO: Infelizmente a função `pvec()` não está mais no pacote `abjutils`! No final deste texto deixamos o seu código para que o leitor possa implementá-la por conta própria.**

@@ -1,6 +1,6 @@
 ---
 title: "Componentes Principais - Intuição"
-date: "2017-06-24T10:12:00+03:00"
+date: "2017-06-24"
 tags: ["pca", "componentes principais", "plotly"]
 categories: ["conceitos"]
 image: "images/posts/banner/componentes_principais.png"

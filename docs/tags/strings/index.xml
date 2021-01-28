@@ -6,7 +6,11 @@
     <description>Recent content in strings on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/strings/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/strings/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Remoção de Acentos e o Ano Novo Muçulmano</title>
       <link>https://blog.curso-r.com/posts/2019-08-29-transliteracao/</link>
@@ -19,7 +23,7 @@
     <item>
       <title>Comportamentos imprevisíveis do lubridate</title>
       <link>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</link>
-      <pubDate>Sat, 02 Sep 2017 10:12:00 +0300</pubDate>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</guid>
       <description>R é uma linguagem maravilhosa. Ela possibilita uma ampla gama de aplicações interessantes. O seu maior trunfo está no rico ecossistema de pacotes, que são desenvolvidos e mantidos pela comunidade, sempre criativa na hora de lidar com os problemas. Entretanto, toda essa facilidade cobra um preço. Neste post vamos aprender que às vezes os programas não fazem exatamente o que estão dizendo que fazem.</description>

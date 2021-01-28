@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/applause.jpg"
 author: ["Julio", "Athos"]
 summary: "Fizemos um teste do pacote {applause}."
-draft: false
+retired: true
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +14,8 @@ knitr::opts_chunk$set(
   echo = TRUE,
   warning = FALSE, 
   message = FALSE, 
-  collapse = TRUE
+  collapse = TRUE,
+  eval = FALSE
 )
 ```
 

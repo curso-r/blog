@@ -1,7 +1,7 @@
 ---
 title: "brcrimR"
-date: "2017-09-13T10:12:00+03:00"
-tags: ["web-scraping", "tidyverse", "r", "data.frames", "bds", "dados-abertos", "api"]
+date: "2017-09-13"
+tags: ["web scraping", "tidyverse", "banco de dados", "dados abertos", "api"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/ssp.jpg"
 author: ["Fernando"]
@@ -38,7 +38,8 @@ As tabelas de informações agregadas podem ser obtidas seguindo os passos que d
 
 ```{r}
 brcrimR::get_summarized_table_sp(year = '2016', city = '1') %>% 
-  knitr::kable(caption = "Contagem de boletins de ocorrência na cidade de Amparo.")
+  knitr::kable(caption = "Contagem de boletins de ocorrência na cidade de Amparo.") %>% 
+  kableExtra::kable_styling(font_size = 8)
 ```
 
 Para obter os dados históricos, basta usar a função `brcrimR::get_historical_summarized_table_sp`. Ela funciona da mesma maneira que `brcrimR::get_summarized_table_sp`, mas pode receber vetores como input. Nesse caso, ela organiza os parâmetros num _grid_ e retorna uma tabela com todas as requisições empilhadas.
@@ -66,7 +67,8 @@ brcrimR::get_detailed_table_sp(folder = 'btnHomicicio', year = '2017', month = '
   select(NUM_BO, BO_INICIADO, DATAOCORRENCIA, BO_AUTORIA, FLAGRANTE, LATITUDE, LONGITUDE) %>% 
   distinct(NUM_BO, .keep_all = T) %>% 
   head(10) %>% 
-  knitr::kable(caption = "Algumas colunas de dez BO's da tabela de boletins de ocorrência de homicídio de janeiro de 2017.")
+  knitr::kable(caption = "Algumas colunas de dez BO's da tabela de boletins de ocorrência de homicídio de janeiro de 2017.") %>% 
+  kableExtra::kable_styling(font_size = 8)
 ```
 
 É fantástico que a gente tenha acesso a informações tão detalhadas como latitude e longitude de um crime, mas o formato não é lá essas coisas. Como os dados da SSP provavelmente estão armazenados em um banco de dados relacional, a tabela que baixamos parece ser um `inner_join` de várias tabelas do banco, pois existem repetições da chave primária `NUM_BO`. É claro que quem tem um pouco de experiência com esse tipo de coisa vai tirar de letra, mas esse certamente não é o melhor formato para a população em geral.

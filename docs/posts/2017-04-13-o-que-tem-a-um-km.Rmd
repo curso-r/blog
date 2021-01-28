@@ -1,6 +1,6 @@
 ---
 title: "Você está a menos de 1 km de um Hambúrguer?"
-date: "2017-04-10T23:26:00+03:00"
+date: "2017-04-10"
 tags: ["GoogleMaps", "API", "leaflet"]
 categories: ["análises"]
 image: "images/posts/banner/man-with-a-map.jpg"

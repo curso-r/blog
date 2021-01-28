@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Julio em <a href="/categories/an%c3%a1lises">Análises</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/jtrecenti" target = "_blank">Julio</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -121,6 +127,8 @@
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Nesse post vou trabalhar com Captchas e GANs. Se você não sabe o que é um Captcha e como estamos trabalhando para resolvê-los até agora, recomendo que você veja a <a href="https://www.curso-r.com/tags/captcha/">série de posts da Curso-R</a> sobre o tema. Se você não sabe nada de GAN, acredito que seja possível acompanhar esse post. No entanto, não acho que esse é o exemplo mais simples possível de GAN: se você quiser um “hello world” no tema, recomendo ver <a href="https://tensorflow.rstudio.com/keras/articles/examples/mnist_acgan.html">esse exemplo</a> e <a href="https://arxiv.org/pdf/1406.2661.pdf">esse paper</a>.</p>
@@ -128,26 +136,26 @@
 <p><strong>Motivo</strong>: o motivo principal de usar modelos generativos é aproveitar o fato de existirem muito mais Captchas não classificados do que classificados. De certa forma, saber criar novos Captchas pode auxiliar no trabalho de resolvê-los.</p>
 <p><strong>Base de dados</strong>: ao invés de utilizar um Captcha real, vamos trabalhar com um Captcha sintético criado partir do MNIST. Chamarei esses carinhas de MNIST-Captcha. A ideia foi simplificar o problema para facilitar o desenvolvimento da solução. Um problema que enfrentamos no Deep Learning é que existem tantos hiperparâmetros a serem escolhidos que é muito difícil achar configurações que funcionam bem. Em problemas mais simples, é mais fácil achar esses parâmetros.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="images/posts/conteudo/gan/mnist.png" alt="Exemplo de imagem do MNIST." width="23%" />
+<img src="/images/posts/conteudo/gan/mnist.png" alt="Exemplo de imagem do MNIST." width="23%" />
 <p class="caption">
-Figure 1: Exemplo de imagem do MNIST.
+Figura 1: Exemplo de imagem do MNIST.
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="images/posts/conteudo/gan/mnist-captcha.png" alt="Exemplo de MNIST-Captcha." width="50%" />
+<img src="/images/posts/conteudo/gan/mnist-captcha.png" alt="Exemplo de MNIST-Captcha." width="50%" />
 <p class="caption">
-Figure 2: Exemplo de MNIST-Captcha.
+Figura 2: Exemplo de MNIST-Captcha.
 </p>
 </div>
-<div id="o-que-e-gan" class="section level3">
+<div id="o-que-é-gan" class="section level3">
 <h3>O que é GAN?</h3>
 <p>A sigla GAN significa <em>Generative Adversarial Networks</em>. Não confunda com GAM (<em>Generalized Additive Models</em>)! Trata-se de um modelo recente, introduzido em 2014 pelo Ian Goodfellow, autor do famoso livro <a href="">DeepLearningBook</a>, que está ganhando cada vez mais espaço na comunidade científica, por conta de seus impressionantes resultados.</p>
 <p>GAN, na verdade, são dois modelos co-dependentes, o <strong>gerador</strong> e o <strong>discriminador</strong>. O gerador tenta gerar novos Captchas a partir de nada, indistinguíveis dos originais, e o discriminador tenta discriminar se os Captchas criados pelo gerador são reais ou não. Ou seja, um fica brigando com o outro, e no final temos um excelente gerador de novos Captchas e um excelente discriminador de Captchas.</p>
 </div>
-<div id="o-que-e-ac-gan" class="section level3">
+<div id="o-que-é-ac-gan" class="section level3">
 <h3>O que é AC-GAN?</h3>
 <p>Quando nosso interesse está na predição, simples GANs não ajudam, pois o discriminadores só sabem verificar se uma imagem é original ou fake. No entanto, podemos adicionar respostas no discriminador, tornando-o um modelo duplo, capaz de discriminar imagens reais e falsas e, ao mesmo tempo, capaz de predizer o valor do Captcha.</p>
-<div id="ok-mas-nao-esta-claro" class="section level4">
+<div id="ok-mas-não-está-claro" class="section level4">
 <h4>OK, mas não está claro</h4>
 <p>Não mesmo. Esses carinhas não são simples. O ideal é sentar na cadeira e tentar entender o que o modelo faz. Eu fiz minha lição de casa, e consegui extrair esses passos:</p>
 <ol style="list-style-type: decimal">
@@ -402,11 +410,11 @@ ________________________________________________________________________________
 <p>É uma pergunta natural. Esse modelo é meio maluco, pois usa uma parte do modelo para avaliar a qualidade do outro. Mas sim, temos alguns resultados matemáticos que garantem que estamos em um bom território.</p>
 <p>Meu desejo era colocá-los aqui, mas ainda não sei explicar todos os detalhes. Pretendo estudar mais e adicionar em novos posts.</p>
 </div>
-<div id="exemplo-de-aplicacao-nos-mnist-captcha" class="section level2">
+<div id="exemplo-de-aplicação-nos-mnist-captcha" class="section level2">
 <h2>Exemplo de aplicação nos MNIST-Captcha</h2>
 <p>O exemplo completo que rodei com os MNIST-Captchas está <a href="https://gist.github.com/jtrecenti/149fc2ae4fe66652624f2c37f11d9286/">neste link</a>. Decidi não colocar o código completo aqui pois <del>a minha implementação está muito feia</del> o post ficaria muito longo.</p>
 <p>Muito bem, se o modelo serve para prever e para gerar, vamos avaliar a qualidade nesses quesitos.</p>
-<div id="preve-bem" class="section level3">
+<div id="prevê-bem" class="section level3">
 <h3>Prevê bem?</h3>
 <p>A taxa de acerto de cada dígito do MNIST-Captcha foi de 95%. Como temos 4 dígitos nesse caso, o acerto de todo o Captcha seria de 81%. Comparado com os modelos funcionando em produção do pacote <code>decryptr</code>, esse resultado é ruim. Lá, as taxas de acerto do Captcha são de no mínimo 93% e tem casos que acertamos tudo. Mas eu acredito que o motivo disso é que não ajustamos bem os hiperparâmetros. Se fizermos isso, provavelmente ficará melhor.</p>
 </div>
@@ -436,15 +444,15 @@ ________________________________________________________________________________
 }</code></pre>
 <p>Rodando para alguns exemplos:</p>
 <pre class="r"><code>gerar_imagem(c(1, 2, 4, 4))</code></pre>
-<p><img src="images/posts/conteudo/gan/1244.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/gan/1244.png" width="50%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>gerar_imagem(c(4, 0, 4, 7))</code></pre>
-<p><img src="images/posts/conteudo/gan/4047.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/gan/4047.png" width="50%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>gerar_imagem(c(9, 9, 9, 9))</code></pre>
-<p><img src="images/posts/conteudo/gan/9999.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/gan/9999.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>O que achou? Note que a última está errada.</p>
 </div>
 </div>
-<div id="proximos-passos" class="section level2">
+<div id="próximos-passos" class="section level2">
 <h2>Próximos passos</h2>
 <ul>
 <li>Fazer o GAN funcionar para mais Captchas.</li>
@@ -468,10 +476,36 @@ ________________________________________________________________________________
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -481,7 +515,7 @@ ________________________________________________________________________________
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -491,7 +525,7 @@ ________________________________________________________________________________
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -501,25 +535,21 @@ ________________________________________________________________________________
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -529,12 +559,14 @@ ________________________________________________________________________________
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -559,24 +591,24 @@ ________________________________________________________________________________
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

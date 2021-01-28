@@ -6,47 +6,24 @@
     <description>Recent content in curso-r on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Fri, 06 Apr 2018 13:07:31 +0200</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/curso-r/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Webinar: Advanced Purrr</title>
-      <link>https://blog.curso-r.com/posts/2018-04-06-webinar-adv-purrr/</link>
-      <pubDate>Fri, 06 Apr 2018 13:07:31 +0200</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2018-04-06-webinar-adv-purrr/</guid>
-      <description>Nessa segunda feira, o Caio apresentará um Webinar sobre purrr avançado.</description>
-    </item>
+    <lastBuildDate>Thu, 19 Oct 2017 00:00:00 +0000</lastBuildDate>
     
-    <item>
-      <title>Tidy Data, Teste T Pareado e Modelos Mistos</title>
-      <link>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</link>
-      <pubDate>Fri, 27 Oct 2017 10:12:00 +0300</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</guid>
-      <description>O que teste t-pareado, modelos mistos e tidy data podem ter a ver? Veja neste post como a estrutura dos seus dados pode afetar a forma que você fará a sua análise.</description>
-    </item>
+	<atom:link href="https://blog.curso-r.com/tags/curso-r/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Curso-R na aMostra de Estatística 2017</title>
       <link>https://blog.curso-r.com/posts/2017-10-19-cursor-amostra/</link>
-      <pubDate>Thu, 19 Oct 2017 10:12:00 +0300</pubDate>
+      <pubDate>Thu, 19 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-10-19-cursor-amostra/</guid>
       <description>Nas últimas semanas sumimos um pouco aqui do blog, pois estávamos ocupados na aMostra de Estatística no IME-USP. Veja neste post o que apresentamos.</description>
     </item>
     
     <item>
-      <title>O melhor de 50 posts!</title>
-      <link>https://blog.curso-r.com/posts/2017-08-05-o-melhor-de-50-posts/</link>
-      <pubDate>Sat, 05 Aug 2017 23:26:00 +0300</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2017-08-05-o-melhor-de-50-posts/</guid>
-      <description>Nosso blog completou 50 posts e para não deixar a marca passar em branco, elaboramos um resumão do que de melhor aconteceu aqui nos últimos 5 meses.</description>
-    </item>
-    
-    <item>
       <title>bR Bloggers está no ar</title>
       <link>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</link>
-      <pubDate>Mon, 19 Jun 2017 13:07:31 +0200</pubDate>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</guid>
       <description>Está no ar o bR Bloggers! bR Bloggers é um agregador de blogs sobre R escritos em língua portuguesa.</description>

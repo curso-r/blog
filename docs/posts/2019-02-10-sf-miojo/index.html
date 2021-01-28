@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Julio em <a href="/categories/tutoriais">Tutoriais</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/jtrecenti" target = "_blank">Julio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,11 +122,13 @@
         </ul>
         <ul class="list-inline tag-list">
           
-            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/mapas">mapas</a></li>
         </ul>
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Se você gosta de fazer mapinhas, talvez já tenha visto <a href="https://www.curso-r.com/blog/2017-05-04-mapas-tematicos-3-minutos/">nosso post para fazer mapas temáticos muito rápido</a>. Mas esse post é tão… 2017!</p>
@@ -135,7 +143,7 @@ get_brmap(&quot;City&quot;, geo.filter = list(State = 33)) %&gt;%
   left_join(pop2017, c(&quot;City&quot; = &quot;mun&quot;)) %&gt;% 
   ggplot() +
   geom_sf(aes(fill = pop2017/1e6))</code></pre>
-<p><img src="images/posts/conteudo/sf-miojo/mapa_rj.png" /></p>
+<p><img src="/images/posts/conteudo/sf-miojo/mapa_rj.png" /></p>
 <p>No caso, estamos fazendo um mapa do Rio de Janeiro (Unidade Federativa de código 33) e colorindo o mapa dos municípios com a população das cidades em 2017 (<code>pop2017</code>, dividida por um milhão). A cidade em azul claro é a capital.</p>
 <p>OK, mas como fizemos isso, e como podemos criar mapas mais bonitos? É o que veremos a seguir!</p>
 </div>
@@ -148,7 +156,7 @@ get_brmap(&quot;City&quot;, geo.filter = list(State = 33)) %&gt;%
 <pre class="r"><code>library(tidyverse)
 library(brazilmaps)</code></pre>
 </div>
-<div id="poligonos" class="section level2">
+<div id="polígonos" class="section level2">
 <h2>Polígonos</h2>
 <p>A melhor fonte oficial para obter os polígonos do Brasil é o <a href="https://mapas.ibge.gov.br/bases-e-referenciais/bases-cartograficas/malhas-digitais">Instituto Brasileiro de Geografia e Estatística (IBGE)</a>. Lá, você vai encontrar malhas territoriais em um formato chamado <em>shapefile</em>. Esse arquivo, que na verdade é um conjunto de arquivos com dados e metadados, contém as informações necessárias para desenhar os polígonos no seu mapa.</p>
 <p>Por muito tempo, a leitura desse tipo de arquivo no R foi uma dor de cabeça. Até 2015 pelo menos, eu utilizava o <code>sp</code> e o <code>maptools</code>, e sempre sofria um pouco para carregar a base e fazer mapas.</p>
@@ -195,7 +203,7 @@ glimpse(uf_map)</code></pre>
 <pre class="r"><code>uf_map %&gt;% 
   ggplot() +
   geom_sf(aes(fill = idh))</code></pre>
-<p><img src="images/posts/conteudo/sf-miojo/mapa_uf.png" /></p>
+<p><img src="/images/posts/conteudo/sf-miojo/mapa_uf.png" /></p>
 <p>O gráfico mostra claramente o aspecto regional do IDH nos estados do Brasil.</p>
 <p>Para fazer o gráfico com os municípios, a lógica é a mesma: i) fazer um join das bases com <code>dplyr</code> e ii) usar o <code>ggplot2</code> para desenhar o mapa. O único problema é que o gráfico demora para rodar<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <pre class="r"><code>muni_map &lt;- get_brmap(&quot;City&quot;) %&gt;% 
@@ -204,18 +212,18 @@ glimpse(uf_map)</code></pre>
 muni_map %&gt;% 
   ggplot() +
   geom_sf(aes(fill = idhm))</code></pre>
-<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_feio.png" /></p>
+<p><img src="/images/posts/conteudo/sf-miojo/mapa_muni_feio.png" /></p>
 <p>Podemos também quebrar pelas regiões com um simples <code>facet_wrap()</code>:</p>
 <pre class="r"><code>muni_map %&gt;% 
   ggplot() +
   geom_sf(aes(fill = idhm)) +
   facet_wrap(~Region)</code></pre>
-<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_feio_facet.png" /></p>
+<p><img src="/images/posts/conteudo/sf-miojo/mapa_muni_feio_facet.png" /></p>
 <p>Parece que estamos indo bem. Alguns problemas que podemos notar:</p>
 <ol style="list-style-type: decimal">
 <li>As linhas estão muito largas.</li>
 <li>As cores ajudam a identificar tendências regionais, mas parece que a imagem está embaçada.</li>
-<li>Os mapas não estão centralizados em cada facet. E não adianta usar o parâmetro <code>scales=&quot;free&quot;</code>, pois infelizmente o sistema de coordenadas do <code>sf</code> não suporta essa funcionalidade.</li>
+<li>Os mapas não estão centralizados em cada facet. E não adianta usar o parâmetro <code>scales="free"</code>, pois infelizmente o sistema de coordenadas do <code>sf</code> não suporta essa funcionalidade.</li>
 </ol>
 <p>Resolveremos esses problemas na próxima seção.</p>
 </div>
@@ -236,7 +244,7 @@ muni_map %&gt;%
         panel.background = element_blank(),
         axis.text = element_blank(),
         axis.ticks = element_blank())</code></pre>
-<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_bonito.png" /></p>
+<p><img src="/images/posts/conteudo/sf-miojo/mapa_muni_bonito.png" /></p>
 <p>Outra coisa legal de fazer é demarcar os estados com outra largura da linha. Podemos fazer isso adicionando mais um <code>geom_sf()</code>:</p>
 <pre class="r"><code>muni_map %&gt;% 
   ggplot() +
@@ -253,10 +261,10 @@ muni_map %&gt;%
         panel.background = element_blank(),
         axis.text = element_blank(),
         axis.ticks = element_blank())</code></pre>
-<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf.png" /></p>
+<p><img src="/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf.png" /></p>
 <p>No caso, usei a paleta de cores <code>viridis</code>. Eu gosto muito dessa paleta e uso sempre que possível :)</p>
 </div>
-<div id="categorizar-ou-nao-eis-a-questao" class="section level3">
+<div id="categorizar-ou-não-eis-a-questão" class="section level3">
 <h3>Categorizar ou não, eis a questão</h3>
 <p>No contexto de mapas, geralmente nosso interesse está em mapear informações ordinais ou numéricas. Quando a informação é numérica, o mapa coroplético pode ficar um pouco difícil de interpretar para o cérebro, pois temos de fazer uma conta com as cores para entender a diferença entre duas regiões. Além disso, a legenda acaba não ajudando muito, pois é dificil de associar uma cor da legenda com a cor do gráfico.</p>
 <p>Por isso, quando a informação é numérica, uma boa prática é categorizar a variável que queremos observar em um conjunto pequeno de categorias (entre 3 e 7), para facilitar a visualização. Isso induz um erro na análise, mas facilita a interpretação de quem está vendo o gráfico.</p>
@@ -277,7 +285,7 @@ muni_map %&gt;%
         panel.background = element_blank(),
         axis.text = element_blank(),
         axis.ticks = element_blank())</code></pre>
-<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png" /></p>
+<p><img src="/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png" /></p>
 <p>Não sei vocês, mas para mim faz muito mais sentido olhar o gráfico categorizado do que o contínuo.</p>
 </div>
 <div id="fazendo-facets-de-mapas" class="section level3">
@@ -311,7 +319,7 @@ mapas &lt;- map(1:5, grafico_regiao)</code></pre>
 <p>Agora, vamos somar esses mapas:</p>
 <pre class="r"><code>library(patchwork)
 reduce(mapas, magrittr::add)</code></pre>
-<p><img src="images/posts/conteudo/sf-miojo/mapa_muni_bonito_cat_facet.png" /></p>
+<p><img src="/images/posts/conteudo/sf-miojo/mapa_muni_bonito_cat_facet.png" /></p>
 <p>Pronto! Temos nossos mapas lindos maravilhosos no <em>tidy way</em>!</p>
 </div>
 </div>
@@ -337,16 +345,42 @@ just more than tripled the speed of geom_sf… in case anyone is interested in s
 — Thomas Lin Pedersen (<span class="citation">@thomasp85</span>) <a href="https://twitter.com/thomasp85/status/1092412825899810817?ref_src=twsrc%5Etfw">February 4, 2019</a>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<a href="#fnref1" class="footnote-back">↩</a></li>
+<a href="#fnref1" class="footnote-back">↩︎</a></li>
 </ol>
 </div>
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -356,7 +390,7 @@ just more than tripled the speed of geom_sf… in case anyone is interested in s
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -366,7 +400,7 @@ just more than tripled the speed of geom_sf… in case anyone is interested in s
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -376,25 +410,21 @@ just more than tripled the speed of geom_sf… in case anyone is interested in s
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -404,12 +434,14 @@ just more than tripled the speed of geom_sf… in case anyone is interested in s
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -434,24 +466,24 @@ just more than tripled the speed of geom_sf… in case anyone is interested in s
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

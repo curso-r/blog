@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Athos em <a href="/categories/conceitos">Conceitos</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/athos_damiani" target = "_blank">Athos</a>
+            
+            em
+            <a href="/categories/conceitos">Conceitos</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -125,6 +131,8 @@
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="objetivos" class="section level2">
@@ -139,7 +147,7 @@
 <li>levantar discussão sobre alguns mitos que não são construtivos para a comunidade dos analistas de dados.</li>
 </ul>
 </div>
-<div id="motivacao" class="section level2">
+<div id="motivação" class="section level2">
 <h2>Motivação</h2>
 <p>Li estatísticos, cientistas da computação, engenheiros de dados a afins questionando o futuro do Machine Learning e se tudo que conhecíamos antes sobre modelagem estatística havia ficado obsoleto (como essa pergunta no Quora: <a href="https://www.quora.com/Should-I-quit-machine-learning">Should I Quit Machine Learning?</a>).</p>
 <p>E em conversas com pessoas próximas percebia certa ufania pela novidade e frustração pela “obsolência” do que se havia investido tempo estudando antes.</p>
@@ -170,7 +178,7 @@ library(forcats)
 library(ggplot2)</code></pre>
 </div>
 </div>
-<div id="regressao-logistica-versus-deep-learning" class="section level2">
+<div id="regressão-logística-versus-deep-learning" class="section level2">
 <h2>Regressão logística versus Deep Learning</h2>
 <p>Hora de ajustar modelos para os mesmos dados de duas maneiras diferentes: regressão logística com <code>glm</code> e deep learning com o <code>keras</code>.</p>
 <div id="dados-simulados" class="section level3">
@@ -188,14 +196,15 @@ df &lt;- data_frame(x = runif(n, -2, 2.5)) %&gt;%
 <p><span class="math display">\[E[Y_1|x] = \text{logistic}{(-1 + 2x)} = \frac{1}{1 + e^{{-(-1 + 2x)}}}\]</span></p>
 <p><strong>Resposta <code>y_2</code></strong></p>
 <p><span class="math display">\[E[Y_2|x] = \text{logistic}{(-1 + 2\tanh(-1 + 2x))} = \frac{1}{1 + e^{{-(-1 + 2\tanh(-1 + 2x))}}}\]</span></p>
-<p><span class="math inline">\(x\)</span> é linear no logito de <code>y_1</code>, então a regressão logística vai cair bem para descobrir os parâmetros <span class="math inline">\(-1\)</span> e <span class="math inline">\(2\)</span>. Porém, <span class="math inline">\(x\)</span> não é linhar no logito de <code>y_2</code> e por isso a regressão logística não conseguirá representar fielmente o gerador de <code>y_2</code>.</p>
+<p><span class="math inline">\(x\)</span> é linear no logito de <code>y_1</code>, então a regressão logística vai cair bem para descobrir os parâmetros <span class="math inline">\(-1\)</span> e <span class="math inline">\(2\)</span>.
+Porém, <span class="math inline">\(x\)</span> não é linhar no logito de <code>y_2</code> e por isso a regressão logística não conseguirá representar fielmente o gerador de <code>y_2</code>.</p>
 <p><strong>OBS 1:</strong> A forma <span class="math inline">\(\text{logistic}{(\beta_0 + \beta_1\tanh(\beta_2 + \beta_3X))}\)</span> tem parâmetros dentro do função <code>tanh</code>, o que significa que a nossa hipótese para <span class="math inline">\(E[Y_2|x]\)</span> não é mais <strong>linear</strong> nos parâmetros. Por isso que modelos lineares (como o nome sugere) não são mais indicados. E a <strong>não linearidade</strong> é uma das generalizações que as redes neurais nos fornece! (sim, isso é muito relevante)</p>
 <p><strong>OBS 2:</strong> é claro que nesse caso bem simples de uma variável conseguiríamos inspecionar os dados para chegar em boas transformações de <span class="math inline">\(x\)</span> de tal forma que o ajuste da logística ficasse tão bom quanto o de uma rede neural, mas se acrescentássemos muitas outras variáveis aí a coisa complicaria!</p>
 <p>Em representação de redes neurais, as fórmulas acima ficam assim:</p>
 <p><strong>Resposta <code>y_1</code></strong></p>
-<p><img src="images/posts/conteudo/segundo-menor-dl/y1.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/segundo-menor-dl/y1.png" /><!-- --></p>
 <p><strong>Resposta <code>y_2</code></strong></p>
-<p><img src="images/posts/conteudo/segundo-menor-dl/y2.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/segundo-menor-dl/y2.png" /><!-- --></p>
 <p>O que era <strong>função de ligação</strong> no GLM, em redes neurais virou <strong>função de ativação</strong> (no final eu falo mais sobre vocabulários que mudaram).</p>
 </div>
 <div id="olhada-nos-dados" class="section level3">
@@ -217,13 +226,15 @@ df %&gt;%
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   facet_wrap(~forcats::fct_inorder(transformacao), nrow = 1, scales = &quot;free_y&quot;) +
   labs(x = &quot;x&quot;, colour = &quot;resposta&quot;) +
-  theme(axis.text.x = element_blank(),panel.grid.major.x = element_blank(), panel.grid.minor.y = element_blank())</code></pre>
-<p><img src="/blog/2017-07-29-segundo-menor-dl_files/figure-html/unnamed-chunk-6-1.png" width="1152" /></p>
-<p>O gráfico da direita mostra que <code>x</code> é proporcional ao logito das probabilidades de <code>y_1</code> (em vermelho) como era pra ser por termos construído assim. Já com o <code>y_2</code> (em azul) ainda ficou parecendo uma sigmoide mesmo depois da transformação.</p>
+  theme(axis.text.x = element_blank(),panel.grid.major.x = element_blank(), panel.grid.minor.y = element_blank())
+## `summarise()` regrouping output by &#39;x_cat&#39; (override with `.groups` argument)</code></pre>
+<p><img src="/posts/2017-07-29-segundo-menor-dl_files/figure-html/unnamed-chunk-6-1.png" width="1152" /></p>
+<p>O gráfico da direita mostra que <code>x</code> é proporcional ao logito das probabilidades de <code>y_1</code> (em vermelho) como era pra ser por termos construído assim.
+Já com o <code>y_2</code> (em azul) ainda ficou parecendo uma sigmoide mesmo depois da transformação.</p>
 </div>
 <div id="ajuste-de-modelos" class="section level3">
 <h3>Ajuste de modelos</h3>
-<div id="regressao-logistica-para-y_1-com-glm" class="section level4">
+<div id="regressão-logística-para-y_1-com-glm" class="section level4">
 <h4>Regressão logística para <span class="math inline">\(Y_1\)</span> (com <code>glm</code>)</h4>
 <pre class="r"><code># modelo glm 1 ------------------------------------------------------
 modelo_glm_1 &lt;- glm(y_1 ~ x, data = df, family = binomial)</code></pre>
@@ -306,9 +317,10 @@ loss_and_metrics_1[[2]]
 # [1] 0.85053</code></pre>
 <p>Resultados idênticos! Era para assim ser porque construímos a mesma hipótese e a memsa função de perda do <code>glm</code>.</p>
 </div>
-<div id="regressao-logistica-para-y_2-com-glm" class="section level4">
+<div id="regressão-logística-para-y_2-com-glm" class="section level4">
 <h4>Regressão logística para <span class="math inline">\(Y_2\)</span> (com <code>glm</code>)</h4>
-<p>Para modelar <span class="math inline">\(Y_2\)</span> vamos pisar em terrenos que os modelos lineares não pisam. Primeiro tento ajustar uma curva uasndo <code>x</code> e a transformação <code>tanh(x)</code>. Esse preditor eu suponho que escolhi depois de uma minuciosa e demorada inspeção dos dados (tentei simular mais ou menos o que eu faria numa modelagem onde eu que teria que construir as features na mão).</p>
+<p>Para modelar <span class="math inline">\(Y_2\)</span> vamos pisar em terrenos que os modelos lineares não pisam.
+Primeiro tento ajustar uma curva uasndo <code>x</code> e a transformação <code>tanh(x)</code>. Esse preditor eu suponho que escolhi depois de uma minuciosa e demorada inspeção dos dados (tentei simular mais ou menos o que eu faria numa modelagem onde eu que teria que construir as features na mão).</p>
 <pre class="r"><code># modelo glm 2 ------------------------------------------------------
 modelo_glm_2 &lt;- glm(y_2 ~ x + tanh(x), data = df, family = binomial)
 
@@ -417,34 +429,37 @@ loss_and_metrics_2[[2]]
   geom_line(aes(x = x_cat, y = estimativa, colour = Modelo, group = Modelo)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(x = &quot;x&quot;, colour = &quot;resposta&quot;)</code></pre>
-<p><img src="/blog/2017-07-29-segundo-menor-dl_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+  labs(x = &quot;x&quot;, colour = &quot;resposta&quot;)
+## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<p><img src="/posts/2017-07-29-segundo-menor-dl_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
-<div id="bonus-pca-com-autoencoer" class="section level4">
+<div id="bônus-pca-com-autoencoer" class="section level4">
 <h4>(Bônus) PCA com autoencoer</h4>
 <p>PCA e autoencodes servem na prática para reduzir a dimensionalidade dos dados. PCA é um caso particular de autoencoder com apenas uma camada e funções de ativação lineares. O post <a href="http://curso-r.com/blog/2017/06/26/2017-06-26-construindo-autoencoders/">Construindo Autoencoders</a> ensina a fazer e recomendo a leitura.</p>
 <p>Resumo: autoencoder é uma técnica incrível que generaliza o PCA.</p>
 </div>
 </div>
 </div>
-<div id="discussao" class="section level2">
+<div id="discussão" class="section level2">
 <h2>Discussão</h2>
 <p>Na minha opinião aconteceu de que muita coisa antiga e consagrada teve seu nome mudado e apresentado como novo e isso acabou ofuscando as grandes contribuições realmente relevantes das pesquisas em torno das redes neurais e do deep learning.</p>
-<p>Percebe-se que o Deep Learning generalizou bastante coisa e por isso eu declaro o post bem sucedido se o escrito acima despertou curiosidade em aprender mais sobre deep learning para agregar ao trabalho que já havia sendo feito. Vale mais a pena trazer todos os praticantes de estatística e machine learning juntos nessa novidade do que nos dividirmos.</p>
+<p>Percebe-se que o Deep Learning generalizou bastante coisa e por isso eu declaro o post bem sucedido se o escrito acima despertou curiosidade em aprender mais sobre deep learning para agregar ao trabalho que já havia sendo feito.
+Vale mais a pena trazer todos os praticantes de estatística e machine learning juntos nessa novidade do que nos dividirmos.</p>
 <p>Acredito que mais do que nunca a fundamentação teórica e interpretações terão seu valor potencializado com a disseminação do deep learning. Com o mito de que deep learning seja uma panaceia e com a facilidade que ela nos trouxe para fazer um modelo preditivo, há o risco de sermos soterrados por caixas pretas feitas por pessoas negligentes com aspectos importantes como interpretabilidade, causalidade e generalização. Talvez o bayesianismo se desponte (mais uma vez) como a solução para problemas qualitativos num mundo cada vez mais obscuro trazendo à luz os excessos dos modelos complexos e os benefícios dos modelos simples.</p>
 <p>Puxando o gancho do bayesianismo (e inferências em geral), os resultados já obtidos em cima de modelos lineares ainda se aplicam em deep learning. E também temos a vantagem de que todas as demais ferramentas que se usam em deep learning e que não afetam a linearidade dos parâmetros podem ser utilizadas, como convolucional, recorrente, max pooling, drop out, autoencoder e tantas outras.</p>
 <p>Para finalizar, na prática sugiro aplicar deep learning com o Keras, um pacote incrível que usa o tensorflow ou o theano por trás. Acredito que vocês verão muitos posts sobre o assunto por aqui! (podem encher o saco do Dan Falbel, um dos sócios da <a href="http://curso-r.com">curso-r.com</a>, que está envolvido no desenvolvimento desse pacote em R =]).</p>
 </div>
 <div id="curiosidades" class="section level2">
 <h2>Curiosidades</h2>
-<div id="n-esimo-menor-deep-learning" class="section level3">
+<div id="n-ésimo-menor-deep-learning" class="section level3">
 <h3>N-ésimo menor deep learning</h3>
-<p>Vimos acima o menor e o segundo menor Deep Learnings (que de profundo não têm nada =P). Mas podemos ir o tão profundo quanto quisermos! A representação de redes neurais sai fácil:</p>
-<p><img src="images/posts/conteudo/segundo-menor-dl/dl_inf.png" /><!-- --></p>
+<p>Vimos acima o menor e o segundo menor Deep Learnings (que de profundo não têm nada =P). Mas podemos ir o tão profundo quanto quisermos!
+A representação de redes neurais sai fácil:</p>
+<p><img src="/images/posts/conteudo/segundo-menor-dl/dl_inf.png" /><!-- --></p>
 <p>Já a representação matemática fica esquisita:</p>
 <p><span class="math display">\[E[Y|x] = \frac{1}{1 + \exp{\left(\beta_{p-1} + \beta_p\frac{1}{\frac{\vdots}{1 + \exp{\left(\beta_{6} + \beta_{7}\frac{1}{1 + \exp{\left(\beta_4 + \beta_5\frac{1}{1 + \exp{\left(\beta_2 + \beta_3\frac{1}{1 + \exp{\left(\beta_0 + \beta_1x\right)}}\right)}}\right)}}\right)}}}\right)}}\]</span></p>
 </div>
-<div id="vocabulario" class="section level3">
+<div id="vocabulário" class="section level3">
 <h3>Vocabulário</h3>
 <p>Os jargões e termos do deep learning foram herdados de um outro contexto diferente do da modelagem preditiva estudada na estatística e por isso acabaram surgindo inúmeros sinônimos. Alguns deles são:</p>
 <ul>
@@ -460,10 +475,36 @@ loss_and_metrics_2[[2]]
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -473,7 +514,7 @@ loss_and_metrics_2[[2]]
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -483,7 +524,7 @@ loss_and_metrics_2[[2]]
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -493,25 +534,21 @@ loss_and_metrics_2[[2]]
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -521,12 +558,14 @@ loss_and_metrics_2[[2]]
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -551,24 +590,24 @@ loss_and_metrics_2[[2]]
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

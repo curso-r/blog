@@ -46,4 +46,3 @@
 | 2017-11-20 | Pacote reticulate                                                 | Gabriela Lima Borges (convidada) |
 | 2018-05-30 | pesqEle: dados de pesquisas eleitorais                            | Julio                            |
 | 2020-08-27 | Aplauda-me                                                        | Julio|Athos                      |
-| 2020-12-30 | CNNs: Kernel Quadrado versus Kernel Retangular                    | Athos                            |

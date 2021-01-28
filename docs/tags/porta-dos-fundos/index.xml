@@ -6,7 +6,11 @@
     <description>Recent content in Porta dos Fundos on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Mon, 06 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/porta-dos-fundos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/porta-dos-fundos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Quem segura a barra do Porta dos Fundos?</title>
       <link>https://blog.curso-r.com/posts/2020-01-06-porta/</link>
@@ -19,7 +23,7 @@
     <item>
       <title>O Porta dos Fundos está em decadência? (REVISITED)</title>
       <link>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</link>
-      <pubDate>Fri, 28 Apr 2017 23:26:00 +0300</pubDate>
+      <pubDate>Fri, 28 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</guid>
       <description>Às vezes a venda de uma empresa é um sinal de que algo não vai bem. Além disso, a briga entre as novas mídias e as velhas mídias é brutal, então se um conglomerado televisivo compra um dos gigantes da internet brasileira deve ter acontecido algum um tipo de canibalismo. Motivados pela nova casa do PDF, neste post revisitamos a análise sobre a decadência do Porta dos Fundos.</description>

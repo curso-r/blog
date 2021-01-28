@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Bruna Wundervald em <a href="/categories/an%c3%a1lises">Análises</a>
+            Escrito por
+            
+            
+              <a href = "" target = "_blank">Bruna Wundervald</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -121,29 +127,59 @@
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
 <script src="/rmarkdown-libs/d3/d3.min.js"></script>
 <script src="/rmarkdown-libs/d3-tip/index.js"></script>
 <link href="/rmarkdown-libs/chorddiag/chorddiag.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/chorddiag/chorddiag.js"></script>
-<script src="/rmarkdown-libs/chorddiag-binding/chorddiag.js"></script>
 
 
-<p>Olá! Tudo bem? Eu sou a <a href="https://github.com/brunaw">Bruna</a>, e talvez você já me conheça de algum grupo de R no Telegram ou Facebook, ou mesmo pelo meu outro pacote, o<br />
-<a href="https://cran.r-project.org/web/packages/vagalumeR/index.html">vagalumeR</a>. Eu estou prestes a me formar em Estatística na UFPR, e esse post vai ter muito a ver com o tema do meu trabalho de conclusão de curso, que está sendo feito sob orientação do Professor <a href="https://github.com/walmes">Walmes Zeviani</a>.</p>
-<p>Recentemente, eu fiz a primeira versão do pacote do meu TCC, o <code>chorrrds</code>. Ainda tem muito a ser feito nele, mas os primeiros resultados já são bem legais. O pacote <code>chorrrds</code> pode ser utilizado para a obtenção acordes de músicas, através da raspagem do site <a href="https://www.cifraclub.com.br/">CifraClub</a>. Junto com o pacote já vêm diversos bancos de dados relativos à música brasileira. Ele já está disponível no CRAN, mas as próximas atualizações devem sair em primeira mão nesse repositório: <a href="https://github.com/brunaw/chorrrds" class="uri">https://github.com/brunaw/chorrrds</a></p>
+<p>Olá! Tudo bem? Eu sou a <a href="https://github.com/brunaw">Bruna</a>,
+e talvez você já me conheça de algum grupo de R no Telegram
+ou Facebook, ou mesmo pelo meu outro pacote, o<br />
+<a href="https://cran.r-project.org/web/packages/vagalumeR/index.html">vagalumeR</a>. Eu estou prestes a me formar em Estatística na
+UFPR, e esse post vai ter muito a ver com o tema do meu
+trabalho de conclusão de curso, que está sendo feito
+sob orientação do Professor
+<a href="https://github.com/walmes">Walmes Zeviani</a>.</p>
+<p>Recentemente, eu fiz a primeira versão do pacote do meu TCC,
+o <code>chorrrds</code>. Ainda tem muito a ser feito nele, mas os primeiros
+resultados já são bem legais. O pacote <code>chorrrds</code> pode ser
+utilizado para a obtenção acordes de músicas, através da
+raspagem do site <a href="https://www.cifraclub.com.br/">CifraClub</a>.
+Junto com o pacote já vêm diversos bancos de dados
+relativos à música brasileira. Ele já está disponível no
+CRAN, mas as próximas atualizações devem sair em
+primeira mão nesse repositório: <a href="https://github.com/brunaw/chorrrds" class="uri">https://github.com/brunaw/chorrrds</a></p>
 <pre class="r"><code># Instalação
 devtools::install_github(&quot;brunaw/chorrrds&quot;)
 # ou
 install.packages(&quot;chorrrds&quot;) # do CRAN
 data(package = &quot;chorrrds&quot;)</code></pre>
-<p>A base de dados chamada <code>all</code>, presente no pacote, contém dados referentes a 106 artistas nacionais, dos genêros: “rock”, “pop”, “sertanejo”, “MPB”, “bossa nova”, “forró”, “reggae” e “samba”. Ela já contém, além das variáveis extraídas com o pacote, as datas de lançamento e a popularidade das músicas, obtidas através da API do <a href="https://github.com/tiagomendesdantas/Rspotify">Spotify</a>. Os detalhes sobre a seleção dos artistas e combinação dos dados com os do Spotify serão omitidos por enquanto, mas quem quiser falar sobre isso comigo, pode ficar a vontade :)</p>
-<p>Então vamos lá. Eu vou começar acertando alguns pontos sobre os dados, já que eles não estão perfeitos, como:</p>
+<p>A base de dados chamada <code>all</code>, presente no pacote, contém dados
+referentes a 106 artistas nacionais, dos genêros: “rock”, “pop”,
+“sertanejo”, “MPB”, “bossa nova”, “forró”, “reggae” e “samba”.
+Ela já contém, além das variáveis extraídas com o pacote,
+as datas de lançamento e a popularidade das músicas, obtidas
+através da API do
+<a href="https://github.com/tiagomendesdantas/Rspotify">Spotify</a>. Os
+detalhes sobre a seleção dos artistas e combinação dos
+dados com os do Spotify serão omitidos por enquanto, mas
+quem quiser falar sobre isso comigo, pode ficar a vontade :)</p>
+<p>Então vamos lá. Eu vou começar acertando alguns pontos
+sobre os dados, já que eles não estão perfeitos, como:</p>
 <ul>
-<li>Deixar apenas os anos de lançamento das músicas, e não a data completa;</li>
-<li>Encontrar as formas mais simples dos acordes (sem acidentes ou extensões);</li>
+<li>Deixar apenas os anos de lançamento das músicas, e não a
+data completa;</li>
+<li>Encontrar as formas mais simples dos acordes (sem acidentes
+ou extensões);</li>
 <li>Conectar a base original com a dos genêros dos artistas;</li>
-<li>Consertar enarmonias, ou seja, transformar as diferentes versões de um acorde com as mesmas notas em uma coisa só (por exemplo, Gb passa a ser F#, já que na prática eles são iguais).</li>
+<li>Consertar enarmonias, ou seja, transformar as diferentes
+versões de um acorde com as mesmas notas em uma coisa só
+(por exemplo, Gb passa a ser F#, já que na prática eles
+são iguais).</li>
 </ul>
 <pre class="r"><code>library(tidyverse)
 
@@ -170,14 +206,14 @@ da &lt;- chorrrds::all %&gt;%
     TRUE ~ acorde)) # Conversão de enarmonias
 
 head(da)</code></pre>
-<table style="width:100%;">
+<table>
 <colgroup>
 <col width="5%" />
-<col width="39%" />
+<col width="41%" />
 <col width="6%" />
 <col width="6%" />
 <col width="4%" />
-<col width="20%" />
+<col width="21%" />
 <col width="7%" />
 <col width="6%" />
 </colgroup>
@@ -256,8 +292,15 @@ head(da)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>A base está no formato longo, ou seja, temos uma linha para cada acorde da música, mantendo a sequência na qual eles aparecem no site.</p>
-<p>Muito se fala sobre o quanto as músicas no Brasil andam ficando mais “simples”, ou que alguns genêros musicais são mais ricos que outros. Com os dados que temos, será que é possível concluir algo sobre isso olhando simplesmente para a quantidade média de acordes por música ao longo dos anos? Vejamos o gráfico a seguir.</p>
+<p>A base está no formato longo, ou seja, temos uma linha para cada
+acorde da música, mantendo a sequência na qual eles aparecem
+no site.</p>
+<p>Muito se fala sobre o quanto as músicas no Brasil andam ficando mais
+“simples”, ou que alguns genêros musicais são mais ricos que
+outros. Com os dados que temos, será que é possível concluir
+algo sobre isso olhando simplesmente para a quantidade média
+de acordes por música ao longo dos anos? Vejamos o gráfico a
+seguir.</p>
 <pre class="r"><code>da_g &lt;- da %&gt;% 
   # 2018 ainda não é um ano completo
   dplyr::mutate(date &lt; 2018) %&gt;%  
@@ -294,9 +337,19 @@ tema &lt;- theme(
   axis.text = element_text(size = 12))
   
 p + tema</code></pre>
-<p><img src="/blog/2018-04-25-chorrrds/media-acordes-musicas.png" style="display: block; margin: auto;" /></p>
-<p>Claramente, gêneros como o samba, MPB e bossa nova têm, em geral, uma quantidade média de acordes distintos por música muito maior do que os outros. E eles têm mais variação ao longo dos anos também, o que pode ser um reflexo da maior criatividade envolvida nestes genêros. Os menores valores, como é esperado, estão principalmente no sertanejo, que é um genêro conhecidamente mais uniforme na questão harmônica.</p>
-<p>Nós podemos avançar um pouco e olhar para os próprios artistas. Quem será que usa as maiores quantidades de acordes distintos em suas composições? Vamos ver o próximo gráfico, que mostra apenas os artistas com mediana maior do que 8 acordes diferentes por música.</p>
+<p><img src="/images/posts/conteudo/2018-04-25-chorrrds/media-acordes-musicas.png" style="display: block; margin: auto;" /></p>
+<p>Claramente, gêneros como o samba, MPB e bossa nova têm, em geral,
+uma quantidade média de acordes distintos por música muito
+maior do que os outros. E eles têm mais variação ao longo dos
+anos também, o que pode ser um reflexo da maior criatividade
+envolvida nestes genêros. Os menores valores, como é
+esperado, estão principalmente no sertanejo, que é um
+genêro conhecidamente mais uniforme na questão harmônica.</p>
+<p>Nós podemos avançar um pouco e olhar para os próprios artistas.
+Quem será que usa as maiores quantidades de acordes
+distintos em suas composições? Vamos ver o próximo gráfico,
+que mostra apenas os artistas com mediana maior do que 8
+acordes diferentes por música.</p>
 <pre class="r"><code>da_g &lt;- da %&gt;%   
   dplyr::mutate(artist = stringr::str_to_title(artist)) %&gt;% 
   # Agrupamento por artista + música
@@ -335,12 +388,42 @@ tema &lt;- theme(
   axis.title.y = element_text(size = 16))
 
 p + tema</code></pre>
-<p><img src="/blog/2018-04-25-chorrrds/stats-artistas.png" style="display: block; margin: auto;" /></p>
-<p>E <em>voilá</em>. A primeira posição é ocupada por um dos maiores musicistas brasileiros, que é referência internacional em questões de harmonia: Chico Buarque. Logo em seguida, temos o Reinaldo, um dos maiores sambistas que o Brasil já conheceu, e o Pixinguinha, um gênio do choro. E assim a lista segue, com artistas principalmente da bossa nova, samba e MPB. Demora até que apareça o primeiro dos rockeiros nesta lista, que é a Rita Lee. Dos membros do sertanejo, nenhum chega a aparecer no gráfico, mostrando que a “variedade” harmônica deste gênero musical é mesmo bem baixa.</p>
-<p>Até agora está legal mas, com música, sempre pode ficar ainda mais. A ideia mais recente que o meu caro orientador <a href="https://github.com/walmes">Walmes Zeviani</a> teve para o nosso trabalho é de encadear as transições entre os acordes em um diagrama de cordas. Vocês já ouviram falar desse diagrama? Eu mal o conheço e já considero pacas.</p>
-<p>O diagrama de cordas é um método gráfico (e lindo) de explicitar relações entre grupos ou indivíduos. Os grupos ficam arranjados de forma radial/circular, e as cordas que aparecem dentro do círculo demonstram as conexões entre eles e suas forças. Pra quem sabe um pouquinho sobre harmonia, vai ser sensacional ver o quanto isso faz sentido (mas também não vou entrar nesse mérito agora).</p>
-<p>O exemplo que eu vou mostrar aqui é extremamente simples. Antes eu separei, dos acordes “crus” retirados do CifraClub, apenas a parte fundamental deles. Isto é, desconsiderei se um acorde tem notas extras, acidentes e maior/menor. Ou seja, aqui nós só veremos acordes como C, D, B, A#, o miolo da coisa. Podemos perder informação fazendo isso? Sim, e bastante. Mas como eu disse, esse caso é pra ser bem simples mesmo.</p>
-<p>Enfim, vamos voltar ao exemplo. A seguir, eu considero como uma “transição” quando um acorde aparece em sequência do outro (exemplo de transição muito comum: dó-sol). O código abaixo constrói o diagrama de cordas através do pacote <code>chordiag</code>:</p>
+<p><img src="/images/posts/conteudo/2018-04-25-chorrrds/stats-artistas.png" style="display: block; margin: auto;" /></p>
+<p>E <em>voilá</em>. A primeira posição é ocupada por um dos maiores
+musicistas brasileiros, que é referência internacional em questões
+de harmonia: Chico Buarque. Logo em seguida, temos o Reinaldo,
+um dos maiores sambistas que o Brasil já conheceu, e o
+Pixinguinha, um gênio do choro. E assim a lista segue, com
+artistas principalmente da bossa nova, samba e MPB. Demora
+até que apareça o primeiro dos rockeiros nesta lista, que
+é a Rita Lee. Dos membros do sertanejo, nenhum chega a
+aparecer no gráfico, mostrando que a “variedade” harmônica
+deste gênero musical é mesmo bem baixa.</p>
+<p>Até agora está legal mas, com música, sempre pode
+ficar ainda mais. A ideia mais recente que o meu caro
+orientador <a href="https://github.com/walmes">Walmes Zeviani</a>
+teve para o nosso trabalho é de
+encadear as transições entre os acordes em um diagrama
+de cordas. Vocês já ouviram falar desse diagrama? Eu
+mal o conheço e já considero pacas.</p>
+<p>O diagrama de cordas é um método gráfico (e lindo)
+de explicitar relações entre grupos ou
+indivíduos. Os grupos ficam arranjados de forma radial/circular,
+e as cordas que aparecem dentro do círculo demonstram
+as conexões entre eles e suas forças. Pra quem sabe um pouquinho
+sobre harmonia, vai ser sensacional ver o quanto isso faz
+sentido (mas também não vou entrar nesse mérito agora).</p>
+<p>O exemplo que eu vou mostrar aqui é extremamente simples.
+Antes eu separei, dos acordes “crus” retirados do CifraClub,
+apenas a parte fundamental deles. Isto é, desconsiderei
+se um acorde tem notas extras, acidentes e maior/menor.
+Ou seja, aqui nós só veremos acordes como C, D, B, A#, o
+miolo da coisa. Podemos perder informação fazendo isso? Sim,
+e bastante. Mas como eu disse, esse caso é pra ser bem simples mesmo.</p>
+<p>Enfim, vamos voltar ao exemplo. A seguir, eu considero como
+uma “transição” quando um acorde aparece em sequência do outro
+(exemplo de transição muito comum: dó-sol). O código abaixo
+constrói o diagrama de cordas através do pacote <code>chordiag</code>:</p>
 <pre class="r"><code>devtools::install_github(&quot;mattflor/chorddiag&quot;)</code></pre>
 <pre class="r"><code># Ordenando por círculo das quintas
 ordem &lt;- c(&quot;G&quot;, &quot;D&quot;, &quot;A&quot;, &quot;E&quot;, &quot;B&quot;, &quot;F#&quot;, 
@@ -366,23 +449,74 @@ chorddiag::chorddiag(mm, showTicks = FALSE,
                      palette = &quot;Set2&quot;, palette2 = &quot;#Set3&quot;)</code></pre>
 <div id="htmlwidget-1" style="width:800px;height:800px;" class="chorddiag html-widget"></div>
 <script type="application/json" data-for="htmlwidget-1">{"x":{"matrix":[[6967,14126,10059,3832,1842,2329,409,929,734,1459,4266,17887,15],[20455,8125,15269,9222,3597,1291,1327,443,851,1461,2645,5562,5],[6928,24159,9653,14863,8550,3207,1348,1512,392,1175,3209,3875,4],[3358,6037,24697,7533,8979,5092,2092,902,899,348,1634,3139,3],[2764,2374,5350,17924,4013,4210,2727,953,247,901,351,1681,6],[1437,1908,2184,3066,9718,1773,2182,1683,390,286,1012,330,3],[372,1067,1747,1172,1812,5019,1127,1512,746,341,217,905,0],[1401,320,1418,811,543,1196,3195,741,878,799,553,397,4],[525,1426,421,578,448,329,483,1687,725,1455,1035,729,0],[1117,764,2147,532,778,302,365,724,2469,1359,3056,2579,3],[5998,2299,1793,2778,623,626,265,513,777,4576,2597,8004,1],[13518,7647,4133,2397,2593,597,517,649,732,2032,10275,5352,1],[14,1,4,5,5,1,0,8,1,3,0,2,157]],"options":{"type":"directional","width":800,"height":800,"margin":100,"showGroupnames":true,"groupNames":["G","D","A","E","B","F#","Db","Ab","Eb","Bb","F","C",null],"groupColors":["#66C2A5","#FC8D62","#8DA0CB","#E78AC3","#A6D854","#FFD92F","#E5C494","#B3B3B3"],"groupThickness":0.1,"groupPadding":0.0349065850398866,"groupnamePadding":[30,30,30,30,30,30,30,30,30,30,30,30,30],"groupnameFontsize":18,"groupedgeColor":null,"chordedgeColor":"#808080","categoryNames":null,"categorynamePadding":100,"categorynameFontsize":28,"showTicks":false,"tickInterval":1000,"ticklabelFontsize":10,"fadeLevel":0.1,"showTooltips":true,"showZeroTooltips":true,"tooltipNames":["G","D","A","E","B","F#","Db","Ab","Eb","Bb","F","C",null],"tooltipFontsize":12,"tooltipUnit":"","tooltipGroupConnector":" &#x25B6; ","precision":"null","clickAction":null,"clickGroupAction":null}},"evals":[],"jsHooks":[]}</script>
-<p>Vejam que interessante. Como eu disse antes, uma das relações mais fortes do diagrama é o C-G (ou dó-sol), que é justificada teoricamente, já que o G é a quinta do C. O mesmo acontece com D-A, A-E, F-C e assim por diante. Quem quiser saber mais sobre esse comportamento, pode dar uma olhada <a href="https://ledgernote.com/columns/music-theory/circle-of-fifths-explained/">aqui</a>. Transições meio malucas, como B-Bb, também acontecem. “Maluca” porque um acorde bemol, indicado pelo “b”, é aquele cuja raíz esta meio tom abaixo do indicado pela letra anterior, que neste caso é o B (si), então esse acontecimento não faz muito sentido.</p>
-<div id="consideracoes-finais" class="section level1">
+<p>Vejam que interessante. Como eu disse antes, uma das
+relações mais fortes do diagrama é o C-G (ou dó-sol),
+que é justificada teoricamente, já que o G é a quinta do
+C. O mesmo acontece com D-A, A-E, F-C e assim por diante.
+Quem quiser saber mais sobre esse comportamento, pode
+dar uma olhada <a href="https://ledgernote.com/columns/music-theory/circle-of-fifths-explained/">aqui</a>.
+Transições meio malucas, como
+B-Bb, também acontecem. “Maluca” porque um acorde
+bemol, indicado pelo “b”, é aquele cuja raíz esta
+meio tom abaixo do indicado pela letra anterior,
+que neste caso é o B (si), então esse acontecimento não
+faz muito sentido.</p>
+<div id="considerações-finais" class="section level1">
 <h1>Considerações Finais</h1>
-<p>O que vimos aqui é um pedaço da análise inicial do meu TCC, que ainda não está nem um pouco pronto. São exemplos simples das informações podemos extrair com o pacote <code>chorrrds</code>, e o universo de possibilidades é infinito. Isso que nós nem começamos a falar sobre as conexões que podem ser feitas com a API do Spotify, o pacote <code>music21</code>, que é do próprio Julio Trecenti, com as letras das músicas,…</p>
-<p>Além disso, om certeza, meu objetivo com os gráficos apresentados não é fazer nenhum tipo de juízo de valor sobre os genêros por conta de “complexidade harmônica”. Diga-se de passagem, eu mesma sou bem fã de todos esses genêros, desde a MPB até o sertanejo :D</p>
+<p>O que vimos aqui é um pedaço da análise inicial do meu TCC,
+que ainda não está nem um pouco pronto. São exemplos
+simples das informações podemos extrair com o pacote <code>chorrrds</code>,
+e o universo de possibilidades é infinito. Isso que nós nem
+começamos a falar sobre as conexões que podem ser feitas
+com a API do Spotify, o pacote <code>music21</code>, que é do próprio
+Julio Trecenti, com as letras das músicas,…</p>
+<p>Além disso, om certeza, meu objetivo com os gráficos apresentados
+não é fazer nenhum tipo de juízo de valor sobre os genêros
+por conta de “complexidade harmônica”. Diga-se de passagem,
+eu mesma sou bem fã de todos esses genêros, desde a MPB
+até o sertanejo :D</p>
 </div>
 <div id="agradecimentos" class="section level1">
 <h1>Agradecimentos</h1>
-<p>Ao meu orientador, <a href="https://github.com/walmes">Walmes Zeviani</a>, que fez eu me apaixonar pelo R, e ao <a href="http://curso-r.com/author/julio/">Julio Trecenti</a>, que é tão entusiasta do meu TCC quanto eu, e já fez diversas contribuições valiosas.</p>
+<p>Ao meu orientador, <a href="https://github.com/walmes">Walmes Zeviani</a>,
+que fez eu me apaixonar pelo R, e ao
+<a href="http://curso-r.com/author/julio/">Julio Trecenti</a>, que é tão
+entusiasta do meu TCC quanto eu, e já fez diversas contribuições
+valiosas.</p>
 </div>
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -392,7 +526,7 @@ chorddiag::chorddiag(mm, showTicks = FALSE,
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -402,7 +536,7 @@ chorddiag::chorddiag(mm, showTicks = FALSE,
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -412,25 +546,21 @@ chorddiag::chorddiag(mm, showTicks = FALSE,
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -440,12 +570,14 @@ chorddiag::chorddiag(mm, showTicks = FALSE,
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -470,24 +602,24 @@ chorddiag::chorddiag(mm, showTicks = FALSE,
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

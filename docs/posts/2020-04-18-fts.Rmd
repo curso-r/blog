@@ -6,7 +6,6 @@ categories: ["pacotes"]
 image: "images/posts/banner/fts.jpg"
 author: ["José de Jesus Filho"]
 summary: "Este tutorial mostrará como estruturar uma base de dados de textos no PostgreSQL, tokenizá-los e montar um índice invertido a fim de realizar buscas textuais em grande volumes de documentos em poucos segundos."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Fernando em <a href="/categories/an%c3%a1lises">Análises</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/Azeloc" target = "_blank">Fernando</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -122,6 +128,8 @@
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Quando eu trabalhei no Núcleo de Estudos da Violência da USP, obter informações da Secretaria de Segurança Pública de São Paulo (SSP) era uma tarefa meio esotérica. Coletávamos os dados de todos os DP’s de São Paulo, que são aproximadamente 100, e, como fazer isso manualmente era demorado, aplicávamos uma solução automática em dois passos. Primeiro <em>raspávamos</em> o site da SSP em Python<!--, com um script desenvolvido antes da minha entrada,--> e depois rodávamos uma macro em VBA chamada “Mestre Dos Magos”, que era responsável por consolidar as séries históricas em excel. Eu achava o procedimento um pouco hermético porque nenhum deles tinha sido feito por mim ou pela minha equipe, era uma herança que a gente não sabia como consertar se desse algum problema. Para dar um exemplo, no final da minha breve estadia no NEV o script não funcionava mais, então era necessário baixar tudo manualmente.</p>
@@ -138,11 +146,11 @@
 </ol>
 <p>Mesmo que existam <em>scrapers</em> mais complicados, é verdade que seguir esses passos pelo menos te ajuda a chegar mais perto do que você realmente precisará fazer depois.</p>
 </div>
-<div id="defina-o-que-voce-quer" class="section level2">
+<div id="defina-o-que-você-quer" class="section level2">
 <h2>Defina o que você quer</h2>
 <p>Tanto o NEV quanto a minha namorada tinham interesse nas tabelas que apareciam numa URL específica do site: <a href="http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx" class="uri">http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx</a>. A lógica por trás da divulgação dessas informações é a seguinte: você escolhe um ano, uma localidade geográfica/administrativa e um tipo de informação e ele te devolve uma tabela. Os anos disponíveis são os anos de 2001 a 2017, as localidades são os cruzamentos entre Municípios, Regiões e Delegacias (notando que você sempre pode escolher “Todos”) e os tipos de informação são taxas de delito, ocorrências registradas por ano, ocorrências registradas por mês e produtividade policial. Nesta aplicação vamos procurar contagens de ocorrências registradas por mês.</p>
 </div>
-<div id="identifique-o-que-o-site-faz-por-tras" class="section level2">
+<div id="identifique-o-que-o-site-faz-por-trás" class="section level2">
 <h2>Identifique o que o site faz por trás</h2>
 <p>Identificar o que o site faz por trás provavelmente é a fase mais complicada da construção de um <em>scraper</em>. A dificuldade é que não existe um algoritmo que faça isso pra você. Normalmente eu sigo alguns passos, mas eles exigem uma dose de <em>insight</em> para funcionar, o que implica que talvez não seja possível seguir todos os passos em sequência.</p>
 <ol style="list-style-type: decimal">
@@ -153,28 +161,28 @@
 <li>Na lista de requisições que o site fez ao servidor, identifique aquela(s) que é(são) relevante(s) a sua pesquisa.</li>
 </ol>
 <p>Parece muito louco né? No geral, é muito louco sim, mas quando você dá sorte é fácil. Vou mostrar o que acontece no nosso exemplo:</p>
-<div id="a-pagina-imediatamente-anterior" class="section level3">
+<div id="a-página-imediatamente-anterior" class="section level3">
 <h3>A página imediatamente anterior</h3>
 <p>Eu quero a url <a href="http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx" class="uri">http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx</a> com alguma seleção, então pra realizar o primeiro passo basta entrar em <a href="http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx" class="uri">http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx</a>.</p>
 </div>
 <div id="ferramentas-do-desenvolvedor-e-aba-network" class="section level3">
 <h3>Ferramentas do desenvolvedor e aba “Network”</h3>
 <p>Em qualquer navegador, as ferramentas do desenvolvedor mostram o <em>background</em> do que aparece na tela. Se estiver nessa aba, quando você entrar em <a href="http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx" class="uri">http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx</a> e apertar F5, vai encontrar uma tela mais ou menos parecida com a tela abaixo:</p>
-<p><img src="/blog/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-1-1.png" width="768" /></p>
+<p><img src="/posts/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-1-1.png" width="768" /></p>
 <p>Cada linha representa uma requisição, que é essencialmente o envio de um arquivo .html ao servidor. O conteúdo que visualizamos na tela é o resultado de todas essas requisições e, se destrincharmos cada uma delas, podemos identificar aquelas que são relevantes para o nosso problema.</p>
 </div>
-<div id="a-requisicao" class="section level3">
+<div id="a-requisição" class="section level3">
 <h3>A requisição</h3>
 <p>O próximo passo é identificar o que é que o navegador pede ao servidor quando te devolve o que você quer. Se você escolher o ano de 2017 na caixa de seleção de anos, por exemplo, vai encontrar uma tela parecida com essa aqui.</p>
-<p><img src="/blog/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
+<p><img src="/posts/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
 <p>Antes de prosseguir, é necessário fazer uma inspeção meticulosa de todas as requisições que aparecem, mas vou encurtar a discussão afirmando que a primeira delas é a mais importante. Existem muitas maneiras de deduzir que ela é uma boa candidata, como por exemplo olhando que ela é a única requisição <em>relevante</em> que recebe html, mas vou pular essa parte.</p>
 <p>Segundo o nosso dedo duro, a requisição utiliza o método “POST” e, quando clicamos nela, temos informações sobre ela no painel ao lado. Como eu falei acima, uma requisição é um arquivo .html que “pede” alguma ao servidor com base no seu conteúdo. No geral, um bom lugar para procurar o que a requisição está pedindo é o seu conjunto de parâmetros, na aba “Params” do painel de detalhamento da requisição.</p>
-<p><img src="/blog/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
-<p>Quando inspecionamos essa requisição “POST”, identificamos que as coisas que são relevantes para o conteúdo da página estão nesses parâmetros. De fato, pensando ingenuamente, clicar apenas em “2017” deve mexer nos parâmetros que tem a ver com isso mas deve deixar os demais parâmetros fixos. Por sorte, os parâmetros observados batem com essa expectativa: “__EVENTTARGET&quot; é <code>ctl00$conteudo$$ddlAnos</code> é um <em>placeholder</em> que tem a ver com a caixa de seleção em que mexemos, os dois próximos parâmetros estão zerados, “__VIEWSTATE&quot; e “__EVENTVALIDATION&quot; são parâmetros da sessão, e, por fim, temos os parâmetros da consulta, que estão todos zerados com exceção de <code>ctl00$conteudo$$ddlAnos</code>.</p>
+<p><img src="/posts/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-3-1.png" width="768" /></p>
+<p>Quando inspecionamos essa requisição “POST”, identificamos que as coisas que são relevantes para o conteúdo da página estão nesses parâmetros. De fato, pensando ingenuamente, clicar apenas em “2017” deve mexer nos parâmetros que tem a ver com isso mas deve deixar os demais parâmetros fixos. Por sorte, os parâmetros observados batem com essa expectativa: "__EVENTTARGET" é <code>ctl00$conteudo$$ddlAnos</code> é um <em>placeholder</em> que tem a ver com a caixa de seleção em que mexemos, os dois próximos parâmetros estão zerados, "__VIEWSTATE" e "__EVENTVALIDATION" são parâmetros da sessão, e, por fim, temos os parâmetros da consulta, que estão todos zerados com exceção de <code>ctl00$conteudo$$ddlAnos</code>.</p>
 <p>Parece que os parâmetros tem tudo a ver com a saída. Será que mexer apenas neles basta para copiar a requisição do navegador?</p>
 </div>
 </div>
-<div id="crie-um-robo-que-imita-o-que-um-humano-faria" class="section level2">
+<div id="crie-um-robô-que-imita-o-que-um-humano-faria" class="section level2">
 <h2>Crie um robô que imita o que um humano faria</h2>
 <p>Agora que sabemos um pouco mais sobre como as requisições funcionam, vamos tentar fazer o POST mais simples de todos: ele só tem os parâmetros da última imagem. Em R, o jeito mais fácil de fazer requisições é usando o pacote <code>httr</code>. Ele é bem intuitivo e flexível, de tal forma que fazer um POST é feito simplesmente chamando a função <code>httr::POST</code>:</p>
 <pre class="r"><code>url &lt;- &#39;http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx&#39;
@@ -228,9 +236,9 @@ event_validation &lt;- httr::POST(url) %&gt;%
     xml2::read_html() %&gt;% 
   rvest::html_table()</code></pre>
 <p>Exatamente a tabelinha que queríamos! Entretanto, nem tudo são flores. Como eu mencionei ali em cima, tanto a minha namorada quanto o NEV tinham interesse no número de BO’s, que não é o que obtivemos fazendo a requisição via R. Fuçando um pouco, é fácil ver que o que obtivemos são os números de produtividade policial. Será que é fácil mexer nos parâmetros pra obter os números de BO’s?</p>
-<p>Felizmente, a resposta é sim, mas não é tão simples quanto parece. Se de outra tela qualquer você clicar em “Ocorrências Registradas por Mês” você vai perceber que o “__EVENTTARGET&quot; mudou para <code>ctl00$conteudo$$btnMes</code>, mas, a despeito do que se poderia imaginar, os outros parâmetros permaneceram com os nomes intactos.</p>
-<p><img src="/blog/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
-<p>Como essa requisição sugere, você consegue variar os tipos de informação simplesmente variando o “__EVENTTARGET“. Com isso, uma requisição para obter as”Ocorrências Registradas por Mês&quot; ficaria:</p>
+<p>Felizmente, a resposta é sim, mas não é tão simples quanto parece. Se de outra tela qualquer você clicar em “Ocorrências Registradas por Mês” você vai perceber que o "__EVENTTARGET" mudou para <code>ctl00$conteudo$$btnMes</code>, mas, a despeito do que se poderia imaginar, os outros parâmetros permaneceram com os nomes intactos.</p>
+<p><img src="/posts/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
+<p>Como essa requisição sugere, você consegue variar os tipos de informação simplesmente variando o "__EVENTTARGET“. Com isso, uma requisição para obter as”Ocorrências Registradas por Mês" ficaria:</p>
 <pre class="r"><code>params &lt;- list(`__EVENTTARGET` = &quot;ctl00$conteudo$$ddlAnos&quot;,
                `__EVENTARGUMENT` = &quot;&quot;,
                `__LASTFOCUS` = &quot;&quot;,
@@ -245,7 +253,7 @@ resposta &lt;- httr::POST(url,
                        body = params,
                        encode = &#39;form&#39;) %&gt;% 
     xml2::read_html()</code></pre>
-<p>É importante notar que cada vez que vamos um POST desse, é como se estivessemos entrando na página novamente, de tal forma que as informações que a página tem quando damos vários cliques seguidos são diferentes das informações de quando acessamos a página pelo R. Por exemplo, quando estamos navegando pela página pelos links, o “__EVENTTARGET&quot; volta para <code>ctl00$conteudo$$ddlAnos</code> se você trocar de página <em>saindo</em> de uma página de “Ocorrências Registradas por Mês”, mas o tipo de informação vêm corretamente. Isso acontece porque, se você acessar várias páginas em sequência, a página sabe de onde você veio.</p>
+<p>É importante notar que cada vez que vamos um POST desse, é como se estivessemos entrando na página novamente, de tal forma que as informações que a página tem quando damos vários cliques seguidos são diferentes das informações de quando acessamos a página pelo R. Por exemplo, quando estamos navegando pela página pelos links, o "__EVENTTARGET" volta para <code>ctl00$conteudo$$ddlAnos</code> se você trocar de página <em>saindo</em> de uma página de “Ocorrências Registradas por Mês”, mas o tipo de informação vêm corretamente. Isso acontece porque, se você acessar várias páginas em sequência, a página sabe de onde você veio.</p>
 </div>
 <div id="repita-quantas-vezes-quiser" class="section level2">
 <h2>Repita quantas vezes quiser</h2>
@@ -293,15 +301,41 @@ D &lt;- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = &quot;ocorrencias&quot
 <div id="resultados" class="section level2">
 <h2>Resultados</h2>
 <p>Com esses dados dá pra fazer muitas coisas legais. É possível, por exemplo, fazer mapas como esse, que representa o número de homicídios em 2016, por município. Ele foi feito em R, mas como fazê-lo é assunto pra outro post!</p>
-<p><img src="/blog/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/posts/2017-05-19-scrapper-ssp_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -311,7 +345,7 @@ D &lt;- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = &quot;ocorrencias&quot
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -321,7 +355,7 @@ D &lt;- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = &quot;ocorrencias&quot
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -331,25 +365,21 @@ D &lt;- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = &quot;ocorrencias&quot
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -359,12 +389,14 @@ D &lt;- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = &quot;ocorrencias&quot
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -389,24 +421,24 @@ D &lt;- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = &quot;ocorrencias&quot
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

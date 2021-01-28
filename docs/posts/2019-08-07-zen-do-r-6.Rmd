@@ -1,12 +1,11 @@
 ---
 title: "Pacotes (Zen do R parte 6)"
 date: "2019-08-07"
-tags: ["zen-do-r"]
-categories: ["livro"]
+tags: ["Zen do R"]
+categories: ["conceitos"]
 image: "images/posts/banner/zen-do-r-6.jpg"
 author: ["Caio"]
 summary: "Pacotes: por que e como fazê-los?"
-draft: false
 ---
 
 Nesta série de posts, estamos apresentamos a todos a nossa primeira tentativa de

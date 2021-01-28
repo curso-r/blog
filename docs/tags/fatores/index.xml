@@ -6,11 +6,15 @@
     <description>Recent content in fatores on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 01 Jul 2017 23:26:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/fatores/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/fatores/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Forcats</title>
       <link>https://blog.curso-r.com/posts/2017-07-01-forcats/</link>
-      <pubDate>Sat, 01 Jul 2017 23:26:00 +0300</pubDate>
+      <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-07-01-forcats/</guid>
       <description>Neste post, falaremos sobre o forcats, um pacote recheado de excelentes funções para manipular fatores.</description>

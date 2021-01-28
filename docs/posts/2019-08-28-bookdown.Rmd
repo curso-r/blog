@@ -6,7 +6,6 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/bookdown.png"
 author: ["Julio"]
 summary: "Depois de ler esse post você conseguirá criar e publicar livros em 6 minutos."
-draft: false
 ---
 
 ```{r, include=FALSE}

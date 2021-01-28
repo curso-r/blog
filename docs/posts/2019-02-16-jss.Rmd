@@ -1,8 +1,8 @@
 ---
 title: "Minha experiência ao publicar no JSS"
-date: "2019-02-05T00:00:00+00:00"
-categories: ["tutoriais"]
-tags: ["r"]
+date: "2019-02-05"
+categories: ["discussões"]
+tags: ["comunidade"]
 image: "images/posts/banner/jss.png"
 author: ["Julio"]
 summary: "."

@@ -6,7 +6,11 @@
     <description>Recent content in ggplot2 on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Bechdel: Filme e Machismo</title>
       <link>https://blog.curso-r.com/posts/2020-06-09-bechdel/</link>
@@ -17,9 +21,27 @@
     </item>
     
     <item>
+      <title>gghighlight</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</guid>
+      <description>O gghighlight é uma das extensões do ggplot2. Este post serve como uma pequena introdução é apresentação do que é possível fazer com ele.</description>
+    </item>
+    
+    <item>
+      <title>A Poupança de Beethoven</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</guid>
+      <description>Explorando um pouco sobre currying e ggplot através da maluquice que são os juros compostos.</description>
+    </item>
+    
+    <item>
       <title>Gráficos miojo: Mapas temáticos do Brasil em 3 minutos ou menos</title>
       <link>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</link>
-      <pubDate>Thu, 04 May 2017 23:26:00 +0300</pubDate>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</guid>
       <description>Impressionar é muito mais fácil se você usa mapas. Neste post vamos aprender a construir mapas temáticos do Brasil com muita agilidade.</description>

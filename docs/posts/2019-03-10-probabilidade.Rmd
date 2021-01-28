@@ -1,12 +1,11 @@
 ---
 title: "Probabilidade e medida: intuição"
-date: "2019-03-10T00:00:00+00:00"
+date: "2019-03-10"
 categories: ["tutoriais"]
-tags: ["r"]
+tags: ["estatística"]
 image: "images/posts/banner/prob.jpg"
 author: ["Julio"]
 summary: "Esse é um post de matemática. Mesmo se você não curte essa faceta da ciência de dados, encorajo vocês a lerem e estudarem esse assunto. Nesse texto vou usar um pouco de teoria dos conjuntos e introduzir a teoria da medida, que é a base matemática de tudo que sabemos sobre probabilidade."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

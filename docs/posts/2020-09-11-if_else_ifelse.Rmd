@@ -1,12 +1,11 @@
 ---
 title: "Warnings no if_else(), mas não no ifelse()?"
 date: "2020-09-11"
-tags: ["r", "programação", "avançado"]
+tags: ["programação"]
 categories: ["conceitos"]
 image: "images/posts/banner/if_else_ifelse.jpg"
 author: ["Caio"]
 summary: "Por que às vezes recebemos warnings no if_else(), mas não no ifelse()? Uma investigação revela que o problema pode não estar onde imaginamos..."
-draft: false
 ---
 
 Essa semana o Julio fez uma [pergunta](https://discourse.curso-r.com/t/warnings-no-if-else-case-when-mas-nao-no-ifelse/529) aparentemente inocente no nosso [fórum](https://discourse.curso-r.com/). Achei a resposta fosse ser simples, mas depois de 1 hora percebi que tinha virado quase um detetive da computação...
