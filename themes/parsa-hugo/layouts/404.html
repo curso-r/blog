@@ -1,0 +1,51 @@
+{{ define "main" }}
+
+<!-- page-title -->
+<section class="section bg-posts" style = "background-image: url('{{ "images/404.jpg" | absURL }}'); ">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Essa página não existe...</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style = "padding-top: 20px; padding-bottom: 20px;">
+  <div class="container">
+    <div class = "row">
+      <div class="col-lg-6">
+        <div class="widget">
+          <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+          {{ range first 3 ( where (where site.RegularPages "Type" "posts") ".Params.draft" false ) }}
+          <div class="media mb-4">
+            <div class="post-thumb-sm mr-3">
+              <a href="{{ .Permalink }}"><img class="mr-3 post-thumb-sm" src="{{ .Params.Image | absURL }}"></a>
+            </div>
+            <div class="media-body">
+              <h5><a class="text-dark" href="{{ .Permalink }}">{{.Title}}</a></h5>
+              <p>Por {{ delimit .Params.author ", " " e "}} em <a href="{{ "categories/" | relLangURL }}{{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 | title}}</a></p>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="widget">
+          <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+          {{- if isset site.Taxonomies "categories" }}
+          {{- if not (eq (len site.Taxonomies.categories) 0) }}
+          <ul class="list-inline tag-list">
+            {{- range $name, $items := site.Taxonomies.categories }}
+            <li class="list-inline-item m-1"><a href="{{ "categories/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | title | humanize }}</a></li>
+            {{- end }}
+          </ul>
+          {{- end }}
+          {{- end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

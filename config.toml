@@ -51,11 +51,11 @@ link = "plugins/search/search.js"
 link = "js/highlight.pack.js"
 
 # navigation
+
 [[menu.main]]
-name = "Home"
+name = "Blog"
 url = "#"
 weight = 1
-hasChildren = true
 
 [[menu.main]]
 name = "Cursos"
@@ -66,6 +66,11 @@ weight = 2
 name = "Fórum"
 url = "https://discourse.curso-r.com/"
 weight = 3
+
+[[menu.main]]
+name = "Curso-R"
+url = "https://www.curso-r.com"
+weight = 4
 
 # deult parameter
 [params]
