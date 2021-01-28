@@ -6,18 +6,17 @@ categories: ["análises"]
 image: "images/posts/banner/pug_knapsack.png"
 author: ["Julio"]
 summary: "São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios."
-retired: true
+retired: false
 alternativa: ""
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>São Paulo é a minha cidade preferida. Não só porque moro aqui, mas também porque é uma cidade cheia de diversidade, boa gastronomia e oportunidades. Para sentir um pouco dessa <em>vibe</em>, recomendo passear na avenida Paulista aos domingos. É sensacional!</p>
 <p>Mas a cidade da diversidade só é o que é porque temos muita, muita gente nela. O município tem 12 milhões de habitantes. Esse número é tão grande que temos um paulistano para cada 17 brasileiros! Se São Paulo fosse um país, <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">seria o 77 do mundo</a>, ganhando de países como a Bélgica, Grécia, Portugal, Bolívia e muitas outras.</p>
 <p>Outro dia eu estava pensando na seguinte problemática: qual é a área do Brasil ocupada pela população de São Paulo? Ou seja, se pegarmos os municípios com grandes áreas, quanto do país conseguiríamos preencher com 12 milhões de habitantes?</p>
-<p>O interessante é que essa questão recai exatamente no <em>problema da mochila</em>, que é um famoso desafio de programação inteira. Depois de <a href="https://en.wikipedia.org/wiki/Knapsack_problem">estudar profundamente no wikipedia</a> (😆), vi que o problema não é tão trivial como parece.</p>
+<p>O interessante é que essa questão recai exatamente no <em>problema da mochila</em>, que é um famoso desafio de programação inteira. Depois de <a href="https://en.wikipedia.org/wiki/Knapsack_problem">estudar profundamente no wikipedia</a> (😄), vi que o problema não é tão trivial como parece.</p>
 <div id="o-problema-da-mochila" class="section level2">
 <h2>O problema da mochila</h2>
 <p>Considere o seguinte contexto: você tem uma mochila com capacidade de 15kg e precisa carregar a combinação de itens com maior valor, com cada item possuindo valores e pesos diferentes.</p>
@@ -58,58 +57,41 @@ cap &lt;- 102</code></pre>
 <p>O vetor-solução é dado por</p>
 <pre class="r"><code>is &lt;- adagio::mknapsack(p, w, cap)
 is$ksack</code></pre>
+<pre><code>[1] 1 1 1 1 0 1 0 0</code></pre>
 </div>
 </div>
 <div id="dados" class="section level2">
 <h2>Dados</h2>
-<p>As áreas e estimativas das populações dos municípios do Brasil em 2016 foram obtidas do IBGE. A leitura é realizada usando pacotes do <code>tidyverse</code>.</p>
+<p>As áreas e estimativas das populações dos municípios do Brasil em 2010 foram obtidas dos pacotes <code>{geobr}</code> e <code>{abjData}</code>. A leitura é realizada usando pacotes do <code>{tidyverse}</code>.</p>
 <p><strong>Pacotes:</strong></p>
-<pre class="r"><code>library(tidyverse)
-library(janitor)
-library(readxl)
-library(httr)</code></pre>
-<p><strong>Áreas:</strong></p>
-<pre class="r"><code>url_area &lt;- paste0(
-  &#39;ftp://geoftp.ibge.gov.br&#39;,
-  &#39;/organizacao_do_territorio/estrutura_territorial/areas_territoriais/2016/&#39;,
-  &#39;AR_BR_RG_UF_MUN_2016.xls&#39;
-) %&gt;% GET(write_disk(&#39;area.xls&#39;, overwrite = TRUE))
-
-area &lt;- read_excel(&#39;area.xls&#39;) %&gt;%
-  clean_names() %&gt;%
-  filter(!is.na(id)) %&gt;% 
-  select(uf = nm_uf_sigla, cd_gcmun, muni = nm_mun_2016, area = ar_mun_2016)</code></pre>
-<p><strong>População:</strong></p>
-<pre class="r"><code>url_pop &lt;- paste0(
-  &#39;ftp://ftp.ibge.gov.br&#39;,
-  &#39;/Estimativas_de_Populacao/Estimativas_2016/&#39;,
-  &#39;estimativa_TCU_2016_20170614.xls&#39;
-) %&gt;% GET(write_disk(&#39;pop.xls&#39;, overwrite = TRUE))
-
-loc &lt;- locale(grouping_mark = &#39;.&#39;, decimal_mark = &#39;,&#39;)
-pop &lt;- read_excel(&#39;pop.xls&#39;, skip = 1, sheet = 2) %&gt;%
-  clean_names() %&gt;%
-  filter(!is.na(cod_munic)) %&gt;%
-  mutate(pop = parse_number(`populacao_estimada`, locale = loc),
-         cd_gcmun = paste0(cod_uf, cod_munic)) %&gt;%
-  select(cd_gcmun, pop)</code></pre>
-<p>Para completar, temos os shapefiles dos municípios. Os originais foram baixados <a href="ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2016/Brasil/BR/">nesse link</a>, mas fiz um código para reduzir a resolução e preferi omitir do post. Se quiser ver, entre no <a href="https://github.com/curso-r/site">repositório que gera esse site</a>. Para ler os shapes usamos o pacote <code>sf</code>:</p>
-<p>No final, vamos dar um join das tabelas:</p>
-<pre class="r"><code>dados &lt;- area %&gt;% 
-  left_join(pop, &#39;cd_gcmun&#39;) %&gt;%
-  mutate(razao = area / pop) %&gt;%
-  filter(!is.na(pop))</code></pre>
+<pre class="r"><code>library(magrittr)
+library(sf)</code></pre>
+<pre class="r"><code>da_sf &lt;- geobr::read_municipality(year = 2010)
+dados &lt;- da_sf %&gt;% 
+  dplyr::mutate(area = as.numeric(sf::st_area(geom)) / 1e6) %&gt;% 
+  tibble::as_tibble() %&gt;% 
+  dplyr::select(-geom) %&gt;% 
+  dplyr::mutate(muni_id = as.character(code_muni)) %&gt;% 
+  dplyr::inner_join(
+    dplyr::filter(abjData::pnud_min, ano == &quot;2010&quot;), 
+    &quot;muni_id&quot;
+  ) %&gt;% 
+  dplyr::select(muni_id, area, pop) %&gt;% 
+  dplyr::mutate(razao = area / pop) %&gt;% 
+  dplyr::filter(area &gt; 0)</code></pre>
 </div>
 <div id="resultados" class="section level2">
 <h2>Resultados</h2>
 <p>A solução ad-hoc e ótima são computadas com esse código:</p>
 <pre class="r"><code>d_solucao &lt;- dados %&gt;% 
-  arrange(desc(razao)) %&gt;% # ordena para solucao adhoc funcionar
-  mutate(area2 = as.integer(area * 1000), # necessario para mknapsack funcionar
-         s_knapsack = adagio::mknapsack(area2, pop, max(pop))$ksack,
-         acu = cumsum(pop),
-         s_adhoc0 = if_else(acu &lt; max(pop), 1, 0),
-         s_adhoc = s_adhoc0) </code></pre>
+  dplyr::arrange(dplyr::desc(razao)) %&gt;% # ordena para solucao adhoc funcionar
+  dplyr::mutate(
+    area2 = as.integer(area * 1000), # necessario para mknapsack funcionar
+    s_knapsack = adagio::mknapsack(area2, pop, max(pop))$ksack,
+    acu = cumsum(pop),
+    s_adhoc0 = dplyr::if_else(acu &lt; max(pop), 1, 0),
+    s_adhoc = s_adhoc0
+  ) </code></pre>
 <p>Agora, vamos melhorar a solução ad-hoc incluindo os melhores municípios.</p>
 <pre class="r"><code>id_melhor &lt;- 0
 pop_faltam &lt;- with(d_solucao, max(pop) - sum(s_adhoc0 * pop))
@@ -121,16 +103,111 @@ while (is.na(id_melhor)) {
     pop_faltam &lt;- with(d_solucao, max(pop) - sum(s_adhoc * pop))
   }
 }</code></pre>
-<p>A Tabela <a href="#tab:dif"><strong>??</strong></a> mostra os municípios que foram classificados diferentemente nos dois métodos. Note que a solução ótima trocou apenas um município da solução adhoc (Nova Aurora - GO) pelo município de Monte Alegre de Minas - MG.</p>
+<p>A Tabela abaixo mostra os municípios que foram classificados diferentemente nos dois métodos. Note que a solução ótima trocou apenas um município da solução adhoc (Nova Aurora - GO) pelo município de Monte Alegre de Minas - MG.</p>
 <pre class="r"><code>d_solucao %&gt;% 
-  filter(s_adhoc != s_knapsack) %&gt;% 
-  select(uf, muni, area, pop, s_adhoc, s_knapsack) %&gt;% 
+  dplyr::filter(s_adhoc != s_knapsack) %&gt;% 
+  dplyr::inner_join(abjData::muni, &quot;muni_id&quot;) %&gt;% 
+  select(uf_nm, muni_nm, area, pop, s_adhoc, s_knapsack) %&gt;% 
   knitr::kable(caption = &#39;Municípios diferentes nas duas soluções.&#39;)</code></pre>
-<p>A Tabela <a href="#tab:dif2"><strong>??</strong></a> mostra a diferença dos resultados dos dois métodos. A solução ótima fica com apenas 92 pessoas a menos que São Paulo.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">uf_nm</th>
+<th align="left">muni_nm</th>
+<th align="right">area</th>
+<th align="right">pop</th>
+<th align="right">s_adhoc</th>
+<th align="right">s_knapsack</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Piauí</td>
+<td align="left">Colônia Do Piauí</td>
+<td align="right">949.0047</td>
+<td align="right">7387</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Tocantins</td>
+<td align="left">Riachinho</td>
+<td align="right">517.6699</td>
+<td align="right">4030</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Santa Catarina</td>
+<td align="left">Palmeira</td>
+<td align="right">289.4767</td>
+<td align="right">2291</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>A Tabela abaixo mostra a diferença dos resultados dos dois métodos. A solução ótima fica com apenas 92 pessoas a menos que São Paulo.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Método</th>
+<th align="left">Área total</th>
+<th align="right">População total</th>
+<th align="right">Diferença para sp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">adhoc</td>
+<td align="left">5669732.52073351</td>
+<td align="right">11152637</td>
+<td align="right">13906</td>
+</tr>
+<tr class="even">
+<td align="left">knapsack</td>
+<td align="left">5671488.67201654</td>
+<td align="right">11166345</td>
+<td align="right">198</td>
+</tr>
+<tr class="odd">
+<td align="left">São Paulo</td>
+<td align="left">-</td>
+<td align="right">11166543</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="mapa-final" class="section level2">
 <h2>Mapa final</h2>
 <p>Visualmente, a solução ótima e a solução adhoc são idênticas. Por isso vou mostrar apenas como fica o mapa para a solução ótima.</p>
-<p>O resultado aparece na Figura <a href="#fig:final"><strong>??</strong></a>. É realmente impressionante ver que aquela regiãozinha vermelha tem a mesma população que toda a região azul do mapa.</p>
+<p>O resultado aparece na Figura <a href="#fig:final">1</a>. É realmente impressionante ver que aquela regiãozinha vermelha tem a mesma população que toda a região azul do mapa.</p>
+<pre class="r"><code>da_sf %&gt;% 
+  dplyr::mutate(muni_id = as.character(code_muni)) %&gt;% 
+  dplyr::inner_join(d_solucao, &quot;muni_id&quot;) %&gt;% 
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(
+    ggplot2::aes(fill = as.factor(s_knapsack)),
+    size = 0
+  ) +
+  ggplot2::geom_sf(
+    fill = &quot;red&quot;,
+    size = 0,
+    colour = &quot;black&quot;,
+    data = dplyr::filter(da_sf, code_muni == &quot;3550308&quot;)
+  ) +
+  ggplot2::scale_fill_manual(
+    values = c(&quot;gray90&quot;, viridis::viridis(1, 1, .2, .8))
+  ) +
+  ggplot2::theme_void() +
+  ggplot2::theme(legend.position = &quot;bottom&quot;) +
+  ggplot2::labs(fill = &quot;Solução&quot;)</code></pre>
+<div class="figure"><span id="fig:final"></span>
+<img src="/images/posts/conteudo/sao-paulo/mapa_final.png" alt="Resultado final da análise. A área em azul tem a mesma população da área em vermelho!"  />
+<p class="caption">
+Figura 1: Resultado final da análise. A área em azul tem a mesma população da área em vermelho!
+</p>
+</div>
 <p>É isso! Happy coding ;)</p>
 </div>
