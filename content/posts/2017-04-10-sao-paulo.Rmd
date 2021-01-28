@@ -6,12 +6,12 @@ categories: ["análises"]
 image: "images/posts/banner/pug_knapsack.png"
 author: ["Julio"]
 summary: "São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios."
-retired: true
+retired: false
 alternativa: ""
 ---
 
 ```{r echo=F}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
 ```
 
 São Paulo é a minha cidade preferida. Não só porque moro aqui, mas também porque é uma cidade cheia de diversidade, boa gastronomia e oportunidades. Para sentir um pouco dessa *vibe*, recomendo passear na avenida Paulista aos domingos. É sensacional!
@@ -20,7 +20,7 @@ Mas a cidade da diversidade só é o que é porque temos muita, muita gente nela
 
 Outro dia eu estava pensando na seguinte problemática: qual é a área do Brasil ocupada pela população de São Paulo? Ou seja, se pegarmos os municípios com grandes áreas, quanto do país conseguiríamos preencher com 12 milhões de habitantes?
 
-O interessante é que essa questão recai exatamente no *problema da mochila*, que é um famoso desafio de programação inteira. Depois de [estudar profundamente no wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem) (`r emo::ji('laugh')`), vi que o problema não é tão trivial como parece.
+O interessante é que essa questão recai exatamente no *problema da mochila*, que é um famoso desafio de programação inteira. Depois de [estudar profundamente no wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem) (😄), vi que o problema não é tão trivial como parece.
 
 ## O problema da mochila
 
@@ -72,7 +72,7 @@ Isso indica uma forma sub-ótima de resolver o problema. Chamamos essa solução
 
 A solução ótima pode ser encontrada usando a função `mknapsack()` do pacote `adagio`. Por exemplo, considere os vetores de pesos `w`, valores `p` e máximo `cap` abaixo.
 
-```{r}
+```{r eval=FALSE}
 p <- c(15, 100, 90, 60, 40, 15, 10,  1)
 w <- c( 2,  20, 20, 30, 40, 30, 60, 10)
 cap <- 102
@@ -80,105 +80,39 @@ cap <- 102
 
 O vetor-solução é dado por
 
-```{r}
+```{r eval=FALSE}
 is <- adagio::mknapsack(p, w, cap)
 is$ksack
 ```
 
+    [1] 1 1 1 1 0 1 0 0
+
+
 ## Dados
 
-As áreas e estimativas das populações dos municípios do Brasil em 2016 foram obtidas do IBGE. A leitura é realizada usando pacotes do `tidyverse`.
+As áreas e estimativas das populações dos municípios do Brasil em 2010 foram obtidas dos pacotes `{geobr}` e `{abjData}`. A leitura é realizada usando pacotes do `{tidyverse}`.
 
 **Pacotes:**
 
 ```{r pkg, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(janitor)
-library(readxl)
-library(httr)
+library(magrittr)
+library(sf)
 ```
-
-**Áreas:**
-
-```{r area, message=FALSE, warning=FALSE, eval = FALSE}
-url_area <- paste0(
-  'ftp://geoftp.ibge.gov.br',
-  '/organizacao_do_territorio/estrutura_territorial/areas_territoriais/2016/',
-  'AR_BR_RG_UF_MUN_2016.xls'
-) %>% GET(write_disk('area.xls', overwrite = TRUE))
-
-area <- read_excel('area.xls') %>%
-  clean_names() %>%
-  filter(!is.na(id)) %>% 
-  select(uf = nm_uf_sigla, cd_gcmun, muni = nm_mun_2016, area = ar_mun_2016)
-```
-
-```{r, message=FALSE, warning=FALSE, echo = FALSE}
-area <- read_excel('../../static/data/sao-paulo/area.xls') %>%
-  clean_names() %>%
-  filter(!is.na(id)) %>% 
-  select(uf = nm_uf_sigla, cd_gcmun, muni = nm_mun_2016, area = ar_mun_2016)
-```
-
-**População:**
-
-```{r pop, message=FALSE, warning=FALSE, eval = FALSE}
-url_pop <- paste0(
-  'ftp://ftp.ibge.gov.br',
-  '/Estimativas_de_Populacao/Estimativas_2016/',
-  'estimativa_TCU_2016_20170614.xls'
-) %>% GET(write_disk('pop.xls', overwrite = TRUE))
-
-loc <- locale(grouping_mark = '.', decimal_mark = ',')
-pop <- read_excel('pop.xls', skip = 1, sheet = 2) %>%
-  clean_names() %>%
-  filter(!is.na(cod_munic)) %>%
-  mutate(pop = parse_number(`populacao_estimada`, locale = loc),
-         cd_gcmun = paste0(cod_uf, cod_munic)) %>%
-  select(cd_gcmun, pop)
-```
-
-```{r message=FALSE, warning=FALSE, echo = FALSE}
-loc <- locale(grouping_mark = '.', decimal_mark = ',')
-pop <- read_excel('../../static/data/sao-paulo/pop.xls', skip = 1, sheet = 2) %>%
-  clean_names() %>%
-  filter(!is.na(cod_munic)) %>%
-  mutate(pop = parse_number(`populacao_estimada`, locale = loc),
-         cd_gcmun = paste0(cod_uf, cod_munic)) %>%
-  select(cd_gcmun, pop)
-```
-
-
-Para completar, temos os shapefiles dos municípios. Os originais foram baixados [nesse link](ftp://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2016/Brasil/BR/), mas fiz um código para reduzir a resolução e preferi omitir do post. Se quiser ver, entre no [repositório que gera esse site](https://github.com/curso-r/site). Para ler os shapes usamos o pacote `sf`:
-
-```{r, message=FALSE, warning=FALSE, eval=FALSE, echo=FALSE}
-dir.create('mapa', showWarnings = FALSE)
-paste0(
-  'ftp://geoftp.ibge.gov.br',
-  '/organizacao_do_territorio/malhas_territoriais/',
-  'malhas_municipais/municipio_2016/Brasil/BR/br_municipios.zip'
-) %>% GET(write_disk('mapa/mapa.zip'))
-
-unzip('mapa/mapa.zip', exdir = 'mapa/')
-# omiti esse código
-nc <- st_read("mapa/BRMUE250GC_SIR.shp", quiet = TRUE) %>%
-  st_simplify(dTolerance = .1) %>% 
-  mutate(len = map_int(geometry, ~length(.x[[1]]))) %>% 
-  filter(len > 0) %>% 
-  clean_names() %>%
-  mutate(cd_geocmu = as.character(cd_geocmu)) %>%
-  select(cd_geocmu, geometry) %>%
-  as_tibble()
-saveRDS(nc, 'sf_municipios.rds', compress = 'bzip2')
-```
-
-No final, vamos dar um join das tabelas:
 
 ```{r}
-dados <- area %>% 
-  left_join(pop, 'cd_gcmun') %>%
-  mutate(razao = area / pop) %>%
-  filter(!is.na(pop))
+da_sf <- geobr::read_municipality(year = 2010)
+dados <- da_sf %>% 
+  dplyr::mutate(area = as.numeric(sf::st_area(geom)) / 1e6) %>% 
+  tibble::as_tibble() %>% 
+  dplyr::select(-geom) %>% 
+  dplyr::mutate(muni_id = as.character(code_muni)) %>% 
+  dplyr::inner_join(
+    dplyr::filter(abjData::pnud_min, ano == "2010"), 
+    "muni_id"
+  ) %>% 
+  dplyr::select(muni_id, area, pop) %>% 
+  dplyr::mutate(razao = area / pop) %>% 
+  dplyr::filter(area > 0)
 ```
 
 ## Resultados
@@ -187,12 +121,14 @@ A solução ad-hoc e ótima são computadas com esse código:
 
 ```{r}
 d_solucao <- dados %>% 
-  arrange(desc(razao)) %>% # ordena para solucao adhoc funcionar
-  mutate(area2 = as.integer(area * 1000), # necessario para mknapsack funcionar
-         s_knapsack = adagio::mknapsack(area2, pop, max(pop))$ksack,
-         acu = cumsum(pop),
-         s_adhoc0 = if_else(acu < max(pop), 1, 0),
-         s_adhoc = s_adhoc0) 
+  dplyr::arrange(dplyr::desc(razao)) %>% # ordena para solucao adhoc funcionar
+  dplyr::mutate(
+    area2 = as.integer(area * 1000), # necessario para mknapsack funcionar
+    s_knapsack = adagio::mknapsack(area2, pop, max(pop))$ksack,
+    acu = cumsum(pop),
+    s_adhoc0 = dplyr::if_else(acu < max(pop), 1, 0),
+    s_adhoc = s_adhoc0
+  ) 
 ```
 
 Agora, vamos melhorar a solução ad-hoc incluindo os melhores municípios.
@@ -210,35 +146,56 @@ while (is.na(id_melhor)) {
 }
 ```
 
-A Tabela \@ref(tab:dif) mostra os municípios que foram classificados diferentemente nos dois métodos. Note que a solução ótima trocou apenas um município da solução adhoc (Nova Aurora - GO) pelo município de Monte Alegre de Minas - MG.
+A Tabela abaixo mostra os municípios que foram classificados diferentemente nos dois métodos. Note que a solução ótima trocou apenas um município da solução adhoc (Nova Aurora - GO) pelo município de Monte Alegre de Minas - MG.
 
 ```{r dif}
 d_solucao %>% 
-  filter(s_adhoc != s_knapsack) %>% 
-  select(uf, muni, area, pop, s_adhoc, s_knapsack) %>% 
+  dplyr::filter(s_adhoc != s_knapsack) %>% 
+  dplyr::inner_join(abjData::muni, "muni_id") %>% 
+  select(uf_nm, muni_nm, area, pop, s_adhoc, s_knapsack) %>% 
   knitr::kable(caption = 'Municípios diferentes nas duas soluções.')
 ```
 
-A Tabela \@ref(tab:dif2) mostra a diferença dos resultados dos dois métodos. A solução ótima fica com apenas 92 pessoas a menos que São Paulo.
+|uf_nm          |muni_nm          |     area|  pop| s_adhoc| s_knapsack|
+|:--------------|:----------------|--------:|----:|-------:|----------:|
+|Piauí          |Colônia Do Piauí | 949.0047| 7387|       0|          1|
+|Tocantins      |Riachinho        | 517.6699| 4030|       0|          1|
+|Santa Catarina |Palmeira         | 289.4767| 2291|       0|          1|
 
-```{r dif2, echo=FALSE}
+
+A Tabela abaixo mostra a diferença dos resultados dos dois métodos. A solução ótima fica com apenas 92 pessoas a menos que São Paulo.
+
+```{r echo=FALSE}
 d_solucao %>%
-  summarise(sol_knapsack = sum(pop * s_knapsack),
-            sol_adhoc = sum(pop * s_adhoc),
-            area_knapsack = sum(area * s_knapsack),
-            area_adhoc = sum(area * s_adhoc),
-            max = max(pop)) %>%
-  gather(key, value, -max) %>%
-  separate(key, c('tipo', 'metodo'), sep = '_', fill = 'right') %>%
-  spread(tipo, value) %>%
-  mutate(dif = max - sol) %>%
-  add_row(metodo = 'São Paulo', area = '-', sol = .$max[1], dif = 0) %>%
-  select(-max) %>% 
-  set_names(c('Método', 'Área total', 'População total', 
-              'Diferença para sp')) %>% 
-  knitr::kable(caption = 'Diferença dos resultados.')
+  dplyr::summarise(
+    sol_knapsack = sum(pop * s_knapsack),
+    sol_adhoc = sum(pop * s_adhoc),
+    area_knapsack = sum(area * s_knapsack),
+    area_adhoc = sum(area * s_adhoc),
+    max = max(pop)
+  ) %>%
+  tidyr::gather(key, value, -max) %>%
+  tidyr::separate(key, c('tipo', 'metodo'), sep = '_', fill = 'right') %>%
+  tidyr::spread(tipo, value) %>%
+  dplyr::mutate(dif = max - sol, area = as.character(area)) %>%
+  tibble::add_row(
+    metodo = 'São Paulo', 
+    area = '-', 
+    sol = as.numeric(.$max[1]), 
+    dif = 0
+  ) %>%
+  dplyr::select(-max) %>% 
+  purrr::set_names(
+    c('Método', 'Área total', 'População total', 
+      'Diferença para sp')
+  )
 ```
 
+|Método    |Área total       | População total| Diferença para sp|
+|:---------|:----------------|---------------:|-----------------:|
+|adhoc     |5669732.52073351 |        11152637|             13906|
+|knapsack  |5671488.67201654 |        11166345|               198|
+|São Paulo | -               |        11166543|                 0|
 
 ## Mapa final
 
@@ -246,26 +203,31 @@ Visualmente, a solução ótima e a solução adhoc são idênticas. Por isso vo
 
 O resultado aparece na Figura \@ref(fig:final). É realmente impressionante ver que aquela regiãozinha vermelha tem a mesma população que toda a região azul do mapa.
 
-```{r echo=FALSE, eval=FALSE}
-p_final <- st_read("mapa/BRMUE250GC_SIR.shp", quiet = TRUE) %>%
-  clean_names() %>%
-  mutate_if(is.factor, as.character) %>% 
-  inner_join(d_solucao, c('cd_geocmu' = 'cd_gcmun')) %>% 
-  mutate(cd_geocmu = as.character(cd_geocmu)) %>%
-  mutate(Resultado = as.factor(case_when(
-    muni == 'SÃO PAULO' ~ 'São Paulo',
-    s_knapsack == 1 ~ 'Incluso',
-    TRUE ~ 'Não Incluso'
-  ))) %>%
-  ggplot() +
-  geom_sf(aes(fill = Resultado), size = 0, colour = 'gray40') +
-  theme_void(16) +
-  scale_fill_manual(values = c('royalblue', 'gray80', 'red'))
+```{r fig.cap="Resultado final da análise. A área em azul tem a mesma população da área em vermelho!", fig.width=10, fig.height=10}
+da_sf %>% 
+  dplyr::mutate(muni_id = as.character(code_muni)) %>% 
+  dplyr::inner_join(d_solucao, "muni_id") %>% 
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(
+    ggplot2::aes(fill = as.factor(s_knapsack)),
+    size = 0
+  ) +
+  ggplot2::geom_sf(
+    fill = "red",
+    size = 0,
+    colour = "black",
+    data = dplyr::filter(da_sf, code_muni == "3550308")
+  ) +
+  ggplot2::scale_fill_manual(
+    values = c("gray90", viridis::viridis(1, 1, .2, .8))
+  ) +
+  ggplot2::theme_void() +
+  ggplot2::theme(legend.position = "bottom") +
+  ggplot2::labs(fill = "Solução")
 ```
 
-```{r final, fig.cap='Mapa do Brasil final.', echo=FALSE}
-knitr::include_graphics('https://raw.githubusercontent.com/curso-r/site/master/content/blog/img/mapa-final.png')
+```{r final, fig.cap="Resultado final da análise. A área em azul tem a mesma população da área em vermelho!", eval=TRUE, echo=FALSE}
+knitr::include_graphics("/images/posts/conteudo/sao-paulo/mapa_final.png")
 ```
-
 
 É isso! Happy coding ;)
