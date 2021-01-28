@@ -1,7 +1,7 @@
 ---
 title: "Data e data-raw (Zen do R parte 7)"
 date: "2019-08-13"
-tags: ["Zen do R]
+tags: ["Zen do R"]
 categories: ["conceitos"]
 image: "images/posts/banner/zen-do-r-7.jpg"
 author: ["Caio"]

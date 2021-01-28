@@ -2,7 +2,7 @@
 title: "Melhores trabalhos do curso R para Ciência de dados I (maio de 2020)"
 date: "2020-06-18"
 tags: ["relatórios"]
-categories: ["Divulgação"]
+categories: ["divulgação"]
 image: "images/posts/banner/mariokart.png"
 author: ["William"]
 summary: "Apresentamos os melhores trabalhos de conclusão do nosso curso de R para Ciência de dados I e comentamos aspectos importantes sobre a comunicação dos resultados das nossas análises."

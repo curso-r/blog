@@ -1,0 +1,57 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = FALSE
+)
+
+library(magrittr)
+```
+
+```{r}
+yaml_to_tibble <- function(file) {
+  rmarkdown::yaml_front_matter(file) %>% 
+    purrr::map(paste, collapse = "|") %>% 
+    tibble::as_tibble() %>% 
+    dplyr::mutate(arquivo = file)
+}
+
+grafico_freq <- function(tab, var) {
+  tab %>% 
+    dplyr::pull({{var}}) %>% 
+    stringr::str_split(pattern = "\\|") %>%
+    purrr::flatten_chr() %>% 
+    tibble::tibble(varivael = .) %>% 
+    dplyr::count(varivael) %>% 
+    dplyr::mutate(varivael = forcats::fct_reorder(varivael, n)) %>% 
+    ggplot2::ggplot(ggplot2::aes(x = n, y = varivael)) +
+    ggplot2::geom_col(fill = "orange") +
+    ggplot2::geom_label(ggplot2::aes(label = n)) +
+    ggplot2::theme_minimal() +
+    ggplot2::labs(y = "", x = "Frequência")
+}
+```
+
+```{r}
+arquivos <- list.files("content/posts/", pattern = ".Rmd$", full.names = TRUE)
+
+tab <- arquivos %>% 
+  purrr::map_dfr(yaml_to_tibble) %>%  
+  dplyr::filter(is.na(draft) | draft == "FALSE")
+```
+
+## Número de posts `r dplyr::n_distinct(tab$arquivo)`
+
+## Posts por autor
+
+```{r}
+grafico_freq(tab, author)
+```
+
+## Posts por categoria
