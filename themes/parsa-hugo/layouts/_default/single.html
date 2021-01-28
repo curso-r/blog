@@ -20,7 +20,15 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por {{ delimit .Params.author ", " " e "}} em <a href="{{ "categories/" | relLangURL }}{{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 | title}}</a>
+            Escrito por
+            {{ if eq (len .Params.author) 1 }}
+            {{ $autor := index (where site.Params.authors "name" "in" .Params.author) 0}}
+              <a href = "{{ $autor.link }}" target = "_blank">{{ index (.Params.author) 0 }}</a>
+            {{ else }}
+              {{ delimit .Params.author ", " " e "}}
+            {{ end }}
+            em
+            <a href="{{ "categories/" | relLangURL }}{{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 | title}}</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>

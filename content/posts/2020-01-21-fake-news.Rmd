@@ -1,7 +1,7 @@
 ---
 title: "Camadas de Fake News"
 date: "2020-01-21"
-tags: ["fake news", "pib"]
+tags: ["fake news"]
 categories: ["análises"]
 image: "images/posts/banner/fake-news.jpg"
 author: ["Caio"]

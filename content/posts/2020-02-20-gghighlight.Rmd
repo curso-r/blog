@@ -1,7 +1,7 @@
 ---
 title: "gghighlight"
 date: "2020-02-21"
-tags: ["ggplot"]
+tags: ["ggplot2"]
 categories: ["pacotes"]
 image: "images/posts/banner/gghighlight.png"
 author: ["Daniel"]

@@ -1,7 +1,7 @@
 ---
 title: "A Poupança de Beethoven"
 date: "2020-02-20"
-tags: ["ggplot", "pib"]
+tags: ["ggplot2", "finanças"]
 categories: ["análises"]
 image: "images/posts/banner/poupanca-beethoven.jpg"
 author: ["Caio"]

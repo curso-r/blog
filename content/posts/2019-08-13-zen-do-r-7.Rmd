@@ -31,8 +31,7 @@ funções do pacote `usethis`, então elas se encaixam perfeitamente no fluxo de
 análise descrito até agora.
 
 Como indicado anteriormente, existem dois tipos de dados: brutos e tratados.
-Normalmente dados brutos estão em formatos comumente compartilhados em ambientes
-de trabalho: planilhas Excel, arquivos CSV, etc. Os pacotes `readxl` e `readr`
+Normalmente dados brutos estão em formatos comumente compartilhados em ambientes de trabalho: planilhas Excel, arquivos CSV, etc. Os pacotes `readxl` e `readr`
 permitem que esses formatos sejam importados para dentro do R, mas normalmente
 essas funções são mais lentas e menos padronizadas do que `readRDS()`, por
 exemplo, que lê arquivos no formato nativo do R.

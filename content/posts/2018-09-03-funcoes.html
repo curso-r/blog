@@ -2,7 +2,7 @@
 title: "Uma forma de encontrar erros no R"
 date: "2018-09-03"
 categories: ["tutoriais"]
-tags: ["r", "funções"]
+tags: ["debug"]
 image: "images/posts/banner/funcoes.png"
 author: ["Bruna Wundervald"]
 summary: "O foco deste post é dar uma noção sobre como podemos contornar dificuldades em entender como se dá a utilização de alguma função do R."
@@ -77,7 +77,7 @@ não mostram o código, e sim o seu qual método ela utiliza:</p>
 <pre class="r"><code>mean</code></pre>
 <pre><code>## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x7fecfe7ab248&gt;
+## &lt;bytecode: 0x7fea5b839a88&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>E o que isso significa? que essa é uma função genérica da classe S3,
 que tem métodos para diferentes classes de objetos. Mas como assim?</p>
@@ -122,7 +122,7 @@ o método desejado:</p>
 ##     }
 ##     .Internal(mean(x))
 ## }
-## &lt;bytecode: 0x7fecfe68f8f8&gt;
+## &lt;bytecode: 0x7fea596dfc10&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>Voltando ao descobrimento dos erros. Digamos que nós rodamos o
 seguinte pedaço de código, que vai dar um erro:</p>

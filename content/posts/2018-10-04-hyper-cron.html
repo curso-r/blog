@@ -2,7 +2,7 @@
 title: "Agendando scripts do R"
 date: "2018-10-04"
 categories: ["tutoriais"]
-tags: ["r"]
+tags: ["cron"]
 image: "images/posts/banner/hyper-cron-r.jpg"
 author: ["Daniel"]
 summary: "Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos sem gastar muito."
@@ -60,10 +60,22 @@ A função <code>fortunes</code> solta aleatóriamente frases famosas que aparec
 <pre class="r"><code>library(fortunes)
 fortune()
 ## 
-## This should be FAQ 0.0. No other thing is asked as frequently as this. This is
-## the FAQest of all FAQs, and a mother of all FAQs.
-##    -- Jari Oksanen (answering yet another question related to FAQ 7.31)
-##       R-help (February 2013)</code></pre>
+## I recently read the small print on the academic license our site has for SAS.
+## You have to:
+## 
+##   1 inform SAS of any taught courses that use SAS,
+##   2 inform SAS of any research projects using SAS,
+##   3 allow SAS to refer to your institution as a SAS user,
+##   4 allow SAS to review your taught courses,
+##   5 ensure your courses are taught using qualified personnel,
+##   6 give SAS your first-born male offspring.
+## 
+## I spoke to our site&#39;s licensing supremos and they say they&#39;ve never heard of
+## anyone complying with 1 or 2. Point 4 sounds like petty fiddling in our
+## educational business, and point 5 left &#39;qualified&#39; undefined. Point 6 doesn&#39;t
+## bother me since I don&#39;t have kids.
+##    -- Barry Rowlingson
+##       R-help (February 2008)</code></pre>
 <p>Vamos criar uma função que envia uma mensagem aleatoriamente pelo Telegram. A função poderia ser algo assim:</p>
 <pre class="r"><code>main &lt;- function() {
   bot &lt;- TGBot$new(token = bot_token(&#39;RBot&#39;))

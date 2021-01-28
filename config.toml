@@ -128,3 +128,32 @@ url = "https://br.linkedin.com/company/curso-r"
 icon = "ti-facebook"
 url = "https://www.facebook.com/cursodeR/"
 
+# Authors
+
+[[params.authors]]
+name = "Athos"
+link = "https://twitter.com/athos_damiani"
+
+[[params.authors]]
+name = "Beatriz Milz"
+link = "https://twitter.com/BeaMilz"
+
+[[params.authors]]
+name = "Caio"
+link = "https://www.linkedin.com/in/clente"
+
+[[params.authors]]
+name = "Daniel"
+link = "https://twitter.com/dfalbel"
+
+[[params.authors]]
+name = "Fernando"
+link = "https://twitter.com/Azeloc"
+
+[[params.authors]]
+name = "Julio"
+link = "https://twitter.com/jtrecenti"
+
+[[params.authors]]
+name = "William"
+link = "https://wamorim.com/"
