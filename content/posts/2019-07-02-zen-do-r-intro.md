@@ -7,6 +7,8 @@ image: "images/posts/banner/zen-do-r-intro.jpg"
 author: ["Caio"]
 summary: "O primeiro post em uma série sobre o nosso novo livro!
 Introduzindo O Zen do R."
+type: "featured"
+featuredImage: "images/featured-post/feat-zen.jpg"
 ---
 
 Neste post, apresentamos a todos a nossa primeira tentativa de escrever um

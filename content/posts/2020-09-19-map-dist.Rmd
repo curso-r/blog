@@ -1,7 +1,7 @@
 ---
 title: "Qual a capital mais distante de Brasília?"
 date: "2020-09-19"
-tags: ["visualizacao", "mapas"]
+tags: ["visualizacao", "mapas", "leaflet", "plotly"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/map-dist.png"
 author: ["Julio"]
@@ -187,7 +187,7 @@ p_leaflet
 
 ![](/images/posts/conteudo/map-dist/leaflet.png)
 
-Acesse o mapa dinâmico [neste link](/blog/2020-09-19-map-dist_files/p_leaflet_world.html).
+Acesse o mapa dinâmico [neste link](/posts/2020-09-19-map-dist_files/p_leaflet_world.html).
 
 Olhando o mapa (e considerando que a terra é esférica), parece mesmo que esses países estão bem longe, mesmo tentando acessar pelo leste ou pelo oeste.
 
@@ -226,7 +226,7 @@ p_plotly
 
 ![](/images/posts/conteudo/map-dist/plotly.png)
 
-Acesse o mapa dinâmico [neste link](/blog/2020-09-19-map-dist_files/p_plotly_world.html).
+Acesse o mapa dinâmico [neste link](/posts/2020-09-19-map-dist_files/p_plotly_world.html).
 
 ## Wrap-up
 

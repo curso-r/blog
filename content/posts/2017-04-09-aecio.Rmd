@@ -6,6 +6,8 @@ categories: ["análises"]
 image: "images/posts/banner/aecio.jpg"
 author: ["Julio"]
 summary: "Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: 'Por quê ele sempre faz tanta cara de dor?'"
+type: "featured"
+featuredImage: "images/featured-post/feat-aecio.jpg"
 ---
 
 ```{r setup, include=FALSE}
