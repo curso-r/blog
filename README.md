@@ -1,42 +1,49 @@
 
-<head>
-  <link rel = "stylesheet" type = "text/css" href = "https://raw.githubusercontent.com/rstudio/shinydashboard/master/inst/shinydashboard.css">
-</head>
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<!--html_preserve-->
+## Número de posts: 147
 
-<div class="row">
+## Por autoria
 
-<div class="col-sm-4">
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-<div class="col-sm-4">
+## Por categoria
 
-<div class="small-box bg-aqua">
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
-<div class="inner">
+## Por ano
 
-<h3>
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-149
+## Por mês/ano
 
-</h3>
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-<p>
+## Por mês
 
-Número de posts
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-</p>
+## Autoria vs categoria
 
-</div>
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
-</div>
+## Posts aposentados
 
-</div>
-
-</div>
-
-</div>
-
-<!--/html_preserve-->
+| date       | title                                                             | author                           |
+| :--------- | :---------------------------------------------------------------- | :------------------------------- |
+| 2017-03-01 | leaflet com markerCluster                                         | Julio                            |
+| 2017-04-01 | Multas em São Paulo                                               | Daniel                           |
+| 2017-08-12 | São Paulo e o problema da mochila                                 | Julio                            |
+| 2017-05-04 | Gráficos miojo: Mapas temáticos do Brasil em 3 minutos ou menos   | Fernando                         |
+| 2017-06-17 | Skimr: estatísticas básicas com ❤️                                | Julio                            |
+| 2017-06-19 | bR Bloggers está no ar                                            | Daniel                           |
+| 2017-07-31 | Quebrando CAPTCHAs - Parte IV: Trabalhando com a imagem completa  | Julio                            |
+| 2017-07-10 | Quebrando CAPTCHAs - Parte II: O pacote decryptr                  | Julio                            |
+| 2017-07-22 | Quebrando CAPTCHAs - Parte III: Segmentação de imagens            | Julio                            |
+| 2017-09-02 | Comportamentos imprevisíveis do lubridate                         | Fernando                         |
+| 2017-11-03 | Estatística e Música                                              | Julio                            |
+| 2017-11-12 | Quebrando Captchas - Parte V: Fazendo redes convolucionais na mão | Julio                            |
+| 2017-11-20 | Pacote reticulate                                                 | Gabriela Lima Borges (convidada) |
+| 2018-05-30 | pesqEle: dados de pesquisas eleitorais                            | Julio                            |
+| 2020-08-27 | Aplauda-me                                                        | Julio|Athos                      |
+| 2020-12-30 | CNNs: Kernel Quadrado versus Kernel Retangular                    | Athos                            |

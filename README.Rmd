@@ -28,8 +28,8 @@ grafico_freq <- function(tab, var) {
     stringr::str_split(pattern = "\\|") %>%
     purrr::flatten_chr() %>% 
     tibble::tibble(varivael = .) %>% 
-    dplyr::count(varivael) %>% 
-    dplyr::mutate(varivael = forcats::fct_reorder(varivael, n)) %>% 
+    dplyr::count(varivael)%>% 
+      dplyr::mutate(varivael = forcats::fct_reorder(varivael, n)) %>% 
     ggplot2::ggplot(ggplot2::aes(x = n, y = varivael)) +
     ggplot2::geom_col(fill = "orange") +
     ggplot2::geom_label(ggplot2::aes(label = n)) +
@@ -43,15 +43,89 @@ arquivos <- list.files("content/posts/", pattern = ".Rmd$", full.names = TRUE)
 
 tab <- arquivos %>% 
   purrr::map_dfr(yaml_to_tibble) %>%  
-  dplyr::filter(is.na(draft) | draft == "FALSE")
+  dplyr::filter(is.na(draft) | draft == "FALSE") %>% 
+  dplyr::mutate(categories = tolower(categories))
 ```
 
-## Número de posts `r dplyr::n_distinct(tab$arquivo)`
+## Número de posts: `r dplyr::n_distinct(tab$arquivo)`
 
-## Posts por autor
+## Por autoria
 
 ```{r}
 grafico_freq(tab, author)
 ```
 
-## Posts por categoria
+## Por categoria
+
+```{r}
+grafico_freq(tab, categories)
+```
+
+## Por ano
+
+```{r}
+tab %>% 
+  dplyr::mutate(
+    date = as.Date(date),
+    ano = lubridate::year(date)
+  ) %>% 
+  grafico_freq(ano) +
+  ggplot2::coord_flip() +
+  ggplot2::scale_y_discrete(limits = as.character(2017:lubridate::year(Sys.Date())))
+```
+
+
+## Por mês/ano
+
+```{r}
+tab %>% 
+  dplyr::mutate(
+    date = as.Date(date),
+    ano = lubridate::year(date),
+    mes = lubridate::month(date),
+    mes_ano = lubridate::make_date(ano, mes, 1)
+  ) %>% 
+  dplyr::count(mes_ano) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = mes_ano, y = n)) +
+  ggplot2::geom_col(fill = "orange") +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(x = "", y = "Frequência")
+```
+
+## Por mês
+
+```{r}
+tab %>% 
+  dplyr::mutate(
+    date = as.Date(date),
+    mes = lubridate::month(date)
+  ) %>% 
+  grafico_freq(mes) +
+  ggplot2::coord_flip() +
+  ggplot2::scale_y_discrete(limits = as.character(1:12))
+```
+
+## Autoria vs categoria
+
+```{r}
+tab %>% 
+  dplyr::filter(!stringr::str_detect(author, "\\|")) %>% 
+  dplyr::group_by(author) %>% 
+  dplyr::filter(dplyr::n() >= 10) %>% 
+  dplyr::count(author, categories) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = n, y = author)) +
+  ggplot2::geom_col(fill = "orange") +
+  ggplot2::facet_wrap(dplyr::vars(categories)) +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(y = "", x = "Frequência")
+```
+
+## Posts aposentados
+
+```{r}
+tab %>% 
+  dplyr::filter(retired == "TRUE") %>% 
+  dplyr::select(date, title, author) %>% 
+  knitr::kable()
+```
+
