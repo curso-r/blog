@@ -1,11 +1,11 @@
 {{ define "main" }}
 
 <!-- page-title -->
-<section class="section bg-secondary">
+<section>
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h4>{{.Title}}</h4>
+        <h4>Apresentando posts sobre: {{.Title | lower }}</h4>
       </div>
     </div>
   </div>
@@ -24,7 +24,6 @@
           <div class="col-sm-6 mb-5">
             <article class="text-center">
               <img class="img-fluid mb-4" src="{{.Params.Image | absURL }}" alt="post-thumb">
-              <p class="text-uppercase mb-2">{{ .Params.Categories }}</p>
               <h4 class="title-border"><a class="text-dark" href="{{.Permalink}}">{{.Title}}</a></h4>
               <p>{{ .Summary }}</p>
               <a href="{{.Permalink}}" class="btn btn-transparent">read more</a>
