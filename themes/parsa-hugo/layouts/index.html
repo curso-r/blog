@@ -66,7 +66,9 @@
       {{ range $paginator.Pages}}
           <div class="col-lg-4 col-sm-6 mb-5">
             <article class="text-center">
-              <img class="img-fluid mb-4" src="{{.Params.Image | absURL }}" alt="post-thumb" style = "width: 300px;">
+              <a href = "{{.Permalink}}">
+                <img class="img-fluid mb-4" src="{{.Params.Image | absURL }}" alt="post-thumb" style = "width: 300px;">
+              </a>
               <h4 class="title-border"><a class="text-dark" href="{{.Permalink}}">{{.Title}}</a></h4>
               <p>{{.Summary}}</p>
               <a href="{{.Permalink}}" class="btn btn-transparent">Leia mais</a>
