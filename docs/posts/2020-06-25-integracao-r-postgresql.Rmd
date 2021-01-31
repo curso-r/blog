@@ -6,7 +6,6 @@ categories: ["tutoriais"]
 image: "images/posts/banner/integracao-r-postgresql.png"
 author: ["José de Jesus Filho"]
 summary: "Este tutorial irá mostrar como instalar o R e o PostgreSQL num mesmo servidor Ubuntu 18.04 ou 16.04 e, em seguida, sobre como chamar o R a partir do Postgres."
-draft: false
 ---
 
 

@@ -6,11 +6,24 @@
     <description>Recent content in gráficos on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Thu, 04 May 2017 23:26:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/gr%C3%A1ficos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/gr%C3%A1ficos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Feedback dos trabalhos do R para Ciência de Dados (Parte II): Dicas para Gráficos</title>
+      <link>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</link>
+      <pubDate>Thu, 17 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</guid>
+      <description>Comentamos algumas dicas sobre elaboração de gráficos em relatórios. Ilustração sobre o pacote ggplot2, criada por Allison Horst.</description>
+    </item>
+    
     <item>
       <title>Gráficos miojo: Mapas temáticos do Brasil em 3 minutos ou menos</title>
       <link>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</link>
-      <pubDate>Thu, 04 May 2017 23:26:00 +0300</pubDate>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</guid>
       <description>Impressionar é muito mais fácil se você usa mapas. Neste post vamos aprender a construir mapas temáticos do Brasil com muita agilidade.</description>
@@ -19,7 +32,7 @@
     <item>
       <title>Diagramas de Venn em R</title>
       <link>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</link>
-      <pubDate>Sat, 29 Apr 2017 23:26:00 +0300</pubDate>
+      <pubDate>Sat, 29 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</guid>
       <description>Diagramas de Venn são representações eficientes das conjuntas de quantidades moderadas de variáveis binárias. Neste post você vai aprender a construir os principais tipos de diagramas de Venn que estão implementados em R.</description>

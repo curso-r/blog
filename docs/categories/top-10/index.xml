@@ -6,11 +6,15 @@
     <description>Recent content in top 10 on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 15 Jul 2017 23:26:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/top-10/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/categories/top-10/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Top 3 pacotes pra usar com rmarkdown</title>
       <link>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</link>
-      <pubDate>Sat, 15 Jul 2017 23:26:00 +0300</pubDate>
+      <pubDate>Sat, 15 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</guid>
       <description>Neste post, vou listar três pacotes que são úteis pra fazer relatórios bonitos em Rmarkdown.</description>

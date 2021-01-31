@@ -6,7 +6,6 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/auth0-pkg.png"
 author: ["Julio"]
 summary: "Atualização do post anterior no tema, mostrando como fazer autenticação em shiny apps usando o serviço Auth0."
-draft: false
 ---
 
 ```{r, include=FALSE}

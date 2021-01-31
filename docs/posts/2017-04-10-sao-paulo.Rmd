@@ -1,16 +1,17 @@
 ---
 title: "São Paulo e o problema da mochila"
-date: "2017-08-12T13:07:31+02:00"
-tags: ["r"]
+date: "2017-08-12"
+tags: ["mapas"]
 categories: ["análises"]
 image: "images/posts/banner/pug_knapsack.png"
 author: ["Julio"]
-draft: false
 summary: "São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios."
+retired: true
+alternativa: ""
 ---
 
 ```{r echo=F}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
 ```
 
 São Paulo é a minha cidade preferida. Não só porque moro aqui, mas também porque é uma cidade cheia de diversidade, boa gastronomia e oportunidades. Para sentir um pouco dessa *vibe*, recomendo passear na avenida Paulista aos domingos. É sensacional!

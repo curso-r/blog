@@ -6,7 +6,6 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/lego.jpeg"
 author: ["Nicole Luduvice"]
 summary: "Apresentamos aqui as novas funções de pivotagem do {tidyr}."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

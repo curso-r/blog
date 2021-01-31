@@ -1,6 +1,6 @@
 ---
 title: "Usando o cronR para Agendar Scripts"
-date: "2017-11-13T14:25:00+03:00"
+date: "2017-11-13"
 tags: ["cron"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/cron-clock.jpg"

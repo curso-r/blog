@@ -16,17 +16,11 @@ Em fevereiro desse ano ministramos o Curso de R de Verão 2017, parte do program
 Abaixo segue um compilado das 10 melhores dicas dadas durante este curso.
 
 
-
-
-
 ### 1. Conheça e domine a filosofia por trás do Tidyverse
 
 O conceito "tidy" deu o oriente do curso de verão e não foi à toa: o *tidyverse*, carinhosamente chamado de "universo arrumadinho", está intimamente associado ao dia-a-dia de um analista de dados e sua implementação em R é tida como uma pequena revolução para os R-eiros.
 
 A postagem [Manifesto Tidy](http://curso-r.com/blog/2017/02/15/2017-02-16-manifesto-tidy/) resume bem os motivos pelos quais valem a pena aprender os princípios e os pacotes do *tidyverse*.
-
-
-
 
 
 

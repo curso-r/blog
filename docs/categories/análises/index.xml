@@ -6,7 +6,11 @@
     <description>Recent content in análises on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/an%C3%A1lises/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/categories/an%C3%A1lises/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Bechdel: Filme e Machismo</title>
       <link>https://blog.curso-r.com/posts/2020-06-09-bechdel/</link>
@@ -136,7 +140,7 @@
     <item>
       <title>Quebrando Captchas - Parte V: Fazendo redes convolucionais na mão</title>
       <link>https://blog.curso-r.com/posts/2017-11-10-captcha-conv/</link>
-      <pubDate>Sun, 12 Nov 2017 23:26:00 +0300</pubDate>
+      <pubDate>Sun, 12 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-11-10-captcha-conv/</guid>
       <description>Nesse post vou mostrar como ajustar redes neurais convolucionais na mão. Muita mão na massa envolvida, muitos captchas e muita diversão. Vamos juntos desmistificar a magia negra do deep learning&amp;hellip;</description>
@@ -145,7 +149,7 @@
     <item>
       <title>Estatística e Música</title>
       <link>https://blog.curso-r.com/posts/2017-11-03-music01/</link>
-      <pubDate>Fri, 03 Nov 2017 23:26:00 +0300</pubDate>
+      <pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-11-03-music01/</guid>
       <description>Já pensou em juntar estatística e música? Nessa série de posts mostro como estou pensando em fazer isso e os pacotes que vou criar nessa jornada&amp;hellip;</description>
@@ -154,7 +158,7 @@
     <item>
       <title>Aquele 1% é Deep Learning - Gerando letras do Wesley Safadão</title>
       <link>https://blog.curso-r.com/posts/2017-08-27-safadao/</link>
-      <pubDate>Mon, 28 Aug 2017 23:26:00 +0300</pubDate>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-08-27-safadao/</guid>
       <description>Nesse funal de semana decidi assistir alguns vídeos do YouTube do Siraj Raval e acompanhar o curso do Andrew Ng. Depois de aprender várias coisas interessantes, fiquei com uma vontade insana de implementar um modelo pra gerar músicas aleatórias do Wesley Safadão. Eis o &amp;hellip;</description>
@@ -163,7 +167,7 @@
     <item>
       <title>São Paulo e o problema da mochila</title>
       <link>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</link>
-      <pubDate>Sat, 12 Aug 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</guid>
       <description>São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios.</description>
@@ -172,7 +176,7 @@
     <item>
       <title>Quebrando CAPTCHAs - Parte IV: Trabalhando com a imagem completa</title>
       <link>https://blog.curso-r.com/posts/2017-06-29-captcha-dados/</link>
-      <pubDate>Mon, 31 Jul 2017 13:07:31 +0200</pubDate>
+      <pubDate>Mon, 31 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-29-captcha-dados/</guid>
       <description>No último post sobre CAPTCHAs nós vimos que a segmentação das imagens é um problema complicado. O Daniel nos disse que estava trabalhando no pacote do Keras e que existia uma forma de trabalhar com a imagem completa, sem segmentar. Foi só quando ele mostrou um acerto de 100% em um CAPTCHA que fomos convencidos, e passamos a chamar esse modelo de&amp;hellip;</description>
@@ -181,7 +185,7 @@
     <item>
       <title>Quebrando CAPTCHAs - Parte III: Segmentação de imagens</title>
       <link>https://blog.curso-r.com/posts/2017-06-29-captcha-segment/</link>
-      <pubDate>Sat, 22 Jul 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sat, 22 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-29-captcha-segment/</guid>
       <description>Digamos que você tenha uma base de dados de treino composta por N imagens com os textos classificados. Nossa resposta nesse caso é uma palavra de k caracteres, com p valores possíveis cada. O problema de modelar o CAPTCHA diretamente é que a variável resposta tem um&amp;hellip;</description>
@@ -190,7 +194,7 @@
     <item>
       <title>Web scraping do site da Secretaria de Segurança Pública de São Paulo</title>
       <link>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</link>
-      <pubDate>Fri, 19 May 2017 23:26:00 +0300</pubDate>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</guid>
       <description>Ao contrário de outros usos pro R, web-scrapping não tem uma receita bem definida. Mesmo definindo passos intermediários, alguns scrapers usam ideias que funcionam apenas em casos específicos. Neste post vamos estudar a construção de um Web Scraping com ideias facilmente generalizáveis.</description>
@@ -199,7 +203,7 @@
     <item>
       <title>As cores da Marvel vs DC</title>
       <link>https://blog.curso-r.com/posts/2017-05-01-as-paletas-de-cores-da-marvel-vs-dc/</link>
-      <pubDate>Mon, 01 May 2017 23:26:00 +0300</pubDate>
+      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-05-01-as-paletas-de-cores-da-marvel-vs-dc/</guid>
       <description>A cor é uma diferença notável entre os filmes da Marvel e da DC. Enquanto a Disney/Marvel Studios costuma lançar filmes com tons mais claros e alegres, a Warner tem optado por cenários escuros, com um aspecto mais sombrios. Neste post, vamos utilizar o Kmeans para obter a paleta de cores mais utilizadas por cada estúdio.</description>
@@ -208,7 +212,7 @@
     <item>
       <title>O Porta dos Fundos está em decadência? (REVISITED)</title>
       <link>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</link>
-      <pubDate>Fri, 28 Apr 2017 23:26:00 +0300</pubDate>
+      <pubDate>Fri, 28 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</guid>
       <description>Às vezes a venda de uma empresa é um sinal de que algo não vai bem. Além disso, a briga entre as novas mídias e as velhas mídias é brutal, então se um conglomerado televisivo compra um dos gigantes da internet brasileira deve ter acontecido algum um tipo de canibalismo. Motivados pela nova casa do PDF, neste post revisitamos a análise sobre a decadência do Porta dos Fundos.</description>
@@ -217,7 +221,7 @@
     <item>
       <title>K-means e paleta de cores</title>
       <link>https://blog.curso-r.com/posts/2017-04-21-paleta-de-cores/</link>
-      <pubDate>Sat, 22 Apr 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-21-paleta-de-cores/</guid>
       <description>Uma aplicação interessante de algoritmos de clusterização é a obtenção de paletas de cores a partir de imagens. Veja como isso pode ser feito usando o R.</description>
@@ -226,7 +230,7 @@
     <item>
       <title>Análise das emoções de Aécio Neves</title>
       <link>https://blog.curso-r.com/posts/2017-04-09-aecio/</link>
-      <pubDate>Sat, 15 Apr 2017 13:07:31 +0200</pubDate>
+      <pubDate>Sat, 15 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-09-aecio/</guid>
       <description>Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: &amp;lsquo;Por quê ele sempre faz tanta cara de dor?&amp;rsquo;</description>
@@ -235,7 +239,7 @@
     <item>
       <title>Você está a menos de 1 km de um Hambúrguer?</title>
       <link>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</link>
-      <pubDate>Mon, 10 Apr 2017 23:26:00 +0300</pubDate>
+      <pubDate>Mon, 10 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</guid>
       <description>Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos utilizar o pacote &lt;code&gt;leaflet&lt;/code&gt; para criar mapas com os dados coletados e descobrir se estamos a menos de 1 km de hospitais, delagacias, corpos de bombeiros e, o mais importante, de uma hamburgueria.</description>
@@ -251,7 +255,7 @@
     </item>
     
     <item>
-      <title>Lollapalooza segundo Spotify - Web Scraping, API do Spotify e tidyverse</title>
+      <title>Lollapalooza segundo o Spotify</title>
       <link>https://blog.curso-r.com/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify/</link>
       <pubDate>Mon, 27 Mar 2017 00:00:00 +0000</pubDate>
       

@@ -6,7 +6,20 @@
     <description>Recent content in discussões on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Mon, 19 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/discuss%C3%B5es/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/categories/discuss%C3%B5es/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Movimento da faxina de dados</title>
+      <link>https://blog.curso-r.com/posts/2019-08-30-faxina/</link>
+      <pubDate>Wed, 18 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-30-faxina/</guid>
+      <description>A faxina de dados é uma etapa essencial do ciclo da ciência de dados, que nunca será automatizada. Seja parte desse movimento.</description>
+    </item>
+    
     <item>
       <title>Programando com a comunidade</title>
       <link>https://blog.curso-r.com/posts/2019-07-15-comunidade/</link>
@@ -28,7 +41,7 @@
     <item>
       <title>Estatística e programação</title>
       <link>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</link>
-      <pubDate>Sat, 09 Dec 2017 11:54:00 +0300</pubDate>
+      <pubDate>Sat, 09 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</guid>
       <description>Neste post, encerraremos a nossa série sobre aprendizado e educação discutindo a importância da programação dentro da Estatística.</description>
@@ -37,7 +50,7 @@
     <item>
       <title>Aprendendo assuntos difíceis</title>
       <link>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</link>
-      <pubDate>Sat, 11 Nov 2017 23:26:00 +0300</pubDate>
+      <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</guid>
       <description>Uma breve reflexão sobre o preconceito de estudar assuntos difíceis.</description>
@@ -46,7 +59,7 @@
     <item>
       <title>Por que amar Estatística?</title>
       <link>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</link>
-      <pubDate>Thu, 31 Aug 2017 23:26:00 +0300</pubDate>
+      <pubDate>Thu, 31 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</guid>
       <description>Neste post, vou contar como me apaixonei pela Estatística.</description>
@@ -55,7 +68,7 @@
     <item>
       <title>Eu, a Estatística e a programação</title>
       <link>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</link>
-      <pubDate>Thu, 17 Aug 2017 23:26:00 +0300</pubDate>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</guid>
       <description>Neste post, iniciarei uma série com algumas reflexões sobre temas que orbitam o ensino de Estatística e a importância da programação na vida do estatístico.</description>
@@ -64,7 +77,7 @@
     <item>
       <title>Quebrando CAPTCHAs - Introdução</title>
       <link>https://blog.curso-r.com/posts/2017-06-29-captcha-intro/</link>
-      <pubDate>Wed, 28 Jun 2017 13:07:31 +0200</pubDate>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-29-captcha-intro/</guid>
       <description>Sabe aquelas imagens chatas que aparecem quando você está preenchendo um formulário ou quer acessar uma página específica, pedindo para você decifrar o texto? Isso é o que chamamos de CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart). Captchas foram criados para&amp;hellip;</description>

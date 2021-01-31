@@ -7,9 +7,8 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/quadrado-vs-retangulo.png"
 author: ["Athos"]
 summary: "Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels retangulares podem ajudar. O post mostra um exemplo minimal em {torch} para ilustrar uma situação em que isso acontece."
-retired: true
 ---
-
+ 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -27,8 +26,56 @@ Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, k
 ```{r}
 library(torch)
 library(tidyverse)
-library(mestrado)
+```
 
+```{r, echo=FALSE}
+
+# funcao auxiliar para transformar um tensor em tibble
+image_tensors_to_tbl <- function(image_tensors) {
+  while(length(dim(image_tensors)) < 4) image_tensors <- image_tensors$unsqueeze(1)
+  c(b, c, h, w) %<-% dim(image_tensors)
+  channels <- image_tensors$permute(c(1,4,3,2))$reshape(c(b*h*w, c)) %>% 
+    torch::as_array() %>% 
+    as.data.frame()
+  names(channels) <- sub(pattern = "V", "c", names(channels))
+  ixy <- expand.grid(y = 1:h, x = 1:w, i = 1:b)[ ,c("i", "y", "x")]
+  cbind(ixy, channels)
+}
+
+# plota um ggplot de varias imagens (em formato de tibble feito pela image_tensors_to_tbl)
+ggpixelgrid <- function(image_tensor_tbl, nrow = NULL, ncol = NULL, x = x, y = y, channels = dplyr::starts_with("c"), label = i, grid_tickness = 0, grid_colour = "grey", palette = "grey", ...) {
+  channels_vars <- tidyselect::vars_select(names(image_tensor_tbl), {{channels}})
+  channel_columns <- image_tensor_tbl[ , channels_vars]
+  max_color_value <- if(max(channel_columns) > 1) 255 else 1
+  pixel_colours <- if(length(channels_vars) == 1) {
+    if(palette == "grey") {
+      grDevices::grey(as.vector(channel_columns)/max_color_value)
+    } else {
+      get_viridis_color(as.vector(channel_columns)/max_color_value, opt = palette)
+    }
+  } else if(length(channels_vars) == 3) {
+    rlang::exec(grDevices::rgb, channel_columns, maxColorValue = max_color_value) 
+  } 
+  image_tensor_tbl %>%
+    dplyr::group_by({{label}}) %>%
+    dplyr::mutate(label = {{label}},
+                  y = rev({{y}})) %>%
+    ggplot2::ggplot(ggplot2::aes(x = {{x}}, y = y)) +
+    ggplot2::geom_raster(fill = pixel_colours, show.legend = FALSE) +
+    {if(grid_tickness > 0) ggplot2::geom_tile(colour = grid_colour, size = grid_tickness, fill = "transparent")} +
+    ggplot2::facet_wrap(facets = "label", nrow = nrow, ncol = ncol, ...) +
+    ggplot2::theme_void(12) +
+    ggplot2::coord_equal() +
+    ggplot2::labs(x = NULL, y = NULL) +
+    ggplot2::theme(
+      axis.title.x = ggplot2::element_text(),
+      axis.title.y = ggplot2::element_text(angle = 90)
+    )
+}
+```
+
+
+```{r}
 imagem_passarinho <- torch_ones(8,6) * 0.9
 imagem_passarinho[3, 1:3] <- torch_zeros(3)
 imagem_sapo <- torch_ones(8,6) * 0.9
@@ -47,6 +94,8 @@ image_tensors_to_tbl(x) %>%
   theme_void(30) +
   labs(x = "Tempo (ms)", y = "Frequência (Hz)")
 ```
+
+PS: códigos das funções [`image_tensors_to_tbl()` e `ggpixelgrid()`](https://github.com/Athospd/mestrado/blob/master/R/utils.R)
 
 ### CNNs
 

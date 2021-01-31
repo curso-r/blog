@@ -1,7 +1,7 @@
 ---
 title: "Mínimos quadrados com restrições lineares"
-date: "2017-08-07T10:12:00+03:00"
-tags: ["análises", "conceitos", "r", "regressão"]
+date: "2017-08-07"
+tags: ["conceitos", "regressão"]
 categories: ["conceitos"]
 image: "images/posts/banner/jackie_chan.jpg"
 author: ["Fernando"]

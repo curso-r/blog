@@ -1,12 +1,11 @@
 ---
 title: "Suavização exponencial simples com R"
-date: "2019-02-04T00:00:00+00:00"
+date: "2019-02-04"
 categories: ["tutoriais"]
-tags: ["r"]
+tags: ["estatística"]
 image: "images/posts/banner/ses.png"
 author: ["Daniel"]
 summary: "Nesse post vamos implementar o método de suavização exponencial simples com R."
-draft: false
 ---
 
 ```{r setup, include=FALSE}

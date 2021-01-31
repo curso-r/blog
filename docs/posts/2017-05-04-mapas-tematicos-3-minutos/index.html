@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Fernando em <a href="/categories/tutoriais">Tutoriais</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/Azeloc" target = "_blank">Fernando</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -122,99 +128,42 @@
         </ul>
         <article class="content">
           
+            <blockquote>Este post foi aposentado.
             
-
-
-<p>De todas as visualizações, mapas são aquelas que impressionam mais. É muito mais fácil alguém se maravilhar com o mapa mais simples do que com o <code>ggplot2</code> mais complicado. Felizmente, considerando essa comparação, o R disponibiliza muitos recursos para construir mapas.</p>
-<p>Dentro do <code>tidyverse</code> é possível construir mapas usando a função <code>geom_map</code>, do pacote <code>ggplot2</code>, mas está fora do escopo deste post explicar como ela funciona. Aqui vamos apenas descobrir como usá-la para agilizar a construção de um gráfico simples.</p>
-<p>Na Associação Brasileira de Jurimetria, nós temos um tipo favorito de mapa. Tipicamente temos interesse em diferenciar as unidades da federação por alguma variável quantitativa, seja ela categorizada ou não, e a ferramenta certa para isso é um mapa temático dos estados. Essa necessidade é tão frequente que as ferramentas mais importantes para construção desses gráficos estão num pacote chamado <code>abjData</code>.</p>
-<p>As coisas estão dispostas de tal forma que, a partir de uma tabela que relaciona uma variavel e os estados brasileiros, construir um gráfico similar ao mapa abaixo pode ser feito chamando apenas uma função<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
-<pre class="r"><code>dataset %&gt;% 
-  constroi_mapa_tematico()</code></pre>
-<p><img src="/blog/2017-05-04-mapas-tematicos-3-minutos_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Neste post, vamos construir a função <code>constroi_mapa_tematico</code> e aprender a implementar alguns <code>tweaks</code>.</p>
-<div id="a-funcao" class="section level2">
-<h2>A função</h2>
-<p>O <code>geom_map</code> é uma função do <code>ggplot2</code> que renderiza coordenadas de mapas. Ela pega um data_frame especial que diz quais coordenadas usar (e como usá-las) e plota no gráfico. Esse mapa normalmente é obtido aplicando a função <code>fortify</code> em um conjunto de dados geospaciais.</p>
-<p>Para os gráficos que vamos construir aqui, não vai ser necessário aplicar a função <code>fortify</code>, pois o resultado desse passo já está disponível no pacote <code>abjData</code> e ele é o data_frame <code>br_uf_map</code>. Tudo que vamos precisar fazer é pedir que o <code>geom_map</code> use esse cara.</p>
-<pre class="r"><code>devtools::install_github(&#39;abjur/abjData&#39;)
-#instala o pacote</code></pre>
-<pre class="r"><code>constroi_mapa_tematico &lt;- function(dataset){
-  dataset %&gt;% 
-  inner_join(abjData::br_uf_map) %&gt;% {
-    ggplot(.) +
-    geom_map(aes(x = long, y = lat,
-                 map_id = id, fill = variavel),
-             color = &#39;gray30&#39;, map = ., data = .) + 
-    theme_void() +
-    coord_equal()
-  }
-}</code></pre>
-<p>O <code>input</code> da função é uma tabela <code>dataset</code> com duas colunas</p>
-<ul>
-<li><code>id</code>, que representa as unidades da federação abreviada;</li>
-<li><code>variavel</code>, variável numérica (ou fator) que vai colorir o gráfico.</li>
-</ul>
-<p>No exemplo acima essa tabela era:</p>
-<pre class="r"><code>dataset %&gt;% 
-  head(10)</code></pre>
-<pre><code>FALSE # A tibble: 10 x 2
-FALSE    id    variavel
-FALSE    &lt;chr&gt;    &lt;dbl&gt;
-FALSE  1 TO        94.9
-FALSE  2 SP       279. 
-FALSE  3 SE        35.5
-FALSE  4 SC       205. 
-FALSE  5 RS       169. 
-FALSE  6 RR       115. 
-FALSE  7 RO       152. 
-FALSE  8 RN        26.2
-FALSE  9 RJ       107. 
-FALSE 10 PR       148.</code></pre>
-</div>
-<div id="os-tweaks" class="section level2">
-<h2>Os tweaks</h2>
-<p>A função <code>constroi_mapa_tematico</code> devolve um <code>ggplot2</code>, então ainda dá pra mexer em alguns parâmetros estéticos após a construção do mapa. As três coisas que vamos aprender a fazer são</p>
-<ol style="list-style-type: decimal">
-<li>Adicionar labels e títulos</li>
-</ol>
-<pre class="r"><code>dataset %&gt;% 
-  constroi_mapa_tematico() +
-  ggtitle(&quot;Roubos de carros no Brasil em 2014&quot;) +
-  scale_fill_continuous(name = &quot;Taxa/100 mil hab.&quot;)</code></pre>
-<p><img src="/blog/2017-05-04-mapas-tematicos-3-minutos_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Alterar as cores da escala</li>
-</ol>
-<pre class="r"><code>dataset %&gt;% 
-  constroi_mapa_tematico() +
-  ggtitle(&quot;Roubos de carros no Brasil em 2014&quot;) +
-  scale_fill_continuous(name = &quot;Taxa/100 mil hab.&quot;, low = &#39;white&#39;, high = &#39;red&#39;,
-                        na.value = &#39;white&#39;)</code></pre>
-<p><img src="/blog/2017-05-04-mapas-tematicos-3-minutos_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Alterar valores</li>
-</ol>
-<pre class="r"><code>dataset %&gt;% 
-  constroi_mapa_tematico() +
-  ggtitle(&quot;Roubos de carros no Brasil em 2014&quot;) +
-  scale_fill_continuous(name = &quot;Taxa/100 mil hab.&quot;, low = &#39;green&#39;, high = &#39;red&#39;,
-                        na.value = &#39;white&#39;, breaks = seq(0,300,50))</code></pre>
-<p><img src="/blog/2017-05-04-mapas-tematicos-3-minutos_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Os dados foram levantados pelo Fórum Brasileiro de Segurança Pública e obtidos via download no seu site <a href="http://www.forumseguranca.org.br/estatisticas/introducao/" class="uri">http://www.forumseguranca.org.br/estatisticas/introducao/</a>.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
+            </blockquote>
+            <img src = "https://blog.curso-r.com/images/retired.jpg" style = "margin: auto; display: block; width: 100%;">
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -224,7 +173,7 @@ FALSE 10 PR       148.</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -234,7 +183,7 @@ FALSE 10 PR       148.</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -244,25 +193,21 @@ FALSE 10 PR       148.</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -272,12 +217,14 @@ FALSE 10 PR       148.</code></pre>
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -302,24 +249,24 @@ FALSE 10 PR       148.</code></pre>
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

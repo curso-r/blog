@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por William em <a href="/categories/an%c3%a1lises">Análises</a>
+            Escrito por
+            
+            
+              <a href = "https://wamorim.com/" target = "_blank">William</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,12 +122,13 @@
         </ul>
         <ul class="list-inline tag-list">
           
-            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
             <li class="list-inline-item m-1"><a href="/tags/netflix">Netflix</a></li>
         </ul>
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Motivado pelo tweet da jornalista de dados <a href="https://twitter.com/gabrielacaesar">Gabriela Caesar</a>, resolvi pegar a base do meu histórico no Netflix e montar algumas visualizações para descobrir como venho utilizando a plataforma nesses últimos anos.</p>
@@ -144,7 +151,7 @@ Qual foi o primeiro filme ou a primeira série a que você assistiu quando assin
 <li><p>No final da página, clicar em <strong>Download all</strong>.</p></li>
 </ul>
 </div>
-<div id="lendo-a-base-e-fazendo-algumas-manipulacoes" class="section level2">
+<div id="lendo-a-base-e-fazendo-algumas-manipulações" class="section level2">
 <h2>2. Lendo a base e fazendo algumas manipulações</h2>
 <p>A base vem em um arquivo <code>.csv</code> com duas colunas:</p>
 <ul>
@@ -207,7 +214,7 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
     color = &quot;red&quot;
   ) +
   labs(x = &quot;Ano&quot;, y = &quot;Frequência&quot;)</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Para ver quais meses do ano eu assisto mais netflix, eu fiz um gráfico do número médio de títulos assistido por mês do ano. Talvez um reflexo de 12 anos na universidade, julho, mês de férias letivas, é o que em média eu mais assisti Netflix.</p>
 <pre class="r"><code>netflix %&gt;% 
   count(mes, ano, categoria) %&gt;% 
@@ -217,7 +224,7 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
   ggplot(aes(x = mes, y = freq_media, fill = categoria)) +
   geom_col() +
   labs(x = &quot;Mês&quot;, y = &quot;Frequência média&quot;)</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Fiz também o gráfico por ano, contando o número de programas assistidos por ano. 2018 foi o campeão, mas com certeza foi influência do meu pai e da minhã irmã, que usaram o meu perfil por um tempo.</p>
 <pre class="r"><code>netflix %&gt;% 
   count(ano, categoria) %&gt;% 
@@ -225,14 +232,14 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
   geom_col() +
   labs(x = &quot;Ano&quot;, y = &quot;Frequência total&quot;, fill = &quot;&quot;) +
   scale_x_continuous(breaks = min(netflix$ano):max(netflix$ano))</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Analisando agora o dia da semana, sem surpresa: fins de semana ganham. Mas é curioso que eu costumo assistir mais filmes às sextas do que no resto da semana.</p>
 <pre class="r"><code>netflix %&gt;% 
   count(dia_sem, categoria) %&gt;% 
   ggplot(aes(x = dia_sem, y = n, fill = categoria)) +
   geom_col() +
   labs(x = &quot;Dia da semana&quot;, y = &quot;Frequência total&quot;, fill = &quot;&quot;)</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Por fim, contei as séries que mais assisti. O resultado representa bem o meu gosto: 8 das 10 séries são comédias (sendo que o desenho Avatar nem fui eu quem assistiu).</p>
 <pre class="r"><code>netflix %&gt;% 
   filter(categoria  == &quot;Séries&quot;) %&gt;% 
@@ -244,9 +251,9 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
   geom_text(aes(label = n, y = n/2), color = &quot;white&quot;) +
   labs(x = &quot;Série&quot;, y = &quot;Total de visualizações&quot;) +
   coord_flip()</code></pre>
-<p><img src="/blog/2019-06-05-netflix_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/posts/2019-06-05-netflix_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="faca-os-graficos-para-os-seus-dados" class="section level2">
+<div id="faça-os-gráficos-para-os-seus-dados" class="section level2">
 <h2>4. Faça os gráficos para os seus dados</h2>
 <p>Eu criei um aplicativo web usando Shiny para que você possa fazer essa mesma análise com apenas alguns cliques. Para isso,</p>
 <ul>
@@ -261,10 +268,36 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -274,7 +307,7 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -284,7 +317,7 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -294,25 +327,21 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -322,12 +351,14 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -352,24 +383,24 @@ ex1 &lt;- tibble(date = c(&quot;14/01/19&quot;, &quot;20/09/20&quot;), date2 = c
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

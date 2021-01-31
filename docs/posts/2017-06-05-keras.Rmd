@@ -1,11 +1,10 @@
 ---
 title: "Keras: colocando deep learning no pipeline"
-date: "2017-06-05T13:07:31+02:00"
-tags: ["r", "deep learning", "keras"]
+date: "2017-06-05"
+tags: ["deep learning", "keras"]
 categories: ["divulgação"]
 image: "images/posts/banner/keras.jpg"
 author: ["Julio"]
-draft: false
 summary: "O keras é um novo pacote do R feito para ajustar modelos de redes neurais profundas. Esse é o primeiro de uma série de posts sobre o assunto. Primeiro, vamos falar dos autores desse pacote..."
 ---
 

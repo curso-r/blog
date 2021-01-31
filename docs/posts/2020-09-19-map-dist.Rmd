@@ -1,7 +1,7 @@
 ---
 title: "Qual a capital mais distante de Brasília?"
 date: "2020-09-19"
-tags: ["r", "visualizacao", "mapas"]
+tags: ["visualizacao", "mapas"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/map-dist.png"
 author: ["Julio"]
@@ -106,6 +106,7 @@ da_countries <- da_countries_tidy %>%
 As capitais mais próximas estão na Tabela \@ref(tab:proximas). Sem muitas surpresas aqui: como Brasília fica na região central do país, a capital mais próxima é a do Paraguai, seguida por outros países da América do Sul.
 
 ```{r proximas, eval=TRUE, echo=FALSE}
+library(magrittr)
 tab_perto <- tibble::tribble(
          ~country,                                        ~capital,         ~dist_br,
        "Paraguay",                                      "Asuncion",   1473.148251619,
@@ -125,7 +126,8 @@ knitr::kable(
   caption = "Capitais mais próximas de Brasília.",
   col.names = c("País", "Capital", "Distância (km)"),
   digits = 0
-)
+) %>% 
+  kableExtra::kable_styling()
 ```
 
 As coisas ficam mais interessantes quando visualizamos as capitais mais distantes, na Tabela \@ref(tab:distantes). E temos nosso resultado: Koror (Palau) é a capital mais distante da capital, Brasília, seguida por Manila (Filipinas) e Saipan (Ilhas Mariana do Norte).
@@ -150,7 +152,8 @@ knitr::kable(
   caption = "Capitais mais distantes de Brasília.",
   col.names = c("País", "Capital", "Distância (km)"),
   digits = 0
-)
+) %>% 
+  kableExtra::kable_styling()
 ```
 
 Mas será mesmo? Vamos usar o pacote `{leaflet}` para visualizar:
@@ -182,7 +185,7 @@ p_leaflet <- da_countries %>%
 p_leaflet
 ```
 
-![](/img/blog/map-dist/leaflet.png)
+![](/images/posts/conteudo/map-dist/leaflet.png)
 
 Acesse o mapa dinâmico [neste link](/blog/2020-09-19-map-dist_files/p_leaflet_world.html).
 
@@ -221,7 +224,7 @@ p_plotly <- plot_ly(height = 1000) %>%
 p_plotly
 ```
 
-![](/img/blog/map-dist/plotly.png)
+![](/images/posts/conteudo/map-dist/plotly.png)
 
 Acesse o mapa dinâmico [neste link](/blog/2020-09-19-map-dist_files/p_plotly_world.html).
 

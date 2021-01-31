@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Julio em <a href="/categories/tutoriais">Tutoriais</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/jtrecenti" target = "_blank">Julio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -121,130 +127,42 @@
         </ul>
         <article class="content">
           
+            <blockquote>Este post foi aposentado.
             
-<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="/rmarkdown-libs/viz/viz.js"></script>
-<link href="/rmarkdown-libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/grViz-binding/grViz.js"></script>
-
-
-<p>No meu último post anunciei que começaríamos uma série sobre CAPTCHAs. Uma da nossas iniciativas principais nesse tema é a criação do <a href="https://github.com/decryptr/decryptr">pacote decryptr</a>. Hoje veremos como usar algumas das funções principais desse pacote.</p>
-<div id="suposicoes-do-decryptr" class="section level2">
-<h2>Suposições do <code>decryptr</code></h2>
-<p>Ao criar o <code>decryptr</code> reduzimos um pouco o escopo de CAPTCHAs que gostaríamos de incluir. Fizemos isso para não ficarmos malucos, pois existem diversos tipos de testes disponíveis na web!</p>
-<p>As suposições são:</p>
-<ol style="list-style-type: decimal">
-<li>Apenas imagens <code>jpg</code> ou <code>png</code>.</li>
-<li>Uma imagem possui apenas números e letras.</li>
-<li>A quantidade de caracteres de um CAPTCHA é fixa.</li>
-<li>Dois CAPTCHAs de mesma origem têm sempre as mesmas dimensões.</li>
-<li>Não conseguimos nem queremos quebrar o <a href="https://www.google.com/recaptcha/intro/invisible.html">reCAPTCHA</a>.</li>
-</ol>
-</div>
-<div id="instalacao" class="section level2">
-<h2>Instalação</h2>
-<p>O <code>decryptr</code> ainda não está no CRAN. Isso significa que para instalá-lo você precisará do <code>devtools</code>:</p>
-<pre class="r"><code>if (!require(devtools)) install.packages(&#39;devtools&#39;)
-devtools::install_github(&#39;decryptr/decryptr&#39;)</code></pre>
-<p>As funções principais do <code>decryptr</code> são</p>
-<ul>
-<li><code>download()</code>: baixar imagens da web.</li>
-<li><code>read_captcha()</code>: adiciona metadados úteis a uma string com o caminho do CAPTCHA.</li>
-<li><code>load_captcha()</code>: carrega a imagem na memória.</li>
-<li><code>plot.captcha()</code>: método <code>S3</code> para desenhar o CAPTCHA na tela.</li>
-<li><code>classify.captcha()</code>: método <code>S3</code> para classificar CAPTCHAs manualmente.</li>
-<li><code>prepare.captcha()</code>: método <code>S3</code> para carregar CAPTCHAs em um formato adequado para modelagem usando o Keras.</li>
-<li><code>model.captcha()</code>: método <code>S3</code> para modelar os CAPTCHAs.</li>
-<li><code>predict.captcha()</code>: método <code>S3</code> para classificar um CAPTCHA a partir de um modelo ajustado e um caminho de imagem.</li>
-</ul>
-<div id="fluxo-de-utilizacao" class="section level3">
-<h3>Fluxo de utilização</h3>
-<p>O modo de uso planejado do <code>decryptr</code> está descrito na Figura <a href="#fig:fluxo">1</a>.</p>
-<div class="figure"><span id="fig:fluxo"></span>
-<div id="htmlwidget-1" style="width:750px;height:400px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"diagram":"\ndigraph rmarkdown {\ngraph [layout = circo]\ndownload->read\nread->plot\nread->classify\nread->prepare\nprepare->model\nmodel->predict\nread->predict\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-<p class="caption">
-Figure 1: Fluxo de utilização do pacote <code>decryptr</code>.
-</p>
-</div>
-<p>Como ainda não temos a teoria completa para ajuste de modelos, nesse post vamos ficar com a utilização das funções de download, visualização e classificação.</p>
-</div>
-</div>
-<div id="download" class="section level2">
-<h2>Download</h2>
-<p>A função <code>download()</code> tem cinco parâmetros:</p>
-<ul>
-<li><code>url=</code> o link do CAPTCHA que queremos baixar.</li>
-<li><code>dest=</code> a pasta que queremos salvar a imagem.</li>
-<li><code>n=</code> a quantidade de CAPTCHAs a serem baixados.</li>
-<li><code>secure=</code> se <code>TRUE</code>, fará o download com a opção <code>ssl_verifypeer = FALSE</code> (<a href="http://curso-r.com/blog/2017/03/31/2017-03-31-ssl/">veja esse post</a>)</li>
-<li><code>type=</code> extensão do arquivo (<code>jpg</code>/<code>jpeg</code> ou <code>png</code>).</li>
-</ul>
-<p>Essa não é uma das funções mais seguras do mundo, já que dependemos de uma boa conexão com o servidor de onde os CAPTCHAs serão baixados. A função também não trata de problemas com bloqueio de IP.</p>
-<p>Para facilitar a utilização do <code>decryptr</code>, adicionamos algumas funções do tipo <code>download_*()</code>, que já contêm os padrões para download de alguns sites específicos:</p>
-<ul>
-<li><code>download_rfb</code>: <a href="http://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva/cnpjreva_solicitacao2.asp">Consulta de CNPJ da Receita federal</a>.</li>
-<li><code>download_saj</code>: <a href="https://esaj.tjsp.jus.br/cjsg/imagemCaptcha.do">Sistema SAJ (vários Tribunais Estaduais)</a>.</li>
-<li><code>download_tjmg</code>: <a href="http://www4.tjmg.jus.br/juridico/sf/captcha.svl">Tribunal de Justiça de Minas Gerais</a>.</li>
-<li><code>download_tjrj</code>: <a href="http://www4.tjrj.jus.br/consultaProcessoWebV2/captcha">Tribunal de Justiça do Rio de Janeiro</a>.</li>
-<li><code>download_tjrs</code>: <a href="http://www.tjrs.jus.br/site_php/consulta/human_check/humancheck_showcode.php">Tribunal de Justiça do Rio Grande do Sul</a>.</li>
-<li><code>download_trt</code>: <a href="https://pje.trt3.jus.br/consultaprocessual/seam/resource/captcha">Tribunais Regionais do Trabalho</a>.</li>
-</ul>
-<p>Nesses casos, os únicos parâmetros são <code>dest=</code> e <code>n=</code>. Exemplo:</p>
-<pre class="r"><code>library(decryptr)
-download_tjmg(&#39;img/tjmg&#39;, n = 5) # salva arquivo em ./img/tjmg/captcha&lt;id&gt;.jpeg</code></pre>
-</div>
-<div id="visualizacao" class="section level2">
-<h2>Visualização</h2>
-<p>Para plotar um CAPTCHA basta ler o arquivo com <code>read_captcha()</code> e depois usar a função <code>plot()</code>. Exemplo:</p>
-<pre class="r"><code>library(decryptr)
-&#39;../../static/data/captcha-dados/tjmg/captcha4d2f1097adba_73301.jpeg&#39; %&gt;% 
-  read_captcha() %&gt;% 
-  purrr::pluck(1) %&gt;%
-  plot()</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="/blog/2017-06-29-captcha-decryptr_files/figure-html/unnamed-chunk-3-1.png" alt="CAPTCHA do TJMG." width="384" />
-<p class="caption">
-Figure 2: CAPTCHA do TJMG.
-</p>
-</div>
-<p>Vale mencionar que esse não é um <code>ggplot()</code> então nem tente somar layers nesse gráfico 😄.</p>
-</div>
-<div id="classificacao" class="section level2">
-<h2>Classificação</h2>
-<p>A classificação manual de CAPTCHAs é importante para possibilitar o treino de modelos preditivos. Para classificar um CAPTCHA você pode utilizar a função <code>classify()</code>, assim:</p>
-<pre class="r"><code>&#39;img/tjmg/captcha4d2f795d4e4_92522.jpeg&#39; %&gt;% 
-  read_captcha() %&gt;% 
-  classify()</code></pre>
-<p>Essa função fará duas coisas:</p>
-<ul>
-<li>Plota o CAPTCHA na tela.</li>
-<li>Abre um console para o usuário digitar o valor do CAPTCHA manualmente.</li>
-</ul>
-<p>Ao escrever o valor o CAPTCHA, pressione <code>&lt;enter&gt;</code>. Após isso, a função <code>classify()</code> irá adicionar sua classificação após o nome da imagem, como no exemplo acima: <code>_92522</code>. A função <code>classify()</code> gera uma cópia para que seja impossível de perder a imagem original.</p>
-<p>Algumas opções do <code>classify()</code>:</p>
-<ul>
-<li><code>dest=</code> colocar uma pasta para classificar os CAPTCHAs. Por padrão é a pasta onde os originais estão.</li>
-<li><code>answer=</code> adicionar uma resposta ao invés de esperar abrir o console. Essa opção é útil quando as classficações são feitas automaticamente (e.g., por um quebrador de CAPTCHAs que usa o áudio no lugar da imagem.)</li>
-</ul>
-</div>
-<div id="wrap-up" class="section level2">
-<h2>Wrap-up</h2>
-<ul>
-<li>Baixar com <code>download()</code> ou <code>download_*()</code>.</li>
-<li>Visualizar com <code>read_captcha()</code> pipe <code>plot()</code>.</li>
-<li>Classificar com <code>read_captcha()</code> pipe <code>classify()</code>.</li>
-</ul>
-<p>Caso encontre problemas, <a href="https://github.com/decryptr/decryptr/issues">adicione issues no repositório do pacote</a>.</p>
-<p>É isso. Happy coding ;)</p>
-</div>
-
+            </blockquote>
+            <img src = "https://blog.curso-r.com/images/retired.jpg" style = "margin: auto; display: block; width: 100%;">
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -254,7 +172,7 @@ Figure 2: CAPTCHA do TJMG.
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -264,7 +182,7 @@ Figure 2: CAPTCHA do TJMG.
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -274,25 +192,21 @@ Figure 2: CAPTCHA do TJMG.
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -302,12 +216,14 @@ Figure 2: CAPTCHA do TJMG.
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -332,24 +248,24 @@ Figure 2: CAPTCHA do TJMG.
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

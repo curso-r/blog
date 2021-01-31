@@ -6,7 +6,11 @@
     <description>Recent content in imdb on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/imdb/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/imdb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Bechdel: Filme e Machismo</title>
       <link>https://blog.curso-r.com/posts/2020-06-09-bechdel/</link>

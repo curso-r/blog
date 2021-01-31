@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Caio em <a href="/categories/an%c3%a1lises">Análises</a>
+            Escrito por
+            
+            
+              <a href = "https://www.linkedin.com/in/clente" target = "_blank">Caio</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,12 +122,14 @@
         </ul>
         <ul class="list-inline tag-list">
           
-            <li class="list-inline-item m-1"><a href="/tags/ggplot">ggplot</a></li>
-            <li class="list-inline-item m-1"><a href="/tags/pib">pib</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/ggplot2">ggplot2</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/finan%c3%a7as">finanças</a></li>
         </ul>
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="uma-bela-herança" class="section level2">
@@ -196,7 +204,7 @@ uma poupança rende, em média, módicos 6% ao ano, então vamos usar isso como
 referência; por fim, o dinheiro ficou parado lá por 250 anos. Quanto você acha
 que terá na conta agora em 2020?</p>
 <pre class="r"><code>grafico_juros(500, 0.06, 250)</code></pre>
-<p><img src="/blog/2020-02-20-poupanca-beethoven_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/posts/2020-02-20-poupanca-beethoven_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Como é de se esperar, juros compostos são uma função exponencial. Depois desses
 250 anos, os R$ 500,00 se tornaram mais de
 R$ 1B. Nada mal para uma mera poupança.</p>
@@ -205,33 +213,59 @@ R$ 1B. Nada mal para uma mera poupança.</p>
 <h2>Bônus</h2>
 <p>Aproveitando que já temos todo o código pronto, podemos visualizar outras séries
 exponenciais. Se colocássemos 1 centavo na poupança no ano 1 D.C., hoje em dia
-teríamos aproximadamente R$ 1.3117402^{49}, ou mais ou menos
+teríamos aproximadamente R$ 1.311740210^{49}, ou mais ou menos
 R$ 0,10 para cada átomo da Terra. Essa é a mágica dos juros compostos.</p>
 <pre class="r"><code>grafico_juros(0.01, 0.06, 2020, FALSE)</code></pre>
-<p><img src="/blog/2020-02-20-poupanca-beethoven_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/posts/2020-02-20-poupanca-beethoven_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Uma propriedade interessante de frases como “crescimento de 3%” é que raramente
 notamos que essa porcentagem se acumuma ano-a-ano. Um país cujo PIB cresce 3% ao
 ano tem que <strong>dobrar</strong> a sua economia a cada 25 anos. Atualmente o PIB do Brasil
 é de R$ 7T, vejamos o gráfico de nossa economia crescendo a 3% todo ano:</p>
 <pre class="r"><code>grafico_juros(7e12, 0.03, 25)</code></pre>
-<p><img src="/blog/2020-02-20-poupanca-beethoven_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/posts/2020-02-20-poupanca-beethoven_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Isso pode não impressionar muito, mas, se começármos a falar em escalas globais,
 a coisa muda de figura. Os EUA têm um PIB de US$ 17T, enquanto a soma de todos
 os PIBs do mundo dá aproximadamente US$ 80T; se a economia estadunidense
 crescesse a 3% pelos próximos 100 anos, precisaríamos de mais de 4 PIBs mundiais
 para chegar perto desse novo PIB dos EUA.</p>
 <pre class="r"><code>grafico_juros(17e12, 0.03, 100)</code></pre>
-<p><img src="/blog/2020-02-20-poupanca-beethoven_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/posts/2020-02-20-poupanca-beethoven_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Uma coisa que não cresce exponencialmente, entretanto, é a quantidade de
 recursos disponíveis na natureza…</p>
 </div>
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -241,7 +275,7 @@ recursos disponíveis na natureza…</p>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -251,7 +285,7 @@ recursos disponíveis na natureza…</p>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -261,25 +295,21 @@ recursos disponíveis na natureza…</p>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -289,12 +319,14 @@ recursos disponíveis na natureza…</p>
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -319,24 +351,24 @@ recursos disponíveis na natureza…</p>
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

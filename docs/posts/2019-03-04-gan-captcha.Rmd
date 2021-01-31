@@ -1,12 +1,11 @@
 ---
 title: "Quebrando Captchas - Parte VI: Redes Generativas Adversariais com Classificador Auxiliar"
-date: "2019-03-11T00:00:00+00:00"
+date: "2019-03-11"
 categories: ["análises"]
 tags: ["captcha"]
 image: "images/posts/banner/captcha_06.png"
 author: ["Julio"]
 summary: "Nesse post vou trabalhar com Captchas e GANs. Se você não sabe o que é um Captcha e como estamos trabalhando para resolvê-los até agora, recomendo que você veja a série de posts da Curso-R sobre o tema. Se você não sabe nada de GAN, acredito que seja possível acompanhar esse post."
-draft: false
 editor_options: 
   chunk_output_type: inline
 ---

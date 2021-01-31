@@ -1,5 +1,5 @@
 ---
-title: "Lollapalooza segundo Spotify - Web Scraping, API do Spotify e tidyverse"
+title: "Lollapalooza segundo o Spotify"
 date: "2017-03-27"
 tags: ["spotify", "lolapalooza", "API"]
 categories: ["análises"]

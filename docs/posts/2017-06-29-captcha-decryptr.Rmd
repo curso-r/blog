@@ -1,16 +1,18 @@
 ---
 title: "Quebrando CAPTCHAs - Parte II: O pacote decryptr"
-date: "2017-07-10T13:07:31+02:00"
+date: "2017-07-10"
 tags: ["captcha", "decryptr"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/captcha_02.png"
 author: ["Julio"]
 draft: false
 summary: "No último post sobre CAPTCHAs anunciei uma série de posts sobre CAPTCHAs. Uma da nossas iniciativas principais nesse tema é a criação do pacote decryptr, um framework completo para modelagem de CAPTCHAs. Hoje veremos como..."
+retired: true
+alternativa: ""
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
 ```
 
 

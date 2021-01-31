@@ -6,11 +6,15 @@
     <description>Recent content in sf on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Fri, 23 Feb 2018 14:25:00 +0300</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/sf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/sf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Meus 2 Centavos: análise das notas</title>
       <link>https://blog.curso-r.com/posts/2018-02-21-2cents/</link>
-      <pubDate>Fri, 23 Feb 2018 14:25:00 +0300</pubDate>
+      <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2018-02-21-2cents/</guid>
       <description>Tiago Belotti do canal do YouTube Meus 2 Centavos é o meu crítico de cinema favorito. Gasto uma quantidade de tempo que não me orgulho vendo os vídeos desse ser maravilhoso. Nesse post mostro como obtive as notas dele para verificar uma dúvida que estava me corroendo&amp;hellip;</description>
@@ -19,7 +23,7 @@
     <item>
       <title>Unindo mapas: the tidy way</title>
       <link>https://blog.curso-r.com/posts/2017-11-23-union-sf/</link>
-      <pubDate>Fri, 24 Nov 2017 14:25:00 +0300</pubDate>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-11-23-union-sf/</guid>
       <description>Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. Dessa vez, o grande culpado foi o sf, um pacote ainda em estágio de desenvolvimento mas que já considero pacas&amp;hellip;</description>

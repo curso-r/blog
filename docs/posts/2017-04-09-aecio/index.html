@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,13 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Julio em <a href="/categories/an%c3%a1lises">Análises</a>
+            Escrito por
+            
+            
+              <a href = "https://twitter.com/jtrecenti" target = "_blank">Julio</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,19 +122,19 @@
         </ul>
         <ul class="list-inline tag-list">
           
-            <li class="list-inline-item m-1"><a href="/tags/emo%c3%a7%c3%b5es">emoções</a></li>
             <li class="list-inline-item m-1"><a href="/tags/api">API</a></li>
         </ul>
         <article class="content">
           
             
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: ‘Por que ele sempre faz tanta cara de dor?’</p>
 <p>Pensando nisso, decidi pegar algumas fotos famosas dele e aplicar um algoritmo de Inteligência Artificial para reconhecimento de emoções. Se minha hipótese estiver correta, provavelmente esse algoritmo retornaria emoções como “dor”, “tristeza” ou “descontentamento”.</p>
 <p>A API escolhida para essa tarefa foi a <a href="https://www.microsoft.com/cognitive-services/en-us/emotion-api">Microsoft Emotions API</a>. O motivo por trás da escolha não é nada especial: foi o primeiro resultado que apareceu no Google para mim!</p>
 <p>As imagens utilizadas para testar o algoritmo contra minha hipótese são essas aqui:</p>
-<p><img src="/blog/2017-04-09-aecio_files/figure-html/fotos-1.png" width="33%" /><img src="/blog/2017-04-09-aecio_files/figure-html/fotos-2.png" width="33%" /><img src="/blog/2017-04-09-aecio_files/figure-html/fotos-3.png" width="33%" /><img src="/blog/2017-04-09-aecio_files/figure-html/fotos-4.png" width="33%" /><img src="/blog/2017-04-09-aecio_files/figure-html/fotos-5.png" width="33%" /><img src="/blog/2017-04-09-aecio_files/figure-html/fotos-6.png" width="33%" /></p>
 <div id="obtenção-das-emoções" class="section level2">
 <h2>Obtenção das emoções</h2>
 <p>Pacotes carregados para essa análise:</p>
@@ -151,7 +157,18 @@ library(gridExtra)</code></pre>
 }</code></pre>
 <p>Finalmente, apliquei a função num vetor de links usando o funcional <code>purrr::map_df</code>. Como resultado, temos essa base de dados:</p>
 <pre class="r"><code>d_emocoes &lt;- map_df(u_imagens, pegar_emocoes, key = key, .id = &#39;id&#39;)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="3%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">id</th>
@@ -238,17 +255,18 @@ library(gridExtra)</code></pre>
 <div id="resultados" class="section level2">
 <h2>Resultados</h2>
 <p>A Figura <a href="#fig:media">1</a> mostra a média de cada emoção nas seis fotos. Para minha surpresa, a emoção com maior proporção média foi “neutro”, com peso de quase 50%. As emoções seguintes são “felicidade”, “raiva” e “desdém”. A emoção “tristeza”, que achei que seria frequente por conta da cara de dor do Aécio, ficou com uma proporção média de apenas 5,5%.</p>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:media"></span>
-<img src="/blog/2017-04-09-aecio_files/figure-html/media-1.png" alt="Média de cada emoção nas seis fotos baixadas." width="864" />
+<img src="/posts/2017-04-09-aecio_files/figure-html/media-1.png" alt="Média de cada emoção nas seis fotos baixadas." width="864" />
 <p class="caption">
-Figure 1: Média de cada emoção nas seis fotos baixadas.
+Figura 1: Média de cada emoção nas seis fotos baixadas.
 </p>
 </div>
 <p>A Figura <a href="#fig:grafinal">2</a> mostra os resultados individuais das imagens. O primeiro resultado faz sentido, já que o Aécio está nitidamente rindo. Em todos os casos, é possível interpretar os resultados olhando a imagem. Por exemplo, o caso com “tristeza” mais alto é o que observamos as sombrancelhas mais caídas.</p>
 <div class="figure" style="text-align: center"><span id="fig:grafinal"></span>
-<img src="images/posts/conteudo/aecio/aecgrafs.png" alt="Emoções do Aécio em cada imagem." width="70%" />
+<img src="/images/posts/conteudo/aecio/aecgrafs.png" alt="Emoções do Aécio em cada imagem." width="70%" />
 <p class="caption">
-Figure 2: Emoções do Aécio em cada imagem.
+Figura 2: Emoções do Aécio em cada imagem.
 </p>
 </div>
 </div>
@@ -260,10 +278,36 @@ Figure 2: Emoções do Aécio em cada imagem.
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -273,7 +317,7 @@ Figure 2: Emoções do Aécio em cada imagem.
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -283,7 +327,7 @@ Figure 2: Emoções do Aécio em cada imagem.
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -293,25 +337,21 @@ Figure 2: Emoções do Aécio em cada imagem.
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -321,12 +361,14 @@ Figure 2: Emoções do Aécio em cada imagem.
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -351,24 +393,24 @@ Figure 2: Emoções do Aécio em cada imagem.
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

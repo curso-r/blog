@@ -6,7 +6,6 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/app-docker.jpg"
 author: ["Caio"]
 summary: "Depois de transformar seu shiny app em pacote, agora só resta transformá-lo em docker."
-draft: false
 ---
 
 ```{r, include=FALSE}

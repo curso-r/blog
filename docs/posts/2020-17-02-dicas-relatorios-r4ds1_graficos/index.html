@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Blog da Curso-R">
   <meta name="author" content="Curso-R">
-  <meta name="generator" content="Hugo 0.80.0" />
+  <meta name="generator" content="Hugo 0.70.0" />
 
   <!-- plugins -->
   
@@ -105,7 +105,12 @@
         <ul class="list-inline d-flex justify-content-between py-3">
           <li class="list-inline-item">
             <i class="ti-user mr-2"></i>
-            Escrito por Beatriz Milz e William em <a href="/categories/tutorial">Tutorial</a>
+            Escrito por
+            
+              Beatriz Milz e William
+            
+            em
+            <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a>
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
@@ -116,8 +121,7 @@
         </ul>
         <ul class="list-inline tag-list">
           
-            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
-            <li class="list-inline-item m-1"><a href="/tags/rstudio">rstudio</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/gr%c3%a1ficos">gráficos</a></li>
         </ul>
         <article class="content">
           
@@ -132,7 +136,7 @@ Neste post, apresentaremos algumas dicas para elaborar gráficos com o pacote <a
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-blanks/ggplot2_blank.png" alt="Ilustração sobre o pacote ggplot2, criada por &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;." width="50%" />
 <p class="caption">
-Figure 1: Ilustração sobre o pacote ggplot2, criada por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>.
+Figura 1: Ilustração sobre o pacote ggplot2, criada por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>.
 </p>
 </div>
 <div id="dicas-para-formatar-melhor-seus-gráficos" class="section level2">
@@ -203,13 +207,13 @@ imdb_top_diretores</code></pre>
 <pre class="r"><code>imdb_top_diretores %&gt;% 
   ggplot() + 
   geom_col(aes(x = diretor, y = media_lucro))</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>A primeira dica é: quando os nomes no eixo x estiverem se sobrepondo (no caso deste gráfico, o nome dos diretores), podemos inverter os eixos. Uma forma de fazer isso é utilizando a função <code>coord_flip()</code>:</p>
 <pre class="r"><code>imdb_top_diretores %&gt;% 
   ggplot() + 
   geom_col(aes(x = diretor, y = media_lucro)) +
   coord_flip()</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Agora está muito mais fácil de ler os nomes dos diretores!</p>
 <p>Quando trabalhamos com variáveis que representam dinheiro (como no caso da variável lucro), podemos formatar os valores para que fiquem formatados como dinheiro, utilizando a função <code>scales::dollar()</code> :</p>
 <pre class="r"><code>imdb_top_diretores %&gt;% 
@@ -217,7 +221,7 @@ imdb_top_diretores</code></pre>
   geom_col(aes(x = diretor, y = media_lucro)) +
   scale_y_continuous(labels = scales::dollar) +
   coord_flip()</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Agora que os eixos estão bem formatados, podemos formatar a legenda para ficar claro o que cada eixo significa! A função <code>labs()</code> permite escrever o que desejamos que apareça como legenda em cada elemento (por exemplo: <code>labs(x = "Legenda do eixo X", y = "Legenda do eixo Y")</code> .</p>
 <pre class="r"><code>imdb_top_diretores %&gt;% 
   ggplot() + 
@@ -225,7 +229,7 @@ imdb_top_diretores</code></pre>
   scale_y_continuous(labels = scales::dollar) +
   labs(x = &quot;Pessoas diretoras&quot;, y = &quot;Lucro médio&quot;) +
   coord_flip()</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>É interessante também ordenar as barras do gráfico de barras, pois facilita a comparação das categorias (neste caso, as pessoas diretoras).</p>
 <p>Para isso, podemos tratar a variável diretor como um fator (<code>factor</code>) <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, e ordenar os níveis (<code>levels</code>) de diretores segundo a variável <code>media_lucro</code>. A função <code>fct_reorder()</code> do pacote <a href="https://forcats.tidyverse.org/"><code>forcats</code></a> pode ser utilizada para isso, pois ela ordena os níveis de um fator utilizando a ordem de outra variável.</p>
 <pre class="r"><code>imdb_top_diretores %&gt;%
@@ -235,7 +239,7 @@ imdb_top_diretores</code></pre>
   scale_y_continuous(labels = scales::dollar) +
   coord_flip() +
   labs(x = &quot;Pessoas diretoras&quot;, y = &quot;Lucro médio&quot;)</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Por último (mas também importante) é uma dica estética, porém tem o poder de deixar o gráfico muito mais atrativo! Existem várias funções no pacote <code>ggplot2</code> com temas para os gráficos, e elas usam o prefixo <code>theme_</code> (por exemplo, <code>theme_light()</code>). Além disso, existem pacotes que oferecem mais temas, como o <a href="https://github.com/Mikata-Project/ggthemr">ggthemr</a> e o <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/">ggthemes</a>!</p>
 <p>O exemplo abaixo utiliza o tema <code>theme_light()</code>:</p>
 <pre class="r"><code>imdb_top_diretores %&gt;%
@@ -246,7 +250,7 @@ imdb_top_diretores</code></pre>
   labs(x = &quot;Pessoas diretoras&quot;, y = &quot;Lucro médio&quot;) +
   coord_flip()  +
   theme_bw()</code></pre>
-<p><img src="/blog/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/posts/2020-17-02-dicas-relatorios-r4ds1_graficos_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>O exemplo abaixo utiliza o tema <code>flat</code> do pacote <a href="https://github.com/Mikata-Project/ggthemr">ggthemr</a>:</p>
 <pre class="r"><code>imdb_top_diretores %&gt;%
   mutate(diretor = forcats::fct_reorder(diretor, media_lucro)) %&gt;%
@@ -276,10 +280,36 @@ imdb_top_diretores</code></pre>
 
           
         </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
       </div>
       <div class="col-lg-1">
 </div>
 <div class="col-lg-3">
+  
   <div class="widget">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
     
@@ -289,7 +319,7 @@ imdb_top_diretores</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2021-01-08-tabulizer/">{tabulizer}: Tabela do PDF para data.frame em segundos</a></h5>
-        <p>Por [Athos], em Jan 08, 2021 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -299,7 +329,7 @@ imdb_top_diretores</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/">CNNs: Kernel Quadrado versus Kernel Retangular</a></h5>
-        <p>Por [Athos], em Dec 30, 2020 </p>
+        <p>Por Athos em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
@@ -309,25 +339,21 @@ imdb_top_diretores</code></pre>
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2020-12-18-stockfish/">Stockfish no R</a></h5>
-        <p>Por [Caio], em Dec 18, 2020 </p>
+        <p>Por Caio em <a href="/categories/pacotes">Pacotes</a></p>
       </div>
     </div>
     
   </div>
-  
   <div class="widget">
-    <h4 class="mb-4">CATEGORIAS</h4>
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
     <ul class="list-inline tag-list">
       <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
       <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
       <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
       <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/livro">Livro</a></li>
       <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
       <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
       <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
-      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
     </ul>
   </div>
 </div>
@@ -337,12 +363,14 @@ imdb_top_diretores</code></pre>
 </section>
 
 
-<footer class="bg-secondary">
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.jpg')">
   <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="https://blog.curso-r.com"><img src="https://blog.curso-r.com/images/logo.png" alt="Blog | Curso-R" class="img-fluid"></a>
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.png" alt="Blog | Curso-R" class="img-fluid"></a>
         </div>
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           
@@ -367,24 +395,24 @@ imdb_top_diretores</code></pre>
           <h6>Siga a Curso-R</h6>
           <ul class="list-inline d-inline-block">
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
             
-            <li class="list-inline-item"><a href="" class="text-dark"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
             
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center pb-3">
-    <p class="mb-0">Copyright © 2021 Curso-R</p>
-  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+    </div>
 </footer>
 
 

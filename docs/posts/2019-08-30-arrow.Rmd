@@ -6,7 +6,6 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/arrow.jpeg"
 author: ["Julio"]
 summary: "O pacote {arrow} é uma atualização importante para o mundo da ciência de dados. Veja porquê nesse post."
-draft: true
 editor_options: 
   chunk_output_type: console
 ---

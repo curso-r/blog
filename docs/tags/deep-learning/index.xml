@@ -6,7 +6,11 @@
     <description>Recent content in deep learning on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>CNNs: Kernel Quadrado versus Kernel Retangular</title>
       <link>https://blog.curso-r.com/posts/2020-12-30-retangulo-vs-quadrado/</link>
@@ -28,7 +32,7 @@
     <item>
       <title>Regressão Logística em: a menor deep learning do mundo</title>
       <link>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</link>
-      <pubDate>Sat, 29 Jul 2017 10:12:00 +0300</pubDate>
+      <pubDate>Sat, 29 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</guid>
       <description>Deep learning é uma grande novidade, mas há muitos mitos em sua volta que acaba espantando pessoas que poderiam usufruir e contribuir para a comunidade de analista de dados. Esse post tem o intuito de abrir um pouquinho a caixa preta para quebrar algumas dessas fábulas.</description>
@@ -37,7 +41,7 @@
     <item>
       <title>Construindo Autoencoders</title>
       <link>https://blog.curso-r.com/posts/2017-06-26-construindo-autoencoders/</link>
-      <pubDate>Mon, 26 Jun 2017 10:12:00 +0300</pubDate>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-26-construindo-autoencoders/</guid>
       <description>Autoencoders são redes neurais treinadas com o objetdivo de copiar o seu input para o seu output. Aprenda a treinar o seu neste post.</description>
@@ -46,7 +50,7 @@
     <item>
       <title>Instalando Anaconda &#43; TensorFlow &#43; Keras para R no Ubuntu 16.04 Server</title>
       <link>https://blog.curso-r.com/posts/2017-06-08-keras-no-ubuntu/</link>
-      <pubDate>Thu, 08 Jun 2017 21:12:00 +0300</pubDate>
+      <pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-08-keras-no-ubuntu/</guid>
       <description>Passo a passo de como preparar o Keras para R no Ubuntu 16.04 em cima do Anaconda.</description>
@@ -55,7 +59,7 @@
     <item>
       <title>Keras: colocando deep learning no pipeline</title>
       <link>https://blog.curso-r.com/posts/2017-06-05-keras/</link>
-      <pubDate>Mon, 05 Jun 2017 13:07:31 +0200</pubDate>
+      <pubDate>Mon, 05 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-05-keras/</guid>
       <description>O keras é um novo pacote do R feito para ajustar modelos de redes neurais profundas. Esse é o primeiro de uma série de posts sobre o assunto. Primeiro, vamos falar dos autores desse pacote&amp;hellip;</description>

@@ -6,7 +6,11 @@
     <description>Recent content in shiny on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.curso-r.com/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Conectando o RStudio com o shinyapps.io</title>
       <link>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</link>
@@ -14,15 +18,6 @@
       
       <guid>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</guid>
       <description>Aprenda como conectar a sua conta do shinyapps.io com o RStudio para compartilhar aplicativos Shiny na internet em apenas alguns minutos.</description>
-    </item>
-    
-    <item>
-      <title>Melhores trabalhos do curso R para Ciência de dados I (maio de 2020)</title>
-      <link>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</link>
-      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</guid>
-      <description>Apresentamos os melhores trabalhos de conclusão do nosso curso de R para Ciência de dados I e comentamos aspectos importantes sobre a comunicação dos resultados das nossas análises.</description>
     </item>
     
     <item>
@@ -73,7 +68,7 @@
     <item>
       <title>Hospedando seu Shiny app no now</title>
       <link>https://blog.curso-r.com/posts/2018-03-05-shiny-now/</link>
-      <pubDate>Mon, 05 Mar 2018 14:25:00 +0300</pubDate>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2018-03-05-shiny-now/</guid>
       <description>Neste post você aprenderá a hospedar o seu shiny app usando Docker e o serviço now.sh.</description>
