@@ -9,11 +9,13 @@ author: ["Athos"]
 summary: "Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels retangulares podem ajudar. O post mostra um exemplo minimal em {torch} para ilustrar uma situação em que isso acontece."
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="exemplo-passarinho-versus-sapo" class="section level2">
 <h2>Exemplo: Passarinho versus Sapo</h2>
-<p>Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels com outros formatos podem ajudar como mostrado em <span class="citation">(Sun, Ozay, and Okatani <a href="#ref-inproceedings" role="doc-biblioref">2016</a>)</span>! Um exemplo é o kernel retangular quando se está mexendo com sons e seus respectivos espectrogramas. Para ilustar eu vou criar dois “espectrogramas” bem simples, assim:</p>
+<p>Em modelos de CNN é comum usar kernels quadrados. Mas a depender do problema, kernels com outros formatos podem ajudar como mostrado em <span class="citation">(Sun, Ozay, and Okatani 2016)</span>! Um exemplo é o kernel retangular quando se está mexendo com sons e seus respectivos espectrogramas. Para ilustar eu vou criar dois “espectrogramas” bem simples, assim:</p>
 <pre class="r"><code>library(torch)
 library(tidyverse)</code></pre>
 <pre class="r"><code>imagem_passarinho &lt;- torch_ones(8,6) * 0.9
