@@ -81,7 +81,7 @@ footerImage = "images/footerImage.jpg"
 # theme layout ( two layout is available, "1" and "2" )
 layout = "1"
 # Meta data
-description = "Blog da Curso-R"
+description = "Este é o blog da Curso-R. Aqui você encontra tutoriais, análises de temas cotidianos e tudo o mais que o maravilhoso universo do R tem a nos oferecer."
 # Preloader
 preloader = true
 # search
