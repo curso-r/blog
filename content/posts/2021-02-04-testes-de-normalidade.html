@@ -1,0 +1,117 @@
+---
+title: "Testes de normalidade em R - Parte 2: Testes"
+date: "2021-02-09"
+tags: ["faxina", "modelagem"]
+categories: ["análises", "conceitos", "tutoriais", "r"]
+image: "images/posts/banner/gaussian-2.png"
+author: ["Fernando"]
+summary: "Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No segundo texto, vamos te mostrar como realizar uma bateria de testes de hipóteses para verificar se uma variável segue ou não a distribuição normal."
+draft: false
+---
+
+
+
+<p>A distribuição normal (também conhecida como distribuição gaussiana) é um dos conceitos mais importantes da estatística. Ela nos ajuda a interpretar resultados experimentais em todas as áreas da ciência e também é o pressuposto de diversos modelos estatísticos, como por exemplo os modelos de regressão linear.</p>
+<p>Nessa série de posts, vamos te ajudar a analisar estatisticamente se uma variável segue ou não a distribuição normal de maneira simples e rápida. Hoje vamos falar especificamente de testes de hipóteses.</p>
+<p>Aproveite e dê uma olhada na <a href="https://www.curso-r.com/blog/2021-01-28-testes-de-normalidade/">parte 1</a> se você também quiser sobre gráficos que ajudam a detectar desvios da distribuição normal.</p>
+<div id="r-básico" class="section level1">
+<h1>R básico</h1>
+<p>Os pacotes do R básico, que já são instalados automaticamente, contam com dois únicos testes de normalidade pré-implementados: <code>ks.test</code> para o teste de Kolmogorov-Smirnov e <code>shapiro.test</code> para o teste de Shapiro-Wilk. Claro que é possível implementar outros testes manualmente, mas essas funções já calculam as estatísticas de teste e fornecem valores p, inclusive com algumas parametrizações disponíveis. Vamos exemplicar o funcionamento dessas funções com a coluna <code>hp</code> (ou horse-power) da base <code>mtcars</code>.</p>
+<p>A função <code>shapiro.test</code> tem uma interface bem amigável. Você insere um vetor, que pode muito bem ser uma coluna de um banco de dados, e recebe de volta o valor calculado da estatística de teste e o valor p calculado. A implementação dessa função segue as especificações de um <a href="https://www.jstor.org/stable/2986146?origin=crossref&amp;seq=1">paper famoso de 1995</a>. No caso da coluna <code>hp</code>, o resultado do teste de Shapiro-Wilk é um valor p de 0.0488082. Ou seja, observamos um desvio improvável com relação ao que se esperaria. Não parece que seria isso que aconteceria, né? <a href="https://www.curso-r.com/blog/2021-01-28-testes-de-normalidade/">O gráfico dava outra ideia</a>, né?</p>
+<pre class="r"><code>
+shapiro.test(mtcars$hp)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  mtcars$hp
+## W = 0.93342, p-value = 0.04881</code></pre>
+<p>Para tirar a dúvida, vamos ver qual é o resultado do teste de Kolmogorov-Smirnov com a função <code>ks.test</code>. Nesse caso, a usabilidade é um pouco pior do que no caso da função <code>shapiro.test</code>, já que você também precisa imputar manualmente a média e o desvio padrão do seu vetor. Nesse caso, obtemos um valor p maior (aproximadamente 30%), mais condizente com o gráfico que construímos antes.</p>
+<pre class="r"><code>ks.test(mtcars$hp, &quot;pnorm&quot;, mean(mtcars$hp), sd(mtcars$hp), exact = TRUE)
+## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  mtcars$hp
+## D = 0.16639, p-value = 0.3037
+## alternative hypothesis: two-sided</code></pre>
+</div>
+<div id="o-pacote-powerr" class="section level1">
+<h1>O pacote <code>PowerR</code></h1>
+<p>Mesmo que o R básico disponha de apenas dois testes, dois pesquisadores da universidade de Montreal compilaram uma série de procedimentos estatísticos no pacote <code>PoweR</code> e o resultado está disponível no CRAN. A ideia central do pacote é viabilizar a comparação massiva de vários testes de hipóteses, inclusive testes de normalidade, por isso todos os testes podem ser executados rapidamente e de maneira robusta. A título de comparação, o teste de Shapiro-Wilk no R básico só funciona até 5000 observações, enquanto no <code>PoweR</code> essa limitação não existe.</p>
+<p>Ao invés de ter uma função para cada teste, como fizemos nos exemplos anteriores, neste pacote é necessário fazer referência a códigos internos que estão descritos na <a href="https://cran.r-project.org/web/packages/PoweR/PoweR.pdf">documentação do pacote</a>. A vantagem dessa interface é que a saída é padronizada de em qualquer função que a gente escolha usar. Vamos dar uma olhada em como ficam o resultado dos testes de Shapiro-Wilk.</p>
+<pre class="r"><code>#install.packages(&#39;PoweR&#39;)
+
+library(PoweR)
+
+# o código identificador da distribuição de Shapiro-Wilk é o número 21
+
+statcompute(21, mtcars$hp)
+## $statistic
+## [1] 0.9334193
+## 
+## $pvalue
+## [1] 0.04880824
+## 
+## $decision
+## [1] 1 1
+## 
+## $alter
+## [1] 4
+## 
+## $stat.pars
+## [1] NA
+## 
+## $symbol
+## [1] &quot;W&quot;</code></pre>
+<p>Infelizmente o <code>PoweR</code> não tem a exata implementação do teste de Kolmogorov-Smirnov que temos no R. Entretanto, existem diversos testes, como o de Anderson-Darling e o teste Lilliefors, outros procedimentos comuns para testar a normalidade dos dados. No exemplo abaixo, podemos ver que esses dois outros testes concordam com o teste de Shapiro-Wilk: o resultado observado é improvável sob a hipótese de que os dados realmente foram obtidos de uma distribuição normal.</p>
+<pre class="r"><code>
+library(PoweR)
+
+print(&quot;O código identificador da distribuição de Lilliefors é o número 1&quot;)
+## [1] &quot;O código identificador da distribuição de Lilliefors é o número 1&quot;
+
+statcompute(1, mtcars$hp)
+## $statistic
+## [1] 0.1663854
+## 
+## $pvalue
+## [1] 0.02448416
+## 
+## $decision
+## [1] 1 1
+## 
+## $alter
+## [1] 3
+## 
+## $stat.pars
+## [1] NA
+## 
+## $symbol
+## [1] &quot;K-S&quot;
+
+print(&quot;O código identificador da distribuição de Anderson-Darling é o número 2&quot;)
+## [1] &quot;O código identificador da distribuição de Anderson-Darling é o número 2&quot;
+
+statcompute(2, mtcars$hp)
+## $statistic
+## [1] 0.7077449
+## 
+## $pvalue
+## [1] 0.05839104
+## 
+## $decision
+## [1] 0 1
+## 
+## $alter
+## [1] 3
+## 
+## $stat.pars
+## [1] NA
+## 
+## $symbol
+## [1] &quot;AD^*&quot;</code></pre>
+<p>Você pode dar uma olhada em todos os procedimentos que estão disponíveis no <code>PoweR</code> e escolher os que você achar mais interessantes para você. Existem várias referências disponíveis na documentação do pacote e você pode se informar sobre eles através dos artigos que fundamentam os testes. É interessante usar vários testes diferentes, já que cada um deles funciona melhor/pior em determinadas situações, mas isso é um assunto para o próximo texto da série… Até lá!</p>
+</div>
+<div id="gostou-quer-saber-mais" class="section level1">
+<h1>Gostou? Quer saber mais?</h1>
+<p>Se você quiser aprender um pouco mais sobre esse assunto, temos alguns cursos que tocam os temas deste post. Dê uma olhada nos nossos cursos de <a href="https://www.curso-r.com/cursos/regressao-linear/">Regressão Linear</a> ou <a href="https://www.curso-r.com/cursos/intro-machine-learning/">Machine Learning</a> e aproveite!</p>
+</div>

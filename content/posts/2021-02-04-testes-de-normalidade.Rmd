@@ -1,0 +1,85 @@
+---
+title: "Testes de normalidade em R - Parte 2: Testes"
+date: "2021-02-09"
+tags: ["faxina", "modelagem"]
+categories: ["análises", "conceitos", "tutoriais", "r"]
+image: "images/posts/banner/gaussian-2.png"
+author: ["Fernando"]
+summary: "Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No segundo texto, vamos te mostrar como realizar uma bateria de testes de hipóteses para verificar se uma variável segue ou não a distribuição normal."
+draft: false
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE
+)
+
+install.packages('PoweR', repos = "http://cran.us.r-project.org")
+```
+
+
+A distribuição normal (também conhecida como distribuição gaussiana) é um dos conceitos mais importantes da estatística. Ela nos ajuda a interpretar resultados experimentais em todas as áreas da ciência e também é o pressuposto de diversos modelos estatísticos, como por exemplo os modelos de regressão linear.
+
+Nessa série de posts, vamos te ajudar a analisar estatisticamente se uma variável segue ou não a distribuição normal de maneira simples e rápida. Hoje vamos falar especificamente de testes de hipóteses.
+
+Aproveite e dê uma olhada na [parte 1](https://www.curso-r.com/blog/2021-01-28-testes-de-normalidade/) se você também quiser sobre gráficos que ajudam a detectar desvios da distribuição normal.
+
+# R básico
+
+Os pacotes do R básico, que já são instalados automaticamente, contam com dois únicos testes de normalidade pré-implementados: `ks.test` para o teste de Kolmogorov-Smirnov e `shapiro.test` para o teste de Shapiro-Wilk. Claro que é possível implementar outros testes manualmente, mas essas funções já calculam as estatísticas de teste e fornecem valores p, inclusive com algumas parametrizações disponíveis. Vamos exemplicar o funcionamento dessas funções com a coluna `hp` (ou horse-power) da base `mtcars`.
+
+A função `shapiro.test` tem uma interface bem amigável. Você insere um vetor, que pode muito bem ser uma coluna de um banco de dados, e recebe de volta o valor calculado da estatística de teste e o valor p calculado. A implementação dessa função segue as especificações de um [paper famoso de 1995](https://www.jstor.org/stable/2986146?origin=crossref&seq=1). No caso da coluna `hp`, o resultado do teste de Shapiro-Wilk é um valor p de `r shapiro.test(mtcars$hp)$p.value`. Ou seja, observamos um desvio improvável com relação ao que se esperaria. Não parece que seria isso que aconteceria, né? [O gráfico dava outra ideia](https://www.curso-r.com/blog/2021-01-28-testes-de-normalidade/), né?
+
+```{r}
+
+shapiro.test(mtcars$hp)
+
+```
+
+Para tirar a dúvida, vamos ver qual é o resultado do teste de Kolmogorov-Smirnov com a função `ks.test`. Nesse caso, a usabilidade é um pouco pior do que no caso da função `shapiro.test`, já que você também precisa imputar manualmente a média e o desvio padrão do seu vetor. Nesse caso, obtemos um valor p maior (aproximadamente 30%), mais condizente com o gráfico que construímos antes.
+
+```{r}
+ks.test(mtcars$hp, "pnorm", mean(mtcars$hp), sd(mtcars$hp), exact = TRUE)
+```
+
+# O pacote `PowerR`
+
+Mesmo que o R básico disponha de apenas dois testes, dois pesquisadores da universidade de Montreal compilaram uma série de procedimentos estatísticos no pacote `PoweR` e o resultado está disponível no CRAN. A ideia central do pacote é viabilizar a comparação massiva de vários testes de hipóteses, inclusive testes de normalidade, por isso todos os testes podem ser executados rapidamente e de maneira robusta. A título de comparação, o teste de Shapiro-Wilk no R básico só funciona até 5000 observações, enquanto no `PoweR` essa limitação não existe.
+
+Ao invés de ter uma função para cada teste, como fizemos nos exemplos anteriores, neste pacote é necessário fazer referência a códigos internos que estão descritos na [documentação do pacote](https://cran.r-project.org/web/packages/PoweR/PoweR.pdf). A vantagem dessa interface é que a saída é padronizada de em qualquer função que a gente escolha usar. Vamos dar uma olhada em como ficam o resultado dos testes de Shapiro-Wilk.
+
+```{r}
+#install.packages('PoweR')
+
+library(PoweR)
+
+# o código identificador da distribuição de Shapiro-Wilk é o número 21
+
+statcompute(21, mtcars$hp)
+
+```
+
+Infelizmente o `PoweR` não tem a exata implementação do teste de Kolmogorov-Smirnov que temos no R. Entretanto, existem diversos testes, como o de Anderson-Darling e o teste Lilliefors, outros procedimentos comuns para testar a normalidade dos dados. No exemplo abaixo, podemos ver que esses dois outros testes concordam com o teste de Shapiro-Wilk: o resultado observado é improvável sob a hipótese de que os dados realmente foram obtidos de uma distribuição normal.
+
+```{r}
+
+library(PoweR)
+
+print("O código identificador da distribuição de Lilliefors é o número 1")
+
+statcompute(1, mtcars$hp)
+
+print("O código identificador da distribuição de Anderson-Darling é o número 2")
+
+statcompute(2, mtcars$hp)
+
+```
+
+Você pode dar uma olhada em todos os procedimentos que estão disponíveis no `PoweR` e escolher os que você achar mais interessantes para você. Existem várias referências disponíveis na documentação do pacote e você pode se informar sobre eles através dos artigos que fundamentam os testes. É interessante usar vários testes diferentes, já que cada um deles funciona melhor/pior em determinadas situações, mas isso é um assunto para o próximo texto da série... Até lá!
+
+# Gostou? Quer saber mais?
+
+Se você quiser aprender um pouco mais sobre esse assunto, temos alguns cursos que tocam os temas deste post. Dê uma olhada nos nossos cursos de [Regressão Linear](https://www.curso-r.com/cursos/regressao-linear/) ou [Machine Learning](https://www.curso-r.com/cursos/intro-machine-learning/) e aproveite!
