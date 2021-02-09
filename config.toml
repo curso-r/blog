@@ -89,7 +89,7 @@ search = true
 # about author
 author = "Curso-R"
 author_image = "images/banner-img.png"
-bio = "I’m a Freelance Interactive Art Director based in France. Focusing across branding and identity, digital and print."
+bio = "Este é o blog da Curso-R. Aqui você encontra tutoriais, análises de temas cotidianos e tudo o mais que o maravilhoso universo do R tem a nos oferecer."
 # Contact info
 email = "contato@curso-r.com"
 address = "[Acesse nosso fórum](https://discourse.curso-r.com/)"
