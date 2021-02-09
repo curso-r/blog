@@ -96,7 +96,7 @@ address = "[Acesse nosso fórum](https://discourse.curso-r.com/)"
 # Contact Form Action
 contact_form_action = "#"
 # Google Analitycs
-google_analitycs_id = "Your ID"
+google_analitycs_id = "UA-87272102-2"
 # copyright
 copyright = "Copyright &copy; 2021 Curso-R"
 
