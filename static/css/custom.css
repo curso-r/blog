@@ -117,3 +117,8 @@ h2, h3, h4, h5, h6 {
 .widget:first-child {
   margin-top: 50px;
 }
+
+.form-searh {
+  flex-direction: column;
+  display: inline-block;
+}
