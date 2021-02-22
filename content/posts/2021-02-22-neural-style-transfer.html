@@ -1,0 +1,210 @@
+---
+title: "Neural Style Transfer com Torch"
+date: "2021-02-22"
+tags: ["deep learning", "torch", "neural style transfer", "modelagem"]
+categories: ["análises", "conceitos", "tutoriais", "r"]
+image: "images/posts/banner/cristoredentorfinal.png"
+bibliography: bibliography.bib
+author: ["Athos"]
+summary: "Neural Style Transfer é uma das técnicas mais divertidas de deep learning. O post mostra como implementar uma rede de NST com o torch."
+draft: false
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code>library(torch)
+library(torchvision)
+library(zeallot)
+device &lt;- torch_device(if(cuda_is_available()) &quot;cuda&quot; else &quot;cpu&quot;)
+cpu &lt;- torch_device(&quot;cpu&quot;)</code></pre>
+<p>Neural Style Transfer é uma das técnicas mais divertidas e “artísticas” do deep learning. A imagem abaixo resume o que a gente vai fazer.</p>
+<div class="figure">
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/nst.png" alt="" />
+<p class="caption">content</p>
+</div>
+<p>Você fornece duas imagens à rede neural: <code>style</code> e <code>content</code> e o resultado será a imagem <code>content</code> com o estilo de <code>style</code>. É como se fosse um filtro do instagram, mas com o estilo do seu artista predileto =P.</p>
+<p>Este post é uma adaptação para R + torch do exercício do curso <a href="https://www.coursera.org/learn/convolutional-neural-networks/">‘Convolutional Neural Networks’ do deeplearning.ai</a> que eu fiz, originalmente em Python + tensorflow. Quando comecei a escrever esse post, tinha a intenção de ser o mais didático possível, mas acho que eu não conseguiria superar o curso do Coursera, então vou me ater aos principais pontos e comentar o código para quem quiser criar suas próprias imagens! Além disso, <a href="https://www.youtube.com/watch?v=iAyL5iCWWAs">este vídeo em português mostra um sumário da estratégia do NST.</a></p>
+<p>PS: durante a escrita desse post eu descobri que o Daniel já tinha feito <a href="https://torchvision.mlverse.org/articles/examples/style-transfer.html">um codigozinho de NST para o torchvision.</a> Parte do código roubei de lá kkk.</p>
+<div id="conceitos-e-ideias-importantes" class="section level2">
+<h2>Conceitos e ideias importantes</h2>
+<p>A ideia é gerar uma imagem <code>generated</code> G que tenha conteúdo similar a <code>content</code> C e estilo similar a <code>style</code> S. O conteúdo e o estilo são, geralmente, extraídos de uma convnet pré-treinada. O artigo original <span class="citation">(<a href="#ref-gatys2015neural" role="doc-biblioref">Gatys, Ecker, and Bethge 2015</a>)</span> utiliza o VGG19, que já vem dentro do {torchvision}.</p>
+<pre class="r"><code># VGG19 model
+vgg &lt;- model_vgg19(pretrained = TRUE)$features$to(device = device)
+
+# congelando os pesos
+vgg$parameters %&gt;% purrr::walk(function(param) param$requires_grad_(FALSE))</code></pre>
+<p>Então o VGG19 vai nos fornecer as features e agora precisamos definir funções de custo para achar a imagem que tem o melhor compromisso entre o conteúdo de uma imagem e o estilo de outra. A construção do algoritmo pode ser divida em três partes:</p>
+<ul>
+<li>Função de custo do <code>content</code>: <span class="math inline">\(L_{content}(C, G)\)</span></li>
+<li>Função de custo do <code>style</code>: <span class="math inline">\(L_{style}(S, G)\)</span></li>
+<li>Função de custo global: <span class="math inline">\(L(G) = \alpha L_{content}(C, G) + \beta L_{style}(S, G)\)</span></li>
+</ul>
+<div id="função-de-custo-do-content" class="section level3">
+<h3>Função de custo do <code>content</code></h3>
+<p>Sobre a escolha entre camadas rasas versus camadas profundas:</p>
+<ul>
+<li>As primeiras camadas de uma rede convolucional tendem a extrair padrões mais básicos como bordas e texturas simples.</li>
+<li>Camadas mais profundas costumam captar características mais sofisticadas como texturas detalhadas e objetos.</li>
+</ul>
+<p>E sobre a escolha de uma camada do meio, queremos a imagem <code>generated</code> com conteúdo similar ao <code>content</code>. A estratégia é:</p>
+<ol style="list-style-type: decimal">
+<li>escolher uma camada da rede para representar este tal “conteúdo.”</li>
+<li>pegar essa camada para cada uma das imagens <code>content</code> e <code>generated</code>.</li>
+<li>fazer a rede forçar com que essas duas camadas sejam o mais parecidas possível.</li>
+</ol>
+<p>Então a função de custo para refletir o ponto (3) pode ser simplesmente o erro quadrático médio entre os pixels dessa camada:</p>
+<pre class="r"><code>content_loss &lt;- function(content_layer, generated_layer) {
+  nnf_mse_loss(content_layer, generated_layer)
+}</code></pre>
+<p>OBS: Na prática, você irá obter o resultado “mais legal” se <strong>escolher camadas da meiúca</strong>: nem tão rasa, nem tão profunda. Já que a VGG19 possui 37 camadas, a escolhida pode ser, por exemplo, a camada 14.</p>
+</div>
+<div id="função-de-custo-do-style" class="section level3">
+<h3>Função de custo do <code>style</code></h3>
+<p>A finalidade da função de custo do <code>style</code> é minimizar a distância entre as tais <em>Gram matrix</em> das imagens <code>style</code> e <code>generated</code>.</p>
+<div id="gram-matrix" class="section level4">
+<h4>Gram matrix</h4>
+<p>A matriz de estilo é chamada de <em>Gram matrix</em> na literatura. Na matemática, dado um conjunto de vetores, a <em>Gram matrix</em> é matriz dos produtos internos dos pares destes vetores. É como se fosse uma matriz de correlação, mas sem centralizar pela média. Na prática, pega-se uma camada da rede, transforma em um tensor 2D (matriz) e calcula <span class="math inline">\(A * A^T\)</span>.</p>
+<pre class="r"><code>gram_matrix &lt;- function(tensor) {
+  c(b,c,h,w) %&lt;-% tensor$size()
+  tensor &lt;- tensor$view(c(c, h*w))
+  torch_matmul(tensor, tensor$t())/(h*w)
+}</code></pre>
+<p>A função de custo <span class="math inline">\(L_{style}(S, G)\)</span> é o bom e velho erro quadrático médio entre as <em>Gram matrices</em>.</p>
+<pre class="r"><code>style_loss &lt;- function(style_layer, generated_layer) {
+  style_gram &lt;- gram_matrix(style_layer)
+  generated_gram &lt;- gram_matrix(generated_layer)
+  nnf_mse_loss(style_gram, generated_gram)
+}</code></pre>
+</div>
+<div id="camadas-dos-estilos" class="section level4">
+<h4>Camadas dos estilos</h4>
+<p>Em vez de uma, pega-se cinco camadas intermediárias da rede para calcular as distâncias entre as respectivas <em>Gram matrices</em>. A função de custo vai passar a ser uma ponderação dessas cinco distâncias: <span class="math inline">\(L_{style}(S, G) = \sum_{l=1}^{5}\lambda^{[l]}L_{style}^{[l]}(S,G)\)</span></p>
+<pre class="r"><code>style_layers &lt;- c(2, 7, 12, 21, 29) # escolha das layers da VGG
+lambdas &lt;- 1e5/(c(1,10,10,10,10)^2) # pesos para cada uma das layers no estilo final</code></pre>
+<p>Agora vale criar uma nn_module() que retorne as camadas intermediárias da rede (no caso VGG19). O argumento <code>layers_out</code> permite escolher quais camadas queremos trazer.</p>
+<pre class="r"><code>features &lt;- nn_module(
+  initialize = function(convnet) {
+    # poderia ser qualquer convnet pré-treinada. Iremos usar a VGG19
+    self$convnet &lt;- convnet
+  },
+  forward = function(img, layers_out = NULL) {
+    layers &lt;- seq_along(self$convnet) # 1 a 37
+    if(is.null(layers_out)) layers_out &lt;- layers
+    conv_outs &lt;- purrr::accumulate(layers, ~self$convnet[[.y]](.x), .init = img) # lista de 37 tensores
+    conv_outs[layers_out] # lista apenas com as layers selecionadas
+  }
+)</code></pre>
+</div>
+</div>
+</div>
+<div id="otimização" class="section level2">
+<h2>Otimização</h2>
+<p>Abaixo segue código comentado para rodar a otimização.</p>
+<pre class="r"><code>#funções auxiliares
+to_r &lt;- function(x) as.numeric(x$to(device = cpu))
+                               
+plot_image &lt;- function(tensor) {
+  im &lt;- tensor$to(device = &quot;cpu&quot;)[1,..]$
+    permute(c(2, 3, 1))$
+    to(device = &quot;cpu&quot;)$
+    clamp(0,1) %&gt;% # make it [0,1]
+    as.array()
+  par(mar = c(0,0,0,0))
+  plot(as.raster(im))
+}
+
+load_image &lt;- function(path, geometry = &quot;250x200&quot;) {
+  img &lt;- path %&gt;%
+    magick_loader() %&gt;%
+    magick::image_resize(geometry) %&gt;%
+    transform_to_tensor() %&gt;%
+    torch_unsqueeze(1)
+  
+  img$to(device = device)
+}</code></pre>
+<p>Os parâmetros e inputs que valem a pena experimentar são:</p>
+<ul>
+<li><code>content</code> e <code>style</code>: Imagens de input: a de conteúdo e a de estilo.</li>
+<li><code>content_layer</code>: a layer da VGG19 para extrair o conteúdo imagem de conteúdo.</li>
+<li><code>style_layers</code>: as layers da VGG19 para extrair o estilo imagem de estilo.</li>
+<li><code>lambdas</code>: os pesos de cada feature de estilo na otimização.</li>
+<li><code>content_weight</code>: o peso das features de conteúdo na otimização.</li>
+<li><code>style_weight</code>: o peso das features de estilo (global) na otimização.</li>
+</ul>
+<p>Outros dois parâmetros que afetam drasticamente o resultado são as dimensões das duas imagens de input. No código abaixo onde tem <code>"400x400"</code> e <code>"350x500"</code> pode-se trocar por outras dimensões a fim de se obter resultados diferentes.</p>
+<p>No processo de criação você irá mexer nesses parâmetros o tempo todo!</p>
+<pre class="r"><code># INPUT: content and style images
+content &lt;- load_image(&quot;content/posts/2021-02-22-neural-style-transfer/cristoredentor3.jpg&quot;, &quot;400x400&quot;)
+style &lt;- load_image(&quot;content/posts/2021-02-22-neural-style-transfer/vangogh_starry_night.jpg&quot;, &quot;350x500&quot;)
+
+# style and content feature setup
+content_layer &lt;- 14
+style_layers &lt;- c(2, 7, 12, 21, 29)
+lambdas &lt;- 1e5/(c(1,10,10,10,10)^2)
+content_weight &lt;- 2
+style_weight &lt;- 4e-1</code></pre>
+<div class="figure">
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentor3.jpg" alt="" />
+<p class="caption">content</p>
+</div>
+<div class="figure">
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/vangogh_starry_night.jpg" alt="" />
+<p class="caption">style</p>
+</div>
+<pre class="r"><code># FEATURES: extraídas da VGG19
+vgg_features &lt;- features(vgg)
+content_features &lt;- vgg_features(content, content_layer)
+style_features &lt;- vgg_features(style, style_layers)
+
+# OUTPUT: generated image
+generated &lt;- torch_clone(content)$requires_grad_(TRUE)
+optim &lt;- optim_adam(generated, lr = 0.02)
+lr_scheduler &lt;- lr_step(optim, 100, 0.9)
+
+# loop de otimização
+for(step in seq_len(8000)) {
+  optim$zero_grad()
+  # atualiza as features da imagem que está sendo gerada
+  generated_features &lt;- vgg_features(generated, c(content_layer, style_layers))
+  
+  # losses
+  LC &lt;- content_loss(content_features[[1]], generated_features[[1]])
+  LS &lt;- 0
+  for(i in seq_along(lambdas)) 
+    LS &lt;- LS + lambdas[i]*style_loss(style_features[[i]], generated_features[-1][[i]])  
+  
+  loss &lt;- content_weight * LC + style_weight * LS
+  
+  loss$backward()
+  optim$step()
+  lr_scheduler$step()
+  
+  # feedback
+  if(step %% 100 == 0) {
+    cat(glue::glue(&quot;LC = {to_r(LC)} - LS = {to_r(LS)} - Loss = {to_r(loss)}\n\n&quot;))
+    plot_image(generated)
+  }
+}
+
+# imagem final
+plot_image(generated)</code></pre>
+<pre><code>LC = 2.70741701126099 - LS = 36.7998428344727 - Loss = 20.1347713470459
+LC = 2.61282753944397 - LS = 24.3190288543701 - Loss = 14.9532661437988
+LC = 2.54735898971558 - LS = 19.7909469604492 - Loss = 13.0110969543457
+LC = 2.49572896957397 - LS = 16.9353790283203 - Loss = 11.7656097412109
+LC = 2.44669985771179 - LS = 16.6177845001221 - Loss = 11.5405139923096</code></pre>
+<p><img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentorfinal.png" /></p>
+<p>E aí? Ficou com cara de pintura? Comente o que achou! Tente com suas imagens e compartilhe com a gente =). Aprender como NST funciona é um grande exercício para aprimorar o entendimento sobre modelos de deep learning em geral, principalmente sobre como podemos criar funções de custo mais especializadas em um determinado contexto.</p>
+</div>
+<div id="aprenda-deep-learning-com-a-curso-r" class="section level2">
+<h2>Aprenda Deep learning com a Curso-R</h2>
+<p>Se você quiser entrar no incrível mundo das redes profundas, nosso curso de <a href="https://www.curso-r.com/cursos/deep-learning/">Deep Learning</a> é a melhor porta de entrada, conheça!</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-gatys2015neural" class="csl-entry">
+Gatys, Leon A., Alexander S. Ecker, and Matthias Bethge. 2015. <span>“A Neural Algorithm of Artistic Style.”</span> <a href="http://arxiv.org/abs/1508.06576">http://arxiv.org/abs/1508.06576</a>.
+</div>
+</div>
+</div>
