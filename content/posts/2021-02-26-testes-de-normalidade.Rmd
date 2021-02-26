@@ -53,15 +53,12 @@ Aqui a coisa é um pouco mais feia do que no caso da regressão, mas também é 
 
 Um exemplo interessante [analisado pelo David Robinson](http://varianceexplained.org/figs/2015-01-16-kmeans-free-lunch/hclust-1.png) é o caso em que os dados estão distribuídos ao longo de um círculo. A imagem abaixo mostra o que acontece quando rodamos um algoritmo de k-médias nesse conjunto de dados: nós quebramos as esferas/círculos no meio.
 
-```{r, echo = FALSE}
-knitr::include_graphics("http://varianceexplained.org/figs/2015-01-16-kmeans-free-lunch/plot_kmeans-1.png")
-```
+
+![](/images/posts/conteudo/normalidade/plot_kmeans-1.jpg)
 
 Esquisito né? Os dados de fato se dividem em dois grupos (o círculo de fora e a bola de dentro), o k-médias rodou, mas encontrou grupos diferentes dos "reais". Essa é uma situação em que usar um teste de normalidade poderia nos dar uma dica de que estamos nesse cenário de desalinho entre o algoritmo utilizado e os dados disponíveis: é muito claro que os grupos encontrados pelo k-médias não seguem uma distribuição normal multivariada. A partir desse teste, poderíamos partir para um outro algoritmo que fosse capaz de encontrar esse padrão, como uma clusterização hierárquica.
 
-```{r, echo = FALSE}
-knitr::include_graphics("http://varianceexplained.org/figs/2015-01-16-kmeans-free-lunch/hclust-1.png")
-```
+![](/images/posts/conteudo/normalidade/plot_kmeans-2.jpg)
 
 # Considerações finais
 
