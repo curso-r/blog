@@ -1,0 +1,45 @@
+---
+title: "Receitinha para criar seu blog com {blogdown}"
+date: "2021-02-12"
+tags: ["blog", "blogdown", "web"]
+categories: ["tutoriais", "r"]
+image: "images/posts/banner/receitinha-blogdown.jpg"
+author: ["William"]
+summary: "Passo a passo para criar o seu blog com {blogdown} em minutos."
+draft: false
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p>Abaixo segue um passo-a-passo para criar seu blogzinho com o R + blogdown e escrever posts com todo o poder do RMarkdown.</p>
+<div id="caminho-das-pedras-do-blogdown" class="section level2">
+<h2>Caminho das pedras do {blogdown}</h2>
+<ul>
+<li><p>Abrir o RStudio limpo (sem estar em nenhum projeto)</p></li>
+<li><p>Criar o projeto com git/github</p>
+<ul>
+<li><code>usethis::create_project()</code></li>
+<li><code>usethis::use_git()</code></li>
+<li><code>usethis::use_github()</code></li>
+</ul></li>
+<li><p>Criar o site com o pacote <code>{blogdown}</code></p>
+<ul>
+<li><code>install.packages("blogdown")</code></li>
+<li><code>blogdown::new_site("caminho", theme = "usuario/repositorio")</code></li>
+<li><a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a> para escolher temas</li>
+</ul></li>
+<li><p>Configurar o site no arquivo config.toml</p></li>
+<li><p>Mexer nos posts dentro da pasta <code>content/post</code></p>
+<ul>
+<li>Usar <code>blogdown::new_post()</code> para criar novos pots.</li>
+</ul></li>
+<li><p>Rodar <code>blogdown::serve_site()</code> para testar local.</p></li>
+<li><p>Rodar <code>blogdown::build_site()</code> para montar o site final.</p></li>
+<li><p>Subir para o Github para colocar em produção (se estiver usando o GH pages)</p></li>
+</ul>
+<p><a href="https://www.youtube.com/watch?v=PjUcR2cZTW8">Clique aqui para assistir ao pedaço de live gravada da gente criando um blogdown do zero.</a></p>
+<p><a href="https://curso-r.github.io/exemploBlogdown/">E aqui para ver o repo do github com os códigos resultantes!</a></p>
+<p>E se quiser ajuda profissional nessa caminhada, conheça nossos <a href="curso-r.com/cursos">cursos de deploy, visualização e relatórios!</a></p>
+</div>
