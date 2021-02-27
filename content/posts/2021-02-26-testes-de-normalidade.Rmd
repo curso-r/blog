@@ -58,7 +58,7 @@ Um exemplo interessante [analisado pelo David Robinson](http://varianceexplained
 
 Esquisito né? Os dados de fato se dividem em dois grupos (o círculo de fora e a bola de dentro), o k-médias rodou, mas encontrou grupos diferentes dos "reais". Essa é uma situação em que usar um teste de normalidade poderia nos dar uma dica de que estamos nesse cenário de desalinho entre o algoritmo utilizado e os dados disponíveis: é muito claro que os grupos encontrados pelo k-médias não seguem uma distribuição normal multivariada. A partir desse teste, poderíamos partir para um outro algoritmo que fosse capaz de encontrar esse padrão, como uma clusterização hierárquica.
 
-<img src = "https://blog.curso-r.com/images/posts/conteudo/normalidade/plot_kmeans-1.png">
+<img src = "https://blog.curso-r.com/images/posts/conteudo/normalidade/plot_kmeans-2.png">
 
 # Considerações finais
 
