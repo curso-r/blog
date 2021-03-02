@@ -87,4 +87,5 @@ Meu objetivo é continuar implementando o pacote, trazendo mais dados sobre as p
 
 Se você encontrar qualquer problema no pacote ou inconsistência nos dados, não deixe de me avisar [abrindo uma issue no repositório](https://github.com/williamorim/brasileirao/issues).
 
-É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. Até a próxima!
+É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
+Até a próxima!
