@@ -1,0 +1,101 @@
+---
+title: "Efeito da ausência de torcida nos jogos do Brasileirão"
+date: "2022-03-05"
+tags: ["futebol", "covid19"]
+categories: ["análises"]
+image: "images/posts/banner/estadio-vazio.jpg"
+author: ["William", "Julio"]
+summary: ""
+draft: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE
+)
+```
+
+## Os dados
+
+```{r}
+brasileirao::matches
+```
+
+
+```{r}
+library(tidyverse)
+library(lubridate)
+
+
+# import ------------------------------------------------------------------
+
+# tidy --------------------------------------------------------------------
+
+da_model <- brasileirao::matches %>% 
+  separate(
+    score, 
+    c("home_score", "away_score"), 
+    sep = "x", 
+    convert = TRUE
+  ) %>% 
+  mutate(
+    home_win = home_score > away_score,
+    result = case_when(
+      home_score > away_score ~ "Vitória em casa",
+      home_score == away_score ~ "Empate",
+      home_score < away_score ~ "Derrota em casa"
+    ),
+    home_win = home_score > away_score,
+    ano = year(date),
+    ano = case_when(
+      ano %in% c("2020", "2021") ~ "2020/\n2021",
+      TRUE ~ as.character(ano)
+    ),
+    covid = date >= "2020-03-01"
+  ) 
+
+da_plot <- da_model %>% 
+  count(ano, covid, result) %>% 
+  group_by(ano, covid) %>% 
+  mutate(prop = n/sum(n)) %>% 
+  ungroup()
+
+
+# visualize ---------------------------------------------------------------
+
+
+da_plot %>% 
+  ggplot(aes(x = ano, y = prop, fill = result)) +
+  geom_col(aes(colour = covid), position = "stack") +
+  geom_hline(yintercept = .5, linetype = 2, colour = 2, size = 1) +
+  geom_label(
+    aes(label = scales::percent(prop, accuracy = 1), y = prop / 2),
+    size = 3,
+    data = filter(da_plot, result == "Vitória em casa")
+  ) +
+  theme_minimal(14) +
+  scale_colour_manual(values = c("transparent", "black")) +
+  guides(colour = FALSE) +
+  theme(legend.position = "bottom") +
+  scale_fill_viridis_d(begin = .2, end = .8) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Proporção de vitórias do time da casa",
+    subtitle = "em cada ano",
+    x = "Ano",
+    y = "Proporção de vitórias",
+    caption = "Fonte: Chance de Gol",
+    fill = "Resultado"
+  )
+
+
+# model -------------------------------------------------------------------
+
+
+glm(home_win ~ covid, data = da_model) %>% 
+  broom::tidy()
+```
+

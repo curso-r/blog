@@ -2,7 +2,7 @@
 title: "Testes de normalidade em R - Parte 3: Quando eu devo fazer um teste de normalidade?"
 date: "2021-02-26"
 tags: ["faxina", "modelagem"]
-categories: ["análises", "conceitos", "tutoriais", "r"]
+categories: ["análises", "conceitos", "tutoriais"]
 image: "images/posts/banner/gaussian-3.png"
 author: ["Fernando"]
 summary: "Nessa série de posts te mostramos como descobrir se uma variável segue ou não a distribuição normal. No último texto da série, vamos conversar um pouco sobre em quais situações é importante executar testes de normalidade."
