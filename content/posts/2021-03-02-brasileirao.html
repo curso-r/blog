@@ -1,6 +1,6 @@
 ---
 title: "O pacote {brasileirao}"
-date: "2022-03-02"
+date: "2021-03-02"
 tags: ["futebol", "web scarping"]
 categories: ["pacotes"]
 image: "images/posts/banner/brasileirao.png"
@@ -9,8 +9,6 @@ summary: "Novo pacote com dados de todas as partidas de 2003 a 2020."
 draft: false
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Recentemente tive vontade de começar a brincar com dados de futebol, mais especificamente <s>o que sobrou</s> do futebol brasileiro.</p>
@@ -40,7 +38,7 @@ matches
 ##  8   2003 2003-03-30 Fortaleza     0x0   Bahia      
 ##  9   2003 2003-03-30 Internacional 1x1   Ponte Preta
 ## 10   2003 2003-03-30 Juventude     2x2   São Paulo  
-## # … with 7,263 more rows</code></pre>
+## # ... with 7,263 more rows</code></pre>
 <p>Para ver os dados de uma temporada, você pode usar a função <code>filter()</code>, do pacote <code>dplyr</code>.</p>
 <pre class="r"><code>matches %&gt;% 
   filter(season == 2020)
@@ -57,7 +55,7 @@ matches
 ##  8   2020 2020-09-30 Corinthians 0x0   Atlético-GO  
 ##  9   2020 2020-12-03 Goiás       0x3   São Paulo    
 ## 10   2020 2021-01-26 Palmeiras   1x1   Vasco        
-## # … with 370 more rows</code></pre>
+## # ... with 370 more rows</code></pre>
 <p>O pacote também possui uma função para padronizar o nome dos times: <code>fix_names()</code>. Alguns times, como o Atlético mineiro aparecem como <code>Atlético MG</code> e <code>Atlético-MG</code> na base. Também há casos de times que mudaram de nome nesse período, como o Athetico e o Grêmio Barueri. Pode isso, Arnaldo?</p>
 <p>Veja a seguir um exemplo da função em ação:</p>
 <pre class="r"><code>atleticos &lt;- matches %&gt;%
@@ -86,7 +84,7 @@ fix_names(atleticos)
 ##  8   2003 2003-03-30 Fortaleza     0x0   Bahia      
 ##  9   2003 2003-03-30 Internacional 1x1   Ponte Preta
 ## 10   2003 2003-03-30 Juventude     2x2   São Paulo  
-## # … with 7,263 more rows</code></pre>
+## # ... with 7,263 more rows</code></pre>
 <p>O pacote é atualizado diriamente, a partir de um script executado via <a href="https://github.com/features/actions">Github Actions</a>. Esse fluxo é pausado nos meses entre temporadas.</p>
 </div>
 <div id="de-onde-os-dados-vieram" class="section level2">
