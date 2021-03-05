@@ -24,7 +24,7 @@ Depois de uma busca bem rápida na internet, resolvi que montaria a minha própr
 
 Foi assim que surgiu o pacote `{brasileirao}`, que reune os resultados de todas as partidas da Série A do Campeonato Brasileiro das temporadas de 2003 a 2020.
 
-> Abrem-se as cortinas e começa o espetáculo - Fiori Gigliotti
+> Abrem-se as cortinas e começa o espetáculo - Fiori Gigliotti, narrador esportivo brasileiro
 
 ## O pacote
 
@@ -75,7 +75,7 @@ O pacote é atualizado diriamente, a partir de um script executado via [Github A
 
 ## De onde os dados vieram?
 
-Os dados das temporadas de 2003 a 2019 vieram do site [Change de gol](https://www.chancedegol.com.br/). Particularmente, eu não gosto muito de previsões de resultados esportivos, mas o site é bem legal para quem gosta do tema! E, claro, ele é bem fácil de scrapear, o que é importante se você é nível 1 em Web Scraping igual eu.
+Os dados das temporadas de 2003 a 2019 vieram do site [Chance de gol](https://www.chancedegol.com.br/). Particularmente, eu não gosto muito de previsões de resultados esportivos, mas o site é bem legal para quem gosta do tema! E, claro, ele é bem fácil de scrapear, o que é importante se você é nível 1 em Web Scraping igual eu.
 
 Como no Chance de Gol não tinha os dados da temporada de 2020, eu fui buscar na página do [ge](https://globoesporte.globo.com/futebol/brasileirao-serie-a/). A tarefa também bem tranquila, pois os dados da página são atualizados a partir de uma API, que consegui acessar diretamente.
 
@@ -88,4 +88,5 @@ Meu objetivo é continuar implementando o pacote, trazendo mais dados sobre as p
 Se você encontrar qualquer problema no pacote ou inconsistência nos dados, não deixe de me avisar [abrindo uma issue no repositório](https://github.com/williamorim/brasileirao/issues).
 
 É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
+
 Até a próxima!
