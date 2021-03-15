@@ -21,8 +21,6 @@ Neste post, apresentaremos algumas dicas para elaborar relatórios com o pacote 
 knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/reproducibility_court.png")
 ```
 
-
-
 ##  Dicas para elaborar relatórios 
 
 ### Contextualize!
