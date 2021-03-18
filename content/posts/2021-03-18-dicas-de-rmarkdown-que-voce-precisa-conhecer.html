@@ -1,0 +1,40 @@
+---
+title: "Dicas de Rmarkdown que você precisa conhecer"
+date: "2021-03-18"
+tags: ["faxina", "modelagem"]
+categories: ["conceitos"]
+image: "images/posts/banner/livros.jpg"
+author: ["Fernando"]
+summary: "RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos lindos e muito elegantes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer."
+draft: false
+---
+
+
+
+<p>RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos elegantes e cheios de detalhes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer. Nossas dicas são curtinhas e objetivas, mas vêm sempre acompanhadas de um documento de exemplo para te ajudar a colocar em prática quando precisar.</p>
+<p>Vamos a elas:</p>
+<div id="use-o-pacote-prettydoc" class="section level1">
+<h1>1. Use o pacote <code>prettydoc</code></h1>
+<p>Muitas vezes a gente quer impressionar com um documento colorido, com uma fonte elegante e agradável pra quem lê, mas o <code>html_doc</code> padrão não ajuda muito nessa empreitada. Nessa situação você tem duas opções: (a) deixar o seu relatório bonito criando um <code>CSS</code> customizado para a página, como você pode ver <a href="https://bookdown.org/yihui/rmarkdown-cookbook/html-css.html">aqui</a> ou (b) usar um template pronto (e bonito) como aqueles do pacote <code>prettydoc</code>. Embora as opções de customização sejam um pouco limitadas, praticamente sem esforço você consegue fazer um documento impressionante e que vai pegar muito bom com a sua audiência. Dá uma olhada:</p>
+<p><img src = "https://prettydoc.statr.me/images/cayman.png"></p>
+<p><a href="https://prettydoc.statr.me/cayman.html">Exemplo de documento.</a></p>
+<p><a href="https://prettydoc.statr.me">Site do pacote.</a></p>
+</div>
+<div id="construa-tabelas-usando-o-pacote-flextable" class="section level1">
+<h1>2. Construa tabelas usando o pacote <code>flextable</code></h1>
+<p>Esse é um daqueles casos em que uma imagem vale mais do que mil palavras… Dá uma olhada nesse exemplo de visualização da tabela <code>mtcars</code> que podemos contruir usando o pacote <code>flextable</code>:</p>
+<p><img src = "https://blog.curso-r.com/images/posts/conteudo/dicas-rmarkdown/flextable_exemplo.png"></p>
+<p>Muito bonito, né? O pacote <code>flextable</code> é uma biblioteca em R que foi construída pensando em (a) construir tabelas muito bonitas e versáteis sem quase nenhum sofrimento e (b) usar o mesmo pacote para fazer tabelas para Word, PDF, PPT e HTML. A sintaxe é um pouco carregada, mas o resultado compensa muito.</p>
+<p><a href="https://raw.githubusercontent.com/curso-r/main-visualizacao/master/exemplos_de_aula/01-rmarkdown-word.Rmd">Exemplo de documento.</a></p>
+<p><a href="https://davidgohel.github.io/flextable/">Site do pacote.</a></p>
+</div>
+<div id="impressione-nas-suas-apresentações-usando-xaringan" class="section level1">
+<h1>3. Impressione nas suas apresentações usando <code>xaringan</code></h1>
+<p>Muito do que a gente faz só é divulgado para o mundo se colocamos isso em formato de apresentação de slides. O pacote <code>xaringan</code> permite que você faça isso com muito estilo e flexibilidade. Dá uma olhada nesse exemplo e saia usando:</p>
+<p><a href="https://beatrizmilz.github.io/aMostra-IME-2019-Xaringan/#1">Exemplo de apresentação + tutorial.</a></p>
+<p><a href="https://bookdown.org/yihui/rmarkdown/xaringan.html">Capítulo de livro sobre o pacote.</a></p>
+</div>
+<div id="gostou-quer-saber-mais" class="section level1">
+<h1>Gostou? Quer saber mais?</h1>
+<p>Se você quiser aprender um pouco mais sobre RMarkdown e Visualização de Dados em geral, dê uma olhada no nosso curso <a href="https://curso-r.com/cursos/visualizacao/">Relatórios e visualização de dados</a> e aproveite!</p>
+</div>
