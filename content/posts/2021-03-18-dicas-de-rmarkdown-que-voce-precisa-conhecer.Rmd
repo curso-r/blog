@@ -1,9 +1,9 @@
 ---
-title: "Dicas de Rmarkdown que você precisa conhecer"
+title: "3 Dicas de Rmarkdown que você precisa saber"
 date: "2021-03-18"
-tags: ["faxina", "modelagem"]
+tags: ["faxina", "gráficos"]
 categories: ["conceitos"]
-image: "images/posts/banner/livros.jpg"
+image: "images/posts/banner/rmarkdown_wizards.png"
 author: ["Fernando"]
 summary: "RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos lindos e muito elegantes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer."
 draft: false
@@ -35,7 +35,7 @@ Muitas vezes a gente quer impressionar com um documento colorido, com uma fonte 
 
 # 2. Construa tabelas usando o pacote `flextable`
 
-Esse é um daqueles casos em que uma imagem vale mais do que mil palavras... Dá uma olhada nesse exemplo de visualização da tabela `mtcars` que podemos contruir usando o pacote `flextable`:
+Esse é um daqueles casos em que uma imagem vale mais do que mil palavras... Dá uma olhada nesse exemplo de visualização da tabela `mtcars` que podemos construir usando o pacote `flextable`:
 
 <img src = "https://blog.curso-r.com/images/posts/conteudo/dicas-rmarkdown/flextable_exemplo.png">
 
@@ -56,3 +56,7 @@ Muito do que a gente faz só é divulgado para o mundo se colocamos isso em form
 # Gostou? Quer saber mais?
 
 Se você quiser aprender um pouco mais sobre RMarkdown e Visualização de Dados em geral, dê uma olhada no nosso curso [Relatórios e visualização de dados](https://curso-r.com/cursos/visualizacao/) e aproveite!
+
+```{r echo=FALSE, out.width="50%", fig.align="center", fig.cap="Ilustração sobre o pacote rmarkdown, criada por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>."}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/rmarkdown_wizards.png")
+```
