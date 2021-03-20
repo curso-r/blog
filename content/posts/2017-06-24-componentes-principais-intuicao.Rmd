@@ -7,7 +7,8 @@ image: "images/posts/banner/componentes_principais.png"
 author: ["Athos"]
 summary: "Uma ilustração gráfica simples para dar intuição sobre o que uma Análise de Componentes Principais faz."
 ---
-  
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, 
                       warning = FALSE, comment = FALSE,
