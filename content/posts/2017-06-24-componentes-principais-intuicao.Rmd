@@ -6,6 +6,7 @@ categories: ["conceitos"]
 image: "images/posts/banner/componentes_principais.png"
 author: ["Athos"]
 summary: "Uma ilustração gráfica simples para dar intuição sobre o que uma Análise de Componentes Principais faz."
+draft: false
 ---
 
 ```{r setup, include=FALSE}
