@@ -1,0 +1,201 @@
+---
+title: "Efeito da ausência de torcida nos jogos do Brasileirão"
+date: "2021-03-05"
+tags: ["futebol", "covid19"]
+categories: ["análises"]
+image: "images/posts/banner/estadio-vazio.jpg"
+author: ["William", "Julio"]
+summary: "Analisamos os resultados do Brasileirão para investigar o efeito da ausência de torcida na última edição do campeonato."
+draft: false
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/core-js/shim.min.js"></script>
+<script src="/rmarkdown-libs/react/react.min.js"></script>
+<script src="/rmarkdown-libs/react/react-dom.min.js"></script>
+<script src="/rmarkdown-libs/reactwidget/react-tools.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/reactable-binding/reactable.js"></script>
+
+
+<div id="motivação" class="section level2">
+<h2>Motivação</h2>
+<p>Será que a ausência de torcida nos jogos de futebol causada pela pandemia tem algum efeito no desempenho dos times mandantes?</p>
+<p>Para responder essa pergunta, o Julio e eu investigamos os resultados da era de pontos corridos da Série A do Brasileirão.</p>
+<blockquote>
+<p>Acerte o seu aí que eu arredondo o meu aqui. Está valendo! - Silvio Luiz, narrador esportivo brasileiro</p>
+</blockquote>
+</div>
+<div id="os-dados" class="section level2">
+<h2>Os dados</h2>
+<p>Os dados utilizados na análise abaixo estão no pacote <code>{brasileirao}</code>. O pacote está disponível <a href="https://github.com/williamorim/brasileirao">neste repositório</a> e se você quiser saber mais sobre como usar, confira <a href="https://blog.curso-r.com/posts/2021-03-02-brasileirao/">este post</a>.</p>
+<pre class="r"><code>head(brasileirao::matches)
+##   season       date        home score        away
+## 1   2003 2003-03-29 Atlético PR   2x0      Grêmio
+## 2   2003 2003-03-29     Guarani   4x2       Vasco
+## 3   2003 2003-03-30 Corinthians   0x3 Atlético MG
+## 4   2003 2003-03-30       Goiás   2x2    Paysandu
+## 5   2003 2003-03-30    Criciúma   2x0  Fluminense
+## 6   2003 2003-03-30    Cruzeiro   2x2 São Caetano</code></pre>
+</div>
+<div id="arrumando" class="section level2">
+<h2>Arrumando</h2>
+<p>Antes de iniciar a análise, precisamos dar aquele famoso tapa na base. A partir da coluna <code>score</code>, que tem seus valores no estilo <code>gols_mandante x gols_visitante</code>, construímos as seguintes variáveis de interesse:</p>
+<ul>
+<li><p><code>result</code>: que indica se o resultado foi vitória do mandante, empate ou derrota do mandante;</p></li>
+<li><p><code>pontos</code>: que indica o número de pontos feitos pelo mandante na partida.</p></li>
+</ul>
+<p>Também criamos um variável <code>torcida</code>, que indica como <code>sem_torcida</code> a temporada de 2020 e como <code>com_torcida</code> as demais.</p>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)
+
+tab_resul_mandante &lt;- brasileirao::matches %&gt;% 
+  dplyr::filter(season &lt;= 2020) %&gt;% 
+  separate(
+    score, 
+    c(&quot;home_score&quot;, &quot;away_score&quot;), 
+    sep = &quot;x&quot;, 
+    convert = TRUE
+  ) %&gt;% 
+  mutate(
+    home_win = home_score &gt; away_score,
+    result = case_when(
+      home_score &gt; away_score ~ &quot;Vitória do mandante&quot;,
+      home_score == away_score ~ &quot;Empate&quot;,
+      home_score &lt; away_score ~ &quot;Derrota do mandante&quot;
+    ),
+    pontos = case_when(
+      home_score &gt; away_score ~ 3,
+      home_score == away_score ~ 1,
+      home_score &lt; away_score ~ 0
+    ),
+    torcida = ifelse(season == 2020, &quot;sem_torcida&quot;, &quot;com_torcida&quot;)
+  ) </code></pre>
+</div>
+<div id="algumas-visualizações" class="section level2">
+<h2>Algumas visualizações</h2>
+<p>A nossa primeira investigação foi sobre a proporção de vitórias dos mandantes, comparando a temporada de 2020 com as demais.</p>
+<p>O gráfico abaixo mostra a proporção de vitórias, empates e derrotas dos mandantes em cada temporada. Vemos que:</p>
+<ul>
+<li><p>A proporção de vitórias dos mandantes no Brasileirão de pontos corridos varia de 44% a 55%.</p></li>
+<li><p>2020, com 45%, foi a temporada com a segunda menor proporção de vitórias dos mandantes, perdendo para 2017 (44%).</p></li>
+</ul>
+<pre class="r"><code>tab_grafico &lt;- tab_resul_mandante %&gt;% 
+  count(season, torcida, result) %&gt;% 
+  group_by(season, torcida) %&gt;% 
+  mutate(prop = n/sum(n)) %&gt;% 
+  ungroup() 
+
+tab_grafico %&gt;% 
+  ggplot(aes(x = season, y = prop, fill = result)) +
+  geom_col(aes(colour = torcida), position = &quot;stack&quot;) +
+  geom_hline(yintercept = .5, linetype = 2, colour = 2, size = 1) +
+  geom_label(
+    aes(label = scales::percent(prop, accuracy = 1), y = prop / 2),
+    size = 3,
+    color = &quot;white&quot;,
+    data = filter(tab_grafico, result == &quot;Vitória do mandante&quot;)
+  ) +
+  theme_minimal(14) +
+  scale_colour_manual(values = c(&quot;transparent&quot;, &quot;black&quot;)) +
+  guides(colour = FALSE) +
+  theme(
+    legend.position = &quot;bottom&quot;,
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    legend.text = element_text(size = 10)
+  ) +
+  scale_fill_viridis_d(begin = .8, end = .2) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = &quot;Desempenho dos mandantes&quot;,
+    subtitle = &quot;por temporada&quot;,
+    x = &quot;Temporada&quot;,
+    y = &quot;Proporção&quot;,
+    fill = &quot;&quot;
+  )</code></pre>
+<p><img src="/posts/2021-03-05-brasileirao-sem-torcida_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Em vez de olhar a proporção dos resultados, poderíamos olhar diretamente a quantidade de pontos somados pelos mandantes em cada temporada.</p>
+<p>O gráfico a seguir mostra que o número de pontos por temporada tende a permanecer entre 650 e 700, com algumas exceções para mais e para menos. Novamente, 2020 foi a temporada com o segundo menor número de pontos feitos pelos mandantes (621, contra 604 da temporada 2017).</p>
+<pre class="r"><code>tab_resul_mandante %&gt;% 
+  filter(season &gt;= 2006) %&gt;% 
+  group_by(season) %&gt;% 
+  summarise(total_pontos = sum(pontos)) %&gt;% 
+  ggplot(aes(x = season, y = total_pontos)) +
+  geom_line(color = viridis::viridis(1, begin = 0.2)) +
+  geom_label(aes(label = total_pontos), color = viridis::viridis(1, begin = 0.2)) +
+  theme_minimal(14) +
+  labs(
+    x = &quot;Temporada&quot;,
+    y = &quot;Número de pontos do mandante&quot;
+  )</code></pre>
+<p><img src="/posts/2021-03-05-brasileirao-sem-torcida_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Por fim, podemos investigar o efeito para cada time. A tabela a seguir mostra o número de pontos como mandante conquistados por cada time na temporada de 2020 contra a média de pontos como mandante nas últimas 3 temporadas (2017, 2018 e 2019).</p>
+<pre class="r"><code>library(reactable)
+
+tab_resul_mandante %&gt;% 
+  filter(season %in% c(2017:2020)) %&gt;% 
+  mutate(home = brasileirao::fix_names(home)) %&gt;% 
+  group_by(season, torcida, home) %&gt;% 
+  summarise(total_pontos = sum(pontos)) %&gt;% 
+  group_by(torcida, home) %&gt;% 
+  summarise(media_pontos = mean(total_pontos)) %&gt;% 
+  ungroup() %&gt;%
+  pivot_wider(
+    id_cols = home,
+    names_from = torcida, 
+    values_from = media_pontos,
+    names_prefix = &quot;pts_&quot;
+  ) %&gt;%
+  filter(!is.na(pts_sem_torcida)) %&gt;% 
+  mutate(
+    diferenca_rel = (pts_sem_torcida - pts_com_torcida) / pts_com_torcida
+  ) %&gt;% 
+  arrange(desc(diferenca_rel)) %&gt;% 
+  mutate(
+    pts_com_torcida = round(pts_com_torcida, 1),
+    diferenca_rel = scales::percent(diferenca_rel, accuracy = 0.1)
+  ) %&gt;% 
+  reactable(
+    pagination = FALSE,
+    compact = TRUE,
+    style = &quot;margin-bottom: 1px;&quot;,
+    columns = list(
+      home = colDef(
+        name = &quot;Time&quot;
+      ),
+      pts_com_torcida = colDef(
+        name = &quot;Média últimas 3 temporadas&quot;,
+        na = &quot;—&quot;,
+        align = &quot;center&quot;
+      ),
+      pts_sem_torcida = colDef(
+        name = &quot;Pontos como mandante em 2020&quot;,
+        align = &quot;center&quot;
+      ),
+      diferenca_rel = colDef(
+        name = &quot;Diferença percentual&quot;,
+        na = &quot;—&quot;,
+        align = &quot;center&quot;
+      )
+    )
+  )</code></pre>
+<div id="htmlwidget-1" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"home":["Atlético GO","Atlético MG","Fluminense","São Paulo","Internacional","Grêmio","Bahia","Ceará","Sport","Vasco","Santos","Fortaleza","Athletico PR","Flamengo","Corinthians","Palmeiras","Coritiba","Goiás","Botafogo","Bragantino"],"pts_com_torcida":[17,32.3,28,36.3,42.5,38,32.3,29,29,30,39.7,35,37.3,43.3,37.7,44,26,36,32,"NA"],"pts_sem_torcida":[27,46,38,37,41,36,29,26,26,26,34,30,32,37,31,35,18,23,14,35],"diferenca_rel":["58.8%","42.3%","35.7%","1.8%","-3.5%","-5.3%","-10.3%","-10.3%","-10.3%","-13.3%","-14.3%","-14.3%","-14.3%","-14.6%","-17.7%","-20.5%","-30.8%","-36.1%","-56.2%",null]},"columns":[{"accessor":"home","name":"Time","type":"character"},{"accessor":"pts_com_torcida","name":"Média últimas 3 temporadas","type":"numeric","na":"—","align":"center"},{"accessor":"pts_sem_torcida","name":"Pontos como mandante em 2020","type":"numeric","align":"center"},{"accessor":"diferenca_rel","name":"Diferença percentual","type":"character","na":"—","align":"center"}],"defaultPageSize":20,"paginationType":"numbers","showPageInfo":true,"minRows":1,"compact":true,"style":{"margin-bottom":"1px"},"dataKey":"2b468f9e054ebd18b78f798fe62e5ae4","key":"2b468f9e054ebd18b78f798fe62e5ae4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="conclusões" class="section level2">
+<h2>Conclusões</h2>
+<p>Existe efeito da ausência de torcida no desempenho dos mandantes? Como bons cientistas, não sabemos.</p>
+<p>Descritivamente, os dados indicam que, se o efeito existe, parece ser pequeno. Pelo menos menor do que o senso comum esperaria. Embora a proporção de vitórias e número de pontos dos mandantes tenho sido abaixo da média, não foi o pior ano e não foi tão diferente das outras temporadas abaixo da média.</p>
+<p>Olhando por time, vimos queda no desempenho de alguns times que mantiveram ou reforçaram o elenco nos últimos anos, como Palmeiras e Flamengo. Outros times que não apresentaram muita variação de elenco, como São Paulo e Internacional, mantiveram a média dos últimos anos.</p>
+<p>Pessoalmente, juntando o que vi nos dados e nos jogos, eu acredito na existência de um efeito de torcida, mas acho muito difícil estudá-lo isoladamente. As interações com time, estádio, adversário, posição na tabela, entre outros fatores, podem ser muito importantes e, olhando só a média simples, veríamos um efeito muito menor. Além disso, existe o efeito pandemia, que mudou alguns aspectos do jogo (como as 5 substuições e o calendário ainda mais apertado) e trouxe mais ruídos (como os surtos de COVID-19 que aconteceram em vários times).</p>
+<p>Assim, deixo as seguintes perguntas:</p>
+<ul>
+<li><p>O que aconteceu em 2017?</p></li>
+<li><p>Com os dados disponíveis, é possível testar (estatisticamente) o efeito da torcida? Quais seriam as suposições e limitações?</p></li>
+<li><p>E você? Acredita no efeito da torcida?</p></li>
+</ul>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
+</div>
