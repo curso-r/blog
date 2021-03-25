@@ -1,5 +1,5 @@
 # default config
-baseurl = "/"
+baseurl = "https://blog.curso-r.com/"
 languageCode = "pt-br"
 title = "Blog | Curso-R"
 theme = "parsa-hugo"
