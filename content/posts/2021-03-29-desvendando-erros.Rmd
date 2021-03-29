@@ -1,10 +1,10 @@
 ---
 title: "Desvendando erros: Entendendo mensagens de erro comuns em R."
-date: "2021-03-26"
+date: "2021-03-29"
 tags: ["conceitos"]
 categories: ["conceitos", "erros", "debugging", "boas práticas"]
 image: "images/posts/banner/dog-pc.jpg"
-author: ["Beatriz Milz"]
+author: ["Beatriz Milz", "Fernando Corrêa"]
 summary: "Esse post tem como objetivo listar alguns erros comuns quando programamos em R, e dicas de como resolve-los!."
 draft: false
 ---
@@ -22,17 +22,13 @@ knitr::opts_chunk$set(
 
 Quando estamos programando, é muito comum executar algum código e ele gerar um erro! Algumas vezes é difícil entender as mensagens de erro para começar a buscar ajuda, e isso pode atrasar nossas tarefas (e também nos desanimar).
 
-
-
 ```{r echo=FALSE, fig.cap="Ilustração por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>"}
 knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/stormyr.gif?raw=true")
 ```
 
-
-
 Principalmente quando estamos iniciando a nossa jornada de aprendizagem de R, alguns erros podem ser mais frequentes. Esse post tem como objetivo listar alguns desses erros comuns, baseado na minha experiência aprendendo e ensinando R, e também respondendo dúvidas :)
 
-Vamos então ler um pouco sobre alguns erros frequentes, e como resolve-los? Prepara um café ou chá, e vamos lá! ☕
+Vamos então ler um pouco sobre alguns erros frequentes, e como resolvê-los? Prepara um café ou chá, e vamos lá! ☕
 
 
 ## Objeto não encontrado
@@ -45,7 +41,7 @@ mean(imdb$orcamento, na.rm = TRUE)
 ```
 <sup>Created on 2021-03-26 by the [reprex package](https://reprex.tidyverse.org) (v1.0.0)</sup>
 
-O R está dizendo para nós que não está encontrando o objeto `imdb`! E como resolver? Precisamos carregar esse objeto no nosso ambiente, para que ele esteja disponível para uso!
+O R está dizendo para nós que não está encontrando o objeto `imdb`! Como podemos resolver esse erro? Precisamos carregar esse objeto no nosso ambiente, para que ele esteja disponível para uso!
 
 Para isso, precisamos usar o sinal de atribuição: `<-`.
 
@@ -69,7 +65,7 @@ glimpse(imdb)
 
 <sup>Created on 2021-03-26 by the [reprex package](https://reprex.tidyverse.org) (v1.0.0)</sup>
 
-Isso significa que o R não encontrou essa função. No R, podemos instalar pacotes que contém funções para que a gente utilize nas nossas rotinas. Porém, é preciso carregar o pacote para que as funções do mesmpo fiquem disponíveis para uso. Podemos carregar um pacote utilizando a função `library()`.
+Isso significa que o R não encontrou essa função. No R, podemos instalar pacotes que contém funções para que a gente utilize nas nossas rotinas. Porém, é preciso carregar o pacote para que as funções do mesmo fiquem disponíveis para uso. Podemos carregar um pacote utilizando a função `library()`.
 
 No exemplo abaixo, a função `glimpse()` faz parte do pacote `{dplyr}`. Carregando o pacote no início do código deixará todas as funções do pacote `{dplyr}` disponíveis para uso (incluindo a função que queremos usar): 
 
@@ -86,6 +82,22 @@ Leia o código abaixo como: quero usar a função `glimpse()` do pacote `dplyr`
 ```{r}
 dplyr::glimpse(imdb)
 ```
+
+## Argumento não numérico para operador binário / non-numeric argument to binary operator
+
+De toda a nossa lista de problemas, esse é aquele com a mensagem de erro mais complicada. Você já tentou fazer algum cálculo como esse abaixo e o retorno foi essa mensagem de erro?
+
+``` r
+x <- "a"
+x+1
+#> Error in x + 1: argumento não-numérico para operador binário
+```
+
+<sup>Created on 2021-03-29 by the [reprex package](https://reprex.tidyverse.org) (v0.3.0)</sup>
+
+Isso é muito comum, principalmente quando estamos trabalhando em scripts mais longos, e essa mensagem de erro é o R tentando nos avisar que nós estamos passando um texto, no caso a letra "a", para uma operação que espera receber um número. Na verdade, o R é até um pouco mais preciso: a operação esperava um número e nós frustramos essa expectativa, por isso o erro menciona um "argumento não-numérico". No caso nós tentamos fazer uma conta (a adição representada pelo símbolo `+`) usando um texto.
+
+O que podemos fazer quando esse erro aparece? Minha recomendação é examinar o seu código para verificar que tipo de argumento as suas operações matemáticas (por exemplo `+`, `-`, `*` e `^`) estão recebendo. Muito provavelmente algum desses argumentos não é um número...
 
 ## Conflito de funções
 
@@ -141,7 +153,7 @@ A forma mais comum de instalação de um pacote é através do CRAN, utilizando 
 install.packages("tidyverse")
 ```
 
-Após instalar o pacote, conseguiremos carregar o pacote normalmente!
+Após instalar o pacote, conseguiremos carregá-lo normalmente!
 
 ``` r
 library(tidyverse)
@@ -155,7 +167,7 @@ library(tidyverse)
 #> x dplyr::lag()    masks stats::lag()
 ```
 
-##  O pacote ... não está disponível para essa versão do R / Package '...' is not available for this version of R 
+## O pacote ... não está disponível para essa versão do R / Package '...' is not available for this version of R 
 
 Nesse exemplo, mostraremos um caso onde não é gerado um erro, e sim uma mensagem de aviso (*warning*). Entretanto, o código não executa como esperamos, e pode impossibilitar a execução das etapas seguintes dos scripts.
 
@@ -175,7 +187,6 @@ Essa mensagem acontece quando queremos instalar um pacote que não está dispon�
 O que eu recomendo, neste caso, é buscar o repositório no GitHub do pacote desejado.
 
 No caso do pacote que estamos mostrando neste exemplo, [este é o link do repositório](https://github.com/cienciadedatos/dados).
-
 
 Caso queira instalar o pacote através do GitHub, devemos utilizar a função `install_github()` do pacote `{remotes}`. Como argumento, devemos informar a organização ou pessoa a quem este repositório "pertence", e o nome do repositório: `"nome_da_organizacao/nome_do_repositorio"`. No caso do pacote `{dados}`, a organização é [cienciadedatos](https://github.com/cienciadedatos), e o repositório é chamado de [dados](https://github.com/cienciadedatos/dados). Portanto, para instalar esse pacote, devemos executar o código a seguir: 
 
@@ -197,11 +208,11 @@ E quando queremos importar uma base de dados (ou outro arquivo) para trabalhar n
 
 ``` r
 imdb <- readr::read_csv2("imdb2.csv")
-#> ℹ Using ',' as decimal and '.' as grouping mark. Use `read_delim()` for more control.
-#> Error: 'imdb2.csv' does not exist in current working directory ('/private/var/folders/z5/nh0wlcsj2fq99rjrj1x7hcwc0000gn/T/RtmpnHTgPb/reprex72f318bb8e33').
+#> i Using ',' as decimal and '.' as grouping mark. Use `read_delim()` for more control.
+#> Error: 'imdb2.csv' does not exist in current working directory ('C:/Users/seu_usuario/Documents').
 ```
-<sup>Created on 2021-03-26 by the [reprex package](https://reprex.tidyverse.org) (v1.0.0)</sup>
 
+<sup>Created on 2021-03-29 by the [reprex package](https://reprex.tidyverse.org) (v0.3.0)</sup>
 
 O R está informando que não encontrou o arquivo que a gente deseja importar. A maior parte das vezes quando esse erro acontece é por que 1) esse arquivo não existe no nosso computador, ou 2) estamos indicando o caminho incorreto até o arquivo.
 
@@ -211,9 +222,9 @@ knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/blo
 ```
 
 Vamos considerar que já sabemos que o arquivo existe no computador, e trabalhar na resolução da segunda opção: precisamos corrigir o caminho até o arquivo. 
-É muito mais fácil lidar com isso quando trabalhamos com projetos no RStudio (`.Rproj`). Recomendo muito ler [esse capítulo do livro Zen do R](https://curso-r.github.io/zen-do-r/rproj-dir.html#diret%C3%B3rio-de-trabalho), pois fala bastante sobre as vantagens dessa abordagem.
+É muito mais fácil lidar com isso quando trabalhamos com projetos no RStudio (`.Rproj`). Recomendo muito ler [desse capítulo do livro Zen do R](https://curso-r.github.io/zen-do-r/rproj-dir.html#diret%C3%B3rio-de-trabalho), pois fala bastante sobre as vantagens dessa abordagem.
 
-Quando trabalhamos com projetos no RStudio (`.Rproj`), os caminhos são relativos à pasta raiz do projeto. Recomendo adicionar dentro do seu projeto o arquivo que deseja abrir. E para descobrir o caminho, existe uma super dica: o RStudio nos ajuda a navegar nos arquivos presentes no nosso projeto. É necessário escrever duas aspas `""`, adicionar o mouse entre elas, e apertar a tecla TAB do teclado. O RStudio possibilitará que a gente navegue nos arquivos do nosso projeto dessa forma.
+Quando trabalhamos com projetos no RStudio (`.Rproj`), os caminhos são relativos à pasta raiz do projeto. Recomendo adicionar dentro do seu projeto o arquivo que deseja abrir. E para descobrir o caminho, existe uma super dica: o RStudio nos ajuda a navegar nos arquivos presentes no nosso projeto. É necessário escrever duas aspas `""`, posicionar o mouse entre elas (isso é, clicando entre as suas aspas como se a gente fosse escrever algo dentro delas), e apertar a tecla TAB do teclado. O RStudio abrirá janelinha que possibilitará que a gente navegue nos arquivos do nosso projeto dessa forma.
 
 
 ```{r echo=FALSE}

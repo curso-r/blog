@@ -1,0 +1,217 @@
+---
+title: "Desvendando erros: Entendendo mensagens de erro comuns em R."
+date: "2021-03-29"
+tags: ["conceitos"]
+categories: ["conceitos", "erros", "debugging", "boas práticas"]
+image: "images/posts/banner/dog-pc.jpg"
+author: ["Beatriz Milz", "Fernando Corrêa"]
+summary: "Esse post tem como objetivo listar alguns erros comuns quando programamos em R, e dicas de como resolve-los!."
+draft: false
+---
+
+
+
+<p>Quando estamos programando, é muito comum executar algum código e ele gerar um erro! Algumas vezes é difícil entender as mensagens de erro para começar a buscar ajuda, e isso pode atrasar nossas tarefas (e também nos desanimar).</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/stormyr.gif?raw=true" alt="Ilustração por &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;" width="80%" />
+<p class="caption">
+Figura 1: Ilustração por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>
+</p>
+</div>
+<p>Principalmente quando estamos iniciando a nossa jornada de aprendizagem de R, alguns erros podem ser mais frequentes. Esse post tem como objetivo listar alguns desses erros comuns, baseado na minha experiência aprendendo e ensinando R, e também respondendo dúvidas :)</p>
+<p>Vamos então ler um pouco sobre alguns erros frequentes, e como resolvê-los? Prepara um café ou chá, e vamos lá! ☕</p>
+<div id="objeto-não-encontrado" class="section level2">
+<h2>Objeto não encontrado</h2>
+<p>Imagine que queremos calcular a média do orçamento dos filmes que fazem parte da base de dados sobre filmes do IMDB, e recebemos o seguinte erro:</p>
+<pre class="r"><code>mean(imdb$orcamento, na.rm = TRUE)
+#&gt; Error in mean(imdb$orcamento, na.rm = TRUE): objeto &#39;imdb&#39; não encontrado</code></pre>
+<p><sup>Created on 2021-03-26 by the <a href="https://reprex.tidyverse.org">reprex package</a> (v1.0.0)</sup></p>
+<p>O R está dizendo para nós que não está encontrando o objeto <code>imdb</code>! Como podemos resolver esse erro? Precisamos carregar esse objeto no nosso ambiente, para que ele esteja disponível para uso!</p>
+<p>Para isso, precisamos usar o sinal de atribuição: <code>&lt;-</code>.</p>
+<p>No exemplo abaixo, importamos o arquivo <code>imdb.csv</code> e salvamos essa base de dados no objeto <code>imdb</code>. Dessa forma, não obtemos um erro quando tentamos calcular a média da mesma forma que fizemos anteriormente, pois o objeto será encontrado e o código conseguirá ser executado!</p>
+<pre class="r"><code>imdb &lt;- readr::read_csv2(&quot;https://raw.githubusercontent.com/curso-r/202010-r4ds-1/master/dados/imdb2.csv&quot;)
+
+mean(imdb$orcamento, na.rm = TRUE)
+## [1] 35237114</code></pre>
+</div>
+<div id="não-foi-possível-encontrar-a-função" class="section level2">
+<h2>Não foi possível encontrar a função “…”</h2>
+<p>Já tentou executar um código e o retorno foi essa mensagem de erro?</p>
+<pre class="r"><code>glimpse(imdb)
+#&gt; Error in glimpse(imdb): não foi possível encontrar a função &quot;glimpse&quot;</code></pre>
+<p><sup>Created on 2021-03-26 by the <a href="https://reprex.tidyverse.org">reprex package</a> (v1.0.0)</sup></p>
+<p>Isso significa que o R não encontrou essa função. No R, podemos instalar pacotes que contém funções para que a gente utilize nas nossas rotinas. Porém, é preciso carregar o pacote para que as funções do mesmo fiquem disponíveis para uso. Podemos carregar um pacote utilizando a função <code>library()</code>.</p>
+<p>No exemplo abaixo, a função <code>glimpse()</code> faz parte do pacote <code>{dplyr}</code>. Carregando o pacote no início do código deixará todas as funções do pacote <code>{dplyr}</code> disponíveis para uso (incluindo a função que queremos usar):</p>
+<pre class="r"><code>library(dplyr)
+glimpse(imdb)
+## Rows: 3,713
+## Columns: 15
+## $ titulo         &lt;chr&gt; &quot;Avatar &quot;, &quot;Pirates of the Caribbean: At World&#39;s End...
+## $ ano            &lt;dbl&gt; 2009, 2007, 2012, 2012, 2007, 2010, 2015, 2016, 2006...
+## $ diretor        &lt;chr&gt; &quot;James Cameron&quot;, &quot;Gore Verbinski&quot;, &quot;Christopher Nola...
+## $ duracao        &lt;dbl&gt; 178, 169, 164, 132, 156, 100, 141, 183, 169, 151, 15...
+## $ cor            &lt;chr&gt; &quot;Color&quot;, &quot;Color&quot;, &quot;Color&quot;, &quot;Color&quot;, &quot;Color&quot;, &quot;Color&quot;...
+## $ generos        &lt;chr&gt; &quot;Action|Adventure|Fantasy|Sci-Fi&quot;, &quot;Action|Adventure...
+## $ pais           &lt;chr&gt; &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;US...
+## $ classificacao  &lt;chr&gt; &quot;A partir de 13 anos&quot;, &quot;A partir de 13 anos&quot;, &quot;A par...
+## $ orcamento      &lt;dbl&gt; 237000000, 300000000, 250000000, 263700000, 25800000...
+## $ receita        &lt;dbl&gt; 760505847, 309404152, 448130642, 73058679, 336530303...
+## $ nota_imdb      &lt;dbl&gt; 7.9, 7.1, 8.5, 6.6, 6.2, 7.8, 7.5, 6.9, 6.1, 7.3, 6....
+## $ likes_facebook &lt;dbl&gt; 33000, 0, 164000, 24000, 0, 29000, 118000, 197000, 0...
+## $ ator_1         &lt;chr&gt; &quot;CCH Pounder&quot;, &quot;Johnny Depp&quot;, &quot;Tom Hardy&quot;, &quot;Daryl Sa...
+## $ ator_2         &lt;chr&gt; &quot;Joel David Moore&quot;, &quot;Orlando Bloom&quot;, &quot;Christian Bale...
+## $ ator_3         &lt;chr&gt; &quot;Wes Studi&quot;, &quot;Jack Davenport&quot;, &quot;Joseph Gordon-Levitt...</code></pre>
+<p>Outra forma de utilizar a função sem que seja necessário carregar o pacote, é utilizando o operador <code>::</code> (você pode ler mais sobre ele <a href="https://curso-r.github.io/zen-do-r/funcoes-deps.html#quatro-pontos">neste capítulo do livro Zen do R</a>).</p>
+<p>Leia o código abaixo como: quero usar a função <code>glimpse()</code> do pacote <code>dplyr</code></p>
+<pre class="r"><code>dplyr::glimpse(imdb)
+## Rows: 3,713
+## Columns: 15
+## $ titulo         &lt;chr&gt; &quot;Avatar &quot;, &quot;Pirates of the Caribbean: At World&#39;s End...
+## $ ano            &lt;dbl&gt; 2009, 2007, 2012, 2012, 2007, 2010, 2015, 2016, 2006...
+## $ diretor        &lt;chr&gt; &quot;James Cameron&quot;, &quot;Gore Verbinski&quot;, &quot;Christopher Nola...
+## $ duracao        &lt;dbl&gt; 178, 169, 164, 132, 156, 100, 141, 183, 169, 151, 15...
+## $ cor            &lt;chr&gt; &quot;Color&quot;, &quot;Color&quot;, &quot;Color&quot;, &quot;Color&quot;, &quot;Color&quot;, &quot;Color&quot;...
+## $ generos        &lt;chr&gt; &quot;Action|Adventure|Fantasy|Sci-Fi&quot;, &quot;Action|Adventure...
+## $ pais           &lt;chr&gt; &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;US...
+## $ classificacao  &lt;chr&gt; &quot;A partir de 13 anos&quot;, &quot;A partir de 13 anos&quot;, &quot;A par...
+## $ orcamento      &lt;dbl&gt; 237000000, 300000000, 250000000, 263700000, 25800000...
+## $ receita        &lt;dbl&gt; 760505847, 309404152, 448130642, 73058679, 336530303...
+## $ nota_imdb      &lt;dbl&gt; 7.9, 7.1, 8.5, 6.6, 6.2, 7.8, 7.5, 6.9, 6.1, 7.3, 6....
+## $ likes_facebook &lt;dbl&gt; 33000, 0, 164000, 24000, 0, 29000, 118000, 197000, 0...
+## $ ator_1         &lt;chr&gt; &quot;CCH Pounder&quot;, &quot;Johnny Depp&quot;, &quot;Tom Hardy&quot;, &quot;Daryl Sa...
+## $ ator_2         &lt;chr&gt; &quot;Joel David Moore&quot;, &quot;Orlando Bloom&quot;, &quot;Christian Bale...
+## $ ator_3         &lt;chr&gt; &quot;Wes Studi&quot;, &quot;Jack Davenport&quot;, &quot;Joseph Gordon-Levitt...</code></pre>
+</div>
+<div id="argumento-não-numérico-para-operador-binário-non-numeric-argument-to-binary-operator" class="section level2">
+<h2>Argumento não numérico para operador binário / non-numeric argument to binary operator</h2>
+<p>De toda a nossa lista de problemas, esse é aquele com a mensagem de erro mais complicada. Você já tentou fazer algum cálculo como esse abaixo e o retorno foi essa mensagem de erro?</p>
+<pre class="r"><code>x &lt;- &quot;a&quot;
+x+1
+#&gt; Error in x + 1: argumento não-numérico para operador binário</code></pre>
+<p><sup>Created on 2021-03-29 by the <a href="https://reprex.tidyverse.org">reprex package</a> (v0.3.0)</sup></p>
+<p>Isso é muito comum, principalmente quando estamos trabalhando em scripts mais longos, e essa mensagem de erro é o R tentando nos avisar que nós estamos passando um texto, no caso a letra “a”, para uma operação que espera receber um número. Na verdade, o R é até um pouco mais preciso: a operação esperava um número e nós frustramos essa expectativa, por isso o erro menciona um “argumento não-numérico”. No caso nós tentamos fazer uma conta (a adição representada pelo símbolo <code>+</code>) usando um texto.</p>
+<p>O que podemos fazer quando esse erro aparece? Minha recomendação é examinar o seu código para verificar que tipo de argumento as suas operações matemáticas (por exemplo <code>+</code>, <code>-</code>, <code>*</code> e <code>^</code>) estão recebendo. Muito provavelmente algum desses argumentos não é um número…</p>
+</div>
+<div id="conflito-de-funções" class="section level2">
+<h2>Conflito de funções</h2>
+<p>Um problema silencioso que pode acontecer é o conflito de funções. Esse tipo de erro é um pouco mais complicado de identificar pois a mensagem de erro causada por esse problema não é padronizada.</p>
+<p><strong>Mas o que é um conflito de funções?</strong></p>
+<p>O R permite que a gente instale e carregue diversos pacotes. E esses pacotes podem ter funções com nomes iguais.</p>
+<p>Por exemplo, o pacote <code>{dplyr}</code> possui uma função chamada <code>filter()</code>, assim como o pacote <code>{base}</code> também tem uma função com o mesmo nome (o <code>{base}</code> sempre está carregado quando iniciamos o R).</p>
+<p>Quando usamos uma função sem usar o operador <code>::</code>, o R vai buscar no ambiente a função com esse nome que foi carregada por último. Então podemos usar uma função A quando queremos realmente usar a função B.</p>
+<p>Exemplo: queremos filtrar os filmes do diretor Zack Snyder. Obtemos esse erro dizendo que o objeto imdb não foi encontrado, porém o objeto está carregado!</p>
+<pre class="r"><code>filter(imdb, diretor == &quot;Zack Snyder&quot;)
+#&gt; Error in as.ts(x): objeto &#39;imdb&#39; não encontrado</code></pre>
+<p><sup>Created on 2021-03-26 by the <a href="https://reprex.tidyverse.org">reprex package</a> (v1.0.0)</sup></p>
+<p>Isso acontece pois o R utilizou a função <code>filter()</code> do pacote <code>{base}</code>, e não a função <code>filter()</code> do pacote <code>{dplyr}</code>!</p>
+<p>Uma forma de evitar esses erros de conflitos é utilizar o operador <code>::</code>, que foi citado anteriormente. Assim estamos falando explicitamente em qual pacote essa função está:</p>
+<pre class="r"><code>dplyr::filter(imdb, diretor == &quot;Zack Snyder&quot;)
+## # A tibble: 7 x 15
+##   titulo   ano diretor duracao cor   generos pais  classificacao orcamento
+##   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt;
+## 1 Batma~  2016 Zack S~     183 Color Action~ USA   A partir de ~ 250000000
+## 2 Man o~  2013 Zack S~     143 Color Action~ USA   A partir de ~ 225000000
+## 3 Watch~  2009 Zack S~     215 Color Action~ USA   A partir de ~ 130000000
+## 4 Legen~  2010 Zack S~     101 Color Action~ USA   Livre          80000000
+## 5 Sucke~  2011 Zack S~     128 Color Action~ USA   A partir de ~  82000000
+## 6 300     2006 Zack S~     117 Color Action~ USA   A partir de ~  65000000
+## 7 Dawn ~  2004 Zack S~     110 Color Action~ USA   A partir de ~  26000000
+## # ... with 6 more variables: receita &lt;dbl&gt;, nota_imdb &lt;dbl&gt;,
+## #   likes_facebook &lt;dbl&gt;, ator_1 &lt;chr&gt;, ator_2 &lt;chr&gt;, ator_3 &lt;chr&gt;</code></pre>
+</div>
+<div id="não-existe-um-pacote-chamado-there-is-no-package-called-.." class="section level2">
+<h2>Não existe um pacote chamado … / There is no package called ..</h2>
+<p>Quando queremos carregar um pacote, e ele não está instalado, o erro gerado é esse:</p>
+<pre class="r"><code>library(tidyverse)
+#&gt; Error in library(tidyverse) : there is no package called ‘tidyverse’</code></pre>
+<p><sup>Created on 2021-03-26 by the <a href="https://reprex.tidyverse.org">reprex package</a> (v1.0.0)</sup></p>
+<p>Como resolver? Precisamos instalar o pacote!</p>
+<p>A forma mais comum de instalação de um pacote é através do CRAN, utilizando a função <code>install.packages()</code>:</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>Após instalar o pacote, conseguiremos carregá-lo normalmente!</p>
+<pre class="r"><code>library(tidyverse)
+#&gt; ── Attaching packages ───── tidyverse 1.3.0 ──
+#&gt; ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+#&gt; ✓ tibble  3.1.0     ✓ dplyr   1.0.5
+#&gt; ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+#&gt; ✓ readr   1.4.0     ✓ forcats 0.5.1
+#&gt; ── Conflicts ──────── tidyverse_conflicts() ──
+#&gt; x dplyr::filter() masks stats::filter()
+#&gt; x dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div id="o-pacote-não-está-disponível-para-essa-versão-do-r-package-is-not-available-for-this-version-of-r" class="section level2">
+<h2>O pacote … não está disponível para essa versão do R / Package ‘…’ is not available for this version of R</h2>
+<p>Nesse exemplo, mostraremos um caso onde não é gerado um erro, e sim uma mensagem de aviso (<em>warning</em>). Entretanto, o código não executa como esperamos, e pode impossibilitar a execução das etapas seguintes dos scripts.</p>
+<p>Imagine que queremos calcular a média da massa corporal dos Pinguins que fazem parte da base de dados sobre <a href="https://cienciadedatos.github.io/dados/reference/pinguins.html">Pinguins</a>, disponível no pacote {<a href="https://cienciadedatos.github.io/dados/">dados</a>}.</p>
+<pre class="r"><code>install.packages(&quot;dados&quot;)
+#&gt; Warning: package &#39;dados&#39; is not available for this version of R
+#&gt; 
+#&gt; A version of this package for your version of R might be available elsewhere,
+#&gt; see the ideas at
+#&gt; https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+<p><sup>Created on 2021-03-26 by the <a href="https://reprex.tidyverse.org">reprex package</a> (v1.0.0)</sup></p>
+<p>Essa mensagem acontece quando queremos instalar um pacote que não está disponível no CRAN.
+O que eu recomendo, neste caso, é buscar o repositório no GitHub do pacote desejado.</p>
+<p>No caso do pacote que estamos mostrando neste exemplo, <a href="https://github.com/cienciadedatos/dados">este é o link do repositório</a>.</p>
+<p>Caso queira instalar o pacote através do GitHub, devemos utilizar a função <code>install_github()</code> do pacote <code>{remotes}</code>. Como argumento, devemos informar a organização ou pessoa a quem este repositório “pertence”, e o nome do repositório: <code>"nome_da_organizacao/nome_do_repositorio"</code>. No caso do pacote <code>{dados}</code>, a organização é <a href="https://github.com/cienciadedatos">cienciadedatos</a>, e o repositório é chamado de <a href="https://github.com/cienciadedatos/dados">dados</a>. Portanto, para instalar esse pacote, devemos executar o código a seguir:</p>
+<pre class="r"><code>remotes::install_github(&quot;cienciadedatos/dados&quot;)</code></pre>
+<p>Agora conseguimos utilizar funções e bases de dados do pacote <code>dados</code>:</p>
+<pre class="r"><code>library(dados)
+mean(pinguins$massa_corporal, na.rm = TRUE)
+## [1] 4201.754</code></pre>
+</div>
+<div id="o-arquivo-não-existe-no-diretório-de-trabalho-atual-does-not-exist-in-current-working-directory" class="section level2">
+<h2>O arquivo … não existe no diretório de trabalho atual / … does not exist in current working directory</h2>
+<p>E quando queremos importar uma base de dados (ou outro arquivo) para trabalhar no R, e recebemos essa mensagem?</p>
+<pre class="r"><code>imdb &lt;- readr::read_csv2(&quot;imdb2.csv&quot;)
+#&gt; i Using &#39;,&#39; as decimal and &#39;.&#39; as grouping mark. Use `read_delim()` for more control.
+#&gt; Error: &#39;imdb2.csv&#39; does not exist in current working directory (&#39;C:/Users/seu_usuario/Documents&#39;).</code></pre>
+<p><sup>Created on 2021-03-29 by the <a href="https://reprex.tidyverse.org">reprex package</a> (v0.3.0)</sup></p>
+<p>O R está informando que não encontrou o arquivo que a gente deseja importar. A maior parte das vezes quando esse erro acontece é por que 1) esse arquivo não existe no nosso computador, ou 2) estamos indicando o caminho incorreto até o arquivo.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/cracked_setwd.png?raw=true" alt="Ilustração sobre projetos no RStudio, por &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;" width="80%" />
+<p class="caption">
+Figura 2: Ilustração sobre projetos no RStudio, por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>
+</p>
+</div>
+<p>Vamos considerar que já sabemos que o arquivo existe no computador, e trabalhar na resolução da segunda opção: precisamos corrigir o caminho até o arquivo.
+É muito mais fácil lidar com isso quando trabalhamos com projetos no RStudio (<code>.Rproj</code>). Recomendo muito ler <a href="https://curso-r.github.io/zen-do-r/rproj-dir.html#diret%C3%B3rio-de-trabalho">desse capítulo do livro Zen do R</a>, pois fala bastante sobre as vantagens dessa abordagem.</p>
+<p>Quando trabalhamos com projetos no RStudio (<code>.Rproj</code>), os caminhos são relativos à pasta raiz do projeto. Recomendo adicionar dentro do seu projeto o arquivo que deseja abrir. E para descobrir o caminho, existe uma super dica: o RStudio nos ajuda a navegar nos arquivos presentes no nosso projeto. É necessário escrever duas aspas <code>""</code>, posicionar o mouse entre elas (isso é, clicando entre as suas aspas como se a gente fosse escrever algo dentro delas), e apertar a tecla TAB do teclado. O RStudio abrirá janelinha que possibilitará que a gente navegue nos arquivos do nosso projeto dessa forma.</p>
+<p>Descobrindo o caminho correto, podemos importar a base sem que aquele erro seja gerado!</p>
+<pre class="r"><code>imdb &lt;- readr::read_csv2(&quot;dados/imdb2.csv&quot;)
+#&gt; ℹ Using &#39;,&#39; as decimal and &#39;.&#39; as grouping mark. Use `read_delim()` for more control.
+#&gt; 
+#&gt; ── Column specification ────────────────────────────────────────────────────────
+#&gt; cols(
+#&gt;   titulo = col_character(),
+#&gt;   ano = col_double(),
+#&gt;   diretor = col_character(),
+#&gt;   duracao = col_double(),
+#&gt;   cor = col_character(),
+#&gt;   generos = col_character(),
+#&gt;   pais = col_character(),
+#&gt;   classificacao = col_character(),
+#&gt;   orcamento = col_double(),
+#&gt;   receita = col_double(),
+#&gt;   nota_imdb = col_double(),
+#&gt;   likes_facebook = col_double(),
+#&gt;   ator_1 = col_character(),
+#&gt;   ator_2 = col_character(),
+#&gt;   ator_3 = col_character()
+#&gt; )</code></pre>
+<p><sup>Created on 2021-03-26 by the <a href="https://reprex.tidyverse.org">reprex package</a> (v1.0.0)</sup></p>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Espero que essas dicas sejam úteis para você resolver os erros no futuro, e você seja mais feliz enquanto escreve seus códigos em R! E caso ainda tenha dúvidas, recomendo perguntar lá no <a href="https://discourse.curso-r.com/">Fórum Discourse da Curso-R</a>!</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<img src="https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/heartyr.gif?raw=true" alt="Ilustração por &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;" width="80%" />
+<p class="caption">
+Figura 3: Ilustração por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>
+</p>
+</div>
+</div>
+<div id="gostou-quer-saber-mais" class="section level2">
+<h2>Gostou? Quer saber mais?</h2>
+<p>Se você quiser aprender um pouco mais sobre R em geral, dê uma olhada nos <a href="https://curso-r.com/#portfolio">Cursos da Curso-R</a> e aproveite! O próximo curso a iniciar é o <a href="https://curso-r.com/cursos/r4ds-2/">R para Ciência de Dados II</a>, e a primeira parte do curso é sobre organização de projetos, um tema muito presente neste post. 🎉</p>
+</div>
