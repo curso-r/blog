@@ -5,7 +5,7 @@ tags: ["conceitos"]
 categories: ["conceitos", "erros", "debugging", "boas práticas"]
 image: "images/posts/banner/dog-pc.jpg"
 author: ["Beatriz Milz", "Fernando Corrêa"]
-summary: "Esse post tem como objetivo listar alguns erros comuns quando programamos em R, e dicas de como resolve-los!."
+summary: "Esse post tem como objetivo listar alguns erros comuns quando programamos em R, e dicas de como resolvê-los!"
 draft: false
 ---
 
