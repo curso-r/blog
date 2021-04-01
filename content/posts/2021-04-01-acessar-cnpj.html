@@ -1,0 +1,82 @@
+---
+title: "Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto"
+date: "2021-04-01"
+tags: ["rfb", "banco de dados"]
+categories: ["análises"]
+image: "images/posts/banner/RECEITA.jpg"
+author: ["Fernando"]
+summary: "Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito muito rápido!"
+draft: false
+---
+
+
+
+<p>Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito muito rápido!</p>
+<p>É um tutorial super simples, de 2 passinhos, que surgiu no contexto de uma pergunta feita lá <a href="https://discourse.curso-r.com/t/raspagem-cnpj-inscricao-e-situacao-cadastral/1084/9">no nosso Discourse</a>. Inclusive, recomendamos que vocês frequentem o nosso fórum, pois muitas dicar de ouro surgem nas conversar que rolam por lá.</p>
+<p>Vamos então ao nosso tutorial:</p>
+<div id="passo-1-baixe-o-banco-de-dados-em-formato-sqlite." class="section level1">
+<h1>Passo 1: Baixe o banco de dados em formato SQLite.</h1>
+<p>SQLite é uma tecnologia muito conveniente para aproveitar as qualidades de um sistema de gerenciamento de banco de dados sem precisar instalar muitos programas ou configurar passos muito complexos. Ao contrário de outras tecnologias, como MySQL por exemplo, SQLite permite que, sem muito trabalho, você consiga fazer queries em uma base grande como a da receita federal e recuperar a resposta para dentro do R. Por isso, nesse nosso tutorial enxuto vamos utilizar essa tecnologia.</p>
+<p>Para simplificar a nossa vida, o querido George Santiago <a href="https://github.com/georgevbsantiago/qsacnpj">disponibiliza para a comunidade</a> um pacote feito de R para processar todos os dados brutos da RFB e também uma versão em SQLite dessa mesma base. Sendo assim, como a comunidade já fez uma grande parte do trabalho, o que resta para nós é baixar a base em SQLite <a href="https://bit.ly/3cRruVw">por este link</a>.</p>
+</div>
+<div id="passo-2-acesse-a-base-usando-o-combo-de-pacotes-dbirsqlitedplyr" class="section level1">
+<h1>Passo 2: Acesse a base usando o combo de pacotes <code>DBI</code>+<code>RSQLite</code>+<code>dplyr</code></h1>
+<p>O passo final é usar a infraestrutura do pacote <code>DBI</code> e <code>dplyr</code> para acessar a base SQLite que baixamos no passo anterior. Entretanto, antes de fazer isso, vamos fazer um pequeno tratamento nos nossos CNPJs para que eles saiam do formato padrão 13.347.016/0001-17 para o formato que de armazenamento na base da RFB “13347016000117”. Você pode consultar o código que faz esse procedimento nas linhas abaixo:</p>
+<pre class="r"><code>#install.packages(&quot;stringr&quot;)
+
+lista_de_cnpjs &lt;- c(
+  &#39;13.347.016/0001-17&#39;,
+) %&gt;% 
+  stringr::str_remove_all(&quot;[:punct:]&quot;) %&gt;% 
+  # remove pontuações, tais como &quot;,&quot;, &quot;.&quot; e &quot;-&quot;
+  stringr::str_pad(pad = &quot;0&quot;, width = 14, side = &quot;left&quot;)
+  # caso o CNPJ tenha menos do que 14 digitos, preenche o CNPJ com 0s à esquerda</code></pre>
+<p>Depois dessa limpeza, temos só mais um passo a executar. Precisamos nos conectar com a base de dados em SQLite e utilizar esse vetor de CNPJs como filtro:</p>
+<pre class="r"><code>#install.packages(&quot;RSQLite&quot;)
+#install.packages(&quot;dplyr&quot;)
+
+con &lt;- DBI::dbConnect(RSQLite::SQLite(), &quot;bd_dados_qsa_cnpj.db&quot;)
+# conecta o R ao banco de dados
+
+dados_cadastrais &lt;- dplyr::tbl(con, &quot;cnpj_dados_cadastrais_pj&quot;) %&gt;% 
+  # carrega a tabela de dados cadastrais
+  dplyr::filter(cnpj %in% local(lista_de_cnpjs)) %&gt;% 
+  # filtra as linhas da tabela &quot;cnpj_dados_cadastrais_pj&quot; que estejam no vetor &quot;lista_de_cnpjs&quot;
+  dplyr::collect() %&gt;% 
+  # carrega o resultado da consulta para o R</code></pre>
+<p>ACABOU! Caso você queira consultar mais CNPJs, basta aumentar a lista de documentos lá no vetor <code>lista_de_cnpjs</code>. Bacana, né? Esperamos que tenha esses passos tenham te tomado só um minuto mesmo! Deixe o seu comentário aí embaixo se você não conseguiu.</p>
+</div>
+<div id="código-completo" class="section level1">
+<h1>Código completo</h1>
+<p>Para que você consiga sair usando esse código por aí, vamos colocar aqui em baixo o código completo, com todos as partes juntas. Boa sorte!</p>
+<pre class="r"><code>#install.packages(&quot;DBI&quot;)
+#install.packages(&quot;RSQLite&quot;)
+#install.packages(&quot;dplyr&quot;)
+
+con &lt;- DBI::dbConnect(RSQLite::SQLite(), &quot;bd_dados_qsa_cnpj.db&quot;)
+# conecta o R com o SQLite que baixamos
+
+lista_de_cnpjs &lt;- c(
+  &#39;13.347.016/0001-17&#39;,
+  # aqui você insere os CNPJs que quer consultar
+) %&gt;% 
+  stringr::str_remove_all(&quot;[:punct:]&quot;) %&gt;% 
+  # remove pontuações
+  stringr::str_pad(pad = &quot;0&quot;, width = 14, side = &quot;left&quot;)
+  # deixa todos os documento com o mesmo comprimento
+
+cnpj &lt;- dplyr::tbl(con, &quot;cnpj_dados_cadastrais_pj&quot;)
+# acessa a tabela &quot;cnpj_dados_cadastrais_pj&quot;
+
+dados_cadastrais &lt;- dplyr::cnpj %&gt;% 
+  # carrega a tabela de dados cadastrais
+  dplyr::filter(cnpj %in% local(lista_de_cnpjs)) %&gt;% 
+  # filtra as linhas da tabela &quot;cnpj_dados_cadastrais_pj&quot; que estejam no vetor &quot;lista_de_cnpjs&quot;
+  dplyr::collect()
+  # carrega o resultado da consulta para o R</code></pre>
+</div>
+<div id="gostou-quer-saber-mais" class="section level1">
+<h1>Gostou? Quer saber mais?</h1>
+<p>Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso <a href="https://curso-r.com/cursos/r4ds-1/">R para Ciência de Dados I</a> e aproveite!</p>
+<p>Caso você tenha dúvidas entre em contato com a gente pelos comentários aqui em baixo, pelo nosso Discourse ou pelo e-mail <a href="mailto:contato@curso-r.com" class="email">contato@curso-r.com</a>.</p>
+</div>
