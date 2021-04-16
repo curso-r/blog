@@ -5,7 +5,7 @@ tags: ["banco de dados"]
 categories: ["análises", "conceitos"]
 image: "images/posts/banner/outlier.jpg"
 author: ["Fernando"]
-summary: "Outliers"
+summary: "Você já passou pela situação de fazer um gráfico e se deparar com um monte de pontos bizarros? Quando você nem seguer consegue ver o que está acontecendo porque um ponto está deixando a sua escala completamente bagunçada? Esses dados que dificultam a nossa vida normalmente são chamados de _outliers_ ou também de _dados discrepantes_ e _pontos fora da curva_. Existem muitos jeitos de tratar esse tipo de dados, pois se por um lado ele pode ser um erro da base e deve ser descartado, também existem situações em que os outliers são características importantes dos seus daods e merecem ser compreendidos em profundidade. Hoje, nós vamos falar sobre uma estratégia rápida e fácil que tem o potencial de te ajudar a encontrar todos os seus outliers sem ter dor de cabeça. "
 draft: false
 ---
 
