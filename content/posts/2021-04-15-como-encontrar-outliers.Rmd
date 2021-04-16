@@ -38,9 +38,9 @@ mtcars_com_outliers %>%
 ```
 
 
-Você já passou pela situação de fazer um gráfico e se deparar com uma imagem triste como essa? Quando você nem seguer consegue ver o que está acontecendo porque um ponto está deixando a sua escala completamente bagunçada?
+Você já passou pela situação de fazer um gráfico e se deparar com uma imagem triste como essa? Quando você nem sequer consegue ver o que está acontecendo porque um ponto está deixando a sua escala completamente bagunçada?
 
-Esses dados que dificultam a nossa vida normalmente são chamados de _outliers_ ou também de _dados discrepantes_ e _pontos fora da curva_. Existem muitos jeitos de tratar esse tipo de dados, pois se por um lado ele pode ser um erro da base e deve ser descartado, também existem situações em que os outliers são características importantes dos seus daods e merecem ser compreendidos em profundidade. Hoje, nós vamos falar sobre uma estratégia rápida e fácil que tem o potencial de resolver os seus problemas sem te dar dor de cabeça. 
+Esses dados que dificultam a nossa vida normalmente são chamados de _outliers_ ou também de _dados discrepantes_ e _pontos fora da curva_. Existem muitos jeitos de tratar esse tipo de dados, pois se por um lado ele pode ser um erro da base e deve ser descartado, também existem situações em que os outliers são características importantes dos seus dados e merecem ser compreendidos em profundidade. Hoje, nós vamos falar sobre uma estratégia rápida e fácil que tem o potencial de resolver os seus problemas sem te dar dor de cabeça. 
 
 O método mais comum para encontrar _outliers_ usa o famoso z-score, que nada mais é que uma transformação de uma variável $X$ que padroniza a sua **posição** (pois a média do z-score é sempre 0, enquanto a média de $X$ pode ser qualquer coisa) e a sua **escala** (pois $X$ pode variar muito ou pouco, com qualquer desvio padrão, mas o z-score não. o z-score terá sempre desvio padrão igual a 1). A fórmula do z-score é:
 
@@ -48,7 +48,7 @@ $$Z_{SCORE} (X) = \frac{X-Média(X)}{Desvio Padrão (X)}$$
 
 Uma estratégia para encontrar outliers, então, é marcar aqueles pontos que, nessa escala, estão muito discrepantes. Normalmente se adota um ponto de corte pequeno, como -2 e 2 ou no máximo -3 e 3. Serão considerados _outliers_ todos os pontos que estiverem fora desse intervalo.
 
-Vamos ver o que aconteceria se usássemos essa regra para arrumar o primeiro gráfico que mostramos? Primeiro, vamos criar uma base de dados aonde poderemos trabalhar. Ela se chamará `mtcars_com_outliers`, como se vê abaixo.
+Vamos ver o que aconteceria se usássemos essa regra para arrumar o primeiro gráfico que mostramos? Primeiro, vamos criar uma base de dados onde poderemos trabalhar. Ela se chamará `mtcars_com_outliers`, como se vê abaixo.
 
 ```{r}
 
