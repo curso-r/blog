@@ -7,6 +7,7 @@ image: "images/posts/banner/reproducibility_court.png"
 author: ["Beatriz Milz", "William"]
 summary: "Comentamos algumas dicas sobre elaboração de relatórios. Ilustração sobre o pacote rmarkdown, criada por Allison Horst."
 draft: false
+type: "featured"
 ---
 
 Olá!
