@@ -1,0 +1,49 @@
+---
+title: "Causal Discovery: como estimar redes causais no R"
+date: "2021-04-27"
+tags: ["faxina", "modelagem"]
+categories: ["análises", "conceitos", "tutoriais"]
+image: "images/posts/banner/pc-alg.png"
+author: ["Fernando"]
+summary: "Correlação não é causalidade. Você certamente já ouviu essa frase, né? Nesse post, vamos te mostrar alguns jeitos de encontrar aquelas correlações que de fato valem o seu tempo."
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Lá no nosso canal do Youtube nós <a href="https://www.youtube.com/watch?v=k8oz1W7URM8&amp;t=6863s">conversamos um pouco sobre alguns conceitos básicos de causalidade</a>. Falamos sobre a importância de ter um grafo descrevendo a relação entre as nossas variáveis para que a gente não seja enganado pelas correlações espúrias, sobre viéses de seleção e, no final, mostramos a aplicação de um método para construir um grafo de relacionamento entre as nossas variáveis usando o algoritmo PC. Neste post, vamos te mostrar como implementar esse algoritmo nas suas bases de dados.</p>
+<p>Entretanto, antes de implementar o algoritmo, vamos analisar como funciona esse algoritmo.</p>
+<div id="funcionamento-geral-do-algoritmo-pc" class="section level1">
+<h1>Funcionamento geral do algoritmo PC</h1>
+<p>A principal ideia por trás do algoritmo PC é que, dadas três variáveis <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, <span class="math inline">\(Z\)</span>, o único jeito de verificarmos <span class="math inline">\(X \not\perp Y | Z\)</span> (isso é, não X é independente de Y quando condicionamos no valor da variável Z) é se a relação causal entre elas for <span class="math inline">\(X \rightarrow Z \leftarrow Y\)</span> (<span class="math inline">\(Z\)</span> é um colisor). Se <span class="math inline">\(X \perp Y \ | \ Z\)</span> fosse verdade, qualquer uma das setas (ou todas) poderiam estar ao contrário do que estão em <span class="math inline">\(X \rightarrow Z \leftarrow Y\)</span>.</p>
+<p>Sendo assim, o algoritmo PC consegue decidir onde fica a ponta de algumas das setinhas usando esse critério e repetir esses testes sucessivamente. Em linhas gerais, o algoritmo faz o seguinte:</p>
+<ol start="0" style="list-style-type: decimal">
+<li>Comece com um grafo em que todas as variáveis estão conectadas, mas sem a ponta das setas.</li>
+<li>Para todo par de variáveis <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>, verifique se <span class="math inline">\(X \perp Y\)</span>. Se a resposta for “Sim”, remova essa conexão.</li>
+<li>Para todo par de variáveis <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> e para todo conjunto de variáveis <span class="math inline">\(S = \{Z_1, Z_2, ...\}\)</span> que não contem <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>, verifique se <span class="math inline">\(X \perp Y \ | \ S\)</span>. Se a resposta for “Sim”, remova essa conexão.</li>
+<li>Para todas as triplas de variáveis que sobraram <span class="math inline">\(X - Z - Y\)</span>, verifique se <span class="math inline">\(X \not \perp Y \ | \ Z\)</span>. Se a resposta for “Sim”, oriente essas setinhas na direção de <span class="math inline">\(Z\)</span>.</li>
+<li>Caso haja alguma setinha que está sem orientação, utilize o resultado dos testes que obteve no passo 3. para eventualmente orientar algumas outras setar por exclusão.</li>
+</ol>
+</div>
+<div id="o-algortimo-pc-no-pacote-bnlearn" class="section level1">
+<h1>O algortimo PC no pacote <code>bnlearn</code></h1>
+<pre class="r"><code>library(bnlearn)
+library(tidyverse)</code></pre>
+<p>Similar ao o que fizemos na live, aqui vamos procurar um grafo de relacionamentos entre as variáveis da base <code>Auto</code>, disponível no pacote <code>ISLR</code>. Vamos excluir algumas variáveis dessa base e aplicar algumas transformações:</p>
+<pre class="r"><code>dados_para_ajuste &lt;- ISLR::Auto %&gt;%
+  dplyr::select(-name, -origin) 
+  # Vamos excluir algumas variáveis estritamente qualitativas</code></pre>
+<p>Para buscar as relações entre as variáveis da tabela <code>dados_para_ajuste</code>, basta utilizarmos a função <code>bnlearn::pc.stable</code>, cujo resultado pode ser plotado usando a função <code>plot</code>.</p>
+<pre class="r"><code>dados_para_ajuste %&gt;% 
+  bnlearn::pc.stable(alpha = .01) %&gt;%
+  plot()</code></pre>
+<p><img src="/posts/2021-04-27-causal-discovery-como-estimar-redes-causais-no-r_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Bacana, né? O melhor é que é simples. Esse pacote, inclusive, permite que a gente misture variáveis contínuas e categórias, basta trocar a opção de teste de independência no parâmetro <code>test</code>.</p>
+</div>
+<div id="gostou-quer-saber-mais" class="section level1">
+<h1>Gostou? Quer saber mais?</h1>
+<p>Se você quiser aprender um pouco mais sobre esse assunto, temos alguns cursos que tocam os temas deste post. Dê uma olhada nos nossos cursos de <a href="https://www.curso-r.com/cursos/regressao-linear/">Regressão Linear</a> ou <a href="https://www.curso-r.com/cursos/intro-machine-learning/">Machine Learning</a> e aproveite!</p>
+<p>Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso <a href="https://curso-r.com/cursos/r4ds-1/">R para Ciência de Dados I</a> e aproveite!</p>
+<p>Caso você tenha dúvidas entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail <a href="mailto:contato@curso-r.com" class="email">contato@curso-r.com</a>.</p>
+</div>
