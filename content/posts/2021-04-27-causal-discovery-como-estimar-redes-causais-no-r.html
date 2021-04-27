@@ -30,7 +30,7 @@ draft: false
 <h1>O algortimo PC no pacote <code>bnlearn</code></h1>
 <pre class="r"><code>library(bnlearn)
 library(tidyverse)</code></pre>
-<p>Similar ao o que fizemos na live, aqui vamos procurar um grafo de relacionamentos entre as variáveis da base <code>Auto</code>, disponível no pacote <code>ISLR</code>. Vamos excluir algumas variáveis dessa base e aplicar algumas transformações:</p>
+<p>Similar ao que fizemos na live, aqui vamos procurar um grafo de relacionamentos entre as variáveis da base <code>Auto</code>, disponível no pacote <code>ISLR</code>. Vamos excluir algumas variáveis dessa base e aplicar algumas transformações:</p>
 <pre class="r"><code>dados_para_ajuste &lt;- ISLR::Auto %&gt;%
   dplyr::select(-name, -origin) 
   # Vamos excluir algumas variáveis estritamente qualitativas</code></pre>

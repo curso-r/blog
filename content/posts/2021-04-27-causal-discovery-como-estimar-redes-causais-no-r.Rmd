@@ -42,7 +42,7 @@ library(tidyverse)
 ```
 
 
-Similar ao o que fizemos na live, aqui vamos procurar um grafo de relacionamentos entre as variáveis da base `Auto`, disponível no pacote `ISLR`. Vamos excluir algumas variáveis dessa base e aplicar algumas transformações:
+Similar ao que fizemos na live, aqui vamos procurar um grafo de relacionamentos entre as variáveis da base `Auto`, disponível no pacote `ISLR`. Vamos excluir algumas variáveis dessa base e aplicar algumas transformações:
 
 ```{r}
 dados_para_ajuste <- ISLR::Auto %>%
