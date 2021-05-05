@@ -6,6 +6,7 @@ categories: ["conceitos"]
 image: "images/posts/banner/xaringan.png"
 author: ["Fernando"]
 summary: "Você também sente falta de visualizar o seu Rmd completo enquanto escreve o código? Nesse post você vai descobrir como resolver esse problema!"
+draft: false
 ---
 
 ```{r setup, include=FALSE}

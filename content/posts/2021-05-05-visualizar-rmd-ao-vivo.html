@@ -1,11 +1,23 @@
-<script src="2021-05-05-visualizar-rmd-ao-vivo_files/header-attrs-2.7/header-attrs.js"></script>
+---
+title: "Como pré-visualizar um relatório em  RMarkdown"
+date: "2021-05-05"
+tags: ["r-markdown", "rstudio"]
+categories: ["conceitos"]
+image: "images/posts/banner/xaringan.png"
+author: ["Fernando"]
+summary: "Você também sente falta de visualizar o seu Rmd completo enquanto escreve o código? Nesse post você vai descobrir como resolver esse problema!"
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>Quando você está criando uma apresentação de slides super elegante com o <a href="https://slides.yihui.org/xaringan/#1">pacote xaringan</a> ou um relatório minimalista com alguma encarnação do <a href="https://prettydoc.statr.me/leonids.html">pacote rmarkdown</a>, é normal sentir falta de visualizar o resultado final ao vivo. Essa é uma funcionalidade muito comum em vários outros softwares de edição de documentos e a falta dela pode ser frustrante no nosso contexto, mesmo que <code>rmarkdown</code> tenha vantagens como flexibilidade e reprodutibilidade.</p>
 <p>Neste post vamos te mostrar dois jeitos de suprir essa necessidade:</p>
 <div id="use-a-função-xaringaninfinite_moon_reader" class="section level1">
 <h1>Use a função <code>xaringan::infinite_moon_reader</code></h1>
-<p>Atualmente o pacote <code>xaringan</code> disponibiliza para nós uma função chamada <code>xaringan::infinite_moon_reader</code>, que é uma mão na roda principalmente para quem está editando slides. O funcionamento é bastante simples: você pode chamar essa função sem nenhum argumento e a janela <code>Viewer</code> do RStudio vai se transformar em uma versão ao vivo do documento que estiver</p>
+<p>Atualmente o pacote <code>xaringan</code> disponibiliza para nós uma função chamada <code>xaringan::infinite_moon_reader</code>, que é uma mão na roda principalmente para quem está editando slides. O funcionamento é bastante simples: você pode chamar essa função sem nenhum argumento e a janela <code>Viewer</code> do RStudio vai se transformar em uma versão ao vivo do documento que você estiver editando no momento em que rodar a função. Você também pode utilizar um argumento <code>moon</code> para ativar o <em>live preview</em> em algum arquivo específico que te interesse.</p>
+<p>O gif abaixo, criado pelo próprio mantenedor principal do <code>xaringan</code>, ilustra muito bem essa funcionalidade.</p>
 <pre class="r"><code>knitr::include_graphics(&#39;https://user-images.githubusercontent.com/163582/53144527-35f7a500-3562-11e9-862e-892d3fd7036d.gif&#39;)</code></pre>
 <div class="figure"><span id="fig:unnamed-chunk-1"></span>
 <img src="https://user-images.githubusercontent.com/163582/53144527-35f7a500-3562-11e9-862e-892d3fd7036d.gif" alt="Ilustração sobre o pacote rmarkdown, criada por &lt;a href='https://yihui.org/en/2019/02/ultimate-inf-mr/'&gt;Yihui Xie&lt;/a&gt;."  />
@@ -16,11 +28,14 @@ Figura 1: Ilustração sobre o pacote rmarkdown, criada por <a href='https://yih
 </div>
 <div id="use-o-visual-markdown-editing-do-rstudio" class="section level1">
 <h1>Use o Visual Markdown Editing do Rstudio</h1>
+<p>Desde setembro do ano passado a janela de edição de texto do RStudio ganhou um novo ícone. Quando você estiver editando um <code>rmd</code>, pode clicar no compasso que fica no canto superior direito da janela e entrar no modo <em>visual editing</em>. Nesse modo, os chunks já são convertidos automaticamente no seu output e isso também vale para <em>html widgets</em>, fórmulas matemáticas em <em>MathJax</em> (aquelas que a gente cria com o símbolo cifrão $) entre outras. Não é tão direto quando o <code>infinite_moon_reader</code>, mas para documentos mais complexos pode ser interessante.</p>
+<pre class="r"><code>knitr::include_graphics(&#39;https://blog.rstudio.com/2020/09/30/rstudio-v1-4-preview-visual-markdown-editing/images/visual-editing.png&#39;)</code></pre>
+<p><img src="https://blog.rstudio.com/2020/09/30/rstudio-v1-4-preview-visual-markdown-editing/images/visual-editing.png" /><!-- --></p>
 </div>
 <div id="gostou-quer-saber-mais" class="section level1">
 <h1>Gostou? Quer saber mais?</h1>
 <p>Se você quiser aprender um pouco mais sobre RMarkdown e Visualização de Dados em geral, dê uma olhada no nosso curso <a href="https://curso-r.com/cursos/visualizacao/">Relatórios e visualização de dados</a> e aproveite!</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/rmarkdown_wizards.png" alt="Ilustração sobre o pacote rmarkdown, criada por &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;." width="50%" />
 <p class="caption">
 Figura 2: Ilustração sobre o pacote rmarkdown, criada por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>.
