@@ -82,8 +82,8 @@ do R 4.1…</p>
 anônimas não são nada de novo. Também conhecidas como <em>lambdas</em>, funções
 anônimas não passam de funções que não precisam receber um nome, ou seja, podem
 ser utilizadas pelo programa na hora de sua criação. No caso do <code>{purrr}</code> isso
-se dava através de uma gambiarra feita em cima das fórmulas (<code>~.x</code>), mas ainda
-assim isso melhor do que a sintaxe bastante prolixa que o R básico exigia
+se dava através de uma gambiarra feita em cima das fórmulas (<code>~.x</code>), mas, ainda
+assim, isso era melhor do que a sintaxe bastante prolixa que o R básico exigia
 (<code>function(x) x</code>).</p>
 <p>A nova sintaxe é, na minha opinião, bastante melhor que a estratégia do
 <code>{purrr}</code>. Apesar de ela ser um pouco mais extensa, ela funciona em todos os
@@ -95,7 +95,9 @@ escolha do símbolo <code>\</code> também é ótima, pois é igual à de
 <a href="https://wiki.haskell.org/Anonymous_function">outras linguagens</a> e porque lembra
 um λ (lambda) com a perna cortada. Para comparar todas as diferentes notações,
 segue um breve exemplo (saídas suprimidas):</p>
-<pre class="r"><code># Sem função anônima
+<pre class="r"><code>library(purrr)
+
+# Sem função anônima
 soma_um &lt;- function(x) {
   x + 1
 }
@@ -116,7 +118,7 @@ lapply(1:10, \(x) x + 1)
 # Para mais de 2 argumentos, o {purrr} muda
 pmap(list(1:10, 11:20, 21:30), ~ ..1 + ..2 + ..3)
 
-# A notação continua consistente
+# A notação nova continua consistente
 pmap(list(1:10, 11:20, 21:30), \(x, y, z) x + y + z)</code></pre>
 <p>De quebra, na minha opinião, também será muito mais fácil de ensinar o <code>\(x)</code> do
 que o <code>~.x</code>. A notação é intuitiva, consistente e funciona fora do tidyverse,
@@ -131,12 +133,12 @@ nova versão e ela se torna uma <em>release candidate</em>. Conforme escrevo ain
 estão permitidas alterações no código, então pode ser que alguma coisa mude até
 o lançamento final do R 4.1, mas o grosso não deve mudar muito.</p>
 <p>Assim, para te poupar desse trabalho, eu li o
-<a href="https://stat.ethz.ch/R-manual/R-devel/doc/html/NEWS.html">NEWS</a> da versão a fim
-de saber quais são as novidades mais interessantes do 4.1. Fora o novo pipe e o
-novo lambda, achei algumas coisas dignas de nota:</p>
+<a href="https://stat.ethz.ch/R-manual/R-devel/doc/html/NEWS.html">NEWS</a> da nova versão
+a fim de saber quais são as novidades mais interessantes do 4.1. Fora o novo
+pipe e o novo lambda, achei algumas coisas dignas de nota:</p>
 <ul>
-<li><p>Usar <code>c()</code> para combinar fatores agora retorna um fator que combina os níveis
-de todos (de forma similar ao <code>forcats::fct_c()</code>);</p></li>
+<li><p>Usar <code>c()</code> para combinar fatores agora retorna um fator que também combina
+todos os níveis (de forma similar ao <code>forcats::fct_c()</code>);</p></li>
 <li><p><code>apply()</code> agora tem um argumento <code>simplify</code> para desabilitar a simplificação
 de resultados;</p></li>
 <li><p>O novo utilitário <code>...names()</code> retorna os nomes dos argumentos passados via
