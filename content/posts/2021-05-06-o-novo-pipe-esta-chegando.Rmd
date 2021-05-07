@@ -96,7 +96,7 @@ assim, isso era melhor do que a sintaxe bastante prolixa que o R básico exigia
 
 A nova sintaxe é, na minha opinião, bastante melhor que a estratégia do
 `{purrr}`. Apesar de ela ser um pouco mais extensa, ela funciona em todos os
-lugares (não só no `{purrr}`), permite nomes arbitrários para os argumentos e
+lugares (não só no tidyverse), permite nomes arbitrários para os argumentos e
 não bagunça a função do `~`. A nova função anônima é declarada com uma barra
 oblíqua para a esquerda seguida por todos os argumentos entre parênteses e o
 código; essencialmente, é igual à notação antiga, mas `function` vira `\`. A
@@ -158,7 +158,7 @@ todos os níveis (de forma similar ao `forcats::fct_c()`);
 de resultados;
 
 - O novo utilitário `...names()` retorna os nomes dos argumentos passados via
-`...` (possivelmente simplificando o trabalho do `{tidyselect}`);
+`...` (possivelmente facilitando o trabalho do `{tidyselect}`);
 
 - As funções `URLencode()` e `URLdecode()` agora funcionam com vetores de URIs;
 
@@ -170,7 +170,7 @@ já ordenados via ALTREP.
 
 ## Conclusão
 
-Se você está muito empolgado para testar as novas funcionalidades, já é possível
+Se você não consegue esperar para testar as novas funcionalidades, já é possível
 baixar a versão beta do R 4.1 diretamente do
 [site](https://cran.r-project.org/src/base-prerelease/) do R Project. O time do
 R Core apenas pede que você

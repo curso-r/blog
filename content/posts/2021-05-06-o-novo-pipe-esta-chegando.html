@@ -87,7 +87,7 @@ assim, isso era melhor do que a sintaxe bastante prolixa que o R básico exigia
 (<code>function(x) x</code>).</p>
 <p>A nova sintaxe é, na minha opinião, bastante melhor que a estratégia do
 <code>{purrr}</code>. Apesar de ela ser um pouco mais extensa, ela funciona em todos os
-lugares (não só no <code>{purrr}</code>), permite nomes arbitrários para os argumentos e
+lugares (não só no tidyverse), permite nomes arbitrários para os argumentos e
 não bagunça a função do <code>~</code>. A nova função anônima é declarada com uma barra
 oblíqua para a esquerda seguida por todos os argumentos entre parênteses e o
 código; essencialmente, é igual à notação antiga, mas <code>function</code> vira <code>\</code>. A
@@ -142,7 +142,7 @@ todos os níveis (de forma similar ao <code>forcats::fct_c()</code>);</p></li>
 <li><p><code>apply()</code> agora tem um argumento <code>simplify</code> para desabilitar a simplificação
 de resultados;</p></li>
 <li><p>O novo utilitário <code>...names()</code> retorna os nomes dos argumentos passados via
-<code>...</code> (possivelmente simplificando o trabalho do <code>{tidyselect}</code>);</p></li>
+<code>...</code> (possivelmente facilitando o trabalho do <code>{tidyselect}</code>);</p></li>
 <li><p>As funções <code>URLencode()</code> e <code>URLdecode()</code> agora funcionam com vetores de URIs;</p></li>
 <li><p><code>grep()</code>, <code>sub()</code>, <code>regexp()</code>, etc. ficaram mais rápidas para fatores longos
 com poucos níveis e</p></li>
@@ -152,7 +152,7 @@ já ordenados via ALTREP.</p></li>
 </div>
 <div id="conclusão" class="section level2">
 <h2>Conclusão</h2>
-<p>Se você está muito empolgado para testar as novas funcionalidades, já é possível
+<p>Se você não consegue esperar para testar as novas funcionalidades, já é possível
 baixar a versão beta do R 4.1 diretamente do
 <a href="https://cran.r-project.org/src/base-prerelease/">site</a> do R Project. O time do
 R Core apenas pede que você
