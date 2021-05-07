@@ -1,0 +1,165 @@
+---
+title: 'R 4.1: o novo pipe está chegando!'
+date: "2021-05-06"
+tags: ["programação", "pipe"]
+categories: ["discussões"]
+image: "images/posts/banner/novo-pipe.jpg"
+author: ["Caio"]
+summary: "Em poucos dias será oficialmente lançado o R 4.1, com seu próprio pipe embutido! Neste post falamos sobre o pipe e outras novidades que chegarão ao R em 18/05/2021."
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>A profecia estava correta: o R finalmente vai ganhar um pipe próprio, embutido
+à linguagem em si. Mais de 7 anos depois do
+<a href="https://github.com/tidyverse/magrittr/commit/6f79e6dbf81a1a480c3b41c24b0dc40777981338">primeiro commit</a>
+do <code>{magrittr}</code>, o <code>%&gt;%</code>, operador com o qual compartilhamos tantas boas
+memórias, símbolo do R moderno e inspiração para o logo da
+<a href="https://curso-r.com/">Curso-R</a>, vai se tornar obsoleto. De acordo com a
+<a href="https://developer.r-project.org/">agenda</a> do R Project, no badalar da
+meia-noite do dia 18/05/2021 será lançada oficialmente a versão 4.1.0 (“Camp
+Pontanezen”) do R, contendo, dentre outras novidades, suporte para o operador
+<code>|&gt;</code>.</p>
+<p>Devo admitir que estou um pouco triste com a despedida, como se eu estivesse
+prestes a mudar de casa: pode ser que a casa nova seja melhor e maior, mas, de
+uma forma ou de outra, estou abandonando um lugar que foi palco de várias boas
+memórias por um lugar estéril e inerte…</p>
+<p>Só que mesmo assim nós seguimos em frente e mudamos de casa! As lembranças não
+vão embora e temos a oportunidade de criar mais boas memórias com esse novo
+plano de fundo. Sendo assim, vamos entender as principais mudanças do R 4.1 e,
+principalmente, como usar o novo pipe.</p>
+<div id="o-novo-pipe" class="section level2">
+<h2>O novo pipe: <code>|&gt;</code></h2>
+<p>À primeira vista, o novo pipe é igual ao antigo: usado no final de uma linha
+para passar o resultado do que está à sua esquerda como primeiro argumento da
+linha debaixo. Aqui temos um exemplo simples do uso mais comum dos pipes:</p>
+<pre class="r"><code>library(dplyr)
+
+# Uma pipeline com o pipe novo
+starwars |&gt;
+  group_by(species, sex) |&gt;
+  select(species, sex, height) |&gt;
+  summarise(height = mean(height, na.rm = TRUE)) |&gt;
+  pull(height) |&gt;
+  summary()
+#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#&gt;    66.0   163.0   181.3   173.5   196.0   264.0</code></pre>
+<p>As diferenças aparecem quanto tentamos usar o <code>.</code>, a saber, o <em>dot placeholder</em>.
+Bem comum no antigo pipe, o uso do <code>.</code> para escolher onde a substituição deve
+ocorrer é simplesmente proibido no novo pipe. Essa decisão foi tomada porque o
+<code>.</code> gera situações ambíguas como a descrita a seguir:</p>
+<pre class="r"><code># Vamos gerar essa string a partir de &quot;-&quot; %&gt;% paste0()
+&quot;-&gt;&lt;-&quot;
+#&gt; [1] &quot;-&gt;&lt;-&quot;
+
+# Podemos começar colando o hífen na esquerda
+&quot;-&quot; %&gt;%
+  paste0(&quot;&gt;&quot;)
+#&gt; [1] &quot;-&gt;&quot;
+
+# Agora adicionamos o . para colar na direita também...
+# Mas isso dá errado!
+&quot;-&quot; %&gt;%
+  paste0(&quot;&gt;&lt;&quot;, .)
+#&gt; [1] &quot;&gt;&lt;-&quot;
+
+# Precisamos colocar o . em dois lugares diferentes,
+# incluindo, contraintuitivamente, no primeiro argumento
+&quot;-&quot; %&gt;%
+  paste0(., &quot;&gt;&lt;&quot;, .)
+#&gt; [1] &quot;-&gt;&lt;-&quot;</code></pre>
+<p>Assim, em troca de nunca mais precisar carregar o <code>{magrittr}</code>, usar
+<code>usethis::use_pipe()</code> ou se preocupar com o ambiente do <code>{future}</code>, vamos ser
+obrigados a criar funções parciais que sempre esperam a substituição no seu
+primeiro argumento. Mas, falando em funções, chegamos à segunda maior novidade
+do R 4.1…</p>
+</div>
+<div id="funções-anônimas-x" class="section level2">
+<h2>Funções anônimas: <code>\(x)</code></h2>
+<p>Se você se acostumou com a notação de fórmulas do <code>{purrr}</code>, então funções
+anônimas não são nada de novo. Também conhecidas como <em>lambdas</em>, funções
+anônimas não passam de funções que não precisam receber um nome, ou seja, podem
+ser utilizadas pelo programa na hora de sua criação. No caso do <code>{purrr}</code> isso
+se dava através de uma gambiarra feita em cima das fórmulas (<code>~.x</code>), mas ainda
+assim isso melhor do que a sintaxe bastante prolixa que o R básico exigia
+(<code>function(x) x</code>).</p>
+<p>A nova sintaxe é, na minha opinião, bastante melhor que a estratégia do
+<code>{purrr}</code>. Apesar de ela ser um pouco mais extensa, ela funciona em todos os
+lugares (não só no <code>{purrr}</code>), permite nomes arbitrários para os argumentos e
+não bagunça a função do <code>~</code>. A nova função anônima é declarada com uma barra
+oblíqua para a esquerda seguida por todos os argumentos entre parênteses e o
+código; essencialmente, é igual à notação antiga, mas <code>function</code> vira <code>\</code>. A
+escolha do símbolo <code>\</code> também é ótima, pois é igual à de
+<a href="https://wiki.haskell.org/Anonymous_function">outras linguagens</a> e porque lembra
+um λ (lambda) com a perna cortada. Para comparar todas as diferentes notações,
+segue um breve exemplo (saídas suprimidas):</p>
+<pre class="r"><code># Sem função anônima
+soma_um &lt;- function(x) {
+  x + 1
+}
+map(1:10, soma_um)
+
+# A notação antiga do {base} é extensa
+map(1:10, function(x) x + 1)
+
+# A notação do {purrr} força o .x
+map(1:10, ~ .x + 1)
+
+# A notação nova permite qualquer nome
+map(1:10, \(n) n + 1)
+
+# A notação nova funciona fora do tidyverse
+lapply(1:10, \(x) x + 1)
+
+# Para mais de 2 argumentos, o {purrr} muda
+pmap(list(1:10, 11:20, 21:30), ~ ..1 + ..2 + ..3)
+
+# A notação continua consistente
+pmap(list(1:10, 11:20, 21:30), \(x, y, z) x + y + z)</code></pre>
+<p>De quebra, na minha opinião, também será muito mais fácil de ensinar o <code>\(x)</code> do
+que o <code>~.x</code>. A notação é intuitiva, consistente e funciona fora do tidyverse,
+então, para mim, o novo lambda é até mais interessante do que o novo pipe!</p>
+</div>
+<div id="miscelânea" class="section level2">
+<h2>Miscelânea</h2>
+<p>Dependendo de quando você estiver lendo este post, a versão 4.1 já vai ter
+passado pelo <em>code freeze</em> que está <a href="https://developer.r-project.org/">agendado</a>
+para 11/05/2021, que é quando não são mais permitidas alterações no código da
+nova versão e ela se torna uma <em>release candidate</em>. Conforme escrevo ainda
+estão permitidas alterações no código, então pode ser que alguma coisa mude até
+o lançamento final do R 4.1, mas o grosso não deve mudar muito.</p>
+<p>Assim, para te poupar desse trabalho, eu li o
+<a href="https://stat.ethz.ch/R-manual/R-devel/doc/html/NEWS.html">NEWS</a> da versão a fim
+de saber quais são as novidades mais interessantes do 4.1. Fora o novo pipe e o
+novo lambda, achei algumas coisas dignas de nota:</p>
+<ul>
+<li><p>Usar <code>c()</code> para combinar fatores agora retorna um fator que combina os níveis
+de todos (de forma similar ao <code>forcats::fct_c()</code>);</p></li>
+<li><p><code>apply()</code> agora tem um argumento <code>simplify</code> para desabilitar a simplificação
+de resultados;</p></li>
+<li><p>O novo utilitário <code>...names()</code> retorna os nomes dos argumentos passados via
+<code>...</code> (possivelmente simplificando o trabalho do <code>{tidyselect}</code>);</p></li>
+<li><p>As funções <code>URLencode()</code> e <code>URLdecode()</code> agora funcionam com vetores de URIs;</p></li>
+<li><p><code>grep()</code>, <code>sub()</code>, <code>regexp()</code>, etc. ficaram mais rápidas para fatores longos
+com poucos níveis e</p></li>
+<li><p><code>duplicated()</code> e <code>anyDuplicated()</code> agora são otimizados para vetores numéricos
+já ordenados via ALTREP.</p></li>
+</ul>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Se você está muito empolgado para testar as novas funcionalidades, já é possível
+baixar a versão beta do R 4.1 diretamente do
+<a href="https://cran.r-project.org/src/base-prerelease/">site</a> do R Project. O time do
+R Core apenas pede que você
+<a href="https://developer.r-project.org/Blog/public/2021/04/28/r-can-use-your-help-testing-r-before-release/">reporte</a>
+quaisquer bugs detectados!</p>
+<p>Para quem é mais paciente e prefere esperar o lançamento oficial daqui alguns
+dias, abra o seu RStudio, aperte CTRL + SHIFT + M com carinho e agradeça por
+todas as aventuras patrocinadas pelo pipe. O pacote <code>{magrittr}</code> continuará lá,
+funcionando, mas cada vez menos relevante… Apesar de estarmos entrando em uma
+nova fase do R, as lembranças e aprendizados do passado nunca irão embora.</p>
+<p>%&gt;%</p>
+</div>
