@@ -1,5 +1,5 @@
 ---
-title: "Como usar plotar vários gráficos juntos: o pacote patchwork"
+title: "Como unir vários gráficos feitos em ggplot2: o pacote patchwork"
 date: "2021-05-19"
 tags: ["ggplot2"]
 categories: ["pacotes"]
@@ -79,8 +79,8 @@ g1 / g2 / g3</code></pre>
 (g2+g3)</code></pre>
 <p><img src="/posts/2021-05-19-patchwork_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="modificando-a-composicao" class="section level1">
-<h1>Modificando a composicao</h1>
+<div id="modificando-a-composição" class="section level1">
+<h1>Modificando a composição</h1>
 <p>Até agora nós vimos como montar o que aparecerá na tela, partindo de objetos pré-prontos, mas o <code>patchwork</code> também permite que façamos algumas mudanças na composição final, tanto usando os estilos comuns do <code>ggplot2</code> quanto usando as funções <code>plot_annotation</code>, para incluir títulos e subtítulos, e <code>plot_layouts</code>, para manipular larguras e posicionamentos. Veja o exemplo abaixo, que utiliza todas essas funcionalidades.</p>
 <pre class="r"><code>((
   # gráfico

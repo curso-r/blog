@@ -1,5 +1,5 @@
 ---
-title: "Como usar plotar vários gráficos juntos: o pacote patchwork"
+title: "Como unir vários gráficos feitos em ggplot2: o pacote patchwork"
 date: "2021-05-19"
 tags: ["ggplot2"]
 categories: ["pacotes"]
@@ -97,7 +97,7 @@ tabela <- dados::pinguins %>%
 (g2+g3)
 ```
 
-# Modificando a composicao
+# Modificando a composição
 
 Até agora nós vimos como montar o que aparecerá na tela, partindo de objetos pré-prontos, mas o `patchwork` também permite que façamos algumas mudanças na composição final, tanto usando os estilos comuns do `ggplot2` quanto usando as funções `plot_annotation`, para incluir títulos e subtítulos, e `plot_layouts`, para manipular larguras e posicionamentos. Veja o exemplo abaixo, que utiliza todas essas funcionalidades. 
 
