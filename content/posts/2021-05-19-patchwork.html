@@ -12,7 +12,7 @@ draft: false
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Você provavelmente já sabe que o pacote <code>ggplot2</code> é uma baita ferramenta para construção de gráficos, mas você sabia que também é possível construir composições com vários gráficos sem nenhuma dificuldade? Essa é exatamente a função do pacote <code>patchwork</code> e hoje nós vamos conversar um pouco sobre essa que é uma das expressões mais importantes do pacote <code>ggplot2</code>.</p>
+<p>Você provavelmente já sabe que o pacote <code>ggplot2</code> é uma super ferramenta para construção de gráficos, mas você sabia que também é possível construir composições com vários gráficos sem nenhuma dificuldade? Essa é exatamente a função do pacote <code>patchwork</code> e hoje nós vamos conversar um pouco sobre essa que é uma das expressões mais importantes do pacote <code>ggplot2</code>.</p>
 <div id="ideia-geral" class="section level1">
 <h1>Ideia geral</h1>
 <p>O pacote <code>patchwork</code> parte de vários objetos <code>ggplot2</code>, nomeados por exemplo como <code>g1</code>, <code>g2</code>, <code>g3</code>, e nos fornece ferramentas para declarar de que forma esses gráficos serão posicionados em uma figura maior. Veja o exemplo abaixo em que colocamos três figuras lado a lado:</p>
@@ -39,55 +39,31 @@ g3 &lt;- dados::pinguins %&gt;%
 # aqui usamos esse operador &#39;+&#39; (que também poderia ser `|`), que fica disponível
 # quando carregamos o pacote 
 g1 + g2 + g3</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).
-
-## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
 <p><img src="/posts/2021-05-19-patchwork_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Nesse nosso exemplo, utilizamos o operador <code>+</code> para colocar os gráficos lado a lado, ou seja, para criar colunas novas. Se o nosso objetivo fosse criar linhas, precisaríamos usar o operador <code>/</code>, que normalmente representa divisões no contexto aritmético. Essa escolha por parte de quem desenvolveu o pacote se dá pelo fato dos divisores (o que vem à esquerda do operador de divisão) serem posicionados na parte inferior das frações. Veja o exemplo abaixo:</p>
 <pre class="r"><code># codigo usando o pacote patchwork
 # aqui usamos esse operador &#39;/&#39;, que fica disponível
 # quando carregamos o pacote
 g1 / g2 / g3</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).
-
-## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
 <p><img src="/posts/2021-05-19-patchwork_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>O verdadeiro poder do pacote <code>patchwork</code> se revela quando misturamos essas duas operações e <code>(</code>s <code>)</code>s para organizar nosso código:</p>
 <pre class="r"><code># codigo usando o pacote patchwork
 # aqui usamos esse operador &#39;/&#39;, que fica disponível
 # quando carregamos o pacote
 (g1 + g2) / g3</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).
-
-## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
 <p><img src="/posts/2021-05-19-patchwork_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code># exemplo mais maluco, podemos misturar quantos gráficos a gente quiser e do jeito que a gente quiser:
 (g1+((g1 + g2) / g3))/g3</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).
-
-## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).
-
-## Warning: Removed 2 rows containing non-finite values (stat_density).
-
-## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
 <p><img src="/posts/2021-05-19-patchwork_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="incluindo-elementos-que-não-são-gráficos-o-pacote-gridextra" class="section level1">
 <h1>Incluindo elementos que não são gráficos: o pacote <code>gridExtra</code></h1>
-<p>A lógica geral do pacote <code>patchwork</code> também funciona com outros tipos de objetos, como textos e tabelas. Entretanto, as operações que vimos até agora só funcionam se estivermos misturando gráficos do <code>ggplot2</code> ou <code>grob</code>s oriuindos dos pacotes <code>grid</code> e <code>gridExtra</code>. No exemplo abaixo, podemos ver como incluir tabelas e textos usando as funções <code>gridExtra::tableGrob</code> e <code>gridExtra::textGrob</code></p>
+<p>A lógica geral do pacote <code>patchwork</code> também funciona com outros tipos de objetos, como textos e tabelas. Entretanto, as operações que vimos até agora só funcionam se estivermos misturando gráficos do <code>ggplot2</code> ou <code>grob</code>s oriundos dos pacotes <code>grid</code> e <code>gridExtra</code>. No exemplo abaixo, podemos ver como incluir tabelas e textos usando as funções <code>gridExtra::tableGrob</code> e <code>gridExtra::textGrob</code></p>
 <pre class="r"><code># Exemplo com gráfico
 # primeira linha
 (g1 + grid::textGrob(&quot;Todos os gráficos indicam que está\nrolando uma parad bi-modal.&quot;))/
 # segunda linha
 (g2+g3)</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).
-
-## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
 <p><img src="/posts/2021-05-19-patchwork_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>tabela &lt;- dados::pinguins %&gt;% 
   dplyr::summarise(
@@ -101,10 +77,6 @@ g1 / g2 / g3</code></pre>
 (g1 + gridExtra::tableGrob(tabela, rows = c(&quot;&quot;, &quot;&quot;)))/
 # segunda linha
 (g2+g3)</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).
-
-## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
 <p><img src="/posts/2021-05-19-patchwork_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="modificando-a-composicao" class="section level1">
@@ -123,16 +95,12 @@ g1 / g2 / g3</code></pre>
 # 
 plot_annotation(
   title = &quot;Comparação entre os a profundidade e o comprimento dos bicos&quot;,
-  subtitle = &quot;Os  graficos indicam a presença de uma bi-modalidade, possivelmente porque existem várias espécias na base.&quot;,
+  subtitle = &quot;Os  graficos indicam a presença de uma distribuição bimodal, possivelmente porque existem várias espécies na base.&quot;,
   caption = &quot;Fonte: github.com/cienciadedatos/dados&quot;
 )) &amp;
 # trocando os temas para branco. o operador `&amp;` garante que o tema será aplicado
 # a todos os sub-plots
 theme_bw() </code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_density).
-
-## Warning: Removed 2 rows containing non-finite values (stat_density).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
 <p><img src="/posts/2021-05-19-patchwork_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="considerações-finais" class="section level1">

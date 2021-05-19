@@ -10,10 +10,10 @@ draft: false
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
 ```
 
-Você provavelmente já sabe que o pacote `ggplot2` é uma baita ferramenta para construção de gráficos, mas você sabia que também é possível construir composições com vários gráficos sem nenhuma dificuldade? Essa é exatamente a função do pacote `patchwork` e hoje nós vamos conversar um pouco sobre essa que é uma das expressões mais importantes do pacote `ggplot2`.
+Você provavelmente já sabe que o pacote `ggplot2` é uma super ferramenta para construção de gráficos, mas você sabia que também é possível construir composições com vários gráficos sem nenhuma dificuldade? Essa é exatamente a função do pacote `patchwork` e hoje nós vamos conversar um pouco sobre essa que é uma das expressões mais importantes do pacote `ggplot2`.
 
 # Ideia geral
 
@@ -71,7 +71,7 @@ O verdadeiro poder do pacote `patchwork` se revela quando misturamos essas duas 
 
 # Incluindo elementos que não são gráficos: o pacote `gridExtra`
 
-A lógica geral do pacote `patchwork` também funciona com outros tipos de objetos, como textos e tabelas. Entretanto, as operações que vimos até agora só funcionam se estivermos misturando gráficos do `ggplot2` ou `grob`s oriuindos dos pacotes `grid` e `gridExtra`. No exemplo abaixo, podemos ver como incluir tabelas e textos usando as funções `gridExtra::tableGrob` e `gridExtra::textGrob`
+A lógica geral do pacote `patchwork` também funciona com outros tipos de objetos, como textos e tabelas. Entretanto, as operações que vimos até agora só funcionam se estivermos misturando gráficos do `ggplot2` ou `grob`s oriundos dos pacotes `grid` e `gridExtra`. No exemplo abaixo, podemos ver como incluir tabelas e textos usando as funções `gridExtra::tableGrob` e `gridExtra::textGrob`
 
 ```{r}
 # Exemplo com gráfico
@@ -115,7 +115,7 @@ Até agora nós vimos como montar o que aparecerá na tela, partindo de objetos 
 # 
 plot_annotation(
   title = "Comparação entre os a profundidade e o comprimento dos bicos",
-  subtitle = "Os  graficos indicam a presença de uma bi-modalidade, possivelmente porque existem várias espécias na base.",
+  subtitle = "Os  graficos indicam a presença de uma distribuição bimodal, possivelmente porque existem várias espécies na base.",
   caption = "Fonte: github.com/cienciadedatos/dados"
 )) &
 # trocando os temas para branco. o operador `&` garante que o tema será aplicado
