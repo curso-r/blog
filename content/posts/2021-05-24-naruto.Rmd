@@ -1,8 +1,9 @@
 ---
-title: "Web scraping naruto"
+title: "Buscando informações na Wikipédia: Lista de episódios de Naruto Shippuden"
 author: ["Beatriz Milz"] 
-date: '2021-05-20'
+date: '2021-05-24'
 categories: ["tutoriais"] 
+image: "https://i.ibb.co/RPfS5Q4/781172d23d3d6d1f372ae6772da1f602056d1825v2-hq.jpg"
 tags: ["web scraping", "faxina", "purrr", "rvest"]
 ---
 
@@ -48,14 +49,14 @@ Agora precisamos descobrir como acessar as informações que queremos. [Olhando 
 
 Estou utilizando o navegador Google Chrome, e esse navegador tem uma opção que ajuda muito a explorar o código: o inspetor de elementos! Para acessar essa ferramenta, você pode usar o atalho `Ctrl` + `Shift` + `C`, ou clicando no menu superior: "Visualizar" > "Desenvolvedor" > "Inspecionar elementos". Caso você utilize outro navegador, recomendo que procure o equivalente ao inspetor de elementos deste navegador.
 
-Ao acessar o inspetor de elementos, podemos navegar com o cursor e conseguir visualizar o código equivalente a essa parte da página. Uma forma de buscar conteúdos dentro do HTMl é utilizando o `XPath`. Na imagem a seguir, é possível ver que selecionei a tabela referente à primeira temporada, e ao apertar o código na área Elements com o botão direito do mouse, é possível copiar o `XPath` navegando em "Copy" > "Copy XPath":
+Ao acessar o inspetor de elementos, podemos navegar com o cursor e conseguir visualizar o código equivalente a essa parte da página. Uma forma de localizar conteúdos dentro do HTMl é utilizando o `XPath`. Na imagem a seguir, é possível ver que selecionei a tabela referente à primeira temporada, e ao apertar o código na área Elements com o botão direito do mouse, é possível copiar o `XPath` navegando em "Copy" > "Copy XPath":
 
 
 ```{r echo=FALSE, fig.align='center'}
 knitr::include_graphics("https://i.ibb.co/3rB68pB/inspetor-de-elementos.png")
 ```
 
-O `XPath` copiado é: `//*[@id="mw-content-text"]/div[1]/table[4]`. Com isso, podemos usar algumas funções para acessar os conteúdos da tabela, e buscar o conteúdo da tabela:
+O `XPath` copiado é: `//*[@id="mw-content-text"]/div[1]/table[4]`. Com isso, podemos acessar os conteúdos da tabela:
 
 ```{r}
 # Carregando o pipe do pacote magrittr
@@ -64,8 +65,11 @@ library(magrittr, include.only = "%>%")
 # Podemos buscar o conteúdo com o xpath, 
 # e as tabelas que estão presentescom a função html_table()
 tabela <- "https://pt.wikipedia.org/wiki/Lista_de_epis%C3%B3dios_de_Naruto_Shippuden" %>%
+  # ler o html
   rvest::read_html() %>%
+  # buscar o xpath
   rvest::html_node(xpath = '//*[@id="mw-content-text"]/div[1]/table[4]') %>% 
+  # ler a tabela
   rvest::html_table()
 
 ```
@@ -84,6 +88,7 @@ tabela %>%
   janitor::clean_names() %>% 
   # adicionando o número da temporada 
   dplyr::mutate(numero_temporada = 1,
+                # transforma a variável `no` em texto
                 no = as.character(no)) %>% 
   dplyr::glimpse()
 ```
@@ -93,15 +98,19 @@ Já está um pouco mais claro o que a base contém, né?
 
 ### Buscando informações de todas as temporadas!
 
-Na etapa anterior, conseguimos buscar as informações para uma temporada. Podemos criar uma função para buscar as informações de outras temporadas também!
+Na etapa anterior, conseguimos obter a tabela da primeira temporada. Podemos criar uma função para buscar as informações de outras temporadas também!
 
-Descobri olhando as tabelas das outras tempoaras que o `XPath` segue o mesmo padrão, alterando apenas o número ao final. Isso será um argumento na função, chamado `n_tabela`. O outro argumento é o número da temporada: `numero_temporada`.
+Olhando as tabelas das outras temporadas, é possível observar que o `XPath` segue o mesmo padrão, alterando apenas o número ao final. Isso será um argumento na função, chamado `n_tabela`. O outro argumento que é interessante adicionar na função é o número da temporada: `numero_temporada`.
 
 ```{r}
 buscar_tabela <- function(n_tabela, numero_temporada) {
+  # link da página
   "https://pt.wikipedia.org/wiki/Lista_de_epis%C3%B3dios_de_Naruto_Shippuden" %>%
+    # lê o htmo
     rvest::read_html() %>%
+    # procura pelo xpath
     rvest::html_node(xpath = glue::glue('//*[@id="mw-content-text"]/div[1]/table[{n_tabela}]')) %>%
+    # lê a tabela
     rvest::html_table() %>%
     # limpar os nomes das variáveis
     janitor::clean_names() %>%
@@ -111,16 +120,18 @@ buscar_tabela <- function(n_tabela, numero_temporada) {
 }
 ```
 
-Os números ao final do `XPath` se iniciam no número 4, e são incrementados de 2 em 2. Portanto, os `XPath` são organizados dessa forma:
+Os números ao final do `XPath` se iniciam no número 4, e são incrementados de 2 em 2. Portanto, **neste caso**, os `XPath` estão organizados dessa forma:
 
   - Temporada 1: `//*[@id="mw-content-text"]/div[1]/table[4]`
   - Temporada 2: `//*[@id="mw-content-text"]/div[1]/table[6]`
   - Temporada 3: `//*[@id="mw-content-text"]/div[1]/table[8]`
   - ......
   - Temporada 20: `//*[@id="mw-content-text"]/div[1]/table[42]`
+  
+Podemos criar uma sequência com a função `seq()`, para para buscar todas as tabelas de uma vez, sendo que a sequência deve começar no número 4, e incrementar de 2 em 2, até o número 42, formando um vetor de 20 números (referente às 20 temporadas).
 
 
-Podemos usar a função `purrr::map2_dfr()` para aplicar a função que criamos `buscar_tabela()` para buscar as informações das tabelas de todas as temporadas, e unir em um único data.frame. Portanto podemos criar uma sequência com a função `seq()`, para para buscar todas as tabelas de uma vez!
+Podemos usar a função `purrr::map2_dfr()` para aplicar a função `buscar_tabela()` para buscar as informações das tabelas de todas as temporadas, e unir em uma única base. 
 
 ```{r cache=TRUE}
 tabela_bruta <-
@@ -140,20 +151,20 @@ tabela_bruta <-
 
 ## Faxina
 
-Conseguimos baixar tudo e salvar em uma única base: `tabela_bruta`. Como o nome do objeto já diz, essa base precisa ser limpa. Vamos tentar descobrir os problemas? A função `dplyr::glimpse()` é útil para dar uma olhada na base:
+Conseguimos baixar tudo e salvar em uma única base: `tabela_bruta`, porém essa base precisa ser limpa. Vamos tentar descobrir os problemas? A função `dplyr::glimpse()` é útil para dar uma olhada na base:
 
 ```{r}
 dplyr::glimpse(tabela_bruta)
 ```
 Vamos então listar os problemas para arrumar e deixar a base tidy:
 
-- 1) Tem variáveis que estão duplicadas, como o título do episódio;
+1. Tem variáveis que estão duplicadas, como o título do episódio;
 
-- 2) A data de estreia do episódio está como tipo texto;
+2. A data de estreia do episódio está como tipo texto;
 
-- 3) A informação se o episódio é filler ou não está contido na variável do número do episódio;
+3. A informação se o episódio é filler está contido na variável do número do episódio;
 
-- 4) Queremos apenas uma linha por episódio;
+4. Queremos apenas uma linha por episódio;
 
 Vamos então fazer uma faxina nessa base, e deixar ela tidy! Vamos começar tentando resolver os itens 1 à 3:
 
@@ -220,43 +231,83 @@ dplyr::glimpse(episodios_naruto_shippuden)
 ```
 
 
+Além disso, conseguimos conferir a quantidade de episódios filler:
+
+```{r, out.width="50%"}
+episodios_naruto_shippuden %>% 
+  dplyr::count(tipo_episodio, sort = TRUE) %>% 
+  knitr::kable(col.names = c("Tipo de episódio", "Número de episódios"))
+```
+
+
 ## Visualização
 
 Agora que já temos a base arrumada, podemos fazer uma visualização para descobrir a distribuição de episódios fillers no anime. A visualização abaixo está separada por temporada, sendo que a ordem dos episódios no gráfico é:  inicia no canto inferior esquerdo, e sobe em direção ao canto superior esquerdo.
 
-```{r}
+```{r eval=FALSE, include=TRUE}
 # Criando a paleta de cores para usar
-paleta <- c("#EB5D13","#2B316F","#BF2F0C","#FBF959",
-            "#EB5D13", "#ACADB1", "#FF9C3D", "#BF2F0C")
+
+paleta <- c("#fe7934",
+            "#403e4b",
+            "#e1e020",
+            "#083b7c",
+            "#5b8cb9",
+            "#a88950")
 
 # O pacote que disponibiliza a função ggwaffle é:
 # devtools::install_github("hrbrmstr/waffle")
 
+
 # Criando a visualização:
-episodios_naruto_shippuden %>%
+grafico <- episodios_naruto_shippuden %>%
   dplyr::count(numero_temporada, numero_episodio, tipo_episodio) %>%
   ggplot2::ggplot(ggplot2::aes(fill = tipo_episodio, values = n)) +
-  waffle::geom_waffle(n_rows = 5,
-                      color = "white",
-                      show.legend = TRUE) +
+  waffle::geom_waffle(
+    n_rows = 5,
+    color = "white",
+    show.legend = TRUE,
+    alpha = 0.9
+  ) +
   ggplot2::facet_wrap( ~ numero_temporada) +
   ggplot2::theme_void() +
   ggplot2::scale_fill_manual(values = paleta) +
-  ggplot2::labs(fill = "Tipo de episódio")
+  ggplot2::labs(fill = "Tipo de episódio",
+                title = "Temporadas de Naruto Shippuden \n") +
+  ggplot2::theme(
+    text = ggplot2::element_text(family = "Ninja Naruto", color = "white"),
+    plot.margin = ggplot2::margin(.5, .5, .5, .5, "cm"),
+    plot.title =  ggplot2::element_text(
+      hjust = 0.5,
+      size = 20,
+      color = paleta[4]
+    ),
+    legend.position = "bottom"
+  )
 
+# Imagem que usaremos de fundo
+imagem <-
+  "https://uploaddeimagens.com.br/images/003/256/849/full/Monumento_dos_Hokage.jpg?1621801239"
+
+
+# Colocando uma imagem de fundo
+ggimage::ggbackground(gg = grafico,
+                      background = imagem)
 ```
 
-Apenas olhando a visualização criada, é possível ver que as únicas temporadas que são 100% compostas de episódios Canon são a primeira e a segunda! Depois de concluir essas temporadas é importante ficar de olho na lista para não acabar assistindo os episódios de enrolação. Tem até algumas temporadas em que a maioria dos episódios é filler também (como a temporada 18)!
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("https://i.ibb.co/XFxRtc3/narutoplot.png")
+```
 
+As únicas temporadas livres de *fillers* são a primeira e a segunda! Depois de concluir essas temporadas é importante ficar de olho na lista para não acabar assistindo os episódios de enrolação.
 
 ## Conclusão
 
-Cursos:
+Espero que esse post tenha sido interessante, e seja útil para ~~quem não quer perder tempo com fillers~~ quem deseja obter algum conteúdo do Wikipédia de forma mais fácil! 
 
-- RDS 1 E 2
+Tchau! Até a próxima!
 
-- Web Scraping
 
-- Faxina
 
-- Visualização
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("https://media.giphy.com/media/sr9VDW732xLby/giphy.gif")
+```
