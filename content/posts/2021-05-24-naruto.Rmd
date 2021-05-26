@@ -1,7 +1,7 @@
 ---
 title: "Buscando informações na Wikipédia: Lista de episódios de Naruto Shippuden"
 author: ["Beatriz Milz"] 
-date: '2021-05-26'
+date: '2021-05-24'
 categories: ["tutoriais"] 
 image: "https://i.ibb.co/RPfS5Q4/781172d23d3d6d1f372ae6772da1f602056d1825v2-hq.jpg"
 tags: ["web scraping", "faxina", "purrr", "rvest"]
@@ -248,19 +248,24 @@ Agora que já temos a base arrumada, podemos fazer uma visualização para desco
 # Criando a paleta de cores para usar
 
 paleta <- c("#fe7934",
-            "#403e4b",
-            "#e1e020",
-            "#083b7c",
             "#5b8cb9",
-            "#a88950")
+            "#083b7c",
+            "#e1e020",
+            "#ba1820",
+            
+            "#403e4b")
 
 # O pacote que disponibiliza a função ggwaffle é:
 # devtools::install_github("hrbrmstr/waffle")
 
 
 # Criando a visualização:
-grafico <- episodios_naruto_shippuden %>%
+ grafico <- episodios_naruto_shippuden %>%
   dplyr::count(numero_temporada, numero_episodio, tipo_episodio) %>%
+   dplyr::mutate(tipo_episodio = forcats::fct_relevel(
+     tipo_episodio,
+     c("Canon", "Omake", "Novel", "Gaiden", "Semi-filler", "Filler")
+   )) %>% 
   ggplot2::ggplot(ggplot2::aes(fill = tipo_episodio, values = n)) +
   waffle::geom_waffle(
     n_rows = 5,
@@ -279,7 +284,7 @@ grafico <- episodios_naruto_shippuden %>%
     plot.title =  ggplot2::element_text(
       hjust = 0.5,
       size = 20,
-      color = paleta[4]
+      color = paleta[3]
     ),
     legend.position = "bottom"
   )
@@ -295,7 +300,21 @@ ggimage::ggbackground(gg = grafico,
 ```
 
 ```{r echo=FALSE, fig.align='center'}
-knitr::include_graphics("https://i.ibb.co/XFxRtc3/narutoplot.png")
+knitr::include_graphics("https://i.ibb.co/3S2J06q/000016.png")
+```
+
+Edit: Comentaram que a paleta de cores não facilitou a visualização para pessoas daltônicas, então fiz uma versão com a paleta [viridis](https://ggplot2.tidyverse.org/reference/scale_viridis.html) (obrigada Luiz Paulo Carvalho!):
+
+```{r eval=FALSE, include=TRUE, dpi = 300}
+grafico_viridis <- grafico +
+  ggplot2::scale_fill_viridis_d()
+
+ggimage::ggbackground(gg = grafico_viridis,
+                      background = imagem)
+```
+
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics("https://i.ibb.co/5cCHJQL/000018.png")
 ```
 
 As únicas temporadas livres de *fillers* são a primeira e a segunda! Depois de concluir essas temporadas é importante ficar de olho na lista para não acabar assistindo os episódios de enrolação.

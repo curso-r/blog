@@ -247,19 +247,24 @@ tabela &lt;- &quot;https://pt.wikipedia.org/wiki/Lista_de_epis%C3%B3dios_de_Naru
 <pre class="r"><code># Criando a paleta de cores para usar
 
 paleta &lt;- c(&quot;#fe7934&quot;,
-            &quot;#403e4b&quot;,
-            &quot;#e1e020&quot;,
-            &quot;#083b7c&quot;,
             &quot;#5b8cb9&quot;,
-            &quot;#a88950&quot;)
+            &quot;#083b7c&quot;,
+            &quot;#e1e020&quot;,
+            &quot;#ba1820&quot;,
+            
+            &quot;#403e4b&quot;)
 
 # O pacote que disponibiliza a função ggwaffle é:
 # devtools::install_github(&quot;hrbrmstr/waffle&quot;)
 
 
 # Criando a visualização:
-grafico &lt;- episodios_naruto_shippuden %&gt;%
+ grafico &lt;- episodios_naruto_shippuden %&gt;%
   dplyr::count(numero_temporada, numero_episodio, tipo_episodio) %&gt;%
+   dplyr::mutate(tipo_episodio = forcats::fct_relevel(
+     tipo_episodio,
+     c(&quot;Canon&quot;, &quot;Omake&quot;, &quot;Novel&quot;, &quot;Gaiden&quot;, &quot;Semi-filler&quot;, &quot;Filler&quot;)
+   )) %&gt;% 
   ggplot2::ggplot(ggplot2::aes(fill = tipo_episodio, values = n)) +
   waffle::geom_waffle(
     n_rows = 5,
@@ -278,7 +283,7 @@ grafico &lt;- episodios_naruto_shippuden %&gt;%
     plot.title =  ggplot2::element_text(
       hjust = 0.5,
       size = 20,
-      color = paleta[4]
+      color = paleta[3]
     ),
     legend.position = &quot;bottom&quot;
   )
@@ -291,7 +296,14 @@ imagem &lt;-
 # Colocando uma imagem de fundo
 ggimage::ggbackground(gg = grafico,
                       background = imagem)</code></pre>
-<p><img src="https://i.ibb.co/XFxRtc3/narutoplot.png" style="display: block; margin: auto;" /></p>
+<p><img src="https://i.ibb.co/3S2J06q/000016.png" style="display: block; margin: auto;" /></p>
+<p>Edit: Comentaram que a paleta de cores não facilitou a visualização para pessoas daltônicas, então fiz uma versão com a paleta <a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">viridis</a> (obrigada Luiz Paulo Carvalho!):</p>
+<pre class="r"><code>grafico_viridis &lt;- grafico +
+  ggplot2::scale_fill_viridis_d()
+
+ggimage::ggbackground(gg = grafico_viridis,
+                      background = imagem)</code></pre>
+<p><img src="https://i.ibb.co/5cCHJQL/000018.png" style="display: block; margin: auto;" /></p>
 <p>As únicas temporadas livres de <em>fillers</em> são a primeira e a segunda! Depois de concluir essas temporadas é importante ficar de olho na lista para não acabar assistindo os episódios de enrolação.</p>
 </div>
 <div id="conclusão" class="section level2">
