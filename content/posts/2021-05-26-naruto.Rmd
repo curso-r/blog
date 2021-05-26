@@ -1,7 +1,7 @@
 ---
 title: "Buscando informações na Wikipédia: Lista de episódios de Naruto Shippuden"
 author: ["Beatriz Milz"] 
-date: '2021-05-24'
+date: '2021-05-26'
 categories: ["tutoriais"] 
 image: "https://i.ibb.co/RPfS5Q4/781172d23d3d6d1f372ae6772da1f602056d1825v2-hq.jpg"
 tags: ["web scraping", "faxina", "purrr", "rvest"]
