@@ -1,0 +1,170 @@
+---
+title: "Animando gráficos feitos em ggplot2: o pacote gganimate"
+date: "2021-06-09"
+tags: ["ggplot2"]
+categories: ["pacotes"]
+image: "images/posts/banner/gganimate_logo_small.png"
+author: ["Fernando"]
+summary: "Quer dar um upgrade nos seus gráficos e colocar uma animaçãozinha? Use o pacote gganimate!"
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Você provavelmente conhece o pacote <code>ggplot2</code>, mas você sabia que também é possível criar gráficos animados sem nenhuma dificuldade? Essa é exatamente a função do pacote <code>gganimate</code> e hoje nós vamos conversar um pouco sobre as animações.</p>
+<div id="ideia-geral" class="section level1">
+<h1>Ideia geral</h1>
+<p>O pacote <code>gganimate</code> parte de um objeto <code>ggplot2</code> que pode ser decomposto em vários plots repetidos. A animação que vemos na tela é uma composição a partir de todas essas imagens. As possibilidades de composição são definidas pelas chamadas à funções <code>transition_*</code>, que definem de que modo a sua animação deve ser se comportar entre um gráfico e outro. Você pode conferir a nossa <a href="https://www.youtube.com/watch?v=LXZhvWE2ne8&amp;t=890s">live</a> ou o cheatsheet para ver alguns exemplos.</p>
+<p>O exemplo abaixo usa <em>transition_reveal(data_aplicacao)</em> do pacote <code>gganimate</code> para transformar um <code>ggplot2</code> comum em várias imagens que representam a curva de pessoas vacinadas ao longo do tempo:</p>
+<pre class="r"><code>library(tidyverse)
+library(bigrquery)
+
+conexao_covid &lt;- dbConnect(
+  bigrquery::bigquery(),
+  project = &quot;basedosdados&quot;,
+  dataset = &quot;br_ms_vacinacao_covid19&quot;,
+  billing = &quot;live-curso-r-bd-2&quot;
+)
+
+conexao_populacao &lt;- dbConnect(
+  bigrquery::bigquery(),
+  project = &quot;basedosdados&quot;,
+  dataset = &quot;br_ibge_populacao&quot;,
+  billing = &quot;live-curso-r-bd-2&quot;
+)
+
+vacinacao_base &lt;- tbl(conexao_covid, &quot;microdados_vacinacao&quot;) %&gt;%
+  count(sigla_uf, data_aplicacao, dose) %&gt;%
+  collect() %&gt;%
+  mutate(
+    data_aplicacao = as.Date(data_aplicacao)
+  )
+
+populacao_estados &lt;- tbl(conexao_populacao, &quot;municipio&quot;) %&gt;%
+  filter(ano == 2020) %&gt;%
+  collect() %&gt;%
+  mutate(
+    id_estado = str_sub(id_municipio, 1, 2),
+    sigla_uf = case_when(
+      id_estado == &quot;12&quot; ~ &quot;AC&quot;,
+      id_estado == &quot;27&quot; ~ &quot;AL&quot;,
+      id_estado == &quot;16&quot; ~ &quot;AP&quot;,
+      id_estado == &quot;13&quot; ~ &quot;AM&quot;,
+      id_estado == &quot;29&quot; ~ &quot;BA&quot;,
+      id_estado == &quot;53&quot; ~ &quot;DF&quot;,
+      id_estado == &quot;23&quot; ~ &quot;CE&quot;,
+      id_estado == &quot;32&quot; ~ &quot;ES&quot;,
+      id_estado == &quot;52&quot; ~ &quot;GO&quot;,
+      id_estado == &quot;21&quot; ~ &quot;MA&quot;,
+      id_estado == &quot;51&quot; ~ &quot;MT&quot;,
+      id_estado == &quot;50&quot; ~ &quot;MS&quot;,
+      id_estado == &quot;31&quot; ~ &quot;MG&quot;,
+      id_estado == &quot;15&quot; ~ &quot;PA&quot;,
+      id_estado == &quot;25&quot; ~ &quot;PB&quot;,
+      id_estado == &quot;41&quot; ~ &quot;PR&quot;,
+      id_estado == &quot;26&quot; ~ &quot;PE&quot;,
+      id_estado == &quot;22&quot; ~ &quot;PI&quot;,
+      id_estado == &quot;33&quot; ~ &quot;RJ&quot;,
+      id_estado == &quot;24&quot; ~ &quot;RN&quot;,
+      id_estado == &quot;43&quot; ~ &quot;RS&quot;,
+      id_estado == &quot;11&quot; ~ &quot;RO&quot;,
+      id_estado == &quot;14&quot; ~ &quot;RR&quot;,
+      id_estado == &quot;42&quot; ~ &quot;SC&quot;,
+      id_estado == &quot;35&quot; ~ &quot;SP&quot;,
+      id_estado == &quot;28&quot; ~ &quot;SE&quot;,
+      id_estado == &quot;17&quot; ~ &quot;TO&quot;
+    )
+  ) %&gt;%
+  group_by(sigla_uf) %&gt;%
+  summarise(
+    populacao = sum(populacao)
+  )
+
+vacinacao_base_por_estado &lt;- vacinacao_base %&gt;%
+  ungroup() %&gt;%
+  mutate(
+    regiao = case_when(
+      sigla_uf %in% c(&quot;SP&quot;, &quot;RJ&quot;, &quot;MG&quot;, &quot;ES&quot;) ~ &quot;Sudeste&quot;,
+      sigla_uf %in% c(&quot;SC&quot;, &quot;PR&quot;, &quot;RS&quot;) ~ &quot;Sul&quot;,
+      sigla_uf %in% c(&quot;MT&quot;, &quot;DF&quot;, &quot;GO&quot;, &quot;MS&quot;) ~ &quot;Centro-Oeste&quot;,
+      sigla_uf %in% c(&quot;AC&quot;, &quot;AM&quot;, &quot;RO&quot;, &quot;RR&quot;, &quot;PA&quot;, &quot;AP&quot;, &quot;TO&quot;) ~ &quot;Norte&quot;,
+      TRUE ~ &quot;Nordeste&quot;
+    )
+  ) %&gt;%
+  filter(dose == &quot;2&quot;) %&gt;%
+  group_by(regiao, sigla_uf) %&gt;%
+  arrange(regiao, sigla_uf, data_aplicacao) %&gt;%
+  mutate(
+    n_acum = cumsum(n),
+  ) %&gt;%
+  filter(data_aplicacao &gt;= as.Date(&quot;2021-01-01&quot;)) %&gt;%
+  left_join(
+    populacao_estados
+  ) %&gt;%
+  mutate(
+    percentual_vacinado = n_acum/populacao
+  )
+
+populacao_regiao &lt;- vacinacao_base_por_estado %&gt;%
+  group_by(regiao) %&gt;%
+  summarise(
+    populacao = sum(unique(populacao))
+  )
+
+vacinacao_base_por_regiao &lt;-  vacinacao_base %&gt;%
+  ungroup() %&gt;%
+  mutate(
+    regiao = case_when(
+      sigla_uf %in% c(&quot;SP&quot;, &quot;RJ&quot;, &quot;MG&quot;, &quot;ES&quot;) ~ &quot;Sudeste&quot;,
+      sigla_uf %in% c(&quot;SC&quot;, &quot;PR&quot;, &quot;RS&quot;) ~ &quot;Sul&quot;,
+      sigla_uf %in% c(&quot;MT&quot;, &quot;DF&quot;, &quot;GO&quot;, &quot;MS&quot;) ~ &quot;Centro-Oeste&quot;,
+      sigla_uf %in% c(&quot;AC&quot;, &quot;AM&quot;, &quot;RO&quot;, &quot;RR&quot;, &quot;PA&quot;, &quot;AP&quot;, &quot;TO&quot;) ~ &quot;Norte&quot;,
+      TRUE ~ &quot;Nordeste&quot;
+    )
+  ) %&gt;%
+  filter(dose == &quot;2&quot;) %&gt;%
+  group_by(regiao, data_aplicacao) %&gt;%
+  summarise(
+    n = sum(n)
+  ) %&gt;%
+  group_by(regiao) %&gt;%
+  arrange(regiao, data_aplicacao) %&gt;%
+  mutate(
+    n_acum = cumsum(n),
+  ) %&gt;%
+  filter(data_aplicacao &gt;= as.Date(&quot;2021-02-01&quot;)) %&gt;%
+  left_join(
+    populacao_regiao
+  ) %&gt;%
+  mutate(
+    percentual_vacinado = n_acum/populacao
+  )
+
+library(gganimate)
+
+grafico_por_regiao &lt;- vacinacao_base_por_regiao %&gt;%
+  #filter(regiao == &quot;Sudeste&quot;) %&gt;%
+  #filter(data_aplicacao &lt;= as.Date(&quot;2021-04-15&quot;)) %&gt;%
+  ungroup() %&gt;%
+  arrange(data_aplicacao) %&gt;%
+  #mutate(data_aplicacao = as.numeric(data_aplicacao)) %&gt;%
+  ggplot(aes(x = data_aplicacao, y = percentual_vacinado, color = regiao)) +
+  #geom_col() +
+  #geom_line(size = 1.2) +
+  geom_point(size = 6) +
+  transition_reveal(data_aplicacao) +
+  scale_color_viridis_d() +
+  theme_bw(20) +
+  shadow_wake(wake_length = 0.5, size = 3) +
+  ease_aes(&quot;cubic-in&quot;) +
+  labs(x = &quot;Data de referência&quot;, &quot;% da população vacinado com a 2a dose&quot;)
+
+animate(grafico_por_regiao, height = 600, width =800)</code></pre>
+<p><img src="/posts/2021-06-09-gganimate_files/figure-html/unnamed-chunk-1-1.gif" /><!-- --></p>
+</div>
+<div id="gostou-quer-saber-mais" class="section level1">
+<h1>Gostou? Quer saber mais?</h1>
+<p>Confira a nossa <a href="https://www.youtube.com/watch?v=LXZhvWE2ne8&amp;t=890s">live</a>!</p>
+<p>Se você quiser aprender um pouco mais sobre RMarkdown e Visualização de Dados em geral, dê uma olhada no nosso curso <a href="https://curso-r.com/cursos/visualizacao/">Relatórios e visualização de dados</a> e aproveite!</p>
+</div>
