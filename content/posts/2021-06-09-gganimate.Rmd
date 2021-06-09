@@ -163,7 +163,9 @@ grafico_por_regiao <- vacinacao_base_por_regiao %>%
   theme_bw(20) +
   shadow_wake(wake_length = 0.5, size = 3) +
   ease_aes("cubic-in") +
-  labs(x = "Data de referência", "% da população vacinado com a 2a dose")
+  labs(x = "Data de referência", y= "% da população vacinado com a 2a dose",
+       titulo = "Evolução da vacinação contra COVID-19 no Brasil por região",
+       caption = "Fonte: openDataSus/Base dos dados")
 
 animate(grafico_por_regiao, height = 600, width =800)
 

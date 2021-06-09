@@ -158,7 +158,9 @@ grafico_por_regiao &lt;- vacinacao_base_por_regiao %&gt;%
   theme_bw(20) +
   shadow_wake(wake_length = 0.5, size = 3) +
   ease_aes(&quot;cubic-in&quot;) +
-  labs(x = &quot;Data de referência&quot;, &quot;% da população vacinado com a 2a dose&quot;)
+  labs(x = &quot;Data de referência&quot;, y= &quot;% da população vacinado com a 2a dose&quot;,
+       titulo = &quot;Evolução da vacinação contra COVID-19 no Brasil por região&quot;,
+       caption = &quot;Fonte: openDataSus/Base dos dados&quot;)
 
 animate(grafico_por_regiao, height = 600, width =800)</code></pre>
 <p><img src="/posts/2021-06-09-gganimate_files/figure-html/unnamed-chunk-1-1.gif" /><!-- --></p>
