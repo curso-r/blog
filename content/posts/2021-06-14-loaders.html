@@ -1,0 +1,103 @@
+---
+title: "Adicionando loaders ao seu Shiny app"
+date: "2021-06-14"
+tags: ["shiny", "widgets"]
+categories: ["tutoriais"]
+image: "images/posts/banner/loading_spinner.png"
+author: ["William"]
+summary: "Aprenda a adicionar animações de carregamento ao seu aplicativo Shiny."
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>É muito comum termos visualizações no nosso app que demoram para serem geradas. Quando estamos carregando o app, isso pode fazer com que parte da UI fique em branco, parecendo que a página está quebrada ou fazendo com que alguém passe em branco pelo output que tivemos tanto trabalho para fazer. Quando a visualização está sendo recalculada, o padrão do Shiny é deixar a versão anterior acizentada até que a nova apareça, o que pode gerar estranheza e também passar a ideia de que o aplicativo quebrou.</p>
+<p>É uma boa prática sempre avisarmos a quem estiver usando o app que alguma coisa está acontecendo por trás das cortinas. Quando a espera é muito longa, devemos sempre que possível explicar o porquê a pessoa está esperando e dar uma estimativa do tempo. Nesses casos, barras de carregamento são a melhor alternativa. Falaremos delas em um outro post.</p>
+<p>Quando a espera não é tão grande (entre 2 e 10 segundos, por exemplo), animações giratórias ou de looping infinito podem ser utilizadas para indicar que algo vai aparecer ali e reduzir um pouco a percepção do tempo de espera.</p>
+<p>Neste post, falaremos de dois pacotes que deixam muito simples a tarefa de incluir essas animações em nossos outputs: o <code>shinycssloaders</code> e o <code>shinyWidgets</code>.</p>
+<p>Se você ainda não tem esses pacotes instalados, ambos estão no CRAN:</p>
+<pre class="r"><code>install.packages(&quot;shinycssloaders&quot;)
+install.packages(&quot;shinyWidgets&quot;)</code></pre>
+<p>O <code>shinycssloaders</code> é um pacote mantido pelo <a href="https://github.com/daattali">Dean Attali</a> que possui uma única função: <code>withSpinner()</code>. Para colocar a animação de carregamento em uma visualização, basta colocar a função <code>*Output()</code> dentro da função <code>withSpinner()</code>! Sempre que ela estiver sendo calculada, um <em>spinner</em> será mostrado no lugar.</p>
+<p>Rode o Shiny app abaixo para ver um exemplo:</p>
+<pre class="r"><code>library(shiny)
+
+ui &lt;- fluidPage(
+  titlePanel(&quot;Exemplo shinyWidgets::addSpinner&quot;),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = &quot;variavel&quot;,
+        label = &quot;Escolha uma variável&quot;,
+        choices = names(mtcars)
+      )
+    ),
+    mainPanel(
+      shinycssloaders::withSpinner(
+        plotOutput(outputId = &quot;histograma&quot;),
+        type = 4,
+        color = &quot;orange&quot;,
+        size = 2
+      )
+    )
+  )
+)
+
+server &lt;- function(input, output, session) {
+
+  output$histograma &lt;- renderPlot({
+    Sys.sleep(5)
+    hist(mtcars[[input$variavel]])
+  })
+
+
+}
+
+shinyApp(ui, server)
+</code></pre>
+<p>Além de 8 opções de animações diferentes, que você pode trocar com o argumento <code>type</code>, também é possível ajustar o tamanho, a cor, a cor de fundo e até usar uma imagem própria como animação<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Veja <a href="https://daattali.com/shiny/shinycssloaders-demo/">aqui</a> um Shiny app que apresenta todas as opções de customização do <code>shinycssloaders</code>.</p>
+<p>O pacote <code>shinyWidgets</code> é mantido pelo pessoal da <a href="https://github.com/dreamRs">dreamRs</a> e possui diversos widgets muito úteis (falaremos bastante desse pacote em próximos posts). Adicionamos animações de carregamento utilizando a função <code>addSpinner()</code> e, assim como a função <code>shinycssloards::withSpinner()</code>, basta embrulhar suas funções <code>*Output()</code> com a função <code>addSpinner()</code>.</p>
+<p>São 9 opções de animação, escolhidas por meio do argumento <code>spin</code>. Aqui podemos customizar apenas a cor delas. Rode o app a seguir para ver um exemplo.</p>
+<pre class="r"><code>library(shiny)
+
+ui &lt;- fluidPage(
+  titlePanel(&quot;Exemplo shinyWidgets::addSpinner&quot;),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = &quot;variavel&quot;,
+        label = &quot;Escolha uma variável&quot;,
+        choices = names(mtcars)
+      )
+    ),
+    mainPanel(
+      shinyWidgets::addSpinner(
+        plotOutput(outputId = &quot;histograma&quot;),
+        spin = &quot;cube&quot;,
+        color = &quot;purple&quot;
+      )
+    )
+  )
+)
+
+server &lt;- function(input, output, session) {
+
+  output$histograma &lt;- renderPlot({
+    Sys.sleep(5)
+    hist(mtcars[[input$variavel]])
+  })
+
+
+}
+
+shinyApp(ui, server)
+</code></pre>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Pode ser uma imagem estática ou GIF.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
