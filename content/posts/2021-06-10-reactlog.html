@@ -6,22 +6,21 @@ categories: ["tutoriais"]
 image: "images/posts/banner/reactlog.png"
 author: ["William"]
 summary: "Aprenda a construir um diagrama do fluxo reatividade do seu Shiny app."
-draft: true
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>O meu maior desafio durante o desenvolvimento de um Shiny app complexo é a construção do fluxo de reatividade. Não foram raras as vezes que gastei horas pensando em uma lógica que gerasse exatamente o comportamento que eu gostaria ou que simplesmente fizesse o app funcionar.</p>
+<p>O meu maior desafio durante o desenvolvimento de um Shiny app complexo é a construção do fluxo de reatividade. Não foram raras as vezes que gastei horas pensando em uma lógica de programação que gerasse o comportamento que eu gostaria ou que simplesmente fizesse o app funcionar.</p>
 <p>Além de a reatividade ser um conceito abstrato e invisível no código, precisamos não apenas garantir que o app funcione, mas também que funcione adequadamente. Se ao mudar o valor de um <em>slider</em>, por exemplo, a gente espera que um gráfico seja atualizado, dois problemas podem surgir: (1) o gráfico não ser recalculado e (2) o gráfico ser recalculado mais de uma vez.</p>
-<p>Os dois problemas indicam um fluxo de reatividade mal construído. A diferença é que, enquanto no primeiro caso o app não funciona, no segundo, ignorando-se o comportamento estranho, ele entrega o que se espera dele.</p>
+<p>Os dois problemas indicam um fluxo de reatividade mal construído. A diferença é que no primeiro caso o app não funciona e no segundo ele funciona de maneira inadequada.</p>
 <p>Para evitar esses problemas, podemos imaginar ou desenhar o fluxo de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.</p>
-<p>Nesses casos, ou mesmo nos casos simples, podemos utilizar o pacote <code>reactlog</code>. Com ele, além de desenharmos facilmente um diagrama de dependências reativas de qualquer Shiny app, podemos olhar o que acontece por trás das curtinas da reatividade quando executamos o aplicativo.</p>
+<p>Nesses casos, ou mesmo nos casos simples, podemos utilizar o pacote <code>reactlog</code>. Com ele, além de criarmos facilmente o diagrama do fluxo de reatividade de qualquer Shiny app, podemos olhar o que acontece por trás das curtinas da reatividade quando executamos o aplicativo.</p>
 <p>Antes de mais nada, instale o pacote <code>reactlog</code>.</p>
 <pre class="r"><code>install.packages(&quot;reactlog&quot;)</code></pre>
 <p>Em seguida, no Console, rode o código abaixo. Isso vai habilitar o <code>reactlog</code> para qualquer app que você rodar na sessão de R atual.</p>
 <pre class="r"><code>options(shiny.reactlog = TRUE) </code></pre>
-<p>Por fim, rode o seu app e utilize o comando <code>CTRL + F3</code> (no Mac, <code>command + F3</code>). O seu navegador abrirá uma nova aba com o diagrama de reatividade. Veja o exemplo a seguir. Primeiro temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre qua o tamanho da amostra muda, o gráfico é recalculado.</p>
+<p>Por fim, rode o seu app e utilize o comando <code>CTRL + F3</code> (no Mac, <code>command + F3</code>). O seu navegador abrirá uma nova aba com o diagrama de reatividade. Veja o exemplo a seguir. Primeiro temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo <code>sliderInput.</code> Sempre que o tamanho da amostra muda, o gráfico é recalculado.</p>
 <div class="figure"><span id="fig:unnamed-chunk-4"></span>
 <img src="/images/posts/conteudo/reactlog/app_hist_normal.png" alt="Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput."  />
 <p class="caption">
@@ -49,7 +48,7 @@ Figura 3: Diagrama de reatividade do app anterior.
 <li><p>investigar porque o código de um output não é rodado ou roda duas vezes quando acionamos um input do qual ele deveria depender;</p></li>
 <li><p>ter uma visão menos abstrada do fluxo de reatividade e entender melhor o que acontece quando executamos cada parte do nosso app.</p></li>
 </ul>
-<p>Um <a href="https://shiny.rstudio.com/reference/shiny/0.14/showReactLog.html">ponto importante</a>, : por razões de segurança e performance, nunca habilite o <code>reaclog</code> em ambientes de produção. Quando ele está habilitado, qualquer pessoal utilizando o seu app pode ver pelo menos parte do seu código fonte (que eventualmente pode conter informações sensíveis).</p>
+<p>Um <a href="https://shiny.rstudio.com/reference/shiny/0.14/showReactLog.html">ponto importante</a>: por razões de segurança e performance, nunca habilite o <code>reaclog</code> em ambientes de produção. Quando ele está habilitado, qualquer pessoal utilizando o seu app pode ver pelo menos parte do seu código fonte (que eventualmente pode conter informações sensíveis).</p>
 <p>Você pode aprender mais sobre o funcionamento do <code>reaclog</code> <a href="https://rstudio.github.io/reactlog/articles/reactlog.html">clicando aqui</a>.</p>
 <p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
 <p>Até a próxima!</p>
