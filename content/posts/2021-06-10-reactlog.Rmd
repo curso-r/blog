@@ -1,5 +1,5 @@
 ---
-title: "Diagramas de reatividade no shiny (reaclog)"
+title: "Diagramas de reatividade no shiny (reactlog)"
 date: "2021-06-10"
 tags: ["shiny", "reatividade", "reactlog"]
 categories: ["tutoriais"]
