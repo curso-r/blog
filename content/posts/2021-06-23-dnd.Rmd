@@ -24,7 +24,9 @@ Se você não sabe o que é DnD, já vamos tirar isso do caminho: DnD não é um
 
 [^sigla]: Sigla em inglês para _Role Playing Game_ que em português significa _Jogo de intepretação de papéis_. [RPGs](https://pt.wikipedia.org/wiki/Role-playing_game) são jogos parecidos com a encenação de uma peça de teatro, mas com regras como as de Banco Imobiliário para estruturar a interpretação de papéis.
 
-Por falta de oportunidade, eu nunca joguei RPG, mas sempre fui muito fã da ideia e dos conceitos. Uma das paradas que acho mais divertidas é a dinâmica de alinhamentos do DnD.
+Por falta de oportunidade, eu (William) nunca joguei RPG, mas sempre fui muito fã da ideia e dos conceitos. Uma das paradas que acho mais divertidas é a dinâmica de alinhamentos do DnD. Mestre de muitas aventuras, o Fernando explica a seguir em bom português como esse alinhamento funciona.
+
+## O alinhamento DnD
 
 Em resumo, essa dinâmica diz que qualquer personagem pode ser posicionado em uma matriz de 9 posições, formadas pela combinação de dois eixos: o ético e o moral. 
 
@@ -51,6 +53,8 @@ knitr::include_graphics("https://i.pinimg.com/originals/27/54/0f/27540ff00c2297c
 knitr::include_graphics("https://i.pinimg.com/originals/2c/1a/0f/2c1a0f184cb9dcb214b069572d78f13e.jpg")
 ```
 
+## O pacote `DnDalignment`
+
 Mesmo não sabendo o que é DnD e nunca tendo jogado RPG, o exercício de alinhar personagens nesse grid geralmemnte é bem divertido, principalmente quando você está discutindo o seu posicionamento com outras pessoas. É uma maneira bem divertida de revisitar e discutir obras que você gosta. :) 
 
 E fica ainda mais divertido se você puder fazer isso no R! :D
@@ -65,7 +69,7 @@ remotes::install_github("williamorim/DnDalignment")
 
 Para criar o alinhamento, basta usar a função `DnDalignment::create_alignment()`. Cada argumento da função se refere a um alinhamento e você pode passar o caminho para uma imagem local ou o link para uma imagem na internet. 
 
-Para exemplificar, o Fernando e eu criamos o alinhamento dos personagens da série The Office:
+Para exemplificar, a gente criou o alinhamento dos personagens da série The Office:
 
 ```{r}
 library(DnDalignment)
