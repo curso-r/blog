@@ -175,7 +175,7 @@ server <- function(input, output, session) {
       value = round(mean(amostra()), 1),
       subtitle = "Média dos valores",
       icon = icon("info-circle")
-    )
+    ) \
   })
   
   output$valor_2 <- shinydashboard::renderValueBox({

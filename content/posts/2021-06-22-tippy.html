@@ -18,10 +18,10 @@ summary: "Aprenda colocar tooltips em aplicativos Shiny e arquivos R Markdown."
 <script src="/rmarkdown-libs/tippy-binding/tippy.js"></script>
 
 
-<p><em>Tooltips</em> são uma ótima maneira de se comunicar com a pessoa utilizando o seu app, pois permitem passar todo tipo de informação extra e não oculpam espaço da UI.</p>
+<p><em>Tooltips</em> são uma ótima maneira de se comunicar com a pessoa utilizando o seu app, pois permitem passar todo tipo de informação extra e não ocupam espaço da UI.</p>
 <p>Essencialmente, elas são textos que só aparecem quando passamos o mouse em cima de algum elemento da tela. Por exemplo, passe o mouse em cima da frase a seguir:</p>
 <span id="htmlwidget-1" class="tippy html-widget" width="672" height="480"></span>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"opts":{"content":"Olá! Eu sou uma tooptip :)"},"text":"Passe o mouse aqui!"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"opts":{"content":"Olá! Eu sou uma tooltip :)"},"text":"Passe o mouse aqui!"},"evals":[],"jsHooks":[]}</script>
 <p><br></p>
 <p>Existem várias soluções disponíveis para incluirmos <em>tooltips</em> em um aplicativo Shiny, mas a minha preferida atualmente é o pacote <code>tippy</code>.</p>
 <p>Antes de mais nada, instale o pacote:</p>
@@ -143,7 +143,7 @@ server &lt;- function(input, output, session) {
       value = round(mean(amostra()), 1),
       subtitle = &quot;Média dos valores&quot;,
       icon = icon(&quot;info-circle&quot;)
-    )
+    ) \
   })
   
   output$valor_2 &lt;- shinydashboard::renderValueBox({
@@ -169,6 +169,8 @@ server &lt;- function(input, output, session) {
 shinyApp(ui, server)
 </code></pre>
 <p>Como mostramos no exemplo no começo do post, o você também pode colocar <em>tooltips</em> em documentos HTML gerados a partir do R Markdown. Para isso, utilize a função <code>tippy</code>.</p>
-<pre class="r"><code>tippy::tippy(&quot;Passe o mouse aqui!&quot;, tooltip = &quot;Olá! Eu sou uma tooptip :)&quot;)</code></pre>
+<pre class="r"><code>tippy::tippy(&quot;Passe o mouse aqui!&quot;, tooltip = &quot;Olá! Eu sou uma tooltip :)&quot;)</code></pre>
 <span id="htmlwidget-2" class="tippy html-widget" width="672" height="480"></span>
-<script type="application/json" data-for="htmlwidget-2">{"x":{"opts":{"content":"Olá! Eu sou uma tooptip :)"},"text":"Passe o mouse aqui!"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"opts":{"content":"Olá! Eu sou uma tooltip :)"},"text":"Passe o mouse aqui!"},"evals":[],"jsHooks":[]}</script>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
