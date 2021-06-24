@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## Número de posts: 170
+## Número de posts: 172
 
 ## Por autoria
 
