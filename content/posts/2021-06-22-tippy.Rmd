@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 Essencialmente, elas são textos que só aparecem quando passamos o mouse em cima de algum elemento da tela. Por exemplo, passe o mouse em cima da frase a seguir:
 
 ```{r, echo = FALSE}
-tippy::tippy("Passe o mouse aqui!", tooltip = "Olá! Eu sou uma tooptip :)")
+tippy::tippy("Passe o mouse aqui!", tooltip = "Olá! Eu sou uma tooltip :)")
 ```
 
 <br>
@@ -205,7 +205,7 @@ shinyApp(ui, server)
 Como mostramos no exemplo no começo do post, o você também pode colocar *tooltips* em documentos HTML gerados a partir do R Markdown. Para isso, utilize a função `tippy`.
 
 ```{r}
-tippy::tippy("Passe o mouse aqui!", tooltip = "Olá! Eu sou uma tooptip :)")
+tippy::tippy("Passe o mouse aqui!", tooltip = "Olá! Eu sou uma tooltip :)")
 ```
 
 É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
