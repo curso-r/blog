@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-*Tooltips* são uma ótima maneira de se comunicar com a pessoa utilizando o seu app, pois permitem passar todo tipo de informação extra e não oculpam espaço da UI.
+*Tooltips* são uma ótima maneira de se comunicar com a pessoa utilizando o seu app, pois permitem passar todo tipo de informação extra e não ocupam espaço da UI.
 
 Essencialmente, elas são textos que só aparecem quando passamos o mouse em cima de algum elemento da tela. Por exemplo, passe o mouse em cima da frase a seguir:
 
