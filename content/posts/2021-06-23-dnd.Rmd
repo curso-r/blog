@@ -1,0 +1,84 @@
+---
+title: "Faça alinhamentos DnD no R"
+date: "2021-06-23"
+tags: ["shiny", "DnD", "theoffice"]
+categories: ["pacotes"]
+image: "images/posts/banner/dnd.png"
+author: ["William", "Fernando"]
+summary: "Crie imagens de alinhamentos DnD direto do R."
+draft: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE,
+  fig.align = "center",
+  out.width = "90%"
+)
+```
+
+Se você não sabe o que é DnD, já vamos tirar isso do caminho: DnD não é um novo modelo de Deep Learning. DnD é a abrreviação de Dungeons & Dragons, um dos jogos de RPG mais famosos da história, considerado a origem dos RPGs modernos.
+
+Por falta de oportunidade, eu nunca joguei RPG, mas sempre fui muito fã da ideia e dos conceitos. Uma das paradas que acho mais divertidas é a dinâmica de alinhamentos do DnD.
+
+Em resumo, essa dinâmica diz que qualquer personagem pode ser posicionado em um grid de 9 posições, formadas pela combinação de dois eixos: o ético e o moral. 
+
+O lado ético possui 3 categorias: *lawful*, *neutral* e *chaotic*. Uma personagem *lawful* é aquela que segue as leis da sociedade em que vive, enquanto um personagem *chaotic* quebra qualquer tipo de lei e faz as suas próprias regras. Um personagem *neutral* seria aquele que se insere dentro do conjunto de normas, mas não vê problema em quebrar algumas regras quando for conviniente.
+
+O lado moral tambémm possui 3 categorias: *good*, *neutral* e *evil*. Essa escala é mais fácil de explicar. São as personagens boas (*good*), más (*evil*) e aquelas que vão na onda (*neutral*).
+
+Uma moda que já surgiu e resurgiu na internet algumas vezes é fazer o alinhamento DnD de personagens de alguma série ou filme qualquer.
+
+Veja alguns exemplos de que você pode achar por aí:
+
+```{r, fig.alt = "Alinhamento DnD do Chaves.", echo=FALSE}
+knitr::include_graphics("https://i.redd.it/rjzpebymelf51.jpg")
+```
+
+
+```{r, fig.alt = "Alinhamento DnD do Game of Thrones.", echo = FALSE}
+knitr::include_graphics("https://i.pinimg.com/originals/27/54/0f/27540ff00c2297c08b7d099a0fc9aba7.jpg")
+```
+
+```{r, fig.alt = "Alinhamento DnD do Harry Potter.", echo = FALSE}
+knitr::include_graphics("https://i.pinimg.com/originals/2c/1a/0f/2c1a0f184cb9dcb214b069572d78f13e.jpg")
+```
+
+Mesmo não sabendo o que é DnD e nunca tendo jogado RPG, o exercício de alinhar personagens nesse grid geralmemnte é bem divertido, principalmente quando você está discutindo o seu posicionamento com outras pessoas. É uma maneira bem divertida de revisitar e discutir obras que você gosta. :) 
+
+E fica ainda mais divertido se você puder fazer isso no R! :D
+
+Foi por isso que o Fernando e eu criamos o pacote `DnDalignment`. Com ele, você pode facilmente gerar uma imagem de alinhamento DnD com arquivos que estão na sua máquina ou links para imagens na interet.
+
+Antes de mais nada, instale o pacote. Ele só está disponível no GitHub.
+
+```{r, eval = FALSE}
+remotes::install_github("williamorim/DnDalignment")
+```
+
+Para criar o alinhamento, basta usar a função `DnDalignment::create_alignment()`. Cada argumento da função se refere a um alinhamento e você pode passar o caminho para uma imagem local ou o link para uma imagem na internet. 
+
+Para exemplificar, o Fernando e eu criamos o alinhamento dos personagens da série The Office:
+
+```{r}
+library(DnDalignment)
+
+create_alignment(
+  chaotic_good = "https://www.cheatsheet.com/wp-content/uploads/2021/04/The-Office.jpg",
+  neutral_good = "https://uploads.jovemnerd.com.br/wp-content/uploads/2021/02/the-office-jim-canta-musica-abertura.jpg",
+  chaotic_neutral = "https://img.ibxk.com.br/2021/01/20/20133848690155.png",
+  chaotic_evil = "https://www.looper.com/img/gallery/the-todd-packer-scene-in-the-office-that-went-too-far/l-intro-1620750071.jpg",
+  lawful_good = "https://static3.srcdn.com/wordpress/wp-content/uploads/2019/11/Phyllis-The-Office.jpg?q=50&fit=crop&w=740&h=370&dpr=1.5",
+  lawful_evil = "https://i.ytimg.com/vi/BWNhTOd9uXI/maxresdefault.jpg",
+  neutral_evil = "https://cdn.jwplayer.com/v2/media/46qsexlL/poster.jpg?width=720",
+  lawful_neutral = "https://uploads.jovemnerd.com.br/wp-content/uploads/2021/01/the-office-dwight-gerenta.jpg",
+  true_neutral = "https://pbs.twimg.com/media/EXlUzHzXQAEgIZt.png"
+)
+```
+
+E aí? O que achou das nossas escolhas? Se você discorda, tweet o seu alinhamento e marque a gente no Twitter: [Curso-R](https://twitter.com/curso_r), [William](https://twitter.com/wamorim_) e [Fernando](https://twitter.com/Azeloc).
+
+Até a próxima!

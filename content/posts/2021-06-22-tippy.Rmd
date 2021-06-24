@@ -208,5 +208,6 @@ Como mostramos no exemplo no começo do post, o você também pode colocar *tool
 tippy::tippy("Passe o mouse aqui!", tooltip = "Olá! Eu sou uma tooptip :)")
 ```
 
+É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
 
-
+Até a próxima!
