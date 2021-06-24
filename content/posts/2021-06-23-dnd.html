@@ -13,7 +13,9 @@ draft: false
 
 
 <p>Se você não sabe o que é DnD, já vamos tirar isso do caminho: DnD não é um novo modelo de Deep Learning. DnD é a abreviação de <em>Dungeons &amp; Dragons</em>, um dos jogos de RPG<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> mais famosos da história, considerado a origem dos RPGs modernos.</p>
-<p>Por falta de oportunidade, eu nunca joguei RPG, mas sempre fui muito fã da ideia e dos conceitos. Uma das paradas que acho mais divertidas é a dinâmica de alinhamentos do DnD.</p>
+<p>Por falta de oportunidade, eu (William) nunca joguei RPG, mas sempre fui muito fã da ideia e dos conceitos. Uma das paradas que acho mais divertidas é a dinâmica de alinhamentos do DnD. Mestre de muitas aventuras, o Fernando explica a seguir em bom português como esse alinhamento funciona.</p>
+<div id="o-alinhamento-dnd" class="section level2">
+<h2>O alinhamento DnD</h2>
 <p>Em resumo, essa dinâmica diz que qualquer personagem pode ser posicionado em uma matriz de 9 posições, formadas pela combinação de dois eixos: o ético e o moral.</p>
 <p>O lado ético possui 3 categorias: <em>lawful</em>, <em>neutral</em> e <em>chaotic</em>. Uma personagem <em>lawful</em> ou <em>ordeira</em> é aquela que segue as leis da sociedade em que vive mesmo que isso possa contrariar suas convicções ou valores pessoais, enquanto um personagem <em>chaotic</em> ou <em>caótico</em> se sente confortável em quebrar qualquer tipo de lei, pois faz as suas próprias regras, com pouco ou nenhum apreço pelas normas estabelecidas socialmente. Uma personagem <em>neutral</em> ou <em>neutra</em> seria aquela que se insere dentro do conjunto de normas, mas não tem nenhuma convicção forte sobre segui-las ou não. Diferente de uma personagem ordeira, que segue à risca o que está estabelecido, ou caótica, que nega por princípio parte das regras estabelecidas, uma personagem neutra simplesmente não pensa sobre o assunto.</p>
 <p>O lado moral também possui 3 categorias: <em>good</em>, <em>neutral</em> e <em>evil</em>. Essa escala é mais fácil de explicar. São as personagens boas (<em>good</em>), más (<em>evil</em>) e aquelas que vão na onda (<em>neutral</em>). Ao contrário do nosso mundo real, a fantasia simulada em um jogo de DnD não tem espaço para relativismo moral e nuances. Uma personagem altruísta, generosa, piedosa e/ou qualquer outra característica que não causa sofrimento nenhum é enquadrada no espectro positivo da escala: ela é boa ou <em>good</em>. Já uma personagem egoísta, cruel por esporte, insensível etc é má ou <em>evil</em>. A dificuldade aqui está nos personagens <em>neutros</em>, mas a ideia é parecida com o que falamos no lado ético: esse posicionamento se define pela distância das outras possibilidades. A neutralidade se define pela ambiguidade: todas as atitudes podem ser legítimas independentemente de leis, sofrimento de outras pessoas etc, tudo depende do contexto, não de convicções fortes ou desejo pessoal.</p>
@@ -23,13 +25,16 @@ draft: false
 <p><img src="https://i.redd.it/rjzpebymelf51.jpg" title="Alinhamento DnD do Chaves." alt="Alinhamento DnD do Chaves." width="90%" style="display: block; margin: auto;" /></p>
 <p><img src="https://i.pinimg.com/originals/27/54/0f/27540ff00c2297c08b7d099a0fc9aba7.jpg" title="Alinhamento DnD do Game of Thrones." alt="Alinhamento DnD do Game of Thrones." width="90%" style="display: block; margin: auto;" /></p>
 <p><img src="https://i.pinimg.com/originals/2c/1a/0f/2c1a0f184cb9dcb214b069572d78f13e.jpg" title="Alinhamento DnD do Harry Potter." alt="Alinhamento DnD do Harry Potter." width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="o-pacote-dndalignment" class="section level2">
+<h2>O pacote <code>DnDalignment</code></h2>
 <p>Mesmo não sabendo o que é DnD e nunca tendo jogado RPG, o exercício de alinhar personagens nesse grid geralmemnte é bem divertido, principalmente quando você está discutindo o seu posicionamento com outras pessoas. É uma maneira bem divertida de revisitar e discutir obras que você gosta. :)</p>
 <p>E fica ainda mais divertido se você puder fazer isso no R! :D</p>
 <p>Foi por isso que o Fernando e eu criamos o pacote <code>DnDalignment</code>. Com ele, você pode facilmente gerar uma imagem de alinhamento DnD com arquivos que estão na sua máquina ou links para imagens na interet.</p>
 <p>Antes de mais nada, instale o pacote. Ele só está disponível no GitHub.</p>
 <pre class="r"><code>remotes::install_github(&quot;williamorim/DnDalignment&quot;)</code></pre>
 <p>Para criar o alinhamento, basta usar a função <code>DnDalignment::create_alignment()</code>. Cada argumento da função se refere a um alinhamento e você pode passar o caminho para uma imagem local ou o link para uma imagem na internet.</p>
-<p>Para exemplificar, o Fernando e eu criamos o alinhamento dos personagens da série The Office:</p>
+<p>Para exemplificar, a gente criou o alinhamento dos personagens da série The Office:</p>
 <pre class="r"><code>library(DnDalignment)
 
 create_alignment(
@@ -46,6 +51,7 @@ create_alignment(
 <p><img src="/posts/2021-06-23-dnd_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>E aí? O que achou das nossas escolhas? Se você discorda, tweet o seu alinhamento e marque a gente no Twitter: <a href="https://twitter.com/curso_r">Curso-R</a>, <a href="https://twitter.com/wamorim_">William</a> e <a href="https://twitter.com/Azeloc">Fernando</a>.</p>
 <p>Até a próxima!</p>
+</div>
 <div class="footnotes">
 <hr />
 <ol>
