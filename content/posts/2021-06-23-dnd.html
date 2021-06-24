@@ -1,23 +1,24 @@
 ---
 title: "Faça alinhamentos DnD no R"
-date: "2021-06-23"
+date: "2021-06-25"
 tags: ["shiny", "DnD", "theoffice"]
 categories: ["pacotes"]
 image: "images/posts/banner/dnd.png"
 author: ["William", "Fernando"]
 summary: "Crie imagens de alinhamentos DnD direto do R."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Se você não sabe o que é DnD, já vamos tirar isso do caminho: DnD não é um novo modelo de Deep Learning. DnD é a abrreviação de Dungeons &amp; Dragons, um dos jogos de RPG mais famosos da história, considerado a origem dos RPGs modernos.</p>
+<p>Se você não sabe o que é DnD, já vamos tirar isso do caminho: DnD não é um novo modelo de Deep Learning. DnD é a abreviação de <em>Dungeons &amp; Dragons</em>, um dos jogos de RPG<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> mais famosos da história, considerado a origem dos RPGs modernos.</p>
 <p>Por falta de oportunidade, eu nunca joguei RPG, mas sempre fui muito fã da ideia e dos conceitos. Uma das paradas que acho mais divertidas é a dinâmica de alinhamentos do DnD.</p>
-<p>Em resumo, essa dinâmica diz que qualquer personagem pode ser posicionado em um grid de 9 posições, formadas pela combinação de dois eixos: o ético e o moral.</p>
-<p>O lado ético possui 3 categorias: <em>lawful</em>, <em>neutral</em> e <em>chaotic</em>. Uma personagem <em>lawful</em> é aquela que segue as leis da sociedade em que vive, enquanto um personagem <em>chaotic</em> quebra qualquer tipo de lei e faz as suas próprias regras. Um personagem <em>neutral</em> seria aquele que se insere dentro do conjunto de normas, mas não vê problema em quebrar algumas regras quando for conviniente.</p>
-<p>O lado moral tambémm possui 3 categorias: <em>good</em>, <em>neutral</em> e <em>evil</em>. Essa escala é mais fácil de explicar. São as personagens boas (<em>good</em>), más (<em>evil</em>) e aquelas que vão na onda (<em>neutral</em>).</p>
-<p>Uma moda que já surgiu e resurgiu na internet algumas vezes é fazer o alinhamento DnD de personagens de alguma série ou filme qualquer.</p>
+<p>Em resumo, essa dinâmica diz que qualquer personagem pode ser posicionado em uma matriz de 9 posições, formadas pela combinação de dois eixos: o ético e o moral.</p>
+<p>O lado ético possui 3 categorias: <em>lawful</em>, <em>neutral</em> e <em>chaotic</em>. Uma personagem <em>lawful</em> ou <em>ordeira</em> é aquela que segue as leis da sociedade em que vive mesmo que isso possa contrariar suas convicções ou valores pessoais, enquanto um personagem <em>chaotic</em> ou <em>caótico</em> se sente confortável em quebrar qualquer tipo de lei, pois faz as suas próprias regras, com pouco ou nenhum apreço pelas normas estabelecidas socialmente. Uma personagem <em>neutral</em> ou <em>neutra</em> seria aquela que se insere dentro do conjunto de normas, mas não tem nenhuma convicção forte sobre segui-las ou não. Diferente de uma personagem ordeira, que segue à risca o que está estabelecido, ou caótica, que nega por princípio parte das regras estabelecidas, uma personagem neutra simplesmente não pensa sobre o assunto.</p>
+<p>O lado moral também possui 3 categorias: <em>good</em>, <em>neutral</em> e <em>evil</em>. Essa escala é mais fácil de explicar. São as personagens boas (<em>good</em>), más (<em>evil</em>) e aquelas que vão na onda (<em>neutral</em>). Ao contrário do nosso mundo real, a fantasia simulada em um jogo de DnD não tem espaço para relativismo moral e nuances. Uma personagem altruísta, generosa, piedosa e/ou qualquer outra característica que não causa sofrimento nenhum é enquadrada no espectro positivo da escala: ela é boa ou <em>good</em>. Já uma personagem egoísta, cruel por esporte, insensível etc é má ou <em>evil</em>. A dificuldade aqui está nos personagens <em>neutros</em>, mas a ideia é parecida com o que falamos no lado ético: esse posicionamento se define pela distância das outras possibilidades. A neutralidade se define pela ambiguidade: todas as atitudes podem ser legítimas independentemente de leis, sofrimento de outras pessoas etc, tudo depende do contexto, não de convicções fortes ou desejo pessoal.</p>
+<p>Vamos a alguns exemplos: o herói mítico inglês <em>Robin Hood</em> é um bom exemplo de um personagem <em>chaotic good</em>, pois ele efetivamente quebra as regras vigentes porque acredita que isso é justo (<em>roubar</em> dos ricos), mas o faz para ajudar as pessoas que mais precisam (dar aos <em>pobres</em>), um motivo altruísta. Indo para o mundo de Star Wars <em>Han Solo</em> pode ser considerado um personagem <em>chaotic neutral</em>, pelo menos no começo da história. Ele é um contrabandista, vive sua vida quebrando sistematicamente as regras e não vê problema nisso, de onde concluímos que ele pelo menos pensou no assunto. Além disso, ele não ajuda o Luke e a Léia, personagens <em>neutral good</em>, por nenhum motivo específico. Sua única preocupação inicial é o dinheiro. Para mais exemplos, confira este <a href="https://www.youtube.com/watch?v=YgNQ3NXqqiQ">vídeo</a> em inglês disponível no Youtube.</p>
+<p>Como esse sistema de alinhamentos é flexível o suficiente para enquadrar várias obras diferentes, uma moda que já surgiu e resurgiu na internet algumas vezes é fazer o alinhamento DnD de personagens de alguma série ou filme qualquer.</p>
 <p>Veja alguns exemplos de que você pode achar por aí:</p>
 <p><img src="https://i.redd.it/rjzpebymelf51.jpg" title="Alinhamento DnD do Chaves." alt="Alinhamento DnD do Chaves." width="90%" style="display: block; margin: auto;" /></p>
 <p><img src="https://i.pinimg.com/originals/27/54/0f/27540ff00c2297c08b7d099a0fc9aba7.jpg" title="Alinhamento DnD do Game of Thrones." alt="Alinhamento DnD do Game of Thrones." width="90%" style="display: block; margin: auto;" /></p>
@@ -45,3 +46,9 @@ create_alignment(
 <p><img src="/posts/2021-06-23-dnd_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>E aí? O que achou das nossas escolhas? Se você discorda, tweet o seu alinhamento e marque a gente no Twitter: <a href="https://twitter.com/curso_r">Curso-R</a>, <a href="https://twitter.com/wamorim_">William</a> e <a href="https://twitter.com/Azeloc">Fernando</a>.</p>
 <p>Até a próxima!</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Sigla em inglês para <em>Role Playing Game</em> que em português significa <em>Jogo de intepretação de papéis</em>. <a href="https://pt.wikipedia.org/wiki/Role-playing_game">RPGs</a> são jogos parecidos com a encenação de uma peça de teatro, mas com regras como as de Banco Imobiliário para estruturar a interpretação de papéis.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
