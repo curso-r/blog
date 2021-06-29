@@ -1,6 +1,6 @@
 ---
 title: "Faça alinhamentos DnD no R"
-date: "2021-06-30"
+date: "2021-06-29"
 tags: ["shiny", "Dnd", "theoffice"]
 categories: ["pacotes"]
 image: "images/posts/banner/dnd.png"
