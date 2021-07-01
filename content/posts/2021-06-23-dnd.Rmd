@@ -1,12 +1,11 @@
 ---
 title: "Faça alinhamentos DnD no R"
-date: "2021-06-25"
-tags: ["shiny", "DnD", "theoffice"]
+date: "2021-06-29"
+tags: ["shiny", "Dnd", "theoffice"]
 categories: ["pacotes"]
 image: "images/posts/banner/dnd.png"
 author: ["William", "Fernando"]
 summary: "Crie imagens de alinhamentos DnD direto do R."
-draft: false
 ---
 
 ```{r, include=FALSE}
