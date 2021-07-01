@@ -1,0 +1,232 @@
+---
+title: "Crie seletores de visualização no Shiny"
+date: "2021-07-01"
+tags: ["shiny", "widgets"]
+categories: ["tutoriais"]
+image: "images/posts/banner/seletor_vis_shiny.png"
+author: ["William"]
+summary: "Aprenda a criar seletores de visualização para o seu aplicativo Shiny."
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Neste post, vamos mostrar como usar o widget <code>radioGroupButtons</code> do pacote <code>shinyWidgets</code> para construir um <a href="https://acursor.shinyapps.io/seletor-visualizacoes/">app com seletor de visualizações</a>, isto é, botões que mudam o tipo de visualização apresentada na tela.</p>
+<p>Como exemplo, vamos construir um shiny app que mostra um gráfico de barras, um gráfico de linhas ou uma tabela (a depender da escolha da pessoa que estiver usando) do número de gols do Brasileirão<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> por temporada.</p>
+<p>O primeiro passo é configurar o widget corretamente. Veja abaixo que o segredo é utilizar os argumentos <code>choiceValues</code> e <code>choiceNames</code>. Para o primeiro, passamos os valores que serão acessados dentro do <code>server</code> a depender da escolha na UI (equivalente ao argumento <code>choices</code>). Ao segundo, podemos passar tanto textos (que seriam escritos dentro do botão) quanto ícones. Nesse caso, utilizamos ícones da biblioteca <a href="https://fontawesome.com/">Font Awesome</a>, com ajuda da função <code>shiny::icon()</code>. Repare também que deixamos o tamanho dos botões um pouco maiores setando o argumento <code>size = "lg</code>.</p>
+<pre class="r"><code>shinyWidgets::radioGroupButtons(
+  inputId = &quot;vis_escolhida&quot;,
+  label = &quot;&quot;,
+  choiceValues = c(&quot;barras&quot;, &quot;linhas&quot;, &quot;tabela&quot;),
+  choiceNames = list(
+    icon(&quot;bar-chart&quot;),
+    icon(&quot;line-chart&quot;),
+    icon(&quot;table&quot;)
+  ),
+  size = &quot;lg&quot;,
+  selected = &quot;barras&quot;
+)</code></pre>
+<p>Agora, precisamos construir a lógica do Output, tanto na UI como no server. Como a nossa visualização pode gerar gráficos ou uma tabela, precisaremos de funções <code>*Output()</code> e <code>render*()</code> diferentes. Dessa forma, vamos utilizar na nossa UI um <code>OutputUI()</code>.</p>
+<pre class="r"><code># A nossa UI ficará assim
+ui &lt;- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      h1(&quot;App com seletor de visualizações&quot;)
+    )
+  ),
+  br(),
+  fluidRow(
+    column(
+      offset = 1,
+      width = 11,
+      shinyWidgets::radioGroupButtons(
+        inputId = &quot;vis_escolhida&quot;,
+        label = &quot;&quot;,
+        choiceValues = c(&quot;barras&quot;, &quot;linhas&quot;, &quot;tabela&quot;),
+        choiceNames = list(
+          icon(&quot;bar-chart&quot;),
+          icon(&quot;line-chart&quot;),
+          icon(&quot;table&quot;)
+        ),
+        size = &quot;lg&quot;,
+        selected = &quot;barras&quot;
+      )
+    )
+  ),
+  br(),
+  fluidRow(
+    column(
+      width = 12,
+      uiOutput(&quot;vis&quot;)
+    )
+  )
+)</code></pre>
+<p>Agora, no server, podemos criar funções <code>*Output()</code> diferentes a depender da visualização escolhida. Usamos <code>plotOutput()</code> para os gráficos e <code>reactable::reactableOutput()</code> para a tabela.</p>
+<pre class="r"><code>output$vis &lt;- renderUI({
+  if (input$vis_escolhida %in% c(&quot;barras&quot;, &quot;linhas&quot;)) {
+    plotOutput(&quot;grafico&quot;)
+  } else if (input$vis_escolhida == &quot;tabela&quot;) {
+    reactable::reactableOutput(&quot;tabela&quot;)
+  }
+})</code></pre>
+<p>Agora vamos construir nossas visualizações. Primeiro, vamos montar a base que precisamos para gerar tanto os gráficos quanto a tabela.</p>
+<p>Os dados vêm do pacote <code>brasileirao</code>. Se você não possui esse pacote instalado, basta rodar o código abaixo:</p>
+<pre class="r"><code>remotes::install_github(&quot;williamorim/brasileirao&quot;)</code></pre>
+<p>Como a tabela que gera os gráficos não depende de nenhum valor ou expressão reativa, podemos colocar o código que a gera diretamente no server.</p>
+<pre class="r"><code>tab &lt;- brasileirao::matches |&gt;
+  dplyr::filter(
+    score != &quot;x&quot;,
+    season %in% 2006:2020
+  ) |&gt;
+  tidyr::separate(
+    score,
+    c(&quot;gols_casa&quot;, &quot;gols_visitante&quot;),
+    sep = &quot;x&quot;,
+    convert = TRUE
+  ) |&gt;
+  dplyr::mutate(
+    gols = gols_casa + gols_visitante
+  ) |&gt;
+  dplyr::group_by(season) |&gt;
+  dplyr::summarise(gols = sum(gols))</code></pre>
+<p>Para gerar os gráficos, só precisamos de um <code>renderPlot()</code> e um <code>if/else</code> para devolver o gráfico certo.</p>
+<pre class="r"><code>output$grafico &lt;- renderPlot({
+  
+  grafico_base &lt;- tab |&gt;
+    ggplot(aes(x = season, y = gols)) +
+    labs(x = &quot;Temporada&quot;, y = &quot;Número de gols&quot;) +
+    theme_minimal() +
+    ggtitle(&quot;Número de gols do Brasileirão por temporada&quot;)
+  
+  if (input$vis_escolhida == &quot;linhas&quot;) {
+    grafico_base +
+      geom_line(color = &quot;dark green&quot;)
+  } else if (input$vis_escolhida == &quot;barras&quot;) {
+    grafico_base +
+      geom_col(width = 0.5, fill = &quot;dark green&quot;)
+  }
+})</code></pre>
+<p>Para gerar a tabela, precisamos apenas de um <code>renderReactable()</code>.</p>
+<pre class="r"><code>output$tabela &lt;- reactable::renderReactable({
+  tab |&gt;
+    reactable::reactable(
+      fullWidth = FALSE,
+      columns = list(
+        season = reactable::colDef(
+          name = &quot;Temporada&quot;
+        ),
+        gols = reactable::colDef(
+          name = &quot;Número de gols&quot;
+        )
+      )
+    )
+})</code></pre>
+<p>Juntando tudo, temos o app a seguir:</p>
+<pre class="r"><code>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      h1(&quot;App com seletor de visualizações&quot;)
+    )
+  ),
+  br(),
+  fluidRow(
+    column(
+      offset = 1,
+      width = 11,
+      shinyWidgets::radioGroupButtons(
+        inputId = &quot;vis_escolhida&quot;,
+        label = &quot;&quot;,
+        choiceValues = c(&quot;barras&quot;, &quot;linhas&quot;, &quot;tabela&quot;),
+        choiceNames = list(
+          icon(&quot;bar-chart&quot;),
+          icon(&quot;line-chart&quot;),
+          icon(&quot;table&quot;)
+        ),
+        size = &quot;lg&quot;,
+        selected = &quot;barras&quot;
+      )
+    )
+  ),
+  br(),
+  fluidRow(
+    column(
+      width = 12,
+      uiOutput(&quot;vis&quot;)
+    )
+  )
+)
+
+server &lt;- function(input, output, session) {
+
+  output$vis &lt;- renderUI({
+    if (input$vis_escolhida %in% c(&quot;barras&quot;, &quot;linhas&quot;)) {
+      plotOutput(&quot;grafico&quot;)
+    } else if (input$vis_escolhida == &quot;tabela&quot;) {
+      reactable::reactableOutput(&quot;tabela&quot;)
+    }
+  })
+
+  tab &lt;- brasileirao::matches |&gt;
+    dplyr::filter(
+      score != &quot;x&quot;,
+      season %in% 2006:2020
+    ) |&gt;
+    tidyr::separate(
+      score,
+      c(&quot;gols_casa&quot;, &quot;gols_visitante&quot;),
+      sep = &quot;x&quot;,
+      convert = TRUE
+    ) |&gt;
+    dplyr::mutate(
+      gols = gols_casa + gols_visitante
+    ) |&gt;
+    dplyr::group_by(season) |&gt;
+    dplyr::summarise(gols = sum(gols))
+
+  output$grafico &lt;- renderPlot({
+
+    grafico_base &lt;- tab |&gt;
+      ggplot(aes(x = season, y = gols)) +
+      labs(x = &quot;Temporada&quot;, y = &quot;Número de gols&quot;) +
+      theme_minimal() +
+      ggtitle(&quot;Número de gols do Brasileirão por temporada&quot;)
+
+    if (input$vis_escolhida == &quot;linhas&quot;) {
+      grafico_base +
+        geom_line(color = &quot;dark green&quot;)
+    } else if (input$vis_escolhida == &quot;barras&quot;) {
+      grafico_base +
+        geom_col(width = 0.5, fill = &quot;dark green&quot;)
+    }
+  })
+
+  output$tabela &lt;- reactable::renderReactable({
+    tab |&gt;
+      reactable::reactable(
+        fullWidth = FALSE,
+        columns = list(
+          season = reactable::colDef(
+            name = &quot;Temporada&quot;
+          ),
+          gols = reactable::colDef(
+            name = &quot;Número de gols&quot;
+          )
+        )
+      )
+  })
+}
+
+shinyApp(ui, server)</code></pre>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Campeonato Brasileiro de futebol da Série A.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
