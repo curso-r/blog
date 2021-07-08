@@ -1,0 +1,59 @@
+---
+title: "Shiny no useR 2021"
+date: "2021-07-07"
+tags: ["shiny", "useR"]
+categories: ["divulgação"]
+image: "images/posts/banner/shiny-user2021.jpeg"
+author: ["William"]
+summary: "Veja o que rolou de Shiny na userR 2021."
+draft: true
+---
+
+A useR é atualmente o maior evento de R do mundo. A [edição 2021](https://user2021.r-project.org/) aconteceu entre os dias 5 e 9 de julho, no modelo online, e contou com diversas apresentações, tutoriais, *short talks* e integração da comunidade.
+
+Neste post, vou listar o que rolou sobre Shiny na edição desse ano. Todas as palestras estão disponíveis gratuitamente no YouTube. 
+
+## All-in-one smartphone-based system for quantitative analysis of point-of-care diagnostics
+
+**Tema**: showcase
+**Nível**: iniciante
+**Quem**: Weronika Schary e Filip Paskali
+**Descrição**: apresentação de um aplicativo Shiny que auxilia na detecção de doenças a partir de análises de imagens.
+**Link**: https://youtu.be/kIlcE9DWzZQ?t=241
+
+## Unit Testing Shiny App Reactivity
+
+**Tema**: testes para aplicativos Shiny
+**Nível**: intermediário
+**Quem**: Jonathan Sidi
+**Descrição**: apresentação do pacote [`{reactor}`](https://github.com/yonicd/reactor), que tem como objetivo diagnosticar problemas de reatividade em um Shiny app.
+**Link**: https://youtu.be/kIlcE9DWzZQ?t=1475
+
+
+## ShinyQuickStarter: Build Shiny apps interactively with Drag & Drop
+
+**Tema**: desenvolvimento de Shiny apps
+**Nível**: iniciante 
+**Quem**: 
+**Descrição**: apresentação de um addin para o RStudio que permite a construção de aplicativos Shiny (e módulos) a partir de uma interface *arraste e solte*.
+**Link**: https://youtu.be/kIlcE9DWzZQ?t=2549
+
+
+## The ShinyProxy Good News Show
+
+**Tema**: deploy
+**Nível**: intermediário
+**Quem**: Tobia De Koninck
+**Descrição**: apresentação do ShinyProxy, solução de código aberto para empresas gerenciarem o deploy de aplicativos Shiny.
+**Link**: https://youtu.be/kIlcE9DWzZQ?t=3840
+
+
+## Shiny PoC to Production Application in 8 steps
+
+**Tema**: desenvolvimento de Shiny apps
+**Nível**: iniciante
+**Quem**: Marcin Dubel
+**Descrição**: apresentação de um *workflow* para desenvolvimento de aplicativos Shiny.
+**Link**: 
+
+
