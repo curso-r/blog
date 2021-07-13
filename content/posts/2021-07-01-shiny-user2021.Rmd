@@ -11,7 +11,11 @@ draft: true
 
 A useR é atualmente o maior evento de R do mundo. A [edição 2021](https://user2021.r-project.org/) aconteceu entre os dias 5 e 9 de julho, no modelo online, e contou com diversas apresentações, tutoriais, *short talks* e integração da comunidade.
 
-Neste post, vou listar o que rolou sobre Shiny na edição desse ano. Todas as palestras estão disponíveis gratuitamente no YouTube. 
+Neste post, vou listar o que rolou sobre Shiny na edição desse ano. Todas as palestras estão disponíveis no YouTube. 
+
+Em resumo, o tema subjacente das palestras é "Olha como o Shiny é foda!", o que é muito legal para aumentar o nosso repertório de argumentos na hora de levar o Shiny para dentro das empresas e universidades. 
+
+A minha preferida foi a "Unit Testing Shiny App Reactivity", porque testes no Shiny são uma coisa que ainda não faço e queria bastante aprender. A palestra me motivou a continuar estudando o assunto. 
 
 ## All-in-one smartphone-based system for quantitative analysis of point-of-care diagnostics
 
@@ -34,7 +38,7 @@ Neste post, vou listar o que rolou sobre Shiny na edição desse ano. Todas as p
 
 **Tema**: desenvolvimento de Shiny apps
 **Nível**: iniciante 
-**Quem**: 
+**Quem**: Leon Binder
 **Descrição**: apresentação de um addin para o RStudio que permite a construção de aplicativos Shiny (e módulos) a partir de uma interface *arraste e solte*.
 **Link**: https://youtu.be/kIlcE9DWzZQ?t=2549
 
@@ -51,9 +55,9 @@ Neste post, vou listar o que rolou sobre Shiny na edição desse ano. Todas as p
 ## Shiny PoC to Production Application in 8 steps
 
 **Tema**: desenvolvimento de Shiny apps
-**Nível**: iniciante
+**Nível**: intermediário
 **Quem**: Marcin Dubel
-**Descrição**: apresentação de um *workflow* para desenvolvimento de aplicativos Shiny.
-**Link**: 
+**Descrição**: apresentação de um *workflow* para desenvolvimento de aplicativos Shiny no contexto empresarial.
+**Link**: https://youtu.be/aYV3bCu405k?t=78
 
 
