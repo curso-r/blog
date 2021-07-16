@@ -13,7 +13,7 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
 ```
 
-Em muitas situações, principalmente quando o assunto é finanças, precisamos contar os dias úteis entre duas datas. Como essa é uma questão que depende de calendários regionais, isso pode ser um pouco chato de fazer diretamente no R, pois você precisará importar uma lista de feriados. Felizmente o pacote `bizdays` que disponível no CRAN ajuda nessa tarefa e hoje vamos dar uma olhada nele.
+Em muitas situações, principalmente quando o assunto é finanças, precisamos contar os dias úteis entre duas datas. Como essa é uma questão que depende de calendários regionais, isso pode ser um pouco chato de fazer diretamente no R, pois você precisará importar uma lista de feriados. Felizmente o pacote `bizdays` que está disponível no CRAN ajuda nessa tarefa e hoje vamos explorar algumas de suas funcionalidades.
 
 # Usando o pacote `bizdays`
 
@@ -41,7 +41,7 @@ bizdays(primeiro_de_janeiro_2021, primeiro_de_julho_2021, "Brazil/ANBIMA")
 
 # Criando seu próprio calendário
 
-Caso você queira usar um calendário próprio ou incluir novos feriados, você pode criar um novo calendário que ficará disponível para ser usado como referência no terceiro parâmetro da função `bizdays`. Para criar um calendário, precisamos executar a função `create.calendar` como vemos abaixo:
+Caso você queira usar um calendário próprio ou incluir novos feriados, você pode criar um novo calendário que ficará disponível para ser usado como referência no terceiro parâmetro da função `bizdays`. Para criar um calendário, precisamos chamar a função `create.calendar` como vemos abaixo:
 
 ```{r}
 

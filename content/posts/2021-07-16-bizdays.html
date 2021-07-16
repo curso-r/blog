@@ -12,7 +12,7 @@ draft: false
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Em muitas situações, principalmente quando o assunto é finanças, precisamos contar os dias úteis entre duas datas. Como essa é uma questão que depende de calendários regionais, isso pode ser um pouco chato de fazer diretamente no R, pois você precisará importar uma lista de feriados. Felizmente o pacote <code>bizdays</code> que disponível no CRAN ajuda nessa tarefa e hoje vamos dar uma olhada nele.</p>
+<p>Em muitas situações, principalmente quando o assunto é finanças, precisamos contar os dias úteis entre duas datas. Como essa é uma questão que depende de calendários regionais, isso pode ser um pouco chato de fazer diretamente no R, pois você precisará importar uma lista de feriados. Felizmente o pacote <code>bizdays</code> que está disponível no CRAN ajuda nessa tarefa e hoje vamos explorar algumas de suas funcionalidades.</p>
 <div id="usando-o-pacote-bizdays" class="section level1">
 <h1>Usando o pacote <code>bizdays</code></h1>
 <p>A função principal do pacote é a função <code>bizdays</code>, que recebe duas datas e um calendário e retorna a quantidade de dias úteis entre essas datas.</p>
@@ -35,7 +35,7 @@ bizdays(primeiro_de_janeiro_2021, primeiro_de_julho_2021, &quot;Brazil/ANBIMA&qu
 </div>
 <div id="criando-seu-próprio-calendário" class="section level1">
 <h1>Criando seu próprio calendário</h1>
-<p>Caso você queira usar um calendário próprio ou incluir novos feriados, você pode criar um novo calendário que ficará disponível para ser usado como referência no terceiro parâmetro da função <code>bizdays</code>. Para criar um calendário, precisamos executar a função <code>create.calendar</code> como vemos abaixo:</p>
+<p>Caso você queira usar um calendário próprio ou incluir novos feriados, você pode criar um novo calendário que ficará disponível para ser usado como referência no terceiro parâmetro da função <code>bizdays</code>. Para criar um calendário, precisamos chamar a função <code>create.calendar</code> como vemos abaixo:</p>
 <pre class="r"><code>library(bizdays)
 
 data(holidaysANBIMA, package = &#39;bizdays&#39;)
