@@ -12,40 +12,52 @@ summary: "Veja como incluir elementos estáticos ao seu aplicativo usando arquiv
 
 Essas páginas geralmente são compostas por textos, links e imagens, facilmente produzidos em um arquivo Markdown. Em contrapartida, construir esses elementos dentro da UI dá bem mais trabalho, pois tudo precisa ser encapsulado por uma função da lista `shiny::tags$`.
 
-Por exemplo, vamos supor que eu queria colocar a minha *mini bio* (a seguir) em um app que estou fazendo.
+Por exemplo, vamos supor que eu queira colocar a minha *mini bio* (a seguir) em um app que estou fazendo.
 
 <br>
 
 <center>
+
+---
+
 <img src="/images/posts/conteudo/shiny-markdown/foto_william.jpg" width="130px" style="border-radius: 65px;"/>
 
 **William Amorim**
 
 Doutor em Estatística pelo IME-USP. Trabalhando diaramente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no [Twitter](https://twitter.com/wamorim_).
+
+---
+
 </center>
 
-<br>
 <br>
 
 O arquivo Markdown para construir essa mini bio seria bem simples:
 
 ```
 <center>
+
+---
+
 <img src="img/foto_william.jpg" width="130px" style="border-radius: 65px;"/>
 
 **William Amorim**
 
 Doutor em Estatística pelo IME-USP. Trabalhando diaramente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no [Twitter](https://twitter.com/wamorim_).
+
+---
+
 </center>
 ```
 
-Veja que só precisamos usar a tag `img` para deixar a imagem redonda. Caso contrário, o código seria totalmente Markdown. A mesma mini bio já é bem mais chato de construir e manter na UI de um shiny app.
+Veja que só precisamos usar a tag `img` para deixar a imagem redonda e usamos a tag `center` pois realmente compensa o crime. Caso contrário, o código seria totalmente Markdown. A mesma mini bio já é bem mais chato de construir e manter na UI de um shiny app.
 
 ```{r, eval = FALSE}
 ui <- fluidPage(
   fluidRow(
     column(
       width = 12,
+      shiny::tags$hr(),
       shiny::tags$img(
         src = "img/foto_william.jpg",
         width = "130px",
@@ -64,7 +76,8 @@ ui <- fluidPage(
           href = "https://twitter.com/wamorim_",
           "Twitter."
         )
-      )
+      ),
+      shiny::tags$hr()
     )
   )
 )
