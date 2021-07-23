@@ -85,7 +85,7 @@ ui <- fluidPage(
 
 Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas e cheias de texto. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhamos muitas tags HTML para criar, scripts R não foram feitos para atender aos cuidados que textos carecem.
 
-A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny transforme em PDF e inclua no lugar adequado apenas na hora do `runApp()`. Para isso usamos a função `shiny::includeMarkdown()`.
+A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny transforme em HTML e inclua no lugar adequado apenas na hora do `runApp()`. Para isso usamos a função `shiny::includeMarkdown()`.
 
 Supondo que salvamos o markdown da mini bio em um arquivo `minibio_william.md`, a nossa UI então ficaria:
 
