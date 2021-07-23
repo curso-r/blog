@@ -60,4 +60,6 @@ A minha preferida foi a "Unit Testing Shiny App Reactivity", porque testes no Sh
 **Descrição**: apresentação de um *workflow* para desenvolvimento de aplicativos Shiny no contexto empresarial.
 **Link**: https://youtu.be/aYV3bCu405k?t=78
 
+É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
 
+Até a próxima!

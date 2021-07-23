@@ -1,0 +1,73 @@
+---
+title: "Fuja das tags! Incluindo Markdown no Shiny"
+date: "2021-07-22"
+tags: ["shiny", "markdown"]
+categories: ["tutorial"]
+image: "images/posts/banner/tags.jpeg"
+author: ["William"]
+summary: "Veja como incluir elementos estáticos ao seu aplicativo usando arquivos Markdown."
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>É comum precisarmos colocar em nossos aplicativos páginas com orientações, informações adicionais ou referências.</p>
+<p>Essas páginas geralmente são compostas por textos, links e imagens, facilmente produzidos em um arquivo Markdown. Em contrapartida, construir esses elementos dentro da UI dá bem mais trabalho, pois tudo precisa ser encapsulado por uma função da lista <code>shiny::tags$</code>.</p>
+<p>Por exemplo, vamos supor que eu queria colocar a minha <em>mini bio</em> (a seguir) em um app que estou fazendo.</p>
+<p><br></p>
+<center>
+<p><img src="/images/posts/conteudo/shiny-markdown/foto_william.jpg" width="130px" style="border-radius: 65px;"/></p>
+<p><strong>William Amorim</strong></p>
+Doutor em Estatística pelo IME-USP. Trabalhando diaramente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no <a href="https://twitter.com/wamorim_">Twitter</a>.
+</center>
+<p><br>
+<br></p>
+<p>O arquivo Markdown para construir essa mini bio seria bem simples:</p>
+<pre><code>&lt;center&gt;
+&lt;img src=&quot;img/foto_william.jpg&quot; width=&quot;130px&quot; style=&quot;border-radius: 65px;&quot;/&gt;
+
+**William Amorim**
+
+Doutor em Estatística pelo IME-USP. Trabalhando diaramente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no [Twitter](https://twitter.com/wamorim_).
+&lt;/center&gt;</code></pre>
+<p>Veja que só precisamos usar a tag <code>img</code> para deixar a imagem redonda. Caso contrário, o código seria totalmente Markdown. A mesma mini bio já é bem mais chato de construir e manter na UI de um shiny app.</p>
+<pre class="r"><code>ui &lt;- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      shiny::tags$img(
+        src = &quot;img/foto_william.jpg&quot;,
+        width = &quot;130px&quot;,
+        style = &quot;border-radius: 65px; display: block; margin: auto;&quot;
+      ),
+      shiny::tags$p(
+        shiny::tags$strong(&quot;William Amorim&quot;),
+        style = &quot;text-align: center;&quot;
+      ),
+      shiny::tags$p(
+        style = &quot;text-align: center;&quot;,
+        &quot;Doutor em Estatística pelo IME-USP. Trabalhando diaramente 
+        com análise de dados, programação em R e criação de dashboards.
+        Falo sobre Shiny no&quot;,
+        shiny::tags$a(
+          href = &quot;https://twitter.com/wamorim_&quot;,
+          &quot;Twitter.&quot;
+        )
+      )
+    )
+  )
+)</code></pre>
+<p>Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas e cheias de texto. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhámos muitas tags HTML para criar, scripts R não foram feitos para atender os cuiddos que textos carecem.</p>
+<p>A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny transforme em PDF e inclua no lugar adequado apenas na hora do <code>runApp()</code>. Para isso usamos a função <code>shiny::includeMarkdown()</code>.</p>
+<p>Supondo que salvamos o markdown da mini bio em um arquivo <code>minibio_william.md</code>, a nossa UI então ficaria:</p>
+<pre class="r"><code>ui &lt;- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      includeMarkdown(&quot;minibio_william.md&quot;)
+    )
+  )
+)</code></pre>
+<p>Vale ressaltar que essa função compila arquivos Markdown (<code>.md</code>) e não R Markdown (<code>.Rmd</code>). Se você gostaria de rodar códigos R para gerar saídas HTML, você deve fazer isso dentro do próprio Shiny.</p>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
