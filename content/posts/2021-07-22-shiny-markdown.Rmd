@@ -24,7 +24,7 @@ Por exemplo, vamos supor que eu queira colocar a minha *mini bio* (a seguir) em 
 
 **William Amorim**
 
-Doutor em Estatística pelo IME-USP. Trabalhando diaramente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no [Twitter](https://twitter.com/wamorim_).
+Doutor em Estatística pelo IME-USP. Trabalhando diariamente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no [Twitter](https://twitter.com/wamorim_).
 
 ---
 
@@ -83,7 +83,7 @@ ui <- fluidPage(
 )
 ```
 
-Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas e cheias de texto. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhámos muitas tags HTML para criar, scripts R não foram feitos para atender os cuiddos que textos carecem.
+Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas e cheias de texto. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhamos muitas tags HTML para criar, scripts R não foram feitos para atender aos cuidados que textos carecem.
 
 A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny transforme em PDF e inclua no lugar adequado apenas na hora do `runApp()`. Para isso usamos a função `shiny::includeMarkdown()`.
 
