@@ -1,0 +1,503 @@
+---
+title: "Tutorial: {rlang} para Filhotes"
+date: "2021-07-27"
+tags: ["rlang", "tidy", "tidyverse"]
+categories: ["tutoriais"]
+image: "images/posts/banner/filhote.jpg"
+author: ["Caio"]
+summary: "Um tutorial sobre {rlang} que vai do básico ao avançado. Zero to hero!"
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "#>")
+
+library(dplyr)
+library(rlang)
+mtcars <- as_tibble(mtcars)
+carinho <- function(nome) {
+  cat("Fazendo carinho no filhote", nome)
+  invisible(paste("Fazendo carinho no filhote", nome))
+}
+```
+
+Este é um tutorial sobre o pacote `{rlang}`, um dos mais poderosos e menos
+conhecidos do R. Ele é vital para a notação compacta do `{tidyverse}`, conhecida
+como **tidy eval**, mas mesmo assim poucas pessoas sabem como ele funciona e
+como utilizá-lo para criar funções no estilo tidy.
+
+O tutorial não é curto, mas fizemos o nosso melhor para começar com calma e
+terminar com colinhas para facilitar o uso deste material no dia a dia. Se for
+necessário, leia e releia uma mesma seção para ter certeza de que o conceito
+apresentado foi completamente absorvido. No caso de dúvidas, entre em contato
+conosco e com o resto da comunidade R no nosso
+[Discourse](https://discourse.curso-r.com/).
+
+
+Se estiver com preguiça, deixei uma colinha no final do post. Mas, para os
+corajosos, preparem-se para alguns novos conceitos de programação, vários
+filhotes de cachorro e muito `{rlang}`!
+
+## O melhor amigo do R
+
+A analogia que vamos usar para explicar o `{rlang}` gira em torno de um parque
+repleto de filhotes fofinhos. Nós temos uma única missão nesse parque: fazer
+carinho nos cachorros. Para isso, temos uma função `carinho()` que recebe o nome
+de um filhote e imprime uma frase explicando em quem estamos fazendo carinho. O
+objeto que descreve o filhote se resume a uma string com a sua cor.
+
+```{r 01_pat_rex}
+rex <- "laranja"
+carinho(rex)
+```
+
+Para facilitar a compreensão do código, vamos também ilustrar esse cenário. Na
+figura abaixo, note que é criado um objeto `rex` que recebe a figura de um
+filhote laranja. A função `carinho()` é retratada como uma mão parada que,
+quando executada, retorna uma mão fazendo carinho no filhote de cor apropriada
+(essencialmente a string retornada pelo código acima).
+
+```{r 01_pat_rex_png, echo=FALSE, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/01_pat_rex.png")
+```
+
+### Expressões
+
+Agora que temos uma base sólida para a analogia, podemos introduzir o primeiro
+conceito importante do `{rlang}`: **expressões**. Uma expressão no R não passa
+do código antes antes que ele seja avaliado, ou seja, aquilo que você escreve e
+que, depois de executado no console do RStudio, se torna um resultado. Em quase
+100% dos casos, o R não faz nenhuma distinção entre a expressão e o valor que
+ela retorna, de modo que executar `carinho(rex)` fica equivalente a executar
+`carinho("laranja")`. Esse comportamento é chamado de **avaliação ansiosa**,
+justamente porque o R avalia cada parte da expressão tão cedo quanto for
+possível.
+
+Essa, entretanto, não é única forma de avaliação. Também é possível capturar uma
+expressão, "impedindo" o R de avaliá-la, em um processo denominado **avaliação
+preguiçosa**. A função do `{rlang}` que faz isso se chama `expr()` e ela retorna
+a expressão passada, vulgo o código escrito.
+
+```{r, 02_expr}
+e <- expr(carinho(max))
+e
+```
+
+Veja que não importa que não existe ainda um filhote chamado `max`! Como estamos
+lidando apenas com uma expressão sem contexto, isso é perfeitamente possível.
+
+Voltando para o nosso parque de cachorros, a avaliação preguiçosa se torna quase
+uma promessa de fazer carinho em um filhote. Temos toda a informação necessária
+(no caso, o nome do filhote), mas não transformamos isso na ação de fazer
+carinho: não "chamamos o filhote para perto" para acariciá-lo. Perceba que na
+figura abaixo não há as marcas de movimento da mão, pois estamos congelando a
+cena antes de o filhote vir até nós.
+
+```{r 02_expr_png, echo=FALSE, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/02_expr.png")
+```
+
+### Ambientes
+
+Na nossa analogia, o próximo conceito representa o parque em si, um lugar onde
+há uma correspondência entre nomes de cachorros. No R, um **ambiente** funciona
+como um dicionário que contém definições de objetos acompanhados pelos valores
+que eles carregam.
+
+Abaixo, vamos "trazer" dois novos cachorros para o parque, ou seja, criar dois
+novos objetos. A função `env_print()` mostra todas as correspondências presentes
+no ambiente (incluindo a da função `carinho()`), além de algumas informações
+extras que não nos interessam agora.
+
+```{r 03_env}
+max <- "marrom"
+dex <- "bege"
+env_print()
+```
+
+Na analogia, estamos colocando os cachorros `max` e `dex` no parque, permitindo
+que possamos eventualmente fazer carinho neles. Vamos apenas ignorar a definição
+da função `carinho()` para que isso não atrapalhe o resto da explicação.
+
+```{r 03_env_png, echo=FALSE, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/03_env.png")
+```
+
+Perceba que o resultado da avaliação de uma expressão depende completamente do
+ambiente. Na hora de executar um código, o R procura as definições de todos os
+objetos no ambiente e os substitui dentro da expressão. Agora vamos ver o que
+aconteceria se tentássemos fazer carinho no filhote chamado `max` em outro
+parque...
+
+### Avaliando expressões
+
+**Avaliação nua** (*bare evaluation* no original) é o processo pelo qual o
+`{rlang}` permite que forneçamos explicitamente um ambiente no qual avaliar uma
+expressão. É como se pudéssemos escolher o parque no qual vamos chamar um
+filhote para acariciá-lo.
+
+No código abaixo vamos visitar um outro parque, isto é, criar uma função. O
+ambiente dentro de uma função herda as definições do ambiente global, mas
+podemos fazer alterações lá dentro que não são propagadas para fora. Vide a
+função abaixo: `p()` define um objeto `max` com a cor verde e avalia (ou seja,
+executa) uma expressão lá dentro.
+
+```{r 04_fun}
+p <- function(x) {
+  max <- "verde"
+  eval_tidy(x)
+}
+```
+
+Seguindo a analogia dos filhotes, é como se visitássemos um outro parque onde há
+um cachorro chamado `max` cuja cor é verde (além dos outros dois cachorros que
+já havíamos visto no parque antigo).
+
+```{r 04_fun_png, echo=FALSE, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/04_fun.png")
+```
+
+Como a função `eval_tidy()`, por padrão, utiliza o ambiente corrente para
+avaliar expressões, então `p(e)` deve indicar carinho em um filhote verde e
+não mais em um filhote marrom. Note que, apesar de não estarmos passando um
+ambiente explicitamente para a `eval_tidy()`, ela está obtendo esse ambiente
+através de `caller_env()`, o valor padrão para seu argumento `env`.
+
+```{r 05_eval_expr}
+p(e)
+```
+
+Na ilustração a seguir vemos o que aconteceria no nosso parque. Apesar de
+estarmos chamando o nome do cachorro marrom, como estamos em outro parque (uma
+nova função), o cachorro que responderá ao chamado aqui é verde!
+
+```{r 05_eval_expr_png, echo=FALSE, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/05_eval_expr.png")
+```
+
+### Quosures
+
+Agora que você entende o que é uma expressão, o que é um ambiente e como podemos
+avaliar uma expressão dentro de um ambiente, chegou a hora de entender a
+estrutura mais importante do `{rlang}`: as **quosures**. Esse nome estranho vem
+de *quote* e *closure*, dois conceitos extremamente importantes da Ciência da
+Computação, mas explicar o que eles significam foge do escopo deste tutorial.
+
+Uma quosure, apesar de parecer um conceito complexo, não passa de uma expressão
+que carrega um apontador para seu ambiente consigo. Isso não parece ser muito
+útil, mas é a quosure que permite que as funções do `{tidyverse}` sejam capazes
+de acessar as colunas de uma tabela e variáveis declaradas no ambiente global.
+
+```{r 06_quo}
+q <- quo(carinho(max))
+q
+```
+
+Pensando nos filhotes, uma quosure é a promessa de fazer carinho em um cachorro
+sabendo exatamente o endereço do parque em que ele estava Note que, na saída
+acima, o `env` se chama "global", justamente porque estamos trabalhando
+diretamente na sessão base do R.
+
+Na figura abaixo, juntamente da cena retratada na ilustração sobre expressões,
+vemos um qualificador de `max`, especificando onde devemos encontrar ele. Isso
+é significativamente diferente de simplesmente gritar pelo `max` mais próximo.
+
+```{r 06_quo_png, echo=FALSE, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/06_quo.png")
+```
+
+### Avaliando quosures
+
+Assim como utilizamos a avaliação nua para obter o resultado de uma expressão em
+um certo ambiente, podemos usar a **avaliação tidy** (de *tidy evaluation*) para
+obter o resultado de uma quosure no ambiente que ela carrega.
+
+Aqui, depois de capturar a quosure, podemos fazer o que quisermos com o ambiente
+na qual avaliaremos ela, pois o único ambiente que importará na avaliação tidy
+é o de seu ambiente de origem. Sendo assim, perceba que o argumento `env` de
+`eval_tidy()` não foi levado em conta!
+
+```{r 07_eval_quo}
+p(q)
+```
+
+É difícil traduzir esse processo para a analogia dos filhotes, mas seria algo
+como voltar para o endereço do parque original antes de fazer carinho no filhote
+cujo nome é `max`.
+
+```{r 07_eval_quo_png, echo=FALSE, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/07_eval_quo.png")
+```
+
+### Bang-bang
+
+A peça final do quebra-cabeça do `{rlang}` é o **bang-bang**, também conhecido
+como quasiquotation e expresso na forma de duas exclamações: `!!`. Essa
+funcionalidade, exclusiva ao `{rlang}`, permite que façamos uma "avaliação
+ansiosa seletiva" em uma expressão ou quosure. Em breve ficará mais claro onde
+isso pode ser útil, mas antes é necessário ver como usar o bang-bang na prática.
+
+O bang-bang "força" a avaliação de uma parte da expressão, liberando o R para
+fazer parte do seu trabalho de avaliação ansiosa. Veja, no código abaixo, como
+funciona a captura de uma expressão que usa o bang-bang. Atente-se para o fato
+de que, na seção anterior, alteramos o valor de `max`.
+
+```{r 08_bang_bang}
+expr(carinho(!!max))
+```
+
+Na analogia dos filhotes, o bang-bang está essencialmente chamando um cachorro
+pelo nome antes que façamos carinho nele. Ao invés do contorno branco que vimos
+nas ilustrações sobre expressões e quosures, agora vemos a mão parada ao lado de
+um filhote específico.
+
+```{r 08_bang_bang_png, echo=FALSE, fig.align='center'}
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/08_bang_bang.png")
+```
+
+## De volta para casa
+
+Apesar de termos visto um pouco de código R na sessão anterior, agora é
+necessário aprofundar um pouco os exemplos. Prometo que não será nada muito
+difícil, mas é impossível entender como aplicar o `{rlang}` no mundo real sem
+ver alguns casos de uso.
+
+Na maior parte das ocasiões, não usaremos nenhuma das funções vistas até agora,
+salvo pelo bang-bang (que na verdade não é uma função, mas sim uma sintaxe). O
+principal uso do `{rlang}`, na verdade, é capturar código que o **usuário**
+escreve, então é necessário conhecer novas versões de `expr()` e `quo()` que são
+capazes de capturar expressões e quosures vindas de fora de uma função.
+
+### Enriquecimento
+
+O conceito de **enriquecimento** vem de uma analogia meio ruim criada pelo autor
+do `{rlang}`; para simplificar, pense que as versões enriquecidas de `expr()` e
+`quo()` são mais "fortes" que as versões normais, sendo capazes de sair de
+dentro de uma função para capturar expressões do lado de fora.
+
+Abaixo é possível ver uma função que tenta capturar o nome de um filhote, mas é
+incapaz de fazê-lo por causa da avaliação ansiosa do R. O correto seria capturar
+a expressão escrita pelo usuário e imprimí-la como uma string.
+
+```{r}
+nome1 <- function(filhote) {
+  cat("O nome do filhote é", filhote)
+}
+nome1(dex)
+```
+
+Podemos ver a versão correta da função desejada em `nome2()`. Ela captura a
+expressão do usuário com `enexpr()` (a versão enriquecida de `expr()`) e
+converte esse objeto em uma string com `expr_text()`, permitindo que a função
+imprima o nome do filhote.
+
+```{r}
+nome2 <- function(filhote) {
+  nome <- enexpr(filhote)
+  cat("O nome do filhote é", expr_text(nome))
+}
+nome2(dex)
+```
+
+Como não havia necessidade nenhuma de capturar o ambiente do usuário nesse
+exemplo, usamos apenas `enexpr()`. Na maioria das situações, entretanto, é
+preciso usar `enquo()` para obter o comportamento correto. Já que quosures
+incluem expressões, `expr()` e `enexpr()` quase nunca são estritamente
+necessárias, então vamos simplificar tudo e seguir apenas com as quosures.
+
+No código abaixo a função `explica()` precisa tanto da expressão quanto do
+ambiente da mesma, ou seja, da quosure escrita pelo usuário.
+
+```{r}
+explica <- function(acao) {
+  quosure <- enquo(acao)
+  cat("`", quo_text(quosure), "` retorna:\n", sep = "")
+  eval_tidy(quosure)
+}
+explica(carinho(dex))
+```
+
+Preste bastante atenção em `explica()`, pois pode ser que não seja fácil
+entender como ela funciona. A primeira função utilizada é a `enquo()` (`quo()`
+enriquecida), que captura a expressão do usuário juntamente com o seu ambiente.
+A seguir, temos apenas que converter a quosure em string com `quo_text()` para
+poder imprimí-la. O último passo é avaliar a quosure para obter um resultado
+exatamente igual ao que o usuário obteria se decidisse executar a expressão
+passada como argumento.
+
+### Curly-curly
+
+A combinação da `enquo()` com o bang-bang é justamente a forma correta de
+implementar funções que trabalham com o `{tidyverse}`. A função `summarise()`,
+por exemplo, não passa de um `enquo()` disfarçado, o que quer dizer que podemos
+usar o bang-bang para "injetar" o nome de uma variável dentro de um cálculo.
+
+```{r, error=TRUE}
+media1 <- function(df, var) {
+  summarise(df, resultado = mean(var))
+}
+media1(mtcars, cyl)
+```
+
+O código acima, que não usa bang-bang, retorna um erro. O problema é que a
+`summarise()` está tentando tirar a média de um objeto chamado `var`, que
+carrega um objeto chamado `cyl`, que simplesmente não existe no ambiente global.
+Abaixo, usando bang-bang e `enquo()`, o código funciona como esperado porque
+`mean(!!var)` se torna `mean(cyl)` dentro da `summarise()`.
+
+```{r}
+media2 <- function(df, var) {
+  var <- enquo(var)
+  summarise(df, resultado = mean(!!var))
+}
+media2(mtcars, cyl)
+```
+
+O `{tidyverse}` nos fornece um atalho para essa combinação poderosa de `enquo()`
+com `!!`: o `{{ }}`, mais conhecido como **curly-curly**. Agora que você já
+entende exatamente o que está acontecendo por trás dos panos, saber onde usar o
+curly-curly é mais fácil.
+
+```{r}
+media3 <- function(df, var) {
+  summarise(df, resultado = mean({{var}}))
+}
+media3(mtcars, cyl)
+```
+
+### Splice
+
+A penúltima funcionalidade do `{rlang}` a compreender é o conceito de **splice**
+("emendar" em português), que se manifesta nas versões pluralizadas das funções
+apresentadas até agora. Essencialmente, `expr()/enexpr` e `quo()/enquo()` só
+conseguem lidar com uma única expressão ou quosure, então temos outras versões
+para trabalhar com múltiplas expressões ou quosures.
+
+Na prática, a principal função que utilizaremos é `enquos()`. Ela captura todo o
+conteúdo de uma **elipse** e o transforma em uma lista de quosures como no
+exemplo abaixo. As versões plurais também acompanham o **bang-bang-bang**, o
+irmão com splice do bang-bang.
+
+```{r}
+media4 <- function(df, ...) {
+  vars <- enquos(...)
+  summarise(df, across(c(!!!vars), mean))
+}
+media4(mtcars, cyl, disp, hp)
+```
+
+Se você não estiver familiarizado com a `across()`, basta saber apenas que o
+primeiro argumento é um vetor de colunas (similar ao que passaríamos para
+`select()`) e o segundo é uma função para utilizar no resumo das colunas
+especificadas. Aqui o `!!!` está apenas transformando a chamada em
+`across(c(cyl, disp, hp), mean)`.
+
+### Símbolos
+
+Existe ainda um conceito que não abordamos até agora: **símbolos**. Um símbolo
+não passa do nome de um objeto, ou seja, `rex`, `max` e `dex` na analogia dos
+filhotes; mais especificamente, um símbolo é uma expressão com algumas
+restrições sobre o seu conteúdo. A função `sym()`, especificamente, transforma
+uma string em um símbolo, permitindo que ela seja usada junto com outras
+expressões.
+
+```{r}
+media6 <- function(df, var) {
+  var <- ensym(var)
+  summarise(df, resultado = mean(!!var))
+}
+media6(mtcars, "cyl")
+```
+
+### Miscelânea
+
+Fora os vários conceitos já apresentados, restam apenas duas breves
+considerações para praticamente zerar o `{rlang}`:
+
+1.  O curly-curly funciona com strings, mas não com splice, então a família
+    `sym()` torna-se quase desnecessária juntamente com o `!!` ao mesmo tempo em
+    que o `!!!` permanece essencial.
+
+2.  Há um operador específico (`:=`, chamado de **morsa**) para quando
+    precisamos forçar a execução de algo no lado esquerdo de um cálculo, mesmo
+    quando usando o curly-curly.
+
+```{r}
+media7 <- function(df, col, ...) {
+  args <- enquos(...)
+  summarise(df, {{col}} := mean(!!!args))
+}
+media7(mtcars, "nova_coluna", drat, na.rm = TRUE)
+```
+
+## De volta para o trabalho
+
+Depois de tanto conteúdo, agora você consegue entender as colinhas que
+apresentamos abaixo para facilitar o seu uso do `{rlang}` no dia-a-dia. Ao final
+também deixamos as referências deste tutorial para que você possa aprofundar
+ainda mais os seus conhecimentos de tidy eval.
+
+### Vocabulário
+
+```{r, echo=FALSE}
+knitr::kable(tribble(
+  ~`Vocábulo`, ~`Tradução`, ~`Significado`, ~`Código`,
+  "Ambiente", "*Environment*", "Dicionário de nomes e valores", "`env()`",
+  "Avaliação ansiosa", "*Eager evaluation*", "Avaliação de todo objeto o mais rápido possível", "-",
+  "Avaliação nua", "*Bare evaluation*", "Avaliação que necessita de um ambiente passado explicitamente", "`eval_tidy(e)`",
+  "Avaliação preguiçosa", "*Lazy evaluation*", "Avaliação de cada objeto conforme a necessidade", "`quo()`, etc.",
+  "Avaliação tidy", "*Tidy evaluation*", "Avaliação que utiliza o ambiente da quosure", "`eval_tidy(q)`",
+  "Bang-bang", "*Bang-bang*", 'Operador utilizado para forçar a avaliação de um objeto', "`!!`",
+  "Bang-bang-bang", "*Bang-bang-bang*", 'Operador utilizado para forçar a avaliação de vários objetos', "`!!!`",
+  "Curly-curly", "*Curly-curly*", "Atalho para `enquo()` + `!!`", "`{{ }}`",
+  "Elipse", "*Ellipsis*", "Argumento de uma funcão que pode receber múltiplas entradas", "`...`",
+  "Enriquecimento", "*Enriching*", "Processo que permite a captura de código do usuário", "`enquo()`, etc.",
+  "Expressão", "*Expression*", "Código R antes de avaliado", "`expr()`",
+  "Morsa", "*Walrus*", 'Operador utilizado para permitir expressões do lado esquerdo de uma igualdade', "`:=`",
+  "Quosure", "*Quosure*", "Expressão que carrega seu ambiente consigo", "`quo()`",
+  "Símbolo", "*Symbol*", "Expressão que pode representar apenas o nome de um objeto", "`sym()`",
+  "Splice", "*Splice*", "Processo que permite a captura de múltiplas expressões, etc.", "`quos()`, etc."
+), format = "html")
+```
+
+### Principais funções
+
+```{r, echo=FALSE}
+knitr::kable(tribble(
+  ~`Objeto`, ~`Simples`, ~`Enriquecido`,
+  "Símbolo", "`sym()/syms()`", "`ensym()/ensyms()`",
+  "Expressão", "`expr()/exprs()`", "`enexpr()/enexprs()`",
+  "Quosure",  "`quo()/quos()`", "`enquo()/enquos()`"
+), format = "html")
+```
+
+### Principais padrões
+
+Os padrões incluem dois exemplos que não foram explicados durante o tutorial.
+Para saber mais, consulte as referências no final do texto.
+
+```{r, echo=FALSE}
+knitr::kable(tribble(
+  ~`Descrição`, ~`Usuário`, ~`Programador`,
+  "Expressão do lado esquerdo", "`media(df, col)`", "`{{col}} := mean(var)`",
+  "Expressão do lado direito", "`media(df, var)`", "`col = mean({{var}})`",
+  "Expressões do lado direito", "`media(df, var, arg1 = 0)`", "`col = mean(!!!var)`",
+  "Expressões no meio", "`agrupar(df, var1, var2)`", "`group_by(df, ...)`",
+  "Símbolo do lado esquerdo", '`media(df, "col")`', "`{{col}} := mean(var)`",
+  "Símbolo do lado direito", '`media(df, "var")`', "`col = mean(.data$var)`"
+), format = "html")
+```
+
+### Referências
+
+- [*Advanced R: Metaprogramming*](https://adv-r.hadley.nz/metaprogramming.html)
+
+- [Documentação do `{rlang}`](https://rlang.r-lib.org/)
+
+- [*Programando com o tidyverse: introdução ao pacote rlang*](https://www.youtube.com/watch?v=o5_Df-btuD4)
+
+- [*Programming with dplyr*](https://dplyr.tidyverse.org/articles/programming.html)
+
+- [*Tidy evaluation with rlang: Cheat Sheet*](https://raw.githubusercontent.com/rstudio/cheatsheets/master/tidyeval.pdf)
+
+- [*Using ggplot2 in packages*](https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html)
