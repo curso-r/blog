@@ -1,0 +1,107 @@
+---
+title: "Fuja das tags! Incluindo Markdown no Shiny"
+date: "2021-07-23"
+tags: ["shiny", "markdown"]
+categories: ["tutorial"]
+image: "images/posts/banner/tags.jpeg"
+author: ["William"]
+summary: "Veja como incluir elementos estáticos ao seu aplicativo usando arquivos Markdown."
+---
+
+É comum precisarmos colocar em nossos aplicativos páginas com orientações, informações adicionais ou referências. 
+
+Essas páginas geralmente são compostas por textos, links e imagens, facilmente produzidos em um arquivo Markdown. Em contrapartida, construir esses elementos dentro da UI dá bem mais trabalho, pois tudo precisa ser encapsulado por uma função da lista `shiny::tags$`.
+
+Por exemplo, vamos supor que eu queira colocar a minha *mini bio* (a seguir) em um app que estou fazendo.
+
+<br>
+
+<center>
+
+---
+
+<img src="/images/posts/conteudo/shiny-markdown/foto_william.jpg" width="130px" style="border-radius: 65px;"/>
+
+**William Amorim**
+
+Doutor em Estatística pelo IME-USP. Trabalhando diariamente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no [Twitter](https://twitter.com/wamorim_).
+
+---
+
+</center>
+
+<br>
+
+O arquivo Markdown para construir essa mini bio seria bem simples:
+
+```
+<center>
+
+---
+
+<img src="img/foto_william.jpg" width="130px" style="border-radius: 65px;"/>
+
+**William Amorim**
+
+Doutor em Estatística pelo IME-USP. Trabalhando diaramente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no [Twitter](https://twitter.com/wamorim_).
+
+---
+
+</center>
+```
+
+Veja que só precisamos usar a tag `img` para deixar a imagem redonda e usamos a tag `center` pois realmente compensa o crime. Caso contrário, o código seria totalmente Markdown. A mesma mini bio já é bem mais chato de construir e manter na UI de um shiny app.
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      shiny::tags$hr(),
+      shiny::tags$img(
+        src = "img/foto_william.jpg",
+        width = "130px",
+        style = "border-radius: 65px; display: block; margin: auto;"
+      ),
+      shiny::tags$p(
+        shiny::tags$strong("William Amorim"),
+        style = "text-align: center;"
+      ),
+      shiny::tags$p(
+        style = "text-align: center;",
+        "Doutor em Estatística pelo IME-USP. Trabalhando diaramente 
+        com análise de dados, programação em R e criação de dashboards.
+        Falo sobre Shiny no",
+        shiny::tags$a(
+          href = "https://twitter.com/wamorim_",
+          "Twitter."
+        )
+      ),
+      shiny::tags$hr()
+    )
+  )
+)
+```
+
+Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas e cheias de texto. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhamos muitas tags HTML para criar, scripts R não foram feitos para atender aos cuidados que textos carecem.
+
+A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny transforme em HTML e inclua no lugar adequado apenas na hora do `runApp()`. Para isso usamos a função `shiny::includeMarkdown()`.
+
+Supondo que salvamos o markdown da mini bio em um arquivo `minibio_william.md`, a nossa UI então ficaria:
+
+```{r, eval=FALSE}
+ui <- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      includeMarkdown("minibio_william.md")
+    )
+  )
+)
+```
+
+Vale ressaltar que essa função compila arquivos Markdown (`.md`) e não R Markdown (`.Rmd`). Se você gostaria de rodar códigos R para gerar saídas HTML, você deve fazer isso dentro do próprio Shiny.
+
+É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
+
+Até a próxima!
