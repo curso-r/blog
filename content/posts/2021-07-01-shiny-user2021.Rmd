@@ -13,7 +13,7 @@ A useR é atualmente o maior evento de R do mundo. A [edição 2021](https://use
 
 Neste post, vou listar o que rolou sobre Shiny na edição desse ano. Todas as palestras estão disponíveis no YouTube. 
 
-Em resumo, o tema subjacente das palestras é "Olha como o Shiny é foda!", o que é muito legal para aumentar o nosso repertório de argumentos na hora de levar o Shiny para dentro das empresas e universidades. 
+Em resumo, o tema subjacente das palestras é "Olha como o Shiny é incrível!", o que é muito legal para aumentar o nosso repertório de argumentos na hora de levar o Shiny para dentro das empresas e universidades. 
 
 A minha preferida foi a "Unit Testing Shiny App Reactivity", porque testes no Shiny são uma coisa que ainda não faço e queria bastante aprender. A palestra me motivou a continuar estudando o assunto. 
 
@@ -23,7 +23,7 @@ A minha preferida foi a "Unit Testing Shiny App Reactivity", porque testes no Sh
 **Nível**: iniciante
 **Quem**: Weronika Schary e Filip Paskali
 **Descrição**: apresentação de um aplicativo Shiny que auxilia na detecção de doenças a partir de análises de imagens.
-**Link**: https://youtu.be/kIlcE9DWzZQ?t=241
+**Link**: https://youtu.be/olmKEqBpWpE?t=130
 
 ## Unit Testing Shiny App Reactivity
 
@@ -31,7 +31,7 @@ A minha preferida foi a "Unit Testing Shiny App Reactivity", porque testes no Sh
 **Nível**: intermediário
 **Quem**: Jonathan Sidi
 **Descrição**: apresentação do pacote [`{reactor}`](https://github.com/yonicd/reactor), que tem como objetivo diagnosticar problemas de reatividade em um Shiny app.
-**Link**: https://youtu.be/kIlcE9DWzZQ?t=1475
+**Link**: https://youtu.be/olmKEqBpWpE?t=1349
 
 
 ## ShinyQuickStarter: Build Shiny apps interactively with Drag & Drop
@@ -40,7 +40,7 @@ A minha preferida foi a "Unit Testing Shiny App Reactivity", porque testes no Sh
 **Nível**: iniciante 
 **Quem**: Leon Binder
 **Descrição**: apresentação de um addin para o RStudio que permite a construção de aplicativos Shiny (e módulos) a partir de uma interface *arraste e solte*.
-**Link**: https://youtu.be/kIlcE9DWzZQ?t=2549
+**Link**: https://youtu.be/olmKEqBpWpE?t=2407
 
 
 ## The ShinyProxy Good News Show
@@ -49,7 +49,7 @@ A minha preferida foi a "Unit Testing Shiny App Reactivity", porque testes no Sh
 **Nível**: intermediário
 **Quem**: Tobia De Koninck
 **Descrição**: apresentação do ShinyProxy, solução de código aberto para empresas gerenciarem o deploy de aplicativos Shiny.
-**Link**: https://youtu.be/kIlcE9DWzZQ?t=3840
+**Link**: https://youtu.be/olmKEqBpWpE?t=3676
 
 
 ## Shiny PoC to Production Application in 8 steps
@@ -59,6 +59,24 @@ A minha preferida foi a "Unit Testing Shiny App Reactivity", porque testes no Sh
 **Quem**: Marcin Dubel
 **Descrição**: apresentação de um *workflow* para desenvolvimento de aplicativos Shiny no contexto empresarial.
 **Link**: https://youtu.be/aYV3bCu405k?t=78
+
+
+## Structure your app: introduction to Shiny modules
+
+**Tema**: desenvolvimento de Shiny apps
+**Nível**: iniciante
+**Quem**: Jonas Hagenberg
+**Descrição**: motivação e introdução ao uso de módulos no Shiny.
+**Link**: https://youtu.be/oOYaHsPXLvs
+
+
+## shiny.fluent and shiny.react: Build Beautiful Shiny Apps Using Microsoft's Fluent UI
+
+**Tema**: desenvolvimento de Shiny apps
+**Nível**: intermediário
+**Quem**: Marek Rogala
+**Descrição**: ensina a utilizar os pacotes {shiny.fluent} e {shiny.react} para construir UIs utilizando o framework Microsoft Fluent UI e a biblioteca JavaScript React.
+**Link**: https://youtu.be/LXpPNfHKyrU
 
 É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
 
