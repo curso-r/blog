@@ -1,0 +1,184 @@
+---
+title: "Rolando Dados com {droll}"
+date: "2021-08-12"
+tags: ["dnd", "probabilidade", "dados"]
+categories: ["pacotes"]
+image: "images/posts/banner/droll.jpg"
+author: ["Caio"]
+summary: "Um pacote em R analisar rolagens de dados e calcular suas probabilidades"
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "#>")
+library(droll)
+```
+
+**droll** [ˈdrōl] _(adj.)_. **1**. (Ing.) Divertido, especialmente de forma
+incomum.
+
+droll é um pacote R para parsear a notação usada para descrever dados, analisar
+rolagens, calcular probabilidades de sucesso e gerar gráficos das distribuições
+dos resultados. Ele pode ajudar DMs detalhistas a preparar encontros (in)justos
+com antecedência ou decidir a DC apropriada para um teste na hora. Jogadores
+também podem usar o droll para determinar a melhor estratégia quando em uma
+situação difícil.
+
+Ele foi feito para ser uma alternativa muito leve (só uma dependência
+obrigatória), muito rápida (menos de 0,4s para calcular a distribuição completa
+de 40d6) e muito precisa (representação interna simbólica cortesia do Ryacas)
+para o [anydice](https://anydice.com/) no R.
+
+## Instalação
+
+Instale a versão estável do CRAN com:
+
+``` r
+install.packages("droll")
+```
+
+Ou instale a versão em desenvolvimento do
+[GitHub](https://github.com/curso-r/droll) com:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("curso-r/droll")
+```
+
+## Uso
+
+O que você procura no droll? Você é um usuário nível 1, um programador
+experiente nível 10, ou um estatístico divino nível 20? Escolha sua classe:
+
+### 🖍️ Usuário
+
+O uso mais básico do droll envolve simplesmente rolar dados. Você pode criar
+qualquer dado que quiser com a função `d()` e escrever qualquer expressão que
+envolva aquele dado. Note que, se você quiser rolar NdX, você deveria escrever
+`N * dX`.
+
+```{r}
+# Criar alguns dados
+d20 <- d(20)
+d6  <- d(6)
+d4  <- d(4)
+
+# Rolar um teste enquanto abençoado
+(d20 + 8) + d4
+
+# Rolar o dano!!
+8 * d6
+
+# Rolar um teste de resistência de destreza com desvantagem
+if (min(d20, d20) + 4 < 18) {
+  print("Dano completo!")
+} else {
+  print("Metade do dano.")
+}
+```
+
+Simples e fácil, certo? Se você é um DM, você também pode querer usar duas
+funções: `check_prob()` e `check_dc()`. Elas permitem que você,
+respectivamente, calcule a probabilidade de passar (ou falhar) em um teste e
+encontrar a DC necessária para que um teste tenha uma certa probabilidade de
+sucesso (ou erro). Você não precisa nem criar os dados que você vai usar dentro
+delas!
+
+```{r}
+# Qual é a probabilidade que esse jogador passe em um teste de DC 15?
+check_prob(d20 + 8, 15)
+
+# Qual deveria ser a DC para que esse jogador tenha 50% de chance de sucesso?
+check_dc(d20 + 8, 0.5)
+
+# Qual é a probabilidade desse jogador falhar em um teste de DC 10?
+check_prob(d20 + 8, 10, success = FALSE)
+
+# Qual deveria ser a DC para que esse jogador tenha 90% de chance de falha?
+check_dc(d20 + 8, 0.9, success = FALSE)
+```
+
+Não há funções do tipo `attack_*()` porque as mecânicas de ataques e testes são
+as mesmas, ou seja, sucesso equivale a rolar um valor maior ou igual a um certo
+patamar. Essas funções podem, portanto, ser usadas para ataques também!
+
+### 🗡️ Programador
+
+Se você já está acostumado com a notação d/p/q/r do R, pode ser que você queira
+mais detalhes sobre a distribuição de uma rolagem. É para isso que as funções
+`droll()`, `proll()`, `qroll()`, e `rroll()` existem! Elas são, respectivamente,
+a densidade, a função de distribuição, a função de quantil, e a geração
+aleatória da distribuição definida por uma expressão de rolagem.
+
+```{r}
+# P[d20 + 8 = 12]
+droll(12, d20 + 8)
+
+# P[d20 + 8 <= 12]
+proll(12, d20 + 8)
+
+# inf{x: P[d20 + 8 <= x] >= 0.5}
+qroll(0.5, d20 + 8)
+
+# Amostrar 3 vezes de d20 + 8 
+rroll(3, d20 + 8)
+```
+
+Quando você aprender a usar essas quatro funções, você pode olhar as suas
+variações `plot_*()` delas. Elas geram gráficos (usando o ggplot2 se ele estiver
+disponível) correspondendo às distribuições completas de d/p/q e um histograma
+simples no caso da `plot_rroll()`.
+
+```{r}
+# Densidade de 8d6
+droll_plot(8 * d6)
+
+# Função de distribuição de 8d6
+proll_plot(8 * d6)
+
+# Função de quantil de 8d6
+qroll_plot(8 * d6)
+
+# Histograma de 1000 rolagens de 8d6
+rroll_plot(1000, 8 * d6)
+```
+
+Toda função p/q também tem um conveniente argumento `lower.tail` que pode ser
+igual a `FALSE` para que os cálculos sejam feitos a partir da cauda superior
+da distribuição.
+
+### 🪄 Estatístico
+
+Já que você é um veterano do R, você precisa ser capaz de dobrar o droll à sua
+vontade. Se você gostaria de ver o tecido da realidade do droll, você pode usar
+a função `r()` para obter uma distribuição de rolagem completa. Se você quiser
+precisão máxima, você também pode impedir o droll de converter a sua
+representação interna (operada pelo Ryacas) para _doubles_ com `precise = TRUE`.
+
+```{r}
+# Obter a distribuição completa de 8d6
+r(8 * d6)
+
+# Poder ilimitado
+r(8 * d6, precise = TRUE)
+```
+
+A tabela retornada por `r()` pode ser usada no lugar do argumento `roll` de
+todas as funções discutidas acima. Isso pula os cálculos internos, um atalho
+valioso se você quiser rodar múltiplos diagnósticos para a mesma expressão de
+rolagem.
+
+Como um estatístico nível 20, você também não está limitado pelos dados internos
+do droll. Você pode criar dados personalizados usando a mesma função `d()`
+descrita anteriormente.
+
+```{r}
+# Criar um dado "fudge"
+dF <- d(-1:1)
+rroll(5, dF)
+
+# Criar um 2d20kh, um "dado de vantagem"
+df <- r(max(d20, d20))
+kh <- d(rep(df$outcome, df$n))
+rroll(5, kh)
+```
