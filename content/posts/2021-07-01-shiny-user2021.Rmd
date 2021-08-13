@@ -1,12 +1,11 @@
 ---
 title: "Shiny no useR 2021"
-date: "2021-07-07"
+date: "2021-08-13"
 tags: ["shiny", "useR"]
 categories: ["divulgação"]
 image: "images/posts/banner/shiny-user2021.jpeg"
 author: ["William"]
 summary: "Veja o que rolou de Shiny na userR 2021."
-draft: true
 ---
 
 A useR é atualmente o maior evento de R do mundo. A [edição 2021](https://user2021.r-project.org/) aconteceu entre os dias 5 e 9 de julho, no modelo online, e contou com diversas apresentações, tutoriais, *short talks* e integração da comunidade.
