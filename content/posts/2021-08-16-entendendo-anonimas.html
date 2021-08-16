@@ -1,0 +1,155 @@
+---
+title: "Entendendo Funções Anônimas de Uma Vez por Todas"
+date: "2021-08-16"
+tags: ["tidyverse", "purrr"]
+categories: ["tutoriais"]
+image: "images/posts/banner/lambda.png"
+author: ["Caio"]
+summary: "Funções anônimas, funções lambda, notação de fórmula: muitos nomes para uma coisa que pouca gente entende"
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Uma das funcionalidades mais interessantes do R é a possibilidade de estender a
+linguagem para domínios específicos. A
+<a href="https://blog.curso-r.com/posts/2021-07-27-rlang-para-filhotes/"><em>non-standard evaluation</em></a>
+garante que até modificações à estrutura fundamental do R podem ser realizadas
+sem problema. Hoje vamos falar de um assunto que muita gente quer aprender,
+mas que pouca gente entende de verdade: funções anônimas.</p>
+<p>Se você não souber o que é uma função anônima, pode ser que você conheça esse
+conceito por outro nome. Também chamada de “função lambda”, “notação de fórmula”
+ou “notação de til”, ela aparece principalmente em programas que usam o {purrr}
+apesar de não serem exclusividade desse pacote. Resumindo, se você já viu algo
+do tipo <code>~.x</code> e não entendeu do que se tratava, este post é para você.</p>
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Funções anônimas são, essencialmente, um jeito de simplificar a criação de
+funções pequenas. Em poucas palavras, o nosso objetivo é não ter que declarar
+uma função nova inteira com <code>function() { ... }</code> para poder usá-la dentro de
+um programa.</p>
+<p>O exemplo que será utilizado na explicação a seguir será a função <code>conta_na()</code>
+que (não surpreendentemente) conta o número de <code>NA</code>s em um vetor. Vamos usá-la
+dentro de um <code>map()</code> para que ela seja aplicada a todas as colunas de um data
+frame. Sendo assim, partiremos da forma mais verborrágica possível desse código
+e tentaremos chegar, intuitivamente, nas funções anônimas.</p>
+<p>Uma ressalva importante é que a notação explicada aqui <strong>só funciona dentro do
+{tidyverse}</strong>! No final do texto será apresentada uma alternativa que funciona
+fora desse contexto, mas, por enquanto, a notação abaixo só pode aparecer nos
+argumentos <code>.f</code>, <code>.fn</code> e <code>.fns</code> utilizados dentro do {tidyverse}.</p>
+</div>
+<div id="conceito" class="section level2">
+<h2>Conceito</h2>
+<p>Vamos imaginar uma função <code>conta_na()</code> que conta o número de <code>NA</code>s em uma coluna
+de um data frame. Para aplicá-la a todas as colunas do data frame, podemos, por
+exemplo, utilizar a função <code>map()</code> do pacote {purrr} como no exemplo abaixo:</p>
+<pre class="r"><code>conta_na &lt;- function(vetor) {
+  sum(is.na(vetor))
+}
+
+map_dbl(starwars, conta_na)</code></pre>
+<pre><code>#&gt;       name     height       mass hair_color skin_color  eye_color birth_year 
+#&gt;          0          6         28          5          0          0         44 
+#&gt;        sex     gender  homeworld    species      films   vehicles  starships 
+#&gt;          4          4         10          4          0          0          0</code></pre>
+<p>No R, quando temos uma função simples de uma linha, é perfeitamente possível
+não colocar o seu corpo em uma linha separada. Veja como o código já fica um
+pouco mais compacto (saída omitida daqui em diante):</p>
+<pre class="r"><code>conta_na &lt;- function(vetor) { sum(is.na(vetor)) }
+
+map_dbl(starwars, conta_na)</code></pre>
+<p>Agora, se temos uma função que cabe inteira em uma linha, o R nos permite também
+omitir as chaves: por exemplo, m if-else pode ser escrito
+<code>if (cond) resp1 else resp2</code> se as respostas não tiverem mais de uma linha. No
+nosso caso, vamos reduzir ainda mais a <code>conta_na()</code>:</p>
+<pre class="r"><code>conta_na &lt;- function(vetor) sum(is.na(vetor))
+
+map_dbl(starwars, conta_na)</code></pre>
+<p>O próximo passo seria encurtar o nome do argumento da função, utilizando algo
+mais genérico. Poucas pessoas sabem, mas o R permite nomes começando com <code>.</code>!
+Por motivos que ficarão claros a seguir, vamos escolher <code>.x</code> para ser o nome do
+nosso argumento:</p>
+<pre class="r"><code>conta_na &lt;- function(.x) sum(is.na(.x))
+
+map_dbl(starwars, conta_na)</code></pre>
+<p>Agora vem a grande sacada. Tudo que fizemos até agora funciona no R como um
+todo, mas, se atendermos algumas condições extras, podemos reduzir ainda mais
+essa função.</p>
+<p>Vamos lá: se a função i) tiver apenas uma linha, ii) tiver apenas 1 argumento,
+iii) tiver <code>.x</code> como seu único argumento <code>.x</code> e iv) estiver sendo utilizada como
+argumento de uma função do {tidyverse}, então podemos omitir o <code>function(.x)</code>
+(já que isso é informação redundante dadas as condições) e trocá-lo por um
+singelo <code>~</code>:</p>
+<pre class="r"><code>conta_na &lt;- ~ sum(is.na(.x))
+
+map_dbl(starwars, conta_na)</code></pre>
+<p>O último passo é o motivo de chamarmos essa notação de “função anônima”. Dado
+que nossa função já é tão pequena e utilizamos ela em apenas um lugar, por que
+precisamos dar um nome para ela? É mais fácil declará-la diretamente dentro do
+<code>map()</code> sem um nome, ou seja, “anonimamente”:</p>
+<pre class="r"><code>map_dbl(starwars, ~ sum(is.na(.x)))</code></pre>
+<pre><code>#&gt;       name     height       mass hair_color skin_color  eye_color birth_year 
+#&gt;          0          6         28          5          0          0         44 
+#&gt;        sex     gender  homeworld    species      films   vehicles  starships 
+#&gt;          4          4         10          4          0          0          0</code></pre>
+<p>Pronto, agora você sabe o que significa uma função do tipo <code>~.x</code>. Para treinar,
+tente fazer o processo reverso como no caso abaixo:</p>
+<pre class="r"><code># Fração de valores distintos dentre todos
+map_dbl(starwars, ~ length(unique(.x)) / length(.x))
+
+# Desanonimizar
+frac_distintos &lt;- ~ length(unique(.x)) / length(.x)
+map_dbl(starwars, frac_distintos)
+
+# Remover a notação de til (não é mais necessário mexer no map())
+frac_distintos &lt;- function(.x) length(unique(.x)) / length(.x)
+
+# Utilizar um nome melhor para o argumento
+frac_distintos &lt;- function(vec) length(unique(vec)) / length(vec)
+
+# Recolocar as chaves
+frac_distintos &lt;- function(vec) { length(unique(vec)) / length(vec) }
+
+# Identar o corpo da função
+frac_distintos &lt;- function(vec) {
+  length(unique(vec)) / length(vec)
+}</code></pre>
+<p>Agora fica bem mais fácil de entender o que faz o <code>map()</code> lá do começo.</p>
+</div>
+<div id="futuro" class="section level2">
+<h2>Futuro</h2>
+<p>A pergunta óbvia agora é: existe um jeito de fazer algo assim fora do
+{tidyverse}? A resposta é sim e não.</p>
+<p>Desde o
+<a href="https://blog.curso-r.com/posts/2021-05-06-o-novo-pipe-esta-chegando/">R 4.1</a>,
+o R introduziu a sua própria notação anônima. Ela funciona de maneira muito
+similar ao <code>~</code>, com a diferença de que você precisa dizer o nome do seu
+argumento. Abaixo deixo vocês com o processo de simplificação da função
+<code>conta_na()</code> para a sua versão anônima que pode ser utilizada em qualquer
+lugar e não só no {tidyverse}:</p>
+<pre class="r"><code># Conta o número de NAs em um vetor
+conta_na &lt;- function(vetor) {
+  sum(is.na(vetor))
+}
+
+# Usar uma linha só
+conta_na &lt;- function(vetor) { sum(is.na(vetor)) }
+
+# Sem necessidade de usar chaves
+conta_na &lt;- function(vetor) sum(is.na(vetor))
+
+# Se a função tem uma linha, podemos usar a nova notação
+conta_na &lt;- \(vetor) sum(is.na(vetor))
+
+# O nome do argumento pode ser qualquer coisa, não importa
+conta_na &lt;- \(v) sum(is.na(v))
+
+# Anonimizar
+map_dbl(starwars, \(v) sum(is.na(v)))</code></pre>
+<pre><code>#&gt;       name     height       mass hair_color skin_color  eye_color birth_year 
+#&gt;          0          6         28          5          0          0         44 
+#&gt;        sex     gender  homeworld    species      films   vehicles  starships 
+#&gt;          4          4         10          4          0          0          0</code></pre>
+<p>Quase tão bom quanto a notação de til!</p>
+</div>
