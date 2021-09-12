@@ -1,0 +1,90 @@
+---
+title: "Entendendo a reatividade (parte 1)"
+date: "2021-09-13"
+tags: ["shiny", "reatividade"]
+categories: ["tutorial"]
+image: "images/posts/banner/reacao-cadeia.jpg"
+author: ["William"]
+summary: "Vamos olhar mais de perto o conceito de reatividade do Shiny."
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Quando escrevemos código R, dois paradigmas estão sempre presentes:</p>
+<ul>
+<li><p>podemos avaliar uma linha de código assim que a escrevermos; e</p></li>
+<li><p>se decidirmos rodar todo o script de uma vez, as linhas de código serão avaliadas sequencialmente.</p></li>
+</ul>
+<p>Isso faz com que as nossas tarefas de análise de dados geralmente virem scripts sequenciais, cujo código não pode ser executado fora de ordem.</p>
+<p>O código abaixo, que executa a corriqueira tarefa de importar, manipular e visualizar uma base, mostra um exemplo disso. Construímos o código rodando linha a linha, para testar se estamos seguindo pelo caminho certo. Ao final, podemos rodar tudo de uma vez para obter o resultado desejado (o gráfico). Se o código for rodado fora de ordem, nada vai funcionar.</p>
+<pre class="r"><code>tab_starwars &lt;- dplyr::starwars
+
+tab_grafico &lt;- tab_starwars |&gt;
+  tidyr::unnest(films) |&gt; 
+  tidyr::drop_na(species) |&gt; 
+  dplyr::group_by(films) |&gt;
+  dplyr::summarise(total_especies = dplyr::n_distinct(species)) |&gt; 
+  dplyr::mutate(
+    films = forcats::fct_reorder(films, total_especies)
+  )
+
+tab_grafico |&gt; 
+  ggplot2::ggplot(ggplot2::aes(y = films, x = total_especies)) +
+  ggplot2::geom_col() +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(x = &quot;Total de espécies&quot;, y = &quot;Filme&quot;)</code></pre>
+<p>A reatividade é um outro paradigma de programação. Com ela, não construímos códigos que serão rodados interativamente ou sequencialmente. A ideia da programação reativa é <strong>especificar um fluxo de reatividade</strong>, isto é, um diagrama de dependências que será utilizado para definir o que deve ser executado e quando. No contexto do Shiny, o <strong>fluxo de reatividade é quem decide quais outputs devem ser recalculados quando um input muda</strong> e pode ser composto por 3 tipos de estruturas: os valores reativos, as expressões reativas e os <em>observers</em>.</p>
+<p>Os valores reativos são <strong>a origem do fluxo reativo</strong>. Eles guardam as informações que vêm da UI (a partir dos inputs) e disparam o <em>sinal de alerta</em> sempre que essas informações mudam. Os valores reativos mais comuns são aqueles dentro da lista <code>input</code>.</p>
+<p>Esse <em>sinal de alerta</em> é um aviso dizendo que todos os outputs que dependem desse valor reativo precisam ser recalculados. Quem recebe esse sinal são os <em>observers</em>, isto é, as estruturas dentro do Shiny que guardam o código de cada output. Eles são o <strong>ponto final do fluxo de reatividade</strong>. Os <em>observers</em> mais comuns são as funções <code>render*()</code>.</p>
+<p>Muitas vezes, um aplicativo shiny precisa de passos intermediários, entre o input de origem e o output final. Isto é, precisamos de uma estrutura que receba um valor reativo, faça alguma conta e devolva como resultado um valor também reativo, que será utilizado posteriormente em um <em>observer</em>. Essas estruturas são as expressões reativas.</p>
+<p>Imagine um app que gere uma amostra de números aleatórios entre 1 e 10 e que o tamanho dessa amostra é definido por um input. Além disso, imagine que esse app também indique em texto qual foi o número mais sorteado. A figura a seguir mostra uma implementação desse app.</p>
+<p><img src="/images/posts/conteudo/reatividade-pt1/app_reactive.png" /><!-- --></p>
+<p>Repare no código do app, apresentado a seguir, que a criação da amostra não poderia ter sido feita diretamente dentro das funções <code>renderPlot()</code> e <code>renderText()</code>, pois gerariam amostras diferentes<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Por outro lado, a geração da amostra precisa estar dentro de um contexto reativo, pois ela utiliza um valor reativo (<code>input$num</code>), o que tira da mesa a proposta de fazer isso diretamente dentro da função <code>server</code>.</p>
+<pre class="r"><code>library(shiny)
+
+ui &lt;- fluidPage(
+  &quot;Histograma da distribuição normal&quot;,
+  sliderInput(
+    inputId = &quot;num&quot;,
+    label = &quot;Selecione o tamanho da amostra&quot;,
+    min = 1,
+    max = 1000,
+    value = 100
+  ),
+  plotOutput(outputId = &quot;hist&quot;),
+  textOutput(outputId = &quot;media&quot;)
+)
+
+server &lt;- function(input, output, session) {
+
+  amostra &lt;- reactive({
+    sample(1:10, input$num, replace = TRUE)
+  })
+
+  output$hist &lt;- renderPlot({
+    barplot(table(amostra()))
+  })
+
+  output$media &lt;- renderText({
+    contagem &lt;- sort(table(amostra()), decreasing = TRUE)
+    mais_frequente &lt;- names(contagem[1])
+    glue::glue(&quot;O número mais sorteado foi {mais_frequente}.&quot;)
+  })
+
+}
+
+shinyApp(ui, server)</code></pre>
+<p>A solução nesse caso foi utilizar a função <code>reactive()</code>. Essa função cria a expressão reativa <code>amostra</code>, que é utilizada dentro das funções <code>renderPlot()</code> e <code>renderText()</code> para obtermos a amostra sorteada. Note que, para retornar o valor de uma expressão reativa, devemos chamá-la como se fosse uma função, abrindo e fechando parênteses após o nome: <code>amostra()</code>.</p>
+<p>Nesse exemplo, o <code>input$num</code> é um valor reativo, a <code>amostra()</code> é uma expressão reativa e as funções <code>renderPlot()</code> e <code>renderText()</code> são <em>observers</em>. O fluxo reativo se inicia com um mudança no valor do <code>input$num</code> e termina com a recriação do gráfico e do texto. O valor reativo, quando alterado, avisa à expressão reativa <code>amostra</code> que seu valor está desatualizado e, por sua vez, a <code>amostra</code> avisa aos <em>observers</em> <code>renderPlot()</code> e <code>renderText()</code> que seu valor está desatualizado. Assim, tanto a expressão reativa quanto os <em>observers</em> são recalculados e seus resultados enviado de volta para a UI.</p>
+<p>Se esses conceitos apresentados até agora estão muito abstratos, pense em uma fábrica de brinquedos. A fábrica utiliza algumas matérias-primas, como madeira, plástico e tecido, para fabricar os brinquetos. Nela, existem algumas máquinas que recebem a matéria-prima e a transformam em partes dos brinquedos, assim como máquinas que recebem tanto matérias-prima quanto essas partes pré-fabricadas e montam o brinquedo.</p>
+<p>Nessa metáfora, a matéria-prima representa os valores reativos (cada material pode ser visto como um input), as máquinas que produzem as partes são as expressões reativas e a máquina que monta o brinquedo são os <em>observers</em>.</p>
+<p>Na parte 2 desse post, falaremos com mais detalhes sobre essas estruturas. Daremos exemplos de valores reativos que não são inputs, observers que não são outputs e expressões reativas que não geram um fluxo de reatividade.</p>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Claro que poderíamos usar a função <code>set.seed()</code> para garantir que as amostras fossem as mesmas, mas imagine que não queremos escolher uma semente para a geração dos dados ou que, em algum outro contexto, o processo de amostragem fosse demorado e não queremos fazê-lo duas vezes.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>

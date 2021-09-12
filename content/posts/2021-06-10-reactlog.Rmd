@@ -73,5 +73,4 @@ Um [ponto importante](https://shiny.rstudio.com/reference/shiny/0.14/showReactLo
 Você pode aprender mais sobre o funcionamento do `reaclog` [clicando aqui](https://rstudio.github.io/reactlog/articles/reactlog.html).
 
 É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
-
 Até a próxima!
