@@ -2,7 +2,7 @@
 title: "Entendendo a reatividade (parte 1)"
 date: "2021-09-13"
 tags: ["shiny", "reatividade"]
-categories: ["tutorial"]
+categories: ["conceitos"]
 image: "images/posts/banner/reacao-cadeia.jpg"
 author: ["William"]
 summary: "Vamos olhar mais de perto o conceito de reatividade do Shiny."
