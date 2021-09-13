@@ -15,7 +15,7 @@ Quando escrevemos código R, dois paradigmas estão sempre presentes:
 - se decidirmos rodar todo o script de uma vez, as linhas de código serão avaliadas sequencialmente.
 
 Isso faz com que as nossas tarefas de análise de dados geralmente virem scripts sequenciais, cujo código não pode ser executado fora de ordem.
-
+ 
 O código abaixo, que executa a corriqueira tarefa de importar, manipular e visualizar uma base, mostra um exemplo disso. Construímos o código rodando linha a linha, para testar se estamos seguindo pelo caminho certo. Ao final, podemos rodar tudo de uma vez para obter o resultado desejado (o gráfico). Se o código for rodado fora de ordem, nada vai funcionar.
 
 ```{r, eval = FALSE}
