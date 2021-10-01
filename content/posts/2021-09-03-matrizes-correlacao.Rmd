@@ -1,0 +1,43 @@
+---
+title: "Matrizes de correlação com o R usando o pacote GGally"
+date: "2021-09-03"
+tags: ["banco de dados"]
+categories: ["análises", "conceitos"]
+image: "images/posts/banner/correl.png"
+featuredImage: "images/posts/banner/correl.png"
+author: ["Fernando"]
+summary: "Muitas vezes queremos ter um jeito rápido de visualizar as relações que existem entre as colunas das nossas bases de dados. No post de hoje vamos falar sobre como fazer isso usando uma matriz de correlação."
+draft: false
+---
+
+No nosso trabalho como Cientistas de Dados é muito comum procurar semelhanças e diferenças entre variáveis de bancos de dados. Existem muitos métodos para procurar por esse tipo de coisa e normalmente eles trabalham com a noção de dependência estatística e suas métricas ou com a noção de redução de dimensionalidade (a capacidade de representar muitas variáveis por um conjunto reduzido). Nessa primeira estratégia, as matrizes de correlação são as técnicas mais comuns e difundidas. No post de hoje, vamos explorar a função `ggcorr` do pacote `GGally` que nos ajuda a visualizar a matriz de correlação.
+
+Quando estamos trabalhando com dados contínuos, isso é: quando as nossas variáveis são todas numéricas (ou no mínimo ordenadas), é possível utilizar os métodos que estão na função `ggcorr` do pacote `GGally`. Essa função constrói um mapa de calor que nos mostra quais pares de variáveis da nossa tabela possuem maior correlação. Essa correlação por sua vez pode ser medida utilizando três métricas: o coeficiente de `kendall` e as correlações de `pearson` e `spearman`. Veja uma aplicação desse método à base de dados socioeconômicos do Gapminder. Aí é possível ver que a expectativa de vida e o pib são bastante correlacionados, mas o mesmo não acontece com o PIB e a população, por exemplo.
+
+```{r}
+
+library(tidyverse)
+
+dados::dados_gapminder |> 
+  #select(-pais, -continente) |> 
+  GGally::ggcorr(method = c('all.obs', 'spearman'))
+```
+
+Podemos também construir matrizes um pouco maiores e obter resultados parecidos:
+
+```{r}
+
+library(tidyverse)
+
+dados::mtcarros |> 
+  #select(-pais, -continente) |> 
+  GGally::ggcorr(method = c('all.obs', 'spearman'))
+```
+
+# Gostou? Quer saber mais?
+
+Se você quiser aprender um pouco mais sobre esse assunto, temos alguns cursos que tocam os temas deste post. Dê uma olhada nos nossos cursos de [Regressão Linear](https://www.curso-r.com/cursos/regressao-linear/) ou [Machine Learning](https://www.curso-r.com/cursos/intro-machine-learning/) e aproveite!
+
+Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso [R para Ciência de Dados I](https://curso-r.com/cursos/r4ds-1/) e aproveite!
+
+Caso você tenha dúvidas entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail contato@curso-r.com. 
