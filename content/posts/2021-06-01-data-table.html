@@ -1,8 +1,8 @@
 ---
 title: "Manipulação de dados usando o pacote data.table"
-author: ["Fernando Corrêa"] 
+author: ["Fernando Corrêa"]
 date: '2021-06-01'
-categories: ["tutoriais"] 
+categories: ["tutoriais"]
 image: "images/posts/banner/dtplyr.png"
 tags: ["faxina", "manipulacao", "pacotes"]
 summary: "Você certamente já ouviu falar no pacote dplyr, mas também conhece o pacote data.table? No post de hoje vamos explorar um pouco desse grande pacote!"
@@ -46,7 +46,7 @@ DTvoos[
   # na terceira vírgula, podemos fazer contas agrupadas usando o parâmetro &quot;by&quot;
   # que fica disponível uma vez que fazemos &quot;library(data.table)&quot;. Para escolher
   # as funções que serão usadas no agrupamento sem aspas, precisamos usar a
-  # notação 
+  # notação
 ]</code></pre>
 <pre><code>##    origem    valor
 ## 1:    JFK 6.635776
@@ -65,23 +65,23 @@ library(dplyr)
 library(tidyr)
 
 voos2 &lt;- lazy_dt(dados::voos)
-# esse aqui é o pulo do gato. um `lazy_dt` vai sempre traduzir 
+# esse aqui é o pulo do gato. um `lazy_dt` vai sempre traduzir
 # os verbos do dplyr para comandos `DT`
 
-voos2 %&gt;% 
+voos2 %&gt;%
   group_by(origem) %&gt;%
   summarise(
     valor = mean(atraso_saida, na.rm = TRUE)
   )</code></pre>
 <pre><code>## Source: local data table [3 x 2]
 ## Call:   `_DT1`[, .(valor = mean(atraso_saida, na.rm = TRUE)), keyby = .(origem)]
-## 
+##
 ##   origem valor
 ##   &lt;chr&gt;  &lt;dbl&gt;
 ## 1 EWR     15.1
 ## 2 JFK     12.1
 ## 3 LGA     10.3
-## 
+##
 ## # Use as.data.table()/as.data.frame()/as_tibble() to access results</code></pre>
 <p>Claro que existem situações em que a tradução não será possível, principalmente quando tentarmos usar funções do pacote
 <code>tidyr</code> que não tem suporte no <code>dtplyr</code>. Por outro lado, para grande parte das manipulações simples que fazemos com <code>dplyr</code>, o pacote <code>dtplyr</code> vai dar conta.</p>

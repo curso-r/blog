@@ -1,6 +1,6 @@
 ---
 title: "Manipulação de dados usando o pacote data.table"
-author: ["Fernando Corrêa"] 
+author: ["Fernando"] 
 date: '2021-06-01'
 categories: ["tutoriais"] 
 image: "images/posts/banner/dtplyr.png"

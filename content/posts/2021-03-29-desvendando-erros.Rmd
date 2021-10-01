@@ -4,7 +4,7 @@ date: "2021-03-29"
 tags: ["conceitos"]
 categories: ["conceitos", "erros", "debugging", "boas práticas"]
 image: "images/posts/banner/dog-pc.jpg"
-author: ["Beatriz Milz", "Fernando Corrêa"]
+author: ["Beatriz Milz", "Fernando"]
 summary: "Esse post tem como objetivo listar alguns erros comuns quando programamos em R, e dicas de como resolvê-los!"
 draft: false
 ---
