@@ -15,33 +15,21 @@ draft: false
 
 <p>No nosso trabalho como Cientistas de Dados é muito comum procurar semelhanças e diferenças entre variáveis de bancos de dados. Existem muitos métodos para procurar por esse tipo de coisa e normalmente eles trabalham com a noção de dependência estatística e suas métricas ou com a noção de redução de dimensionalidade (a capacidade de representar muitas variáveis por um conjunto reduzido). Nessa primeira estratégia, as matrizes de correlação são as técnicas mais comuns e difundidas. No post de hoje, vamos explorar a função <code>ggcorr</code> do pacote <code>GGally</code> que nos ajuda a visualizar a matriz de correlação.</p>
 <p>Quando estamos trabalhando com dados contínuos, isso é: quando as nossas variáveis são todas numéricas (ou no mínimo ordenadas), é possível utilizar os métodos que estão na função <code>ggcorr</code> do pacote <code>GGally</code>. Essa função constrói um mapa de calor que nos mostra quais pares de variáveis da nossa tabela possuem maior correlação. Essa correlação por sua vez pode ser medida utilizando três métricas: o coeficiente de <code>kendall</code> e as correlações de <code>pearson</code> e <code>spearman</code>. Veja uma aplicação desse método à base de dados socioeconômicos do Gapminder. Aí é possível ver que a expectativa de vida e o pib são bastante correlacionados, mas o mesmo não acontece com o PIB e a população, por exemplo.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
-<pre><code>## v ggplot2 3.3.5     v purrr   0.3.4
-## v tibble  3.1.2     v dplyr   1.0.7
-## v tidyr   1.1.3     v stringr 1.4.0
-## v readr   2.0.1     v forcats 0.5.1</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.1.1</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.1.1</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>dados::dados_gapminder |&gt; 
+<pre class="r"><code>
+library(tidyverse)
+
+dados::dados_gapminder |&gt; 
   #select(-pais, -continente) |&gt; 
   GGally::ggcorr(method = c(&#39;all.obs&#39;, &#39;spearman&#39;))</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
-##   method from   
-##   +.gg   ggplot2</code></pre>
-<pre><code>## Warning in GGally::ggcorr(dados::dados_gapminder, method = c(&quot;all.obs&quot;, : data
-## in column(s) &#39;pais&#39;, &#39;continente&#39; are not numeric and were ignored</code></pre>
-<p><img src="/posts/2021-09-03-matrizes-correlacao_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/posts/2021-09-03-matrizes-correlacao_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Podemos também construir matrizes um pouco maiores e obter resultados parecidos:</p>
-<pre class="r"><code>library(tidyverse)
+<pre class="r"><code>
+library(tidyverse)
 
 dados::mtcarros |&gt; 
   #select(-pais, -continente) |&gt; 
   GGally::ggcorr(method = c(&#39;all.obs&#39;, &#39;spearman&#39;))</code></pre>
-<p><img src="/posts/2021-09-03-matrizes-correlacao_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/posts/2021-09-03-matrizes-correlacao_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div id="gostou-quer-saber-mais" class="section level1">
 <h1>Gostou? Quer saber mais?</h1>
 <p>Se você quiser aprender um pouco mais sobre esse assunto, temos alguns cursos que tocam os temas deste post. Dê uma olhada nos nossos cursos de <a href="https://www.curso-r.com/cursos/regressao-linear/">Regressão Linear</a> ou <a href="https://www.curso-r.com/cursos/intro-machine-learning/">Machine Learning</a> e aproveite!</p>
