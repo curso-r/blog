@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE,
                       eval=TRUE, cache = TRUE)
 ```
 
-Componentes principais são bastante utilizados em modelagem estatística, mas a sua definição matemática rigorosa faz com que a ACP pareça um conceito mais abstrato do que somos capazes de compreender, em particular quando falam **“maximizar a variância total”** e **“diminuir a dimensionalidade”**. A primeira reação é um grande “HEIN?”.
+Componentes principais são bastante utilizados em modelagem estatística, mas a sua definição matemática rigorosa faz com que a ACP pareça um conceito mais abstrato do que somos capazes de compreender, em particular quando falam **“maximizar a variância total”** e **“diminuir a dimensionalidade”**. A primeira reação é um grande "HEIN?".
 
 Abaixo tem alguns gráficos em 3 dimensões que dão uma boa ilustração sobre o que essas duas afirmativas querem dizer e, mesmo sendo um exemplo simples, irão ajudar a extrapolar a ideia para problemas mais complexos. 
 
