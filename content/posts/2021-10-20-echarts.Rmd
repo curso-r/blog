@@ -12,3 +12,4 @@ draft: true
 O pacote `ggplot2` é uma ferramenta maravilhosa para produzirmos gráficos no R. Quando entendemos a sua sintaxe, nos tornamos capazes de fazer uma variedade enorme de gráficos e dar a eles a cara que quisermos.
 
 Podemos inserir um `ggplot` em um aplicativo Shiny utilizando a dupla de funções `plotOutput()`/`renderPlot()`. Essas funções estão preparadas para receber um objeto gerado pelas funções do `ggplot` (uma lista) e transformá-lo em uma imagem, que será inserida no HTML do app por meio da tag `<img>`.
+
