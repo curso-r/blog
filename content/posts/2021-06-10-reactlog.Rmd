@@ -5,7 +5,7 @@ tags: ["shiny", "reatividade", "reactlog"]
 categories: ["tutoriais"]
 image: "images/posts/banner/reactlog.png"
 author: ["William"]
-summary: "Aprenda a construir um diagrama do fluxo reatividade do seu Shiny app."
+summary: "Aprenda a construir um diagrama do fluxo reatividade do seu Shiny app." 
 ---
 
 ```{r, include=FALSE}

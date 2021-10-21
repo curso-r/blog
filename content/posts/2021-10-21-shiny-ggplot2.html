@@ -1,0 +1,84 @@
+---
+title: "Gráficos no Shiny: ggplot2"
+date: "2021-10-20"
+tags: ["shiny", "gráficos", "echarts"]
+categories: ["pacotes"]
+image: "images/posts/banner/ggplot-shiny.jpg"
+author: ["William"]
+summary: "Conheça uma ótima opção para fazer gráficos interativos."
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Gráficos são a alegria da festa em um aplicativo Shiny (ou dashboards em geral). Embora possamos usar tabelas, textos ou caixinhas coloridas com valores para comunicar nossos resultados, são eles que geralmente chamam e prendem a atenção de quem está utilizando o app.</p>
+<p>Para dar a atenção que eles merecem, farei aqui uma série de posts para apresentar as principais alternativas para construção de gráficos dentro do Shiny. Falaremos do <code>plotly</code>, do <code>echarts4r</code>, do <code>highcharter</code>, começando neste post pelo nosso fiel companheiro: o <code>ggplot2</code>.</p>
+<hr />
+<p>O pacote <code>ggplot2</code> é uma ferramenta maravilhosa para produzirmos gráficos no R. Quando entendemos a sua sintaxe, nos tornamos capazes de fazer uma variedade enorme de gráficos e dar a eles a cara que quisermos.</p>
+<p>Nada do que o pacote <code>ggplot2</code> tem para oferecer se perde quando estamos construindo gráficos dentro de um Shiny app. Pelo contrário, ainda ganhamos um novo recurso!</p>
+<p>Para inserir um <code>ggplot</code> em um aplicativo Shiny, utilizamos a dupla de funções <code>plotOutput()</code>/<code>renderPlot()</code>. Essas funções estão preparadas para receber um objeto gerado pelas funções do <code>ggplot</code> e renderizá-lo em uma <strong>imagem</strong>, que será inserida no HTML do app por meio da tag <code>&lt;img&gt;</code>. Veja um exemplo abaixo.</p>
+<pre class="r"><code>library(shiny)
+library(ggplot2)
+
+colunas &lt;- names(mtcars)
+
+ui &lt;- fluidPage(
+  titlePanel(&quot;Shiny app com um ggplot&quot;),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        &quot;varX&quot;,
+        label = &quot;Variável eixo X&quot;,
+        choices = colunas
+      ),
+      selectInput(
+        &quot;varY&quot;,
+        label = &quot;Variável eixo Y&quot;,
+        choices = colunas,
+        selected = colunas[6]
+      )
+    ),
+    mainPanel(
+      plotOutput(&quot;grafico&quot;)
+    )
+  )
+)
+
+server &lt;- function(input, output, session) {
+  output$grafico &lt;- renderPlot({
+    ggplot(mtcars, aes(x = .data[[input$varX]], y = .data[[input$varY]])) +
+      geom_point()
+  })
+}
+
+shinyApp(ui, server)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="/images/posts/conteudo/shiny-ggplot/app.png" alt="App com dois inputs especificando as variáveis do eixo x e y de um ggplot ."  />
+<p class="caption">
+Figura 1: App com dois inputs especificando as variáveis do eixo x e y de um ggplot .
+</p>
+</div>
+<p>O objeto gerado pelo <code>ggplot</code> é uma lista com classe <code>gg</code> e <code>ggplot</code>, que contém todas as informações necessárias para o R desenhar o gráfico.</p>
+<pre class="r"><code>p &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point()
+
+class(p)</code></pre>
+<pre><code>## [1] &quot;gg&quot;     &quot;ggplot&quot;</code></pre>
+<pre class="r"><code>names(p)</code></pre>
+<pre><code>## [1] &quot;data&quot;        &quot;layers&quot;      &quot;scales&quot;      &quot;mapping&quot;     &quot;theme&quot;      
+## [6] &quot;coordinates&quot; &quot;facet&quot;       &quot;plot_env&quot;    &quot;labels&quot;</code></pre>
+<p>Repare que, se salvássemos o <code>ggplot</code> em um arquivo (<code>.png</code> por exemplo), poderíamos simplesmente usar a dupla <code>imageOutput()</code>/<code>renderImage()</code> para inserir um gráfico no nosso app, já que essas funções também criam uma tag <code>&lt;img&gt;</code>, mas a partir de um arquivo de imagem local.</p>
+<p>Mas não precisar salvar o <code>ggplot</code> em um arquivo não é a única vantagem de utilizarmos as funções <code>plotOutput()</code>/<code>renderPlot()</code>. Essas funções inserem um objeto intermediário no diagrama de reatividade do app: um <code>plotObj</code>. Esse objeto é justamente a lista gerada pelas funções que utilizamos na construção do gráfico e que só é recalculado quando um dos inputs existentes no código da função <code>renderPlot()</code> muda.</p>
+<p><strong>Leia mais</strong>: <a href="https://blog.curso-r.com/posts/2021-06-10-reactlog/">Diagramas de reatividade no shiny (reactlog)</a></p>
+<p>Já o gráfico renderizado depende não apenas desse <code>plotObj</code>, mas também do comprimento e altura da janela do navegador de quem estiver utilizando o app. Dessa maneira, o gráfico é renderizado não apenas quando o <code>plotObj</code> muda, mas também quando o espaço disponível para a tag <code>&lt;img&gt;</code> na tela também muda. Nesse segundo caso, o R gera o gráfico novamente, redesenhando seus elementos para a nova proporção de comprimento e altura. E o melhor é que ele faz isso sem precisar rodar o código da função <code>renderPlot()</code> novamente, pois tudo o que ele precisa já está salvo no <code>plotObj</code>.</p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="/images/posts/conteudo/shiny-ggplot/redimensionando.gif" alt="Gráfico sendo redimensionado conforme diminuímos o comprimento da tela."  />
+<p class="caption">
+Figura 2: Gráfico sendo redimensionado conforme diminuímos o comprimento da tela.
+</p>
+</div>
+<p>Sem esse recurso, nossos gráficos seriam apenas imagens sendo esticadas e achatadas, o que provavelmente os deixaria pixelados. Ao contrário do que acontece no R Markdown, em um relatório HTML ou em um flexdashboard por exemplo, no Shiny não precisamos nos preocupar muito com as dimensões de um <code>ggplot</code>. Ele será sempre automaticamente otimizado para o espaço disponível na tela.</p>
+<p>Mas nem tudo são flores… Por melhor que consigamos mexer no visual do nosso ggplot utilizando a função <code>theme()</code>, no fim do dia ele continuará sendo apenas uma imagem no nosso app. Isso significa que não será possível atribuir a ele qualquer comportamento interativo, como <em>tooltips</em>, <em>drildown</em> ou ações geradas por cliques no gráfico. Para isso, precisaremos utilizar bibliotecas gráficas próprias para a Web, que geralmente utilizam JavaScript para construir os gráficos e gerar interatividade.</p>
+<p>No próximo post, falaremos da biblioteca e pacote <code>plotly</code>, que permite transformamos nossos ggplots em gráficos interativos.</p>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.
+Até a próxima!</p>
