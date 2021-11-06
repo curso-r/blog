@@ -1,0 +1,69 @@
+---
+title: "Entendendo a reatividade: observers"
+date: "2021-11-05"
+tags: ["shiny", "reatividade"]
+categories: ["conceitos"]
+image: "images/posts/banner/efeito-domino.jpg"
+author: ["William"]
+summary: "Todo observer é uma função render?"
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>No <a href="https://blog.curso-r.com/posts/2021-09-12-reatividade-pt1/">último post</a>, falamos sobre as três peças fundamentais do fluxo de reatividade de um app: os valores reativos, as expressões reativas e os observers, o foco deste post.</p>
+<p>Os observers são o ponto final de um diagrama de reatividade de um aplicativo Shiny e, sem eles, o fluxo reativo não acontece. As funções <code>render*()</code>, que geram os nossos outputs, são o tipo mais comum de observer. Mas eles não são os únicos.</p>
+<p>Muitas vezes queremos usar a reatividade para disparar ações que não estão ligadas a geração de outputs, como o registro de informações em bases de dados ou a atualização de elementos da UI.</p>
+<p>Nesses casos, podemos utilizar as funções <code>observe()</code> e <code>oberveEvent()</code>. Elas funcionam de maneira similar às funções <code>reactive()</code> e <code>eventReactive()</code>, mas em vez de criar expressões reativas, elas são observers.</p>
+<div id="a-função-observe" class="section level2">
+<h2>A função <code>observe()</code></h2>
+<p>A função <code>observe({codigo})</code> monitora os valores e expressões reativas que estão dentro dela e roda seu código quando algum desses valores são modificados.</p>
+<p>A diferença do <code>observe()</code> para a função <code>reactive()</code> é que a primeira não gera expressões reativas, servindo apenas para códigos que têm efeitos colaterais.</p>
+<p>Essa função é muito utilizada com as funções da família <code>update*()</code>, que servem para atualizar valores de um input na UI.</p>
+<p>Na segunda caixa de seleção do exemplo a seguir, queremos selecionar apenas os filmes do(a) diretor(a) que selecionamos na primeira. Veja que usamos o texto <code>Carregando...</code> como um <em>placeholder</em> para o segundo <code>selectInput()</code>.</p>
+<pre class="r"><code>ui &lt;- fluidPage(
+  selectInput(
+    &quot;dir&quot;,
+    &quot;Selecione um(a) diretor(a)&quot;,
+    choices = sort(unique(imdb$diretor))
+  ),
+  selectInput(
+    &quot;filme&quot;,
+    &quot;Selecione um filme&quot;,
+    choices = &quot;Carregando...&quot;
+  )
+)</code></pre>
+<p>No <code>server</code>, atualizamos as escolhas da segunda caixa de seleção com a função <code>updateSelectInput()</code>. Veja que, como essa função está dentro de um <code>observe</code>, esse código será rodado novamente sempre que o valor de <code>input$dir</code> mudar.</p>
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  observe({
+    opcoes &lt;- imdb |&gt; 
+      dplyr::filter(diretor == input$dir) |&gt; 
+      dplyr::pull(titulo)
+    updateSelectInput(
+      session,
+      inputId = &quot;filme&quot;,
+      choices = opcoes
+    )
+  })
+}</code></pre>
+</div>
+<div id="a-função-observeevent" class="section level2">
+<h2>A função <code>observeEvent()</code></h2>
+<p>A função <code>observeEvent()</code> funciona assim como a <code>observe()</code>, mas ela escuta apenas um valor ou expressão reativa, que é definido em seu primeiro argumento, assim como na função <code>eventReactive()</code>.</p>
+<p>Ela é muito utiliza para disparar ações, como gravar informações em uma base de dados, a partir de botões.</p>
+<p>No exemplo a seguir, queremos salvar o e-mail de uma pessoa quando ela clicar no botão “Enviar dados”. A função <code>observeEvent()</code> roda o código definido dentro dela quando o botão é clicado, salvando o e-mail em um arquivo de texto.</p>
+<pre class="r"><code>ui &lt;- fluidPage(
+  textInput(&quot;email&quot;, &quot;Informe seu e-mail&quot;),
+  actionButton(&quot;enviar&quot;, &quot;Enviar dados&quot;)
+)
+
+server &lt;- function(input, output, session) {
+  
+  observeEvent(input$enviar, {
+    write(input$email, &quot;emails.txt&quot;, append = TRUE)
+  })
+}</code></pre>
+<p>As funções <code>observe()</code> e <code>oberveEvent()</code> aumentam bastante o leque de opções dos nossos aplicativos. Agora conseguimos criar fluxos reativos que não estão associados necessariamente a um output. Nessa linha, no nosso próximo post sobre reatividade, falaremos sobre como criar valores reativos que não estão associados a inputs.</p>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
+</div>

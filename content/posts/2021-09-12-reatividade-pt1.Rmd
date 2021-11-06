@@ -1,5 +1,5 @@
 ---
-title: "Entendendo a reatividade (parte 1)"
+title: "Entendendo a reatividade: fundamentos"
 date: "2021-09-13"
 tags: ["shiny", "reatividade"]
 categories: ["conceitos"]
@@ -9,7 +9,6 @@ summary: "Vamos olhar mais de perto o conceito de reatividade do Shiny."
 ---
 
 Quando escrevemos código R, dois paradigmas estão sempre presentes: 
-
 - podemos avaliar uma linha de código assim que a escrevermos; e
 
 - se decidirmos rodar todo o script de uma vez, as linhas de código serão avaliadas sequencialmente.
@@ -99,7 +98,7 @@ Se esses conceitos apresentados até agora estão muito abstratos, pense em uma 
 
 Nessa metáfora, a matéria-prima representa os valores reativos (cada material pode ser visto como um input), as máquinas que produzem as partes são as expressões reativas e a máquina que monta o brinquedo são os *observers*.
 
-Na parte 2 desse post, falaremos com mais detalhes sobre essas estruturas. Daremos exemplos de valores reativos que não são inputs, observers que não são outputs e expressões reativas que não geram um fluxo de reatividade.
+Nos próximos posts, falaremos com mais detalhes sobre essas estruturas. Daremos exemplos de valores reativos que não são inputs, observers que não são outputs e expressões reativas que não geram um fluxo de reatividade.
 
 É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
 

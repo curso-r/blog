@@ -1,8 +1,8 @@
 ---
-title: "Entendendo a reatividade (parte 1)"
+title: "Entendendo a reatividade: fundamentos"
 date: "2021-09-13"
 tags: ["shiny", "reatividade"]
-categories: ["tutorial"]
+categories: ["conceitos"]
 image: "images/posts/banner/reacao-cadeia.jpg"
 author: ["William"]
 summary: "Vamos olhar mais de perto o conceito de reatividade do Shiny."
@@ -11,10 +11,10 @@ summary: "Vamos olhar mais de perto o conceito de reatividade do Shiny."
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Quando escrevemos código R, dois paradigmas estão sempre presentes:</p>
+<p>Quando escrevemos código R, dois paradigmas estão sempre presentes:
+- podemos avaliar uma linha de código assim que a escrevermos; e</p>
 <ul>
-<li><p>podemos avaliar uma linha de código assim que a escrevermos; e</p></li>
-<li><p>se decidirmos rodar todo o script de uma vez, as linhas de código serão avaliadas sequencialmente.</p></li>
+<li>se decidirmos rodar todo o script de uma vez, as linhas de código serão avaliadas sequencialmente.</li>
 </ul>
 <p>Isso faz com que as nossas tarefas de análise de dados geralmente virem scripts sequenciais, cujo código não pode ser executado fora de ordem.</p>
 <p>O código abaixo, que executa a corriqueira tarefa de importar, manipular e visualizar uma base, mostra um exemplo disso. Construímos o código rodando linha a linha, para testar se estamos seguindo pelo caminho certo. Ao final, podemos rodar tudo de uma vez para obter o resultado desejado (o gráfico). Se o código for rodado fora de ordem, nada vai funcionar.</p>
@@ -79,7 +79,7 @@ shinyApp(ui, server)</code></pre>
 <p>Nesse exemplo, o <code>input$num</code> é um valor reativo, a <code>amostra()</code> é uma expressão reativa e as funções <code>renderPlot()</code> e <code>renderText()</code> são <em>observers</em>. O fluxo reativo se inicia com um mudança no valor do <code>input$num</code> e termina com a recriação do gráfico e do texto. O valor reativo, quando alterado, avisa à expressão reativa <code>amostra</code> que seu valor está desatualizado e, por sua vez, a <code>amostra</code> avisa aos <em>observers</em> <code>renderPlot()</code> e <code>renderText()</code> que seu valor está desatualizado. Assim, tanto a expressão reativa quanto os <em>observers</em> são recalculados e seus resultados enviado de volta para a UI.</p>
 <p>Se esses conceitos apresentados até agora estão muito abstratos, pense em uma fábrica de brinquedos. A fábrica utiliza algumas matérias-primas, como madeira, plástico e tecido, para fabricar os brinquetos. Nela, existem algumas máquinas que recebem a matéria-prima e a transformam em partes dos brinquedos, assim como máquinas que recebem tanto matérias-prima quanto essas partes pré-fabricadas e montam o brinquedo.</p>
 <p>Nessa metáfora, a matéria-prima representa os valores reativos (cada material pode ser visto como um input), as máquinas que produzem as partes são as expressões reativas e a máquina que monta o brinquedo são os <em>observers</em>.</p>
-<p>Na parte 2 desse post, falaremos com mais detalhes sobre essas estruturas. Daremos exemplos de valores reativos que não são inputs, observers que não são outputs e expressões reativas que não geram um fluxo de reatividade.</p>
+<p>Nos próximos posts, falaremos com mais detalhes sobre essas estruturas. Daremos exemplos de valores reativos que não são inputs, observers que não são outputs e expressões reativas que não geram um fluxo de reatividade.</p>
 <p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
 <p>Até a próxima!</p>
 <div class="footnotes">
