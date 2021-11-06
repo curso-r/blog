@@ -1,0 +1,324 @@
+---
+title: "Programando R no VS Code"
+date: "2021-11-06"
+tags: ["rstudio", "vscode"]
+categories: ["tutoriais"]
+image: "images/posts/banner/vscode.jpg"
+author: ["Caio"]
+summary: "Como programar R em um dos editores de código mais populares da atualidade."
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>O RStudio é uma IDE (<em>Integrated development environment</em>) incrível. Em sua
+<a href="https://www.rstudio.com/products/rstudio/release-notes/">versão mais recente</a>
+a ferramenta tem suporte para visualizações interativas, traz controle de versão
+embutido, consegue executar <em>jobs</em> em paralelo e permite programar não só em R,
+mas também em Python!</p>
+<p>Ele não é, contudo, perfeito. Pessoalmente eu tenho algumas críticas a algumas
+de suas idiossincrasias, principalmente no tocante à camada interpretativa que
+embrulha o R… Depois de muitos anos programando R e usando somente o RStudio,
+a lista de coisas que começaram a me incomodar foi crescendo:</p>
+<ul>
+<li><p>Às vezes, imprimir um objeto de texto muito grande trava a interface. Cancelar
+essa operação depois que ela foi iniciada também nem sempre funciona.</p></li>
+<li><p>O navegador de arquivos, com suas caixinhas clicáveis, deixa muito a desejar.
+Não deveria ser tão chato copiar e deletar arquivos.</p></li>
+</ul>
+<p><img src="/images/posts/conteudo/2021-11-06-r-no-vscode/multiple-items-selected.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><p>Até hoje não existe um jeito de substituir um termo (<em>find-replace</em>) em
+múltiplos arquivos. É possível procurar um termo na pasta toda
+(<strong>Ctrl + Shift + F</strong>), mas nada de substituí-lo.</p></li>
+<li><p>Até onde eu sei, é impossível abrir uma pasta com o RStudio sem que seja
+criado um arquivo <code>.Rproj</code>. Por que é necessário criar um arquivo para abrir uma
+mera pasta?</p></li>
+<li><p>Por padrão, as
+<a href="https://github.com/rstudio/rstudio/issues/9692">mensagens de diagnóstico</a>
+continuam sujando as sessões locais. Novos usuários podem estranhar esse tipo
+de alerta inesperado.</p></li>
+</ul>
+<pre class="r"><code>#&gt; Registered S3 method overwritten by &#39;quantmod&#39;:
+#&gt;   method            from
+#&gt;   as.zoo.data.frame zoo</code></pre>
+<ul>
+<li><p>Honestamente, a interface está visualmente cada vez mais atrasada. Ícones
+coloridos e difíceis de diferenciar somados a um sistema de design limitado é
+mais que um incômodo em 2021.</p></li>
+<li><p>Ainda é impossível executar funções do <code>furrr</code> no modo <em>multicore</em> dentro do
+console do RStudio.</p></li>
+</ul>
+<pre class="r"><code>plan(&quot;multicore&quot;)
+#&gt; Warning message:
+#&gt; In supportsMulticoreAndRStudio(...) :
+#&gt;   [ONE-TIME WARNING] Forked processing (&#39;multicore&#39;) is not supported when
+#&gt; running R from RStudio because it is considered unstable. For more details,
+#&gt; how to control forked processing or not, and how to silence this warning in
+#&gt; future R sessions, see ?parallelly::supportsMulticore</code></pre>
+<ul>
+<li><p>A interrupção da execução continua tendo problemas com tarefas em C e
+paralelas. Quem nunca segurou <strong>Esc</strong> na esperança de interromper um comando
+só para ter que esperar ele terminar de rodar de qualquer jeito?</p></li>
+<li><p>A bombinha. Por que a IDE inteira cai se o problema está no código executado?</p></li>
+</ul>
+<p><img src="/images/posts/conteudo/2021-11-06-r-no-vscode/bomba.png" style="display: block; margin: auto;" /></p>
+<div id="uma-possível-alternativa" class="section level2">
+<h2>Uma Possível Alternativa</h2>
+<p>Apesar de nenhum desses problemas ser fatal, eu ainda acho interessante procurar
+uma alternativa. Depender de apenas um software para programar também acaba
+virando um problema caso ele deixe de ser mantido; note que, no momento em que
+escrevo, aproximadamente 20% das
+<a href="https://github.com/rstudio/rstudio/issues"><em>issues</em></a> já cadastradas no GitHub
+do RStudio ainda estão abertas.</p>
+<p>É assim que chegamos às alternativas. Eu já testei o
+<a href="https://github.com/jalvesaq/Nvim-R">Nvim-R</a> (extensão para Vim programada por
+um brasileiro!) e o <a href="https://ess.r-project.org/">ESS</a> (extensão para o Emacs),
+mas a curva de aprendizado das duas ferramentas acabou se tornando um obstáculo.
+No final eu cheguei ao
+<a href="https://marketplace.visualstudio.com/items?itemName=Ikuyadeu.r">vscode-R</a>, a
+extensão de R para o VS Code.</p>
+<p><img src="/images/posts/conteudo/2021-11-06-r-no-vscode/vscode.png" style="display: block; margin: auto;" /></p>
+<p>Para quem não sabe, o VS Code é atualmente o editor de código mais popular do
+mundo. De acordo com uma
+<a href="https://insights.stackoverflow.com/survey/2021#most-popular-technologies-new-collab-tools">pesquisa</a>
+feita pelo Stack Overflow em 2021, 71% dos programadores usam o VS Code para
+programar, então ele deve ter algo de bom.</p>
+<p>Na minha opinião, os benefícios do VS Code, em geral, giram em torno da
+flexibilidade da ferramenta. É muito fácil instalar plugins, modificar o seu
+visual e customizar o seu funcionamento, permitindo que a IDE se torne
+verdadeiramente sua. Já, no tocante ao R, o maior benefício é que a sua
+integração com a linguagem se dá através de um terminal, ou seja, não é
+embrulhada como no RStudio.</p>
+</div>
+<div id="guia-de-instalação" class="section level2">
+<h2>Guia de Instalação</h2>
+<p>Instalar o VS Code em si é fácil. Basta ir no
+<a href="https://code.visualstudio.com/">site</a> e baixar a versão para o seu sistema
+operacional. Depois de abrir o programa, você verá uma lista de extensões
+sugeridas e é aí que precisamos configurar o R.</p>
+<p>A extensão que procuramos é identificada pelo código <code>ikuyadeu.r</code>. Basta
+instalá-la e seguir as instruções para o seu sistema operacional:
+<a href="https://github.com/REditorSupport/vscode-R/wiki/Installation:-Windows">Windows</a>,
+<a href="https://github.com/REditorSupport/vscode-R/wiki/Installation:-macOS">MacOS</a> ou
+<a href="https://github.com/REditorSupport/vscode-R/wiki/Installation:-Linux">Linux</a>.</p>
+<p>Assumindo que você esteja no Windows, os próximos passos são os seguintes:</p>
+<ol style="list-style-type: decimal">
+<li>Instalar, no R, o pacote <code>languageserver</code>:</li>
+</ol>
+<pre class="r"><code>install.packages(&quot;languageserver&quot;)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Instalar a <a href="https://www.python.org/downloads/">versão mais recente</a> do
+Python. Se você tiver qualquer versão a partir da 3, já é o suficiente:</li>
+</ol>
+<p><img src="/images/posts/conteudo/2021-11-06-r-no-vscode/python.png" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Instalar o <a href="https://github.com/randy3k/radian">Radian</a>, um console moderno
+para o R, e descobir onde ele foi instalado. Executar o seguinte no <em>prompt</em> de
+comando!</li>
+</ol>
+<pre class="sh"><code>pip install -U radian
+where.exe radian</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Abrir o arquivo de configurações avançadas do VS Code: aperte
+<strong>Ctrl + Shift + P</strong>, digite “open settings” e clique em “Open Settings (JSON)”.
+Colar o texto a seguir no arquivo e salvar (substitua o caminho do <code>rterm</code>
+pela localização do Radian):</li>
+</ol>
+<pre class="json"><code>{
+  &quot;r.bracketedPaste&quot;: true,
+  &quot;r.rterm.windows&quot;: &quot;C:\\Users\\user\\...\\radian.exe&quot;
+}</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Caso você use o debugger, instalar a extensão
+<a href="https://marketplace.visualstudio.com/items?itemName=RDebugger.r-debugger">R Debugger</a>
+e o pacote <code>vscDebugger</code>:</li>
+</ol>
+<pre class="r"><code>remotes::install_github(&quot;ManuelHentschel/vscDebugger&quot;)</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Habilitar a renderização de visualizações com o pacote <code>httpgd</code>:</li>
+</ol>
+<pre class="r"><code>install.packages(&quot;httpgd&quot;)</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>Finalmente, indicar o uso do <code>httpgd</code> para o VS Code:</li>
+</ol>
+<pre class="r"><code>usethis::edit_r_profile()
+
+# Colar a linha abaixo no .Rprofile
+options(vsc.use_httpgd = TRUE)</code></pre>
+</div>
+<div id="usando-o-vs-code" class="section level2">
+<h2>Usando o VS Code</h2>
+<p>Se você tiver configurado tudo corretamente, o VS Code estará pronto para uso.
+Para programar em R, basta abrir a pasta de um projeto e começar! Assim que você
+executar o primeiro comando R com <strong>Ctrl + Enter</strong>, um console R irá aparecer e
+você pode seguir a vida normalmente.</p>
+<p><img src="/images/posts/conteudo/2021-11-06-r-no-vscode/demo.png" style="display: block; margin: auto;" /></p>
+<p>Minha principal sugestão para o seu futuro no VS Code é: explore! Se algo te
+incomoda, a change de isso ser modificável é de praticamente 100%. Veja vídeos
+no YouTube de outras pessoas trabalhando com R no VS Code e procure extensões
+legais na loja. Se algo parecer que está errado, se informe.</p>
+<p>A minha primeira semana com o VS Code foi de adaptação, configurando tudo do
+jeito que eu mais gosto. A partir daí, eu nunca mais precisei mexer em nada,
+então consigo atestar de que a plataforma é robusta.</p>
+</div>
+<div id="bônus-configuração-extra" class="section level2">
+<h2>Bônus: Configuração Extra</h2>
+<p>Para que você não precise ter o mesmo trabalho que eu, aqui estão as minhas
+principais configurações do VS Code. Veja se elas funcionam para o seu estilo
+de trabalho. Note apenas que a minha configuração é do Mac! Troque a tecla <code>cmd</code>
+por <code>ctrl</code> de acordo.</p>
+<p><code>settings.json</code>:</p>
+<pre class="json"><code>{
+    &quot;r.rterm.mac&quot;: &quot;/opt/homebrew/bin/radian&quot;,
+    &quot;r.bracketedPaste&quot;: true,
+    &quot;editor.minimap.enabled&quot;: false,
+    &quot;workbench.startupEditor&quot;: &quot;none&quot;,
+    &quot;redhat.telemetry.enabled&quot;: false,
+    &quot;editor.tabSize&quot;: 2,
+    &quot;security.workspace.trust.untrustedFiles&quot;: &quot;open&quot;,
+    &quot;explorer.confirmDelete&quot;: false,
+    &quot;files.defaultLanguage&quot;: &quot;r&quot;,
+    &quot;terminal.integrated.defaultLocation&quot;: &quot;editor&quot;,
+    &quot;diffEditor.ignoreTrimWhitespace&quot;: false,
+    &quot;files.trimTrailingWhitespace&quot;: true,
+    &quot;editor.rulers&quot;: [
+        80,
+        120
+    ]
+}</code></pre>
+<p><code>keybindings.json</code>:</p>
+<pre class="json"><code>// Place your key bindings in this file to override the defaults
+[
+    // RStudio key bindings
+    {
+        &quot;key&quot;: &quot;cmd+shift+m&quot;,
+        &quot;command&quot;: &quot;type&quot;,
+        &quot;args&quot;: { &quot;text&quot;: &quot; %&gt;%&quot; },
+        &quot;when&quot;: &quot;editorTextFocus &amp;&amp; editorLangId == &#39;r&#39;&quot;
+    },
+    {
+        &quot;key&quot;: &quot;alt+-&quot;,
+        &quot;command&quot;: &quot;type&quot;,
+        &quot;args&quot;: { &quot;text&quot;: &quot; &lt;- &quot; },
+        &quot;when&quot;: &quot;editorTextFocus &amp;&amp; editorLangId == &#39;r&#39;&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+l&quot;,
+        &quot;command&quot;: &quot;r.loadAll&quot;
+    },
+
+    // Custom shortcuts
+    {
+        &quot;key&quot;: &quot;shift+alt+cmd+left&quot;,
+        &quot;command&quot;: &quot;workbench.action.moveEditorToPreviousGroup&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+alt+cmd+right&quot;,
+        &quot;command&quot;: &quot;workbench.action.moveEditorToNextGroup&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+g&quot;,
+        &quot;command&quot;: &quot;workbench.view.scm&quot;,
+        &quot;when&quot;: &quot;workbench.scm.active&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+g&quot;,
+        &quot;command&quot;: &quot;workbench.view.scm&quot;,
+        &quot;when&quot;: &quot;workbench.scm.active &amp;&amp; !gitlens:disabled &amp;&amp; config.gitlens.keymap == &#39;chorded&#39;&quot;
+    },
+
+    // Conflicts
+    {
+        &quot;key&quot;: &quot;alt+cmd+left&quot;,
+        &quot;command&quot;: &quot;-workbench.action.terminal.focusPreviousPane&quot;,
+        &quot;when&quot;: &quot;terminalFocus &amp;&amp; terminalProcessSupported&quot;
+    },
+    {
+        &quot;key&quot;: &quot;alt+cmd+right&quot;,
+        &quot;command&quot;: &quot;-workbench.action.terminal.focusNextPane&quot;,
+        &quot;when&quot;: &quot;terminalFocus &amp;&amp; terminalProcessSupported&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+m&quot;,
+        &quot;command&quot;: &quot;-workbench.actions.view.problems&quot;,
+        &quot;when&quot;: &quot;workbench.panel.markers.view.active&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+alt+cmd+left&quot;,
+        &quot;command&quot;: &quot;-cursorColumnSelectLeft&quot;,
+        &quot;when&quot;: &quot;textInputFocus&quot;
+    },
+    {
+        &quot;key&quot;: &quot;ctrl+cmd+left&quot;,
+        &quot;command&quot;: &quot;-workbench.action.moveEditorToPreviousGroup&quot;
+    },
+    {
+        &quot;key&quot;: &quot;ctrl+cmd+right&quot;,
+        &quot;command&quot;: &quot;-workbench.action.moveEditorToNextGroup&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+alt+cmd+right&quot;,
+        &quot;command&quot;: &quot;-cursorColumnSelectRight&quot;,
+        &quot;when&quot;: &quot;textInputFocus&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+g&quot;,
+        &quot;command&quot;: &quot;-editor.action.previousMatchFindAction&quot;,
+        &quot;when&quot;: &quot;editorFocus&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+g&quot;,
+        &quot;command&quot;: &quot;-workbench.action.terminal.findPrevious&quot;,
+        &quot;when&quot;: &quot;terminalFindFocused &amp;&amp; terminalProcessSupported || terminalFocus &amp;&amp; terminalProcessSupported&quot;
+    },
+    {
+        &quot;key&quot;: &quot;cmd+g&quot;,
+        &quot;command&quot;: &quot;-editor.action.nextMatchFindAction&quot;,
+        &quot;when&quot;: &quot;editorFocus&quot;
+    },
+    {
+        &quot;key&quot;: &quot;cmd+g&quot;,
+        &quot;command&quot;: &quot;-workbench.action.terminal.findNext&quot;,
+        &quot;when&quot;: &quot;terminalFindFocused &amp;&amp; terminalProcessSupported || terminalFocus &amp;&amp; terminalProcessSupported&quot;
+    },
+    {
+        &quot;key&quot;: &quot;ctrl+shift+g&quot;,
+        &quot;command&quot;: &quot;-workbench.view.scm&quot;,
+        &quot;when&quot;: &quot;workbench.scm.active&quot;
+    },
+    {
+        &quot;key&quot;: &quot;ctrl+shift+g&quot;,
+        &quot;command&quot;: &quot;-workbench.view.scm&quot;,
+        &quot;when&quot;: &quot;workbench.scm.active &amp;&amp; !gitlens:disabled &amp;&amp; config.gitlens.keymap == &#39;chorded&#39;&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+l&quot;,
+        &quot;command&quot;: &quot;-selectAllSearchEditorMatches&quot;,
+        &quot;when&quot;: &quot;inSearchEditor&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+l&quot;,
+        &quot;command&quot;: &quot;-editor.action.selectHighlights&quot;,
+        &quot;when&quot;: &quot;editorFocus&quot;
+    },
+    {
+        &quot;key&quot;: &quot;shift+cmd+l&quot;,
+        &quot;command&quot;: &quot;-addCursorsAtSearchResults&quot;,
+        &quot;when&quot;: &quot;fileMatchOrMatchFocus &amp;&amp; searchViewletVisible&quot;
+    },
+    {
+        &quot;key&quot;: &quot;alt+cmd+right&quot;,
+        &quot;command&quot;: &quot;-workbench.action.terminal.focusNextPane&quot;,
+        &quot;when&quot;: &quot;terminalFocus &amp;&amp; terminalHasBeenCreated || terminalFocus &amp;&amp; terminalProcessSupported&quot;
+    },
+    {
+        &quot;key&quot;: &quot;alt+cmd+left&quot;,
+        &quot;command&quot;: &quot;-workbench.action.terminal.focusPreviousPane&quot;,
+        &quot;when&quot;: &quot;terminalFocus &amp;&amp; terminalHasBeenCreated || terminalFocus &amp;&amp; terminalProcessSupported&quot;
+    },
+]</code></pre>
+<p>Caso você tenha problemas com o VS Code, mande uma mensagem no nosso
+<a href="https://discourse.curso-r.com/">fórum</a> para que eu possa ajudar.</p>
+</div>
