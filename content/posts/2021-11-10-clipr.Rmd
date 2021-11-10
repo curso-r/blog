@@ -1,0 +1,12 @@
+---
+title: "Como copiar tabelas..."
+date: "2021-11-10"
+tags: ["shiny", "reatividade"]
+categories: ["conceitos"]
+image: "images/posts/banner/efeito-domino.jpg"
+author: ["Tereza"]
+summary: "Todo observer é uma função render?"
+draft: TRUE
+---
+
+testando o corpo do texto...
