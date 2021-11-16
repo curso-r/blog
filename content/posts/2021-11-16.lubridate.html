@@ -1,0 +1,79 @@
+---
+title: "Manipulando datas com o lubridate"
+date: "2021-11-16"
+tags: ["tutoriais"]
+categories: ["tutoriais"]
+image: "images/posts/banner/lubridate.jpg"
+author: ["Tereza"]
+summary: "Aprenda a converter e a fazer operações com datas no R"
+draft: true
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Datas no R são tratadas como um tipo especial de objeto, com classe <code>Date</code>.</p>
+<p>Existem algumas funções para converter diversos tipos de padrões de data para a classe <code>Date</code>, veja como funcionam algumas delas!</p>
+<div id="lubridate" class="section level2">
+<h2>Lubridate</h2>
+<p>Primeiramente, vamos carregar o pacote <code>lubridate</code>:</p>
+<pre class="r"><code>library(lubridate)</code></pre>
+<p>Suponha que queremos criar um objeto da classe <code>Date</code> com a seguinte data: <strong>20/11/2021</strong></p>
+<p>A primeira coisa a ser feita, é identificar a ordem da entrada, nesse caso, é: <strong>dia, mês, ano</strong> (padrão brasileiro)</p>
+<p>Então, basta usar a função <code>dmy</code> (<strong>d</strong>ay, <strong>m</strong>onth, <strong>y</strong>ear):</p>
+<pre class="r"><code>dmy(&quot;20/11/2021&quot;)</code></pre>
+<pre><code>## [1] &quot;2021-11-20&quot;</code></pre>
+<p>Obs: note que o padrão do R para um objeto da classe <code>Date</code> é y/m/d (<strong>y</strong>ear, <strong>m</strong>onth, <strong>d</strong>ay)</p>
+<p>Trocando dia e mês de lugar na data anterior, obtemos: <strong>11/20/2021</strong>.</p>
+<p>Para converter para a classe <code>Date</code>, identificamos que a ordem de entrada é: <strong>mês, dia, ano</strong> (padrão americano)</p>
+<p>E então, usamos a função <code>mdy</code> (<strong>m</strong>onth, <strong>d</strong>ay, <strong>y</strong>ear):</p>
+<pre class="r"><code>mdy(&quot;11/20/2021&quot;)</code></pre>
+<pre><code>## [1] &quot;2021-11-20&quot;</code></pre>
+<p>Seguindo essa intuição:</p>
+<pre class="r"><code>ydm(&quot;2021/20/11&quot;)</code></pre>
+<pre><code>## [1] &quot;2021-11-20&quot;</code></pre>
+<p>Além disso, a função aceita diversos padrões de entrada, vejamos:</p>
+<pre class="r"><code>dmy(20112021)</code></pre>
+<pre><code>## [1] &quot;2021-11-20&quot;</code></pre>
+<pre class="r"><code>dmy(&quot;20112021&quot;)</code></pre>
+<pre><code>## [1] &quot;2021-11-20&quot;</code></pre>
+<pre class="r"><code>dmy(&quot;20-11-2021&quot;)</code></pre>
+<pre><code>## [1] &quot;2021-11-20&quot;</code></pre>
+<pre class="r"><code>dmy(&quot;20.11.2021&quot;)</code></pre>
+<pre><code>## [1] &quot;2021-11-20&quot;</code></pre>
+<div id="incluindo-horas-minutos-e-segundos" class="section level3">
+<h3>Incluindo horas, minutos e segundos</h3>
+<p>Suponha que queremos criar um objeto com a seguinte informação: <strong>20/11/2021 16:34:29</strong>. Basta usar a função <code>dmy_hms</code>:</p>
+<pre class="r"><code>dmy_hms(&quot;20/11/2021 16:34:29&quot;)</code></pre>
+<pre><code>## [1] &quot;2021-11-20 16:34:29 UTC&quot;</code></pre>
+<pre class="r"><code>dmy_hms(&quot;20112021163429&quot;)</code></pre>
+<pre><code>## [1] &quot;2021-11-20 16:34:29 UTC&quot;</code></pre>
+</div>
+<div id="os-operadores-m-e-m-" class="section level3">
+<h3>Os operadores %m+% e %m-%</h3>
+<p>Podemos usar os operadores <code>%m+%</code> e <code>%m-%</code> para somar e subtrair datas.</p>
+<p>Criando um objeto date:</p>
+<pre class="r"><code>data &lt;- dmy(&quot;31-01-2022&quot;)</code></pre>
+<p>Por exemplo, para somar um mês em alguma data, fazemos:</p>
+<pre class="r"><code>data %m+% months(1)</code></pre>
+<pre><code>## [1] &quot;2022-02-28&quot;</code></pre>
+<p>Note que a função não excedeu o último dia do mês, ela retornou o último dia do mês seguinte.</p>
+<p>Podemos somar mais de um mês por vez, obtendo:</p>
+<pre class="r"><code>data %m+% months(1:12)</code></pre>
+<pre><code>##  [1] &quot;2022-02-28&quot; &quot;2022-03-31&quot; &quot;2022-04-30&quot; &quot;2022-05-31&quot; &quot;2022-06-30&quot;
+##  [6] &quot;2022-07-31&quot; &quot;2022-08-31&quot; &quot;2022-09-30&quot; &quot;2022-10-31&quot; &quot;2022-11-30&quot;
+## [11] &quot;2022-12-31&quot; &quot;2023-01-31&quot;</code></pre>
+<p>A expressão <code>Date %m+% months(n)</code> sempre retorna uma data do n-ésimo mês seguinte à data do objeto <code>Date</code></p>
+<p>Subtraindo um dia:</p>
+<pre class="r"><code>data %m+% months(1:12) %m-% days(1)</code></pre>
+<pre><code>##  [1] &quot;2022-02-27&quot; &quot;2022-03-30&quot; &quot;2022-04-29&quot; &quot;2022-05-30&quot; &quot;2022-06-29&quot;
+##  [6] &quot;2022-07-30&quot; &quot;2022-08-30&quot; &quot;2022-09-29&quot; &quot;2022-10-30&quot; &quot;2022-11-29&quot;
+## [11] &quot;2022-12-30&quot; &quot;2023-01-30&quot;</code></pre>
+<p>Outro exemplo:</p>
+<pre class="r"><code>data_2 &lt;- dmy(&quot;29/02/2020&quot;)
+data_2 %m+% years(1)</code></pre>
+<pre><code>## [1] &quot;2021-02-28&quot;</code></pre>
+<pre class="r"><code>data_2 %m-% years(1)</code></pre>
+<pre><code>## [1] &quot;2019-02-28&quot;</code></pre>
+</div>
+</div>
