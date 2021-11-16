@@ -9,10 +9,12 @@ summary: "Conheça uma ótima opção para fazer gráficos interativos."
 draft: true
 ---
 
-Muitas vezes, o destino dos nossos gráficos é um Word ou PDF. Nesses casos, indendentemente se vamos ler o documento no computador ou na versão impressa, os gráficos precisam ser uma imagem estática. E então o pacote `ggplot2` brilha.
+No último post, vimos como usar o pacote `plotly` para gerar gráficos dinâmicos do zero ou aproveitando um gráfico feito em `ggplot`. Neste post, falaremos de outra biblioteca gráfica em JavaScript que possui pacote em R: o `echarts`.
 
-> Leia mais: [Gráficos no Shiny: ggplot2](https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/)
+---
+Leia mais
 
-Quando estamos construindo páginas ou aplicações Web (ou apresentações de slides em HTML), além de gráficos em formato de imagem, podemos construir visualizações utilizando bibliotecas JavaScript, que permitem animações e possuem diversas funcionalidades interativas, como *tooltips*, filtros, zoom e drilldrown.
+- [Gráficos no Shiny: ggplot2](https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/)
 
-Neste post, vamos falar da biblioteca `plotly`, que permite transformarmos rapidamente nossos gráficos feitos com `ggplot2` em gráficos animados e interativos.
+- [Gráficos no Shiny: echarts](https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/)
+---
