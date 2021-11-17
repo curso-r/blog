@@ -83,7 +83,7 @@ Para aprender mais sobre como fazer gráficos diretamente no `plotly`, confira o
 
 ## No Shiny
 
-Para adicionar uma plotly no Shiny, criado a partir da função `ggplotly()` ou da função `plot_ly()`, utilizamos o par de funções `plotly::plotlyOutput()` e `plotly::renderPlotly()`. Na função `renderPlotly()`, basta passarmos um código que retorne um gráfico `plotly`, utilizando os `inputs` para especificar as variáveis.
+Para adicionar um plotly no Shiny, criado a partir da função `ggplotly()` ou da função `plot_ly()`, utilizamos o par de funções `plotly::plotlyOutput()` e `plotly::renderPlotly()`. Na função `renderPlotly()`, basta passarmos um código que retorne um gráfico `plotly`, utilizando os `inputs` para especificar as variáveis.
 
 Rode o app abaixo para ver um exemplo.
 
@@ -135,4 +135,5 @@ shinyApp(ui, server)
 ```
 
 É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
+
 Até a próxima!
