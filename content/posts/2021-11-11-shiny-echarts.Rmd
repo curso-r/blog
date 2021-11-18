@@ -11,8 +11,7 @@ summary: "Conheça uma ótima opção para fazer gráficos interativos."
 ```{r, include = FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
-
-
+ 
 No último post, vimos como usar o pacote `plotly` para gerar gráficos dinâmicos do zero ou aproveitando um gráfico feito em `ggplot`. Neste post, falaremos de outra biblioteca gráfica em JavaScript que possui pacote em R: o `echarts`.
 
 O pacote em questão se chama `echarts4r`, portanto, se você ainda não o estiver instalado, rode o código abaixo:
