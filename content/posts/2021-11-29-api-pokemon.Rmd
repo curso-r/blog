@@ -6,6 +6,7 @@ categories: ["conceitos"]
 image: "images/posts/banner/API-drake.jpeg"
 author: ["Beatriz", "Julio"]
 summary: "Primeiro post sobre acesso à APIs usando R."
+draft: false
 ---
 
 ```{r, include = FALSE}
