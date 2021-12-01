@@ -91,7 +91,7 @@ o seu `dplyr::lag()`; depois disso um `dplyr::summarise()` contou o número de
 A segunda parte, entretanto, aumenta (com o perdão do trocadilho) a dificuldade.
 Dessa vez precisamos somar uma janela de 3 valores e comparar com a próxima
 janela, ou seja, verificar quantas vezes
-$sum_{k = i}^{i+2} x_k > sum_{k = i-1}^{i+1} x_k$.
+$\sum_{k = i}^{i+2} x_k > \sum_{k = i-1}^{i+1} x_k$.
 
 Observe como as janelas funcionam:
 
