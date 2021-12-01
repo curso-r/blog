@@ -1,0 +1,10 @@
+---
+title: "Advent of R: Dia 20"
+date: "2021-12-20"
+tags: ["advent-of-code", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-20.png"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 20."
+draft: true
+---

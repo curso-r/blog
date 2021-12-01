@@ -1,0 +1,10 @@
+---
+title: "Advent of R: Dia 17"
+date: "2021-12-17"
+tags: ["advent-of-code", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-17.png"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 17."
+draft: true
+---

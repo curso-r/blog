@@ -1,0 +1,10 @@
+---
+title: "Advent of R: Dia 12"
+date: "2021-12-12"
+tags: ["advent-of-code", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-12.png"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 12."
+draft: true
+---
