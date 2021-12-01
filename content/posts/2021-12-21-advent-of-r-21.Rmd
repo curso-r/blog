@@ -1,10 +1,29 @@
 ---
 title: "Advent of R: Dia 21"
 date: "2021-12-21"
-tags: ["advent-of-code", "tidyverse"]
+tags: ["advent-of-r", "tidyverse"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-21.png"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 21."
 draft: true
 ---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
