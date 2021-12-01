@@ -66,8 +66,8 @@ se ele representa que a série aumentou, diminuiu ou manteve-se constante.
 # 263 (aumentou)
 ```
 
-Tendo isso, podemos concluir que houveram 7 aumentos na série exemplo e essa
-seria a resposta do problema.
+Tendo isso, podemos concluir que houve 7 aumentos na série exemplo e essa seria
+a resposta do problema.
 
 O meu código para resolver o exercício ficou bem enxuto. Bastou ler a lista de
 número do arquivo disponibilizado como uma tabela e comparar seus valores com
