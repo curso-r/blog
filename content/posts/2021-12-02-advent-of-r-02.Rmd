@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-02.png"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 02."
-draft: true
+draft: false
 ---
 
 O [Advent of Code](https://adventofcode.com) é um
@@ -27,3 +27,64 @@ A minha esperança é que, com essa série, mais pessoas pratiquem seus
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Mergulhe (A)
+
+A parte 1 do [segundo dia](https://adventofcode.com/2021/day/2) do AoC pede para
+lermos uma lista de comandos para um submarino e calcular a sua posição final.
+Os comandos possíveis são `forward X` (soma X à posição horizontal), `up X`
+(subtrai X da profundidade) e `down X` (soma X à profundidade), então precisamos
+fazer um `dplyr::group_by(command == "forward")` para que um grupo represente
+a posição horizontal e um represente a profundidade.
+
+Para concluir o código, como a resposta final é a posição horizontal
+multiplicada pela profundidade, temos que fazer um `prod()` ao final:
+
+```r
+"data-raw/02a_dive.txt" |>
+  readr::read_delim(" ", col_names = c("command", "x")) |>
+  dplyr::mutate(x = ifelse(command == "up", -x, x)) |>
+  dplyr::group_by(command == "forward") |>
+  dplyr::summarise(x = sum(x)) |>
+  dplyr::summarise(x = prod(x)) |>
+  dplyr::pull(x)
+#> [1] 1727835
+```
+
+## Mergulhe (B)
+
+A parte 2 complica um pouco a nossa vida. Os mesmos comandos agora possuem outro
+significado:
+
+- `down X` aumenta a mira em X unidades
+- `up X` diminui a mira em X unidades.
+- `forward X` faz duas coisas:
+  - Aumenta a posição horizontal em X unidades.
+  - Aumenta a profundidade em X vezes a mira atual.
+
+O meu código da primeira parte não permitiria resolver isso de forma eficiente.
+Minha solução foi fazer uma `cumsum()` da posição horizontal e uma da mira, que
+são as partes mais simples. Depois eu calculei a profundidade com
+`cumsum(aim * x)` (dado que a mira tinha sido calculada no passo anterior).
+
+A saída, mais uma vez é o produto entre a posição horizontal e a profundidade.
+Dessa vez a resposta vai estar na última linha da tabela, então o código precisa
+de um `tail(1)`.
+
+```r
+"data-raw/02a_dive.txt" |>
+  readr::read_delim(" ", col_names = c("command", "x")) |>
+  dplyr::mutate(
+    horizontal = ifelse(command == "forward", x, 0),
+    horizontal = cumsum(horizontal),
+    aim = ifelse(command == "down", x, 0),
+    aim = ifelse(command == "up", -x, aim),
+    aim = cumsum(aim),
+    depth = ifelse(command == "forward", aim * x, 0),
+    depth = cumsum(depth),
+    output = horizontal * depth
+  ) |>
+  utils::tail(1) |>
+  dplyr::pull(output)
+#> [1] 1544000595
+```

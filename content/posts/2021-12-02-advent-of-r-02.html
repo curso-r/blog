@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-02.png"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 02."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,58 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="mergulhe-a" class="section level2">
+<h2>Mergulhe (A)</h2>
+<p>A parte 1 do <a href="https://adventofcode.com/2021/day/2">segundo dia</a> do AoC pede para
+lermos uma lista de comandos para um submarino e calcular a sua posição final.
+Os comandos possíveis são <code>forward X</code> (soma X à posição horizontal), <code>up X</code>
+(subtrai X da profundidade) e <code>down X</code> (soma X à profundidade), então precisamos
+fazer um <code>dplyr::group_by(command == "forward")</code> para que um grupo represente
+a posição horizontal e um represente a profundidade.</p>
+<p>Para concluir o código, como a resposta final é a posição horizontal
+multiplicada pela profundidade, temos que fazer um <code>prod()</code> ao final:</p>
+<pre class="r"><code>&quot;data-raw/02a_dive.txt&quot; |&gt;
+  readr::read_delim(&quot; &quot;, col_names = c(&quot;command&quot;, &quot;x&quot;)) |&gt;
+  dplyr::mutate(x = ifelse(command == &quot;up&quot;, -x, x)) |&gt;
+  dplyr::group_by(command == &quot;forward&quot;) |&gt;
+  dplyr::summarise(x = sum(x)) |&gt;
+  dplyr::summarise(x = prod(x)) |&gt;
+  dplyr::pull(x)
+#&gt; [1] 1727835</code></pre>
+</div>
+<div id="mergulhe-b" class="section level2">
+<h2>Mergulhe (B)</h2>
+<p>A parte 2 complica um pouco a nossa vida. Os mesmos comandos agora possuem outro
+significado:</p>
+<ul>
+<li><code>down X</code> aumenta a mira em X unidades</li>
+<li><code>up X</code> diminui a mira em X unidades.</li>
+<li><code>forward X</code> faz duas coisas:
+<ul>
+<li>Aumenta a posição horizontal em X unidades.</li>
+<li>Aumenta a profundidade em X vezes a mira atual.</li>
+</ul></li>
+</ul>
+<p>O meu código da primeira parte não permitiria resolver isso de forma eficiente.
+Minha solução foi fazer uma <code>cumsum()</code> da posição horizontal e uma da mira, que
+são as partes mais simples. Depois eu calculei a profundidade com
+<code>cumsum(aim * x)</code> (dado que a mira tinha sido calculada no passo anterior).</p>
+<p>A saída, mais uma vez é o produto entre a posição horizontal e a profundidade.
+Dessa vez a resposta vai estar na última linha da tabela, então o código precisa
+de um <code>tail(1)</code>.</p>
+<pre class="r"><code>&quot;data-raw/02a_dive.txt&quot; |&gt;
+  readr::read_delim(&quot; &quot;, col_names = c(&quot;command&quot;, &quot;x&quot;)) |&gt;
+  dplyr::mutate(
+    horizontal = ifelse(command == &quot;forward&quot;, x, 0),
+    horizontal = cumsum(horizontal),
+    aim = ifelse(command == &quot;down&quot;, x, 0),
+    aim = ifelse(command == &quot;up&quot;, -x, aim),
+    aim = cumsum(aim),
+    depth = ifelse(command == &quot;forward&quot;, aim * x, 0),
+    depth = cumsum(depth),
+    output = horizontal * depth
+  ) |&gt;
+  utils::tail(1) |&gt;
+  dplyr::pull(output)
+#&gt; [1] 1544000595</code></pre>
+</div>
