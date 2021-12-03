@@ -1,0 +1,150 @@
+---
+title: "Três Pontinhos: Como Funcionam os Dots"
+date: "2021-12-03"
+tags: ["conceitos", "dots"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/tutorial-dots.jpg"
+author: ["Caio"]
+summary: "Com certeza você já lidou com os '...' do R, mas talvez ainda não saiba como eles funcionam. Está na hora de mudar isso!"
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Chamdos de “três pontinhos”, “reticências”, “dots” ou “ellipsis”, os <code>...</code>
+são uma das funcionalidades mais comuns do R, mas ao mesmo tempo uma das menos
+conhecidas. Explicá-los em linguagem técnica é muito simples: eles são os
+<a href="https://en.wikipedia.org/wiki/Variadic_function">argumentos variádicos</a> do R!
+O difícil é entender de verdade o que eles são e como usá-los. Vamos abandonar o
+jargão e sigamos em frente, agora em bom português…</p>
+<p>Obs.: O nome correto no R para os <code>...</code> é dots, então vou usar esse termo a
+partir de agora. A prova disso é que, para consultar a sua documentação,
+executamos <code>?dots</code>.</p>
+<div id="onde-estão" class="section level2">
+<h2>Onde estão</h2>
+<p>Como eu disse anteriormente, eles são bastante comuns, mas quão comuns
+exatamente? Talvez mais do que você imagine. Veja abaixo os
+<a href="https://en.wikipedia.org/wiki/Function_prototype">protótipos</a> de algumas poucas
+funções que talvez você conheça (ignore o <code>NULL</code>, ele é parte da saída da
+função <code>args()</code>):</p>
+<pre class="r"><code>args(sum)</code></pre>
+<pre><code>## function (..., na.rm = FALSE) 
+## NULL</code></pre>
+<pre class="r"><code>args(c)</code></pre>
+<pre><code>## function (...) 
+## NULL</code></pre>
+<pre class="r"><code>args(dplyr::mutate)</code></pre>
+<pre><code>## function (.data, ...) 
+## NULL</code></pre>
+<p>Te convenci? Entender os dots é, portanto, uma excelente arma no arsenal do
+programador de R, tanto que eles são usados pelas funções mais importantes da
+linguagem toda.</p>
+</div>
+<div id="o-que-são" class="section level2">
+<h2>O que são</h2>
+<p>De forma bem geral, os dots são um argumento que, quando colocado na sua função,
+pode ser substituído por qualquer coisa pelo usuário. Na função <code>sum()</code>, por
+exemplo, os dots podem virar uma série de números (quantos o usuário quiser).</p>
+<pre class="r"><code>sum(1, 2, 3, 4, 5)</code></pre>
+<pre><code>## [1] 15</code></pre>
+<p>Quando falamos de argumentos normais, não precisamos declarar seus argumentos
+caso estejamos utilizando-os na ordem correta. Os dots, entretanto, podem ser
+substituídos por qualquer número de objetos, então eles quebram essa regra;
+qualquer argumento que vier <em>depois</em> dos dots precisa ser nomeado.</p>
+<pre class="r"><code># Não funciona do jeito esperado (TRUE mais um elemento dos dots)
+sum(1, 2, NA, 4, 5, TRUE)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code># Agora sim
+sum(1, 2, NA, 4, 5, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 12</code></pre>
+<p>Sem os dots a função <code>sum()</code> estaria limitada a receber um vetor de números,
+mas com essa ferramenta ela passa a poder receber números separados como se
+fossem cada um um argumento. A função <code>c()</code>, entretanto, não poderia ser
+implementada sem os dots.</p>
+<p>O seu poder completo, porém, fica mais claro na função <code>dplyr::select()</code>. Aqui
+vemos que podemos até dar nomes arbitrários para os “argumentos” de dentro dos
+dots e a função pode usá-los sem o menor problema:</p>
+<pre class="r"><code>mtcars |&gt;
+  dplyr::select(mpg, cil = cyl, marcha = gear) |&gt;
+  head()</code></pre>
+<pre><code>##                    mpg cil marcha
+## Mazda RX4         21.0   6      4
+## Mazda RX4 Wag     21.0   6      4
+## Datsun 710        22.8   4      4
+## Hornet 4 Drive    21.4   6      3
+## Hornet Sportabout 18.7   8      3
+## Valiant           18.1   6      3</code></pre>
+<p>Perceba que a função <code>dplyr::select()</code> não tem como saber quantas colunas nós
+vamos selecionar e quais nomes eu vou dar para cada uma, tornando impossível o
+uso de argumentos convencionais. O uso do dots é inevitável nesses casos.</p>
+</div>
+<div id="como-usá-los" class="section level2">
+<h2>Como usá-los</h2>
+<p>Agora que já vimos universalidade e importância dos dots, chegou a hora de
+entender como eles funcionam e como usá-los. Vamos começar com um exemplo
+simples: criar uma função que captura quaisquer argumentos que o usuário
+resolver passar e imprime seus valores.</p>
+<pre class="r"><code># Captura dots e os imprime como uma lista
+captura &lt;- function(...) {
+  list(...)
+}
+
+captura(arg1 = 1, arg2 = &quot;b&quot;, arg3 = FALSE)</code></pre>
+<pre><code>## $arg1
+## [1] 1
+## 
+## $arg2
+## [1] &quot;b&quot;
+## 
+## $arg3
+## [1] FALSE</code></pre>
+<p>Simples, né? 90% das vezes podemos simplesmente transformar os dots em uma lista
+comum com <code>list(...)</code> e utilizá-la normalmente. Em breve ficará mais claro
+por que isso funciona.</p>
+<p>Se quisermos capturar argumentos específicos dentro dos dots, aí podemos usar
+uma função especial chamada <code>...elt()</code> (sim, as reticências fazem parte de seu
+nome):</p>
+<pre class="r"><code># Captura dots e os imprime como uma lista
+captura_segundo &lt;- function(...) {
+  ...elt(2)
+}
+
+captura_segundo(arg1 = 1, arg2 = &quot;b&quot;, arg3 = FALSE)</code></pre>
+<pre><code>## [1] &quot;b&quot;</code></pre>
+<p>A terceira forma de usar os dots é os transportando para uma função que recebe
+dots. Como já deve ter ficado evidente, os dots podem ser substituídos por
+qualquer número de argumentos por parte do usuário, mas eles também podem ser
+passados como argumento no lugar dos dots de outra função!</p>
+<pre class="r"><code>filtra_seleciona &lt;- function(marchas, ...) {
+  mtcars |&gt;
+    dplyr::filter(gear == marchas) |&gt;
+    dplyr::select(...) |&gt;
+    head()
+}
+
+filtra_seleciona(4, mpg, cil = cyl)</code></pre>
+<pre><code>##                mpg cil
+## Mazda RX4     21.0   6
+## Mazda RX4 Wag 21.0   6
+## Datsun 710    22.8   4
+## Merc 240D     24.4   4
+## Merc 230      22.8   4
+## Merc 280      19.2   6</code></pre>
+<p>No caso acima, os dots eram <code>mpg, cil = cyl</code> e isso foi transportado
+perfeitamente para dentro de <code>dplyr::select()</code>.</p>
+<p>Para fechar este tutorial com chave de ouro, vamos criar uma função arbitrária
+que precisa de um argumento depois dos dots: nossa função deve receber qualquer
+quantidade de valores numéricos, ignorar o primeiro e somar o resto com <code>n</code>.</p>
+<pre class="r"><code>ignora_um_soma_n &lt;- function(..., n = 0) {
+  valores &lt;- list(...)
+  valores &lt;- valores[-1]
+  unlist(valores) + n
+}
+
+ignora_um_soma_n(1, 2, 3, 4, 5, n = 10)</code></pre>
+<pre><code>## [1] 12 13 14 15</code></pre>
+<p>Espero que agora esteja pelo menos um pouco mais claro o funcionamento dos dots!
+Se não, pode entrar em contato comigo via <a href="https://twitter.com/ctlente">Twitter</a>
+ou postar uma dúvida no nosso <a href="https://discourse.curso-r.com/">fórum</a>.</p>
+</div>

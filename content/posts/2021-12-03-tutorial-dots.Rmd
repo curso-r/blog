@@ -1,0 +1,153 @@
+---
+title: "Três Pontinhos: Como Funcionam os Dots"
+date: "2021-12-03"
+tags: ["conceitos", "dots"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/tutorial-dots.jpg"
+author: ["Caio"]
+summary: "Com certeza você já lidou com os '...' do R, mas talvez ainda não saiba como eles funcionam. Está na hora de mudar isso!"
+draft: false
+---
+
+Chamdos de "três pontinhos", "reticências", "dots" ou "ellipsis", os `...`
+são uma das funcionalidades mais comuns do R, mas ao mesmo tempo uma das menos
+conhecidas. Explicá-los em linguagem técnica é muito simples: eles são os
+[argumentos variádicos](https://en.wikipedia.org/wiki/Variadic_function) do R!
+O difícil é entender de verdade o que eles são e como usá-los. Vamos abandonar o
+jargão e sigamos em frente, agora em bom português...
+
+Obs.: O nome correto no R para os `...` é dots, então vou usar esse termo a
+partir de agora. A prova disso é que, para consultar a sua documentação,
+executamos `?dots`.
+
+## Onde estão
+
+Como eu disse anteriormente, eles são bastante comuns, mas quão comuns
+exatamente? Talvez mais do que você imagine. Veja abaixo os
+[protótipos](https://en.wikipedia.org/wiki/Function_prototype) de algumas poucas
+funções que talvez você conheça (ignore o `NULL`, ele é parte da saída da
+função `args()`):
+
+```{r}
+args(sum)
+
+args(c)
+
+args(dplyr::mutate)
+```
+
+Te convenci? Entender os dots é, portanto, uma excelente arma no arsenal do
+programador de R, tanto que eles são usados pelas funções mais importantes da
+linguagem toda.
+
+## O que são
+
+De forma bem geral, os dots são um argumento que, quando colocado na sua função,
+pode ser substituído por qualquer coisa pelo usuário. Na função `sum()`, por
+exemplo, os dots podem virar uma série de números (quantos o usuário quiser).
+
+```{r}
+sum(1, 2, 3, 4, 5)
+```
+
+Quando falamos de argumentos normais, não precisamos declarar seus argumentos
+caso estejamos utilizando-os na ordem correta. Os dots, entretanto, podem ser
+substituídos por qualquer número de objetos, então eles quebram essa regra;
+qualquer argumento que vier _depois_ dos dots precisa ser nomeado.
+
+```{r}
+# Não funciona do jeito esperado (TRUE mais um elemento dos dots)
+sum(1, 2, NA, 4, 5, TRUE)
+
+# Agora sim
+sum(1, 2, NA, 4, 5, na.rm = TRUE)
+```
+
+Sem os dots a função `sum()` estaria limitada a receber um vetor de números,
+mas com essa ferramenta ela passa a poder receber números separados como se
+fossem cada um um argumento. A função `c()`, entretanto, não poderia ser
+implementada sem os dots.
+
+O seu poder completo, porém, fica mais claro na função `dplyr::select()`. Aqui
+vemos que podemos até dar nomes arbitrários para os "argumentos" de dentro dos
+dots e a função pode usá-los sem o menor problema:
+
+```{r}
+mtcars |>
+  dplyr::select(mpg, cil = cyl, marcha = gear) |>
+  head()
+```
+
+Perceba que a função `dplyr::select()` não tem como saber quantas colunas nós
+vamos selecionar e quais nomes eu vou dar para cada uma, tornando impossível o
+uso de argumentos convencionais. O uso do dots é inevitável nesses casos.
+
+## Como usá-los
+
+Agora que já vimos universalidade e importância dos dots, chegou a hora de
+entender como eles funcionam e como usá-los. Vamos começar com um exemplo
+simples: criar uma função que captura quaisquer argumentos que o usuário
+resolver passar e imprime seus valores.
+
+```{r}
+# Captura dots e os imprime como uma lista
+captura <- function(...) {
+  list(...)
+}
+
+captura(arg1 = 1, arg2 = "b", arg3 = FALSE)
+```
+
+Simples, né? 90% das vezes podemos simplesmente transformar os dots em uma lista
+comum com `list(...)` e utilizá-la normalmente. Em breve ficará mais claro
+por que isso funciona.
+
+Se quisermos capturar argumentos específicos dentro dos dots, aí podemos usar
+uma função especial chamada `...elt()` (sim, as reticências fazem parte de seu
+nome):
+
+```{r}
+# Captura dots e os imprime como uma lista
+captura_segundo <- function(...) {
+  ...elt(2)
+}
+
+captura_segundo(arg1 = 1, arg2 = "b", arg3 = FALSE)
+```
+
+A terceira forma de usar os dots é os transportando para uma função que recebe
+dots. Como já deve ter ficado evidente, os dots podem ser substituídos por
+qualquer número de argumentos por parte do usuário, mas eles também podem ser
+passados como argumento no lugar dos dots de outra função!
+
+```{r}
+filtra_seleciona <- function(marchas, ...) {
+  mtcars |>
+    dplyr::filter(gear == marchas) |>
+    dplyr::select(...) |>
+    head()
+}
+
+filtra_seleciona(4, mpg, cil = cyl)
+```
+
+No caso acima, os dots eram `mpg, cil = cyl` e isso foi transportado
+perfeitamente para dentro de `dplyr::select()`.
+
+Para fechar este tutorial com chave de ouro, vamos criar uma função arbitrária
+que precisa de um argumento depois dos dots: nossa função deve receber qualquer
+quantidade de valores numéricos, ignorar o primeiro e somar o resto com `n`.
+
+```{r}
+ignora_um_soma_n <- function(..., n = 0) {
+  valores <- list(...)
+  valores <- valores[-1]
+  unlist(valores) + n
+}
+
+ignora_um_soma_n(1, 2, 3, 4, 5, n = 10)
+```
+
+Espero que agora esteja pelo menos um pouco mais claro o funcionamento dos dots!
+Se não, pode entrar em contato comigo via [Twitter](https://twitter.com/ctlente)
+ou postar uma dúvida no nosso [fórum](https://discourse.curso-r.com/).
