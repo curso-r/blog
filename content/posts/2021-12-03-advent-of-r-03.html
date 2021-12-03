@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-03.png"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 03."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,114 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="diagnóstico-binário-a" class="section level2">
+<h2>Diagnóstico Binário (A)</h2>
+<p>Na primeira parte do <a href="https://adventofcode.com/2021/day/3">terceiro dia</a> do AoC
+somos apresentados aos diagnósticos do submarino. Cada linha é composta por um
+número binário e precisamos carclular, a partir deles, os índices gama e
+épsilon.</p>
+<pre class="r"><code># 00100
+# 11110
+# 10110
+# 10111
+# 10101
+# 01111
+# 00111
+# 11100
+# 10000
+# 11001
+# 00010
+# 01010</code></pre>
+<p>Cada bit do fator gama é igual ao valor mais comum do bit correspondente na
+entrada, enquanto o épsilon funciona ao contrário. No exemplo acima, o primeiro
+bit mais comum é 1 e o segundo é 0, então o índice gama começará com 10… e o
+índice épsilon começará com 01…</p>
+<p>O meu código quebra os bits da entrada com <code>tidyr::separate()</code> e calcula o valor
+mais frequente com <code>names(sort(-table(.x)))[1]</code> (a moda estatística). É
+importante lembrar que épsilon é o oposto, então eu troquei todos os bits de
+gama com <code>stringr::str_replace_all()</code>. A resposta final é a multiplicação
+de gama por épsilon na base decimal.</p>
+<pre class="r"><code>&quot;data-raw/03a_binary_diagnostic.txt&quot; |&gt;
+  readr::read_table(col_names = &quot;reading&quot;) |&gt;
+  tidyr::separate(reading, paste0(&quot;B&quot;, 0:12), &quot;&quot;) |&gt;
+  dplyr::select(-B0) |&gt;
+  dplyr::summarise_all(~names(sort(-table(.x)))[1]) |&gt;
+  tidyr::unite(&quot;gamma&quot;, dplyr::everything(), sep = &quot;&quot;) |&gt;
+  dplyr::mutate(
+    epsilon = gamma |&gt;
+      stringr::str_replace_all(&quot;0&quot;, &quot;!&quot;) |&gt;
+      stringr::str_replace_all(&quot;1&quot;, &quot;0&quot;) |&gt;
+      stringr::str_replace_all(&quot;!&quot;, &quot;1&quot;) |&gt;
+      strtoi(base = 2),
+    gamma = strtoi(gamma, base = 2),
+    output = gamma * epsilon
+  ) |&gt;
+  dplyr::pull(output)</code></pre>
+</div>
+<div id="diagnóstico-binário-b" class="section level2">
+<h2>Diagnóstico Binário (B)</h2>
+<p>O segundo item desse dia foi o mais difícil de todos, ainda mais considerando
+que eu tento resolver tudo em apenas uma pipeline. Usando os mesmos dados,
+precisamos obter a taxa de O<span class="math inline">\(_2\)</span> e de CO<span class="math inline">\(_2\)</span> do submarino, sendo que as regras
+são as seguintes:</p>
+<ol style="list-style-type: decimal">
+<li><p>Jogue fora os número que não atendem ao critério daquele gás.</p></li>
+<li><p>Se restar apenas 1 número, essa é a taxa daquele gás.</p></li>
+<li><p>Caso contrário, repita o processo com o próximo bit.</p></li>
+</ol>
+<p>E quais são os critérios?</p>
+<ul>
+<li><p>Para o oxigênio, determinamos o valor mais comum para o bit atual e jogamos
+fora todos os números que diferem, nessa posição, desse valor. Se 0 e 1 forem
+igualmente comuns, manter apenas os números com 1 no bit considerado.</p></li>
+<li><p>Para gás carbônico, determinamos o valor menos comum para o bit atual e
+jogamos fora todos os números que diferem, nessa posição, desse valor. Se 0 e 1
+forem igualmente comuns, manter apenas os números com 0 no bit considerado.</p></li>
+</ul>
+<p>O primeiro passo da minha solução foi criar uma função que calcula a anti-moda
+de um vetor. Ela difere da função usada no item anterior somente pelo sinal de
+subtração, mas isso garante a ela uma propriedade importante: se 0 e 1 empatarem
+na contagem, ela retorna o valor que vem antes na ordem alfabética, ou seja, 0.
+Dessa forma a função <code>antimode()</code> realiza exatamente a operação que precisamos
+para determinar a taxa de gás carbônico.</p>
+<pre class="r"><code>antimode &lt;- function(x) names(sort(table(x)))[1]</code></pre>
+<p>A função abaixo é uma versão recursiva do cálculo das taxas dos gases. A coluna
+<code>current</code> é só um atalho para deixar o filtro mais enxuto, pois ela não passa da
+do bit atual. O <code>op()</code>, porém, é a chave que nos permite usar a mesma função
+para calcular O<span class="math inline">\(_2\)</span> e CO<span class="math inline">\(_2\)</span>; por padrão a função filtra os valores iguais à
+anti-moda, mas, com <code>co2 = FALSE</code>, ela filtra os valores diferentes da
+anti-moda, atendendo ao critério do oxigênio (incluindo o desempate)!</p>
+<p>A última linha chama a função de novo para o próximo bit, resolvendo o cálculo.</p>
+<pre class="r"><code>gas &lt;- function(df, co2 = TRUE, bit = 1) {
+
+  # Condição de parada
+  if (bit &gt; 12 || nrow(df) == 1) return(df)
+
+  # Escolher o operador apropriado
+  if (co2) op &lt;- `==` else op &lt;- `!=`
+
+  # Filtrar usando antimode() e fazer a recursão
+  df |&gt;
+    dplyr::mutate(current = .data[[names(df)[bit]]]) |&gt;
+    dplyr::filter(op(current, antimode(current))) |&gt;
+    dplyr::select(-current) |&gt;
+    find_rating(co2 = co2, bit = bit + 1)
+}</code></pre>
+<p>Só nos resta aplicar essa função na lista de números. Para tentar manter o fim
+do código em uma pipeline só (já que não foi possível com o resto), eu usei
+<code>rep_len(list(df), 2)</code> para duplicar a base e poder aplicar <code>gas()</code> e
+<code>gas(co2 = FALSE)</code> em uma linha só com <code>purrr::map2_dfr()</code>. O final do código
+deixa cada taxa em uma linha, junta os seu bits, as converte para decimal e
+multiplica seus valores. Essa é a saída.</p>
+<pre class="r"><code>&quot;data-raw/03b_binary_diagnostic.txt&quot; |&gt;
+  readr::read_table(col_names = &quot;reading&quot;) |&gt;
+  tidyr::separate(reading, paste0(&quot;B&quot;, 0:12), &quot;&quot;) |&gt;
+  dplyr::select(-B0) |&gt;
+  list() |&gt;
+  rep_len(2) |&gt;
+  purrr::map2_dfr(list(gas, \(df) gas(df, FALSE)), ~.y(.x)) |&gt;
+  tidyr::unite(&quot;reading&quot;, dplyr::everything(), sep = &quot;&quot;) |&gt;
+  dplyr::mutate(reading = strtoi(reading, base = 2)) |&gt;
+  dplyr::summarise(output = prod(reading)) |&gt;
+  dplyr::pull(output)</code></pre>
+</div>
