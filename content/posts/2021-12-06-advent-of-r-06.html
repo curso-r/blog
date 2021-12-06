@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-06.png"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 06."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,111 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="peixes-lanterna-a" class="section level2">
+<h2>Peixes-lanterna (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/3">dia 6</a> do AoC me pegou um pouco de
+surpresa. O primeiro item foi tranquilo de fazer: a entrada era uma lista de
+números que representavam os “contadores biológicos” de um cardume de
+peixes-lanterna e precisávamos retornar o número de peixes depois de 80 dias.</p>
+<p>Os peixes adultos demoram 7 dias (contador vai de 6 até 0) para gerar um novo
+peixe bebê e um peixe bebê demora 9 dias (contador vai de 8 até 0) para gerar
+seu primeiro filhote.</p>
+<pre class="r"><code>Estado inicial   : 3,4,3,1,2
+Depois de  1 dia : 2,3,2,0,1
+Depois de  2 dias: 1,2,1,6,0,8
+Depois de  3 dias: 0,1,0,5,6,7,8
+Depois de  4 dias: 6,0,6,4,5,6,7,8,8
+Depois de  5 dias: 5,6,5,3,4,5,6,7,7,8
+Depois de  6 dias: 4,5,4,2,3,4,5,6,6,7
+Depois de  7 dias: 3,4,3,1,2,3,4,5,5,6
+Depois de  8 dias: 2,3,2,0,1,2,3,4,4,5
+Depois de  9 dias: 1,2,1,6,0,1,2,3,3,4,8
+Depois de 10 dias: 0,1,0,5,6,0,1,2,2,3,7,8
+Depois de 11 dias: 6,0,6,4,5,6,0,1,1,2,6,7,8,8,8
+Depois de 12 dias: 5,6,5,3,4,5,6,0,0,1,5,6,7,7,7,8,8
+Depois de 13 dias: 4,5,4,2,3,4,5,6,6,0,4,5,6,6,6,7,7,8,8
+Depois de 14 dias: 3,4,3,1,2,3,4,5,5,6,3,4,5,5,5,6,6,7,7,8
+Depois de 15 dias: 2,3,2,0,1,2,3,4,4,5,2,3,4,4,4,5,5,6,6,7
+Depois de 16 dias: 1,2,1,6,0,1,2,3,3,4,1,2,3,3,3,4,4,5,5,6,8
+Depois de 17 dias: 0,1,0,5,6,0,1,2,2,3,0,1,2,2,2,3,3,4,4,5,7,8
+Depois de 18 dias: 6,0,6,4,5,6,0,1,1,2,6,0,1,1,1,2,2,3,3,4,6,7,8,8,8,8</code></pre>
+<p>O meu código até que ficou bem simples. Precisei apenas de uma função que, todo
+dia, subtraia 1 de todos os condadores, criava 1 peixe com contador 8 para
+cada peixe com contador -1 e, por fim, subia todos os peixes com contador -1
+para 6.</p>
+<pre class="r"><code># Rodar n cíclos de reprodução do peixe-lanterna
+reproduce &lt;- function(fish, n = 80) {
+
+  # Condição de parada
+  if (n == 0) return(length(fish))
+
+  # Reduzir contadores biológicos
+  fish &lt;- fish - 1L
+
+  # Criar novos peixes e reiniciar contadores
+  fish &lt;- append(fish, rep_len(8L, length(fish[fish == -1L])))
+  fish[fish == -1L] &lt;- 6L
+
+  # Recursão
+  reproduce(fish, n = n - 1)
+}
+
+# Ler uma lista de peixes e reproduzir por 80 dias
+&quot;data-raw/06a_lanternfish.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_split(&quot;,&quot;) |&gt;
+  purrr::pluck(1) |&gt;
+  as.integer() |&gt;
+  reproduce()
+#&gt; [1] 362666</code></pre>
+</div>
+<div id="peixes-lanterna-b" class="section level2">
+<h2>Peixes-lanterna (B)</h2>
+<p>O segundo item do exercício não mudava essencialmente nada em relação ao
+primeiro. Assumindo espaço e recursos infinitos, quantos peixes teríamos depois
+de 256 dias?</p>
+<p>Para resolver esse item, em teoria, seria necessário trocar apenas o valor do
+<code>n</code> por 256. Mas não foi o que aconteceu… Por causa da ineficiência do
+algoritmo, obter uma resposta demoraria horas e acabaria com a memória do meu
+computador. Foi necessário pensar em um novo método de resolver o problema.</p>
+<p>A solução abaixo foi inspirada pela função <code>table()</code>. Para reduzir a exigência
+de espaço e não precisar iterar ao longo de um vetor com todos os peixes, eu
+agrupei os peixes com o mesmo contador biológico em apenas uma linha de uma
+tabela! Assim o programa nunca precisava lidar com mais de 9 linhas por dia,
+resolvendo as complicações com espaço e tempo.</p>
+<pre class="r"><code># Rodar n cíclos de reprodução do peixe-lanterna
+reproduce &lt;- function(fish, n = 80) {
+
+  # Condição de parada
+  if (n == 0) return(sum(fish$n))
+
+  # Reduzir contadores biológicos
+  fish &lt;- dplyr::mutate(fish, timer = timer - 1L)
+
+  # Criar novos peixes
+  babies &lt;- fish |&gt;
+    dplyr::filter(timer == -1L) |&gt;
+    dplyr::mutate(timer = 8L)
+
+  # Reiniciar contadores e recursão
+  fish |&gt;
+    dplyr::bind_rows(babies) |&gt;
+    dplyr::mutate(timer = ifelse(timer == -1L, 6L, timer)) |&gt;
+    dplyr::group_by(timer) |&gt;
+    dplyr::summarise(n = sum(n)) |&gt;
+    reproduce(n = n - 1)
+}
+
+# Ler uma lista de peixes e reproduzir por 256 dias
+&quot;data-raw/06b_lanternfish.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_split(&quot;,&quot;) |&gt;
+  purrr::pluck(1) |&gt;
+  as.integer() |&gt;
+  tibble::as_tibble() |&gt;
+  purrr::set_names(&quot;timer&quot;) |&gt;
+  dplyr::count(timer) |&gt;
+  reproduce(n = 256) |&gt;
+  format(scientific = FALSE)
+#&gt; [1] 1640526601595</code></pre>
+</div>
