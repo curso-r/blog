@@ -62,7 +62,7 @@ Depois de 18 dias: 6,0,6,4,5,6,0,1,1,2,6,0,1,1,1,2,2,3,3,4,6,7,8,8,8,8
 ```
 
 O meu código até que ficou bem simples. Precisei apenas de uma função que, todo
-dia, subtraia 1 de todos os condadores, criava 1 peixe com contador 8 para
+dia, subtraia 1 de todos os contadores, criava 1 peixe com contador 8 para
 cada peixe com contador -1 e, por fim, subia todos os peixes com contador -1
 para 6.
 
