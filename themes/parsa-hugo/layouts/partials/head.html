@@ -2,23 +2,23 @@
   <meta charset="utf-8">
 
   <!-- Primary Meta Tags -->
-  <title>{{ site.Title }}</title>
-  <meta name="title" content="{{ site.Title }}">
-  <meta name="description" content="{{ site.Params.description }}">
+  <title>{{ .Title }}</title>
+  <meta name="title" content="{{ .Title }}">
+  <meta name="description" content="{{ .Summary }}">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://blog.curso-r.com/">
-  <meta property="og:title" content="{{ site.Title }}">
-  <meta property="og:description" content="{{ site.Params.description }}">
-  <meta property="og:image" content="https://blog.curso-r.com/images/home.png">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Summary }}">
+  <meta property="og:image" content="{{ .Params.image | absURL }}">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://blog.curso-r.com/">
-  <meta property="twitter:title" content="{{ site.Title }}">
-  <meta property="twitter:description" content="{{ site.Params.description }}">
-  <meta property="twitter:image" content="https://blog.curso-r.com/images/home.png">
+  <meta property="twitter:url" content="{{ .Permalink }}">
+  <meta property="twitter:title" content="{{ .Title }}">
+  <meta property="twitter:description" content="{{ .Summary }}">
+  <meta property="twitter:image" content="{{ .Params.image | absURL }}">
 
   {{ "<!-- mobile responsive meta -->" | safeHTML }}
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
