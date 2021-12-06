@@ -6,7 +6,6 @@ categories: ["tutoriais"]
 image: "images/posts/banner/lubridate.jpg"
 author: ["Tereza"]
 summary: "Aprenda a converter e a fazer operações com datas no R"
-draft: true
 ---
 
 Datas no R são tratadas como um tipo especial de objeto, com classe `Date`.
