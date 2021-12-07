@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-07.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 07."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,65 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="a-traição-das-baleias-a" class="section level2">
+<h2>A Traição das Baleias (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/7">dia 7</a> do AoC foi o mais rápido até
+agora. A nossa tarefa era determinar a posição horizontal na qual um exército de
+carangueijos deveria se alinhar, com a restrição de que deveríamos encontrar a
+posição que exigisse menos combustível.</p>
+<p>Cada carangueijo estava equipado de um mini-submarino que gastava 1 unidade de
+combustível por unidade de deslocamento, logo o total de combustível gasto pela
+tropa para ir até a posição <code>x</code> seria simplesmente <code>sum(abs(positions - x))</code>. A
+saída era o combustível gasto para levar todos os carangueijos até a posição
+mais econômica.</p>
+<pre class="r"><code># Ler vetor de posições iniciais
+positions &lt;- &quot;data-raw/07a_the_treachery_of_whales.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_split(&quot;,&quot;) |&gt;
+  purrr::pluck(1) |&gt;
+  as.integer()
+
+# Iterar nas posições para encontrar a mais barata
+cheapest &lt;- Inf
+for (pos in max(positions):min(positions)) {
+
+  # Calcular o combustível gasto para a posição
+  fuel &lt;- sum(abs(positions - pos))
+
+  # Trocar a resposta se essa posição for mais econômica
+  if (fuel &lt; cheapest) cheapest &lt;- fuel
+}
+
+# Imprimir
+cheapest
+#&gt; [1] 328318</code></pre>
+<p>Note que não era necessário testar nenhuma posição fora do intervalo
+<code>max(positions):min(positions)</code>! Qualquer posição fora disso seria menos
+econômica do que a ponta mais próxima a ela dentro do intervalo.</p>
+</div>
+<div id="a-traição-das-baleias-b" class="section level2">
+<h2>A Traição das Baleias (B)</h2>
+<p>O segundo item mantinha o mesmo problema, mas mudava o cálculo do gasto de
+combustível dos mini-submarinos: o primeiro movimento consumiria 1 unidade de
+combustível, o segundo consumiria 2 unidades, o terceiro consumiria 3 e assim
+por diante.</p>
+<p>A única linha que muda dessa solução para a anterior é a que calcula o gasto
+de combustível para cada posição. Se um carangueijo estiver na posição <code>a</code> e
+quiser ir até a <code>x</code>, o seu consumo total será <span class="math inline">\(\sum_{k = 0}^{|a - x|} k\)</span>. Abaixo
+a operação <code>sum(purrr::map_int(positions, ~sum(0:abs(.x - pos))))</code> faz isso para
+todos os carangueijos.</p>
+<pre class="r"><code># Iterar nas posições para encontrar a mais barata
+cheapest &lt;- Inf
+for (pos in max(positions):min(positions)) {
+
+  # Calcular o combustível gasto para a posição
+  fuel &lt;- sum(purrr::map_int(positions, ~sum(0:abs(.x - pos))))
+
+  # Trocar a resposta se essa posição for mais econômica
+  if (fuel &lt; cheapest) cheapest &lt;- fuel
+}
+
+# Imprimir
+cheapest
+#&gt; [1] 328318</code></pre>
+</div>
