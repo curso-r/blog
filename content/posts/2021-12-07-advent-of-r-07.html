@@ -32,12 +32,12 @@ divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
 <h2>A Traição das Baleias (A)</h2>
 <p>O <a href="https://adventofcode.com/2021/day/7">dia 7</a> do AoC foi o mais rápido até
 agora. A nossa tarefa era determinar a posição horizontal na qual um exército de
-carangueijos deveria se alinhar, com a restrição de que deveríamos encontrar a
+caranguejos deveria se alinhar, com a restrição de que deveríamos encontrar a
 posição que exigisse menos combustível.</p>
-<p>Cada carangueijo estava equipado de um mini-submarino que gastava 1 unidade de
+<p>Cada caranguejo estava equipado de um mini-submarino que gastava 1 unidade de
 combustível por unidade de deslocamento, logo o total de combustível gasto pela
 tropa para ir até a posição <code>x</code> seria simplesmente <code>sum(abs(positions - x))</code>. A
-saída era o combustível gasto para levar todos os carangueijos até a posição
+saída era o combustível gasto para levar todos os caranguejos até a posição
 mais econômica.</p>
 <pre class="r"><code># Ler vetor de posições iniciais
 positions &lt;- &quot;data-raw/07a_the_treachery_of_whales.txt&quot; |&gt;
@@ -71,10 +71,10 @@ combustível dos mini-submarinos: o primeiro movimento consumiria 1 unidade de
 combustível, o segundo consumiria 2 unidades, o terceiro consumiria 3 e assim
 por diante.</p>
 <p>A única linha que muda dessa solução para a anterior é a que calcula o gasto
-de combustível para cada posição. Se um carangueijo estiver na posição <code>a</code> e
+de combustível para cada posição. Se um caranguejo estiver na posição <code>a</code> e
 quiser ir até a <code>x</code>, o seu consumo total será <span class="math inline">\(\sum_{k = 0}^{|a - x|} k\)</span>. Abaixo
 a operação <code>sum(purrr::map_int(positions, ~sum(0:abs(.x - pos))))</code> faz isso para
-todos os carangueijos.</p>
+todos os caranguejos.</p>
 <pre class="r"><code># Iterar nas posições para encontrar a mais barata
 cheapest &lt;- Inf
 for (pos in max(positions):min(positions)) {

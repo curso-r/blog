@@ -32,13 +32,13 @@ divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
 
 O [dia 7](https://adventofcode.com/2021/day/7) do AoC foi o mais rápido até
 agora. A nossa tarefa era determinar a posição horizontal na qual um exército de
-carangueijos deveria se alinhar, com a restrição de que deveríamos encontrar a
+caranguejos deveria se alinhar, com a restrição de que deveríamos encontrar a
 posição que exigisse menos combustível.
 
-Cada carangueijo estava equipado de um mini-submarino que gastava 1 unidade de
+Cada caranguejo estava equipado de um mini-submarino que gastava 1 unidade de
 combustível por unidade de deslocamento, logo o total de combustível gasto pela
 tropa para ir até a posição `x` seria simplesmente `sum(abs(positions - x))`. A
-saída era o combustível gasto para levar todos os carangueijos até a posição
+saída era o combustível gasto para levar todos os caranguejos até a posição
 mais econômica.
 
 ```r
@@ -77,10 +77,10 @@ combustível, o segundo consumiria 2 unidades, o terceiro consumiria 3 e assim
 por diante.
 
 A única linha que muda dessa solução para a anterior é a que calcula o gasto
-de combustível para cada posição. Se um carangueijo estiver na posição `a` e
+de combustível para cada posição. Se um caranguejo estiver na posição `a` e
 quiser ir até a `x`, o seu consumo total será $\sum_{k = 0}^{|a - x|} k$. Abaixo
 a operação `sum(purrr::map_int(positions, ~sum(0:abs(.x - pos))))` faz isso para
-todos os carangueijos.
+todos os caranguejos.
 
 ```r
 # Iterar nas posições para encontrar a mais barata
