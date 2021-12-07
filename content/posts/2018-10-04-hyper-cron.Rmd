@@ -3,7 +3,7 @@ title: "Agendando scripts do R"
 date: "2018-10-04"
 categories: ["tutoriais"]
 tags: ["cron"]
-image: "images/posts/banner/hyper-cron-r.jpg"
+image: "images/posts/banner/hyper-cron-r.jpeg"
 author: ["Daniel"]
 summary: "Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos sem gastar muito."
 ---

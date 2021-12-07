@@ -3,7 +3,7 @@ title: "Warnings no if_else(), mas não no ifelse()?"
 date: "2020-09-11"
 tags: ["programação"]
 categories: ["conceitos"]
-image: "images/posts/banner/if_else_ifelse.jpg"
+image: "images/posts/banner/if_else_ifelse.jpeg"
 author: ["Caio"]
 summary: "Por que às vezes recebemos warnings no if_else(), mas não no ifelse()? Uma investigação revela que o problema pode não estar onde imaginamos..."
 ---

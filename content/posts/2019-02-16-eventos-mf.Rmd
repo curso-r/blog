@@ -3,7 +3,7 @@ title: "Precisamos falar sobre a participação de mulheres em eventos de estat�
 date: "2019-02-16"
 categories: ["análises"]
 tags: ["comunidade"]
-image: "images/posts/banner/gender_eq.png"
+image: "images/posts/banner/gender_eq.jpeg"
 author: ["Bruna Wundervald", "Julio"]
 summary: "Nos últimos anos, vários grupos têm monitorado e denunciado ocorrências desse fenômeno na comunidade científica. Para enriquecer os debates aqui no Brasil, decidimos organizar os dados de três eventos recentes de estatística."
 ---

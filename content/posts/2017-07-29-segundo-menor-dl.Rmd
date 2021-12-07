@@ -3,7 +3,7 @@ title: "Regressão Logística em: a menor deep learning do mundo"
 date: "2017-07-29"
 tags: ["deep learning", "redes neurais", "regressão logística", "keras", "glm"]
 categories: ["conceitos"]
-image: "images/posts/banner/what_if_i_told_you.png"
+image: "images/posts/banner/what_if_i_told_you.jpeg"
 author: ["Athos"]
 summary: "Deep learning é uma grande novidade, mas há muitos mitos em sua volta que acaba espantando pessoas que poderiam usufruir e contribuir para a comunidade de analista de dados. Esse post tem o intuito de abrir um pouquinho a caixa preta para quebrar algumas dessas fábulas."
 ---

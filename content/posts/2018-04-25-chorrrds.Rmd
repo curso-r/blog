@@ -3,7 +3,7 @@ title: "chorrrds: Analisando acordes de músicas brasileiras"
 date: "2018-04-25"
 tags: ["musica"]
 categories: ["análises"]
-image: "images/posts/banner/chorrrds.png"
+image: "images/posts/banner/chorrrds.jpeg"
 author: ["Bruna Wundervald"]
 summary: "Esse post da nossa convidada Bruna é mais uma bela aplicação de estatística em música, usando o R. Novos pacotes, lindas visualizações e insights super legais sobre a música brasileira..."
 ---

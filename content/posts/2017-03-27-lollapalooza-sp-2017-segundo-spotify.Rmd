@@ -4,7 +4,7 @@ date: "2017-03-27"
 tags: ["spotify", "lolapalooza", "API"]
 categories: ["análises"]
 author: ["Athos"]
-image: "images/posts/banner/lolla-spotify_s.png"
+image: "images/posts/banner/lolla-spotify_s.jpeg"
 ---
 
 ```{r setup, include=FALSE}

@@ -3,7 +3,7 @@ title: "3 Dicas de Rmarkdown que você precisa saber"
 date: "2021-03-18"
 tags: ["faxina", "gráficos"]
 categories: ["conceitos"]
-image: "images/posts/banner/rmarkdown_wizards.png"
+image: "images/posts/banner/rmarkdown_wizards.jpeg"
 author: ["Fernando"]
 summary: "RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos lindos e muito elegantes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer."
 draft: false

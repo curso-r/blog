@@ -3,7 +3,7 @@ title: "Tutorial: {rlang} para Filhotes"
 date: "2021-07-27"
 tags: ["rlang", "tidy", "tidyverse"]
 categories: ["tutoriais"]
-image: "images/posts/banner/filhote.jpg"
+image: "images/posts/banner/filhote.jpeg"
 author: ["Caio"]
 summary: "Um tutorial sobre {rlang} que vai do básico ao avançado. Zero to hero!"
 draft: false
