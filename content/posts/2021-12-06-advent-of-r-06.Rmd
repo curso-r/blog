@@ -30,7 +30,7 @@ divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
 
 ## Peixes-lanterna (A)
 
-O [dia 6](https://adventofcode.com/2021/day/3) do AoC me pegou um pouco de
+O [dia 6](https://adventofcode.com/2021/day/6) do AoC me pegou um pouco de
 surpresa. O primeiro item foi tranquilo de fazer: a entrada era uma lista de
 números que representavam os "contadores biológicos" de um cardume de
 peixes-lanterna e precisávamos retornar o número de peixes depois de 80 dias.

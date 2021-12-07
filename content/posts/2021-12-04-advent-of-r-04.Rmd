@@ -30,7 +30,7 @@ divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
 
 ## Lula Gigante (A)
 
-O [quarto dia](https://adventofcode.com/2021/day/3) do AoC foi talvez o mais
+O [quarto dia](https://adventofcode.com/2021/day/4) do AoC foi talvez o mais
 interessante até agora. Na primeira parte, precisávamos calcular a pontuação da
 cartela vencedora de um
 [bingo americano](https://en.wikipedia.org/wiki/Bingo_(American_version)): cada

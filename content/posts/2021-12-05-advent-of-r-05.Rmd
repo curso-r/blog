@@ -30,7 +30,7 @@ divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
 
 ## Aventura Hidrotermal (A)
 
-O [quinto dia](https://adventofcode.com/2021/day/3) do AoC foi um pouco mais
+O [quinto dia](https://adventofcode.com/2021/day/5) do AoC foi um pouco mais
 tranquilo do que o anterior porque eu tive ajuda da incrível
 [Renata Hirota](https://twitter.com/renata_mh). Hoje tínhamos as coordenadas
 cartesianas do início e do fim de tubulações submarinas e o objetivo era
