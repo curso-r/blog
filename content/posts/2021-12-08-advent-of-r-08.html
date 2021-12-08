@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-08.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 08."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,192 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="busca-em-sete-segmentos-a" class="section level2">
+<h2>Busca em Sete Segmentos (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/8">oitavo dia</a> do AoC foi bastante difícil
+para mim. O problema começou pelo enunciado, que é longo e complexo, então
+realmente recomendo ler a versão original além do resumo que trago abaixo.</p>
+<p>Dito isso, vamos lá. O problema dizia respeito a
+<a href="https://pt.wikipedia.org/wiki/Display_de_sete_segmentos">displays de sete segmentos</a>,
+onde cada número é representado por um conjunto de segmentos acessos; de acordo
+com o diagrama abaixo, vemos que 0 é representado por <code>abcefg</code>, 1 é <code>cf</code> e assim
+por diante.</p>
+<pre class="r"><code>#   0:      1:      2:      3:      4:
+#  aaaa    ....    aaaa    aaaa    ....
+# b    c  .    c  .    c  .    c  b    c
+# b    c  .    c  .    c  .    c  b    c
+#  ....    ....    dddd    dddd    dddd
+# e    f  .    f  e    .  .    f  .    f
+# e    f  .    f  e    .  .    f  .    f
+#  gggg    ....    gggg    gggg    ....
+
+#   5:      6:      7:      8:      9:
+#  aaaa    aaaa    aaaa    aaaa    aaaa
+# b    .  b    .  .    c  b    c  b    c
+# b    .  b    .  .    c  b    c  b    c
+#  dddd    dddd    ....    dddd    dddd
+# .    f  e    f  .    f  e    f  .    f
+# .    f  e    f  .    f  e    f  .    f
+#  gggg    gggg    ....    gggg    gggg</code></pre>
+<p>O desafio é que, no nosso submarino, todo os displays estão com os fios
+trocados e, para piorar, cada display tem um arranjo diferente. A entrada do
+problema é uma série de linhas como a abaixo: como os 10 dígitos são
+representados em um display específico (em qualquer ordem) e, depois da barra,
+4 dígitos que precisamos decodificar.</p>
+<pre class="r"><code># acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
+# cdfeb fcadb cdfeb cdbaf</code></pre>
+<p>Alguns dígitos são fáceis de identificar. Os números 1, 4, 7 e 8 usam números
+únicos de segmentos, então é possível perceber que, quando <code>ab</code> acenderam, o
+display estava tentando mostrar um 1. Seguindo a mesma lógica, <code>dab</code> é 7, <code>eafb</code>
+é 4 e <code>acedgfb</code> é 8.</p>
+<p>O objetivo do primeiro item do dia 08 era contar quantas vezes os dígitos 1, 4,
+7 e 8 aparecem nas saídas que devemos decodificar (lado direito da barra). A
+solução foi bem simples, pois bastou pivotar a tabela e filtrar as linhas que
+tinham <code>stringr::str_length()</code> igual a 2, 3, 4, ou 7.</p>
+<pre class="r"><code>&quot;data-raw/08a_seven_segment_search.txt&quot; |&gt;
+  readr::read_delim(&quot; &quot;, col_names = NULL) |&gt;
+  purrr::set_names(
+    paste0(&quot;P&quot;, stringr::str_pad(1:10, 2, &quot;left&quot;, &quot;0&quot;)), &quot;remove&quot;,
+    paste0(&quot;V&quot;, stringr::str_pad(1:4, 2, &quot;left&quot;, &quot;0&quot;))
+  ) |&gt;
+  dplyr::select(-remove) |&gt;
+  dplyr::select(V01:V04) |&gt;
+  tidyr::pivot_longer(V01:V04, names_to = &quot;col&quot;, values_to = &quot;value&quot;) |&gt;
+  dplyr::filter(stringr::str_length(value) %in% c(2, 4, 3, 7)) |&gt;
+  nrow()
+#&gt; [1] 365</code></pre>
+</div>
+<div id="busca-em-sete-segmentos-b" class="section level2">
+<h2>Busca em Sete Segmentos (B)</h2>
+<p>O verdadeiro problema veio no item 2. Aqui o exercício abandona qualquer
+pretexto de bondade e pede de uma vez para decodificarmos os dígitos depois da
+barra baseados nos 10 padrões antes da barra. A saída deveria ser a soma de
+todos os números de 4 dígitos decodificados.</p>
+<p>Minha primeira tentativa de resolver o problema testava cada segmento em cada
+posição (essencialmente verificando todos os possíveis jeitos de embaralhar os
+fios) para ver em qual das configurações os padrões faziam sentido; depois seria
+só bater os padrões com os 4 dígitos da direita para ver quem é quem. Não
+preciso nem dizer que isso seria demorado demais para funcionar.</p>
+<p>Depois de um tempo olhando para o arquivo de entrada, entretanto, me veio uma
+luz: talvez eu pudesse analisar a <em>frequência</em> com a qual cada segmento aparece
+nos padrões. Perceba, por exemplo, que no diagrama acima o segmento <code>e</code> está
+ligado em 4 dígitos (0, 2, 6 e 8). O fato importante é que ele é o único
+segmento com essa propriedade!</p>
+<p>Partindo deste princípio, criei as seguinte regras para o código:</p>
+<ol style="list-style-type: decimal">
+<li><p>O único segmento que aparecer 4 vezes nos padrões corresponderá ao <code>e</code>;</p></li>
+<li><p>O único segmento que aparecer 6 vezes nos padrões corresponderá ao <code>b</code>;</p></li>
+<li><p>O único segmento que aparecer 9 vezes nos padrões corresponderá ao <code>f</code>;</p></li>
+<li><p>No padrão com 2 segmentos acessos, aquele que não representar o <code>e</code>
+corresponderá ao <code>c</code> (número 1).</p></li>
+<li><p>No padrão com 3 segmentos acessos, aquele que não representar <code>c</code> ou <code>f</code>
+corresponderá ao <code>a</code> (número 7).</p></li>
+<li><p>No padrão com 4 segmentos acessos, aquele que não representar <code>b</code>, <code>c</code> ou <code>f</code>
+corresponderá ao <code>d</code> (número 4).</p></li>
+<li><p>O segmento que ainda não tiver correspondente corresponderá ao <code>g</code>.</p></li>
+</ol>
+<p>O resto do código cuidava de organizar as letras de cada dígito de modo que
+fosse fácil transpor as correspondências dos 10 padrões para os 4 valores das
+saídas.</p>
+<pre class="r"><code># Decodificar uma linha da entrada
+decode &lt;- function(entry) {
+
+  # Encontra e quebra o padrão que tenha certa str_length()
+  find_by_len &lt;- function(patterns, len) {
+    patterns |&gt;
+      magrittr::extract(stringr::str_length(patterns) == len) |&gt;
+      stringr::str_split(&quot;&quot;) |&gt;
+      purrr::pluck(1)
+  }
+
+  # Frequências de referência
+  ref_freq &lt;- list(
+    &quot;a&quot; = 8,
+    &quot;b&quot; = 6,
+    &quot;c&quot; = 8,
+    &quot;d&quot; = 7,
+    &quot;e&quot; = 4,
+    &quot;f&quot; = 9,
+    &quot;g&quot; = 7
+  )
+
+  # Valores de referência
+  ref_val &lt;- list(
+    &quot;abdefg&quot; = 6,
+    &quot;abcefg&quot; = 0,
+    &quot;cf&quot; = 1,
+    &quot;acdfg&quot; = 3,
+    &quot;abcdfg&quot; = 9,
+    &quot;abcdefg&quot; = 8,
+    &quot;bcdf&quot; = 4,
+    &quot;acf&quot; = 7,
+    &quot;abdfg&quot; = 5,
+    &quot;acdeg&quot; = 2
+  )
+
+  # Calcular frequências desta entrada
+  cur_freq &lt;- entry |&gt;
+    dplyr::select(P01:P10) |&gt;
+    purrr::flatten_chr() |&gt;
+    stringr::str_split(&quot;&quot;) |&gt;
+    purrr::flatten_chr() |&gt;
+    table()
+
+  # Criar um dicionário para traduzir os segmentos
+  dict &lt;- list()
+
+  # Traduzir segmentos com frequências únicas
+  dict[[&quot;e&quot;]] &lt;- names(cur_freq[cur_freq == 4])
+  dict[[&quot;b&quot;]] &lt;- names(cur_freq[cur_freq == 6])
+  dict[[&quot;f&quot;]] &lt;- names(cur_freq[cur_freq == 9])
+
+  # Extrair padrões da entrada
+  patterns &lt;- entry |&gt;
+    dplyr::select(P01:P10) |&gt;
+    purrr::flatten_chr()
+
+  # Determinar segmento que falta do 1
+  one &lt;- find_by_len(patterns, 2)
+  dict[[&quot;c&quot;]] &lt;- one[!one %in% purrr::flatten_chr(dict)]
+
+  # Determinar segmento que falta do 7
+  seven &lt;- find_by_len(patterns, 3)
+  dict[[&quot;a&quot;]] &lt;- seven[!seven %in% purrr::flatten_chr(dict)]
+
+  # Determinar segmento que falta do 4
+  four &lt;- find_by_len(patterns, 4)
+  dict[[&quot;d&quot;]] &lt;- four[!four %in% purrr::flatten_chr(dict)]
+
+  # Determinar último segmento que falta
+  dict[[&quot;g&quot;]] &lt;- names(cur_freq)[!names(cur_freq) %in% purrr::flatten_chr(dict)]
+
+  # Traduzir segmentos dos valores de saída
+  entry |&gt;
+    dplyr::select(V01:V04) |&gt;
+    purrr::flatten_chr() |&gt;
+    stringr::str_split(&quot;&quot;) |&gt;
+    purrr::map(~names(dict)[match(.x, dict)]) |&gt;
+    purrr::map(sort) |&gt;
+    purrr::map(stringr::str_c, collapse = &quot;&quot;) |&gt;
+    purrr::map(~purrr::flatten_chr(ref_val)[match(.x, names(ref_val))]) |&gt;
+    purrr::flatten_chr() |&gt;
+    as.integer() |&gt;
+    stringr::str_c(collapse = &quot;&quot;) |&gt;
+    as.numeric()
+}
+
+# Ler entrada, mapear decode() e somar todas os valores de saída
+&quot;data-raw/08b_seven_segment_search.txt&quot; |&gt;
+  readr::read_delim(&quot; &quot;, col_names = NULL) |&gt;
+  purrr::set_names(
+    paste0(&quot;P&quot;, stringr::str_pad(1:10, 2, &quot;left&quot;, &quot;0&quot;)), &quot;remove&quot;,
+    paste0(&quot;V&quot;, stringr::str_pad(1:4, 2, &quot;left&quot;, &quot;0&quot;))
+  ) |&gt;
+  dplyr::select(-remove) |&gt;
+  tibble::rowid_to_column(&quot;id&quot;) |&gt;
+  tidyr::nest(entry = c(P01:V04)) |&gt;
+  dplyr::mutate(output = purrr::map_dbl(entry, decode)) |&gt;
+  dplyr::summarise(output = sum(output)) |&gt;
+  dplyr::pull(output)
+#&gt; [1] 975706</code></pre>
+</div>
