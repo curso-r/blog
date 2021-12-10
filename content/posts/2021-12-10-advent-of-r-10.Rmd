@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-10.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 10."
-draft: true
+draft: false
 ---
 
 O [Advent of Code](https://adventofcode.com) é um
@@ -27,3 +27,136 @@ A minha esperança é que, com essa série, mais pessoas pratiquem seus
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Pontuação de Sintaxe (A)
+
+O [dia 10](https://adventofcode.com/2021/day/10) do AoC pedia para que
+resolvessemos um clássico problema de parentização com alguns facilitadores. Em
+resumo, recebíamos uma string composta por parênteses e seus amigos ("(", "[",
+"{", "<", ">", "}", "]", ")") e precisávamos identificar se o fechamento de
+algum deles estava errado, por exemplo, "[}", "{()()()>", etc. Para cada string
+que tivesse um fechamento ilegal recebia uma quantidade de pontos de acordo com
+a tabela abaixo e, finalmente, a saída do exercício era a soma de todas as
+pontuações.
+
+```r
+# ): 3 pontos.
+# ]: 57 pontos.
+# }: 1197 pontos.
+# >: 25137 pontos.
+```
+
+Para quem nunca viu um problema desse tipo, a solução pode ser alcançada
+facilmente usando uma
+[pilha](https://pt.wikipedia.org/wiki/Pilha_(inform%C3%A1tica)). Cada caractere
+que abre um bloco é colocado na pilha e, para cada caractere que fecha um bloco,
+removemos o elemento do topo da pilha. Se os caracteres se complementam
+corretamente o algoritmo segue em frente, caso contrário ele busca a pontuação
+na tabela e retorna.
+
+```r
+# Correspondência de valores
+scores <- list(
+  ")" = 3,
+  "]" = 57,
+  "}" = 1197,
+  ">" = 25137
+)
+
+# Calcular a pontuação por caractere ilegal em uma linha
+score_ilegal <- function(line) {
+  stack <- flifo::lifo()
+
+  # Iterar na linha até um elemento não corresponder
+  symbols <- stringr::str_split(line, "")[[1]]
+  for (symbol in symbols) {
+
+    # Empilhar ou desempilhar (e calcular pontuação se necessário)
+    if (symbol %in% c("(", "[", "{", "<")) {
+      flifo::push(stack, symbol)
+    } else {
+      check <- flifo::pop(stack)
+      if (
+        (check == "{" && symbol != "}") ||
+        (check == "(" && symbol != ")") ||
+        (check == "[" && symbol != "]") ||
+        (check == "<" && symbol != ">")
+      ) {
+        return(scores[names(scores) == symbol][[1]])
+      }
+    }
+  }
+
+  return(0)
+}
+
+# Iterar nas linhas e calcular pontuações
+"data-raw/10a_syntax_scoring.txt" |>
+  readr::read_lines() |>
+  purrr::map_dbl(score_ilegal) |>
+  sum()
+#> [1] 216297
+```
+
+## Pontuação de Sintaxe (B)
+
+O segundo item do problema pedia para que começássemos removendo as linhas que
+tinham pontuação maior que 0 (então só foi necessário filtrar isso no código,
+que vou omitir). Depois disso o objetivo era completar as linhas que restavam.
+
+O fato é que as linhas restantes estavam todas com um pedaço faltando, por
+exemplo, "[({(<(())[]>[[{[]{<()<>>" precisa ainda de "}}]])})]" para ficar
+correta. Usando a lógica do item anterior, só precisávamos seguir o mesmo
+roteiro e, ao final da linha, contar os pontos dos caracteres que ainda haviam
+sobrado na pilha.
+
+Desta vez a regra de pontuação era diferente: para cada caractere faltante,
+precisávamos multiplicar a pontuação corrente por 5 e então somar o valor do
+caractere de acordo com uma nova tabelha. A resposta final era a mediana da
+pontuação de todoas as linhas. Enfim, o código vai a seguir:
+
+```r
+# Ler linhas e remover corrompidas
+lines <- readr::read_lines("data-raw/10b_syntax_scoring.txt")
+lines <- lines[purrr::map_dbl(lines, score_ilegal) == 0]
+
+# Correspondência de valores
+scores <- list(
+  "(" = 1,
+  "[" = 2,
+  "{" = 3,
+  "<" = 4
+)
+
+# Calcular a pontuação por caractere faltante em uma linha
+score_complete <- function(line) {
+  stack <- flifo::lifo()
+
+  # Iterar na linha e remover parte completa
+  symbols <- stringr::str_split(line, "")[[1]]
+  for (symbol in symbols) {
+
+    # Empilhar ou desempilhar
+    if (symbol %in% c("(", "[", "{", "<")) {
+      flifo::push(stack, symbol)
+    } else {
+      flifo::pop(stack)
+    }
+  }
+
+  # Iterar no resto da pilha e calcular pontos
+  score <- 0
+  while (flifo::size(stack) > 0) {
+    check <- flifo::pop(stack)
+    score <- (score * 5) + scores[names(scores) == check][[1]]
+  }
+
+  return(score)
+}
+
+# Pegar mediana das pontuações
+lines |>
+  purrr::map_dbl(score_complete) |>
+  median()
+#> [1] 2165057169
+```
