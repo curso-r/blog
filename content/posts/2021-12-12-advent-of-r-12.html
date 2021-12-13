@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-12.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 12."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,148 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="busca-de-caminho-a" class="section level2">
+<h2>Busca de Caminho (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/12">dia 12</a>, juntamente com os anteriores,
+começou a me deixar preocupado com os próximos exercícios do Advent of Code.
+Aparentemente a dificuldade vai aumentando conforme o passar dos dias, mas já
+estou chegando no limite do meu conhecimento.</p>
+<p>Mais uma vez temos um enunciado complicado, então leia a versão original se
+ficar difícil de entender aqui. Nosso objetivo esta vez era contar o número de
+caminhos que o nosso submarino podia tomar em um sistema de cavernas.</p>
+<p>A entrada era uma lista de arestas nomeadas em um grafo. Os nossos caminhos
+deveriam sempre começar na caverna chamada “start” e terminar na chamada “end”,
+sendo que todas as outras eram divididas em dois grupos: grandes e pequenas. Uma
+caverna grande era demarcada por uma letra maiúscula e podia ser utilizada pelo
+nosso caminho qualquer número de vezes. Já uma caverna pequena (demarcada por
+uma letra minúscula), só podia ser utilizada uma vez no caminho.</p>
+<p>Veja o exemplo abaixo. A primeira parte seria a entrada do problema, a segunda,
+o diagrama das cavernas e a terceira, os 10 possíveis caminhos para o nosso
+submarino.</p>
+<pre class="r"><code># start-A
+# start-b
+# A-c
+# A-b
+# b-d
+# A-end
+# b-end
+
+#     start
+#     /   \
+# c--A-----b--d
+#     \   /
+#      end
+
+# start,A,b,A,c,A,end
+# start,A,b,A,end
+# start,A,b,end
+# start,A,c,A,b,A,end
+# start,A,c,A,b,end
+# start,A,c,A,end
+# start,A,end
+# start,b,A,c,A,end
+# start,b,A,end
+# start,b,end</code></pre>
+<p>Minha solução envolvia uma tabela que representava todas as arestas do grafo do
+sistema de cavernas. A cada nova recursão, a última caverna poderia ser mantida
+na tabela ou removida (no caso das cavernas pequenas); toda vez que um caminho
+chegasse ao “end”, um contador global era incrementado.</p>
+<pre class="r"><code># Contar caminhos distintos em um grafo
+count &lt;- 0
+count_paths &lt;- function(graph, path = &quot;start&quot;) {
+
+  # Verificar se o nó atual é &quot;pequeno&quot;
+  cave &lt;- tail(path, 1)
+  is_small &lt;- stringr::str_to_lower(cave) == cave
+
+  # Condições de parada
+  if (cave == &quot;end&quot;) {count &lt;&lt;- count + 1; return(1)}
+  if (!any(graph$orig == cave)) return(0)
+
+  # Encontrar próximo nó do caminho
+  searches &lt;- graph |&gt;
+    dplyr::filter(orig == cave) |&gt;
+    dplyr::pull(dest) |&gt;
+    purrr::map(purrr::prepend, path)
+
+  # Atualizar nós disponíveis
+  graph &lt;- if (is_small) dplyr::filter(graph, orig != cave) else graph
+
+  # Iterar nos possíveis caminhos
+  for (search in searches) {
+    count_paths(graph, search)
+  }
+
+  # Retornar contador global
+  return(count)
+}
+
+# Ler arestas do grafo e retornar conta dos caminhos
+&quot;data-raw/12a_passage_pathing.txt&quot; |&gt;
+  readr::read_table(col_names = &quot;path&quot;) |&gt;
+  tidyr::separate(path, c(&quot;orig&quot;, &quot;dest&quot;), &quot;-&quot;) |&gt;
+  {\(d) dplyr::bind_rows(d, purrr::set_names(d, rev(names(d))))}() |&gt;
+  dplyr::filter(dest != &quot;start&quot;, orig != &quot;end&quot;) |&gt;
+  count_paths()
+#&gt; [1] 4792</code></pre>
+</div>
+<div id="busca-de-caminho-b" class="section level2">
+<h2>Busca de Caminho (B)</h2>
+<p>O segundo item do problema mudava muito pouco o enunciado. Agora, ao invés de
+cada caverna pequena poder ser visitada apenas 1 vez, tínhamos um pequeno
+acréscimo de tempo. Isso queria dizer que, em cada caminho até o final do
+sistema de cavernas, podíamos visitar <em>apenas 1</em> das cavernas pequenas até 2
+vezes.</p>
+<p>Minha solução foi criar um argumento chamado <code>boost</code> que indicava se já tínhamos
+usado o nosso excedente de tempo naquele caminho expecífico. Se não tivéssemos,
+poderíamos não retirar uma das cavernas pequenas da lista imediatamente. Esta
+estratégia funcionou, mas gerou caminhos repetidos (usando e não usando o
+<code>boost</code>), então, ao invés de contar os caminhos, passei a salvar os caminhos e
+contar o número de caminhos distintos no final.</p>
+<pre class="r"><code># Pegar todos os caminhos distintos em um grafo
+all_paths &lt;- list()
+get_paths &lt;- function(graph, path = &quot;start&quot;, boost = FALSE) {
+
+  # Verificar se o nó atual é &quot;pequeno&quot;
+  cave &lt;- tail(path, 1)
+  is_small &lt;- stringr::str_to_lower(cave) == cave
+
+  # Condições de parada
+  if (cave == &quot;end&quot;) {all_paths &lt;&lt;- append(all_paths, list(path)); return(1)}
+  if (!any(graph$orig == cave)) return(0)
+
+  # Encontrar próximo nó do caminho
+  searches &lt;- graph |&gt;
+    dplyr::filter(orig == cave) |&gt;
+    dplyr::pull(dest) |&gt;
+    purrr::map(purrr::prepend, path)
+
+  # Atualizar nós disponíveis
+  graph_ &lt;- if (is_small) dplyr::filter(graph, orig != cave) else graph
+
+  # Iterar nos possíveis caminhos
+  for (search in searches) {
+    get_paths(graph_, search, boost = boost)
+
+    # Uma opção é não remover o nó do grafo e usar o boost
+    if (!boost &amp;&amp; is_small &amp;&amp; cave != &quot;start&quot;) {
+      get_paths(graph, search, boost = TRUE)
+    }
+  }
+
+  # Retornar lista global
+  return(all_paths)
+}
+
+# Ler arestas do grafo e retornar conta dos caminhos distintos
+&quot;data-raw/12b_passage_pathing.txt&quot; |&gt;
+  readr::read_table(col_names = &quot;path&quot;) |&gt;
+  tidyr::separate(path, c(&quot;orig&quot;, &quot;dest&quot;), &quot;-&quot;) |&gt;
+  {\(d) dplyr::bind_rows(d, purrr::set_names(d, rev(names(d))))}() |&gt;
+  dplyr::filter(dest != &quot;start&quot;, orig != &quot;end&quot;) |&gt;
+  get_paths() |&gt;
+  purrr::map_chr(stringr::str_c, collapse = &quot;|&quot;) |&gt;
+  unique() |&gt;
+  length()
+#&gt; [1] 133360</code></pre>
+</div>
