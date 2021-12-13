@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-13.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 13."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,171 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="origami-transparente-a" class="section level2">
+<h2>Origami Transparente (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/13">dia 13</a> foi um belo alívio comparado
+com o dia anterior. Nossa missão hoje era descobrir o código de um sensor a
+partir de um código escrito em papel transparente. A entrada era uma série de
+coordenadas de pontos no papel e uma sequência de instruções de como dobrar o
+papel para obter o código final.</p>
+<p>Partindo do princípio de que a matriz começava no ponto <code>(0, 0)</code> na esqueda
+superior, o primeiro item pedia para que lêssemos a nossa lista de coordenadas e
+contasse o número de pontos (<code>#</code>) visíveis depois de realizar a primeira
+instrução que nos era dada. Para ilustrar como as dobras ocorriam, veja os
+resultados de uma dobra em <code>x = 7</code> e, depois, de uma dobra em <code>y = 5</code>:</p>
+<pre class="r"><code># Papel inicial
+# ...#..#..#.
+# ....#......
+# ...........
+# #..........
+# ...#....#.#
+# ...........
+# ...........
+# ...........
+# ...........
+# ...........
+# .#....#.##.
+# ....#......
+# ......#...#
+# #..........
+# #.#........
+
+# Linha em x = 7
+# ...#..#..#.
+# ....#......
+# ...........
+# #..........
+# ...#....#.#
+# ...........
+# ...........
+# -----------
+# ...........
+# ...........
+# .#....#.##.
+# ....#......
+# ......#...#
+# #..........
+# #.#........
+
+# Resultado da primeira dobra
+# #.##..#..#.
+# #...#......
+# ......#...#
+# #...#......
+# .#.#..#.###
+# ...........
+# ...........
+
+# Linha em y = 5
+# #.##.|#..#.
+# #...#|.....
+# .....|#...#
+# #...#|.....
+# .#.#.|#.###
+# .....|.....
+# .....|.....
+
+# Resultado final
+# #####
+# #...#
+# #...#
+# #...#
+# #####
+# .....
+# .....</code></pre>
+<p>O maior desafio no código em R foi arrumar todas as coordenadas e sub-matrizes
+para um sistema que começa em 1 e não em 0. Eu também resolvi fazer uma aposta:
+o primeiro item pedia para fazer apenas a primeira dobra, então eu imaginei que
+o segundo item pediria para fazer todas. Minha decisão, portanto, foi tentar já
+generalizar meu algortimo para que ele funcionasse com o mínimo de alterações
+possíveis para realizar várias dobras.</p>
+<pre class="r"><code># Ler tabela de onde os pontos estão
+dots &lt;- &quot;data-raw/13a_transparent_origami.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_subset(&quot;^[0-9]&quot;) |&gt;
+  tibble::tibble() |&gt;
+  purrr::set_names(&quot;dot&quot;) |&gt;
+  tidyr::separate(dot, c(&quot;x&quot;, &quot;y&quot;), &quot;,&quot;) |&gt;
+  dplyr::mutate_all(as.integer) |&gt;
+  dplyr::mutate_all(`+`, 1L)
+
+# Ler instruções das dobras
+instructions &lt;- &quot;data-raw/13a_transparent_origami.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_subset(&quot;^[^0-9]&quot;) |&gt;
+  tibble::tibble() |&gt;
+  purrr::set_names(&quot;fold&quot;) |&gt;
+  tidyr::separate(fold, c(&quot;axis&quot;, &quot;line&quot;), &quot;=&quot;) |&gt;
+  dplyr::mutate(
+    axis = stringr::str_sub(axis, -1),
+    line = as.integer(line) + 1L
+  )
+
+# Colocar os pontos no papel
+paper &lt;- matrix(FALSE, nrow = max(dots$y), ncol = max(dots$x))
+for (i in seq_len(nrow(dots))) {
+  paper[dots$y[i], dots$x[i]] &lt;- TRUE
+}
+
+# Rodar apenas a primeira instrução
+for (i in 1) {
+
+  # Achar o eixo e o ponto da dobra
+  axis &lt;- instructions$axis[i]
+  line &lt;- instructions$line[i]
+
+  # Dobras de acordo com o eixo
+  if (axis == &quot;x&quot;) {
+
+    # Número de colunas à direita da dobra
+    size &lt;- length((line + 1):dim(paper)[2])
+
+    # Pegar colunas à direita, invertê-las e fazer um OR com o lado esquerdo
+    paper[, (line - size):(line - 1)] &lt;-
+      paper[, (line + 1):(line + size)][, size:1] |
+      paper[, (line - size):(line - 1)]
+
+    # Descartar colunas representando o papel dobrado
+    paper &lt;- paper[, 1:(line - 1)]
+
+  } else {
+
+    # Número de linhas abaixo da dobra
+    size &lt;- length((line + 1):dim(paper)[1])
+
+    # Pegar linhas abaixo da dobra, invertê-las e fazer um AND com as acima
+    paper[(line - size):(line - 1), ] &lt;-
+      paper[(line + 1):(line + size), ][size:1, ] |
+      paper[(line - size):(line - 1), ]
+
+    # Descartar linhas representando o papel dobrado
+    paper &lt;- paper[1:(line - 1), ]
+  }
+}
+
+# Contar pontos no papel
+sum(paper)
+#&gt; [1] 765</code></pre>
+</div>
+<div id="origami-transparente-b" class="section level2">
+<h2>Origami Transparente (B)</h2>
+<p>E minha aposta valeu à pena! De fato o enunciado da parte 2 pedia para que
+realizássemos todas as dobras do nosso conjunto de instruções. No final, se tudo
+estivesse correto, os <code>#</code> e <code>.</code> do papel deveriam formar 8 letras maiúsculas.</p>
+<p>A única alteração no código foi trocar a condição do <code>for</code>:</p>
+<pre class="r"><code># Iterar por todas as instruções
+for (i in seq_len(nrow(instructions)))</code></pre>
+<p>E, no final, também foi necessário fazer um print melhor da matriz:</p>
+<pre class="r"><code># Imprimir os pontos de um jeito mais amigável
+paper &lt;- ifelse(paper, &quot;#&quot;, &quot;.&quot;)
+for (i in seq_len(nrow(paper))) {
+  cat(paper[i, ])
+  cat(&quot;\n&quot;)
+}
+# # # # . . # # # # . # . . # . # # # # . # . . . . # # # . . . # # . . # . . # .
+# # . . # . . . . # . # . # . . . . . # . # . . . . # . . # . # . . # . # . . # .
+# # . . # . . . # . . # # . . . . . # . . # . . . . # . . # . # . . . . # # # # .
+# # # # . . . # . . . # . # . . . # . . . # . . . . # # # . . # . # # . # . . # .
+# # . # . . # . . . . # . # . . # . . . . # . . . . # . . . . # . . # . # . . # .
+# # . . # . # # # # . # . . # . # # # # . # # # # . # . . . . . # # # . # . . # .</code></pre>
+</div>
