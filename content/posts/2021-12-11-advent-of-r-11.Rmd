@@ -31,8 +31,8 @@ essa linguagem incrível para mais pessoas. Boas festas e bom código!
 ## Polvo-dumbo (A)
 
 O [dia 11](https://adventofcode.com/2021/day/11) do AoC foi bastante complicado
-e o código talvez o meu código tenha ficado pior ainda. As instruções eram até
-simples: recebemos uma matriz 10x10 com os níveis de energia de 100
+e o meu código talvez tenha ficado pior ainda. As instruções eram até simples:
+recebemos uma matriz 10x10 com os níveis de energia de 100
 [polvos-dumbo](https://pt.wikipedia.org/wiki/Grimpoteuthis) e precisávamos
 acompanhar seus níveis de energia ao longo de 100 iterações. As regras eram as
 seguintes:

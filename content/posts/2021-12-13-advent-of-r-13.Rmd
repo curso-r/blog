@@ -40,7 +40,7 @@ Partindo do princípio de que a matriz começava no ponto `(0, 0)` na esqueda
 superior, o primeiro item pedia para que lêssemos a nossa lista de coordenadas e
 contasse o número de pontos (`#`) visíveis depois de realizar a primeira
 instrução que nos era dada. Para ilustrar como as dobras ocorriam, veja os
-resultados de uma dobra em `x = 7` e, depois, de uma dobra em `y = 5`:
+resultados de uma dobra em `y = 7` e, depois, de uma dobra em `x = 5`:
 
 ```r
 # Papel inicial
@@ -60,7 +60,7 @@ resultados de uma dobra em `x = 7` e, depois, de uma dobra em `y = 5`:
 # #..........
 # #.#........
 
-# Linha em x = 7
+# Linha em y = 7
 # ...#..#..#.
 # ....#......
 # ...........
@@ -86,7 +86,7 @@ resultados de uma dobra em `x = 7` e, depois, de uma dobra em `y = 5`:
 # ...........
 # ...........
 
-# Linha em y = 5
+# Linha em x = 5
 # #.##.|#..#.
 # #...#|.....
 # .....|#...#
