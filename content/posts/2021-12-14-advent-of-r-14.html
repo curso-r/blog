@@ -25,6 +25,172 @@ processo através desta
 minha solução aqui no blog e subir os meus scripts completos para um
 <a href="https://github.com/curso-r/advent-of-r">repositório público</a> no GitHub.</p>
 <p>A minha esperança é que, com essa série, mais pessoas pratiquem seus
-conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
-da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
-divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final da
+jornada vamos todos ter afiado nossas habilidades de R e, quem sabe, divulgado
+essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="polimerização-estendida-a" class="section level2">
+<h2>Polimerização Estendida (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/14">14º dia</a> do AoC foi muito demorado de
+resolver para mim. Apesar de ambas as soluções abaixo serem “simples”, levei
+horas para encontrar um jeito razoável de resolver o segundo item e,
+infelizmente, só consegui depois de olhar uma dica na internet que deixou tudo
+mais simples.</p>
+<p>Desta vez nossa missão era estender um molde de polímero através de um conjunto
+de regras de reação. A primeira linha da entrada era o molde e, a partir daí,
+tínhamos as regras de inserção:</p>
+<pre class="r"><code># NNCB
+#
+# CH -&gt; B
+# HH -&gt; N
+# CB -&gt; H
+# NH -&gt; C
+# HB -&gt; C
+# HC -&gt; B
+# HN -&gt; C
+# NN -&gt; C
+# BH -&gt; H
+# NC -&gt; B
+# NB -&gt; B
+# BN -&gt; B
+# BB -&gt; N
+# BC -&gt; B
+# CC -&gt; N
+# CN -&gt; C</code></pre>
+<p>As regras eram fáceis de entender. Cada uma delas indicava que, quando os dois
+elementos da esquerda se encontravam, entre eles apareceria o elemento da
+direita. Uma rodada de reação envolvia estender todos os pares da cadeia
+polimérica; no caso do exemplo, isso transformaria <code>NNCB</code> em <code>NCNBCHB</code>.</p>
+<p>Após 10 iterações, deveríamos contar o número de ocorrências do elemento mais
+comum da cadeia e subtrair dele o número de ocorrências do elemento menos comum
+da cadeia. Esta seria a resposta do problema.</p>
+<p>Meu código para o primeiro item acabou seguindo o que chamamos de estratégia de
+<a href="https://pt.wikipedia.org/wiki/Busca_por_for%C3%A7a_bruta">força bruta</a>. A cada
+iteração, eu quebrava o polímero nos seus pares de elementos e fazia um join com
+a tabela de regras; depois era só colar tudo em uma string só e seguir em
+frente. No final eu só precisava encontrar as letras mais e menos comuns da
+string e subtraí-las.</p>
+<pre class="r"><code># Ler modelo como string
+poly &lt;- readr::read_lines(&quot;data-raw/14a_extended_polymerization.txt&quot;, n_max = 1)
+
+# Ler regras como tabela
+rules &lt;- &quot;data-raw/14a_extended_polymerization.txt&quot; |&gt;
+  readr::read_table(skip = 1, col_names = FALSE) |&gt;
+  purrr::set_names(&quot;pair&quot;, &quot;rm&quot;, &quot;insertion&quot;) |&gt;
+  dplyr::select(-rm) |&gt;
+  dplyr::mutate(insertion = stringr::str_replace(
+    pair, &quot;(.)(.)&quot;, paste0(&quot;\\1&quot;, insertion, &quot;\\2&quot;)
+  ))
+
+# Executar uma rodada de inserções
+do_insertions &lt;- function(poly) {
+  poly |&gt;
+    stringr::str_split(&quot;&quot;) |&gt;
+    purrr::pluck(1) |&gt;
+    purrr::accumulate(~paste0(stringr::str_sub(.x, -1), .y)) |&gt;
+    utils::tail(-1) |&gt;
+    purrr::map_chr(~rules[rules$pair == .x, ]$insertion) |&gt;
+    purrr::reduce(~paste0(.x, stringr::str_sub(.y, -2))) |&gt;
+    stringr::str_c(collapse = &quot;&quot;)
+}
+
+# Rodar do_insertions() 10 vezes e fazer el. mais comum - el. menos comum
+10 |&gt;
+  seq_len() |&gt;
+  purrr::reduce(~do_insertions(.x), .init = poly) |&gt;
+  stringr::str_split(&quot;&quot;) |&gt;
+  table() |&gt;
+  {\(t) list(t[which.max(t)], t[which.min(t)])}() |&gt;
+  purrr::reduce(`-`) |&gt;
+  abs() |&gt;
+  unname()
+#&gt; [1] 2584</code></pre>
+</div>
+<div id="polimerização-estendida-b" class="section level2">
+<h2>Polimerização Estendida (B)</h2>
+<p>O segundo item parecia suspeitamente simples, mas eu estava redondamente
+enganado. A única instrução era repetir o problema do primeiro item para 40
+iterações ao invés de 10. Pode parecer que eu não precisaria nem mudar meu
+código, mas note que no primeiro item a minha cadeia polimérica só chegou a ter
+19457 letras. No segundo item a cadeia chegaria a… mais de 20 trilhões.</p>
+<p>Seria necessário mudar de estratégia e foi aí que eu empaquei. Tentei diversas
+formas de manter apenas o número de letras na cadeia, sem armazenar a cadeia em
+si, mas nada funcionava. Eu até notei que a primeira e a última letras da cadeia
+nunca mudavam, mas isso não me ajudou.</p>
+<p>Depois de procurar por dicas no
+<a href="https://www.reddit.com/r/adventofcode">subreddit do AoC</a>, finalmente achei uma
+boa alma que havia feito uma observação incrível:</p>
+<blockquote>
+<p>Sempre podemos manter apenas a contagem de pares distintos na cadeia. Se
+tivermos, por exemplo, um par AC aparecendo n = 10 vezes na cadeia e uma regra
+AC -&gt; B, então na próxima iteração podemos adicionar à nossa contagem AB e BC,
+cada uma aparecendo n = 10 vezes.</p>
+</blockquote>
+<p>Até aí eu já sabia, era essencialmente o que eu fazia manualmente no item 1. O
+problema é que, mantendo apenas as contagens dos pares, isso repetiria a letra B
+duas vezes, totalizando A 10 vezes, C 10 vezes e B <em>20</em> vezes. A ideia que veio
+a seguir, entretanto, foi o que realmente resolveu o problema:</p>
+<blockquote>
+<p>Se pensarmos na cadeia como um todo, todos as letras serão contadas 2 vezes,
+exceto pela primeira e pela última, pois elas nunca ficam no meio de uma
+reação. O número de ocorrências de cada letra é, portanto, n / 2, exceto pelas
+letras que aparecem no início e no fim, paras quais a fórmula é (n + 1) / 2.</p>
+</blockquote>
+<p>Depois disso o item 2 podia ser solucionado facilmente.</p>
+<pre class="r"><code># Registrar a primeira e a última letras da cadeia original
+orig &lt;- &quot;data-raw/14b_extended_polymerization.txt&quot; |&gt;
+  readr::read_lines(n_max = 1) |&gt;
+  stringr::str_replace(&quot;^(.).*?(.)$&quot;, &quot;\\1\\2&quot;) |&gt;
+  stringr::str_split(&quot;&quot;) |&gt;
+  purrr::pluck(1)
+
+# Ler modelo já no formato de contagem de pares
+poly &lt;- &quot;data-raw/14b_extended_polymerization.txt&quot; |&gt;
+  readr::read_lines(n_max = 1) |&gt;
+  stringr::str_split(&quot;&quot;) |&gt;
+  purrr::pluck(1) |&gt;
+  purrr::accumulate(~paste0(stringr::str_sub(.x, -1), .y)) |&gt;
+  utils::tail(-1) |&gt;
+  tibble::tibble() |&gt;
+  purrr::set_names(&quot;pair&quot;) |&gt;
+  dplyr::count(pair)
+
+# Ler regras como tabela
+rules &lt;- &quot;data-raw/14b_extended_polymerization.txt&quot; |&gt;
+  readr::read_table(skip = 1, col_names = FALSE) |&gt;
+  purrr::set_names(&quot;pair&quot;, &quot;rm&quot;, &quot;insertion&quot;) |&gt;
+  dplyr::select(-rm) |&gt;
+  dplyr::mutate(insertion = stringr::str_replace(
+    pair, &quot;(.)(.)&quot;, paste0(&quot;\\1&quot;, insertion, &quot;\\2&quot;)
+  ))
+
+# Executar uma rodada de inserções
+do_insertions &lt;- function(poly) {
+  poly |&gt;
+    dplyr::left_join(rules, &quot;pair&quot;) |&gt;
+    dplyr::mutate(
+      insertion = purrr::map(insertion, stringr::str_extract, c(&quot;^..&quot;, &quot;..$&quot;))
+    ) |&gt;
+    tidyr::unnest(insertion) |&gt;
+    dplyr::group_by(pair = insertion) |&gt;
+    dplyr::summarise(n = sum(n))
+}
+
+# Rodar do_insertions() 40 vezes e fazer el. mais comum - el. menos comum
+40 |&gt;
+  seq_len() |&gt;
+  purrr::reduce(~do_insertions(.x), .init = poly) |&gt;
+  dplyr::mutate(elem = stringr::str_split(pair, &quot;&quot;)) |&gt;
+  tidyr::unnest(elem) |&gt;
+  dplyr::group_by(elem) |&gt;
+  dplyr::summarise(n = sum(n)) |&gt;
+  dplyr::mutate(
+    n = ifelse(elem %in% orig, n + 1, n),
+    n = n / 2
+  ) |&gt;
+  dplyr::filter(n == max(n) | n == min(n)) |&gt;
+  dplyr::pull(n) |&gt;
+  purrr::reduce(`-`) |&gt;
+  abs() |&gt;
+  format(scientific = FALSE)
+#&gt; [1] 3816397135460</code></pre>
+</div>
