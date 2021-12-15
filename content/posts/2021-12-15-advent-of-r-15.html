@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-15.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 15."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,150 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="quítons-a" class="section level2">
+<h2>Quítons (A)</h2>
+<p>No <a href="https://adventofcode.com/2021/day/15">15º dia</a> do AoC eu demorei muito mais
+do que deveria. Apesar de ter entendido bem o enunciado e ter identificado
+rapidamente o caminho para a solução, eu empaquei na <em>implementação</em> do
+algoritmo. No final achei melhor pegar uma versão pronta do algoritmo para não
+perder mais horas com isso.</p>
+<p>Novamente o enunciado envolvia um submarino, uma caverna, etc. Passar por cada
+ponto da caverna vinha com um certo risco que variava entre 1 e 9 e nosso
+objetivo era levar o submarino do ponto esquerdo superior até o ponto esquerdo
+inferior passando pelo caminho com menor risco total. A saída do programa
+deveria ser a soma do risco de todos os pontos do caminho (sem incluir o ponto
+de entrada, pois já começávamos nele).</p>
+<p>A esse ponto, qualquer um que tenha aprendido sobre grafos já deve estar com o
+sentido aranha ativado. Esse é um problema clássico da Computação que pode ser
+facilmente solucionado pelo <a href="https://pt.wikipedia.org/wiki/Algoritmo_de_Dijkstra">algoritmo de
+Dijkstra</a>. Algumas
+alterações são necessárias, mas todas podem ser feitas antes de executar o
+algoritmo.</p>
+<p>O passo-a-passo do código é mais ou menos o seguinte:</p>
+<ol style="list-style-type: decimal">
+<li><p>Marcar todos os pontos como não visitados. Criar um conjunto com todos os
+pontos não visitador chamado <em>conjunto não visitado</em>.</p></li>
+<li><p>Atribuir a todos os pontos um risco temporário: ele deve ser 0 para o nó
+inicial e infinito para o resto. O risco temporário de um ponto <code>v</code> é o risco
+total do caminho de menor risco já descoberto entre <code>v</code> e o ponto inicial. Como
+no começo não conhecemos nenhum outro ponto além do inicial, todos os riscos
+temporários começam como infinito. Fixar o ponto inicial como o atual.</p></li>
+<li><p>Para o ponto atual, considerar todos os seus vizinhos não vizitados e
+calcular os seus riscos temporários através do ponto atual. Comparar o novo
+risco temporário ao risco atual e atribuir o menor dos dois. Por exemplo, se o
+risco do ponto atual <code>A</code> é 6 e o seu vizinho <code>B</code> tem risco 2, então o risco de
+chegar em <code>B</code> por <code>A</code> é 6 + 2 = 8. Se o risco temporário de <code>B</code> até agora era
+maior que 8, então ele deve virar 8. Caso contrário, nada muda.</p></li>
+<li><p>Quando já tivermos considerado todos os vizinhos não visitados do ponto
+atual, marcar o ponto atual como visitado e removê-lo do conjunto não visitado.
+Um ponto visitado nunca será checado de novo.</p></li>
+<li><p>Se o ponto final houver sido marcado como visitado, então parar. O algoritmo
+terminou e o risco total do melhor caminho até o distino é igual ao risco
+temporário que foi atribuido ao destino.</p></li>
+<li><p>Caso contrário, selecionar o ponto não visitado que tem o menor risco
+temporário e torná-lo o ponto atual. Voltar ao passo 3.</p></li>
+</ol>
+<p>Normalmente o algoritmo de Dijkstra é aplicado em grafos nos quais os custos de
+cada passo do caminho são atribuídos à <em>arestas</em> do grafo e não aos nós, como é
+o nosso caso. Para resolver esse problema, temos que fazer uma certa ginástica
+para que os custos sejam transferidos para as arestas. Cada par de nós vizinhos
+ganham duas arestas direcionadas, cada uma com o risco do nó para o qual ela
+aponta:</p>
+<pre class="r"><code># Ponto atual com seus 4 vizinhos
+#   7
+# 9 3 1
+#   6
+#
+# Arestas indo para o ponto atual (todas têm risco 3)
+#       o
+#       3
+#       ↓
+# o 3 → x ← 3 o
+#       ↑
+#       3
+#       o
+#
+# Arestas saindo do ponto atual (todas têm o risco do vizinho)
+#       o
+#       ↑
+#       7
+# o ← 9 x 1 → o
+#       6
+#       ↓
+#       o</code></pre>
+<p>Eu queria ter de fato implementado o algoritmo de Dijkstra no R por conta
+própria, mas eu cometi vários erros pelo caminho (eram 7:30, não me julgue) e,
+para não passar a manhã toda nisso, resolvi usar o pacote <code>cppRouting</code> para
+aplicar o algoritmo.</p>
+<pre class="r"><code># Ler os riscos da caverna como uma matriz
+cave &lt;- &quot;data-raw/15a_chiton.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_split(&quot;&quot;) |&gt;
+  purrr::flatten_chr() |&gt;
+  as.integer() |&gt;
+  matrix(100, 100, byrow = TRUE)
+
+# Criar uma tabela com os custos entre vizinhos
+graph &lt;- tibble::tibble()
+for (i in 1:prod(dim(cave))) {
+
+  vals &lt;- c()
+  if (i %% 100 != 0)  vals &lt;- append(vals, i + 1L)
+  if (i %% 100 != 1)  vals &lt;- append(vals, i - 1L)
+  if (i &gt; 100)        vals &lt;- append(vals, i - 100L)
+  if (i &lt; 9901)       vals &lt;- append(vals, i + 100L)
+
+  node &lt;- tibble::tibble(from_vertex = i, to_vertex = vals, cost = cave[vals])
+  graph &lt;- dplyr::bind_rows(graph, node)
+}
+
+# Criar grafo e executar o algoritmo de Dijkstra
+path &lt;- graph |&gt;
+  cppRouting::makegraph(directed = TRUE) |&gt;
+  cppRouting::get_path_pair(from = 1L, to = 10000L) |&gt;
+  purrr::pluck(1) |&gt;
+  as.integer()
+
+# Calcular o risco total do caminho (subtraíndo o custo da entrada)
+graph |&gt;
+  dplyr::filter(to_vertex %in% path) |&gt;
+  dplyr::group_by(to_vertex) |&gt;
+  dplyr::summarise(cost = cost[1]) |&gt;
+  dplyr::summarise(risk = sum(cost)) |&gt;
+  dplyr::pull(risk) |&gt;
+  magrittr::subtract(cave[1])
+#&gt; [1] 811</code></pre>
+</div>
+<div id="quítons-b" class="section level2">
+<h2>Quítons (B)</h2>
+<p>O segundo item seguia a mesma lógica de outros problemas desse ano: igual ao
+primeiro item, mas maior. Como eu estava usando um algoritmo bastante eficiente,
+não tive problema nenhum nessa parte.</p>
+<p>Aqui descobríamos que, na verdade, a caverna era 5 vezes maior em cada dimensão
+(ou seja, 25 vezes mais pontos). A caverna completa era, entretanto, composta
+por cópias da sessão original com riscos mais elevados; para obter a versão
+final da caverna era necessário juntar 25 cópias da original somando um certo
+fator a cada cópia.</p>
+<pre class="r"><code># +0 +1 +2 +3 +4
+# +1 +2 +3 +4 +5
+# +2 +3 +4 +5 +6
+# +3 +4 +5 +6 +7
+# +4 +5 +6 +7 +8</code></pre>
+<p>Seguindo o guia acima, vemos que o canto superior esquerdo da caverna maior era
+igual à sessão original e, sucessivamente, chegávamos ao canto direito inferior,
+que era igual à sessão original, mas o risco de cada ponto era acrescido de 8.
+O único detalhe é que, quando o risco de um ponto passava de 9, ele voltava para
+1 (igual aos polvos-dumbo que vimos anteriormente). O resto da solução era
+igual.</p>
+<pre class="r"><code># Criar clones da caverna, somar fator de risco e juntar
+cave &lt;- cbind(
+  rbind(cave + 0L, cave + 1L, cave + 2L, cave + 3L, cave + 4L),
+  rbind(cave + 1L, cave + 2L, cave + 3L, cave + 4L, cave + 5L),
+  rbind(cave + 2L, cave + 3L, cave + 4L, cave + 5L, cave + 6L),
+  rbind(cave + 3L, cave + 4L, cave + 5L, cave + 6L, cave + 7L),
+  rbind(cave + 4L, cave + 5L, cave + 6L, cave + 7L, cave + 8L)
+)
+
+# Reduzir pontos que passaram de 9
+cave[cave &gt; 9] &lt;- cave[cave &gt; 9] - 9</code></pre>
+</div>
