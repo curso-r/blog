@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-16.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 16."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,282 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="decodificador-de-pacotes-a" class="section level2">
+<h2>Decodificador de Pacotes (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/16">16º problema</a> do AoC foi bastante
+diverido. O enunciado era extremamente longo e cheio de detalhes, mas consegui
+fazer uma implementação direta e eficiente que só não funcionou de primeira por
+causa de um detalhe obscuro da função <code>strtoi()</code>.</p>
+<p>Hoje nosso objetivos era decodificar pacotes binários. Eles chegavam ao nosso
+submarino em hexadecimal e, depois de convertidos para binário eles tinham as
+seguintes características:</p>
+<ul>
+<li><p>Os 3 primeiros bits representavam a versão do pacote;</p></li>
+<li><p>Os 3 bits seguintes representavam o tipo do pacote, que podia cair em dois
+casos:</p>
+<ul>
+<li><p>Se o tipo (na forma decimal) fosse igual a 4, então o pacote representaria
+um valor. Isso queria dizer que o resto do pacote poderia ser quebrado em
+pedaços de 5 bits com a seguinte configuração:</p>
+<ul>
+<li><p>Se o pedaço começasse com 1, então os 4 bits a seguir eram parte do valor
+e deveríamos continuar lendo o pacote;</p></li>
+<li><p>Se o pedaço começassem em 0, então os 4 bits a seguir eram o final do
+valor e poderíamos parar de ler o pacote.</p></li>
+</ul></li>
+<li><p>Se o tipo do pacote fosse diferente de 4, então o pacote representaria um
+operador. Isso queria dizer que o bit de número 7 indicava o modo do pacote:</p>
+<ul>
+<li><p>Se o indicador fosse 1, então os próximos 15 bits seriam iguais à soma dos
+comprimentos de todos os sub-pacotes contidos naquele pacote operador;</p></li>
+<li><p>Se o indicador fosse 0, então os próximos 11 bits seriam iguais ao número
+de sub-pacotes contidos naquele pacote operador.</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Simples? Longe disso. Vejamos alguns exemplos:</p>
+<pre class="r"><code># Pacote literal (valor)
+# D2FE28
+# 110100101111111000101000
+# VVVTTTAaaaaBbbbbCcccc
+#
+# - VVV são a versão do pacote, 6.
+# - TTT são o tipo, 4. Então este pacote carrega um valor.
+# - A é 1 (continuar lendo), então aaaa são o primeiro pedaço do valor.
+# - B é 1 (continuar lendo), então bbbb são o segundo pedaço do valor.
+# - C é 0 (parar de ler), então cccc são o último pedaço do valor.
+# - O resto são bits extras.
+# - Portanto, o valor carregado por este pacote é 011111100101 = 2021.
+#
+# Pacote operador com indicador 0
+# 38006F45291200
+# 00111000000000000110111101000101001010010001001000000000
+# VVVTTTILLLLLLLLLLLLLLLAAAAAAAAAAABBBBBBBBBBBBBBBB
+#
+# - VVV são a versão do pacote, 1.
+# - TTT são o tipo, 6. Então este pacote carrega um operador.
+# - I é o indicador, 0. Então este pacote tem 15 bits com os comprimentos
+#   dos sub-pacotes.
+# - LLLLLLLLLLLLLLL contêm a soma dos comprimentos dos sub-pacotes, 27.
+# - AAAAAAAAAAA são um sub-pacote carregando um valor, 10.
+# - BBBBBBBBBBBBBBBB são um sub-pacote carregando um valor, 20.
+#
+# Pacote operador com indicador 1
+# EE00D40C823060
+# 11101110000000001101010000001100100000100011000001100000
+# VVVTTTILLLLLLLLLLLAAAAAAAAAAABBBBBBBBBBBCCCCCCCCCCC
+# - VVV são a versão do pacote, 7.
+# - TTT são o tipo, 3. Então este pacote carrega um operador.
+# - I é o indicador, 1. Então este pacote tem 11 bits com os número de
+#   sub-pacotes.
+# - LLLLLLLLLLL contêm o número de sub-pacotes, 3.
+# - AAAAAAAAAAA são um sub-pacote carregando um valor, 1.
+# - BBBBBBBBBBB são um sub-pacote carregando um valor, 2.
+# - CCCCCCCCCCC são um sub-pacote carregando um valor, 3.</code></pre>
+<p>O ponto positivo desse enunciado enorme é que conseguimos implementar os
+recursos necessários quase em sequência.</p>
+<pre class="r"><code># Converter string hexadecimal para string binária
+hex_to_bits &lt;- function(hex) {
+  hex |&gt;
+    stringr::str_split(&quot;&quot;) |&gt;
+    purrr::pluck(1) |&gt;
+    purrr::map(~paste(rev(as.integer(intToBits(strtoi(.x, 16)))))) |&gt;
+    purrr::map(magrittr::extract, 29:32) |&gt;
+    purrr::flatten_chr() |&gt;
+    stringr::str_c(collapse = &quot;&quot;)
+}
+
+# Pegar a versão de um pacote
+get_version &lt;- function(pkt) {
+  strtoi(stringr::str_sub(pkt, 1, 3), 2)
+}
+
+# Pegar o tipo de um pacote
+get_type &lt;- function(pkt) {
+  strtoi(stringr::str_sub(pkt, 4, 6), 2)
+}</code></pre>
+<p>O objetivo final deste item era parsear a hierarquia de pacotes da nossa entrada
+e somar as versões de todos. Minha solução envolveu, desta forma, cirar uma
+“classe” que podia conter a versão e o comprimento de um pacote. O comprimento
+era importante para descartar o número certo de bits do pacote quando tivéssemos
+terminado de processar um sub-pacote.</p>
+<p>Se um pacote fosse do tipo operador, então sua “classe” também conteria todos
+os seus sub-pacotes como elementos sem nome. O código abaixo implementa o
+processamento dos dois tipos de pacotes; note como foram implementadas as
+“classes”:</p>
+<pre class="r"><code># Pegar o valor de um pacote literal
+get_literal &lt;- function(pkt) {
+  interval &lt;- c(7, 11)
+
+  # Iterar até o último pedaço ser encontrado
+  literal &lt;- &quot;&quot;
+  flag &lt;- FALSE
+  while (!flag) {
+
+    # Pegar o grupo especificado pelo intervalo
+    group &lt;- stringr::str_sub(pkt, interval[1], interval[2])
+    literal &lt;- stringr::str_c(literal, stringr::str_sub(group, 2))
+
+    # Parar se este é o último pedaço, caso contrário somar 5 ao intervalo
+    if (!as.integer(stringr::str_sub(group, 1, 1))) {
+      flag &lt;- TRUE
+    } else {
+      interval &lt;- interval + 5
+    }
+  }
+
+  # Retornar a &quot;classe&quot; que descreve o pacote
+  return(list(
+    version = get_version(pkt),
+    len = interval[2],
+    value = strtoi(literal, 2)
+  ))
+}
+
+# Processar um pacote operador
+get_operator &lt;- function(pkt) {
+  indicator &lt;- stringr::str_sub(pkt, 7, 7)
+
+  # Inicializar &quot;classe&quot;
+  out &lt;- list(
+    version = get_version(pkt)
+  )
+
+  # Lidar com os 2 indicadores
+  if (as.integer(indicator)) {
+
+    # Pegar o número de sub-pacotes e separar a cauda do pacote
+    num &lt;- strtoi(stringr::str_sub(pkt, 8, 18), 2)
+    rest &lt;- stringr::str_sub(pkt, 19)
+    out$len &lt;- 18
+
+    # Iterar no número de pacotes
+    for (i in seq_len(num)) {
+
+      # Processar sub-pacote
+      sub &lt;- if (get_type(rest) == 4) get_literal(rest) else get_operator(rest)
+      out$len &lt;- out$len + sub$len
+      out &lt;- c(out, list(sub))
+
+      # Atualizar a cauda dado o compimento do último sub-pacote
+      rest &lt;- stringr::str_sub(rest, sub$len + 1)
+    }
+  } else {
+
+    # Pegar o limite de comprimento dos sub-pacotes e separar a cauda
+    lim &lt;- strtoi(stringr::str_sub(pkt, 8, 22), 2)
+    rest &lt;- stringr::str_sub(pkt, 23)
+    out$len &lt;- 22
+
+    # Iterar enquanto os sub-pacotes não tiverem passado do limite
+    while (lim &gt; 0) {
+
+      # Processar sub-pacote
+      sub &lt;- if (get_type(rest) == 4) get_literal(rest) else get_operator(rest)
+      out$len &lt;- out$len + sub$len
+      out &lt;- c(out, list(sub))
+
+      # Atualizar a cauda dado o compimento do último sub-pacote
+      rest &lt;- stringr::str_sub(rest, sub$len + 1)
+      lim &lt;- lim - sub$len
+    }
+  }
+
+  return(out)
+}</code></pre>
+<p>O último passo do meu código era achatar toda a estrutura de árvore que seria
+devolvida pelas funções acima e somar todos os comprimentos.</p>
+<pre class="r"><code># Somar todas as versões do pacote representado por um hex
+sum_versions &lt;- function(hex) {
+
+  # Pegar a árvore de pacotes representada pelo hex
+  pkt &lt;- hex_to_bits(hex)
+  pkts &lt;- if (get_type(pkt) == 4) get_literal(pkt) else get_operator(pkt)
+
+  # Achatar árvore
+  while (purrr::vec_depth(pkts) &gt; 2) {
+    pkts &lt;- purrr::flatten(pkts)
+  }
+
+  # Somar versões
+  pkts |&gt;
+    magrittr::extract(names(pkts) == &quot;version&quot;) |&gt;
+    purrr::reduce(sum)
+}
+
+# Ler pacotes de um hex e somar versões
+&quot;data-raw/16a_packet_decoder.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  sum_versions()
+#&gt; [1] 991</code></pre>
+</div>
+<div id="decodificador-de-pacotes-b" class="section level2">
+<h2>Decodificador de Pacotes (B)</h2>
+<p>O segundo item era mais ou menos o que eu já esperava. Os tipos dos pacotes
+tinham um significado maior, ou seja, cada sub-tipo de pacote operador indicava
+uma operação matemática que deveria ser aplicada no valor dos seus sub-pacotes.</p>
+<ul>
+<li><p>A operação 0 é soma (<code>sum()</code>).</p></li>
+<li><p>A operação 1 é produto (<code>prod()</code>).</p></li>
+<li><p>A operação 2 é mínimo (<code>min()</code>).</p></li>
+<li><p>A operação 3 é máximo (<code>max()</code>).</p></li>
+<li><p>A operação 5 é maior que (<code>&gt;</code>).</p></li>
+<li><p>A operação 6 é menor que (<code>&lt;</code>).</p></li>
+<li><p>A operação 7 é igual (<code>==</code>).</p></li>
+</ul>
+<p>Ou seja, se um pacote tiver a estrutura
+<code>(operador + (operador * (valor 1) (valor 2)) (valor 3))</code>, então a expressão
+aritmética resultante seria <code>(1 * 2) + 3)</code>. Nosso objetivo final era calcular o
+valor da expressão que o nosso pacote representava. Felizmente, o meu script
+anterior funcionava muito bem com essa alteração!</p>
+<p>Eu troquei o elemento <code>version</code> da “classe” por <code>type</code> (o tipo do operador) e
+adicionei o seguinte no final do código:</p>
+<pre class="r"><code># Avaliar a árvore de pacotes
+get_value &lt;- function(tree) {
+
+  # Funções correspondentes aos tipos
+  fun &lt;- switch(as.character(tree$type),
+    &quot;0&quot; = sum,
+    &quot;1&quot; = prod,
+    &quot;2&quot; = min,
+    &quot;3&quot; = max,
+    &quot;5&quot; = `&gt;`,
+    &quot;6&quot; = `&lt;`,
+    &quot;7&quot; = `==`,
+  )
+
+  # Aplicar função aos sub-pacotes
+  apply_fun &lt;- function(tree) {
+    tree |&gt;
+      purrr::keep(names(tree) == &quot;&quot;) |&gt;
+      purrr::map(get_value) |&gt;
+      purrr::reduce(fun)
+  }
+
+  # Aplicar recursivamente
+  if (tree$type == 4) tree$value else as.numeric(apply_fun(tree))
+}
+
+# Decodificar a expressão de um pacote hex
+decode &lt;- function(hex) {
+  pkt &lt;- hex_to_bits(hex)
+  tree &lt;- if (get_type(pkt) == 4) get_literal(pkt) else get_operator(pkt)
+
+  get_value(tree)
+}
+
+# Ler pacotes de um hex e calcular o valor da expressão
+&quot;data-raw/16b_packet_decoder.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  decode() |&gt;
+  format(scientific = FALSE)
+#&gt; [1] 1264485568252</code></pre>
+<p>P.S.: Mas isso não funcionou de primeira! Eu recebi um belo <code>NA</code> ao final da
+execução e demorei para entender a causa… No final eu descobri que a função
+<code>strtoi()</code> retorna <code>NA</code> quando o resultado é grande demais. A solução foi
+trocá-la por uma função própria:</p>
+<pre class="r"><code>strton &lt;- function(x) {
+  y &lt;- as.numeric(strsplit(x, &quot;&quot;)[[1]])
+  sum(y * 2^rev((seq_along(y) - 1)))
+}</code></pre>
+</div>
