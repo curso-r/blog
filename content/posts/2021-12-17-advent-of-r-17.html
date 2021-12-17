@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-17.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 17."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,171 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="cesta-de-três-a" class="section level2">
+<h2>Cesta de Três (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/17">17º dia</a> do AoC foi uma ótima quebra em
+relação aos últimos. O enunciado era simples de entender e a solução foi fácil
+de criar, tudo que eu precisava depois de uma semana cansativa.</p>
+<p>Hoje precisávamos tentar encontrar a chave do nosso submarino em uma fossa
+marinha. A sonda que tínhamos a bordo podia ser arremessada a partir do ponto
+(0, 0) com qualquer velocidade inteira tanto no eixo x quanto no y. A entrada
+do problema era a posição do alvo e a saída do primeiro item deveria ser a
+altura máxima que podíamos arremessar a sonda de modo que ela ainda atingisse
+o alvo.</p>
+<p>As regras para a aceleração da sonda a cada passo eram as seguintes:</p>
+<ul>
+<li><p>A posição x da sonda aumenta um valor igual à sua velocidade x.</p></li>
+<li><p>A posição y da sonda aumenta um valor igual à sua velocidade y.</p></li>
+<li><p>Por causa do atrito, a velocidade x da sonda muda em 1 um direção a 0 (ou
+seja, ela diminui em 1 se a velocidade for maior que 0 e aumenta em 1 caso
+contrário).</p></li>
+<li><p>Por causa da gravidade, a velocidade y da sonda diminui em 1.</p></li>
+</ul>
+<p>O grande truque do exercício era identificar todas as velocidades possíveis da
+sonda e depois verificar qual o levava à maior altura. Como o alvo estava sempre
+abaixo e à direita do (0, 0), podíamos estabelecer os limites inferiores e
+superiores para as velocidades x e y:</p>
+<ul>
+<li><p>A velocidade x necessariamente tem que ser maior que 0, já que precisamos que
+a sonda se mova para frente. Adicionalmente, velocidade x máxima não pode ser
+maior que a fronteira direita do alvo; se o alvo terminar, por exemplo, em
+x = 10, nunca vamos acertá-lo jogando o módulo para frente com velocidade maior
+que 10.</p></li>
+<li><p>Os limites da velocidade y são mais difícil de entender. Em primeiro lugar,
+ela nunca pode ser menor do que a fronteira inferior do alvo (pensando na mesma
+lógica que usamos antes, se o alvo terminar, por exemplo, em y = -10, nunca
+vamos acertá-lo jogando a sonda para baixo com velocidade menor que -10). O
+limite superior vem do fato de que se jogarmos a sonda para cima, não importando
+a velocidade, ela eventualmente vai voltar a y = 0 com velocidade igual à
+velocidade inicial menos 1, mas com sinal negativo; sendo assim, a velocidade y
+máxima é igual ao valor absoluto do limite inferior do alvo.</p></li>
+</ul>
+<pre class="r"><code># Velocidade inicial: (6,3)
+# ..................................
+# .........(3,0).#..#.(2,-1)........
+# .....(4,1).#........#.(1,-2)......
+# ..................................
+# (5,2).#..............#.(0,-3).....
+# ..................................
+# ..................................
+# S.(6,3)..............#.(0,-4).....
+# ..................................
+# ..................................
+# ..................................
+# .....................#.(0,-5).....
+# ....................TTTTTTTTTTT...
+# ....................TTTTTTTTTTT...
+# ....................TTTTTTTTTTT...
+# ....................TTTTTTTTTTT...
+# ....................T#T(0,-6)TT...
+# ..................................
+# ..................................</code></pre>
+<p>Note no diagrama acima a simetria da trajetória no eixo y. Assim fica mais fácil
+entender porque, por exemplo, se o limite inferior do alvo for y = -10, então
+nunca podemos jogar a sonda para cima com velocidade maior que 9; ela voltará
+para y = 0 com velocidade -10 e acertará exatamente a fronteira de baixo do
+alvo.</p>
+<pre class="r"><code># Ler alvo como uma tabela de coordenadas
+target &lt;- &quot;data-raw/17a_trick_shot.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_split(&quot;[=,]&quot;) |&gt;
+  purrr::pluck(1) |&gt;
+  stringr::str_subset(&quot;^[0-9-]&quot;) |&gt;
+  stringr::str_replace(&quot;\\.\\.&quot;, &quot;:&quot;) |&gt;
+  purrr::map(~eval(parse(text = .x))) |&gt;
+  purrr::cross() |&gt;
+  purrr::transpose() |&gt;
+  purrr::set_names(&quot;x&quot;, &quot;y&quot;) |&gt;
+  tibble::as_tibble() |&gt;
+  tidyr::unnest(c(x, y))
+
+# Todas as possíveis combinações de velocidades x e y válidas
+vels &lt;- purrr::cross(list(
+  1:max(target$x),
+  min(target$y):abs(min(target$y))
+))</code></pre>
+<p>Para calcular a altura máxima que poderíamos arremessar a sonda, eu simulei a
+trajetória a partir de cada um dos pares de velocidades válidas e guardei a
+altura máxima à qual a sonda chegava. No final da iteração, se a sonda de fato
+atingisse o alvo, então eu comparava a altura máxima dessa combinação com a
+altura máxima global e mantinha a maior.</p>
+<pre class="r"><code># Verificar quais pares de velocidades funcionam e pegar a altura máxima
+max_height &lt;- 0
+for (vel in vels) {
+
+  # Posição inicial
+  x_pos &lt;- 0
+  y_pos &lt;- 0
+
+  # Velocidades iniciais
+  x_vel &lt;- vel[[1]]
+  y_vel &lt;- vel[[2]]
+
+  # Encontrar a altura máxima deste par de velocidades
+  max_height_ &lt;- 0
+  while (y_pos &gt;= min(target$y) &amp;&amp; x_pos &lt;= max(target$x)) {
+
+    # Atualizar posições
+    x_pos &lt;- x_pos + x_vel
+    y_pos &lt;- y_pos + y_vel
+
+    # Atualizar altura máxima local
+    if (y_pos &gt; max_height_) max_height_ &lt;- y_pos
+
+    # Se o par de fato leva ao alvo, atualizar altura máxima global
+    if (x_pos %in% target$x &amp;&amp; y_pos %in% target$y) {
+      if (max_height_ &gt; max_height) max_height &lt;- max_height_
+    }
+
+    # Atualizar velocidades
+    x_vel &lt;- if (x_vel &gt; 0) x_vel - 1 else 0
+    y_vel &lt;- y_vel - 1
+  }
+}
+
+# Retornar a altura máxima global
+max_height
+#&gt; [1] 4753</code></pre>
+</div>
+<div id="cesta-de-três-b" class="section level2">
+<h2>Cesta de Três (B)</h2>
+<p>Chegando no item 2, eu percebi que tinha dado muita sorte. O enunciado aqui
+pedia para encontrarmos o número de velocidades iniciais da sonda que a faziam
+chegar ao alvo. Meu código anterior já encontrava todos os pares válidos, mas
+utilizava isso para atualizar a altura máxima; só era necessário trocar a
+variável sendo atualizada dentro do <code>while</code>.</p>
+<pre class="r"><code># Verificar pares de velocidades que funcionam e contá-los
+n_works &lt;- 0
+for (vel in vels) {
+
+  # Posição inicial
+  x_pos &lt;- 0
+  y_pos &lt;- 0
+
+  # Velocidades iniciais
+  x_vel &lt;- vel[[1]]
+  y_vel &lt;- vel[[2]]
+
+  # Encontrar a altura máxima deste par de velocidades
+  max_height_ &lt;- 0
+  while (y_pos &gt;= min(target$y) &amp;&amp; x_pos &lt;= max(target$x)) {
+
+    # Atualizar posições
+    x_pos &lt;- x_pos + x_vel
+    y_pos &lt;- y_pos + y_vel
+
+    # Se o par de fato leva ao alvo, atualizar contador
+    if (x_pos %in% target$x &amp;&amp; y_pos %in% target$y) {
+      n_works &lt;- n_works + 1
+      break
+    }
+
+    # Atualizar velocidades
+    x_vel &lt;- if (x_vel &gt; 0) x_vel - 1 else 0
+    y_vel &lt;- y_vel - 1
+  }
+}
+
+# Retornar número de velocidades que funcionam
+n_works</code></pre>
+</div>
