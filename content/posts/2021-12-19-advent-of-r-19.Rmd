@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-19.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 19."
-draft: true
+draft: false
 ---
 
 O [Advent of Code](https://adventofcode.com) é um
@@ -27,3 +27,351 @@ A minha esperança é que, com essa série, mais pessoas pratiquem seus
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Detectores de Sinalizadores (A)
+
+Neville Chamberlain tem uma frase que eu gosto muito: "na guerra não há
+vencedores, todos são perdedores." É assim que eu me senti com o
+[dia 19](https://adventofcode.com/2021/day/19) do AoC. No total eu demorei mais
+de 6 horas de programação intensa para resolver o problema de hoje. Joguei meu
+código fora múltiplas vezes, quase desisti, mas no final perseverei. Não acho
+que eu tenha resolvido o problema; assim como Chamberlain, acredito que o
+problema só perdeu antes.
+
+Por esse motivo, o post de hoje vai ser um pouco diferente. Em primeiro lugar,
+é impossível resumir as mais de 400 linhas do enunciado de forma efetiva e,
+em segundo, explicar o raciocínio por trás da minha solução seria tão exaustivo
+quanto. Sendo assim, vou fazer um super resumo do enunciado e deixar a
+explicação do código a cargo dos comentários. Quem sabe um dia eu não revisito
+esse exercício para dar um passo-a-passo melhor.
+
+O grosso da pergunta é o seguinte: temos 36 detectores e uma série de
+sinalizadores espalhados pelo oceano em posições fixas. A entrada são as
+coordenadas dos sinalizadores que são vistos por cada detector relativas à
+posição desse detector. Cada detector também pode estar em uma de 24 orientações
+(olhando para +x com o topo apontado para +y, olhando para -y com o topo
+apontado para +z, etc.). Se dois detectores tiverem uma intersecção entre os
+seus cubos de detecção, então deve haver pelo menos 12 sinalizadores nesse
+volume. A pergunta pede para calcularmos o número de sinalizadores que estão
+nessa região do mar.
+
+```r
+# Converter c(x,y,z) para "x,y,z"
+vec_to_str <- function(vec) {
+  stringr::str_c(vec, collapse = ",")
+}
+
+# Converter "x,y,z" para c(x,y,z)
+str_to_vec <- function(str) {
+  as.integer(stringr::str_split(str, ",")[[1]])
+}
+
+# Atalho para escolhe(n,2) de uma lista
+choose_pairs <- function(l) {
+  seq_along(l) |>
+    list(seq_along(l)) |>
+    purrr::cross(`==`) |>
+    purrr::transpose() |>
+    purrr::map(purrr::flatten_int) |>
+    purrr::set_names("a", "b") |>
+    dplyr::as_tibble() |>
+    dplyr::rowwise() |>
+    dplyr::mutate(ordered = paste0(sort(c(a, b)), collapse = ",")) |>
+    dplyr::group_by(ordered) |>
+    dplyr::slice_head(n = 1) |>
+    dplyr::ungroup() |>
+    dplyr::select(-ordered) |>
+    dplyr::mutate(
+      a = purrr::map(a, ~l[[.x]]),
+      b = purrr::map(b, ~l[[.x]])
+    )
+}
+
+# Aplicar todas as rotações de um ponto
+apply_rotations <- function(point) {
+  rotations <- list(
+    list(c(-1, 0, 0), c(0, -1, 0), c(0, 0, 1)),
+    list(c(-1, 0, 0), c(0, 0, -1), c(0, -1, 0)),
+    list(c(-1, 0, 0), c(0, 0, 1), c(0, 1, 0)),
+    list(c(-1, 0, 0), c(0, 1, 0), c(0, 0, -1)),
+    list(c(0, -1, 0), c(-1, 0, 0), c(0, 0, -1)),
+    list(c(0, -1, 0), c(0, 0, -1), c(1, 0, 0)),
+    list(c(0, -1, 0), c(0, 0, 1), c(-1, 0, 0)),
+    list(c(0, -1, 0), c(1, 0, 0), c(0, 0, 1)),
+    list(c(0, 0, -1), c(-1, 0, 0), c(0, 1, 0)),
+    list(c(0, 0, -1), c(0, -1, 0), c(-1, 0, 0)),
+    list(c(0, 0, -1), c(0, 1, 0), c(1, 0, 0)),
+    list(c(0, 0, -1), c(1, 0, 0), c(0, -1, 0)),
+    list(c(0, 0, 1), c(-1, 0, 0), c(0, -1, 0)),
+    list(c(0, 0, 1), c(0, -1, 0), c(1, 0, 0)),
+    list(c(0, 0, 1), c(0, 1, 0), c(-1, 0, 0)),
+    list(c(0, 0, 1), c(1, 0, 0), c(0, 1, 0)),
+    list(c(0, 1, 0), c(-1, 0, 0), c(0, 0, 1)),
+    list(c(0, 1, 0), c(0, 0, -1), c(-1, 0, 0)),
+    list(c(0, 1, 0), c(0, 0, 1), c(1, 0, 0)),
+    list(c(0, 1, 0), c(1, 0, 0), c(0, 0, -1)),
+    list(c(1, 0, 0), c(0, -1, 0), c(0, 0, -1)),
+    list(c(1, 0, 0), c(0, 0, -1), c(0, 1, 0)),
+    list(c(1, 0, 0), c(0, 0, 1), c(0, -1, 0)),
+    list(c(1, 0, 0), c(0, 1, 0), c(0, 0, 1))
+  )
+
+  # Criar uma tabela com (x, y, z) rotacionados e um ID de rotação
+  rotations |>
+    purrr::map(purrr::map, `*`, point) |>
+    purrr::map(purrr::map, sum) |>
+    purrr::map(purrr::flatten_dbl) |>
+    dplyr::tibble() |>
+    purrr::set_names("point") |>
+    dplyr::mutate(rotation = rotations) |>
+    tibble::rowid_to_column() |>
+    tidyr::unnest(point) |>
+    dplyr::mutate(coord = rep(c("x", "y", "z"), dplyr::n() / 3)) |>
+    tidyr::pivot_wider(names_from = coord, values_from = point) |>
+    dplyr::mutate(rotation = purrr::map_chr(rotation, paste, collapse = ",")) |>
+    dplyr::select(x, y, z, rotation)
+}
+
+# Fábrica de função para transformar um ponto com rotação + translação
+factory_transform <- function(df) {
+
+  # Extrair a operação de rotação da df
+  rot <- df$rotation |>
+    stringr::str_split("c\\(") |>
+    purrr::pluck(1) |>
+    stringr::str_remove("\\),?") |>
+    stringr::str_subset(",") |>
+    stringr::str_split(", ") |>
+    purrr::map(as.numeric)
+
+  # Extrair a operação de translação da df
+  trans <- c(df$dif_x, df$dif_y, df$dif_z)
+
+  # Retornar função que aplica a transformação
+  function(vec) {
+    rot |>
+      purrr::map(`*`, vec) |>
+      purrr::map(sum) |>
+      purrr::flatten_dbl() |>
+      magrittr::add(trans)
+  }
+}
+
+# Pegar todas as intersecções entre detectores
+get_intersections <- function(points) {
+
+  # Parear os detectores e retornar as suas intersecções
+  points |>
+    purrr::map(choose_pairs) |>
+    purrr::map(
+      dplyr::mutate, # Intersecções são baseadas nas distâncias entre pontos
+      dist = purrr::map2_dbl(a, b, ~sum((.x - .y)**2))
+    ) |>
+    choose_pairs() |>
+    dplyr::rowwise() |>
+    dplyr::group_split() |>
+    purrr::map(~dplyr::inner_join(.x[["a"]][[1]], .x[["b"]][[1]], "dist")) |>
+    purrr::keep(~nrow(.x) >= 66) # 66 = C(12, 2) = 12 pontos na intersec.
+}
+
+# Pegar todas as transformações que podem converter pairs1 em pairs2
+get_transforms <- function(pairs1, pairs2) {
+
+  # Criar uma função que leva pairs1[2] a pairs2[2a] ou pairs2[2b]
+  dplyr::bind_rows(
+    dplyr::mutate(
+      apply_rotations(pairs1$a.x[[2]]),
+      ref_x = pairs2$a.y[[2]][1],
+      ref_y = pairs2$a.y[[2]][2],
+      ref_z = pairs2$a.y[[2]][3]
+    ),
+    dplyr::mutate(
+      apply_rotations(pairs1$a.x[[2]]),
+      ref_x = pairs2$b.y[[2]][1],
+      ref_y = pairs2$b.y[[2]][2],
+      ref_z = pairs2$b.y[[2]][3]
+    )
+  ) |>
+    dplyr::mutate(
+      dif_x = ref_x - x,
+      dif_y = ref_y - y,
+      dif_z = ref_z - z
+    ) |>
+    dplyr::rowwise() |>
+    dplyr::group_split() |>
+    purrr::map(factory_transform)
+}
+
+# Encontrar a função correta de transformação
+find_transform <- function(df, funs) {
+
+  # Dadas as funções de transformação, encontrar uma que converte os pontos de
+  # df (conjunto de intersecções) corretamente
+  df |>
+    tibble::rowid_to_column("pair_id") |>
+    dplyr::rowwise() |>
+    dplyr::group_split() |>
+    purrr::map(~{
+      .x |>
+        dplyr::mutate(,
+          fun_a.x = list(purrr::map(funs, ~.x(a.x[[1]]))),
+          fun_id = list(seq_along(funs))
+        ) |>
+        tidyr::unnest(dplyr::starts_with("fun")) |>
+        dplyr::select(-dist) |>
+        tidyr::unnest(dplyr::everything())
+    }) |>
+    dplyr::bind_rows() |>
+    dplyr::mutate(
+      a_works = a.y == fun_a.x,
+      b_works = b.y == fun_a.x
+    ) |>
+    dplyr::group_by(pair_id, fun_id) |>
+    dplyr::summarise(
+      some_works = all(a_works) || all(b_works), .groups = "drop"
+    ) |>
+    dplyr::ungroup() |>
+    dplyr::group_by(fun_id) |>
+    dplyr::summarise(works = sum(some_works)) |>
+    dplyr::slice_max(works) |>
+    dplyr::pull(fun_id)
+}
+
+# Ler pontos como uma lista de vetores
+points <- "data-raw/19a_beacon_scanner.txt" |>
+  readr::read_lines() |>
+  tibble::tibble() |>
+  purrr::set_names("point") |>
+  dplyr::mutate(
+    scanner = as.integer(stringr::str_detect(point, "scanner")),
+    scanner = cumsum(scanner) - 1
+  ) |>
+  dplyr::filter(!stringr::str_detect(point, "scanner")) |>
+  dplyr::filter(point != "") |>
+  dplyr::group_split(scanner) |>
+  purrr::map(dplyr::pull, point) |>
+  purrr::map(purrr::map, str_to_vec)
+
+
+# Reduzir detectores a uma única região
+while (length(points) > 1) {
+
+  # Pegar um par de detectores que tem uma intersecção
+  pairs <- get_intersections(points)[[1]]
+
+  # Pegar todas as funções de transformação
+  funs <- get_transforms(
+    dplyr::select(pairs, a.x, b.x),
+    dplyr::select(pairs, a.y, b.y)
+  )
+
+  # Encontrar a função correta
+  transformation <- funs[[find_transform(pairs, funs)]]
+
+  # Converter pontos para strings
+  pairs <- pairs |>
+    dplyr::select(-dist) |>
+    dplyr::mutate_all(purrr::map_chr, vec_to_str)
+
+  # Criar uma cópia dos pontos que também é strings
+  points_ <- purrr::map(points, purrr::map_chr, vec_to_str)
+
+  # Encontrar detector usado como referência por transformation()
+  for (i in seq_along(points_)) {
+
+    ref <- all(c(pairs$a.y, pairs$b.y) %in% points_[[i]])
+    if (ref) reference <- i
+  }
+
+  # Encontrar detector que foi transformado por transformation()
+  for (i in seq_along(points_)) {
+
+    trns <- all(c(pairs$a.x, pairs$b.x) %in% points_[[i]])
+    if (trns) transformed <- i
+  }
+
+  # Aplicar transformation() em todos os pontos do detector e adicionar pontos
+  # transformados ao detector de referência
+  points_[[reference]] <- points[[transformed]] |>
+    purrr::map(transformation) |>
+    purrr::map_chr(vec_to_str) |>
+    c(points_[[reference]]) |>
+    unique()
+
+  # Atualizar lista de pontos
+  points_[[transformed]] <- NULL
+  points <- purrr::map(points_, purrr::map, str_to_vec)
+}
+
+# Calcular o número de pontos em uma única região contígua
+sum(lengths(points))
+#> [1] 408
+```
+
+## Detectores de Sinalizadores (B)
+
+O segundo item pedia para que encontrássemos a maior
+[distância de Manhattan](https://pt.wikipedia.org/wiki/Geometria_do_t%C3%A1xi)
+entre detectores distintos.
+
+```r
+# Reduzir detectores a uma única região, guardando as funções de tranform.
+save_funs <- list()
+while (length(points) > 1) {
+
+  # Pegar um par de detectores que tem uma intersecção
+  pairs <- get_intersections(points)[[1]]
+
+  # Pegar todas as funções de transformação
+  funs <- get_transforms(
+    dplyr::select(pairs, a.x, b.x),
+    dplyr::select(pairs, a.y, b.y)
+  )
+
+  # Encontrar a função correta
+  transformation <- funs[[find_transform(pairs, funs)]]
+  save_funs <- c(save_funs, transformation)
+
+  # Converter pontos para strings
+  pairs <- pairs |>
+    dplyr::select(-dist) |>
+    dplyr::mutate_all(purrr::map_chr, vec_to_str)
+
+  # Criar uma cópia dos pontos que também é strings
+  points_ <- purrr::map(points, purrr::map_chr, vec_to_str)
+
+  # Encontrar detector usado como referência por transformation()
+  for (i in seq_along(points_)) {
+
+    ref <- all(c(pairs$a.y, pairs$b.y) %in% points_[[i]])
+    if (ref) reference <- i
+  }
+
+  # Encontrar detector que foi transformado por transformation()
+  for (i in seq_along(points_)) {
+
+    trns <- all(c(pairs$a.x, pairs$b.x) %in% points_[[i]])
+    if (trns) transformed <- i
+  }
+
+  # Aplicar transformation() em todos os pontos do detector e adicionar pontos
+  # transformados ao detector de referência
+  points_[[reference]] <- points[[transformed]] |>
+    purrr::map(transformation) |>
+    purrr::map_chr(vec_to_str) |>
+    c(points_[[reference]]) |>
+    unique()
+
+  # Atualizar lista de pontos
+  points_[[transformed]] <- NULL
+  points <- purrr::map(points_, purrr::map, str_to_vec)
+}
+
+# Aplicar transformações aos detectores e tirar distância de Manhattan
+save_funs |>
+  purrr::map(~.x(c(0, 0, 0))) |>
+  choose_pairs() |>
+  dplyr::mutate(dist = purrr::map2_dbl(a, b, ~sum(abs(.x - .y)))) |>
+  dplyr::slice_max(dist) |>
+  dplyr::pull(dist)
+```
