@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-22.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 22."
-draft: true
+draft: false
 ---
 
 O [Advent of Code](https://adventofcode.com) é um
@@ -27,3 +27,160 @@ A minha esperança é que, com essa série, mais pessoas pratiquem seus
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Reinicialização do Reator (A)
+
+O [dia 22](https://adventofcode.com/2021/day/22) do AoC foi mais um cujo
+enunciado não apresentou dificuldades. Não que a resolução tenha sido fácil, mas
+pelo menos o problema foi fácil de entender.
+
+Essencialmente tínhamos que reiniciar o reator do submarino seguindo uma série
+de instruções (a entrada do problema). O reator era composto por uma grade
+gigantesca feita de cubos 1x1x1 que começavam todos desligados; cada instrução
+nos dava uma região do reator que precisava ser desligada ou ligada:
+
+```r
+# on x=10..12,y=10..12,z=10..12
+# on x=11..13,y=11..13,z=11..13
+# off x=9..11,y=9..11,z=9..11
+# on x=10..10,y=10..10,z=10..10
+```
+
+O primeiro comando da lista acima, por exemplo, ligava todos os cubos dentro da
+matrix `reator[10:12, 10:12, 10:12]`. Nosso objetivo no primeiro item era contar
+todos os cubos que estariam acessos no final do processo de reinicialização, mas
+levando em conta _apenas_ os cubos dentro da região denotada por
+`x=-50..50,y=-50..50,z=-50..50`.
+
+O código era bastante simples de escrever usando a função `array()` do R,
+prestando atenção apenas ao fato de que as coordenadas da array deveríam ir de
+1 a 101 e não de -50 a 50.
+
+```r
+# Ler todos os passos como uma tabela
+steps <- "data-raw/22a_reactor_reboot.txt" |>
+  readr::read_lines() |>
+  stringr::str_split("[ ,]|(\\.\\.)") |>
+  purrr::transpose() |>
+  purrr::set_names("state", "x1", "x2", "y1", "y2", "z1", "z2") |>
+  purrr::map(purrr::flatten_chr) |>
+  tibble::as_tibble() |>
+  dplyr::mutate(
+    dplyr::across(dplyr::ends_with("1"), stringr::str_remove, "[a-z]="),
+    dplyr::across(c(-state), as.integer),
+    x = purrr::map2(x1, x2, `:`),
+    y = purrr::map2(y1, y2, `:`),
+    z = purrr::map2(z1, z2, `:`)
+  ) |>
+  dplyr::select(state, x, y, z)
+
+# Criar reator como uma array 3D
+reactor <- array(rep("off", 303), dim = c(101, 101, 101))
+
+# Iterar nos passos
+for (i in seq_len(nrow(steps))) {
+
+  # Coordenadas do cubóide
+  x <- steps$x[[i]] + 51
+  y <- steps$y[[i]] + 51
+  z <- steps$z[[i]] + 51
+
+  # Eliminar o que estiver fora do cubo -50:50
+  x <- x[x >= 1 & x <= 101]
+  y <- y[y >= 1 & y <= 101]
+  z <- z[z >= 1 & z <= 101]
+
+  # Atribuir estado
+  reactor[x, y, z] <- steps$state[i]
+}
+
+# Contar cubos ligados
+sum(reactor == "on")
+#> [1] 647076
+```
+
+## Reinicialização do Reator (B)
+
+Sem muita surpresa, o item 2 pedia para contarmos o número de cubos ligados ao
+final do processo de reinicialização em _todo_ o reator. Olhando o código acima,
+parece que só seria necessário mudar as dimensões da array e tirar os filtros
+dentro do loop, certo? Infelizmente não, pois com esse algoritmo ineficiente
+precisaríamos contar aproximadamente 2 quadrilhões de cubos...
+
+A solução foi, então, calcular apenas os limites das regiões e lidar com as suas
+intersecções. Ou seja, se dois cubóides tiverem que ser ligados, então podemos
+tomar nota das suas coordenadas e adicionar um novo cubóide de "subtração" na
+nossa lista que servirá para remover uma cópia da intersecção que foi ligada
+"duas vezes". Resumidamente, estaremos contando apenas os volumes de cada
+cubóide ligado e subtraíndo o volume de cada intersecção para não contar nada
+duas vezes.
+
+```r
+# Ler todos os passos como uma tabela
+steps <- "data-raw/22b_reactor_reboot.txt" |>
+  readr::read_lines() |>
+  stringr::str_split("[ ,]|(\\.\\.)") |>
+  purrr::transpose() |>
+  purrr::set_names("state", "x1", "x2", "y1", "y2", "z1", "z2") |>
+  purrr::map(purrr::flatten_chr) |>
+  tibble::as_tibble() |>
+  dplyr::mutate(
+    dplyr::across(dplyr::ends_with("1"), stringr::str_remove, "[a-z]="),
+    dplyr::across(c(-state), as.integer),
+    state = ifelse(state == "on", 1L, -1L),
+  )
+
+# Iterar nos passos Iterate over steps
+cuboids <- dplyr::slice_head(steps, n = 1)
+for (i in 2:nrow(steps)) {
+
+  # Iterar nos cubóides que já vimos
+  for (j in seq_len(nrow(cuboids))) {
+
+    # Calcular intersecção
+    x1_inter <- max(steps$x1[i], cuboids$x1[j])
+    x2_inter <- min(steps$x2[i], cuboids$x2[j])
+    y1_inter <- max(steps$y1[i], cuboids$y1[j])
+    y2_inter <- min(steps$y2[i], cuboids$y2[j])
+    z1_inter <- max(steps$z1[i], cuboids$z1[j])
+    z2_inter <- min(steps$z2[i], cuboids$z2[j])
+
+    # Adicionar intersecção à lista (com sinal virado)
+    if (x1_inter <= x2_inter && y1_inter <= y2_inter && z1_inter <= z2_inter) {
+      cuboids <- tibble::add_row(cuboids,
+        state = cuboids$state[j] * -1L,
+        x1 = x1_inter, x2 = x2_inter,
+        y1 = y1_inter, y2 = y2_inter,
+        z1 = z1_inter, z2 = z2_inter,
+      )
+    }
+  }
+
+  # Adicionar cubóide à lista se ele estiver ligado
+  if (steps$state[i] == 1) {
+    cuboids <- tibble::add_row(cuboids,
+      state = steps$state[i],
+      x1 = steps$x1[i], x2 = steps$x2[i],
+      y1 = steps$y1[i], y2 = steps$y2[i],
+      z1 = steps$z1[i], z2 = steps$z2[i],
+    )
+  }
+}
+
+# Contar cubos ligados
+on <- 0
+for (i in seq_len(nrow(cuboids))) {
+
+  # Calcular volume
+  x <- cuboids$x2[i] - cuboids$x1[i] + 1
+  y <- cuboids$y2[i] - cuboids$y1[i] + 1
+  z <- cuboids$z2[i] - cuboids$z1[i] + 1
+
+  # Adicionar/remover à/da conta
+  on <- on + (x * y * z * cuboids$state[i])
+}
+
+# Imprimir
+format(on, scientific = FALSE)
+#> [1] 1233304599156793
+```
