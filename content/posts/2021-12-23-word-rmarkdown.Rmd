@@ -6,6 +6,7 @@ categories: ["tutoriais"]
 image: "images/posts/banner/word-rmarkdown.jpg"
 author: ["Tereza"]
 summary: "Aprenda a ter maior controle sobre a formatação de relatórios em Word gerados a partir do R Markdown"
+draft: true
 ---
 
 Este tutorial é para você que quer usar o R Markdown para criar arquivos em Word e quer ter maior controle sobre a formatação desses documentos!
