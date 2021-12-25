@@ -6,7 +6,7 @@ categories: ["Tutoriais"]
 image: "images/posts/banner/advent-of-r-25.jpeg"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 25."
-draft: true
+draft: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -28,3 +28,91 @@ minha solução aqui no blog e subir os meus scripts completos para um
 conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
 da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
 divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="pepino-do-mar-a" class="section level2">
+<h2>Pepino-do-mar (A)</h2>
+<p>Finalmente chegamos ao <a href="https://adventofcode.com/2021/day/25">último dia</a> do AoC
+deste ano! O problema de hoje foi um verdadeiro presente de Natal: bem mais
+simples que todos os dias anteriores. Nossa missão era acompanhar os movimentos
+de dois grupos de pepinos-do-mar e encontrar o momento em que eles não poderiam
+mais se mover.</p>
+<p>Os pepinos estavam dispostos em uma matriz retangular e se moviam na direção
+para a qual estavam apontando. Se o espaço em frente ao pepino estivesse vago
+(<code>.</code>), então ele se movia.</p>
+<pre class="r"><code># Estado inicial:
+# ...&gt;...
+# .......
+# ......&gt;
+# v.....&gt;
+# ......&gt;
+# .......
+# ..vvv..
+#
+# Depis de 1 passo:
+# ..vv&gt;..
+# .......
+# &gt;......
+# v.....&gt;
+# &gt;......
+# .......
+# ....v..
+#
+# Depois de 58 passos (todos travados):
+# ..&gt;&gt;v&gt;vv..
+# ..v.&gt;&gt;vv..
+# ..&gt;&gt;v&gt;&gt;vv.
+# ..&gt;&gt;&gt;&gt;&gt;vv.
+# v......&gt;vv
+# v&gt;v....&gt;&gt;v
+# vvv.....&gt;&gt;
+# &gt;vv......&gt;
+# .&gt;v.vv.v..</code></pre>
+<p>Meu código ficou simples. Eu li o mapa do fundo do mar como uma matriz e
+calculei todos os pepinos que podiam se mover; quando nenhum mais pudesse, eu
+retornava o número de passos transcorridos.</p>
+<pre class="r"><code># Ler fundo do mar como matriz
+seafloor &lt;- &quot;data-raw/25a_sea_cucumber.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_split(&quot;&quot;) |&gt;
+  purrr::flatten_chr() |&gt;
+  matrix(nrow = 137, ncol = 139, byrow = TRUE)
+
+# Iterar enquanto ainda há movimentos
+i &lt;- 0
+while (TRUE) {
+  i &lt;- i + 1
+
+  # Todos os pepinos
+  e &lt;- which(seafloor == &quot;&gt;&quot;)
+  s &lt;- which(seafloor == &quot;v&quot;)
+
+  # As suas próximas posições
+  next_e &lt;- ((e + 137) %% 19043) + ((e + 137) %% 19043 == 0) * 19043
+  next_s &lt;- s + 1 - (s %% 137 == 0) * 137
+
+  # Mover todos os pepinos virados para a esquerda
+  allowed_e &lt;- seafloor[next_e] == &quot;.&quot;
+  seafloor[next_e[allowed_e]] &lt;- seafloor[e[allowed_e]]
+  seafloor[e[allowed_e]] &lt;- &quot;.&quot;
+
+  # Mover todos os pepinos virados para baixo
+  allowed_s &lt;- seafloor[next_s] == &quot;.&quot;
+  seafloor[next_s[allowed_s]] &lt;- seafloor[s[allowed_s]]
+  seafloor[s[allowed_s]] &lt;- &quot;.&quot;
+
+  # Verificar condição de parada
+  if (all(!allowed_e) &amp;&amp; all(!allowed_s)) break
+}
+
+# Imprimir
+print(i)
+#&gt; [1] 518</code></pre>
+</div>
+<div id="pepino-do-mar-b" class="section level2">
+<h2>Pepino-do-mar (B)</h2>
+<p>O segundo item me pegou de surpresa porque… Não havia segundo item! A
+historinha que estava sendo contada ao longo do AoC foi finalmente concluída e
+ganhamos a última estrela de graça.</p>
+<p>E esse foi o fim da aventura. Muito obrigado por me acompanhar nesses últimos 25
+dias de programação intensa! Espero que tenham gostado e, até que enfim, boas
+festas!</p>
+</div>
