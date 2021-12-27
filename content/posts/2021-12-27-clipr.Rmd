@@ -1,0 +1,142 @@
+---
+title: "Importando e exportando objetos do R através da área de transferência"
+date: "2021-12-27"
+tags: ["tutoriais"]
+categories: ["tutoriais"]
+image: "images/posts/banner/clipr.jpg"
+author: ["Tereza"]
+summary: "Aprenda a importar/exportar objetos do R através do pacote clipr"
+draft: true
+---
+
+O `clipr` é um pacote composto por algumas funções que permitem importar/exportar objetos do R através da área de transferência!
+
+Essas funções são muito úteis para, por exemplo, copiar objetos do excel, powerpoint ou word para o R, e vice-versa.
+
+Nesse post, vamos mostrar **como copiar tabelas do R para o Excel**, e **como copiar tabelas do Excel para o R** através desse pacote! Sem mais delongas, vamos aos tutoriais:
+
+## Copiando tabelas do R para o Excel através da área de transferência
+
+1. Carregue o pacote `clipr`
+
+```{r message=FALSE, warning=FALSE}
+library(clipr)
+```
+
+```{r, include=FALSE}
+CLIPR_ALLOW = TRUE
+```
+
+
+2. Agora, basta usar a tabela escolhida como argumento da função `write_clip`. No nosso caso, queremos copiar a tabela `mtcars`
+
+```{r eval=FALSE}
+write_clip(mtcars)
+```
+
+3. Abra um novo arquivo excel, use o atalho **crtl + v** e voilà!
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr1.png")
+```
+
+Note que por default, o separador decimal usado é o ponto. Para mudar isso, basta usar o argumento `dec = ","`
+
+```{r, eval=FALSE}
+write_clip(mtcars, dec = ",")
+```
+
+Usando o atalho **ctrl + v** no arquivo excel:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr2.png")
+```
+
+Também podemos usar o operador **pipe**, obtendo o mesmo resultado do passo anterior:
+
+```{r, eval=FALSE}
+mtcars %>% 
+  write_clip(dec = ",")
+```
+
+Além disso, a função também pode receber outros argumentos. Por exemplo, com o argumento `col.names = FALSE` a tabela será copiada sem os nomes das colunas
+
+```{r, eval=FALSE}
+mtcars %>% 
+  write_clip(dec = ",", col.names = FALSE)
+```
+
+Usando o atalho **ctrl + v** no arquivo excel:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr3.png")
+```
+
+## Copiando tabelas do Excel para o R através da área de transferência
+
+1. Carregue o pacote `clipr`
+
+```{r message=FALSE, warning=FALSE}
+library(clipr)
+```
+
+2. No excel, selecione a tabela desejada, e a copie através do comando **ctrl + c**. No nosso caso, estamos copiando a base `mtcars` (no formato **.xlsx**)
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr4.png")
+```
+
+3. Agora, vá até o R e use o seguinte comando:
+
+```{r, eval=FALSE}
+base_de_dados <- read_clip_tbl()
+```
+
+(`base_de_dados` é apenas um nome genérico que estamos dando para esse **data.frame**, você pode nomear como preferir)
+
+E prontinho! Vamos visualizar o objeto `base_de_dados`:
+
+```{r include=FALSE}
+base_de_dados <- mtcars
+row.names(base_de_dados) <- 1:32
+```
+
+
+```{r}
+base_de_dados[1:11, ]
+```
+
+Também podemos usar alguns argumentos na função `read_clip_tbl`. Por exemplo, considere que temos uma base de dados no formato **.csv**:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr5.png")
+```
+
+Se quisermos copiar a tabela `mtcars` no formato **.csv** do excel para o R, por exemplo, basta usar o argumento `sep` para especificar o separador usado, que é a vírgula:
+
+```{r, eval=FALSE}
+base_de_dados2 <- read_clip_tbl(sep = ",")
+```
+
+Vamos visualizar o objeto `base_de_dados2`:
+
+```{r include=FALSE}
+base_de_dados2 <- mtcars
+X <- row.names(base_de_dados2)
+row.names(base_de_dados2) <- 1:32
+base_de_dados2 <- cbind(X, base_de_dados2)
+```
+
+```{r}
+base_de_dados2[1:11, ]
+```
+
+Obs: Para limpar a area de tranferencia, basta usar o comando `clear_clip()`
+
+
+
+
+
+
+
+

@@ -1,0 +1,93 @@
+---
+title: "Importando e exportando objetos do R através da área de transferência"
+date: "2021-12-27"
+tags: ["tutoriais"]
+categories: ["tutoriais"]
+image: "images/posts/banner/clipr.jpg"
+author: ["Tereza"]
+summary: "Aprenda a importar/exportar objetos do R através do pacote clipr"
+draft: true
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>O <code>clipr</code> é um pacote composto por algumas funções que permitem importar/exportar objetos do R através da área de transferência!</p>
+<p>Essas funções são muito úteis para, por exemplo, copiar objetos do excel, powerpoint ou word para o R, e vice-versa.</p>
+<p>Nesse post, vamos mostrar <strong>como copiar tabelas do R para o Excel</strong>, e <strong>como copiar tabelas do Excel para o R</strong> através desse pacote! Sem mais delongas, vamos aos tutoriais:</p>
+<div id="copiando-tabelas-do-r-para-o-excel-através-da-área-de-transferência" class="section level2">
+<h2>Copiando tabelas do R para o Excel através da área de transferência</h2>
+<ol style="list-style-type: decimal">
+<li>Carregue o pacote <code>clipr</code></li>
+</ol>
+<pre class="r"><code>library(clipr)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Agora, basta usar a tabela escolhida como argumento da função <code>write_clip</code>. No nosso caso, queremos copiar a tabela <code>mtcars</code></li>
+</ol>
+<pre class="r"><code>write_clip(mtcars)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Abra um novo arquivo excel, use o atalho <strong>crtl + v</strong> e voilà!</li>
+</ol>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr1.png" style="display: block; margin: auto;" /></p>
+<p>Note que por default, o separador decimal usado é o ponto. Para mudar isso, basta usar o argumento <code>dec = ","</code></p>
+<pre class="r"><code>write_clip(mtcars, dec = &quot;,&quot;)</code></pre>
+<p>Usando o atalho <strong>ctrl + v</strong> no arquivo excel:</p>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr2.png" style="display: block; margin: auto;" /></p>
+<p>Também podemos usar o operador <strong>pipe</strong>, obtendo o mesmo resultado do passo anterior:</p>
+<pre class="r"><code>mtcars %&gt;% 
+  write_clip(dec = &quot;,&quot;)</code></pre>
+<p>Além disso, a função também pode receber outros argumentos. Por exemplo, com o argumento <code>col.names = FALSE</code> a tabela será copiada sem os nomes das colunas</p>
+<pre class="r"><code>mtcars %&gt;% 
+  write_clip(dec = &quot;,&quot;, col.names = FALSE)</code></pre>
+<p>Usando o atalho <strong>ctrl + v</strong> no arquivo excel:</p>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr3.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="copiando-tabelas-do-excel-para-o-r-através-da-área-de-transferência" class="section level2">
+<h2>Copiando tabelas do Excel para o R através da área de transferência</h2>
+<ol style="list-style-type: decimal">
+<li>Carregue o pacote <code>clipr</code></li>
+</ol>
+<pre class="r"><code>library(clipr)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>No excel, selecione a tabela desejada, e a copie através do comando <strong>ctrl + c</strong>. No nosso caso, estamos copiando a base <code>mtcars</code> (no formato <strong>.xlsx</strong>)</li>
+</ol>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr4.png" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Agora, vá até o R e use o seguinte comando:</li>
+</ol>
+<pre class="r"><code>base_de_dados &lt;- read_clip_tbl()</code></pre>
+<p>(<code>base_de_dados</code> é apenas um nome genérico que estamos dando para esse <strong>data.frame</strong>, você pode nomear como preferir)</p>
+<p>E prontinho! Vamos visualizar o objeto <code>base_de_dados</code>:</p>
+<pre class="r"><code>base_de_dados[1:11, ]</code></pre>
+<pre><code>##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4  21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5  18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6  18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7  14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9  22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4</code></pre>
+<p>Também podemos usar alguns argumentos na função <code>read_clip_tbl</code>. Por exemplo, considere que temos uma base de dados no formato <strong>.csv</strong>:</p>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr5.png" style="display: block; margin: auto;" /></p>
+<p>Se quisermos copiar a tabela <code>mtcars</code> no formato <strong>.csv</strong> do excel para o R, por exemplo, basta usar o argumento <code>sep</code> para especificar o separador usado, que é a vírgula:</p>
+<pre class="r"><code>base_de_dados2 &lt;- read_clip_tbl(sep = &quot;,&quot;)</code></pre>
+<p>Vamos visualizar o objeto <code>base_de_dados2</code>:</p>
+<pre class="r"><code>base_de_dados2[1:11, ]</code></pre>
+<pre><code>##                    X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1          Mazda RX4 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2      Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3         Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4     Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5  Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6            Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7         Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8          Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9           Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10          Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11         Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4</code></pre>
+<p>Obs: Para limpar a area de tranferencia, basta usar o comando <code>clear_clip()</code></p>
+</div>
