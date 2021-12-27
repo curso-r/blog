@@ -15,6 +15,15 @@ knitr::opts_chunk$set(
 )
 ```
 
+Sabe aquelas imagens que aparecem quando você está preenchendo um formulário ou quer acessar uma página específica, pedindo para você decifrar o texto? Isso é o que chamamos de CAPTCHA (**Completely Automated Public Turing test to tell Computers and Humans Apart**).
+
+
+<div style="width:70%;margin:auto;">
+![](/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg)
+</div>
+
+<center>Figura: Exemplo de captcha do site do Tribunal Regional do Trabalho (TRT).</center>
+
 
 O Captcha é um desafio computacional criado para ser difícil de resolver por máquinas mas fácil de resolver por pessoas. No início, a maioria dos Captchas eram formados por letras aleatórias inseridas em imagens ou áudios com algum ruído. Com a popularização das técnicas de Deep Learning, esses desafios se tornaram fáceis de resolver por máquinas, desde que exista uma base suficientemente grande de exemplos classificados.
 
@@ -152,7 +161,7 @@ dl
 
 Isso pode ser usado para gerar amostras da base de dados, o que é importante para a etapa de ajuste de modelos realizadas pelo `{torch}` e pelo `{luz}`. 
 
-No caso dos captchas, eu montei uma função do pacote `{captcha}` que cria os dataloaders de treino e teste a partir de uma função que faz o download do 
+No caso dos captchas, eu montei uma função do pacote `{captcha}` que cria os dataloaders de treino e validação a partir de uma função que faz o download dos arquivos brutos.
 
 ```{r dataloader-all, eval=FALSE}
 
@@ -168,17 +177,19 @@ captcha_ds <- captcha::captcha_dataset(
 )
 
 
-# cria os dataloaders de treino e teste
+# cria os dataloaders de treino e validação
 
 ## amostra de indices
 id_train <- sample(1:length(captcha_ds), .8 * length(captcha_ds))
 
+## cria o dataloader de treino
 captcha_dl_train <- torch::dataloader(
   torch::dataset_subset(captcha_ds, id_train),
   batch_size = 32,
   shuffle = TRUE
 )
 
+## cria o dataloader de validação
 captcha_dl_valid <- torch::dataloader(
   torch::dataset_subset(captcha_ds, -id_train),
   batch_size = 32
@@ -249,7 +260,6 @@ captcha::net_captcha
 
 E agora chegamos na parte mais legal. Com o `{luz}`, temos uma sintaxe parecida com o `{keras}`, em que fazemos o setup do modelo e depois ajustamos, com direito a uma barrinha de progresso que já vem automaticamente 🤩
 
-No caso, nosso 
 
 ```{r model-run, eval=FALSE}
 fitted <- captcha::net_captcha |>
