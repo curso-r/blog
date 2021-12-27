@@ -327,7 +327,7 @@ captcha_accuracy <- luz::luz_metric(
 
 ## Resultados
 
-O código completo de ajuste do modelo pode ser encontrado [aqui](). A sintaxe do pacote `{captcha}` ainda está instável, então pode ser que o código quebre no futuro.
+O código completo de ajuste do modelo pode ser encontrado [aqui](https://gist.github.com/3c2cd573a184576a27e8ffe5ce04498a). A sintaxe do pacote `{captcha}` ainda está instável, então pode ser que o código quebre no futuro.
 
 ```{r include=FALSE}
 knitr::include_graphics("../../static/images/posts/conteudo/captcha-luz/luz.gif")
