@@ -171,7 +171,7 @@ path <- "caminho/para/arquivos/brutos"
 # que tem apenas 400 Captchas.
 
 captcha_ds <- captcha::captcha_dataset(
-  root = "data-raw/trt",
+  root = path,
   captcha = "trt2",
   download = TRUE
 )
@@ -331,13 +331,34 @@ O código completo de ajuste do modelo pode ser encontrado [aqui](). A sintaxe d
 
 ```{r include=FALSE}
 knitr::include_graphics("../../static/images/posts/conteudo/captcha-luz/luz.gif")
-
-
 ```
 
 ![](/images/posts/conteudo/captcha-luz/luz.gif)
 
 Com o código, consegui chegar em uma acurácia de 90% com apenas 400 exemplos classificados!
+
+Abaixo, um exemplinho de aplicação:
+
+```{r eval=FALSE}
+captcha <- captcha_ds$files[1]
+
+captcha |> 
+  captcha::read_captcha() |> 
+  plot()
+```
+
+<div style="min-width:200px;margin:auto;">
+
+![](/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg)
+</div>
+
+
+```{r eval=FALSE}
+fitted <- luz::luz_load("caminho/para/trt.pt")
+captcha::decrypt(captcha, fitted)
+```
+
+    [1] "2n73k7"
 
 ## Wrap-up
 
@@ -349,3 +370,7 @@ Neste post, vimos que
 - Os modelos de redes neurais convolucionais funcionam bem em tarefas de visão computacional, como os Captchas.
 
 É isso. Happy coding ;)
+
+## Agradecimentos
+
+Um agradecimento especial à [Beatriz Milz](https://beatrizmilz.com) pela revisão do post!
