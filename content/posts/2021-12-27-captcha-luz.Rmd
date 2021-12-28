@@ -313,10 +313,11 @@ captcha_accuracy <- luz::luz_metric(
     # fazemos o mesmo para a variável resposta
     tgt <- torch::torch_argmax(target$squeeze(), dim = 3)
     # comparamos os dois resultados e somamos a quantidade de resultados iguais
-    new_correct <- (pred == tgt)$to(dtype = torch::torch_float())$sum()$item()
+    new_correct <- torch::torch_sum(pred == tgt, 2) == dim(pred)[2]
+    new_correct <- new_correct$to(dtype = torch::torch_float())$sum()$item()
     # atualizamos os valores
     self$correct <- self$correct + new_correct
-    self$total <- self$total + pred$numel()
+    self$total <- self$total + dim(pred)[1]
   },
   compute = function() {
     # calcula a proporção de acertos
@@ -324,6 +325,7 @@ captcha_accuracy <- luz::luz_metric(
   }
 )
 ```
+
 
 ## Resultados
 
