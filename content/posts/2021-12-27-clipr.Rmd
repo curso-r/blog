@@ -1,11 +1,11 @@
 ---
-title: "Importando e exportando objetos do R através da área de transferência"
+title: "Importando e exportando tabelas do R para o Excel através da área de transferência"
 date: "2021-12-27"
 tags: ["tutoriais"]
 categories: ["tutoriais"]
 image: "images/posts/banner/clipr.jpg"
 author: ["Tereza"]
-summary: "Aprenda a importar/exportar objetos do R através do pacote clipr"
+summary: "Aprenda a importar/exportar tabelas do R através do pacote clipr"
 draft: false
 ---
 
