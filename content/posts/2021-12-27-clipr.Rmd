@@ -6,7 +6,7 @@ categories: ["tutoriais"]
 image: "images/posts/banner/clipr.jpg"
 author: ["Tereza"]
 summary: "Aprenda a importar/exportar objetos do R através do pacote clipr"
-draft: true
+draft: false
 ---
 
 O `clipr` é um pacote composto por algumas funções que permitem importar/exportar objetos do R através da área de transferência!
