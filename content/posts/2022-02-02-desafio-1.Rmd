@@ -5,19 +5,29 @@ tags: ["desafio curso-r", "desafio manipulação"]
 categories: ["desafio curso-r"]
 image: "images/posts/banner/desafio-1.jpg"
 author: ["Tereza"]
-summary: "Esse é o primeiro desafio de programação proposto pela curso-R! Resolva-o e poste a sua solução em nosso discourse!"
+summary: "Esse é o primeiro desafio de programação proposto pela curso-R! Resolva-o e poste a sua solução em nosso Discourse!"
 draft: true
 ---
 
-(verificar se as tags estão clicáveis)
-(escrever texto falando sobre os desafios de modo geral)
+```{r eval=FALSE, include=FALSE}
+# TO DO:
+
+# verificar se as tags estão clicáveis: "desafio curso-r", "desafio manipulação", "Tereza"
+```
+
+```{r eval=FALSE, include=FALSE}
+# TO DO:
+
+# escrever texto falando sobre os desafios de modo geral
+```
+
 
 ## Desafio #1: Manipulando a base de filmes do IMDB
 
 Vamos começar com um desafio de manipulação. 
 Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la [clicando aqui](https://github.com/curso-r/livro-material/raw/master/assets/data/imdb.rds).
 
-**Objetivo**: Escreva um código que transforme a base do IMDB em uma base nomeada *IMDB_atores*, que deve ser formada pelas seguintes colunas:
+**Desafio**: Escreva um código que transforme a base do IMDB em uma base nomeada *IMDB_atores*, que deve ser formada pelas seguintes colunas:
 
 - `ator`: nome de um(a) ator/atriz
 
@@ -56,6 +66,17 @@ Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la
 
 - `contracenou`: um vetor com os nomes de todos os(as) atores/atrizes que o(a) ator/atriz já contracenou (ou seja, participou do mesmo filme)
 
-(especificar onde deve ser postada a resolução dos desafios)
+Poste a sua resolução em nosso [Discourse](https://discourse.curso-r.com/) :)
+
+
+```{r eval=FALSE, include=FALSE}
+# VERIFICAR:
+
+# vai ser criado um único tópico pra cada desafio? ou vai ser um tópico por resolução?
+
+# TO DO:
+
+# escrever mais alguma coisa, se vai ter premio, dar dicas, etc
+```
 
 
