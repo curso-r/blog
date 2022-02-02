@@ -1,0 +1,60 @@
+---
+title: "Desafio #1: Manipulando a base de filmes do IMDB"
+date: "2021-02-02"
+tags: ["desafio curso-r", "desafio manipulação"]
+categories: ["desafio curso-r"]
+image: "images/posts/banner/desafio-1.jpg"
+author: ["Tereza"]
+summary: "Esse é o primeiro desafio de programação proposto pela curso-R! Resolva-o e poste a sua solução no nosso discouse!"
+draft: true
+---
+
+(escrever texto falando sobre os desafios de modo geral)
+
+## Desafio #1: Manipulando a base de filmes do IMDB
+
+Vamos começar com um desafio de manipulação. 
+Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la [clicando aqui](https://github.com/curso-r/livro-material/raw/master/assets/data/imdb.rds).
+
+**Objetivo**: Escreva um código que transforme a base do IMDB em uma base nomeada *IMDB_atores*, que deve ser formada pelas seguintes colunas:
+
+- `ator`: nome de um(a) ator/atriz
+
+  (cada nome deve aparecer uma vez só)
+
+- `nota_media_imdb`: nota imdb média dos filmes que o(a) ator/atriz particiou
+
+- `media_lucro`: lucro médio dos filmes que o(a) ator/atriz participou
+
+  (obs: `lucro = receita - orcamento`)
+
+- `top1_genero`: gênero mais frequente entre os filmes que o(a) ator/atriz particiou
+
+- `top2_genero`: segundo gênero mais frequente entre os filmes que o(a) ator/atriz particiou
+
+- `top3_genero`: terceiro gênero mais frequente entre os filmes que o(a) ator/atriz particiou
+
+- `primeiro_registro`: ano do primeiro filme que o(a) ator/atriz participou
+
+- `ultimo_registro`: ano do último filme que o(a) ator/atriz particiou
+
+- `filmes`: um *data frame* com informações de todos os filmes que o(a) ator/atriz participou, as colunas desse *data frame* devem ser as seguintes:
+
+  - `título`: nome do filme
+  - `ano`: ano do filme
+  - `diretor`: diretor(a) do filme
+  - `duracao`: duração do filme
+  - `cor`: cor do filme (*Color* ou *Black and White*)
+  - `generos`: generos do filme
+  - `pais`: país do filme
+  - `classificacao`: classificação etária do filme
+  - `nota_imdb`: nota imbd do filme
+  - `orcamento`: orcamento do filme
+  - `receita`: receita do filme
+  - `lucro`: lucro do filme
+
+- `contracenou`: um vetor com os nomes de todos os(as) atores/atrizes que o(a) ator/atriz já contracenou (ou seja, participou do mesmo filme)
+
+(especificar onde deve ser postada a resolução dos desafios)
+
+

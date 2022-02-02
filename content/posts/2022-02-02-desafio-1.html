@@ -1,0 +1,50 @@
+---
+title: "Desafio #1: Manipulando a base de filmes do IMDB"
+date: "2021-02-02"
+tags: ["desafio curso-r", "desafio manipulação"]
+categories: ["desafio curso-r"]
+image: "images/posts/banner/desafio-1.jpg"
+author: ["Tereza"]
+summary: "Esse é o primeiro desafio de programação proposto pela curso-R! Resolva-o e poste a sua solução no nosso discouse!"
+draft: true
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>(escrever texto falando sobre os desafios de modo geral)</p>
+<div id="desafio-1-manipulando-a-base-de-filmes-do-imdb" class="section level2">
+<h2>Desafio #1: Manipulando a base de filmes do IMDB</h2>
+<p>Vamos começar com um desafio de manipulação.
+Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la <a href="https://github.com/curso-r/livro-material/raw/master/assets/data/imdb.rds">clicando aqui</a>.</p>
+<p><strong>Objetivo</strong>: Escreva um código que transforme a base do IMDB em uma base nomeada <em>IMDB_atores</em>, que deve ser formada pelas seguintes colunas:</p>
+<ul>
+<li><p><code>ator</code>: nome de um(a) ator/atriz</p>
+<p>(cada nome deve aparecer uma vez só)</p></li>
+<li><p><code>nota_media_imdb</code>: nota imdb média dos filmes que o(a) ator/atriz particiou</p></li>
+<li><p><code>media_lucro</code>: lucro médio dos filmes que o(a) ator/atriz participou</p>
+<p>(obs: <code>lucro = receita - orcamento</code>)</p></li>
+<li><p><code>top1_genero</code>: gênero mais frequente entre os filmes que o(a) ator/atriz particiou</p></li>
+<li><p><code>top2_genero</code>: segundo gênero mais frequente entre os filmes que o(a) ator/atriz particiou</p></li>
+<li><p><code>top3_genero</code>: terceiro gênero mais frequente entre os filmes que o(a) ator/atriz particiou</p></li>
+<li><p><code>primeiro_registro</code>: ano do primeiro filme que o(a) ator/atriz participou</p></li>
+<li><p><code>ultimo_registro</code>: ano do último filme que o(a) ator/atriz particiou</p></li>
+<li><p><code>filmes</code>: um <em>data frame</em> com informações de todos os filmes que o(a) ator/atriz participou, as colunas desse <em>data frame</em> devem ser as seguintes:</p>
+<ul>
+<li><code>título</code>: nome do filme</li>
+<li><code>ano</code>: ano do filme</li>
+<li><code>diretor</code>: diretor(a) do filme</li>
+<li><code>duracao</code>: duração do filme</li>
+<li><code>cor</code>: cor do filme (<em>Color</em> ou <em>Black and White</em>)</li>
+<li><code>generos</code>: generos do filme</li>
+<li><code>pais</code>: país do filme</li>
+<li><code>classificacao</code>: classificação etária do filme</li>
+<li><code>nota_imdb</code>: nota imbd do filme</li>
+<li><code>orcamento</code>: orcamento do filme</li>
+<li><code>receita</code>: receita do filme</li>
+<li><code>lucro</code>: lucro do filme</li>
+</ul></li>
+<li><p><code>contracenou</code>: um vetor com os nomes de todos os(as) atores/atrizes que o(a) ator/atriz já contracenou (ou seja, participou do mesmo filme)</p></li>
+</ul>
+<p>(especificar onde deve ser postada a resolução dos desafios)</p>
+</div>
