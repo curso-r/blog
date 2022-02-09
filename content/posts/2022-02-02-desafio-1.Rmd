@@ -9,11 +9,15 @@ summary: "Esse é o primeiro desafio de programação proposto pela curso-R! Res
 draft: true
 ---
 
-```{r eval=FALSE, include=FALSE}
-# TO DO:
+Esse é o primeiro post de uma série de desafios de ciência de dados que postaremos aqui no blog!
 
-# verificar se as tags estão clicáveis: "desafio curso-r", "desafio manipulação", "Tereza"
-```
+Os desafios serão bem variados, incluindo temas como Shiny, Manipulação, Visualização, etc...
+
+O intuito desses desafios é mostrar como um problema prático na ciência de dados pode ter as mais diversas soluções! 
+
+Para isso, gostaríamos que você postasse a sua resolução em nosso [Discourse](https://discourse.curso-r.com/), assim, você estaria contribuindo com a variedade de soluções do problema, além de poder receber dicas da comunidade de como melhorar o seu código :)
+
+Então, vamos ao primeiro desafio!
 
 ```{r eval=FALSE, include=FALSE}
 # TO DO:
@@ -66,17 +70,13 @@ Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la
 
 - `contracenou`: um vetor com os nomes de todos os(as) atores/atrizes que o(a) ator/atriz já contracenou (ou seja, participou do mesmo filme)
 
-Poste a sua resolução em nosso [Discourse](https://discourse.curso-r.com/) :)
+Poste a sua resolução em nosso [Discourse](https://discourse.curso-r.com/), na categoria **Desafios**! Ah, e não esqueça de especificar o número/nome do desafio!
 
 
 ```{r eval=FALSE, include=FALSE}
-# VERIFICAR:
-
-# vai ser criado um único tópico pra cada desafio? ou vai ser um tópico por resolução?
-
 # TO DO:
 
-# escrever mais alguma coisa, se vai ter premio, dar dicas, etc
+# ver se vai ter premio, dar dicas, etc
 ```
 
 
