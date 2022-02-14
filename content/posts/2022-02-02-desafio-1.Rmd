@@ -70,11 +70,13 @@ Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la
 
 - `contracenou`: um vetor com os nomes de todos os(as) atores/atrizes que o(a) ator/atriz já contracenou (ou seja, participou do mesmo filme)
 
-Poste a sua resolução em nosso [Discourse](https://discourse.curso-r.com/), na categoria **Desafios**! Ah, e não esqueça de especificar o número/nome do desafio!
+Poste a sua resolução em nosso Discourse, respondendo o **tópico criado para esse desafio**! 
 
 
 ```{r eval=FALSE, include=FALSE}
 # TO DO:
+
+# Colocar o link do desafio do discouse aqiu no post, em "topico criado para esse desafio"
 
 # ver se vai ter premio, dar dicas, etc
 ```
