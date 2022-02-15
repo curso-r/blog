@@ -1,12 +1,12 @@
 ---
 title: "Desafio #1: Manipulando a base de filmes do IMDB"
-date: "2021-02-02"
-tags: ["desafio curso-r", "desafio manipulação"]
-categories: ["desafio curso-r"]
+date: "2022-02-02"
+tags: ["desafio curso-r", "manipulação"]
+categories: ["Desafio"]
 image: "images/posts/banner/desafio-1.jpg"
 author: ["Tereza"]
+#series: "Desafio"
 summary: "Esse é o primeiro desafio de programação proposto pela curso-R! Resolva-o e poste a sua solução em nosso Discourse!"
-draft: true
 ---
 
 Esse é o primeiro post de uma série de desafios de ciência de dados que postaremos aqui no blog!
