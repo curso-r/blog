@@ -1,0 +1,186 @@
+---
+title: "Acessando APIs com R: GitHub - Parte 1"
+date: "2022-02-19"
+tags: ["api", "github", "git", "purrr"]
+categories: ["pacotes"]
+image: "images/posts/banner/octocat.png"
+author: ["Beatriz"]
+summary: "Segundo post sobre acesso à APIs."
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Esse post faz parte de uma série sobre acesso à APIs com R! O primeiro post foi uma <a href="https://blog.curso-r.com/posts/2021-11-29-api-pokemon/">introdução sobre como acessar APIs com R</a>.</p>
+<p>Neste post mostraremos um exemplo usando a <strong>API do GitHub</strong>.</p>
+<p>O GitHub é uma plataforma onde conseguimos hospedar repositórios (pastas com nossos códigos e arquivos) com controle de versão usando o Git, e podemos fazer <strong>muitas</strong> coisas utilizando a sua API. E como dissemos no <a href="https://blog.curso-r.com/posts/2021-11-29-api-pokemon/">post anterior</a>: “o primeiro passo para acessar qualquer API é procurar uma documentação”. A boa notícia é que a <a href="https://docs.github.com/pt/rest">documentação da API do GitHub</a> está disponível em Português e é bem detalhada!</p>
+<p>Existem muitas ações possíveis utilizando essa API. O que escolhemos para esse exemplo é buscar os repositórios que pertencem à uma organização.</p>
+<p>Segundo a documentação, para consultar os repositórios que pertencem à organização <strong>octokit</strong>, podemos utilizar a seguinte busca:</p>
+<pre><code>GET /orgs/octokit/repos</code></pre>
+<p>O equivalente a isso usando o pacote <code>httr</code> é:</p>
+<pre class="r"><code># url_base - nunca muda na mesma API
+url_base &lt;- &quot;https://api.github.com&quot;      
+
+# endpoint - é o que muda o resultado
+endpoint &lt;- &quot;/orgs/octokit/repos&quot;                 
+
+# precisamos colar os textos para criar o link
+u_github &lt;- paste0(url_base, endpoint) 
+
+# ver como o texto ficou colado
+# u_github 
+# &gt; &quot;https://api.github.com/orgs/octokit/repos&quot;
+
+# fazer a requisição do tipo GET
+r_github &lt;- httr::GET(u_github) 
+
+r_github
+## Response [https://api.github.com/orgs/octokit/repos]
+##   Date: 2022-02-19 16:45
+##   Status: 200
+##   Content-Type: application/json; charset=utf-8
+##   Size: 181 kB
+## [
+##   {
+##     &quot;id&quot;: 417862,
+##     &quot;node_id&quot;: &quot;MDEwOlJlcG9zaXRvcnk0MTc4NjI=&quot;,
+##     &quot;name&quot;: &quot;octokit.rb&quot;,
+##     &quot;full_name&quot;: &quot;octokit/octokit.rb&quot;,
+##     &quot;private&quot;: false,
+##     &quot;owner&quot;: {
+##       &quot;login&quot;: &quot;octokit&quot;,
+##       &quot;id&quot;: 3430433,
+## ...</code></pre>
+<p>Podemos acessar o resultado usando a função <code>httr::content()</code>, porém não vamos colocar o resultado no post pois ficaria muito longo.</p>
+<pre class="r"><code># httr::content(r_github)</code></pre>
+</div>
+<div id="o-que-é-o-pacote-gh" class="section level2">
+<h2>O que é o pacote <code>gh</code>?</h2>
+<p>O pacote <a href="https://gh.r-lib.org/">gh</a> permite acessar a API do GitHub. A lógica mostrada anteriormente se aplica para esse pacote também: precisaremos consultar a documentação para verificar como fazer alguma tarefa com a API.</p>
+</div>
+<div id="primeiro-exemplo-com-o-pacote-gh" class="section level2">
+<h2>Primeiro exemplo com o pacote <code>gh</code></h2>
+<p>Neste exemplo, vamos buscar as informações sobre os repositórios que são organização Curso-R no GitHub, gerar um dataframe, e ao final fazer uma visualização simples.</p>
+<div id="informações-gerais-da-organização-curso-r" class="section level3">
+<h3>Informações gerais da organização Curso-R</h3>
+<p>Podemos buscar informações sobre a organização da Curso-R no GitHub:</p>
+<pre class="r"><code>gh_curso_r &lt;- gh::gh(&quot;GET /orgs/{org}&quot;,
+                     org = &quot;curso-r&quot;)</code></pre>
+<p>A sintaxe do pacote <code>gh</code> é similar ao <a href="https://github.com/tidyverse/glue"><code>glue</code></a>. Quando queremos buscar uma informação que está em uma variável (no caso “curso-r”), colocamos os <code>{variavel}</code> no primeiro argumento e escrevemos <code>variavel=</code> nos argumentos seguintes.</p>
+<p>Como vimos, o resultado é uma lista. Para consultar o número de repositórios públicos, podemos usar o <code>$</code> para acessar essa informação dentro da lista:</p>
+<pre class="r"><code>gh_curso_r$public_repos
+## [1] 303</code></pre>
+<p>Olha só, a Curso-R tem atualmente 303 repositórios públicos no GitHub! Temos muitos repositórios pois criamos um diferente para cada curso, para que quem faz aula com a gente tenha sempre um lugar para olhar todos os materiais, de forma organizada e independente.</p>
+</div>
+<div id="acessando-informações-de-repositórios" class="section level3">
+<h3>Acessando informações de repositórios</h3>
+<p>Podemos buscar informações sobre os repositórios que pertencem à organização Curso-R no GitHub:</p>
+<pre class="r"><code>repositorios_cursor &lt;- gh::gh(&quot;GET /orgs/{org}/repos&quot;, org = &quot;curso-r&quot;)
+
+# A classe que retorna é uma lista
+class(repositorios_cursor)
+## [1] &quot;gh_response&quot; &quot;list&quot;
+
+# É uma lista grande!
+length(repositorios_cursor)
+## [1] 30</code></pre>
+<p>Esse código retornou informações de apenas 30 repositórios. Portanto, precisamos repetir o processo para obter informações de todos os repositórios.</p>
+</div>
+<div id="iterando-com-purrr-e-o-pacote-gh" class="section level3">
+<h3>Iterando com purrr e o pacote <code>gh</code></h3>
+<p>A documentação do pacote aponta que é possível buscar informações de 100 repositórios por vez. Se queremos buscar todos os repositórios, primeiro precisamos calcular quantas vezes vamos repetir o processo todo:</p>
+<pre class="r"><code>numero_repos_publicos &lt;- gh_curso_r$public_repos
+
+# podemos buscar 100 repositórios por vez,
+# então podemos dividir o numero de repositorios
+# por 100, e arredondar &quot;para cima&quot;
+# (é para isso que a função ceiling() serve!)
+numero_paginas &lt;- ceiling(numero_repos_publicos/100)
+
+numero_paginas
+## [1] 4</code></pre>
+<p>Precisaremos repetir 4 vezes! Agora podemos usar a função <code>purrr::map()</code> para repetir o acesso à API quantas vezes forem necessárias para obter as informações de todos os repositórios da Curso-R:</p>
+<pre class="r"><code>repos_cursor &lt;- purrr::map(1:numero_paginas, 
+                           .f = ~gh::gh(
+    &quot;GET /orgs/{org}/repos&quot;, 
+    org = &quot;curso-r&quot;, # organizacao
+    type = &quot;public&quot;, # tipo de repositorio 
+    sort = &quot;updated&quot;, # forma de ordenar a busca
+    per_page = 100, # numero de resultados por pagina
+    page = .x # numero da pagina que será substituido
+  ))</code></pre>
+<p>O resultado ainda é uma lista… podemos usar a magia do pacote purrr e transformar essa lista em um dataframe:</p>
+<pre class="r"><code>lista_repos &lt;-  repos_cursor  |&gt; 
+  purrr::flatten() |&gt; 
+  purrr::map(unlist, recursive = TRUE)  |&gt; 
+  purrr::map_dfr(tibble::enframe, .id = &quot;id_repo&quot;) |&gt; 
+  tidyr::pivot_wider() |&gt; 
+  janitor::clean_names()
+
+lista_repos
+## # A tibble: 303 × 108
+##    id_repo id        node_id        name  full_name private owner_login owner_id
+##    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;   
+##  1 1       311969160 MDEwOlJlcG9za… chess curso-r/… FALSE   curso-r     10060716
+##  2 2       154844030 MDEwOlJlcG9za… auth0 curso-r/… FALSE   curso-r     10060716
+##  3 3       316277552 MDEwOlJlcG9za… main… curso-r/… FALSE   curso-r     10060716
+##  4 4       431987860 R_kgDOGb-clA   2022… curso-r/… FALSE   curso-r     10060716
+##  5 5       249453848 MDEwOlJlcG9za… tree… curso-r/… FALSE   curso-r     10060716
+##  6 6       272436141 MDEwOlJlcG9za… base… curso-r/… FALSE   curso-r     10060716
+##  7 7       445626145 R_kgDOGo-3IQ   main… curso-r/… FALSE   curso-r     10060716
+##  8 8       163780826 MDEwOlJlcG9za… shin… curso-r/… FALSE   curso-r     10060716
+##  9 9       436799548 R_kgDOGgkIPA   scryr curso-r/… FALSE   curso-r     10060716
+## 10 10      431978304 R_kgDOGb93QA   2022… curso-r/… FALSE   curso-r     10060716
+## # … with 293 more rows, and 100 more variables: owner_node_id &lt;chr&gt;,
+## #   owner_avatar_url &lt;chr&gt;, owner_gravatar_id &lt;chr&gt;, owner_url &lt;chr&gt;,
+## #   owner_html_url &lt;chr&gt;, owner_followers_url &lt;chr&gt;, owner_following_url &lt;chr&gt;,
+## #   owner_gists_url &lt;chr&gt;, owner_starred_url &lt;chr&gt;,
+## #   owner_subscriptions_url &lt;chr&gt;, owner_organizations_url &lt;chr&gt;,
+## #   owner_repos_url &lt;chr&gt;, owner_events_url &lt;chr&gt;,
+## #   owner_received_events_url &lt;chr&gt;, owner_type &lt;chr&gt;, …</code></pre>
+<p>Vamos fazer mais uma etapa de organização dos dados: são muitas colunas, e não precisaremos de todas para terminar o post. Também filtramos a base para remover os forks, já que não seriam repositórios da Curso-R originalmente.</p>
+<pre class="r"><code>df_repos_cursor &lt;- lista_repos  |&gt;
+  dplyr::filter(fork == FALSE)  |&gt;
+  dplyr::select(
+    name,
+    created_at,
+    default_branch
+  )  |&gt;
+  dplyr::mutate(
+    data_criacao = readr::parse_datetime(created_at),
+    ano_criacao = as.Date(lubridate::floor_date(data_criacao, &quot;year&quot;))
+  )</code></pre>
+</div>
+</div>
+<div id="exemplo-de-visualização-com-os-dados-obtidos" class="section level2">
+<h2>Exemplo de visualização com os dados obtidos!</h2>
+<p>Em 2020, o <a href="https://lente.dev">Caio</a> escreveu um post sobre o uso do <a href="https://blog.curso-r.com/posts/2020-07-27-github-main-branch/">termo ‘master’ no GitHub</a>. Lá no post é explicado sobre a questão da substituição do termo ‘master’. Em 2020 a GitHub anunciou que faria a transição para o termo main (principal), e desde então muitas pessoas e organizações estão renomeando a branch principal de seus repositórios para ‘main’(inclusive existe um <a href="https://www.tidyverse.org/blog/2021/10/renaming-default-branch/">post no blog da RStudio sobre isso</a>).</p>
+<p>Usando os dados obtidos nesse post, vamos explorar os repositórios da Curso-R e averiguar qual é o nome da branch principal dos repositórios ao longo do tempo?</p>
+<pre class="r"><code>library(ggplot2)
+main_percent &lt;- mean(df_repos_cursor$default_branch == &quot;main&quot;)
+main_percent &lt;- scales::percent(main_percent)
+df_repos_cursor  |&gt;
+  dplyr::count(ano_criacao, default_branch)  |&gt;
+  ggplot() +
+  geom_col(aes(y = n, x = ano_criacao, fill = default_branch)) +
+  theme_bw() +
+  scale_x_date(date_labels = &quot;%Y&quot;, date_breaks = &quot;1 year&quot;) +
+  scale_fill_brewer(palette = &quot;Pastel1&quot;) +
+  labs(x = &quot;Ano de criação&quot;, y = &quot;Número de repositórios&quot;, fill = &quot;Nome da Branch&quot;)</code></pre>
+<p><img src="/posts/2022-02-19-api-github-1_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>É possível ver que em 2021 o uso do termo ‘main’ para nomear as branches principais foi muito mais usado! Atualmente, o percentual de repositórios <code>main</code> é de 25% e esperamos que isso aumente com o tempo. Outra coisa legal do gráfico é ver como a criação de repositórios na organização da Curso-R foi crescendo ao longo do tempo!</p>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. <strong>Postem também quais exemplos, dentre os que foram listados, vocês gostariam de saber mais!!</strong></p>
+<p>Se você quiser saber mais sobre acessar APIs, o <a href="https://loja.curso-r.com/web-scraping.html">curso de Web Scraping</a> é uma ótima oportunidade!</p>
+<p>Até a próxima!</p>
+</div>
+<div id="referências" class="section level2">
+<h2>Referências</h2>
+<ul>
+<li><p><a href="https://curso-r.github.io/main-web-scraping/slides/02-introducao-ao-ws.html#8">Slides do curso de Web Scraping sobre APIs</a></p></li>
+<li><p><a href="https://curso-r.github.io/main-deploy/docs/index.html#12">Slides do curso de Deploy</a></p></li>
+<li><p>Pacote <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html"><code>httr</code></a></p></li>
+</ul>
+</div>
