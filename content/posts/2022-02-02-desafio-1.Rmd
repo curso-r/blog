@@ -69,5 +69,5 @@ Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la
 
 - `contracenou`: um vetor com os nomes de todos os(as) atores/atrizes que o(a) ator/atriz já contracenou (ou seja, participou do mesmo filme)
 
-Poste a sua resolução em nosso Discourse, respondendo o **tópico criado para esse desafio**! 
+Poste a sua resolução em nosso Discourse, respondendo o [tópico criado para esse desafio](https://discourse.curso-r.com/t/desafio-1-manipulando-a-base-de-filmes-do-imdb/1870)! 
 
