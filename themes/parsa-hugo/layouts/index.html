@@ -183,8 +183,8 @@
     <h4 class="mb-4">DESAFIOS</h4>
     {{ $paginator := .Paginate (where (where site.RegularPages "Type" "posts") ".Params.draft" false ) }}
     <div class="row masonry-container">
-      {{ range where .Paginator.Pages "Params.categories" "intersect" (slice "Desafio")}}
-          <div class="col-lg-4 col-sm-6 mb-5">
+      {{ range where .Paginator.Pages "Params.categories" "intersect" (slice "Desafio") }}
+          <div class="col-lg-4 col-sm-6 mb-5 clearfix">
             <article class="text-center">
               <a href = "{{.Permalink}}">
                 <img class="img-fluid mb-4" src="{{.Params.Image | absURL }}" alt="post-thumb" style = "width: 300px;">
@@ -196,6 +196,13 @@
           </div>
       {{ end }}
     </div>
+
+    <div class = "text-center" style = "font-size: 1.5em;">
+      <a href = "{{ .Site.BaseURL }}/categories/desafio/">VEJA MAIS DESAFIOS</a>
+    </div>
+
+    <br>
+
     <!-- Desafios -->
 
     <div class = "row">

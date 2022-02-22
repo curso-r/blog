@@ -5,7 +5,6 @@ tags: ["desafio curso-r", "manipulação"]
 categories: ["Desafio"]
 image: "images/posts/banner/desafio-1.jpg"
 author: ["Tereza"]
-#series: "Desafio"
 summary: "Esse é o primeiro desafio de programação proposto pela curso-R! Resolva-o e poste a sua solução em nosso Discourse!"
 ---
 
@@ -71,14 +70,4 @@ Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la
 - `contracenou`: um vetor com os nomes de todos os(as) atores/atrizes que o(a) ator/atriz já contracenou (ou seja, participou do mesmo filme)
 
 Poste a sua resolução em nosso Discourse, respondendo o **tópico criado para esse desafio**! 
-
-
-```{r eval=FALSE, include=FALSE}
-# TO DO:
-
-# Colocar o link do desafio do discouse aqiu no post, em "topico criado para esse desafio"
-
-# ver se vai ter premio, dar dicas, etc
-```
-
 

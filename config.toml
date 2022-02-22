@@ -58,19 +58,24 @@ url = "#"
 weight = 1
 
 [[menu.main]]
+name = "Desafios"
+url = "https://blog.curso-r.com/categories/desafio"
+weight = 2
+
+[[menu.main]]
 name = "Cursos"
 url = "https://www.curso-r.com/cursos"
-weight = 2
+weight = 3
 
 [[menu.main]]
 name = "Fórum"
 url = "https://discourse.curso-r.com/"
-weight = 3
+weight = 4
 
 [[menu.main]]
 name = "Curso-R"
 url = "https://www.curso-r.com"
-weight = 4
+weight = 5
 
 # deult parameter
 [params]
