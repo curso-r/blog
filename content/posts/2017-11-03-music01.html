@@ -58,7 +58,7 @@ music21</code></pre>
 <p>O objeto <code>music21</code> é um módulo do python. Com ele é possível rodar qualquer função do pacote usando <code>$</code>, tratando o objeto como uma <a href="http://adv-r.had.co.nz/R5.html">Reference Class</a>.</p>
 <pre class="r"><code>note &lt;- music21$note$Note(&quot;C#&quot;)
 note</code></pre>
-<pre class="r"><code>note %&gt;% 
+<pre class="r"><code>note %&gt;%
   plot()</code></pre>
 <p><img src="/images/posts/conteudo/music01/note-1.png" /></p>
 </div>
@@ -66,16 +66,16 @@ note</code></pre>
 <h2>Exemplo</h2>
 <div id="corais-do-bach" class="section level3">
 <h3>Corais do Bach</h3>
-<pre class="r"><code>get_composer(&quot;bach&quot;) %&gt;% 
+<pre class="r"><code>get_composer(&quot;bach&quot;) %&gt;%
   head()</code></pre>
 <p>Vamos pegar uma delas e guardar numa variável</p>
-<pre class="r"><code>bach_music &lt;- get_composer(&quot;bach&quot;)[61] %&gt;% 
+<pre class="r"><code>bach_music &lt;- get_composer(&quot;bach&quot;)[61] %&gt;%
   read_music()</code></pre>
 </div>
 <div id="plotando-a-música-bwv165.6" class="section level3">
 <h3>Plotando a música <em>bwv165.6</em></h3>
 <p>Basta rodar <code>plot()</code>!!</p>
-<pre class="r"><code>bach_music %&gt;% 
+<pre class="r"><code>bach_music %&gt;%
   plot()</code></pre>
 <p><img src="/images/posts/conteudo/music01/bach-1.png" /></p>
 <p>No RStudio, você pode usar a função <code>view()</code> para visualizar a música em melhor resolução no Viewer Pane.</p>

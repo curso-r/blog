@@ -1,7 +1,7 @@
 ---
 title: "Estatística e Música"
 date: "2017-11-03"
-tags: ["musica"]
+tags: ["música"]
 categories: ["análises"]
 image: "images/posts/banner/music01.jpg"
 author: ["Julio"]

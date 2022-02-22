@@ -19,7 +19,7 @@ summary: "Veja como incluir elementos estáticos ao seu aplicativo usando arquiv
 <hr />
 <p><img src="/images/posts/conteudo/shiny-markdown/foto_william.jpg" width="130px" style="border-radius: 65px;"/></p>
 <p><strong>William Amorim</strong></p>
-<p>Doutor em Estatística pelo IME-USP. Trabalhando diaramente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no <a href="https://twitter.com/wamorim_">Twitter</a>.</p>
+<p>Doutor em Estatística pelo IME-USP. Trabalhando diariamente com análise de dados, programação em R e criação de dashboards. Falo sobre Shiny no <a href="https://twitter.com/wamorim_">Twitter</a>.</p>
 <hr />
 </center>
 <p><br></p>
@@ -66,8 +66,8 @@ Doutor em Estatística pelo IME-USP. Trabalhando diaramente com análise de dado
     )
   )
 )</code></pre>
-<p>Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas e cheias de texto. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhámos muitas tags HTML para criar, scripts R não foram feitos para atender os cuiddos que textos carecem.</p>
-<p>A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny transforme em PDF e inclua no lugar adequado apenas na hora do <code>runApp()</code>. Para isso usamos a função <code>shiny::includeMarkdown()</code>.</p>
+<p>Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas e cheias de texto. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhamos muitas tags HTML para criar, scripts R não foram feitos para atender aos cuidados que textos carecem.</p>
+<p>A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny transforme em HTML e inclua no lugar adequado apenas na hora do <code>runApp()</code>. Para isso usamos a função <code>shiny::includeMarkdown()</code>.</p>
 <p>Supondo que salvamos o markdown da mini bio em um arquivo <code>minibio_william.md</code>, a nossa UI então ficaria:</p>
 <pre class="r"><code>ui &lt;- fluidPage(
   fluidRow(
