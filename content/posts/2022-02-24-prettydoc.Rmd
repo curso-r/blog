@@ -1,5 +1,5 @@
 ---
-title: "Personalizando seus relatórios HTML em R Markdown com o {prettydoc}"
+title: "Personalizando seus relatórios R Markdown em HTML com o {prettydoc}"
 date: "2022-02-24"
 tags: ["tutoriais"]
 categories: ["tutoriais"]
