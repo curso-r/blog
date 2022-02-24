@@ -98,13 +98,13 @@ Por exemplo, temos aqui esse relatório com a saída HTML:
 knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc011.png")
 ```
 
-Que gera o seguinte HTML ao "Knitar":
+Que gera o seguinte HTML ao *Knitar*:
 
 ```{r, fig.align='center', echo = FALSE}
 knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc012.png")
 ```
 
-Ao substituir (e alterar os campos de Título, Autor e Data), o nosso documento ficou assim:
+Ao substituir o cabeçalho (e alterar os campos de Título, Autor e Data), o nosso documento ficou assim:
 
 ```{r, fig.align='center', echo = FALSE}
 knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc013.png")
@@ -112,10 +112,11 @@ knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc01
 
 Aqui estamos usando o template `cayman`, mas você pode escolher o que preferir!
 
-E voilà, ao "Knitar" esse documento, o seguinte HTML é gerado:
+E voilà, ao *Knitar* esse documento, o seguinte HTML é gerado:
 
 ```{r, fig.align='center', echo = FALSE}
 knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc014.png")
 ```
+
 
 
