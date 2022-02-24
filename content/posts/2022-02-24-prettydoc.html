@@ -1,0 +1,73 @@
+---
+title: "Personalizando seus relatórios HTML em R Markdown com o {prettydoc}"
+date: "2022-02-24"
+tags: ["tutoriais"]
+categories: ["tutoriais"]
+image: "images/posts/banner/2022-02-24-prettydoc.jpg"
+author: ["Tereza"]
+summary: "Este tutorial é para você que usa o R Markdown para criar relatórios em HTML e quer deixá-los mais bonitos e apresentáveis!"
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>O <a href="https://prettydoc.statr.me/">prettydoc</a> é um pacote que oferece alguns templates bem bonitos para serem utilizados em relatórios HTML construídos com R Markdown. Nesse tutorial, vamos mostrar como usar esses templates em seus relatórios!</p>
+<p>Então, vamos lá:</p>
+<ol style="list-style-type: decimal">
+<li>Abra o <strong>RStudio</strong> e crie um arquivo <strong>R Markdown</strong>.</li>
+</ol>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc001.png" style="display: block; margin: auto;" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Selecione a opção <strong>HTML</strong> como formato de saída, e então, clique em <strong>From Template</strong>.</li>
+</ol>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc002.png" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Selecione a opção <strong>Lightweight and Pretty Document (HTML)</strong> e então, clique em <strong>OK</strong>.</li>
+</ol>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc003.png" style="display: block; margin: auto;" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Um documento R Markdown como esse será criado:</li>
+</ol>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc004.png" style="display: block; margin: auto;" /></p>
+<p>O importante aqui é o cabeçalho YAML (parte destacada na imagem), ele que vai garantir a personalização do seu relatório.</p>
+<p>Podemos ver na imagem que existe um campo chamado <strong>theme</strong>, e é nele que vamos especificar qual template queremos usar no nosso relatório!</p>
+<p>O prettydoc possui 5 templates, são eles: <code>cayman</code>, <code>tactile</code>, <code>architect</code>, <code>leonids</code>, <code>hpstr</code>. Para alterar o template, basta modificar o nome no campo <strong>“theme:”</strong>. Podemos ver que o template default é o <code>architect</code>.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Para visualizar cada template, basta colocar o respectivo nome no campo <strong>“theme:”</strong>, e apertar o botão <strong>Knit</strong>.</li>
+</ol>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc005.png" style="display: block; margin: auto;" /></p>
+<p>Vamos dar uma olhada em cada template:</p>
+<div id="cayman" class="section level4">
+<h4>cayman:</h4>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc006.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tactile" class="section level4">
+<h4>tactile:</h4>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc007.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="architect" class="section level4">
+<h4>architect:</h4>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc008.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="leonids" class="section level4">
+<h4>leonids:</h4>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc009.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="hpstr" class="section level4">
+<h4>hpstr:</h4>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc010.png" style="display: block; margin: auto;" /></p>
+<p>Você pode ver mais sobre os templates <a href="https://prettydoc.statr.me/themes.html">nessa página</a></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Se você já tem algum relatório em R Markdown e quer personalizá-lo, basta substituir o cabeçalho do seu relatório pelo cabeçalho que foi gerado no passo 4 (pelo prettydoc)</li>
+</ol>
+<p>Por exemplo, temos aqui esse relatório com a saída HTML:</p>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc011.png" style="display: block; margin: auto;" /></p>
+<p>Que gera o seguinte HTML ao “Knitar”:</p>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc012.png" style="display: block; margin: auto;" /></p>
+<p>Ao substituir (e alterar os campos de Título, Autor e Data), o nosso documento ficou assim:</p>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc013.png" style="display: block; margin: auto;" /></p>
+<p>Aqui estamos usando o template <code>cayman</code>, mas você pode escolher o que preferir!</p>
+<p>E voilà, ao “Knitar” esse documento, o seguinte HTML é gerado:</p>
+<p><img src="/images/posts/conteudo/2022-02-24-prettydoc/prettydoc014.png" style="display: block; margin: auto;" /></p>
+</div>
