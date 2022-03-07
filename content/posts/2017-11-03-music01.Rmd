@@ -30,7 +30,7 @@ image_join(im1, im2) %>%
   image_write('../../static/images/posts/banner/music01.jpg')
 ```
 
-> Para quem está esperando posts sobre captchas, esperem mais um pouquinho `r emo::ji("happy")`. Em novembro voltarei a postar sobre esse assunto.
+> Para quem está esperando posts sobre captchas, esperem mais um pouquinho. Em novembro voltarei a postar sobre esse assunto.
 
 Em setembro de 2017, participei do [16th Symposium on Computer Music](http://compmus.ime.usp.br/sbcm/2017), organizado pelo prof. Marcelo Queiroz do IME-USP. O evento foi muito legal! Estou estudando música nos últimos meses e acho que farei meu doutorado em soluções que ligam estatística e música. É uma área realmente apaixonante.
 
