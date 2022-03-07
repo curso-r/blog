@@ -1,7 +1,7 @@
 ---
 title: "Uma maneira prática de encontrar outliers nos seus dados"
 date: "2021-04-15"
-tags: ["banco de dados"]
+tags: ["base de dados"]
 categories: ["análises", "conceitos"]
 image: "images/posts/banner/outlier.jpg"
 featuredImage: "images/posts/banner/outlier.jpg"
@@ -20,8 +20,7 @@ draft: false
 <p><span class="math display">\[Z_{SCORE} (X) = \frac{X-Média(X)}{Desvio Padrão (X)}\]</span></p>
 <p>Uma estratégia para encontrar outliers, então, é marcar aqueles pontos que, nessa escala, estão muito discrepantes. Normalmente se adota um ponto de corte pequeno, como -2 e 2 ou no máximo -3 e 3. Serão considerados <em>outliers</em> todos os pontos que estiverem fora desse intervalo.</p>
 <p>Vamos ver o que aconteceria se usássemos essa regra para arrumar o primeiro gráfico que mostramos? Primeiro, vamos criar uma base de dados onde poderemos trabalhar. Ela se chamará <code>mtcars_com_outliers</code>, como se vê abaixo.</p>
-<pre class="r"><code>
-mtcars_com_outliers &lt;- mtcars %&gt;% 
+<pre class="r"><code>mtcars_com_outliers &lt;- mtcars %&gt;% 
   # aqui vamos incluir os pontos bizarros...
   dplyr::bind_rows(
     tibble::tibble(

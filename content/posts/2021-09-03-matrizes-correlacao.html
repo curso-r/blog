@@ -1,7 +1,7 @@
 ---
 title: "Matrizes de correlação com o R usando o pacote GGally"
 date: "2021-09-03"
-tags: ["banco de dados"]
+tags: ["base de dados"]
 categories: ["análises", "conceitos"]
 image: "images/posts/banner/correl.png"
 featuredImage: "images/posts/banner/correl.png"
@@ -15,16 +15,14 @@ draft: false
 
 <p>No nosso trabalho como Cientistas de Dados é muito comum procurar semelhanças e diferenças entre variáveis de bancos de dados. Existem muitos métodos para procurar por esse tipo de coisa e normalmente eles trabalham com a noção de dependência estatística e suas métricas ou com a noção de redução de dimensionalidade (a capacidade de representar muitas variáveis por um conjunto reduzido). Nessa primeira estratégia, as matrizes de correlação são as técnicas mais comuns e difundidas. No post de hoje, vamos explorar a função <code>ggcorr</code> do pacote <code>GGally</code> que nos ajuda a visualizar a matriz de correlação.</p>
 <p>Quando estamos trabalhando com dados contínuos, isso é: quando as nossas variáveis são todas numéricas (ou no mínimo ordenadas), é possível utilizar os métodos que estão na função <code>ggcorr</code> do pacote <code>GGally</code>. Essa função constrói um mapa de calor que nos mostra quais pares de variáveis da nossa tabela possuem maior correlação. Essa correlação por sua vez pode ser medida utilizando três métricas: o coeficiente de <code>kendall</code> e as correlações de <code>pearson</code> e <code>spearman</code>. Veja uma aplicação desse método à base de dados socioeconômicos do Gapminder. Aí é possível ver que a expectativa de vida e o pib são bastante correlacionados, mas o mesmo não acontece com o PIB e a população, por exemplo.</p>
-<pre class="r"><code>
-library(tidyverse)
+<pre class="r"><code>library(tidyverse)
 
 dados::dados_gapminder |&gt; 
   #select(-pais, -continente) |&gt; 
   GGally::ggcorr(method = c(&#39;all.obs&#39;, &#39;spearman&#39;))</code></pre>
 <p><img src="/posts/2021-09-03-matrizes-correlacao_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Podemos também construir matrizes um pouco maiores e obter resultados parecidos:</p>
-<pre class="r"><code>
-library(tidyverse)
+<pre class="r"><code>library(tidyverse)
 
 dados::mtcarros |&gt; 
   #select(-pais, -continente) |&gt; 

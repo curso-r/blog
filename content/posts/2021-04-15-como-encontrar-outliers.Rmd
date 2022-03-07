@@ -1,7 +1,7 @@
 ---
 title: "Uma maneira prática de encontrar outliers nos seus dados"
 date: "2021-04-15"
-tags: ["banco de dados"]
+tags: ["base de dados"]
 categories: ["análises", "conceitos"]
 image: "images/posts/banner/outlier.jpg"
 featuredImage: "images/posts/banner/outlier.jpg"

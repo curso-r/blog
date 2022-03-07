@@ -1,7 +1,7 @@
 ---
 title: "Matrizes de correlação com o R usando o pacote GGally"
 date: "2021-09-03"
-tags: ["banco de dados"]
+tags: ["base de dados"]
 categories: ["análises", "conceitos"]
 image: "images/posts/banner/correl.png"
 featuredImage: "images/posts/banner/correl.png"
