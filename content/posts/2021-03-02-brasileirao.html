@@ -1,7 +1,7 @@
 ---
 title: "O pacote {brasileirao}"
 date: "2021-03-02"
-tags: ["futebol", "web scarping"]
+tags: ["futebol", "web scraping"]
 categories: ["pacotes"]
 image: "images/posts/banner/brasileirao.png"
 author: ["William"]
@@ -9,15 +9,14 @@ summary: "Novo pacote com dados de todas as partidas de 2003 a 2020."
 draft: false
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>Recentemente tive vontade de começar a brincar com dados de futebol, mais especificamente <s>o que sobrou</s> do futebol brasileiro.</p>
 <p>Depois de uma busca bem rápida na internet, resolvi que montaria a minha própria base, até como uma forma de praticar <a href="https://curso-r.com/cursos/web-scraping/">web scraping</a>.</p>
 <p>Foi assim que surgiu o pacote <code>{brasileirao}</code>, que reune os resultados de todas as partidas da Série A do Campeonato Brasileiro das temporadas de 2003 a 2020.</p>
 <blockquote>
-<p>Abrem-se as cortinas e começa o espetáculo - Fiori Gigliotti</p>
+<p>Abrem-se as cortinas e começa o espetáculo - Fiori Gigliotti, narrador esportivo brasileiro</p>
 </blockquote>
 <div id="o-pacote" class="section level2">
 <h2>O pacote</h2>
@@ -27,53 +26,7 @@ draft: false
 <pre class="r"><code>library(dplyr)
 library(brasileirao)
 matches
-## # A tibble: 7,273 x 5
-##    season date       home          score away       
-##     &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;      
-##  1   2003 2003-03-29 Atlético PR   2x0   Grêmio     
-##  2   2003 2003-03-29 Guarani       4x2   Vasco      
-##  3   2003 2003-03-30 Corinthians   0x3   Atlético MG
-##  4   2003 2003-03-30 Goiás         2x2   Paysandu   
-##  5   2003 2003-03-30 Criciúma      2x0   Fluminense 
-##  6   2003 2003-03-30 Cruzeiro      2x2   São Caetano
-##  7   2003 2003-03-30 Flamengo      1x1   Coritiba   
-##  8   2003 2003-03-30 Fortaleza     0x0   Bahia      
-##  9   2003 2003-03-30 Internacional 1x1   Ponte Preta
-## 10   2003 2003-03-30 Juventude     2x2   São Paulo  
-## # … with 7,263 more rows</code></pre>
-<p>Para ver os dados de uma temporada, você pode usar a função <code>filter()</code>, do pacote <code>dplyr</code>.</p>
-<pre class="r"><code>matches %&gt;% 
-  filter(season == 2020)
-## # A tibble: 380 x 5
-##    season date       home        score away         
-##     &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;        
-##  1   2020 2020-08-08 Fortaleza   0x2   Athletico-PR 
-##  2   2020 2020-08-08 Coritiba    0x1   Internacional
-##  3   2020 2020-08-08 Sport       3x2   Ceará        
-##  4   2020 2020-08-09 Flamengo    0x1   Atlético-MG  
-##  5   2020 2020-08-09 Santos      1x1   Bragantino   
-##  6   2020 2020-08-09 Grêmio      1x0   Fluminense   
-##  7   2020 2020-09-30 Botafogo    1x2   Bahia        
-##  8   2020 2020-09-30 Corinthians 0x0   Atlético-GO  
-##  9   2020 2020-12-03 Goiás       0x3   São Paulo    
-## 10   2020 2021-01-26 Palmeiras   1x1   Vasco        
-## # … with 370 more rows</code></pre>
-<p>O pacote também possui uma função para padronizar o nome dos times: <code>fix_names()</code>. Alguns times, como o Atlético mineiro aparecem como <code>Atlético MG</code> e <code>Atlético-MG</code> na base. Também há casos de times que mudaram de nome nesse período, como o Athetico e o Grêmio Barueri. Pode isso, Arnaldo?</p>
-<p>Veja a seguir um exemplo da função em ação:</p>
-<pre class="r"><code>atleticos &lt;- matches %&gt;%
-  filter(stringr::str_detect(home, &quot;Atlético&quot;)) %&gt;% 
-  pull(home) %&gt;% 
-  unique()
-
-atleticos
-## [1] &quot;Atlético PR&quot; &quot;Atlético MG&quot; &quot;Atlético GO&quot; &quot;Atlético-MG&quot; &quot;Atlético-GO&quot;
-
-fix_names(atleticos)
-## [1] &quot;Athletico PR&quot; &quot;Atlético MG&quot;  &quot;Atlético GO&quot;  &quot;Atlético MG&quot;  &quot;Atlético GO&quot;</code></pre>
-<p>Ela também pode ser utilizada diretamente em uma coluna com nome de times usando o <code>mutate()</code>.</p>
-<pre class="r"><code>matches %&gt;% 
-  mutate(home = fix_names(home), away = fix_names(away))
-## # A tibble: 7,273 x 5
+## # A tibble: 7,646 × 5
 ##    season date       home          score away       
 ##     &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;      
 ##  1   2003 2003-03-29 Athletico PR  2x0   Grêmio     
@@ -86,12 +39,57 @@ fix_names(atleticos)
 ##  8   2003 2003-03-30 Fortaleza     0x0   Bahia      
 ##  9   2003 2003-03-30 Internacional 1x1   Ponte Preta
 ## 10   2003 2003-03-30 Juventude     2x2   São Paulo  
-## # … with 7,263 more rows</code></pre>
+## # … with 7,636 more rows</code></pre>
+<p>Para ver os dados de uma temporada, você pode usar a função <code>filter()</code>, do pacote <code>dplyr</code>.</p>
+<pre class="r"><code>matches %&gt;% 
+  filter(season == 2020)
+## # A tibble: 380 × 5
+##    season date       home        score away         
+##     &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;        
+##  1   2020 2020-08-08 Fortaleza   0x2   Athletico PR 
+##  2   2020 2020-08-08 Coritiba    0x1   Internacional
+##  3   2020 2020-08-08 Sport       3x2   Ceará        
+##  4   2020 2020-08-09 Flamengo    0x1   Atlético MG  
+##  5   2020 2020-08-09 Santos      1x1   Bragantino   
+##  6   2020 2020-08-09 Grêmio      1x0   Fluminense   
+##  7   2020 2020-09-30 Botafogo    1x2   Bahia        
+##  8   2020 2020-09-30 Corinthians 0x0   Atlético GO  
+##  9   2020 2020-12-03 Goiás       0x3   São Paulo    
+## 10   2020 2021-01-26 Palmeiras   1x1   Vasco        
+## # … with 370 more rows</code></pre>
+<p>O pacote também possui uma função para padronizar o nome dos times: <code>fix_names()</code>. Alguns times, como o Atlético mineiro aparecem como <code>Atlético MG</code> e <code>Atlético-MG</code> na base. Também há casos de times que mudaram de nome nesse período, como o Athetico e o Grêmio Barueri. Pode isso, Arnaldo?</p>
+<p>Veja a seguir um exemplo da função em ação:</p>
+<pre class="r"><code>atleticos &lt;- matches %&gt;%
+  filter(stringr::str_detect(home, &quot;Atlético&quot;)) %&gt;% 
+  pull(home) %&gt;% 
+  unique()
+
+atleticos
+## [1] &quot;Atlético MG&quot; &quot;Atlético GO&quot;
+fix_names(atleticos)
+## [1] &quot;Atlético MG&quot; &quot;Atlético GO&quot;</code></pre>
+<p>Ela também pode ser utilizada diretamente em uma coluna com nome de times usando o <code>mutate()</code>.</p>
+<pre class="r"><code>matches %&gt;% 
+  mutate(home = fix_names(home), away = fix_names(away))
+## # A tibble: 7,646 × 5
+##    season date       home          score away       
+##     &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;      
+##  1   2003 2003-03-29 Athletico PR  2x0   Grêmio     
+##  2   2003 2003-03-29 Guarani       4x2   Vasco      
+##  3   2003 2003-03-30 Corinthians   0x3   Atlético MG
+##  4   2003 2003-03-30 Goiás         2x2   Paysandu   
+##  5   2003 2003-03-30 Criciúma      2x0   Fluminense 
+##  6   2003 2003-03-30 Cruzeiro      2x2   São Caetano
+##  7   2003 2003-03-30 Flamengo      1x1   Coritiba   
+##  8   2003 2003-03-30 Fortaleza     0x0   Bahia      
+##  9   2003 2003-03-30 Internacional 1x1   Ponte Preta
+## 10   2003 2003-03-30 Juventude     2x2   São Paulo  
+## # … with 7,636 more rows</code></pre>
 <p>O pacote é atualizado diriamente, a partir de um script executado via <a href="https://github.com/features/actions">Github Actions</a>. Esse fluxo é pausado nos meses entre temporadas.</p>
 </div>
 <div id="de-onde-os-dados-vieram" class="section level2">
 <h2>De onde os dados vieram?</h2>
-<p>Os dados das temporadas de 2003 a 2019 vieram do site <a href="https://www.chancedegol.com.br/">Change de gol</a>. Particularmente, eu não gosto muito de previsões de resultados esportivos, mas o site é bem legal para quem gosta do tema! E, claro, ele é bem fácil de scrapear, o que é importante se você é nível 1 em Web Scraping igual eu.</p>
+<p>Os dados das temporadas de 2003 a 2019 vieram do site <a href="https://www.chancedegol.com.br/">Chance de gol</a>. Particularmente, eu não gosto muito de previsões de resultados esportivos, mas o site é bem legal para quem gosta do tema! E, claro, ele é bem fácil de scrapear, o que é importante se você é nível 1 em Web Scraping igual eu.</p>
 <p>Como no Chance de Gol não tinha os dados da temporada de 2020, eu fui buscar na página do <a href="https://globoesporte.globo.com/futebol/brasileirao-serie-a/">ge</a>. A tarefa também bem tranquila, pois os dados da página são atualizados a partir de uma API, que consegui acessar diretamente.</p>
 <p>O código que utilizei nos dois casos pode ser encontrado <a href="https://github.com/williamorim/brasileirao/blob/master/data-raw/scraping_matches.R">aqui</a>.</p>
 </div>
@@ -99,6 +97,6 @@ fix_names(atleticos)
 <h2>Próximos passos</h2>
 <p>Meu objetivo é continuar implementando o pacote, trazendo mais dados sobre as partidas da Série A (local, público, cartões, posse de bola, chutes a gol etc), além de completar com os dados das demais séries (B, C e D).</p>
 <p>Se você encontrar qualquer problema no pacote ou inconsistência nos dados, não deixe de me avisar <a href="https://github.com/williamorim/brasileirao/issues">abrindo uma issue no repositório</a>.</p>
-<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.
-Até a próxima!</p>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
 </div>
