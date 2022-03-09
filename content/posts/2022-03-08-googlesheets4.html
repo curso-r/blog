@@ -1,0 +1,160 @@
+---
+title: "Acessando dados do Google Sheets com R"
+date: "2022-03-08"
+tags: ["api", "google", "importação", "google sheets"]
+categories: ["pacotes"]
+image: "https://googlesheets4.tidyverse.org/logo.png"
+author: ["Beatriz"]
+summary: "Quer saber como acessar dados do Google Sheets e respostas de Google Forms com R?"
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>O <a href="https://docs.google.com/spreadsheets/u/0/">Google Sheets</a> é um editor de planilhas da Google, que funciona vinculado ao Google Drive (ou seja, os arquivos ficam na nuvem). O pacote <a href="https://googlesheets4.tidyverse.org/">googlesheets4</a> permite interagir com o Google Sheets através do R. Neste post, vamos mostrar alguns exemplos sobre como podemos importar dados usando o pacote <code>googlesheets4</code>.</p>
+<p>Primeiramente, é necessário instalar o pacote:</p>
+<pre class="r"><code>install.packages(&quot;googlesheets4&quot;)</code></pre>
+<p>Então, podemos carregá-lo:</p>
+<pre class="r"><code># Carregar pacote googlesheets4
+library(googlesheets4)</code></pre>
+<p>Neste exemplo, usaremos a tabela da <a href="https://cran.r-project.org/web/packages/gapminder/README.html">base de dados Gapminder</a>, que apresenta algumas informações por país e ano, como a população total, expectativa de vida ao nascer e o PIB per capita.</p>
+<p>Para importar uma tabela que está no Google Sheets, primeiramente precisamos identificá-la para que o R saiba qual arquivo queremos abrir. Uma forma de fazer isso é usando a <em>URL</em> (ou <em>Uniform Resource Locator</em>), que é também conhecido como <em>o link que usamos no navegador</em>.</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/url.png" /><!-- --></p>
+<p>Um exemplo de url é o seguinte, e ele encaminha para <a href="https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077">essa tabela</a>.</p>
+<pre><code>https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077</code></pre>
+<p>Sabendo a URL da planilha, podemos salvar em um objeto no R para facilitar o uso!</p>
+<pre class="r"><code># salvar a url/link da planilha que queremos acessar
+url_planilha &lt;- &quot;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077&quot;</code></pre>
+<div id="autenticação" class="section level3">
+<h3>Autenticação</h3>
+<p>Para evitar que alguém que não tem acesso a uma Google Sheet consiga ler a mesma sem permissão, o pacote nos direciona para fazer uma autenticação com uma conta do Google. Esse direcionamento é feito quando usamos alguma função que necessita de autenticação pela primeira vez, e a cada sessão do R (ou seja, sempre que reiniciar), o R perguntará novamente com qual email do Google gostaríamos de autenticar.</p>
+<p>Exemplo: No meu caso, eu já autentiquei anteriormente, então ele apresenta os emails já autenticados.</p>
+<pre class="r"><code>respostas_formulario &lt;- read_sheet(url)
+# → The googlesheets4 package is requesting access to your Google account
+#   Select a pre-authorised account or enter &#39;0&#39; to obtain a new token
+#   Press Esc/Ctrl + C to cancel
+# 
+# 1: bmilz@curso-r.com
+# 2: milz.bea@gmail.com</code></pre>
+<p>Para fazer uma nova autenticação, basta escolher a opção <code>0</code>, e uma janela do navegador abrirá para fazer a autenticação:</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/auth1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>Precisamos então clicar no email desejado, selecionar todas as opções de acesso e clicar em “Continuar”:</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/auth2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>Caso funcione, a seguinte mensagem aparecerá no navegador: <code>Authentication complete. Please close this page and return to R</code>. Isso significa que podemos voltar ao R!</p>
+<blockquote>
+<p>DEU ERRO! Caso dê erro ao abrir o arquivo, se certifique que você tem acesso de leitura ou edição do Google Sheets desejado.</p>
+</blockquote>
+<p>Agora podemos experimenta as funções do pacote!</p>
+</div>
+<div id="função-sheet_properties" class="section level3">
+<h3>Função <code>sheet_properties()</code></h3>
+<p>A função <code>sheet_properties()</code> permite ver quais abas (chamaremos muitas vezes de <em>sheets</em>, pois é a forma usada no pacote) estão disponíveis na tabela:</p>
+<pre class="r"><code># ver as propriedades da planilha (conseguimos descobrir quais sheets 
+# estão disponíveis)
+sheet_properties(url_planilha)
+## # A tibble: 5 × 8
+##   name     index         id type  visible grid_rows grid_columns data  
+##   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;
+## 1 Africa       0  780868077 GRID  TRUE          625            6 &lt;NULL&gt;
+## 2 Americas     1   45759261 GRID  TRUE          301            6 &lt;NULL&gt;
+## 3 Asia         2 1984823455 GRID  TRUE          397            6 &lt;NULL&gt;
+## 4 Europe       3 1503562052 GRID  TRUE          361            6 &lt;NULL&gt;
+## 5 Oceania      4 1796776040 GRID  TRUE           25            6 &lt;NULL&gt;</code></pre>
+<p>Com isso, sabemos que a tabela que informamos tem 5 abas, sendo elas: Africa, Americas, Asia, Europe e Oceania.</p>
+</div>
+<div id="função-read_sheet" class="section level3">
+<h3>Função <code>read_sheet()</code></h3>
+<p>A função mais útil (na minha opinião) do pacote é a que usamos para ler os dados: <code>read_sheet()</code>!</p>
+<p>Se usarmos essa função sem nenhum argumento além do <em>url</em> da planilha, por padrão a primeira sheet será importada. Como vimos no resultado da função <code>sheet_properties()</code>, a primeira aba da base contém os dados dos países que estão no continente Africano. Então os dados que serão importados são referentes à este continente:</p>
+<pre class="r"><code>planilha &lt;- read_sheet(url_planilha)
+dplyr::glimpse(planilha)
+## Rows: 624
+## Columns: 6
+## $ country   &lt;chr&gt; &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Alge…
+## $ continent &lt;chr&gt; &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, …
+## $ year      &lt;dbl&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+## $ lifeExp   &lt;dbl&gt; 43.077, 45.685, 48.303, 51.407, 54.518, 58.014, 61.368, 65.7…
+## $ pop       &lt;dbl&gt; 9279525, 10270856, 11000948, 12760499, 14760787, 17152804, 2…
+## $ gdpPercap &lt;dbl&gt; 2449.0082, 3013.9760, 2550.8169, 3246.9918, 4182.6638, 4910.…</code></pre>
+<p>Podemos também usar o argumento <code>sheet =</code> para especificar qual aba queremos importar. Podemos fazer a busca pela posição (ou seja, informando um número), ou pelo nome da aba:</p>
+<pre class="r"><code># abrir uma sheet específica: pela posição
+planilha_sheet_3 &lt;- read_sheet(url_planilha, sheet = 3)
+dplyr::glimpse(planilha_sheet_3)
+## Rows: 396
+## Columns: 6
+## $ country   &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, …
+## $ continent &lt;chr&gt; &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asi…
+## $ year      &lt;dbl&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+## $ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.8…
+## $ pop       &lt;dbl&gt; 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 12…
+## $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, …
+
+# abrir uma sheet específica: pelo nome
+planilha_asia &lt;- read_sheet(url_planilha, sheet = &quot;Asia&quot;)
+dplyr::glimpse(planilha_asia)
+## Rows: 396
+## Columns: 6
+## $ country   &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, …
+## $ continent &lt;chr&gt; &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asi…
+## $ year      &lt;dbl&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+## $ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.8…
+## $ pop       &lt;dbl&gt; 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 12…
+## $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, …</code></pre>
+<p>Como todas as tabelas da base tem a mesma estrutura, podemos usar o pacote <a href="https://purrr.tidyverse.org/reference/map.html">purrr</a> para importar todas as abas de uma vez:</p>
+<pre class="r"><code># a função sheet_names permite buscar apenas o nome das abas
+nome_abas &lt;- sheet_names(url_planilha)
+
+# com o purrr, podemos abrir todas as abas de uma vez!
+gapminder_completo &lt;- nome_abas |&gt; 
+  purrr::map_dfr(~ read_sheet(url_planilha, sheet = .x))
+
+dplyr::glimpse(gapminder_completo)
+## Rows: 1,704
+## Columns: 6
+## $ country   &lt;chr&gt; &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Alge…
+## $ continent &lt;chr&gt; &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, …
+## $ year      &lt;dbl&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+## $ lifeExp   &lt;dbl&gt; 43.077, 45.685, 48.303, 51.407, 54.518, 58.014, 61.368, 65.7…
+## $ pop       &lt;dbl&gt; 9279525, 10270856, 11000948, 12760499, 14760787, 17152804, 2…
+## $ gdpPercap &lt;dbl&gt; 2449.0082, 3013.9760, 2550.8169, 3246.9918, 4182.6638, 4910.…</code></pre>
+</div>
+<div id="outras-funções" class="section level3">
+<h3>Outras funções</h3>
+<p>Esse pacote tem muitas outras funções que interagem com o Googles Sheets, mas que não fazem parte do escopo deste post, como criar uma nova aba e escrever dados em uma aba. Essas funções também são muito úteis!</p>
+</div>
+<div id="e-o-google-forms" class="section level3">
+<h3>E o Google Forms?</h3>
+<p>Eu gosto muito de usar esse pacote para importar respostas de <a href="https://docs.google.com/forms/u/0/">formulários do Google</a>, pois o Google permite vincular respostas dos formulários em uma Google Sheets.</p>
+<p>Aqui mostrarei como fazer isso! Primeiro precisamos criar um formulário (caso ele ainda não exista):</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms1.png" /><!-- --></p>
+<p>Ao criar o formulário, podemos clicar em “Respostas” e então clicar no logo do Google Sheets (um quadrado verde com uma linha branca horizontal e outra vertical):</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms2.png" /><!-- --></p>
+<p>O Google Forms irá perguntar qual o nome da Google Sheet a ser criada (ou também podemos selecionar uma Google Sheets que já existe):</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms3.png" /><!-- --></p>
+<p>Depois de selecionar qual a Google Sheet ficará vinculada ao formulário, a Google Sheet será aberta e podemos ver as respostas:</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms4.png" /><!-- -->
+Cada coluna terá informações de uma pergunta do formulário. Inicialmente, a base terá 0 linhas, pois quando criamos o formulário ele tem 0 respostas. Porém, após alguém responder o formulário, a Google Sheet é automaticamente atualizada e apresentará a resposta. Podemos imp</p>
+<pre class="r"><code>url &lt;- &quot;https://docs.google.com/spreadsheets/d/1Ch3aMraacwhNo1sU4Z9b54nWYG8gdl18UfLJMzquL8s/&quot;
+
+respostas_formulario &lt;- read_sheet(url)
+
+respostas_formulario
+## # A tibble: 1 × 2
+##   `Carimbo de data/hora` `Pergunta sem título`
+##   &lt;dttm&gt;                 &lt;chr&gt;                
+## 1 2022-03-08 21:29:01    Opção 1</code></pre>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. <strong>Postem também quais funções do pacote vocês gostariam de saber mais!!</strong></p>
+<p>Até a próxima!</p>
+</div>
+</div>
+<div id="referências" class="section level2">
+<h2>Referências</h2>
+<ul>
+<li><p><a href="https://googlesheets4.tidyverse.org/">Documentação do pacote googlesheets4</a></p></li>
+<li><p><a href="https://purrr.tidyverse.org/reference/map.html">Documentação do pacote purrr</a></p></li>
+<li><p><a href="https://www.gapminder.org/data/">Referência da base Gapminder</a></p></li>
+</ul>
+</div>
