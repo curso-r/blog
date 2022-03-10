@@ -28,7 +28,7 @@ Então, vamos ao primeiro desafio!
 ## Desafio #1: Manipulando a base de filmes do IMDB
 
 Vamos começar com um desafio de manipulação. 
-Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la [clicando aqui](https://github.com/curso-r/livro-material/raw/master/assets/data/imdb.rds).
+Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la [clicando aqui](https://github.com/curso-r/blog/raw/main/static/data/desafios/imdb.rds).
 
 **Desafio**: Escreva um código que transforme a base do IMDB em uma base nomeada *IMDB_atores*, que deve ser formada pelas seguintes colunas:
 
