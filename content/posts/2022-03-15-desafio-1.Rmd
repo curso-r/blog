@@ -1,0 +1,38 @@
+---
+title: "Desafio #2: contador de cliques [Shiny]"
+date: "2022-03-15"
+tags: ["desafio curso-r", "shiny"]
+categories: ["Desafio"]
+image: "images/posts/banner/mouse.jpg"
+author: ["William"]
+summary: "Mais um desafio Curso-R, agora de Shiny! Resolva e compartilhe a sua solução em nosso Discourse!"
+---
+
+Os desafios da Curso-R são problemas práticos de análise de dados e programação envolvendo faxina de dados, construção de gráficos, relatórios em RMarkdown, modelagem, aplicativos Shiny e muito mais. 
+
+O intuito é praticar as diversas etapas da Ciência de Dados, interagir com a comunidade compartilhando as suas soluções e gerar bastante repertório.
+
+Vale sempre lembrar que:
+
+- **Não existe uma única solução para o desafio**.
+
+- Você pode usar qualquer linguagem de programação e quaisquer ferramentas/pacotes da linguagem.
+
+- Não existe a *melhor* solução. Toda solução é válida. No dia-a-dia o importante é resolver o problema.
+
+Para compartilhar a sua solução, vamos usar o [Discourse da Curso-R](https://discourse.curso-r.com/). Basta acessar o tópico referente a esse desafio (no final deste post colocamos o link) e enviar o seu código. Você pode aproveitar também para pedir ajuda ou ver e comentar as soluções já enviadas.
+
+## Desafio #2: app contador de cliques
+
+Este é o nosso primeiro desafio de Shiny! O objetivo é construir um app que conte o número de **cliques seguidos** em um botão. Veja o funcionamento a seguir:
+
+```{r, echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/desafio-2/contador-cliques.gif")
+```
+
+Veja que o contador começa no zero e aumenta em uma unidade para cada clique seguido. Cliques seguidos são cliques feitos em um intervalo muito curto de tempo. No exemplo acima, utilizamos 0.5 segundo. Assim, se o intervalo entre dois cliques for maior que 0.5 segundo, o contador deve voltar para 1. Você pode definir qualquer intervalo de tempo para a sua solução.
+
+A solução precisa conter apenas o comportamento descrito anteriormente. Você **não precisa** reproduzir o layout e a identidade visual do exemplo. Inclusive, incentivamos a criação de novas versões desse app. Explore a sua criatividade!
+
+Poste a sua resolução em nosso Discourse, respondendo o [tópico criado para esse desafio](https://discourse.curso-r.com/t/desafio-2-contador-de-cliques-shiny/1903)!
+
