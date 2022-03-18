@@ -1,11 +1,11 @@
 # TOPICOS SOBRE API, CHUVA DE IDEIAS PARA OS POSTS DE API / BIJUU
 
-- INTRODUCAO
+-  [x] INTRODUCAO
 
 
 - GitHub
-  - O que é o pacote gh
-  - atividades com GET: buscar uma pessoa/org, buscar repositorios.
+  - [x] O que é o pacote gh
+  - [x] atividades com GET: buscar uma pessoa/org, buscar repositorios.
   - Criar repositórios (vazios e a partir de templates também!)
   - Dar acesso para pessoas no repositório
   - Ativar o GitHub Pages
