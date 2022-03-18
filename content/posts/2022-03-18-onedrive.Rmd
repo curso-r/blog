@@ -37,7 +37,7 @@ library(Microsoft365R)
 ```
 
 
-Ao carregar o pacote pela primeira vez, a seguinte mensagem aparecerá, dizendo que é possível armazenar as credenciais em uma pasta chamada `AzureR` e pergunta se permitimos que o pacote crie esse diretório. Eu aceitei respondendo com `Yes`:
+Ao carregar o pacote pela primeira vez, a seguinte mensagem aparecerá, dizendo que é possível armazenar as credenciais em uma pasta chamada `AzureR` e perguntando se permitimos que o pacote crie esse diretório. Eu aceitei respondendo com `Yes`:
 
 ```r
 The AzureR packages can save your authentication credentials in the directory:
@@ -184,7 +184,7 @@ onedrive_da_bea$open_item(path = "pasta_de_exemplo/pinguins.xlsx")
 
 ## Conclusão
 
-Espero que este post seja útil para quem usa o One Drive também. Espero que o pacote seja aprimorado para conseguir importar os dados sem que seja necessário baixá-los.
+Espero que este post seja útil para quem usa o One Drive também. Também espero que o pacote seja aprimorado para conseguir importar os dados sem que seja necessário baixá-los.
 
 Caso você encontre algum método melhor para importar os dados, [conta pra gente](https://discourse.curso-r.com/)! 
 
