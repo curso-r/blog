@@ -5,7 +5,7 @@ tags: ["tutoriais"]
 categories: ["tutoriais"]
 image: "images/posts/banner/2022-03-22-esquisse.jpg"
 author: ["Tereza"]
-summary: ""
+summary: "Essa ferramenta facilita muito a criação de gráficos ggplot2, não havendo a necessidade de digitar as linhas de código, tudo é feito de maneira point and click!"
 draft: false
 ---
 
