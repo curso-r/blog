@@ -33,6 +33,10 @@ library(esquisse)
 
 3. Carregue os seus dados. No nosso caso, estamos usando a base de dados **pinguins**, do pacote {dados}
 
+(Para instalar esse pacote, basta rodar o comando `install.packages("dados")`)
+
+
+
 ```{r}
 dados <- dados::pinguins
 ```
