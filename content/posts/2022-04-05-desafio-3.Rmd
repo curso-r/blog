@@ -1,12 +1,12 @@
 ---
 title: "Desafio #3: Gráfico Temático Star Wars"
-date: "2022-03-30"
+date: "2022-04-05"
 tags: ["desafio curso-r", "visualização"]
 categories: ["Desafio"]
 image: "images/posts/banner/desafio-3.jpg"
 author: ["Tereza"]
 summary: "Esse é o primeiro desafio de visualização da Curso-R! Resolva-o e poste a sua solução em nosso Discourse!"
-draft: true
+draft: TRUE
 ---
 
 ```{r eval=FALSE, include=FALSE}
@@ -34,24 +34,55 @@ Para compartilhar a sua solução, vamos usar o [Discourse da Curso-R](https://d
 
 O objetivo desse desafio é escrever um código que reproduza o seguinte gráfico:
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r grafico_starwars, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 library(ggplot2)
+library(dplyr)
 
 imagem <- "https://wallpaperaccess.com/full/11836.jpg"
 
-grafico <- dados::dados_starwars |> 
-  ggplot(aes(x = massa, y = altura)) +
-  geom_point(color = "yellow",
-            shape = 21,
-            size = 2) +
+vader <-  dados::dados_starwars |>
+  mutate(vader = if_else(nome == "Darth Vader", TRUE, NA)) |>
+  tidyr::drop_na(vader)
+
+grafico <-
+  dados::dados_starwars |>
+  ggplot() +
+  geom_point(
+    aes(x = massa, y = altura),
+    fill = "yellow",
+    color = "yellow",
+    shape = 23,
+    size = 2,
+    alpha = 0.8
+  ) +
+  geom_point(
+    data = vader,
+    aes(x = massa, y = altura),
+    fill = "red",
+    color = "red",
+    shape = 23,
+    size = 2,
+    alpha = 1
+  ) +
+  geom_label(
+    data = vader,
+    aes(x = massa, y = altura),
+    label = "darth vader",
+    nudge_y = 12,
+    nudge_x = -5,
+    fill = "red",
+    family = "Star Jedi"
+  ) +
   coord_cartesian(xlim = c(0, 200)) +
-  labs(title = "Star Wars", 
-       subtitle = "May the force be with you",
-       x = "\n Massa",
-       y = "Altura \n") +
+  labs(
+    title = "Star Wars",
+    subtitle = "May the force be with you",
+    x = "Massa",
+    y = "Altura"
+  ) +
   theme(
-    axis.text = element_text(color = "yellow"),
-    axis.title = element_text(color = "yellow"),
+    axis.text = element_text(color = "yellow", family = "Star Jedi"),
+    axis.title = element_text(color = "yellow", family = "Star Jedi"),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
     panel.grid = element_line(color = "grey6"),
@@ -67,15 +98,24 @@ grafico <- dados::dados_starwars |>
       hjust = 0.5,
       family = "Star Jedi"
     )
-  ) 
+  )
 
-ggimage::ggbackground(gg = grafico,
-                      background = imagem)
+grafico_final <- ggimage::ggbackground(gg = grafico,
+                      background = imagem) 
+
+ggsave(filename = "../../static/images/posts/conteudo/desafio-3/grafico.png",
+       plot = grafico_final, width = 10, height = 6, dpi = 600)
+
 
 
 # fonte Star Jedi: https://www.dafont.com/pt/star-jedi.font
-
 ```
+
+
+```{r echo=FALSE, fig.align="center", message=FALSE, warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/desafio-3/grafico.png")
+```
+
 
 Algumas informações úteis:
 
