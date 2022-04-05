@@ -115,9 +115,13 @@ Algumas informações úteis:
 
 - A base de dados utilizada é a `dados_starwars` do pacote `dados` (pode ser instalado com o comando `install.packages("dados")`)
 
-- A imagem de fundo do gráfico pode ser acessada através [desse link]("https://wallpaperaccess.com/full/11836.jpg")
+- O link da imagem de fundo do gráfico é: `https://wallpaperaccess.com/full/11836.jpg`
 
 - A fonte utilizada pode ser baixada [aqui](https://www.dafont.com/pt/star-jedi.font)
 
-Poste a sua resolução em nosso Discourse, respondendo o [tópico criado para esse desafio]()! 
+Poste a sua resolução em nosso Discourse, respondendo o [tópico criado para esse desafio](https://discourse.curso-r.com/t/desafio-3-grafico-tematico-star-wars/1934)! 
+
+```{r echo=FALSE}
+knitr::include_graphics("https://media.giphy.com/media/Bp1urA9f0XrW/giphy.gif")
+```
 
