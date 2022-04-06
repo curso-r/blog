@@ -1,0 +1,472 @@
+---
+title: "Pacote dados: bases em português para praticar e ensinar"
+date: "2022-04-06"
+tags: ["ensino", "bases de dados", "importação"]
+categories: ["pacotes"]
+image: "https://cienciadedatos.github.io/dados/reference/figures/dados-hex.png"
+author: ["Beatriz"]
+summary: "Quer saber como acessar várias bases de dados em Português com R?"
+draft: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>O <a href="https://cienciadedatos.github.io/dados/">pacote dados</a> disponibiliza a tradução de várias bases de dados que são originalmente disponíveis em outros pacotes de R.
+Recentemente o <a href="https://cienciadedatos.github.io/dados/">pacote</a> foi disponibilizado no CRAN!
+Esse post foi escrito para que as pessoas conheçam mais sobre ele!</p>
+</div>
+<div id="pacote-dados" class="section level2">
+<h2>Pacote dados</h2>
+<p><img src="https://cienciadedatos.github.io/dados/reference/figures/dados-hex.png" width="30%" style="display: block; margin: auto;" /></p>
+<p>O <a href="https://cienciadedatos.github.io/dados/">pacote dados</a> disponibiliza a tradução de várias bases de dados que são originalmente disponíveis em outros pacotes de R.</p>
+<p>O pacote começou a ser desenvolvido em Junho de 2020, e um destaque importantíssimo é que as traduções foram feitas voluntariamente por pessoas da comunidade Latino-Americana de R, contando com a colaboração de pessoas que fazem parte da <a href="https://latin-r.com/">Latin-R</a>, <a href="https://rladies.org/">R-Ladies</a> e <a href="https://curso-r.com/material/">Curso-R</a>, sendo elas: <a href="https://twitter.com/rivaquiroga">Riva Quiroga</a>, <a href="https://twitter.com/MortaraSara">Sara Mortara</a>, <a href="https://twitter.com/BeaMilz">Beatriz Milz</a> (professora na Curso-R), <a href="https://twitter.com/SanchezTapiaA">Andrea Sánchez-Tapia</a>, <a href="https://twitter.com/aleants">Alejandra Andrea Tapia Silva</a>, Beatriz Maurer Costa, <a href="https://twitter.com/jeangprado">Jean Prado</a>, <a href="https://twitter.com/renata_mh">Renata Hirota</a>, <a href="https://twitter.com/wamorim_">William Amorim</a> (professor na Curso-R), e <a href="https://www.linkedin.com/in/emmanuellernunes/">Emmanuelle Rodrigues Nunes</a>.</p>
+<p>Alguns dos objetivos do pacote dados são:</p>
+<ul>
+<li><p>Disponibilizar bases de dados em português utilizadas para praticar e ensinar R (como em tutoriais, cursos, textos em blogs, livros). Por exemplo, estão disponíveis lá todas as bases usadas no livro <a href="https://r4ds.had.co.nz/">R for Data Science</a>, entre outras;</p></li>
+<li><p>Incentivar pessoas a ser tornarem desenvolvedoras em R (várias pessoas que participaram do desenvolvimento do pacote e realizaram traduções não tinham experiência anterior com colaboração via GitHub e desenvolvimento de pacotes em R, por exemplo);</p></li>
+<li><p>Colaborar com a diminuição da lacuna linguística em materiais usados no ensino e prática de R.</p></li>
+</ul>
+<p>O pacote está <strong>disponível no CRAN</strong> e pode ser instalado utilizando o seguinte código:</p>
+<pre class="r"><code>install.packages(&quot;dados&quot;)</code></pre>
+<p>Para que as bases fiquem disponíveis, utilize a função <code>library(dados)</code> ou use com <code>dados::nome_da_base</code>.</p>
+<p>Todas as bases possuem a documentação traduzida também. Você pode conferir na aba Help, usando <code>?dados::nome_da_base</code> ou conferindo <a href="https://cienciadedatos.github.io/dados/reference/index.html">na documentação online do pacote</a>.</p>
+<p>Existem bases bem legais disponíveis, como:</p>
+<div id="star-wars" class="section level3">
+<h3>Star Wars <img src="https://dplyr.tidyverse.org/logo.png" align="right" width = "100px"/></h3>
+<ul>
+<li>A base de dados de personagens da franquia Star Wars, disponibilizada originalmente no pacote <a href="https://dplyr.tidyverse.org/reference/starwars.html">dplyr</a>. Por isso, é esperado que seja bastante útil em exemplos de manipulação de dados. Porém podemos criar visualizações bem legais também usando esses dados! Aliás, essa é a base utilizada no <a href="https://blog.curso-r.com/posts/2022-04-05-desafio-3/">desafio 3</a>, focado em visualização de dados, com o objetivo de replicar esse gráfico:</li>
+</ul>
+<p><img src="https://blog.curso-r.com/images/posts/conteudo/desafio-3/grafico.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>Espie a base por aqui:</p>
+<pre class="r"><code>dplyr::glimpse(dados::dados_starwars)
+## Rows: 87
+## Columns: 14
+## $ nome            &lt;chr&gt; &quot;Luke Skywalker&quot;, &quot;C-3PO&quot;, &quot;R2-D2&quot;, &quot;Darth Vader&quot;, &quot;Le…
+## $ altura          &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 1…
+## $ massa           &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0…
+## $ cor_do_cabelo   &lt;chr&gt; &quot;Loiro&quot;, NA, NA, &quot;Nenhum&quot;, &quot;Castanho&quot;, &quot;Castanho, Cinz…
+## $ cor_da_pele     &lt;chr&gt; &quot;Branca clara&quot;, &quot;Ouro&quot;, &quot;Branca, Azul&quot;, &quot;Branca&quot;, &quot;Cla…
+## $ cor_dos_olhos   &lt;chr&gt; &quot;Azul&quot;, &quot;Amarelo&quot;, &quot;Vermelho&quot;, &quot;Amarelo&quot;, &quot;Castanho&quot;, …
+## $ ano_nascimento  &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 5…
+## $ sexo_biologico  &lt;chr&gt; &quot;Macho&quot;, &quot;Nenhum&quot;, &quot;Nenhum&quot;, &quot;Macho&quot;, &quot;Fêmea&quot;, &quot;Macho&quot;…
+## $ genero          &lt;chr&gt; &quot;Masculino&quot;, &quot;Masculino&quot;, &quot;Masculino&quot;, &quot;Masculino&quot;, &quot;F…
+## $ planeta_natal   &lt;chr&gt; &quot;Tatooine&quot;, &quot;Tatooine&quot;, &quot;Naboo&quot;, &quot;Tatooine&quot;, &quot;Alderaan…
+## $ especie         &lt;chr&gt; &quot;Humano&quot;, &quot;Droide&quot;, &quot;Droide&quot;, &quot;Humano&quot;, &quot;Humano&quot;, &quot;Hum…
+## $ filmes          &lt;list&gt; &lt;&quot;The Empire Strikes Back&quot;, &quot;Revenge of the Sith&quot;, &quot;R…
+## $ veiculos        &lt;list&gt; &lt;&quot;Snowspeeder&quot;, &quot;Imperial Speeder Bike&quot;&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;,…
+## $ naves_espaciais &lt;list&gt; &lt;&quot;X-wing&quot;, &quot;Imperial shuttle&quot;&gt;, &lt;&gt;, &lt;&gt;, &quot;TIE Advanced…</code></pre>
+</div>
+<div id="pinguins" class="section level3">
+<h3>Pinguins <img src="https://allisonhorst.github.io/palmerpenguins/reference/figures/logo.png" align="right" width = "100px"/></h3>
+<p>A <a href="https://allisonhorst.github.io/palmerpenguins/">base dos pinguins</a> foi disponibilizada com o objetivo de ser uma alternativa à base de dados <code>iris</code>. Podemos utilizar essa base para ensinar e praticar principalmente temas de visualização e manipulação de dados.</p>
+<p>Algo muito legal são as <a href="https://allisonhorst.github.io/palmerpenguins/articles/examples.html">vignettes do pacote original</a>, que apresentam tutoriais sobre como fazer visualizações interessantes com os dados. Que tal experimentar recriá-las utilizando os dados em português?</p>
+<p>Espie a base por aqui:</p>
+<pre class="r"><code>dplyr::glimpse(dados::pinguins)
+## Rows: 344
+## Columns: 8
+## $ especie               &lt;fct&gt; Pinguim-de-adélia, Pinguim-de-adélia, Pinguim-de…
+## $ ilha                  &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torg…
+## $ comprimento_bico      &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34…
+## $ profundidade_bico     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18…
+## $ comprimento_nadadeira &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190,…
+## $ massa_corporal        &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 34…
+## $ sexo                  &lt;fct&gt; macho, fêmea, fêmea, NA, fêmea, macho, fêmea, ma…
+## $ ano                   &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, …</code></pre>
+</div>
+<div id="filmes-da-pixar" class="section level3">
+<h3>Filmes da Pixar <img src="https://erictleung.com/pixarfilms/reference/figures/logo.png" align="right" width = "100px"/></h3>
+<p>O pacote <a href="https://erictleung.com/pixarfilms/">pixarfilms</a> apresenta algumas bases de dados com informações sobre filmes da Pixar. Todas as bases foram traduzidas e disponibilizadas no pacote dados! Essas bases podem ser utilizadas para treinar manipulação e visualização de dados. Na minha opinião, essas bases são super interessantes para ensinar os concentos dos <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">joins do dplyr</a>!</p>
+<p>O post ‘Pixar: Uma História de dados’, foi escrito por Fernando Barbalho, e publicado no Blog da Escola de Dados, utilizando os dados deste pacote. <a href="https://beatrizmilz.com/blog/2021-07-01-pixar-uma-historia-de-dados/">No meu blog há uma versão do post com os códigos para gerar todas as visualizações</a>.</p>
+<p>Espie as bases por aqui:</p>
+<pre class="r"><code>dplyr::glimpse(dados::pixar_filmes)
+## Rows: 27
+## Columns: 5
+## $ ordem_lancamento         &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, …
+## $ filme                    &lt;chr&gt; &quot;Toy Story - Um Mundo de Aventuras&quot;, &quot;Vida de…
+## $ data_lancamento          &lt;date&gt; 1995-11-22, 1998-11-25, 1999-11-24, 2001-11-…
+## $ duracao                  &lt;dbl&gt; 81, 95, 92, 92, 100, 115, 117, 111, 98, 96, 1…
+## $ classificacao_indicativa &lt;chr&gt; &quot;Livre&quot;, &quot;Livre&quot;, &quot;Livre&quot;, &quot;Livre&quot;, &quot;Livre&quot;, …
+dplyr::glimpse(dados::pixar_avalicao_publico)
+## Rows: 24
+## Columns: 5
+## $ filme                &lt;chr&gt; &quot;Toy Story - Um Mundo de Aventuras&quot;, &quot;Vida de Ins…
+## $ nota_rotten_tomatoes &lt;dbl&gt; 100, 92, 100, 96, 99, 97, 74, 96, 95, 98, 98, 40,…
+## $ nota_metacritic      &lt;dbl&gt; 95, 77, 88, 79, 90, 90, 73, 96, 95, 88, 92, 57, 6…
+## $ nota_cinema_score    &lt;chr&gt; &quot;A&quot;, &quot;A&quot;, &quot;A+&quot;, &quot;A+&quot;, &quot;A+&quot;, &quot;A+&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, …
+## $ nota_critics_choice  &lt;dbl&gt; NA, NA, 100, 92, 97, 88, 89, 91, 90, 95, 97, 67, …
+dplyr::glimpse(dados::pixar_bilheteria)
+## Rows: 24
+## Columns: 5
+## $ filme                    &lt;chr&gt; &quot;Toy Story - Um Mundo de Aventuras&quot;, &quot;Vida de…
+## $ orcamento                &lt;dbl&gt; 3.00e+07, 1.20e+08, 9.00e+07, 1.15e+08, 9.40e…
+## $ bilheteria_eua_canada    &lt;dbl&gt; 191796233, 162798565, 245852179, 289916256, 3…
+## $ bilheteria_outros_paises &lt;dbl&gt; 181757800, 200460294, 251522597, 342400393, 5…
+## $ bilheteria_mundial       &lt;dbl&gt; 373554033, 363258859, 497374776, 632316649, 8…
+dplyr::glimpse(dados::pixar_equipe)
+## Rows: 220
+## Columns: 3
+## $ filme &lt;chr&gt; &quot;Toy Story - Um Mundo de Aventuras&quot;, &quot;Toy Story - Um Mundo de Av…
+## $ cargo &lt;chr&gt; &quot;Diretor(a)&quot;, &quot;Roteirista&quot;, &quot;Roteirista&quot;, &quot;Roteirista&quot;, &quot;Roteiri…
+## $ nome  &lt;chr&gt; &quot;John Lasseter&quot;, &quot;Joel Cohen&quot;, &quot;Alec Sokolow&quot;, &quot;Andrew Stanton&quot;,…
+dplyr::glimpse(dados::pixar_generos)
+## Rows: 128
+## Columns: 2
+## $ filme  &lt;chr&gt; &quot;Toy Story - Um Mundo de Aventuras&quot;, &quot;Toy Story - Um Mundo de A…
+## $ genero &lt;chr&gt; &quot;Animação&quot;, &quot;Aventura&quot;, &quot;Comédia&quot;, &quot;Família&quot;, &quot;Fantasia&quot;, &quot;Anim…
+dplyr::glimpse(dados::pixar_oscars)
+## Rows: 80
+## Columns: 3
+## $ filme                &lt;chr&gt; &quot;Toy Story - Um Mundo de Aventuras&quot;, &quot;Toy Story -…
+## $ tipo_premio_indicado &lt;chr&gt; &quot;Melhor Filme de Animação&quot;, &quot;Melhor Roteiro Origi…
+## $ resultado            &lt;chr&gt; &quot;Prêmio ainda não introduzido&quot;, &quot;Nomeado&quot;, &quot;Inele…</code></pre>
+</div>
+</div>
+<div id="todas-as-bases-disponíveis" class="section level2">
+<h2>Todas as bases disponíveis</h2>
+<p>Veja o nome e a descrição de todas as bases disponíveis:</p>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Nome
+</th>
+<th style="text-align:left;">
+Descrição
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+aeroportos
+</td>
+<td style="text-align:left;">
+Aeroportos
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+arremesadores
+</td>
+<td style="text-align:left;">
+Tabela de estatísticas de arremesadores
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+avioes
+</td>
+<td style="text-align:left;">
+Dados de aviões
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bebes
+</td>
+<td style="text-align:left;">
+Nomes de bebês
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+casas
+</td>
+<td style="text-align:left;">
+Dados de habitação em Ames
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+clima
+</td>
+<td style="text-align:left;">
+Dados de clima
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+companhias_aereas
+</td>
+<td style="text-align:left;">
+Nomes de companhias aéreas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+comuns
+</td>
+<td style="text-align:left;">
+Modelos comuns de carros
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dados_atmosfera
+</td>
+<td style="text-align:left;">
+Dados atmosféricos
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dados_gapminder
+</td>
+<td style="text-align:left;">
+Dados de Gapminder
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dados_iris
+</td>
+<td style="text-align:left;">
+Dados de espécies de flor de Íris por Edgar Anderson
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dados_oms
+</td>
+<td style="text-align:left;">
+Dados de tuberculose da Organização Mundial da Saúde
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dados_starwars
+</td>
+<td style="text-align:left;">
+Personagens de Starwars
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+diamante
+</td>
+<td style="text-align:left;">
+Preço de 50 mil diamantes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gerentes
+</td>
+<td style="text-align:left;">
+Tabela de gerentes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+jardineiros
+</td>
+<td style="text-align:left;">
+Tabela de estatísticas do jardineiro
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+milhas
+</td>
+<td style="text-align:left;">
+Dados de economia de combustível de 1999 a 2008 para 38 modelos populares de carros
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mtcarros
+</td>
+<td style="text-align:left;">
+Testes de estrada para automóveis
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pessoas
+</td>
+<td style="text-align:left;">
+Tabela de pessoas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pinguins
+</td>
+<td style="text-align:left;">
+Medidas de pinguins adultos perto da Estação Palmer, Antártida (Palmer Station)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pixar_avalicao_publico
+</td>
+<td style="text-align:left;">
+Filmes da Pixar e avaliações
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pixar_bilheteria
+</td>
+<td style="text-align:left;">
+Bilheteria dos filmes da Pixar
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pixar_equipe
+</td>
+<td style="text-align:left;">
+Equipe dos filmes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pixar_filmes
+</td>
+<td style="text-align:left;">
+Filmes da Pixar
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pixar_generos
+</td>
+<td style="text-align:left;">
+Gêneros dos filmes da Pixar
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pixar_oscars
+</td>
+<td style="text-align:left;">
+Filmes da Pixar com indicações ao Oscar
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+premios_gerentes
+</td>
+<td style="text-align:left;">
+Tabela de prêmios dos gerentes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+presidentes_eua
+</td>
+<td style="text-align:left;">
+Período que engloba 11 presidentes, desde Eisenhower até Obama
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+questionario
+</td>
+<td style="text-align:left;">
+Amostra de variáveis categóricas do questinário ‘General Social Survey’ (GSS)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rebatedores
+</td>
+<td style="text-align:left;">
+Tabela de estatíticas de Beisebol
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+salarios
+</td>
+<td style="text-align:left;">
+Tabela de salários
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tabela1
+</td>
+<td style="text-align:left;">
+Registros de tuberculose da Organização Mundial da Saúde (primeira variante)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tabela2
+</td>
+<td style="text-align:left;">
+Registros de tuberculose da Organização Mundial da Saúde (segunda variante)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tabela3
+</td>
+<td style="text-align:left;">
+Registros de tuberculose da Organização Mundial da Saúde (terceira variante)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tabela4a
+</td>
+<td style="text-align:left;">
+Registros de tuberculose da Organização Mundial da Saúde (variante 4a)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tabela4b
+</td>
+<td style="text-align:left;">
+Registros de tuberculose da Organização Mundial da Saúde (variante 4a)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tabela5
+</td>
+<td style="text-align:left;">
+Registros de tuberculose da Organização Mundial da Saúde (quinta variante)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+veiculos
+</td>
+<td style="text-align:left;">
+Dados de economia de combustível
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+velho_fiel
+</td>
+<td style="text-align:left;">
+Dados do gêiser Velho Fiel (Old Faithful)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+voos
+</td>
+<td style="text-align:left;">
+Dados de voos
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Espero que o post tenha sido uma boa introdução ao <a href="https://cienciadedatos.github.io/dados/">pacote dados</a>, seja você uma pessoa que deseja ensinar ou praticar R.</p>
+<p>Caso tenha sugestões de melhoria nas traduções, <a href="https://github.com/cienciadedatos/dados/issues">escreva uma issue</a> no repositório do pacote!</p>
+<p>Até a próxima!</p>
+</div>
