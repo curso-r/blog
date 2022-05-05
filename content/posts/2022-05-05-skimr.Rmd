@@ -1,0 +1,62 @@
+---
+title: "Conheça o pacote {skimr}"
+date: "2022-05-05"
+tags: ["tutoriais"]
+categories: ["tutoriais"]
+image: "images/posts/banner/2022-05-05-skimr.jpg"
+author: ["Tereza"]
+summary: "Uma ótima ferramenta para usar em suas análises exploratórias"
+draft: false
+---
+
+Você já conhece o skimr?
+
+O [skimr](https://cran.r-project.org/web/packages/skimr/index.html) é um pacote que nos fornece medidas resumo de variáveis de uma base de dados de interesse. Ele pode ser visto como uma alternativa mais completa para a função summary() do R Base. 
+
+Além de incluir algumas informações a mais sobre cada coluna (como número de missings, por exemplo), ele lida com todos os tipos de dados, não só numéricos, fornecendo um conjunto diferente de medidas resumo a depender do tipo da coluna.
+
+Gostou? Vamos dar uma olhada em como ele funciona!
+
+## skimr
+
+Primeiramente, vamos instalar e carregar o pacote skimr
+
+```{r eval=FALSE, include=TRUE}
+install.packages("skimr")
+```
+
+```{r}
+library(skimr)
+```
+
+Agora, vamos aplicar a função `skim` em uma base de dados de interesse. No caso, estamos usando a base `dados_starwars` do pacote `dados`
+
+```{r}
+dados::dados_starwars |> skim()
+```
+
+
+Veja que a saída da função `skim` mostra uma visão geral da base de dados, nos dando informações como número de linhas, número de colunas, e os tipos das colunas.
+
+Ela fornece também informações individuais sobre cada coluna da base, separando as colunas por tipo: cada tipo nos dá um conjunto diferente de estatísticas, que façam sentido para aquele tipo de dado.
+
+Além disso, se salvarmos a saída da função em um objeto, podemos obter um data frame no qual cada linha é referente a uma coluna da base de dados. 
+
+Isso é muito útil quando estamos lidando com bases que tem muitas colunas.
+
+```{r}
+info_skim <- dados::dados_starwars |> 
+  skim() |> 
+  tibble::as_tibble()
+```
+
+Podemos, por exemplo, ordenar pelas variáveis que tem maior número de NA:
+
+```{r}
+info_skim |> 
+  dplyr::arrange(desc(n_missing))
+```
+
+Você pode ler mais sobre as funcionalidades do skimr [nesse vignette](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html)
+
+
