@@ -173,7 +173,7 @@ Muito bem, vamos à visualização! Meu plano foi mostrar um gráfico em que, no
 knitr::include_graphics("https://i.imgur.com/YW5w9nk.png")
 ```
 
-Pelo gráfico, podemos ver que, se todos os jogadores parassem de jogar agora, Nadal se tornaria o primeiro colocado por volta do mês de setembro de 2022. Isso ocorreria porque o Nadal teve uma campanha muito boa em 2022, ganhando o Australian Open e o French Open (Roland Garros). Já Novak Djokovic, atual número um do mundo, teve uma excelente campanha em 2021 e uma campanha ruim em 2022. 
+Pelo gráfico, podemos ver que, se todos os jogadores parassem de jogar agora, Nadal se tornaria o primeiro colocado por volta do mês de novembro de 2022. Isso ocorreria porque o Nadal teve uma campanha muito boa em 2022, ganhando o Australian Open e o French Open (Roland Garros). Já Novak Djokovic, atual número um do mundo (que cairá para segundo ao final de junho), teve uma excelente campanha em 2021 e uma campanha ruim em 2022. 
 
 ## Comunicação
 
