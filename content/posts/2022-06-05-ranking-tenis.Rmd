@@ -19,9 +19,9 @@ knitr::opts_chunk$set(
 
 ## Introdução
 
-Eu gosto bastante de assistir tênis. Não sei jogar nada, mas acho bem legal ver os impressionantes feitos de pessoas como Rafael Nadal e, mais recentemente, da Iga Swiatek.
+Eu gosto bastante de assistir tênis. Não sei jogar nada, mas acho bem legal ver os impressionantes feitos de pessoas como [Rafael Nadal](https://en.wikipedia.org/wiki/Rafael_Nadal) e, mais recentemente, da [Iga Swiatek](https://en.wikipedia.org/wiki/Iga_%C5%9Awi%C4%85tek).
 
-Uma coisa que eu acompanho com frequência é o ranking de esportistas. Para isso, acesso o site [Live Tennos](https://live-tennis.eu/en/atp-live-ranking), que mostra os rankings da ATP (masculino) e da WTA (feminino) de forma atualizada. 
+Uma coisa que eu acompanho com frequência é o ranking de esportistas. Para isso, acesso o site [Live Tennis](https://live-tennis.eu/en/atp-live-ranking), que mostra os rankings da [ATP](https://www.atptour.com/) (masculino) e da [WTA](https://www.wtatennis.com/) (feminino) de forma atualizada. 
 
 Esse site, no entanto, não mostra a projeção do ranking dos jogadores ao longo do tempo. Até existe a possibilidade de ver os pontos em uma [projeção de cinco semanas](https://live-tennis.eu/en/forecast-atp-ranking), mas para mim não é muito bom de visualizar.
 
