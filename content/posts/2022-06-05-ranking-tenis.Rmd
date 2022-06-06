@@ -43,8 +43,6 @@ Por exemplo, essa é a página do Rafael Nadal:
 knitr::include_graphics("https://i.imgur.com/vTaIsHp.png")
 ```
 
-**Obs**: Nadal ganhou o French Open de 2022, mas os pontos ainda não haviam sido computados no site no momento da escrita do post.
-
 ## Importação
 
 Para montar as bases, escrevi um script usando o pacote `{rvest}`. Trata-se de um pacote útil para raspagem de dados, permitindo transformar tabelas HTML em dataframes do R, dentre outras coisas.
@@ -170,10 +168,10 @@ rankings_tempo <- proximos_meses |>
 Muito bem, vamos à visualização! Meu plano foi mostrar um gráfico em que, no eixo X, temos o tempo e, no eixo Y, temos os nomes dos jogadores. As linhas do gráfico mostram o ranking dos jogadores ao longo do tempo.
 
 ```{r, out.width="75%", echo=FALSE}
-knitr::include_graphics("https://i.imgur.com/YW5w9nk.png")
+knitr::include_graphics("https://i.imgur.com/b7j8DIm.png")
 ```
 
-Pelo gráfico, podemos ver que, se todos os jogadores parassem de jogar agora, Nadal se tornaria o primeiro colocado por volta do mês de novembro de 2022. Isso ocorreria porque o Nadal teve uma campanha muito boa em 2022, ganhando o Australian Open e o French Open (Roland Garros). Já Novak Djokovic, atual número um do mundo (que cairá para segundo ao final de junho), teve uma excelente campanha em 2021 e uma campanha ruim em 2022. 
+Pelo gráfico, podemos ver que, se todos os jogadores parassem de jogar agora, Nadal se tornaria o primeiro colocado por volta do mês de setembro de 2022. Isso ocorreria porque o Nadal teve uma campanha muito boa em 2022, ganhando o Australian Open e o French Open (Roland Garros). Já Novak Djokovic, atual número um do mundo (que cairá para segundo ao final de junho), teve uma excelente campanha em 2021 e uma campanha ruim em 2022. 
 
 ## Comunicação
 
