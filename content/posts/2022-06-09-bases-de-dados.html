@@ -1,0 +1,262 @@
+---
+title: "Bases de dados: para praticar e ensinar"
+date: "2022-06-09"
+tags: ["ensino", "bases de dados", "importação"]
+categories: ["tutoriais"]
+image: "images/posts/banner/welcome_to_rstats.jpeg"
+author: ["Beatriz", "Tereza"]
+summary: "Quer saber como acessar várias bases de dados com R?"
+draft: false
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Neste post, listamos alguns lugares onde encontrar bases de dados interessantes para quem está aprendendo e quer praticar com novas bases, e também para quem quer ensinar R e procura bases de dados para criar exemplos!</p>
+<p>O post será separado em: bases em português (sejam elas traduzidas ou originais), e em inglês.</p>
+</div>
+<div id="bases-de-dados-em-português" class="section level2">
+<h2>Bases de dados em Português</h2>
+<div id="pacote-dados" class="section level3">
+<h3>Pacote dados</h3>
+<p>O pacote está <strong>disponível no CRAN</strong> e pode ser instalado utilizando o seguinte código:</p>
+<pre class="r"><code>install.packages(&quot;dados&quot;)</code></pre>
+<p><a href="https://blog.curso-r.com/posts/2022-04-06-pacote-dados/">Escrevemos um post recentemente focado neste pacote, então recomendamos checar lá</a>!
+Para acessar as bases de dados, utilize a função <code>library(dados)</code> ou use com <code>dados::nome_da_base</code>.
+Por exemplo:</p>
+<pre class="r"><code>library(dados)
+dplyr::glimpse(dados::pixar_filmes)
+## Rows: 27
+## Columns: 5
+## $ ordem_lancamento         &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, …
+## $ filme                    &lt;chr&gt; &quot;Toy Story - Um Mundo de Aventuras&quot;, &quot;Vida de…
+## $ data_lancamento          &lt;date&gt; 1995-11-22, 1998-11-25, 1999-11-24, 2001-11-…
+## $ duracao                  &lt;dbl&gt; 81, 95, 92, 92, 100, 115, 117, 111, 98, 96, 1…
+## $ classificacao_indicativa &lt;chr&gt; &quot;Livre&quot;, &quot;Livre&quot;, &quot;Livre&quot;, &quot;Livre&quot;, &quot;Livre&quot;, …</code></pre>
+</div>
+<div id="base-dos-dados" class="section level3">
+<h3>Base dos dados</h3>
+<p>A <a href="https://staging.basedosdados.org/">Base dos Dados</a> é um projeto super interessante.
+Lá, são disponibilizadas diversas bases públicas, e várias delas já estão tratadas, como: Relação Anual de Informações Sociais (RAIS), Índice de Desenvolvimento da Educação Básica (Ideb), Censo Demográfico, entre outros!</p>
+<p>Consulte as bases tratadas <a href="https://staging.basedosdados.org/dataset?resource_type=bdm_table&amp;order_by=score">neste link</a>.</p>
+<p>Os dados são disponibilizados em um BigQuery, portanto o acesso tem algumas etapas a mais.
+Recomendamos olhar os seguintes links:</p>
+<ul>
+<li><a href="https://blog.curso-r.com/posts/2021-05-28-basedosdados/">Acessando bases públicas em R: o pacote basedosdados</a></li>
+<li><a href="https://www.youtube.com/watch?v=8D4jK-YCxLU&amp;t=2688s">Live da Curso-R - Unboxing do pacote basedosdados</a></li>
+<li><a href="https://basedosdados.github.io/mais/">Documentação do BD+</a></li>
+</ul>
+</div>
+<div id="pacote-de-bases-usadas-em-cursos-da-curso-r" class="section level3">
+<h3>Pacote de bases usadas em cursos da Curso-R</h3>
+<p>Algumas bases de dados foram traduzidas por pessoas da Curso-R, e disponibilizadas nesse pacote para serem usadas nos cursos.
+Esse pacote não está disponível no CRAN, então caso queira instalar, utilize os seguintes comandos:</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;curso-r/basesCursoR&quot;)</code></pre>
+<p>Para verificar quais são as bases disponíveis no pacote, utilize a seguinte função: <code>basesCursoR::bases_disponiveis()</code>.</p>
+<pre class="r"><code>basesCursoR::bases_disponiveis()
+##  [1] &quot;adult&quot;           &quot;airbnb_rj&quot;       &quot;ames&quot;            &quot;cetesb&quot;         
+##  [5] &quot;covid&quot;           &quot;credito&quot;         &quot;imdb_avaliacoes&quot; &quot;imdb_completa&quot;  
+##  [9] &quot;imdb_pessoas&quot;    &quot;imdb_top_cast&quot;   &quot;imdb&quot;            &quot;pokemon&quot;        
+## [13] &quot;ssp&quot;</code></pre>
+<p>Para carregar alguma base do pacote, utilize a função <code>basesCursoR::pegar_base("nome_da_base")</code>, por exemplo:</p>
+<pre class="r"><code>pokemon &lt;- basesCursoR::pegar_base(&quot;pokemon&quot;)
+dplyr::glimpse(pokemon)
+## Rows: 949
+## Columns: 20
+## $ id              &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…
+## $ id_especie      &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…
+## $ id_geracao      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ pokemon         &lt;chr&gt; &quot;bulbasaur&quot;, &quot;ivysaur&quot;, &quot;venusaur&quot;, &quot;charmander&quot;, &quot;cha…
+## $ altura          &lt;dbl&gt; 0.7, 1.0, 2.0, 0.6, 1.1, 1.7, 0.5, 1.0, 1.6, 0.3, 0.7,…
+## $ peso            &lt;dbl&gt; 6.9, 13.0, 100.0, 8.5, 19.0, 90.5, 9.0, 22.5, 85.5, 2.…
+## $ exp_base        &lt;dbl&gt; 64, 142, 236, 62, 142, 240, 63, 142, 239, 39, 72, 178,…
+## $ tipo_1          &lt;chr&gt; &quot;grama&quot;, &quot;grama&quot;, &quot;grama&quot;, &quot;fogo&quot;, &quot;fogo&quot;, &quot;fogo&quot;, &quot;ág…
+## $ tipo_2          &lt;chr&gt; &quot;venenoso&quot;, &quot;venenoso&quot;, &quot;venenoso&quot;, NA, NA, &quot;voador&quot;, …
+## $ hp              &lt;dbl&gt; 45, 60, 80, 39, 58, 78, 44, 59, 79, 45, 50, 60, 40, 45…
+## $ ataque          &lt;dbl&gt; 49, 62, 82, 52, 64, 84, 48, 63, 83, 30, 20, 45, 35, 25…
+## $ defesa          &lt;dbl&gt; 49, 63, 83, 43, 58, 78, 65, 80, 100, 35, 55, 50, 30, 5…
+## $ ataque_especial &lt;dbl&gt; 65, 80, 100, 60, 80, 109, 50, 65, 85, 20, 25, 90, 20, …
+## $ defesa_especial &lt;dbl&gt; 65, 80, 100, 50, 65, 85, 64, 80, 105, 20, 25, 80, 20, …
+## $ velocidade      &lt;dbl&gt; 45, 60, 80, 65, 80, 100, 43, 58, 78, 45, 30, 70, 50, 3…
+## $ cor_1           &lt;chr&gt; &quot;#78C850&quot;, &quot;#78C850&quot;, &quot;#78C850&quot;, &quot;#F08030&quot;, &quot;#F08030&quot;,…
+## $ cor_2           &lt;chr&gt; &quot;#A040A0&quot;, &quot;#A040A0&quot;, &quot;#A040A0&quot;, NA, NA, &quot;#A890F0&quot;, NA…
+## $ cor_final       &lt;chr&gt; &quot;#81A763&quot;, &quot;#81A763&quot;, &quot;#81A763&quot;, NA, NA, &quot;#DE835E&quot;, NA…
+## $ url_imagem      &lt;chr&gt; &quot;https://raw.githubusercontent.com/phalt/pokeapi/maste…
+## $ url_icone       &lt;chr&gt; &quot;//cdn.bulbagarden.net/upload/e/ec/001MS.png&quot;, &quot;//cdn.…</code></pre>
+</div>
+</div>
+<div id="bases-de-dados-em-inglês" class="section level2">
+<h2>Bases de dados em Inglês</h2>
+<div id="bases-do-tidytuesday" class="section level3">
+<h3>Bases do tidytuesday</h3>
+<p>O <a href="https://github.com/rfordatascience/tidytuesday">tidytuesday</a> é um projeto bem legal da comunidade de R!
+Toda semana é disponibilizada uma base de dados.
+QUALQUER pessoa que queira participar pode participar, fazendo uma visualização com a base disponibilizada!</p>
+<p>Um lugar legal para ver as visualizações criadas pelas pessoas é no twitter, pesquisando a hashtag <a href="https://twitter.com/search?q=tidytuesday&amp;src=typed_query"><code>#tidytuesday</code></a>.</p>
+<p>É possível consultar a lista de bases de dados neste link: <a href="https://github.com/rfordatascience/tidytuesday#datasets">tidytuesday datasets</a>. Ao entrar na página de uma base de dados, o código para carregar a mesma é mostrado. Por exemplo: para usar os dados de <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-01-25/readme.md">Jogos de tabuleiro</a>, podemos usar o seguinte código:</p>
+<pre class="r"><code>jogos_ratings &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/ratings.csv&#39;)
+
+dplyr::glimpse(jogos_ratings)
+## Rows: 21,831
+## Columns: 10
+## $ num           &lt;dbl&gt; 105, 189, 428, 72, 103, 191, 100, 3, 15, 35, 30, 182, 13…
+## $ id            &lt;dbl&gt; 30549, 822, 13, 68448, 36218, 9209, 178900, 167791, 1733…
+## $ name          &lt;chr&gt; &quot;Pandemic&quot;, &quot;Carcassonne&quot;, &quot;Catan&quot;, &quot;7 Wonders&quot;, &quot;Domini…
+## $ year          &lt;dbl&gt; 2008, 2000, 1995, 2010, 2008, 2004, 2015, 2016, 2015, 20…
+## $ rank          &lt;dbl&gt; 106, 190, 429, 73, 104, 192, 101, 4, 16, 36, 31, 183, 14…
+## $ average       &lt;dbl&gt; 7.59, 7.42, 7.14, 7.74, 7.61, 7.41, 7.60, 8.42, 8.11, 7.…
+## $ bayes_average &lt;dbl&gt; 7.487, 7.309, 6.970, 7.634, 7.499, 7.305, 7.508, 8.274, …
+## $ users_rated   &lt;dbl&gt; 108975, 108738, 108024, 89982, 81561, 76171, 74419, 7421…
+## $ url           &lt;chr&gt; &quot;/boardgame/30549/pandemic&quot;, &quot;/boardgame/822/carcassonne…
+## $ thumbnail     &lt;chr&gt; &quot;https://cf.geekdo-images.com/S3ybV1LAp-8SnHIXLLjVqA__mi…</code></pre>
+</div>
+<div id="pacote-islr" class="section level3">
+<h3>Pacote ISLR</h3>
+<p>O pacote ISLR acompanha o livro <a href="https://www.statlearning.com/">Introduction to Statistical Learning</a> (disponível <a href="https://hastie.su.domains/ISLR2/ISLRv2_website.pdf">gratuitamente aqui</a>).
+Apresenta bases de dados interessantes para treinar modelagem, acompanhando os exemplos do livro.</p>
+<p>Você pode instalar o pacote através do CRAN, usando a função <code>install.packages()</code>:</p>
+<pre class="r"><code>install.packages(&quot;ISLR&quot;)</code></pre>
+<p>Essas são as bases de dados disponíveis no pacote, que podem ser acessadas utilizando a função <code>library(ISLR)</code> ou use com <code>ISLR::nome_da_base</code>.
+:</p>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Nome
+</th>
+<th style="text-align:left;">
+Descrição
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Auto
+</td>
+<td style="text-align:left;">
+Auto Data Set
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Caravan
+</td>
+<td style="text-align:left;">
+The Insurance Company (TIC) Benchmark
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carseats
+</td>
+<td style="text-align:left;">
+Sales of Child Car Seats
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+College
+</td>
+<td style="text-align:left;">
+U.S. News and World Report’s College Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Credit
+</td>
+<td style="text-align:left;">
+Credit Card Balance Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Default
+</td>
+<td style="text-align:left;">
+Credit Card Default Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hitters
+</td>
+<td style="text-align:left;">
+Baseball Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Khan
+</td>
+<td style="text-align:left;">
+Khan Gene Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NCI60
+</td>
+<td style="text-align:left;">
+NCI 60 Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OJ
+</td>
+<td style="text-align:left;">
+Orange Juice Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Portfolio
+</td>
+<td style="text-align:left;">
+Portfolio Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Smarket
+</td>
+<td style="text-align:left;">
+S&amp;P Stock Market Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wage
+</td>
+<td style="text-align:left;">
+Mid-Atlantic Wage Data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weekly
+</td>
+<td style="text-align:left;">
+Weekly S&amp;P Stock Market Data
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="kaggle" class="section level3">
+<h3>Kaggle</h3>
+<p>O <a href="https://www.kaggle.com/">Kaggle</a> é uma plataforma onde é possível participar de competições de Machine Learning!</p>
+<p>Por lá, também estão disponíveis diversas bases de dados, na <a href="https://www.kaggle.com/datasets">página de datasets</a>. Um ponto importante para citar é que qualquer pessoa consegue fazer upload de uma base lá no Kaggle, então pesquise com calma e veja as bases mais bem avaliadas no tema que você quer explorar! Depois que escolher, é possível baixar a base de dados e importar para o R.</p>
+</div>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Esperamos que este post seja interessante para quem está aprendendo e quer praticar com novas bases, e também para quem quer ensinar R e procura bases de dados para criar exemplos!
+Bons estudos e até a próxima!</p>
+</div>
