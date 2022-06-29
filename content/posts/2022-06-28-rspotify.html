@@ -1,0 +1,2265 @@
+---
+title: "Tudo sobre o pacote {Rspotify}"
+date: "2022-06-28"
+tags: ["tutoriais"]
+categories: ["tutoriais"]
+image: "images/posts/banner/2022-06-28-rspotify.jpg"
+author: ["Tereza"]
+summary: "alguma coisa aqui"
+draft: false
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<p>Olá! Quem me conhece sabe que sou um pouco viciada em música, e no contexto do R não poderia ser diferente! hahaha</p>
+<p>Faz um tempo que venho mexendo com a API do Spotify no R. Primeiro comecei com o pacote <a href="https://cran.r-project.org/web/packages/Rspotify/index.html">Rspotify</a>, e depois conheci o <a href="https://www.rcharlie.com/spotifyr/">spotifyr</a> (e foi aí que surtei de vez, descobri que dá pra fazer absolutamente tudo de dentro do R: criar playlists, adicionar músicas em playlists, ver quais foram as minhas últimas músicas escutadas, e tudo mais que você imaginar)</p>
+<p>Como o acesso a esses pacotes não é nada trivial, resolvi escrever esse post pra mostrar de uma vez por todas como isso é feito (eu sofri bastante na época que comecei a mexer com eles). Vou mostrar como obter os tokens de acesso do Spotify, e falar um pouco sobre as funções do <code>Rspotify</code> também.</p>
+<p>Nesse post vou focar só nas funções do <code>Rspotify</code> (por serem mais simples), mas pretendo fazer um post dedicado para o <code>spotifyr</code> mais pra frente.</p>
+<div id="obtendo-os-tokens-de-acesso-do-spotify" class="section level2">
+<h2>Obtendo os tokens de acesso do Spotify</h2>
+<p>Primeiro, instale o pacote <code>Rspotify</code> através do comando</p>
+<pre class="r"><code>install.packages(&quot;Rspotify&quot;)</code></pre>
+<p>Agora, carregue o pacote</p>
+<pre class="r"><code>library(Rspotify)</code></pre>
+<p>Note que todas as funções do <code>Rspotify</code> exigem o argumento <strong>token</strong>.</p>
+<p>Para obter esse token, siga os seguintes passos:</p>
+<p>(obs: estou assumindo que você possui uma conta no Spotify. Não precisa ser premium, então caso não possua ainda, é só criar uma)</p>
+<p>1 - Entre <a href="https://developer.spotify.com/dashboard/">nesse link</a></p>
+<p>Você será redirecionado para essa página:</p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify001.png" style="display: block; margin: auto;" /></p>
+<p>2 - Clique em <strong>Log in</strong> e faça o login com a sua conta do Spotify</p>
+<p>3 - Agora, clique em <strong>Create an app</strong></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify002.png" style="display: block; margin: auto;" /></p>
+<p>4 - Dê um nome e uma descrição para o seu app, assinale a caixinha de Termos de Uso, e então, clique em <strong>Create</strong></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify003.png" style="display: block; margin: auto;" /></p>
+<p>5 - Depois de criar o app, você será redirecionado para essa tela. Clique em <strong>edit settings</strong></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify004.png" style="display: block; margin: auto;" /></p>
+<p>6 - Preencha o campo <strong>Redirect URIs</strong> com “<a href="http://localhost:1410/" class="uri">http://localhost:1410/</a>” (sem as aspas), e clique em <strong>Add</strong></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify005.png" style="display: block; margin: auto;" /></p>
+<p>A tela deve ficar assim:</p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify006.png" style="display: block; margin: auto;" /></p>
+<p>7 - Agora, role até o final da página e clique em <strong>Save</strong></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify007.png" style="display: block; margin: auto;" /></p>
+<p>8 - Clique no botão <strong>Show client secret</strong></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify008.png" style="display: block; margin: auto;" /></p>
+<p>Veja que na tela estão o <strong>Client ID</strong> e o <strong>Client Secret</strong>. São esse dois tokens que usaremos para ter acesso às funções do <code>Rspotify</code>.</p>
+<p>Agora, com o R aberto e o pacote <code>Rspotify</code> carregado, rode o seguinte código, substituindo o segundo e terceito argumentos pelos tokens <strong>Client ID</strong> e <strong>Client Secret</strong>, respectivamente:</p>
+<pre class="r"><code>keys &lt;- spotifyOAuth(&quot;nome_qualquer_aqui&quot;,
+                     &quot;cole_aqui_seu_client_id&quot;,
+                     &quot;cole_aqui_seu_client_secret&quot;)</code></pre>
+<p>(obs: os três argumentos da função são do tipo character, então devem estar entre aspas; o primeiro argumento é livre)</p>
+<p>Você será redirecionado para uma página de autorização do Spotify no seu navegador. Clique em <strong>Aceito</strong> e volte para o R.</p>
+<p>Pronto! Agora é só usar as funções do <code>Rspotify</code>, usando <code>token = keys</code> como argumento em todas elas.</p>
+</div>
+<div id="conhecendo-as-funções-do-rspotify" class="section level2">
+<h2>Conhecendo as funções do Rspotify</h2>
+<p>O funcionamento das funções está explicado na <a href="https://cran.r-project.org/web/packages/Rspotify/Rspotify.pdf">documentação do pacote</a>, então vou mostrar só alguns exemplos, sem me preocupar em explicar cada função detalhadamente.</p>
+<p>Para os exemplos, vou usar músicas e bandas brasileiras que gosto, então já fica aí a recomendação pra quem quiser! hahaha</p>
+<div id="searchartist" class="section level3">
+<h3>searchArtist</h3>
+<p>A função <code>searchArtist</code> pede como argumentos o <em>nome do artista/banda</em>, e o <em>token</em> (aquele que acabamos de obter). Ela retorna um data frame no qual cada linha é referente a um artista (relacionado com a busca feita). O <em>id do artista</em> é especialmente importante, pois algumas funções desse pacote exigem o id como argumento, como veremos em seguida.</p>
+<pre class="r"><code>searchArtist(&quot;O Grilo&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+artist
+</th>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:right;">
+popularity
+</th>
+<th style="text-align:right;">
+followers
+</th>
+<th style="text-align:left;">
+genres
+</th>
+<th style="text-align:left;">
+type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+O Grilo
+</td>
+<td style="text-align:left;">
+22KEpOwThQ5q1DGochfayO
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+74930
+</td>
+<td style="text-align:left;">
+rock alternativo brasileiro
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Banda Cumade Selvira &amp; Os Cantiga de Grilo
+</td>
+<td style="text-align:left;">
+504zftG42qkU6Gzw8Ai3mC
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kamaitachi
+</td>
+<td style="text-align:left;">
+1ISc8zhrqxd5WrJMkMMLSm
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+1031552
+</td>
+<td style="text-align:left;">
+musica triste brasileira
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O Grito
+</td>
+<td style="text-align:left;">
+0CzL84J7lB5sWycref43lN
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+291
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grilo
+</td>
+<td style="text-align:left;">
+2s1cOPGtfbCeYvxibRHtew
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O Gringo Sou Eu
+</td>
+<td style="text-align:left;">
+7Da1dXVGp2bjqkVTKQ4W7L
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+El Grilo Ensamble Vocal
+</td>
+<td style="text-align:left;">
+2NHB6zVcmBv8034ZNpBkzU
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+295
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O. Grimm
+</td>
+<td style="text-align:left;">
+59SQwI32qROXuzlHTu7RS8
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O. Grinbergs
+</td>
+<td style="text-align:left;">
+2E2MSLcsX2lYOTVMr2DKcq
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+668
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="getrelated" class="section level3">
+<h3>getRelated</h3>
+<p>A função <code>getRelated</code> pede como argumentos o <em>nome do artista/banda</em>, e o <em>token</em>. Ela retorna algumas informações sobre os artistas relacionados com o artista especificado.</p>
+<pre class="r"><code>getRelated(&quot;O Grilo&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:right;">
+popularity
+</th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:right;">
+followers
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Walfredo em Busca da Simbiose
+</td>
+<td style="text-align:left;">
+6PzQC3kTcWcJcH8p4d7yJl
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+8842
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Abacaxepa
+</td>
+<td style="text-align:left;">
+37YBTVhchsMr6ekdUHEKRy
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+15088
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Daparte
+</td>
+<td style="text-align:left;">
+6D5hUhZncLiNMeE3gq9BhL
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+17384
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lupa
+</td>
+<td style="text-align:left;">
+7yct0AdXUgrHi83xwSt902
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+7405
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nanasai
+</td>
+<td style="text-align:left;">
+67PBrqP0nECUumF2AQ8G6S
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+25626
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Selvagens à Procura de Lei
+</td>
+<td style="text-align:left;">
+093ybF4c81CndQe6qWtc8S
+</td>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+125164
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scatolove
+</td>
+<td style="text-align:left;">
+0icMce3ZQU1HdA8gGHo5Rg
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+88050
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cidade Dormitório
+</td>
+<td style="text-align:left;">
+3hnNIsiWatVyHen6mz79sf
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+30869
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Terno Rei
+</td>
+<td style="text-align:left;">
+7c8kQb9AUntvapfnuC3IhF
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+89239
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Zimbra
+</td>
+<td style="text-align:left;">
+11xX6bMCvpstEFOyx8lxYg
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:left;">
+artist
+</td>
+<td style="text-align:right;">
+111790
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="getartist" class="section level3">
+<h3>getArtist</h3>
+<p>Essa função pede como argumentos o <em>id do artista</em>, e o <em>token</em>. Ela retorna algumas informações sobre esse artista. No caso, estou usando o id da banda <a href="https://open.spotify.com/artist/22KEpOwThQ5q1DGochfayO?si=b90c470678e14818"><em>O Grilo</em></a>, que foi obtido acima.</p>
+<pre class="r"><code>getArtist(&quot;22KEpOwThQ5q1DGochfayO&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:right;">
+popularity
+</th>
+<th style="text-align:right;">
+followers
+</th>
+<th style="text-align:left;">
+genres
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+O Grilo
+</td>
+<td style="text-align:left;">
+22KEpOwThQ5q1DGochfayO
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+74930
+</td>
+<td style="text-align:left;">
+rock alternativo brasileiro
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gettoptracks" class="section level3">
+<h3>getTopTracks</h3>
+<p>Essa função pede como argumentos o <em>id do artista</em>, a especificação de <em>um país</em>, e o <em>token</em>. Ela retorna as músicas mais populares daquele artista no país em questão (e algumas informações sobre elas)</p>
+<pre class="r"><code>getTopTracks(&quot;22KEpOwThQ5q1DGochfayO&quot;, country = &quot;BR&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+artist_id
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:right;">
+popularity
+</th>
+<th style="text-align:right;">
+duration_ms
+</th>
+<th style="text-align:right;">
+track_number
+</th>
+<th style="text-align:left;">
+available_markets
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2DllnWTQNjh5NDN1A2ZtnH
+</td>
+<td style="text-align:left;">
+Serenata Existencialista
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+163209
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+61keC2MVAbhqm3RoAVSfI6
+</td>
+<td style="text-align:left;">
+Sambinha
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+180202
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+43MdgqLdKQJl1Azdq0Shpc
+</td>
+<td style="text-align:left;">
+Trela
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+187482
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6btBKvH1OlMbwW9lU1RGIo
+</td>
+<td style="text-align:left;">
+Herói do Futuro
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+232373
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2JNXbqa8e0aQ7Trert8N8D
+</td>
+<td style="text-align:left;">
+Meu Amor
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+193440
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6zHoaw5RcWAcaWCSDzKdlj
+</td>
+<td style="text-align:left;">
+Pra Você Gostar de Mim
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+184799
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6aEQ365jPX55xfpA8OFfki
+</td>
+<td style="text-align:left;">
+Onde Flor
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+192546
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2682XIBY8wcjL9UJ9voUa8
+</td>
+<td style="text-align:left;">
+Contramão
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+172623
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4aEDdWboWAKt5UYIFWqRwf
+</td>
+<td style="text-align:left;">
+Inês
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+173880
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5ayHgfHVet0M47OC4kTrTK
+</td>
+<td style="text-align:left;">
+Tira a Roupa
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+191899
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="getalbums" class="section level3">
+<h3>getAlbums</h3>
+<p>A função <code>getAlbums</code> pede como argumentos o <em>id do artista/banda</em>, e o <em>token</em>. Ela retorna um data frame no qual cada linha é referente a um album do artista/banda. O <em>id de cada álbum</em> também é importante caso queira obter mais informações sobre o álbum.</p>
+<pre class="r"><code>getAlbums(&quot;22KEpOwThQ5q1DGochfayO&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+album_type
+</th>
+<th style="text-align:left;">
+available_markets
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0I7bofr4iucY3LXUPKv9cz
+</td>
+<td style="text-align:left;">
+Você Não Sabe de Nada
+</td>
+<td style="text-align:left;">
+album
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="getalbuminfo" class="section level3">
+<h3>getAlbumInfo</h3>
+<p>Essa função pede como argumentos o <em>id do álbum</em>, e o <em>token</em>. Ela retorna algumas informações sobre o álbum.</p>
+<pre class="r"><code>getAlbumInfo(&quot;0I7bofr4iucY3LXUPKv9cz&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:left;">
+artist
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+label
+</th>
+<th style="text-align:right;">
+popularity
+</th>
+<th style="text-align:left;">
+release_date
+</th>
+<th style="text-align:left;">
+album_type
+</th>
+<th style="text-align:right;">
+track_total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0I7bofr4iucY3LXUPKv9cz
+</td>
+<td style="text-align:left;">
+O Grilo
+</td>
+<td style="text-align:left;">
+Você Não Sabe de Nada
+</td>
+<td style="text-align:left;">
+Rockambole
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:left;">
+2021-03-26
+</td>
+<td style="text-align:left;">
+album
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="getalbum" class="section level3">
+<h3>getAlbum</h3>
+<p>Essa função pede como argumentos o <em>id do álbum</em>, e o <em>token</em>. Ela retorna informações sobre cada música do álbum.</p>
+<pre class="r"><code>getAlbum(&quot;0I7bofr4iucY3LXUPKv9cz&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+duration_ms
+</th>
+<th style="text-align:left;">
+track_number
+</th>
+<th style="text-align:left;">
+disc_number
+</th>
+<th style="text-align:left;">
+available_markets
+</th>
+<th style="text-align:left;">
+preview_url
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+43MdgqLdKQJl1Azdq0Shpc
+</td>
+<td style="text-align:left;">
+Trela
+</td>
+<td style="text-align:left;">
+187482
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/7fecbb599cb7f86dfd86f2f145ce9b1979a49d70?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/7fecbb599cb7f86dfd86f2f145ce9b1979a49d70?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7fT4wCxnKI1FFb0QnQ4nX3
+</td>
+<td style="text-align:left;">
+Guitarrada
+</td>
+<td style="text-align:left;">
+154912
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/c8ed5a257adac75a8fd7ef00202867baf71968cc?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/c8ed5a257adac75a8fd7ef00202867baf71968cc?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2682XIBY8wcjL9UJ9voUa8
+</td>
+<td style="text-align:left;">
+Contramão
+</td>
+<td style="text-align:left;">
+172623
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/0156d027e420d79acb24faa0775547cd2f779eb8?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/0156d027e420d79acb24faa0775547cd2f779eb8?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2XXBtwtgdfQ3rGvgweteRF
+</td>
+<td style="text-align:left;">
+Tudo e Mais um Pouco
+</td>
+<td style="text-align:left;">
+166390
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/ef9a1f304dc853504e2867fb31c3a0acc114a232?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/ef9a1f304dc853504e2867fb31c3a0acc114a232?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5Vjhpp2vftIrYk3Fija7j7
+</td>
+<td style="text-align:left;">
+Meu Pior Amigo
+</td>
+<td style="text-align:left;">
+217737
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/4b6d85f4de13e716ea1f9983aec5e349c777e737?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/4b6d85f4de13e716ea1f9983aec5e349c777e737?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6tjsjuI6eZX1XpwrehfRRg
+</td>
+<td style="text-align:left;">
+Infinito (-1)
+</td>
+<td style="text-align:left;">
+204792
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/46ee8ed72fdb8372b8d37ad206f4cf5b34ebd80e?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/46ee8ed72fdb8372b8d37ad206f4cf5b34ebd80e?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6yPZTaETPJ6Juy00huOb55
+</td>
+<td style="text-align:left;">
+Você Não Sabe de Nada
+</td>
+<td style="text-align:left;">
+99378
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/eac1f0862b5aa377cba6831398fba9cdbbf7e517?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/eac1f0862b5aa377cba6831398fba9cdbbf7e517?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2JNXbqa8e0aQ7Trert8N8D
+</td>
+<td style="text-align:left;">
+Meu Amor
+</td>
+<td style="text-align:left;">
+193440
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/85df60a314644d579019ab11cd1d8574d9996a24?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/85df60a314644d579019ab11cd1d8574d9996a24?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4KC49pnwukN8SVse2tzi7L
+</td>
+<td style="text-align:left;">
+Vou Levar
+</td>
+<td style="text-align:left;">
+198197
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/699e8e652d0c1bac360eb256940e48b491565f14?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/699e8e652d0c1bac360eb256940e48b491565f14?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1BcrtC8bB8D0Dj0waoD6uy
+</td>
+<td style="text-align:left;">
+e daí, eu sei lá ¯_(&lt;U+30C4&gt;)/¯
+</td>
+<td style="text-align:left;">
+46566
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/0c9b9c2db58981d27e6afb7c547e76ac64ae7d17?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/0c9b9c2db58981d27e6afb7c547e76ac64ae7d17?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6e3BWdeIaXTt0mOkzKKHVA
+</td>
+<td style="text-align:left;">
+Adeus
+</td>
+<td style="text-align:left;">
+262198
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/9d9995ab4e0bdee69a1031f49497db5d6f9b3fce?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/9d9995ab4e0bdee69a1031f49497db5d6f9b3fce?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6aEQ365jPX55xfpA8OFfki
+</td>
+<td style="text-align:left;">
+Onde Flor
+</td>
+<td style="text-align:left;">
+192546
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/d80e37677128ab1e0392904a241458e33036951f?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/d80e37677128ab1e0392904a241458e33036951f?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+70Sw1EWhOn9TUkUAAAFWAE
+</td>
+<td style="text-align:left;">
+Malabarista de Granadas - Bonus Track
+</td>
+<td style="text-align:left;">
+176032
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+AD, AE, AG, AL, AM, AO, AR, AT, AU, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CG, CH, CI, CL, CM, CO, CR, CV, CW, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, ES, FI, FJ, FM, FR, GA, GB, GD, GE, GH, GM, GN, GQ, GR, GT, GW, GY, HK, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM, KN, KR, KW, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MG, MH, MK, ML, MN, MO, MR, MT, MU, MV, MW, MX, MY, MZ, NA, NE, NG, NI, NL, NO, NP, NR, NZ, OM, PA, PE, PG, PH, PK, PL, PS, PT, PW, PY, QA, RO, RS, RW, SA, SB, SC, SE, SG, SI, SK, SL, SM, SN, SR, ST, SV, SZ, TD, TG, TH, TJ, TL, TN, TO, TR, TT, TV, TW, TZ, UA, UG, US, UY, UZ, VC, VE, VN, VU, WS, XK, ZA, ZM, ZW
+</td>
+<td style="text-align:left;">
+<a href="https://p.scdn.co/mp3-preview/a3ba0939a9d55cc315c459cfdf875873a43f50da?cid=d31252a2880546b3ba640d5d64b7e652" class="uri">https://p.scdn.co/mp3-preview/a3ba0939a9d55cc315c459cfdf875873a43f50da?cid=d31252a2880546b3ba640d5d64b7e652</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="searchplaylist" class="section level3">
+<h3>searchPlaylist</h3>
+<p>A função <code>searchPlaylist</code> pede como argumentos o <em>nome de uma playlist</em>, e o <em>token</em>. Ela retorna um data frame no qual cada linha é referente a uma playlist (relacionada com a busca feita). Assim como os outros casos, o <em>id da playlist</em> também é importante caso queira obter mais informações sobre ela.</p>
+<p>No caso, vamos procurar a playlist <a href="https://open.spotify.com/playlist/4faz4FVeL328piox0lz7UF?si=046d21d978d14cf1"><em>“Uma Música Por Dia”</em></a>, que é uma playlist que atualizo diariamente. (obs: meu id de usuário no spotify é <em>“therezzza”</em>)</p>
+<pre class="r"><code>searchPlaylist(&quot;Uma Música Por Dia&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:right;">
+tracks
+</th>
+<th style="text-align:left;">
+owner
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+3buJd0YAjAM0kuPnrQMFJ7
+</td>
+<td style="text-align:left;">
+Uma Música por Dia
+</td>
+<td style="text-align:right;">
+731
+</td>
+<td style="text-align:left;">
+allanclaudino
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4faz4FVeL328piox0lz7UF
+</td>
+<td style="text-align:left;">
+Uma Música Por Dia
+</td>
+<td style="text-align:right;">
+179
+</td>
+<td style="text-align:left;">
+therezzza
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+575JlxqDooZLZGVQyPO5QV
+</td>
+<td style="text-align:left;">
+Músicas para dormir, louvar, orar e devocional &lt;U+0001F64F&gt;&lt;U+0001F3FB&gt;&lt;U+2728&gt;&lt;U+2764&gt;&lt;U+FE0F&gt;#1
+</td>
+<td style="text-align:right;">
+147
+</td>
+<td style="text-align:left;">
+31slnxm43mhcf6lle5nqucq2inha
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+26ZQg5BBS4cSgCQpskRaiO
+</td>
+<td style="text-align:left;">
+Uma música por dia
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:left;">
+oliveiraarnon
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2OCnbwpAiu1j0i2tWUj3w2
+</td>
+<td style="text-align:left;">
+Uma música por dia
+</td>
+<td style="text-align:right;">
+288
+</td>
+<td style="text-align:left;">
+1193062474
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2sC8NL6bwlecjjtHokZYns
+</td>
+<td style="text-align:left;">
+Todo dia uma música em 2022
+</td>
+<td style="text-align:right;">
+179
+</td>
+<td style="text-align:left;">
+2c71zh1ergjwcfdilvypipwlx
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2BX2mKiEzgtAcbcwLR89iD
+</td>
+<td style="text-align:left;">
+uma música por dia
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+nvymfjifcztrj905o6epne2at
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1sqHtyK0w3zZ5POn6ZayAE
+</td>
+<td style="text-align:left;">
+Uma Musica Boa por Dia
+</td>
+<td style="text-align:right;">
+591
+</td>
+<td style="text-align:left;">
+thiagogsimonetti
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0B5jPflKKB2xxpOA9nlGYH
+</td>
+<td style="text-align:left;">
+Uma música por dia
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:left;">
+31lkfpkfdkhaci2644cbwlokaspe
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0Wlh0n3NR4sDwWu1xqMemG
+</td>
+<td style="text-align:left;">
+uma música por dia
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:left;">
+12167607547
+</td>
+</tr>
+</tbody>
+</table>
+<p>Veja que a playlist que eu queria encontrar está na segunda linha do data frame, vou usá-la na próxima função!</p>
+</div>
+<div id="getplaylistsongs" class="section level3">
+<h3>getPlaylistSongs</h3>
+<p>Essa função pede como argumentos o <em>id do usuário</em>, o <em>id da playlist</em> e o <em>token</em>, e retorna um data frame com as músicas da playlist (e algumas informações adicionais sobre elas)</p>
+<pre class="r"><code>getPlaylistSongs(&quot;therezzza&quot;, &quot;4faz4FVeL328piox0lz7UF&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+tracks
+</th>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:right;">
+popularity
+</th>
+<th style="text-align:left;">
+artist
+</th>
+<th style="text-align:left;">
+artist_full
+</th>
+<th style="text-align:left;">
+artist_id
+</th>
+<th style="text-align:left;">
+album
+</th>
+<th style="text-align:left;">
+album_id
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Por Supuesto
+</td>
+<td style="text-align:left;">
+7xVSNhAUQhUIpwfR6lTOwA
+</td>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:left;">
+Marina Sena
+</td>
+<td style="text-align:left;">
+Marina Sena
+</td>
+<td style="text-align:left;">
+0nFdWpwl7h6fp3ADRyG14L
+</td>
+<td style="text-align:left;">
+De Primeira
+</td>
+<td style="text-align:left;">
+6bN5oG5wKJJqO0j7OhXVNt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Metamorfose Ambulante
+</td>
+<td style="text-align:left;">
+2Yk0HvfTaijA47aM0Fj88u
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:left;">
+Raul Seixas
+</td>
+<td style="text-align:left;">
+Raul Seixas
+</td>
+<td style="text-align:left;">
+7jrRQZg4FZq6dwpi3baKcu
+</td>
+<td style="text-align:left;">
+“Krig-Ha, Bandolo”
+</td>
+<td style="text-align:left;">
+2xRddGxRH0KdDWLNE5b0iu
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Police Station
+</td>
+<td style="text-align:left;">
+6DfWymHzCYOH2ABUuHFaMe
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:left;">
+Red Hot Chili Peppers
+</td>
+<td style="text-align:left;">
+Red Hot Chili Peppers
+</td>
+<td style="text-align:left;">
+0L8ExT028jH3ddEcZwqJJ5
+</td>
+<td style="text-align:left;">
+I’m with You
+</td>
+<td style="text-align:left;">
+5wZtSIvijWCMc1vlPFqAyB
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tremores
+</td>
+<td style="text-align:left;">
+5cCFZeltndzRmZ5cjtQdXs
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+Lau e Eu
+</td>
+<td style="text-align:left;">
+Lau e Eu
+</td>
+<td style="text-align:left;">
+2gh3qTCBKZ5LwVj5zQha9e
+</td>
+<td style="text-align:left;">
+Selma
+</td>
+<td style="text-align:left;">
+0u3OZX362nmVG918dwDUK1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E.C.T.
+</td>
+<td style="text-align:left;">
+4Wt9zi9hvsgiUACRmoN9Ak
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:left;">
+Cássia Eller
+</td>
+<td style="text-align:left;">
+Cássia Eller
+</td>
+<td style="text-align:left;">
+10naVTwNjE50daQVrN0bXh
+</td>
+<td style="text-align:left;">
+Cássia Eller (1994)
+</td>
+<td style="text-align:left;">
+3JGRDTWHXpXNfoAPglI7Tr
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bote
+</td>
+<td style="text-align:left;">
+1ZNV4geiDow8Wks8sKDQCc
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:left;">
+Julio Secchin
+</td>
+<td style="text-align:left;">
+Julio Secchin
+</td>
+<td style="text-align:left;">
+0B0FipO3fLbLbHQz5RfTUs
+</td>
+<td style="text-align:left;">
+Bote
+</td>
+<td style="text-align:left;">
+5IJwNADxj5Kew8Yjdq7psH
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Enemy - From the series Arcane League of Legends
+</td>
+<td style="text-align:left;">
+5UlnuulVAVmmesw4VzqHdG
+</td>
+<td style="text-align:right;">
+82
+</td>
+<td style="text-align:left;">
+Imagine Dragons
+</td>
+<td style="text-align:left;">
+Imagine Dragons feat. Arcane feat. League of Legends
+</td>
+<td style="text-align:left;">
+53XhwfbYqKCa1cC15pYq2q
+</td>
+<td style="text-align:left;">
+Enemy (from the series Arcane League of Legends)
+</td>
+<td style="text-align:left;">
+2Y9Kal9IDz6JphsCfY6GzG
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6h 34
+</td>
+<td style="text-align:left;">
+2gNPwfmBZMo2xzZFFPIt8P
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:left;">
+Visconde
+</td>
+<td style="text-align:left;">
+Visconde
+</td>
+<td style="text-align:left;">
+0ScxxqjnVMeXYqPl5AavFd
+</td>
+<td style="text-align:left;">
+Visconde
+</td>
+<td style="text-align:left;">
+6XiK7cPd6XqlyiPN7NjTJO
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sinusite
+</td>
+<td style="text-align:left;">
+1rEOoUHBbnmPnlFS4p5P9t
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:left;">
+Rodrigo Alarcon
+</td>
+<td style="text-align:left;">
+Rodrigo Alarcon
+</td>
+<td style="text-align:left;">
+6D3gtdoxrtRGO9ZDU5wWSQ
+</td>
+<td style="text-align:left;">
+Parte
+</td>
+<td style="text-align:left;">
+1Q8UuqiYlAHTmkLlpVdACL
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nossa Bossa
+</td>
+<td style="text-align:left;">
+2YynWd3NpoQC6NId0HPTeq
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+O Cinza
+</td>
+<td style="text-align:left;">
+O Cinza
+</td>
+<td style="text-align:left;">
+2hhRYX2Zdh4jrvMLghsqGX
+</td>
+<td style="text-align:left;">
+O Lugar Onde Envelhecemos
+</td>
+<td style="text-align:left;">
+3CBTykgeyVSdjc4zm7Mra6
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="searchtrack" class="section level3">
+<h3>searchTrack</h3>
+<p>A função <code>searchTrack</code> pede como argumentos o <em>nome de uma música</em> (funciona como a busca do Spotify mesmo), e o <em>token</em>. Ela retorna um data frame no qual cada linha é referente a uma música (relacionada com a busca feita).</p>
+<p>No exemplo, estou procurando a música <a href="https://open.spotify.com/track/7w6IN6ebiY2AOQwZY50NOG?si=4e4c41a7dd344752"><em>“Geminis”</em></a> da <a href="https://open.spotify.com/artist/1FnGKreDca8xq3juSi5hAE?si=6s0LdIJiQ0ai07oYHOPGmA"><em>Julia Mestre</em></a>.</p>
+<pre class="r"><code>searchTrack(&quot;Geminis Julia Mestre&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+display_name
+</th>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:right;">
+popularity
+</th>
+<th style="text-align:left;">
+artists
+</th>
+<th style="text-align:left;">
+artists_IDs
+</th>
+<th style="text-align:left;">
+type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Agora Só Falta Você
+</td>
+<td style="text-align:left;">
+5fGQXRu7c4gZ2lGO8zlL51
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Geminis
+</td>
+<td style="text-align:left;">
+7w6IN6ebiY2AOQwZY50NOG
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+KIMBALA
+</td>
+<td style="text-align:left;">
+0tPTI9u5fsapoRRf5dc7xC
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+Cores e Nomes
+</td>
+<td style="text-align:left;">
+3OxGALD40vE750AQ7SLGZr
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Mudar o Mundo
+</td>
+<td style="text-align:left;">
+5SDERPI78k0GcVov3vkrRn
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+el fuego del amor
+</td>
+<td style="text-align:left;">
+7w28YPENfQgVuqQxUeltL0
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Batom
+</td>
+<td style="text-align:left;">
+0lVHrmfGdS2xoAkEKbEcCI
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+Papai Me Empresta o Carro
+</td>
+<td style="text-align:left;">
+3C1iarbfPZ2bhWUVPUilSc
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Canto de Saudade
+</td>
+<td style="text-align:left;">
+1c39CBruWQ4EkY1npaNKwL
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+Medo de Mim
+</td>
+<td style="text-align:left;">
+1UaDO9pwz7pZsudleZhbHR
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+track
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gettrack" class="section level3">
+<h3>getTrack</h3>
+<p>Essa função pede como argumentos o <em>id da música</em>, e o <em>token</em>. Ela retorna algumas informações sobre a música.</p>
+<pre class="r"><code>getTrack(&quot;7w6IN6ebiY2AOQwZY50NOG&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+track_id
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+explicit
+</th>
+<th style="text-align:right;">
+popularity
+</th>
+<th style="text-align:left;">
+artists
+</th>
+<th style="text-align:left;">
+artists_id
+</th>
+<th style="text-align:left;">
+album
+</th>
+<th style="text-align:left;">
+album_id
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+7w6IN6ebiY2AOQwZY50NOG
+</td>
+<td style="text-align:left;">
+Geminis
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+Julia Mestre
+</td>
+<td style="text-align:left;">
+1FnGKreDca8xq3juSi5hAE
+</td>
+<td style="text-align:left;">
+GEMINIS
+</td>
+<td style="text-align:left;">
+4y85scLBaZV25lBqLn0DC2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="getfeatures" class="section level3">
+<h3>getFeatures</h3>
+<p>Essa função pede como argumentos o <em>id da música</em>, e o <em>token</em>. Ela retorna algumas informações mais específicas sobre a música (e é a parte que acho mais legal). Essa informações são algumas “métricas” da música, e dá pra fazer muitas coisas legais com elas, como por exemplo, ordenar uma playlist pelas músicas mais dançantes.</p>
+<pre class="r"><code>getFeatures(&quot;7w6IN6ebiY2AOQwZY50NOG&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:right;">
+danceability
+</th>
+<th style="text-align:right;">
+energy
+</th>
+<th style="text-align:right;">
+key
+</th>
+<th style="text-align:right;">
+loudness
+</th>
+<th style="text-align:right;">
+mode
+</th>
+<th style="text-align:right;">
+speechiness
+</th>
+<th style="text-align:right;">
+acousticness
+</th>
+<th style="text-align:right;">
+instrumentalness
+</th>
+<th style="text-align:right;">
+liveness
+</th>
+<th style="text-align:right;">
+valence
+</th>
+<th style="text-align:right;">
+tempo
+</th>
+<th style="text-align:right;">
+duration_ms
+</th>
+<th style="text-align:right;">
+time_signature
+</th>
+<th style="text-align:left;">
+uri
+</th>
+<th style="text-align:left;">
+analysis_url
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+7w6IN6ebiY2AOQwZY50NOG
+</td>
+<td style="text-align:right;">
+0.614
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+-10.721
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0418
+</td>
+<td style="text-align:right;">
+0.683
+</td>
+<td style="text-align:right;">
+8.5e-06
+</td>
+<td style="text-align:right;">
+0.115
+</td>
+<td style="text-align:right;">
+0.385
+</td>
+<td style="text-align:right;">
+148.273
+</td>
+<td style="text-align:right;">
+141867
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+<a href="spotify:track:7w6IN6ebiY2AOQwZY50NOG" class="uri">spotify:track:7w6IN6ebiY2AOQwZY50NOG</a>
+</td>
+<td style="text-align:left;">
+<a href="https://api.spotify.com/v1/audio-analysis/7w6IN6ebiY2AOQwZY50NOG" class="uri">https://api.spotify.com/v1/audio-analysis/7w6IN6ebiY2AOQwZY50NOG</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="getuser" class="section level3">
+<h3>getUser</h3>
+<p>Essa função pede como argumentos o <em>id de um usuário</em>, e o <em>token</em>. Ela retorna algumas informações sobre esse usuário.</p>
+<p>No caso, estou usando o id de uma conta minha no spotify, chamada <a href="https://open.spotify.com/user/bn5u195uotc5u95tfw24ct6uf?si=d0ad76cd89604c8d"><em>“guiadosmusiqueiros”</em></a>, que tem playlists de recomendações mais bem organizadas :)</p>
+<pre class="r"><code>getUser(&quot;bn5u195uotc5u95tfw24ct6uf&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+display_name
+</th>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:right;">
+followers
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+guiadosmusiqueiros
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+51
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="getplaylists" class="section level3">
+<h3>getPlaylists</h3>
+<p>E por fim, a função <code>getPlaylists</code> pede como argumentos o <em>id de um usuário</em> e o <em>token</em>. Ela retorna informações sobre cada playlist desse usuário!</p>
+<pre class="r"><code>getPlaylists(&quot;bn5u195uotc5u95tfw24ct6uf&quot;, token = keys)</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+ownerid
+</th>
+<th style="text-align:right;">
+tracks
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+3KGktfVPwVBJGBnoCrUQK9
+</td>
+<td style="text-align:left;">
+Guia dos Musiqueiros
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3RdNIPmldyUYDJvIyHk6oU
+</td>
+<td style="text-align:left;">
+DUDA BEAT
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+191YgBaCVYbTksKDhj2P4c
+</td>
+<td style="text-align:left;">
+Lau e Eu
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5ONYYUGvooOe8OoGIqICg2
+</td>
+<td style="text-align:left;">
+PLUMA
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5kSoTjqYeRbYWDxJfGvyRU
+</td>
+<td style="text-align:left;">
+Marina Sena
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+54XmEFNjzqXRQULMRWSgEZ
+</td>
+<td style="text-align:left;">
+Der Baum
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5ys3bqipFkmdqppTF8pZk4
+</td>
+<td style="text-align:left;">
+Mariana Froes
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0j3ZjUaasSzektT6nShKPz
+</td>
+<td style="text-align:left;">
+Toco
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7LUYIRlOPsqD1gJa9jX3do
+</td>
+<td style="text-align:left;">
+Seu Pereira e Coletivo 401
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4I0EHR3LKqmZB9JUzSX0sn
+</td>
+<td style="text-align:left;">
+Letrux
+</td>
+<td style="text-align:left;">
+bn5u195uotc5u95tfw24ct6uf
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://media.giphy.com/media/olAik8MhYOB9K/giphy.gif" /><!-- --></p>
+<p>Por hoje é só, pessoal! Espero que o tutorial tenha ficado claro :)</p>
+</div>
+</div>
