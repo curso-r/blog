@@ -5,7 +5,7 @@ tags: ["tutoriais"]
 categories: ["tutoriais"]
 image: "images/posts/banner/2022-06-28-rspotify.jpg"
 author: ["Tereza"]
-summary: "alguma coisa aqui"
+summary: "obtendo informações dos seus artistas e músicas favoritas do Spotify"
 draft: false
 ---
 
