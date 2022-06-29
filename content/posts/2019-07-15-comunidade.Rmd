@@ -6,8 +6,6 @@ categories: ["discussões"]
 image: "images/posts/banner/comunidade.jpeg"
 author: ["Julio"]
 summary: "Trabalhar em grupo é difícil, mas os esforços se pagam. Aqui discuto alguns aspectos importantes para tirar proveito da melhor parte do R: a comunidade (Imagem de Allison Holst)."
-type: featured
-featuredImage: "images/posts/banner/feat-comunidade.jpg"
 ---
 
 ```{r, include=FALSE}

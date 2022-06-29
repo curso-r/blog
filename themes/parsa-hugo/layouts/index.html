@@ -5,7 +5,7 @@
 <section class="overflow-hidden">
   <div class="container-fluid p-sm-0">
     <div class="row featured-post-slider">
-      {{ range (where site.RegularPages "Type" "featured")}}
+      {{ range (where site.RegularPages "Type" "featured") }}
       <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
         <article class="card bg-dark text-center text-white border-0 rounded-0">
           <img class="card-img rounded-0 img-fluid w-100" src="{{.Params.featuredImage | absURL}}" alt="post-thumb">
@@ -70,6 +70,18 @@
                 <img class="img-fluid mb-4" src="{{.Params.Image | absURL }}" alt="post-thumb" style = "width: 300px;">
               </a>
               <h4 class="title-border"><a class="text-dark" href="{{.Permalink}}">{{.Title}}</a></h4>
+              <p style = "font-size: 0.8em; margin-top: -15px;">
+                Escrito por
+                {{ if eq (len .Params.author) 1 }}
+              {{ $autor := index (where site.Params.authors "name" "in" .Params.author) 0}}
+                <a href = "{{ .Site.BaseURL }}search/?s={{ index (.Params.author) 0 }}">{{ index (.Params.author) 0 }}</a>
+              {{ else }}
+                {{ delimit .Params.author ", " " e "}}
+              {{ end }}
+              em {{ .Params.Date.Day }} de
+            {{ index $.Site.Data.mes (printf "%d" .Params.Date.Month) }} de
+            {{ .Params.Date.Year }}
+            </p>
               <p>{{.Summary}}</p>
               <a href="{{.Permalink}}" class="btn btn-transparent">Leia mais</a>
             </article>

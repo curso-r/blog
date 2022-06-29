@@ -23,7 +23,7 @@
             Escrito por
             {{ if eq (len .Params.author) 1 }}
             {{ $autor := index (where site.Params.authors "name" "in" .Params.author) 0}}
-              <a href = "{{ $autor.link }}" target = "_blank">{{ index (.Params.author) 0 }}</a>
+              <a href = "{{ .Site.BaseURL }}search/?s={{ index (.Params.author) 0 }}">{{ index (.Params.author) 0 }}</a>
             {{ else }}
               {{ delimit .Params.author ", " " e "}}
             {{ end }}

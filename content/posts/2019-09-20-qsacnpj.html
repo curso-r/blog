@@ -6,8 +6,6 @@ tags: ["rfb", "banco de dados"]
 image: "images/posts/banner/qsacnpj.jpg"
 author: ["Julio"]
 summary: "A base de dados de CNPJ da Receita Federal do Brasil (RFB) é, na minha opinião, uma das maiores conquistas de dados abertos do Brasil. Nesse post vou passar alguns links para ler a base e alguns gráficos simples."
-type: "featured"
-featuredImage: "images/featured-post/feat-cnpj.jpg"
 ---
 
 
@@ -81,49 +79,70 @@ Fim do Processamento: Base de Dados do CNPJ gerada com Sucesso!</code></pre>
 <h2>Análises</h2>
 <p>Para dar um cheirinho de como essa base é rica, fiz alguns gráficos descritivos considerando apenas as informações do estado de SP. Usei como base o CSV do Turicas e usei as bases carregadas do <code>{qsacnpj}</code>.</p>
 <p>A Figura <a href="#fig:abertura">1</a> mostra o volume de empresas na base por ano de abertura. É interessante notar a evolução a partir do ano de 2004.</p>
-<div class="figure"><span id="fig:abertura"></span>
+<pre><code>## Warning in knitr::include_graphics(&quot;/images/posts/conteudo/qsacnpj/
+## abertura.png&quot;): It is highly recommended to use relative paths for images. You
+## had absolute paths: &quot;/images/posts/conteudo/qsacnpj/abertura.png&quot;</code></pre>
+<div class="figure"><span style="display:block;" id="fig:abertura"></span>
 <img src="/images/posts/conteudo/qsacnpj/abertura.png" alt="Quantidade de empresas abertas por ano."  />
 <p class="caption">
 Figura 1: Quantidade de empresas abertas por ano.
 </p>
 </div>
 <p>A Figura <a href="#fig:atividade">2</a> mostra as atividades principais das empresas. Eu fiquei surpreso com o fato de mais um quarto das empresas serem relacionadas a comércio, reparação de veículos automotores e motocicletas. Seria interessante aprofundar essa análise criando um Treemap, por exemplo, para entender o que acontece nos subníveis dessa categoria.</p>
-<div class="figure"><span id="fig:atividade"></span>
+<pre><code>## Warning in knitr::include_graphics(&quot;/images/posts/conteudo/qsacnpj/
+## atividade.png&quot;): It is highly recommended to use relative paths for images. You
+## had absolute paths: &quot;/images/posts/conteudo/qsacnpj/atividade.png&quot;</code></pre>
+<div class="figure"><span style="display:block;" id="fig:atividade"></span>
 <img src="/images/posts/conteudo/qsacnpj/atividade.png" alt="Distribuição da atividade principal (CNAE), considerando apenas o nível mais genérico."  />
 <p class="caption">
 Figura 2: Distribuição da atividade principal (CNAE), considerando apenas o nível mais genérico.
 </p>
 </div>
 <p>A Figura <a href="#fig:capital">3</a> mostra a distribuição do capital social das empresas. Quase metade das empresas tem capital social de até mil reais! Essa análise, no entanto, pode estar distorcida, pois existem várias empresas na base que não têm capital social por conta do tipo societário.</p>
-<div class="figure"><span id="fig:capital"></span>
+<pre><code>## Warning in knitr::include_graphics(&quot;/images/posts/conteudo/qsacnpj/
+## capital.png&quot;): It is highly recommended to use relative paths for images. You
+## had absolute paths: &quot;/images/posts/conteudo/qsacnpj/capital.png&quot;</code></pre>
+<div class="figure"><span style="display:block;" id="fig:capital"></span>
 <img src="/images/posts/conteudo/qsacnpj/capital.png" alt="Distribuição do capital social das empresas."  />
 <p class="caption">
 Figura 3: Distribuição do capital social das empresas.
 </p>
 </div>
 <p>A Figura <a href="#fig:mapa">4</a> mostra os municípios de registro das empresas. Aqui não tem nada de impressionante, apenas o esperado: cidades mais populosas têm mais empresas. Seria interessante aprofundar a análise para taxa de empresas por 100 mil habitantes, por exemplo.</p>
-<div class="figure"><span id="fig:mapa"></span>
+<pre><code>## Warning in knitr::include_graphics(&quot;/images/posts/conteudo/qsacnpj/mapa.png&quot;):
+## It is highly recommended to use relative paths for images. You had absolute
+## paths: &quot;/images/posts/conteudo/qsacnpj/mapa.png&quot;</code></pre>
+<div class="figure"><span style="display:block;" id="fig:mapa"></span>
 <img src="/images/posts/conteudo/qsacnpj/mapa.png" alt="Mapa dos municípios de origem."  />
 <p class="caption">
 Figura 4: Mapa dos municípios de origem.
 </p>
 </div>
 <p>A Figura <a href="#fig:natureza">5</a> mostra a distribuição da natureza jurídica das empresas. Eu fiquei surpreso com o fato de que 60% das empresas são empresários individuais!</p>
-<div class="figure"><span id="fig:natureza"></span>
+<pre><code>## Warning in knitr::include_graphics(&quot;/images/posts/conteudo/qsacnpj/
+## natureza.png&quot;): It is highly recommended to use relative paths for images. You
+## had absolute paths: &quot;/images/posts/conteudo/qsacnpj/natureza.png&quot;</code></pre>
+<div class="figure"><span style="display:block;" id="fig:natureza"></span>
 <img src="/images/posts/conteudo/qsacnpj/natureza.png" alt="Distribuição da natureza jurídica das empresas."  />
 <p class="caption">
 Figura 5: Distribuição da natureza jurídica das empresas.
 </p>
 </div>
 <p>A Figura <a href="#fig:qtd-socios1">6</a> mostra a distribuição da quantidade de sócios. É esperado que a maioria das empresas tenham dois sócios, já que as LTDAs devem ter pelo menos dois sócios.</p>
-<div class="figure"><span id="fig:qtd-socios1"></span>
+<pre><code>## Warning in knitr::include_graphics(&quot;/images/posts/conteudo/qsacnpj/
+## qtd_socios1.png&quot;): It is highly recommended to use relative paths for images.
+## You had absolute paths: &quot;/images/posts/conteudo/qsacnpj/qtd_socios1.png&quot;</code></pre>
+<div class="figure"><span style="display:block;" id="fig:qtd-socios1"></span>
 <img src="/images/posts/conteudo/qsacnpj/qtd_socios1.png" alt="Distribuição da quantidade de sócios."  />
 <p class="caption">
 Figura 6: Distribuição da quantidade de sócios.
 </p>
 </div>
 <p>A Figura <a href="#fig:qtd-socios2">7</a> mostra a distribuição da quantidade de sócios, considerando apenas Limitada e SA. É possível notar que as Sociedades Anônimas possuem mais sócios.</p>
-<div class="figure"><span id="fig:qtd-socios2"></span>
+<pre><code>## Warning in knitr::include_graphics(&quot;/images/posts/conteudo/qsacnpj/
+## qtd_socios2.png&quot;): It is highly recommended to use relative paths for images.
+## You had absolute paths: &quot;/images/posts/conteudo/qsacnpj/qtd_socios2.png&quot;</code></pre>
+<div class="figure"><span style="display:block;" id="fig:qtd-socios2"></span>
 <img src="/images/posts/conteudo/qsacnpj/qtd_socios2.png" alt="Distribuição da quantidade de sócios, comparando Limitada e SA."  />
 <p class="caption">
 Figura 7: Distribuição da quantidade de sócios, comparando Limitada e SA.
