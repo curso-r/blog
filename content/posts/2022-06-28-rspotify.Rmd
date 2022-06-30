@@ -1,7 +1,7 @@
 ---
 title: "Tudo sobre o pacote {Rspotify}"
 date: "2022-06-28"
-tags: ["tutoriais"]
+tags: ["tutoriais", "spotify", "música"]
 categories: ["tutoriais"]
 image: "images/posts/banner/2022-06-28-rspotify.jpg"
 author: ["Tereza"]
