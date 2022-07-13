@@ -3,7 +3,7 @@ title: "O pacote {brasileirao}"
 date: "2021-03-02"
 tags: ["futebol", "web scraping"]
 categories: ["pacotes"]
-image: "images/posts/banner/brasileirao.png"
+image: "images/posts/banner/brasileirao.webp"
 author: ["William"]
 summary: "Novo pacote com dados de todas as partidas de 2003 a 2020."
 draft: false

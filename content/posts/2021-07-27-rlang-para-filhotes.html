@@ -3,7 +3,7 @@ title: "Tutorial: {rlang} para Filhotes"
 date: "2021-07-27"
 tags: ["rlang", "tidy", "tidyverse"]
 categories: ["tutoriais"]
-image: "images/posts/banner/filhote.jpeg"
+image: "images/posts/banner/filhote.webp"
 author: ["Caio"]
 summary: "Um tutorial sobre {rlang} que vai do básico ao avançado. Zero to hero!"
 draft: false
@@ -40,7 +40,7 @@ figura abaixo, note que é criado um objeto <code>rex</code> que recebe a figura
 filhote laranja. A função <code>carinho()</code> é retratada como uma mão parada que,
 quando executada, retorna uma mão fazendo carinho no filhote de cor apropriada
 (essencialmente a string retornada pelo código acima).</p>
-<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/01_pat_rex.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/01_pat_rex.webp" style="display: block; margin: auto;" /></p>
 <div id="expressões" class="section level3">
 <h3>Expressões</h3>
 <p>Agora que temos uma base sólida para a analogia, podemos introduzir o primeiro
@@ -67,7 +67,7 @@ uma promessa de fazer carinho em um filhote. Temos toda a informação necessár
 carinho: não “chamamos o filhote para perto” para acariciá-lo. Perceba que na
 figura abaixo não há as marcas de movimento da mão, pois estamos congelando a
 cena antes de o filhote vir até nós.</p>
-<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/02_expr.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/02_expr.webp" style="display: block; margin: auto;" /></p>
 </div>
 <div id="ambientes" class="section level3">
 <h3>Ambientes</h3>
@@ -94,7 +94,7 @@ env_print()</code></pre>
 <p>Na analogia, estamos colocando os cachorros <code>max</code> e <code>dex</code> no parque, permitindo
 que possamos eventualmente fazer carinho neles. Vamos apenas ignorar a definição
 da função <code>carinho()</code> para que isso não atrapalhe o resto da explicação.</p>
-<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/03_env.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/03_env.webp" style="display: block; margin: auto;" /></p>
 <p>Perceba que o resultado da avaliação de uma expressão depende completamente do
 ambiente. Na hora de executar um código, o R procura as definições de todos os
 objetos no ambiente e os substitui dentro da expressão. Agora vamos ver o que
@@ -119,7 +119,7 @@ executa) uma expressão lá dentro.</p>
 <p>Seguindo a analogia dos filhotes, é como se visitássemos um outro parque onde há
 um cachorro chamado <code>max</code> cuja cor é verde (além dos outros dois cachorros que
 já havíamos visto no parque antigo).</p>
-<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/04_fun.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/04_fun.webp" style="display: block; margin: auto;" /></p>
 <p>Como a função <code>eval_tidy()</code>, por padrão, utiliza o ambiente corrente para
 avaliar expressões, então <code>p(e)</code> deve indicar carinho em um filhote verde e
 não mais em um filhote marrom. Note que, apesar de não estarmos passando um
@@ -130,7 +130,7 @@ através de <code>caller_env()</code>, o valor padrão para seu argumento <code>
 <p>Na ilustração a seguir vemos o que aconteceria no nosso parque. Apesar de
 estarmos chamando o nome do cachorro marrom, como estamos em outro parque (uma
 nova função), o cachorro que responderá ao chamado aqui é verde!</p>
-<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/05_eval_expr.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/05_eval_expr.webp" style="display: block; margin: auto;" /></p>
 </div>
 <div id="quosures" class="section level3">
 <h3>Quosures</h3>
@@ -155,7 +155,7 @@ diretamente na sessão base do R.</p>
 <p>Na figura abaixo, juntamente da cena retratada na ilustração sobre expressões,
 vemos um qualificador de <code>max</code>, especificando onde devemos encontrar ele. Isso
 é significativamente diferente de simplesmente gritar pelo <code>max</code> mais próximo.</p>
-<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/06_quo.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/06_quo.webp" style="display: block; margin: auto;" /></p>
 </div>
 <div id="avaliando-quosures" class="section level3">
 <h3>Avaliando quosures</h3>
@@ -171,7 +171,7 @@ na qual avaliaremos ela, pois o único ambiente que importará na avaliação ti
 <p>É difícil traduzir esse processo para a analogia dos filhotes, mas seria algo
 como voltar para o endereço do parque original antes de fazer carinho no filhote
 cujo nome é <code>max</code>.</p>
-<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/07_eval_quo.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/07_eval_quo.webp" style="display: block; margin: auto;" /></p>
 </div>
 <div id="bang-bang" class="section level3">
 <h3>Bang-bang</h3>
@@ -190,7 +190,7 @@ de que, na seção anterior, alteramos o valor de <code>max</code>.</p>
 pelo nome antes que façamos carinho nele. Ao invés do contorno branco que vimos
 nas ilustrações sobre expressões e quosures, agora vemos a mão parada ao lado de
 um filhote específico.</p>
-<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/08_bang_bang.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/08_bang_bang.webp" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="de-volta-para-casa" class="section level2">

@@ -3,7 +3,7 @@ title: "Multas em São Paulo"
 date: "2017-04-01"
 tags: ["sptrans"]
 categories: ["análises"]
-image: "images/posts/banner/banner-multas-sp.jpg"
+image: "images/posts/banner/banner-multas-sp.webp"
 author: ["Daniel"]
 retired: true
 alternativa: ""
@@ -251,4 +251,4 @@ Por incrível que pareça, nos dois radares com mais multas, o motivo da multa �
 A foto de onde fica esse radar saiu em uma [notícia sobre o mesmo tema](http://www1.folha.uol.com.br/cotidiano/2015/07/1660793-radar-campeao-aplica-375-mil-multas-em-um-ano-na-ponte-das-bandeiras.shtml) na Folha de
 São Paulo.
 
-![](/images/posts/conteudo/multas-em-sp/radar-chateubriant.jpeg)
+![](/images/posts/conteudo/multas-em-sp/radar-chateubriant.webp)

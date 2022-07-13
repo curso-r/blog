@@ -3,7 +3,7 @@ title: "Advent of R: Dia 11"
 date: "2021-12-11"
 tags: ["advent-of-r", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/advent-of-r-11.png"
+image: "images/posts/banner/advent-of-r-11.webp"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 11."
 draft: false

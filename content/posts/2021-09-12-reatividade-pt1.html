@@ -3,7 +3,7 @@ title: "Entendendo a reatividade: fundamentos"
 date: "2021-09-13"
 tags: ["shiny", "reatividade"]
 categories: ["conceitos"]
-image: "images/posts/banner/reacao-cadeia.jpg"
+image: "images/posts/banner/reacao-cadeia.webp"
 author: ["William"]
 summary: "Vamos olhar mais de perto o conceito de reatividade do Shiny."
 ---
@@ -39,7 +39,7 @@ tab_grafico |&gt;
 <p>Esse <em>sinal de alerta</em> é um aviso dizendo que todos os outputs que dependem desse valor reativo precisam ser recalculados. Quem recebe esse sinal são os <em>observers</em>, isto é, as estruturas dentro do Shiny que guardam o código de cada output. Eles são o <strong>ponto final do fluxo de reatividade</strong>. Os <em>observers</em> mais comuns são as funções <code>render*()</code>.</p>
 <p>Muitas vezes, um aplicativo shiny precisa de passos intermediários, entre o input de origem e o output final. Isto é, precisamos de uma estrutura que receba um valor reativo, faça alguma conta e devolva como resultado um valor também reativo, que será utilizado posteriormente em um <em>observer</em>. Essas estruturas são as expressões reativas.</p>
 <p>Imagine um app que gere uma amostra de números aleatórios entre 1 e 10 e que o tamanho dessa amostra é definido por um input. Além disso, imagine que esse app também indique em texto qual foi o número mais sorteado. A figura a seguir mostra uma implementação desse app.</p>
-<p><img src="/images/posts/conteudo/reatividade-pt1/app_reactive.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/reatividade-pt1/app_reactive.webp" /><!-- --></p>
 <p>Repare no código do app, apresentado a seguir, que a criação da amostra não poderia ter sido feita diretamente dentro das funções <code>renderPlot()</code> e <code>renderText()</code>, pois gerariam amostras diferentes<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Por outro lado, a geração da amostra precisa estar dentro de um contexto reativo, pois ela utiliza um valor reativo (<code>input$num</code>), o que tira da mesa a proposta de fazer isso diretamente dentro da função <code>server</code>.</p>
 <pre class="r"><code>library(shiny)
 

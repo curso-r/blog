@@ -3,7 +3,7 @@ title: "Colocando tooltips no Shiny (e no Rmarkdown)"
 date: "2021-06-22"
 tags: ["shiny", "tooltips"]
 categories: ["tutoriais"]
-image: "images/posts/banner/tippy.jpeg"
+image: "images/posts/banner/tippy.webp"
 author: ["William"]
 summary: "Aprenda colocar tooltips em aplicativos Shiny e arquivos R Markdown."
 ---
@@ -36,7 +36,7 @@ summary: "Aprenda colocar tooltips em aplicativos Shiny e arquivos R Markdown."
   ),
   tooltip = &quot;Amostra de uma distribuição Normal com média 0 e variância 100.&quot;
 )</code></pre>
-<p><img src="/images/posts/conteudo/tippy/tippy.png" title="Tooltip colocada em um numericInput" alt="Tooltip colocada em um numericInput" width="70%" /></p>
+<p><img src="/images/posts/conteudo/tippy/tippy.webp" title="Tooltip colocada em um numericInput" alt="Tooltip colocada em um numericInput" width="70%" /></p>
 <p>Você também pode aplicar a mesma <em>tooltip</em> a vários elementos utilizando a função <code>tippy_class()</code>.</p>
 <pre class="r"><code>fluidRow(
   column(
@@ -69,7 +69,7 @@ summary: "Aprenda colocar tooltips em aplicativos Shiny e arquivos R Markdown."
     content = &quot;Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard.&quot;
   )
 )</code></pre>
-<p><img src="/images/posts/conteudo/tippy/tippy_class.png" title="Tooltip colocada em um valueBox." alt="Tooltip colocada em um valueBox." width="90%" /></p>
+<p><img src="/images/posts/conteudo/tippy/tippy_class.webp" title="Tooltip colocada em um valueBox." alt="Tooltip colocada em um valueBox." width="90%" /></p>
 <p>Você pode customizar a <em>tooltip</em> seguindo os parâmetros da <a href="https://atomiks.github.io/tippyjs/v6/all-props/">documentação oficial da biblioteca <code>tippy.js</code></a>.</p>
 <pre class="r"><code>tippy::tippy_class(
   &quot;valuebox-tip&quot;,
@@ -77,7 +77,7 @@ summary: "Aprenda colocar tooltips em aplicativos Shiny e arquivos R Markdown."
   arrow = TRUE,
   placement = &quot;left&quot;
 )</code></pre>
-<p><img src="/images/posts/conteudo/tippy/tippy_left.png" title="Tooltip aparecendo no lado esquerdo do valueBox." alt="Tooltip aparecendo no lado esquerdo do valueBox." width="90%" /></p>
+<p><img src="/images/posts/conteudo/tippy/tippy_left.webp" title="Tooltip aparecendo no lado esquerdo do valueBox." alt="Tooltip aparecendo no lado esquerdo do valueBox." width="90%" /></p>
 <p>Os fragmentos de código acima pertencem ao app a seguir. Rode o app para ver as <em>tooltips</em> em funcionamento.</p>
 <pre class="r"><code>library(shiny)
 

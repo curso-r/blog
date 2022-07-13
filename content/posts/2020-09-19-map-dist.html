@@ -3,7 +3,7 @@ title: "Qual a capital mais distante de Brasília?"
 date: "2020-09-19"
 tags: ["visualizacao", "mapas", "leaflet", "plotly"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/map-dist.png"
+image: "images/posts/banner/map-dist.webp"
 author: ["Julio"]
 summary: "Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!"
 draft: false
@@ -372,7 +372,7 @@ p_leaflet &lt;- da_countries %&gt;%
   )
 
 p_leaflet</code></pre>
-<p><img src="/images/posts/conteudo/map-dist/leaflet.png" /></p>
+<p><img src="/images/posts/conteudo/map-dist/leaflet.webp" /></p>
 <p>Acesse o mapa dinâmico <a href="/posts/2020-09-19-map-dist_files/p_leaflet_world.html">neste link</a>.</p>
 <p>Olhando o mapa (e considerando que a terra é esférica), parece mesmo que esses países estão bem longe, mesmo tentando acessar pelo leste ou pelo oeste.</p>
 <p>E, já que a terra é esférica, que tal criar um mapa 3D? Fiz isso usando o <code>{plotly}</code>, com base no tutorial disponível <a href="https://github.com/ropensci/plotly/blob/master/demo/sf-plotly-3D-globe.R">neste link</a>.</p>
@@ -404,7 +404,7 @@ p_plotly &lt;- plot_ly(height = 1000) %&gt;%
   layout(showlegend = FALSE)
 
 p_plotly</code></pre>
-<p><img src="/images/posts/conteudo/map-dist/plotly.png" /></p>
+<p><img src="/images/posts/conteudo/map-dist/plotly.webp" /></p>
 <p>Acesse o mapa dinâmico <a href="/posts/2020-09-19-map-dist_files/p_plotly_world.html">neste link</a>.</p>
 </div>
 <div id="wrap-up" class="section level2">

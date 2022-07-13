@@ -3,7 +3,7 @@ title: "O blog da Curso-R"
 date: "2017-02-15T13:07:31+02:00"
 categories: ["divulgação"]
 tags: ["curso-r"]
-image: "images/posts/banner/bookshop.jpg"
+image: "images/posts/banner/bookshop.webp"
 author: ["Athos", "Daniel", "Fernando", "Julio", "William"]
 ---
 

@@ -3,7 +3,7 @@ title: "Meus 2 Centavos: análise das notas"
 date: "2018-02-23"
 tags: ["sf", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/out_0262.png"
+image: "images/posts/banner/out_0262.webp"
 author: ["Julio"]
 summary: "Tiago Belotti do canal do YouTube Meus 2 Centavos é o meu crítico de cinema favorito. Gasto uma quantidade de tempo que não me orgulho vendo os vídeos desse ser maravilhoso. Nesse post mostro como obtive as notas dele para verificar uma dúvida que estava me corroendo..."
 ---
@@ -21,7 +21,7 @@ summary: "Tiago Belotti do canal do YouTube Meus 2 Centavos é o meu crítico de
 
 
 <p><a href="https://www.youtube.com/channel/UCiSarBtpSphUrxtKDIW9c_A">Tiago Belotti</a> é o meu crítico de cinema favorito. Gasto uma quantidade de tempo que não me orgulho vendo os vídeos desse ser maravilhoso. Atualmente, muitas vezes eu prefiro ver a crítica dele do filme que o próprio filme, seguindo cegamente as indicações dele a partir das notas que ele coloca no final da crítica. Recomendo fortemente que acessem o canal do Belotti.</p>
-<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_0045.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_0045.webp" style="display: block; margin: auto;" /></p>
 <p>O Tiago já mencionou várias vezes que as notas que ele dá aos filmes não representam toda a crítica realizada. Por exemplo, ele já montou listas de Top 10 colocando filmes com notas medianas à frente de filmes com notas altas. Mesmo assim, não dá pra não querer saber a nota que ele dá aos filmes, é um vício!</p>
 <p>A minha necessidade visceral de saber as notas dadas aos filmes começou quando a seguinte pergunta apareceu na minha mente:</p>
 <blockquote>
@@ -73,12 +73,12 @@ A nota média está aumentando ao longo do tempo?</p>
   }
 }</code></pre>
 <p>Basta fazer um loop (com <code>purrr</code>, não <code>for</code>, rs) para processar todos os arquivos de vídeo. Resultado:</p>
-<p><img src="/images/posts/conteudo/2018-02-21-2cents/frames.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/2018-02-21-2cents/frames.webp" /><!-- --></p>
 </div>
 <div id="passo-3-encontrar-a-imagem-que-tem-a-nota" class="section level3">
 <h3>Passo 3: Encontrar a imagem que tem a nota</h3>
 <p>A nota geralmente aparece no canto superior direito da imagem:</p>
-<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_0277.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_0277.webp" style="display: block; margin: auto;" /></p>
 <p>Então, vamos recortar esse pedaço e pegar qual imagem tem maior concentração de vermelho. A função <code>cortar_canto()</code> utiliza o <code>magick</code> para pegar o canto da imagem e salva num arquivo temporário.</p>
 <pre class="r"><code>cortar_canto &lt;- function(img_file) {
   img_file %&gt;% 
@@ -119,7 +119,7 @@ A nota média está aumentando ao longo do tempo?</p>
 <pre class="r"><code>&quot;out_0277.png&quot; %&gt;%
   cortar_canto() %&gt;% 
   limpar_imagem()</code></pre>
-<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_raw.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_raw.webp" style="display: block; margin: auto;" /></p>
 </div>
 <div id="passo-5-passar-um-algoritmo-de-ocr" class="section level3">
 <h3>Passo 5: Passar um algoritmo de OCR</h3>
@@ -403,7 +403,7 @@ purrr::pluck(detalhes, 4, 1, &quot;snippet&quot;, &quot;publishedAt&quot;)
 </tbody>
 </table>
 </div>
-<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_0301.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_0301.webp" style="display: block; margin: auto;" /></p>
 <p>Não assistiu a algum desses filmes? Tá na hora de ver!</p>
 <pre class="r"><code>notas_2cents %&gt;%
   dplyr::select(nm, nota) %&gt;% 
@@ -529,7 +529,7 @@ plotly::ggplotly(p)
 </ol>
 <p>Para essas investigações, seria necessário cruzar essa base com a base do Rotten Tomatoes e do IMDb. Quem sabe num próximo post!</p>
 <p>É isso pessoal. Um abraço, e até a próxima.</p>
-<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_0266.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2018-02-21-2cents/out_0266.webp" style="display: block; margin: auto;" /></p>
 </div>
 <div id="agradecimentos" class="section level3">
 <h3>Agradecimentos</h3>

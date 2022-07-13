@@ -3,7 +3,7 @@ title: "Testes de normalidade em R - Parte 2: Testes"
 date: "2021-02-09"
 tags: ["faxina", "modelagem"]
 categories: ["análises", "conceitos", "tutoriais"]
-image: "images/posts/banner/gaussian-2.png"
+image: "images/posts/banner/gaussian-2.webp"
 author: ["Fernando"]
 summary: "Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No segundo texto, vamos te mostrar como realizar uma bateria de testes de hipóteses para verificar se uma variável segue ou não a distribuição normal."
 draft: false

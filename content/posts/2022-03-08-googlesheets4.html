@@ -22,7 +22,7 @@ draft: false
 library(googlesheets4)</code></pre>
 <p>Neste exemplo, usaremos a tabela da <a href="https://cran.r-project.org/web/packages/gapminder/README.html">base de dados Gapminder</a>, que apresenta algumas informações por país e ano, como a população total, expectativa de vida ao nascer e o PIB per capita.</p>
 <p>Para importar uma tabela que está no Google Sheets, primeiramente precisamos identificá-la para que o R saiba qual arquivo queremos abrir. Uma forma de fazer isso é usando a <em>URL</em> (ou <em>Uniform Resource Locator</em>), que é também conhecido como <em>o link que usamos no navegador</em>.</p>
-<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/url.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/url.webp" /><!-- --></p>
 <p>Um exemplo de url é o seguinte, e ele encaminha para <a href="https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077">essa tabela</a>.</p>
 <pre><code>https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077</code></pre>
 <p>Sabendo a URL da planilha, podemos salvar em um objeto no R para facilitar o uso!</p>
@@ -40,9 +40,9 @@ url_planilha &lt;- &quot;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZq
 # 1: bmilz@curso-r.com
 # 2: milz.bea@gmail.com</code></pre>
 <p>Para fazer uma nova autenticação, basta escolher a opção <code>0</code>, e uma janela do navegador abrirá para fazer a autenticação:</p>
-<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/auth1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/auth1.webp" width="50%" style="display: block; margin: auto;" /></p>
 <p>Precisamos então clicar no email desejado, selecionar todas as opções de acesso e clicar em “Continuar”:</p>
-<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/auth2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/auth2.webp" width="50%" style="display: block; margin: auto;" /></p>
 <p>Caso funcione, a seguinte mensagem aparecerá no navegador: <code>Authentication complete. Please close this page and return to R</code>. Isso significa que podemos voltar ao R!</p>
 <blockquote>
 <p>DEU ERRO! Caso dê erro ao abrir o arquivo, se certifique que você tem acesso de leitura ou edição do Google Sheets desejado.</p>
@@ -129,13 +129,13 @@ dplyr::glimpse(gapminder_completo)
 <h3>E o Google Forms?</h3>
 <p>Eu gosto muito de usar esse pacote para importar respostas de <a href="https://docs.google.com/forms/u/0/">formulários do Google</a>, pois o Google permite vincular respostas dos formulários em uma Google Sheets.</p>
 <p>Aqui mostrarei como fazer isso! Primeiro precisamos criar um formulário (caso ele ainda não exista):</p>
-<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms1.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms1.webp" /><!-- --></p>
 <p>Ao criar o formulário, podemos clicar em “Respostas” e então clicar no logo do Google Sheets (um quadrado verde com uma linha branca horizontal e outra vertical):</p>
-<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms2.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms2.webp" /><!-- --></p>
 <p>O Google Forms irá perguntar qual o nome da Google Sheet a ser criada (ou também podemos selecionar uma Google Sheets que já existe):</p>
-<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms3.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms3.webp" /><!-- --></p>
 <p>Depois de selecionar qual a Google Sheet ficará vinculada ao formulário, a Google Sheet será aberta e podemos ver as respostas:</p>
-<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms4.png" /><!-- -->
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms4.webp" /><!-- -->
 Cada coluna terá informações de uma pergunta do formulário. Inicialmente, a base terá 0 linhas, pois quando criamos o formulário ele tem 0 respostas. Porém, após alguém responder o formulário, a Google Sheet é automaticamente atualizada e apresentará a resposta. Podemos importar os dados usando a função <code>read_sheet()</code>, como mostrado anteriormente:</p>
 <pre class="r"><code>url &lt;- &quot;https://docs.google.com/spreadsheets/d/1Ch3aMraacwhNo1sU4Z9b54nWYG8gdl18UfLJMzquL8s/&quot;
 

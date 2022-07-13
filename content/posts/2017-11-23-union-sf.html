@@ -3,7 +3,7 @@ title: "Unindo mapas: the tidy way"
 date: "2017-11-24"
 tags: ["sf", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/sf.png"
+image: "images/posts/banner/sf.webp"
 author: ["Julio"]
 summary: "Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. Dessa vez, o grande culpado foi o sf, um pacote ainda em estágio de desenvolvimento mas que já considero pacas..."
 ---
@@ -37,7 +37,7 @@ summary: "Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. 
 <blockquote>
 <p>P.S.: Não se esqueça do ciclo da ciência de dados! Vou falar disso sem parar para explicar. Na dúvida, leia o <a href="http://r4ds.had.co.nz/" class="uri">http://r4ds.had.co.nz/</a></p>
 </blockquote>
-<p><img src="/images/posts/conteudo/union-sf/data-science.png" /></p>
+<p><img src="/images/posts/conteudo/union-sf/data-science.webp" /></p>
 <p><br/></p>
 <p>As partes de <code>import</code> e <code>tidy</code> desse projeto processo foram sofríveis. Precisei fazer vários web scrapers e diversos códigos para lidar com nomes zoados dos municípios de São Paulo, como Moji/Mogi, Estrela D’Oeste/Doeste, Brodowski/Brodosqui etc. Quem quiser pode dar uma olhada nos códigos do <a href="https://github.com/abjur/abjMaps">github da ABJ</a>.</p>
 </div>
@@ -153,7 +153,7 @@ dplyr::glimpse(d_sf_municipio)
 # $ geometry          &lt;simple_feature&gt; MULTIPOLYGON (((-51.8600105..., MUL...</code></pre>
 <p>Se você quiser fazer um gráfico feinho só pra saber o que está rolando, use <code>plot()</code>:</p>
 <pre class="r"><code>plot(d_sf_municipio[, c(&quot;num_regiao&quot;, &quot;geometry&quot;)])</code></pre>
-<p><img src="/images/posts/conteudo/union-sf/sf_blog01.png" /></p>
+<p><img src="/images/posts/conteudo/union-sf/sf_blog01.webp" /></p>
 </div>
 <div id="parte-2-agrupando-os-municípios" class="section level3">
 <h3>Parte 2: agrupando os municípios</h3>
@@ -201,7 +201,7 @@ dplyr::glimpse(d_sf_comarca)
 <p>Você pode usar a função <code>gridExtra::grid.arrange()</code> para juntar essa lista de gráficos em um gráfico só, rodando</p>
 <pre class="r"><code>gridExtra::grid.arrange(grobs = graficos)</code></pre>
 <p>O resultado final é o gráfico abaixo.</p>
-<p><img src="/images/posts/conteudo/union-sf/sf_blog02.png" /></p>
+<p><img src="/images/posts/conteudo/union-sf/sf_blog02.webp" /></p>
 <p>Coisa mais linda!</p>
 </div>
 </div>

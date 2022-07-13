@@ -3,7 +3,7 @@ title: "Criando um relatório personalizado no Word através do R Markdown"
 date: "2021-12-23"
 tags: ["tutoriais"]
 categories: ["tutoriais"]
-image: "images/posts/banner/word-rmarkdown.jpg"
+image: "images/posts/banner/word-rmarkdown.webp"
 author: ["Tereza"]
 summary: "Aprenda a ter maior controle sobre a formatação de relatórios em Word gerados a partir do R Markdown"
 draft: false
@@ -18,13 +18,13 @@ Então, vamos ao tutorial:
 1. Abra o **RStudio** e crie um arquivo **R Markdown**.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word001.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word001.webp")
 ```
 
 2. Selecione a opção **Word** como formato de saída.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word002.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word002.webp")
 ```
 
 3. Salve o arquivo.
@@ -32,13 +32,13 @@ knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word002.png")
 4. Dê um **Knit**, apertando no botão do canto superior esquerdo (ou **Knit to Word**).
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word003.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word003.webp")
 ```
 
 5. Um arquivo Word aparecerá na sua tela, como esse:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word004.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word004.webp")
 ```
 
 6. Agora, edite esse arquivo com a formatação que deseja ter em seu relatório!
@@ -46,25 +46,25 @@ knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word004.png")
 7. Clique no botão do canto inferior direito da aba **Estilos**. Deixe essa aba aberta.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word005.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word005.webp")
 ```
 
 8. Clique em cima do título ("Untitled", na imagem), e note que na aba **Estilos** a caixa **Título** será automaticamente selecionada.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word006.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word006.webp")
 ```
 
 9. Clique na seta à direita da caixa **Título**, e então, em **Modificar**.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word007.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word007.webp")
 ```
 
 10. Edite a formatação do jeito que preferir. No nosso exemplo, ficou assim:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word008.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word008.webp")
 ```
 
 11. Quando terminar a edição, clique em **Ok** no canto inferior direito.
@@ -72,7 +72,7 @@ knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word008.png")
 12. Para editar outro elemento do texto, basta clicar em cima desse elemento, e a caixa do elemento será automaticamente selecionada na aba **Estilos**. (na imagem exemplo, clicamos no link "http://rmarkdown.rstudio.com" e na aba "Estilos" a caixa de **Hiperlink** foi automaticamente selecionada)
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word009.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word009.webp")
 ```
 
 13. Prossiga como anteriormente, clicando na seta à direita da caixa, e então, em **Modificar**.
@@ -80,7 +80,7 @@ knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word009.png")
 14. Quando a formatação estiver do jeito que você quiser, salve o arquivo. Aqui estamos usando o nome **Template_1.docx**. Feche o arquivo.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word010.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word010.webp")
 ```
 
 15. Voltando ao RStudio, crie outro arquivo R Markdown, com **Word** como formato de saída.
@@ -90,7 +90,7 @@ knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word010.png")
 17. Edite o começo do texto, especificando o seu arquivo de referência (sim, o arquivo que você acabou de editar!), ele deve ficar assim:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word011.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word011.webp")
 ```
 
 18. Salve o arquivo.
@@ -100,7 +100,7 @@ knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word011.png")
 20. Prontinho! Aparecerá na tela o arquivo Word com o seu relatório personalizado como no arquivo de referência!
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word012.png")
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word012.webp")
 ```
 
 Obs: Antes de apertar o botão **Knit**, certifique-se de que o arquivo Word está fechado. Se não, aparecerá um erro na tela do R.

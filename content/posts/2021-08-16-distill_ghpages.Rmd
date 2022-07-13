@@ -3,7 +3,7 @@ title: "Github Pages e Distill: Blog no Ar em 13 Passos"
 date: "2021-08-16"
 tags: ["blog", "github pages", "distill"]
 categories: ["tutoriais"]
-image: "images/posts/banner/distill_ghpages.png"
+image: "images/posts/banner/distill_ghpages.webp"
 author: ["Athos"]
 summary: "Passo a passo de como subir um blog distill no Github Pages"
 draft: false
@@ -41,7 +41,7 @@ knitr::include_graphics("/images/posts/conteudo/2021-08-16-distill_ghpages/githu
 9. Ir para o link que o Github Pages mostrou na hora da configuração.
 
 ```{r, echo = FALSE, layout="l-body-outset", fig.cap="ghpages"}
-knitr::include_graphics("/images/posts/conteudo/2021-08-16-distill_ghpages/githubpageslink.png")
+knitr::include_graphics("/images/posts/conteudo/2021-08-16-distill_ghpages/githubpageslink.webp")
 ```
 
 ## Criar um post: passo-a-passo

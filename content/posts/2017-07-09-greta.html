@@ -3,7 +3,7 @@ title: "Greta"
 date: "2017-07-08"
 tags: ["tensorflow", "bayes"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/banner-greta.png"
+image: "images/posts/banner/banner-greta.webp"
 author: ["Daniel"]
 summary: "Greta é um pacote de modelagem estatística que permite que você defina seus modelos interativamente em R e depois os estime usando MCMC."
 ---
@@ -50,7 +50,7 @@ draws &lt;- mcmc(m, n_samples = 1000)</code></pre>
 <p>Você pode fazer um gráfico para visualizar as estimativas dos parâmetros usando o
 <code>bayesplot</code>:</p>
 <pre class="r"><code>bayesplot::mcmc_trace(draws, facet_args = list(ncol = 1))</code></pre>
-<p><img src="/images/posts/conteudo/greta/Rplot.png" /></p>
+<p><img src="/images/posts/conteudo/greta/Rplot.webp" /></p>
 <p>Podemos obter as estimativas pontuais dos parâmetros pegando, por exemplo, a mediana
 dessa amostra do MCMC.</p>
 <pre class="r"><code>apply(draws[[1]], 2, median)

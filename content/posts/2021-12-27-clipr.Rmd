@@ -3,7 +3,7 @@ title: "Importando e exportando tabelas do R para o Excel através da área de t
 date: "2021-12-27"
 tags: ["tutoriais"]
 categories: ["tutoriais"]
-image: "images/posts/banner/clipr.jpg"
+image: "images/posts/banner/clipr.webp"
 author: ["Tereza"]
 summary: "Aprenda a importar/exportar tabelas do R através do pacote clipr"
 draft: false
@@ -37,7 +37,7 @@ write_clip(mtcars)
 3. Abra um novo arquivo excel, use o atalho **crtl + v** e voilà!
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr1.png")
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr1.webp")
 ```
 
 Note que por default, o separador decimal usado é o ponto. Para mudar isso, basta usar o argumento `dec = ","`
@@ -49,7 +49,7 @@ write_clip(mtcars, dec = ",")
 Usando o atalho **ctrl + v** no arquivo excel:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr2.png")
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr2.webp")
 ```
 
 Também podemos usar o operador **pipe**, obtendo o mesmo resultado do passo anterior:
@@ -69,7 +69,7 @@ mtcars %>%
 Usando o atalho **ctrl + v** no arquivo excel:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr3.png")
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr3.webp")
 ```
 
 ## Copiando tabelas do Excel para o R através da área de transferência
@@ -83,7 +83,7 @@ library(clipr)
 2. No excel, selecione a tabela desejada, e a copie através do comando **ctrl + c**. No nosso caso, estamos copiando a base `mtcars` (no formato **.xlsx**)
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr4.png")
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr4.webp")
 ```
 
 3. Agora, vá até o R e use o seguinte comando:
@@ -109,7 +109,7 @@ base_de_dados[1:11, ]
 Também podemos usar alguns argumentos na função `read_clip_tbl`. Por exemplo, considere que temos uma base de dados no formato **.csv**:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr5.png")
+knitr::include_graphics("/images/posts/conteudo/2021-12-27-clipr/clipr5.webp")
 ```
 
 Se quisermos copiar a tabela `mtcars` no formato **.csv** do excel para o R, por exemplo, basta usar o argumento `sep` para especificar o separador usado, que é a vírgula:

@@ -3,7 +3,7 @@ title: "Quebrando Captchas - Parte V: Fazendo redes convolucionais na mão"
 date: "2017-11-12"
 tags: ["captcha"]
 categories: ["análises"]
-image: "images/posts/banner/captcha_05.png"
+image: "images/posts/banner/captcha_05.webp"
 author: ["Julio"]
 summary: "Nesse post vou mostrar como ajustar redes neurais convolucionais na mão. Muita mão na massa envolvida, muitos captchas e muita diversão. Vamos juntos desmistificar a magia negra do deep learning..."
 retired: true
@@ -51,7 +51,7 @@ library(magick)</code></pre>
 kern_horizontal</code></pre>
 <p>E considere essa imagem super complexa:</p>
 <p>Na prática, essa imagem é isso aqui (tirei algumas linhas e colunas):</p>
-<pre class="r"><code>emoji &lt;- load_image(&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot;)[,,1]
+<pre class="r"><code>emoji &lt;- load_image(&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.webp&quot;)[,,1]
 round(emoji, 1)[1:10, 1:12]</code></pre>
 <p>Tome por exemplo o ponto <span class="math inline">\((i,j) = (12,16)\)</span>. A vizinhança 3x3 em torno desse ponto é dada por</p>
 <pre class="r"><code>emoji[12 + (-1):1, 16 + (-1):1]</code></pre>
@@ -85,7 +85,7 @@ round(emoji, 1)[1:10, 1:12]</code></pre>
 }</code></pre>
 <p>(desculpe aos amigos por usar <code>for</code>. Shame on me…)</p>
 <p>Voltando para nossa imagem agora. No nosso caso, o resultado fica assim:</p>
-<pre class="r"><code>&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot; %&gt;%
+<pre class="r"><code>&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.webp&quot; %&gt;%
   load_image() %&gt;%
   convolve(kern_horizontal) %&gt;%
   image_read() %&gt;%
@@ -97,7 +97,7 @@ round(emoji, 1)[1:10, 1:12]</code></pre>
                        c(-1, 0, 1))
 kern_vertical
 
-&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot; %&gt;%
+&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.webp&quot; %&gt;%
   load_image() %&gt;%
   convolve(kern_vertical) %&gt;%
   image_read() %&gt;%

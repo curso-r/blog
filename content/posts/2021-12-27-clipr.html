@@ -3,7 +3,7 @@ title: "Importando e exportando tabelas do R para o Excel através da área de t
 date: "2021-12-27"
 tags: ["tutoriais"]
 categories: ["tutoriais"]
-image: "images/posts/banner/clipr.jpg"
+image: "images/posts/banner/clipr.webp"
 author: ["Tereza"]
 summary: "Aprenda a importar/exportar tabelas do R através do pacote clipr"
 draft: false
@@ -28,11 +28,11 @@ draft: false
 <ol start="3" style="list-style-type: decimal">
 <li>Abra um novo arquivo excel, use o atalho <strong>crtl + v</strong> e voilà!</li>
 </ol>
-<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr1.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr1.webp" style="display: block; margin: auto;" /></p>
 <p>Note que por default, o separador decimal usado é o ponto. Para mudar isso, basta usar o argumento <code>dec = ","</code></p>
 <pre class="r"><code>write_clip(mtcars, dec = &quot;,&quot;)</code></pre>
 <p>Usando o atalho <strong>ctrl + v</strong> no arquivo excel:</p>
-<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr2.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr2.webp" style="display: block; margin: auto;" /></p>
 <p>Também podemos usar o operador <strong>pipe</strong>, obtendo o mesmo resultado do passo anterior:</p>
 <pre class="r"><code>mtcars %&gt;% 
   write_clip(dec = &quot;,&quot;)</code></pre>
@@ -40,7 +40,7 @@ draft: false
 <pre class="r"><code>mtcars %&gt;% 
   write_clip(dec = &quot;,&quot;, col.names = FALSE)</code></pre>
 <p>Usando o atalho <strong>ctrl + v</strong> no arquivo excel:</p>
-<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr3.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr3.webp" style="display: block; margin: auto;" /></p>
 </div>
 <div id="copiando-tabelas-do-excel-para-o-r-através-da-área-de-transferência" class="section level2">
 <h2>Copiando tabelas do Excel para o R através da área de transferência</h2>
@@ -51,7 +51,7 @@ draft: false
 <ol start="2" style="list-style-type: decimal">
 <li>No excel, selecione a tabela desejada, e a copie através do comando <strong>ctrl + c</strong>. No nosso caso, estamos copiando a base <code>mtcars</code> (no formato <strong>.xlsx</strong>)</li>
 </ol>
-<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr4.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr4.webp" style="display: block; margin: auto;" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Agora, vá até o R e use o seguinte comando:</li>
 </ol>
@@ -72,7 +72,7 @@ draft: false
 ## 10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
 ## 11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4</code></pre>
 <p>Também podemos usar alguns argumentos na função <code>read_clip_tbl</code>. Por exemplo, considere que temos uma base de dados no formato <strong>.csv</strong>:</p>
-<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr5.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2021-12-27-clipr/clipr5.webp" style="display: block; margin: auto;" /></p>
 <p>Se quisermos copiar a tabela <code>mtcars</code> no formato <strong>.csv</strong> do excel para o R, por exemplo, basta usar o argumento <code>sep</code> para especificar o separador usado, que é a vírgula:</p>
 <pre class="r"><code>base_de_dados2 &lt;- read_clip_tbl(sep = &quot;,&quot;)</code></pre>
 <p>Vamos visualizar o objeto <code>base_de_dados2</code>:</p>

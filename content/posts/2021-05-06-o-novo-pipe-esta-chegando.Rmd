@@ -3,7 +3,7 @@ title: 'R 4.1: o novo pipe está chegando!'
 date: "2021-05-06"
 tags: ["programação", "pipe"]
 categories: ["discussões"]
-image: "images/posts/banner/novo-pipe.jpeg"
+image: "images/posts/banner/novo-pipe.webp"
 author: ["Caio"]
 summary: "Em poucos dias será oficialmente lançado o R 4.1, com seu próprio pipe embutido! Neste post falamos sobre o pipe e outras novidades que chegarão ao R em 18/05/2021."
 draft: false

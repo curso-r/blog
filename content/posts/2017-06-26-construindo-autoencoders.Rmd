@@ -3,7 +3,7 @@ title: "Construindo Autoencoders"
 date: "2017-06-26"
 tags: ["autoencoders", "keras", "deep-learning"]
 categories: ["conceitos"]
-image: "images/posts/banner/autoencoder_schema.jpg"
+image: "images/posts/banner/autoencoder_schema.webp"
 author: ["Daniel"]
 summary: "Autoencoders são redes neurais treinadas com o objetdivo de copiar o seu input para o seu output. Aprenda a treinar o seu neste post."
 ---

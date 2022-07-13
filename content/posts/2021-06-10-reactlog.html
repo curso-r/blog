@@ -3,7 +3,7 @@ title: "Diagramas de reatividade no shiny (reactlog)"
 date: "2021-06-10"
 tags: ["shiny", "reatividade", "reactlog"]
 categories: ["tutoriais"]
-image: "images/posts/banner/reactlog.png"
+image: "images/posts/banner/reactlog.webp"
 author: ["William"]
 summary: "Aprenda a construir um diagrama do fluxo reatividade do seu Shiny app." 
 ---
@@ -22,14 +22,14 @@ summary: "Aprenda a construir um diagrama do fluxo reatividade do seu Shiny app.
 <pre class="r"><code>options(shiny.reactlog = TRUE) </code></pre>
 <p>Por fim, rode o seu app e utilize o comando <code>CTRL + F3</code> (no Mac, <code>command + F3</code>). O seu navegador abrirá uma nova aba com o diagrama de reatividade. Veja o exemplo a seguir. Primeiro temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo <code>sliderInput.</code> Sempre que o tamanho da amostra muda, o gráfico é recalculado.</p>
 <div class="figure"><span id="fig:unnamed-chunk-4"></span>
-<img src="/images/posts/conteudo/reactlog/app_hist_normal.png" alt="Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput."  />
+<img src="/images/posts/conteudo/reactlog/app_hist_normal.webp" alt="Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput."  />
 <p class="caption">
 Figura 1: Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput.
 </p>
 </div>
 <p>Veja agora o diagrama de reatividade associado a esse app. A forma dos 4 elementos mais a esquerda representa inputs ou valores reativos, a forma do elemento <code>plotObj</code> representa expressões reativas e a forma do elemento <code>output$hist</code> representa os outputs (ou observadores).</p>
 <div class="figure"><span id="fig:unnamed-chunk-5"></span>
-<img src="/images/posts/conteudo/reactlog/reaclog_diagrama_completo.png" alt="Diagrama de reatividade do app anterior criado pelo pacote reactlog."  />
+<img src="/images/posts/conteudo/reactlog/reaclog_diagrama_completo.webp" alt="Diagrama de reatividade do app anterior criado pelo pacote reactlog."  />
 <p class="caption">
 Figura 2: Diagrama de reatividade do app anterior.
 </p>
@@ -37,7 +37,7 @@ Figura 2: Diagrama de reatividade do app anterior.
 <p>Parece muito mais complicado do que deveria, né? Acontece que além do input e output, o diagrama também apresenta elementos referentes ao tamanho da janela da pessoa que está utilizando o app. Esses elementos influenciam na imagem produzida para o gráfico dentro do HTML, que é redimensionada a depender do tamanho da tela. Por isso a existência do elemento intermediário <code>plotObj</code>, que guarda as instruções para gerar o gráfico criadas pelo código R. Assim, o código R no servidor não precisa ser rodado novamente para que a imagem do gráfico seja redimensionada.</p>
 <p>Podemos filtrar o diagrama para mostrar apenas o fluxo relacionado aos inputs do aplicativo escrevendo <code>input</code> no campo de busca. Repare também que os comandos no canto superior esquerdo permitem visualizar o fluxo de reatividade das ações realizadas entre a inicialização do app e o momento em que criamos o diagrama (quando pressionamos CTRL + F3).</p>
 <div class="figure"><span id="fig:unnamed-chunk-6"></span>
-<img src="/images/posts/conteudo/reactlog/reactlog_comandos.png" alt="Diagrama de reatividade do app anterior criado pelo pacote reactlog."  />
+<img src="/images/posts/conteudo/reactlog/reactlog_comandos.webp" alt="Diagrama de reatividade do app anterior criado pelo pacote reactlog."  />
 <p class="caption">
 Figura 3: Diagrama de reatividade do app anterior.
 </p>

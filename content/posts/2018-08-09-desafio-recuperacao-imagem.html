@@ -3,7 +3,7 @@ title: "Desafio de Dados - Recuperação de imagens"
 date: "2018-08-09"
 tags: ["app", "pacotes"]
 categories: ["divulgação"]
-image: "images/posts/banner/purple_wave.jpg"
+image: "images/posts/banner/purple_wave.webp"
 author: ["Athos","Daniel", "Bruna Wundervald"]
 summary: "Na segunda edição do Desafio de Dados vamos tentar recuperar a cor de uma imagem usando modelos de regressão e árvore de decisão."
 draft: false
@@ -29,15 +29,15 @@ ser representada por um banco de dados com 5 colunas (<code>x</code>, <code>y</c
 <ul>
 <li>Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da
-<a href="/images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg">imagem purple_wave.jpg.</a></li>
+<a href="/images/posts/conteudo/desafio-recuperacao-img/purple_wave.webp">imagem purple_wave.jpg.</a></li>
 </ul>
-<p><img src="/images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg" /></p>
+<p><img src="/images/posts/conteudo/desafio-recuperacao-img/purple_wave.webp" /></p>
 <ul>
 <li>Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da
-<a href="/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg">imagem xadrez_colorido.jpg.</a></li>
+<a href="/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.webp">imagem xadrez_colorido.jpg.</a></li>
 </ul>
-<p><img src="/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg" /></p>
+<p><img src="/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.webp" /></p>
 </div>
 <div id="como-começar" class="section level1">
 <h1>Como começar?</h1>
@@ -46,7 +46,7 @@ imagens no R e transforme para data.frame:</p>
 <pre class="r"><code>library(tidyverse)
 library(jpeg)
 # carrega uma imagem jpeg no R
-download.file(&quot;http://curso-r.comimages/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg&quot;, 
+download.file(&quot;http://curso-r.comimages/posts/conteudo/desafio-recuperacao-img/purple_wave.webp&quot;, 
               destfile = &quot;purple_wave.jpg&quot;)
 
 img &lt;- readJPEG(&quot;purple_wave.jpg&quot;)

@@ -3,7 +3,7 @@ title: "Magic no R com {scryr}"
 date: "2022-01-07"
 tags: ["mtg", "scryr"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/scryr.jpeg"
+image: "images/posts/banner/scryr.webp"
 author: ["Caio"]
 summary: "Um pacote em R para acessar o Scryfall, uma API de Magic: The Gathering"
 type: "featured"

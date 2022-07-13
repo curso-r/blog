@@ -3,7 +3,7 @@ title: "O pacote arrow"
 date: "2019-11-27"
 tags: ["arrow", "dados"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/arrow.jpeg"
+image: "images/posts/banner/arrow.webp"
 author: ["Julio"]
 summary: "O pacote {arrow} é uma atualização importante para o mundo da ciência de dados. Veja porquê nesse post."
 editor_options: 

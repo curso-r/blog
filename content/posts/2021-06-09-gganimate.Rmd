@@ -3,7 +3,7 @@ title: "Animando gráficos feitos em ggplot2: o pacote gganimate"
 date: "2021-06-09"
 tags: ["ggplot2"]
 categories: ["pacotes"]
-image: "images/posts/banner/gganimate_logo_small.png"
+image: "images/posts/banner/gganimate_logo_small.webp"
 author: ["Fernando"]
 summary: "Quer dar um upgrade nos seus gráficos e colocar uma animaçãozinha? Use o pacote gganimate!"
 draft: false

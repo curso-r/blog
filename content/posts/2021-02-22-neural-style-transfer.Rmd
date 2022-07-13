@@ -3,7 +3,7 @@ title: "Neural Style Transfer com Torch"
 date: "2021-02-22"
 tags: ["deep learning", "torch", "neural style transfer", "modelagem"]
 categories: ["análises", "conceitos", "tutoriais"]
-image: "images/posts/banner/cristoredentorfinal.jpeg"
+image: "images/posts/banner/cristoredentorfinal.webp"
 bibliography: bibliography.bib
 author: ["Athos"]
 summary: "Neural Style Transfer é uma das técnicas mais divertidas de deep learning. O post mostra como implementar uma rede de NST com o torch."
@@ -32,7 +32,7 @@ cpu <- torch_device("cpu")
 
 Neural Style Transfer é uma das técnicas mais divertidas e "artísticas" do deep learning. A imagem abaixo resume o que a gente vai fazer.
 
-![content](/images/posts/conteudo/2021-02-22-neural-style-transfer/nst.png)
+![content](/images/posts/conteudo/2021-02-22-neural-style-transfer/nst.webp)
 
 Você fornece duas imagens à rede neural: `style` e `content` e o resultado será a imagem `content` com o estilo de `style`. É como se fosse um filtro do instagram, mas com o estilo do seu artista predileto =P.
 
@@ -190,9 +190,9 @@ content_weight <- 2
 style_weight <- 4e-1
 ```
 
-![content](/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentor3.jpg)
+![content](/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentor3.webp)
 
-![style](/images/posts/conteudo/2021-02-22-neural-style-transfer/vangogh_starry_night.jpg)
+![style](/images/posts/conteudo/2021-02-22-neural-style-transfer/vangogh_starry_night.webp)
 
 ```{r}
 # FEATURES: extraídas da VGG19
@@ -241,7 +241,7 @@ plot_image(generated)
     LC = 2.44669985771179 - LS = 16.6177845001221 - Loss = 11.5405139923096
 
 
-![](/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentorfinal.png)
+![](/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentorfinal.webp)
 
 E aí? Ficou com cara de pintura? Comente o que achou! Tente com suas imagens e compartilhe com a gente =). Aprender como NST funciona é um grande exercício para aprimorar o entendimento sobre modelos de deep learning em geral, principalmente sobre como podemos criar funções de custo mais especializadas em um determinado contexto.
 

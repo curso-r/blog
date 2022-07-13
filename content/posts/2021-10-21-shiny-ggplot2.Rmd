@@ -3,7 +3,7 @@ title: "Gráficos no Shiny: ggplot2"
 date: "2021-10-20"
 tags: ["shiny", "gráficos", "echarts"]
 categories: ["pacotes"]
-image: "images/posts/banner/ggplot-shiny.jpg"
+image: "images/posts/banner/ggplot-shiny.webp"
 author: ["William"]
 summary: "Unindo dois dos melhores pacotes do R."
 ---
@@ -64,7 +64,7 @@ shinyApp(ui, server)
 ```
 
 ```{r, fig.cap="App com dois inputs especificando as variáveis do eixo x e y de um ggplot .", echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/shiny-ggplot/app.png")
+knitr::include_graphics("/images/posts/conteudo/shiny-ggplot/app.webp")
 ```
 
 O objeto gerado pelo `ggplot` é uma lista com classe `gg` e `ggplot`, que contém todas as informações necessárias para o R desenhar o gráfico.

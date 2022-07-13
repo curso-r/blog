@@ -3,7 +3,7 @@ title: "Neural Style Transfer com Torch"
 date: "2021-02-22"
 tags: ["deep learning", "torch", "neural style transfer", "modelagem"]
 categories: ["análises", "conceitos", "tutoriais", "r"]
-image: "images/posts/banner/cristoredentorfinal.jpeg"
+image: "images/posts/banner/cristoredentorfinal.webp"
 bibliography: bibliography.bib
 author: ["Athos"]
 summary: "Neural Style Transfer é uma das técnicas mais divertidas de deep learning. O post mostra como implementar uma rede de NST com o torch."
@@ -22,7 +22,7 @@ device &lt;- torch_device(if(cuda_is_available()) &quot;cuda&quot; else &quot;cp
 cpu &lt;- torch_device(&quot;cpu&quot;)</code></pre>
 <p>Neural Style Transfer é uma das técnicas mais divertidas e “artísticas” do deep learning. A imagem abaixo resume o que a gente vai fazer.</p>
 <div class="figure">
-<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/nst.png" alt="" />
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/nst.webp" alt="" />
 <p class="caption">content</p>
 </div>
 <p>Você fornece duas imagens à rede neural: <code>style</code> e <code>content</code> e o resultado será a imagem <code>content</code> com o estilo de <code>style</code>. É como se fosse um filtro do instagram, mas com o estilo do seu artista predileto =P.</p>
@@ -147,11 +147,11 @@ lambdas &lt;- 1e5/(c(1,10,10,10,10)^2)
 content_weight &lt;- 2
 style_weight &lt;- 4e-1</code></pre>
 <div class="figure">
-<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentor3.jpg" alt="" />
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentor3.webp" alt="" />
 <p class="caption">content</p>
 </div>
 <div class="figure">
-<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/vangogh_starry_night.jpg" alt="" />
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/vangogh_starry_night.webp" alt="" />
 <p class="caption">style</p>
 </div>
 <pre class="r"><code># FEATURES: extraídas da VGG19
@@ -196,7 +196,7 @@ LC = 2.61282753944397 - LS = 24.3190288543701 - Loss = 14.9532661437988
 LC = 2.54735898971558 - LS = 19.7909469604492 - Loss = 13.0110969543457
 LC = 2.49572896957397 - LS = 16.9353790283203 - Loss = 11.7656097412109
 LC = 2.44669985771179 - LS = 16.6177845001221 - Loss = 11.5405139923096</code></pre>
-<p><img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentorfinal.png" /></p>
+<p><img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentorfinal.webp" /></p>
 <p>E aí? Ficou com cara de pintura? Comente o que achou! Tente com suas imagens e compartilhe com a gente =). Aprender como NST funciona é um grande exercício para aprimorar o entendimento sobre modelos de deep learning em geral, principalmente sobre como podemos criar funções de custo mais especializadas em um determinado contexto.</p>
 </div>
 <div id="aprenda-deep-learning-com-a-curso-r" class="section level2">

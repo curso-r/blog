@@ -3,7 +3,7 @@ title: "Programando R no VS Code"
 date: "2021-11-06"
 tags: ["rstudio", "vscode"]
 categories: ["tutoriais"]
-image: "images/posts/banner/vscode.jpeg"
+image: "images/posts/banner/vscode.webp"
 author: ["Caio"]
 summary: "Como programar R em um dos editores de código mais populares da atualidade."
 draft: false
@@ -31,7 +31,7 @@ essa operação depois que ela foi iniciada também nem sempre funciona.
 Não deveria ser tão chato copiar e deletar arquivos.
 
 ```{r, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/multiple-items-selected.png")
+knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/multiple-items-selected.webp")
 ```
 
 - Até hoje não existe um jeito de substituir um termo (_find-replace_) em
@@ -77,7 +77,7 @@ só para ter que esperar ele terminar de rodar de qualquer jeito?
 - A bombinha. Por que a IDE inteira cai se o problema está no código executado?
 
 ```{r, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/bomba.png")
+knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/bomba.webp")
 ```
 
 ## Uma Possível Alternativa
@@ -98,7 +98,7 @@ No final eu cheguei ao
 extensão de R para o VS Code.
 
 ```{r, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/vscode.png")
+knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/vscode.webp")
 ```
 
 Para quem não sabe, o VS Code é atualmente o editor de código mais popular do
@@ -139,7 +139,7 @@ install.packages("languageserver")
 Python. Se você tiver qualquer versão a partir da 3, já é o suficiente:
 
 ```{r, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/python.png")
+knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/python.webp")
 ```
 
 3. Instalar o [Radian](https://github.com/randy3k/radian), um console moderno
@@ -194,7 +194,7 @@ executar o primeiro comando R com **Ctrl + Enter**, um console R irá aparecer e
 você pode seguir a vida normalmente.
 
 ```{r, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/demo.png")
+knitr::include_graphics("/images/posts/conteudo/2021-11-06-r-no-vscode/demo.webp")
 ```
 
 Minha principal sugestão para o seu futuro no VS Code é: explore! Se algo te

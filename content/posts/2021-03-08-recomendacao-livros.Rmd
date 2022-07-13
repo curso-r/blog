@@ -3,7 +3,7 @@ title: "3 livros essenciais para Cientistas de Dados "
 date: "2021-03-12"
 tags: ["faxina", "modelagem"]
 categories: ["conceitos"]
-image: "images/posts/banner/livros.jpg"
+image: "images/posts/banner/livros.webp"
 author: ["Fernando"]
 summary: "Ciência de Dados é uma área nova e, embora relacionada a muitas outras áreas mais tradicionais como estatística e computação, pode parecer um mar vasto demais. Por isso, nesse post vamos te recomendar 3 livros muito legais para começar os seus estudos."
 draft: false
@@ -24,7 +24,7 @@ Muitos e muitos livros poderiam aparecer nessa lista, mas para garantir que mais
 
 # 1. "Estatística Básica", por Wilton Bussab e Pedro Morettin
 
-<img src = "https://blog.curso-r.com/images/posts/conteudo/livros/morettin.jpg">
+<img src = "https://blog.curso-r.com/images/posts/conteudo/livros/morettin.webp">
 
 
 Estatística é uma das principais ferramentas no cinto de utilidades de Cientistas de Dados. Embora também seja importante cultivar outros conhecimentos, as técnicas e estratégias de análise tradicionais do campo da Estatística resolvem muitos problemas comuns da vida de quem mexe com dados. 
@@ -33,7 +33,7 @@ Estatística é uma das principais ferramentas no cinto de utilidades de Cientis
 
 # 2. "Storytelling com Dados: um Guia Sobre Visualização de Dados Para Profissionais de Negócios", por Cole Nussbaumer Knaflic
 
-<img src = "https://blog.curso-r.com/images/posts/conteudo/livros/cole.jpg">
+<img src = "https://blog.curso-r.com/images/posts/conteudo/livros/cole.webp">
 
 O verdadeiro trabalho de quem trabalha com dados é, antes de tudo, conseguir traduzir o que os dados têm a dizer para uma linguagem que seja útil para um negócio, pesquisa ou qualquer outra forma de investigação. As pessoas que vão consumir nossos resultados, em geral, precisam acessar o amplo contexto no qual os dados estão inseridos e muitas vezes a forma mais produtiva de transmitir as nossas informações é contando uma história com começo, meio e fim. Às vezes podemos nos esquecer disso, já que gastamos uma grande parte do nosso tempo em tarefas complementares, como limpeza e modelagem de dados, mas nunca se pode perder de vista que no final vamos precisar contar uma história pra alguém, e possivelmente só aí nosso trabalho terá sido útil.
 
@@ -41,7 +41,7 @@ O verdadeiro trabalho de quem trabalha com dados é, antes de tudo, conseguir tr
 
 # 3. "R Para Data Science", por Hadley Wickham e Garrett Grolemund 
 
-<img src = "https://blog.curso-r.com/images/posts/conteudo/livros/r4ds.jpg">
+<img src = "https://blog.curso-r.com/images/posts/conteudo/livros/r4ds.webp">
 
 Muitas pessoas definem como Ciência de Dados como uma união entre métodos quantitativos em geral (estatística, matemática, machine learning etc), programação, e uma atuação focada a negócios. Desses três temas, apenas um ainda não estava contemplado na nossa lista: a progamação.
 

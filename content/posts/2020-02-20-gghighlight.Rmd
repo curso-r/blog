@@ -3,7 +3,7 @@ title: "gghighlight"
 date: "2020-02-21"
 tags: ["ggplot2"]
 categories: ["pacotes"]
-image: "images/posts/banner/gghighlight.png"
+image: "images/posts/banner/gghighlight.webp"
 author: ["Daniel"]
 summary: "O gghighlight é uma das extensões do ggplot2. Este post serve como uma pequena introdução é apresentação do que é possível fazer com ele."
 ---

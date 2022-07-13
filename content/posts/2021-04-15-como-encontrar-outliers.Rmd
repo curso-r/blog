@@ -3,8 +3,8 @@ title: "Uma maneira prática de encontrar outliers nos seus dados"
 date: "2021-04-15"
 tags: ["base de dados"]
 categories: ["análises", "conceitos"]
-image: "images/posts/banner/outlier.jpg"
-featuredImage: "images/posts/banner/outlier.jpg"
+image: "images/posts/banner/outlier.webp"
+featuredImage: "images/posts/banner/outlier.webp"
 author: ["Fernando"]
 summary: "Você já passou pela situação de fazer um gráfico e se deparar com um monte de pontos bizarros? Quando você nem seguer consegue ver o que está acontecendo porque um ponto está deixando a sua escala completamente bagunçada? Hoje, nós vamos falar sobre uma estratégia rápida e fácil que tem o potencial de te ajudar a encontrar todos os seus outliers sem ter dor de cabeça. "
 draft: false

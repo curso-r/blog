@@ -3,7 +3,7 @@ title: "Salvando data.frames: uma comparação"
 date: "2017-07-20"
 tags: ["base de dados"]
 categories: ["tutoriais"]
-image: "images/posts/banner/banner-datasets.jpg"
+image: "images/posts/banner/banner-datasets.webp"
 author: ["Daniel"]
 summary: "Salvar data.frames para ler depois é uma tarefa muito comum para quem trabalha com R. Veja aqui algumas maneiras de como fazer isso de forma rápida e de forma que possa te salvar tempo na hora de carregá-lo novamente."
 ---
@@ -140,7 +140,7 @@ b <- a[5000:6000, 1:3]
 
 [`fst` é um pacote](https://github.com/fstpackage/fst) para ler e escrever `data.frames` de forma muito rápida.
 
-![](/images/posts/conteudo/escrevendo-data-frames/README-speedCode-1.png)
+![](/images/posts/conteudo/escrevendo-data-frames/README-speedCode-1.webp)
 
 A imagem (retirada [daqui](https://github.com/fstpackage/fst)) acima mostra a sua velocidade. O `fst` é mais ou menos 3 vezes mais rápido
 para ler os arquivos salvos e cerca de 2x mais rápido para escrevê-los. O arquivo

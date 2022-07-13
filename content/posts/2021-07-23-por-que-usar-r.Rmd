@@ -3,7 +3,7 @@ title: "5 motivos para usar R"
 date: "2021-07-30"
 tags: ["tutoriais"]
 categories: ["discussões"]
-image: "images/posts/banner/5-motivos.png"
+image: "images/posts/banner/5-motivos.webp"
 author: ["Fernando"]
 summary: "Tanto para quem já conhece quanto pra quem ainda dá os primeiros passos, sempre é bom relembrar porque o R é tão bacana."
 draft: false

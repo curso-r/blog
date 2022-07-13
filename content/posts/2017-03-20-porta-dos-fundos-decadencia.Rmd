@@ -3,7 +3,7 @@ title: "O Porta dos Fundos está em decadência?"
 date: "2017-03-20"
 tags: ["Porta dos Fundos","API", "YouTube"]
 categories: ["análises"]
-image: "images/posts/banner/porta.jpg"
+image: "images/posts/banner/porta.webp"
 author: ["William"]
 summary: "Há alguns anos eu acompanho o canal Porta dos Fundos no YouTube, assistindo os vídeos quase sempre no dia de lançamento. Nos últimos meses, no entanto, meu entusiasmo com o canal vem diminuindo. Não sei se eu que fiquei chato ou se outras pessoas compartilham a minha opinião de que o conteúdo do Porta piorou. Então resolvi scrapear informações do canal e montar algumas visualizações para tirar essa dúvida."
 ---
@@ -130,7 +130,7 @@ dados %>%
   theme_bw()
 ```
 
-![](/images/posts/conteudo/porta-dos-fundos-decadencia/views_porta_png.png)
+![](/images/posts/conteudo/porta-dos-fundos-decadencia/views_porta_png.webp)
 
 Também fiz um gráfico da proporção likes/dislikes pela data de publicação do vídeo. Parece haver uma leve redução dessa proporção no último ano, mas é arriscado tirar uma conclusão. Refazendo essa análise no fim de 2017, talvez fique mais claro se o público do canal concorda comigo sobre a qualidade do conteúdo nos últimos tempos.
 
@@ -149,7 +149,7 @@ dados %>%
   theme_bw()
 ```
 
-![](/images/posts/conteudo/porta-dos-fundos-decadencia/likes-dislikes_porta_png.png)
+![](/images/posts/conteudo/porta-dos-fundos-decadencia/likes-dislikes_porta_png.webp)
 
 O Porta dos Fundos é sem dúvida um gigante no YouTube, mas os indícios dessa sucinta análise colaboram com a minha opinião de que o canal já viveu dias (bem) melhores. Apesar de essa decadência poder ser só uma fase ruim, nunca é cedo para se reinventar, ter novas ideias, definir as regras do jogo, assim como eles fizeram no início.
 

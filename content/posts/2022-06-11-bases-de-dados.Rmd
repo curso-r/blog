@@ -3,7 +3,7 @@ title: "Bases de dados: para praticar e ensinar"
 date: "2022-06-11"
 tags: ["ensino", "bases de dados", "importação"]
 categories: ["tutoriais"]
-image: "images/posts/banner/welcome_to_rstats.jpeg"
+image: "images/posts/banner/welcome_to_rstats.webp"
 author: ["Beatriz", "Tereza"]
 summary: "Quer saber como acessar várias bases de dados com R?"
 draft: false

@@ -3,7 +3,7 @@ title: "Ranking de jogadores de Tênis"
 date: "2022-06-05"
 tags: ["web-scraping", "visualização"]
 categories: ["análises"]
-image: "images/posts/banner/nadal.png"
+image: "images/posts/banner/nadal.webp"
 author: ["Julio"]
 summary: "Análise do ranking dos jogadores ao longo do tempo"
 draft: false

@@ -3,7 +3,7 @@ title: "Tutorial: {rlang} para Filhotes"
 date: "2021-07-27"
 tags: ["rlang", "tidy", "tidyverse"]
 categories: ["tutoriais"]
-image: "images/posts/banner/filhote.jpeg"
+image: "images/posts/banner/filhote.webp"
 author: ["Caio"]
 summary: "Um tutorial sobre {rlang} que vai do básico ao avançado. Zero to hero!"
 draft: false
@@ -58,7 +58,7 @@ quando executada, retorna uma mão fazendo carinho no filhote de cor apropriada
 (essencialmente a string retornada pelo código acima).
 
 ```{r 01_pat_rex_png, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/01_pat_rex.png")
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/01_pat_rex.webp")
 ```
 
 ### Expressões
@@ -94,7 +94,7 @@ figura abaixo não há as marcas de movimento da mão, pois estamos congelando a
 cena antes de o filhote vir até nós.
 
 ```{r 02_expr_png, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/02_expr.png")
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/02_expr.webp")
 ```
 
 ### Ambientes
@@ -120,7 +120,7 @@ que possamos eventualmente fazer carinho neles. Vamos apenas ignorar a definiç�
 da função `carinho()` para que isso não atrapalhe o resto da explicação.
 
 ```{r 03_env_png, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/03_env.png")
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/03_env.webp")
 ```
 
 Perceba que o resultado da avaliação de uma expressão depende completamente do
@@ -154,7 +154,7 @@ um cachorro chamado `max` cuja cor é verde (além dos outros dois cachorros que
 já havíamos visto no parque antigo).
 
 ```{r 04_fun_png, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/04_fun.png")
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/04_fun.webp")
 ```
 
 Como a função `eval_tidy()`, por padrão, utiliza o ambiente corrente para
@@ -172,7 +172,7 @@ estarmos chamando o nome do cachorro marrom, como estamos em outro parque (uma
 nova função), o cachorro que responderá ao chamado aqui é verde!
 
 ```{r 05_eval_expr_png, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/05_eval_expr.png")
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/05_eval_expr.webp")
 ```
 
 ### Quosures
@@ -203,7 +203,7 @@ vemos um qualificador de `max`, especificando onde devemos encontrar ele. Isso
 é significativamente diferente de simplesmente gritar pelo `max` mais próximo.
 
 ```{r 06_quo_png, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/06_quo.png")
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/06_quo.webp")
 ```
 
 ### Avaliando quosures
@@ -226,7 +226,7 @@ como voltar para o endereço do parque original antes de fazer carinho no filhot
 cujo nome é `max`.
 
 ```{r 07_eval_quo_png, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/07_eval_quo.png")
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/07_eval_quo.webp")
 ```
 
 ### Bang-bang
@@ -252,7 +252,7 @@ nas ilustrações sobre expressões e quosures, agora vemos a mão parada ao lad
 um filhote específico.
 
 ```{r 08_bang_bang_png, echo=FALSE, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/08_bang_bang.png")
+knitr::include_graphics("/images/posts/conteudo/2021-07-16-rlang-para-filhotes/08_bang_bang.webp")
 ```
 
 ## De volta para casa

@@ -3,7 +3,7 @@ title: "RStudio e Github no dia a dia"
 date: "2017-07-17"
 tags: ["github", "rstudio", "git"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/fluxo_github_rstudio2.png"
+image: "images/posts/banner/fluxo_github_rstudio2.webp"
 author: ["Athos"]
 summary: "Versionamento de código é uma ferramenta que veio para ficar. Não dá para calcular o quanto de dor de cabeça, horas perdidas e frustrações ela economiza e já economizou na história da humanidade. Esse post mostra a rotina de um analista que usa Github no RStudio"
 ---
@@ -50,7 +50,7 @@ Você precisa ter instalado na sua máquina...
 A vida com Github + RStudio segue a seguinte rotina (escreva esse fluxo num pedaço de papel e guarde na sua carteira):
 
 ```{r, fig.align='center', fig.height = 5, echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/rstudio-e-github/fluxo_github_rstudio.png", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/rstudio-e-github/fluxo_github_rstudio.webp", error = FALSE)
 ```
 
 
@@ -137,7 +137,7 @@ No site do Github já vai estar as mudanças prontas para quem quiser ver.
 
 
 ```{r, fig.align='center', fig.height = 15, echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/rstudio-e-github/github_dps_do_push.png", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/rstudio-e-github/github_dps_do_push.webp", error = FALSE)
 ```
 
 ### Passo 5 - Pull: Baixando o estado atual do projeto

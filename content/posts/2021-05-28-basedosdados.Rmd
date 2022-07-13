@@ -3,7 +3,7 @@ title: "Acessando bases públicas em R: o pacote basedosdados"
 author: ["Fernando"]
 date: '2021-05-28'
 categories: ["tutoriais"]
-image: "images/posts/banner/bdmais_logo.png"
+image: "images/posts/banner/bdmais_logo.webp"
 tags: ["web scraping", "faxina", "purrr", "rvest"]
 ---
 

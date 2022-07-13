@@ -3,7 +3,7 @@ title: "O que é um gráfico estatístico?"
 date: "2017-02-20"
 tags: ["gráficos", "ggplot2"]
 categories: ["conceitos"]
-image: "images/posts/banner/grafico-interrogacao.png"
+image: "images/posts/banner/grafico-interrogacao.webp"
 author: ["William"]
 summary: "Os gráficos são técnicas estatísticas para visualização de dados amplamente utilizados em todas as áreas da pesquisa. A sua popularidade se deve à maneira como elucidam informações que estavam escondidas nas colunas do banco de dados, sendo que muitos deles podem ser compreendidos até mesmo por leigos no assunto em questão. Mas será que podemos definir formalmente o que é um gráfico estatístico?"
 ---

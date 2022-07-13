@@ -3,7 +3,7 @@ title: "Arrumando BDs: nome das variáveis"
 date: "2017-07-12"
 tags: ["base de dados", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/bds_ruins.jpg"
+image: "images/posts/banner/bds_ruins.webp"
 author: ["William"]
 summary: "Neste post, mostraremos uma forma rápida para padronizar os nomes das variáveis de uma base de dados, deixando-os mais adequados para o restante da análise."
 ---

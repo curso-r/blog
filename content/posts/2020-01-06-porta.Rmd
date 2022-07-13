@@ -3,7 +3,7 @@ title: "Quem segura a barra do Porta dos Fundos?"
 date: "2020-01-06"
 categories: ["análises"]
 tags: ["api", "youtube", "porta dos fundos"]
-image: "images/posts/banner/porta-elenco.jpg"
+image: "images/posts/banner/porta-elenco.webp"
 author: ["Julio"]
 summary: "O Porta dos Fundos (PDF) é um dos meus canais preferidos do youtube. Muitos consideram que é um dos maiores grupos de humor do século. Outros acreditam que eles começaram muito bem, mas que agora já perderam a graça."
 disable_codefolding: false
@@ -249,7 +249,7 @@ grafico_acumulado <- function(n_corte) {
 O resultado de `n_corte=70` é o que observamos na Figura \@ref(fig:acu). Podemos notar que os três sócios principais do PDF, Fabio Porchat, Gregorio Duvidier e Antonio Tabet dividem a liderança de visualizações em seus vídeos, seguidos pelo Rafael Portugal e Thati Lopes, que começaram a fazer vídeos mais recentemente. 
 
 ```{r acu, echo=FALSE, out.width="150%", fig.cap="Gráfico do volume acumulado de visualizações por artista ao longo do tempo.", eval=TRUE, echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/porta/acu.png")
+knitr::include_graphics("/images/posts/conteudo/porta/acu.webp")
 ```
 
 No entanto, sabemos que o [porta dos fundos está em decadência](https://www.curso-r.com/blog/2017-03-20-porta-dos-fundos-decadencia/). A Figura \@ref(fig:historico) mostra o mesmo gráfico do post feito lá em 2017 pelo [William Amorim](https://www.curso-r.com/author/william/), mas com os dados atualizados. Aproveitei para adicionar os vídeos mais visualizados em cada ano. 
@@ -272,7 +272,7 @@ pdf_long %>%
 
 
 ```{r historico, out.width="100%", fig.cap = "Volume de visualizações por vídeo por data de publicação.", eval=TRUE, echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/porta/historico.png")
+knitr::include_graphics("/images/posts/conteudo/porta/historico.webp")
 ```
 
 É interessante notar também que a taxa de visualizações por quantidade de dias desde a publicação permanece constante, corroborando com a hipótese de que [existe um efeito da idade do vídeo na quantidade de visualizações](https://www.curso-r.com/blog/2017-04-28-porta-dos-fundos-decadencia-revisited/), formulada pelo [Fernando](https://www.curso-r.com/author/fernando/) mais de dois anos atrás. Aqui, consideramos apenas vídeos publicados até o final de 2018.
@@ -294,7 +294,7 @@ pdf_long %>%
 ```
 
 ```{r historico-taxa, out.width="100%", fig.cap="Taxa do volume de visualizações por quantidade de dias desde a publicação do vídeo.", eval=TRUE, echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/porta/historico_taxa.png")
+knitr::include_graphics("/images/posts/conteudo/porta/historico_taxa.webp")
 ```
 
 
@@ -336,7 +336,7 @@ grafico_roll(years(2), n_corte = 180)
 A Figura \@ref(fig:roll) mostra os resultados da análise considerando uma janela de 2 anos. Considerei no gráfico somente os 5 artistas com mais visualizações. Nesse gráfico é possível visualizar que Rafael Portugal está dominando as visualizações desde que entrou. No entanto, recentemente a diferença entre os cinco artistas está diminuindo. Uma explicação é que, como a quantidade de visualizações dos vídeos estacionou na média da Figura \@ref(fig:historico), as diferenças existentes entre os artistas passam a ser menos relevantes.
 
 ```{r roll, fig.cap="Gráfico do volume acumulado de visualizações por artista ao longo do tempo, considerando uma janela de 2 anos.", eval=TRUE, echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/porta/roll.png")
+knitr::include_graphics("/images/posts/conteudo/porta/roll.webp")
 ```
 
 
