@@ -5,13 +5,11 @@ tags: ["imagens", "cluster", "kmeans"]
 categories: ["análises"]
 image: "images/posts/banner/paleta-cores.png"
 author: ["Daniel"]
-summary: "Uma aplicação interessante de algoritmos de clusterização é a obtenção de 
+summary: "Uma aplicação interessante de algoritmos de clusterização é a obtenção de
 paletas de cores a partir de imagens. Veja como isso pode ser feito usando
 o R."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Uma aplicação interessante de algoritmos de clusterização é a obtenção de
@@ -53,8 +51,8 @@ Podemos obter isso com algumas manipulações usando o <code>dplyr</code>.</p>
 <pre class="r"><code>library(tibble)
 library(dplyr)
 img_df &lt;- tibble(
-  r = img_matrix[,1], 
-  g = img_matrix[,2], 
+  r = img_matrix[,1],
+  g = img_matrix[,2],
   b = img_matrix[,3],
   cluster = km$cluster
   )
@@ -62,7 +60,7 @@ centroides &lt;- img_df %&gt;%
   group_by(cluster) %&gt;%
   summarise_all(mean)</code></pre>
 <pre class="r"><code>centroides
-## # A tibble: 6 x 4
+## # A tibble: 6 × 4
 ##   cluster     r      g     b
 ##     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1       1 0.221 0.273  0.441
@@ -97,8 +95,8 @@ Vamos colocar todo o código que fizemos passo a passo aqui em uma única funç�
   # treina o algoritmo de k médias
   km &lt;- kmeans(img_matrix, centers = num_cores)
   img_df &lt;- tibble(
-    r = img_matrix[,1], 
-    g = img_matrix[,2], 
+    r = img_matrix[,1],
+    g = img_matrix[,2],
     b = img_matrix[,3],
     cluster = km$cluster
   )

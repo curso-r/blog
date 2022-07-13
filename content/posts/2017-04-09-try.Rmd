@@ -10,7 +10,7 @@ summary: "Tratar erros no R é importante para identificar problemas nos código
 
 
 ```{r echo=F}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão `tidy` dessas soluções.
@@ -78,7 +78,7 @@ Agora, os resultados:
 
 ```{r, error=TRUE}
 ## Esse código vai travar
-map(entradas, log) 
+map(entradas, log)
 ```
 
 - `safely()`:
@@ -99,7 +99,7 @@ map(entradas, possible_log)
 
 ```{r error = TRUE}
 ## Também trava, mesmo problema de log
-map(entradas, quiet_log) 
+map(entradas, quiet_log)
 
 ## Quando funciona, retorna todos os warnings e messages
 map(entradas[1:2], quiet_log)
@@ -115,13 +115,13 @@ library(tibble)
 # adiciona um resultado default caso dê erro. No caso, NA.
 safe_log2 <- log %>% safely(otherwise = NA_real_)
 
-d_result <- entradas %>% 
-  map(safe_log2) %>% 
+d_result <- entradas %>%
+  map(safe_log2) %>%
   # ao invés de uma lista de tamanho 3 com 2 elementos (result e error),
   # temos uma lista de tamanho 2 (result e error) com 3 elementos.
-  transpose() %>%    
+  transpose() %>%
   # simplifica o vetor de resultados
-  simplify_all() %>% 
+  simplify_all() %>%
   # converte para data frame
   as_tibble()
 

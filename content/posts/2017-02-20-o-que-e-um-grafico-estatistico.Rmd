@@ -9,7 +9,7 @@ summary: "Os gráficos são técnicas estatísticas para visualização de dados
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Os gráficos são técnicas de visualização de dados amplamente utilizadas em todas as áreas da pesquisa. A sua popularidade se deve à maneira como elucidam informações que estavam escondidas nas colunas do banco de dados, sendo que muitos deles podem ser compreendidos até mesmo por leigos no assunto que está sendo discutido.
@@ -39,12 +39,12 @@ Os conceitos criados por Leland e Hadley defendem que essa estrutura pode ser ut
 ```{r}
 ggplot(mtcars) +
   geom_point(aes(x = disp, y = mpg, shape = as.factor(am), color = cyl)) +
-  labs(x = "Tonelagem", y = "Milhas por galão", 
+  labs(x = "Tonelagem", y = "Milhas por galão",
        shape = "Transmissão", color = "Cilindros") +
   scale_shape_discrete(labels = c("Automática","Manual")) +
   theme_bw() +
-  theme(legend.position = "bottom") 
-  
+  theme(legend.position = "bottom")
+
 ```
 
 

@@ -9,8 +9,6 @@ draft: false
 summary: "Uma tarefa muito comum no R é colar textos. As funções mais importantes para isso são paste() e sprintf(), que vêm com o pacote base. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do tidyverse, o glue."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Uma tarefa muito comum no <code>R</code> é colar textos. As funções mais importantes para isso são <code>paste()</code> e <code>sprintf()</code>, que vêm com o pacote <code>base</code>. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do <code>tidyverse</code>, o <code>glue</code>.</p>
@@ -73,11 +71,8 @@ glue(&#39;{p * 100}% das pessoas adoram R.&#39;)
 ## 112.3123123% das pessoas adoram R.</code></pre>
 <pre class="r"><code>glue(&#39;{scales::percent(p)} das pessoas adoram R.&#39;)
 ## 112% das pessoas adoram R.</code></pre>
-<p>A função <code>collapse()</code> é parecida com o <code>paste()</code> quando <code>collapse = ''</code>, mas só aceita um objeto como entrada:</p>
-<pre class="r"><code>x &lt;- collapse(1:10)
-## Warning: &#39;collapse&#39; is deprecated.
-## Use &#39;glue_collapse&#39; instead.
-## See help(&quot;Deprecated&quot;) and help(&quot;glue-deprecated&quot;).
+<p>A função <code>glue_collapse()</code> é parecida com o <code>paste()</code> quando <code>collapse = ''</code>, mas só aceita um objeto como entrada:</p>
+<pre class="r"><code>x &lt;- glue_collapse(1:10)
 x
 ## 12345678910
 all.equal(x, paste(1:10, collapse = &#39;&#39;))
@@ -87,15 +82,12 @@ all.equal(x, paste(1:10, collapse = &#39;&#39;))
 ## [4] &quot;Attributes: &lt; current is not list-like &gt;&quot;            
 ## [5] &quot;target is glue, current is character&quot;</code></pre>
 <p>Se quiser colar os objetos elemento a elemento e depois colapsar, faça isso explicitamente em duas operações:</p>
-<pre class="r"><code>glue(&#39;{letters}/{LETTERS}&#39;) %&gt;% 
-  collapse(&#39;, &#39;)
-## Warning: &#39;collapse&#39; is deprecated.
-## Use &#39;glue_collapse&#39; instead.
-## See help(&quot;Deprecated&quot;) and help(&quot;glue-deprecated&quot;).
+<pre class="r"><code>glue(&#39;{letters}/{LETTERS}&#39;) %&gt;%
+  glue_collapse(&#39;, &#39;)
 ## a/A, b/B, c/C, d/D, e/E, f/F, g/G, h/H, i/I, j/J, k/K, l/L, m/M, n/N, o/O, p/P, q/Q, r/R, s/S, t/T, u/U, v/V, w/W, x/X, y/Y, z/Z</code></pre>
 <p>O <code>glue</code> também tem uma função extra para trabalhar melhor com o <code>%&gt;%</code>, o <code>glue_data()</code>. O primeiro argumento dessa função é uma lista ou <code>data.frame</code>, e seus nomes são utilizados como variáveis para alimentar as chaves das strings. Use o <code>.</code> para fazer operações com toda a base de dados:</p>
-<pre class="r"><code>mtcars %&gt;% 
-  head() %&gt;% 
+<pre class="r"><code>mtcars %&gt;%
+  head() %&gt;%
   glue_data(&#39;O carro {row.names(.)} rende {mpg} milhas por galão.&#39;)
 ## O carro Mazda RX4 rende 21 milhas por galão.
 ## O carro Mazda RX4 Wag rende 21 milhas por galão.
@@ -125,7 +117,7 @@ all.equal(x, paste(1:10, collapse = &#39;&#39;))
 ## [1] &quot;abacaxi&quot;</code></pre>
 <p>Você pode adicionar esse operador como um atalho no RStudio, análogo ao <code>Ctrl+Shift+M</code> que usamos para escrever o <code>%&gt;%</code>. Para isso, veja <a href="https://rstudio.github.io/rstudioaddins/">esse tutorial sobre RStudio Addins</a>.</p>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
 <li id="fn1"><p>Mais sobre isso no livro <a href="http://www.burns-stat.com/pages/Tutor/R_inferno.pdf">R inferno</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>

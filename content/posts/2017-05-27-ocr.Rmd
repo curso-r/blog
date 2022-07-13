@@ -10,17 +10,17 @@ summary: "Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho c
 ---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 
 Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com [jurimetria](http://abj.org.br) e preciso extrair dados de diários oficiais, petições, sentenças, então já viu né...
 
-A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é *digital* ou *digitalizado*? 
+A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é *digital* ou *digitalizado*?
 
-- Se for digital, significa que ele pode ser transcrito diretamente para vários formatos: texto, html, xml e até mesmo `data.frame`s diretamente. 
+- Se for digital, significa que ele pode ser transcrito diretamente para vários formatos: texto, html, xml e até mesmo `data.frame`s diretamente.
 
-[Vamos usar esse exemplo de PDF digital](/data/ocr/pdf_digital.pdf) 
+[Vamos usar esse exemplo de PDF digital](/data/ocr/pdf_digital.pdf)
 
 Se estiver no desktop, é possível ver o documento abaixo:
 
@@ -71,14 +71,14 @@ Infelizmente, o `pdftools` ainda não transforma em HTML nem XML. Para soltar um
 pdf_html <- function(pdf) {
   infos <- pdf_info(pdf)              # pega infos do pdf
   html <- tempfile(fileext = '.html') # cria arquivo temporário
-  
-  # monta comando a ser executado. 
+
+  # monta comando a ser executado.
   # não sei se funciona em Windows ;)
-  command <- sprintf('pdftohtml -f 1 -l %s -q -i -s -noframes %s %s', 
+  command <- sprintf('pdftohtml -f 1 -l %s -q -i -s -noframes %s %s',
                      infos$pages,
                      normalizePath(pdf),
                      html)
-  
+
   system(command)                     # roda comando e salva
   txt <- readr::read_file(html)       # lê arquivo salvo
   file.remove(html)                   # remove arquivo temporário
@@ -101,9 +101,9 @@ html <- readRDS('../../static/data/ocr/html_pdf.rds')
 ```
 
 ```{r}
-html %>% 
-  read_html() %>% 
-  html_nodes('div') %>% 
+html %>%
+  read_html() %>%
+  html_nodes('div') %>%
   head()
 ```
 
@@ -119,7 +119,7 @@ Para instalar o `tabulizer`, siga as instruções [dessa página](https://github
 library(tabulizer)
 ```
 
-Vamos usar [esse pdf de exemplo](https://github.com/curso-r/site/raw/master/content/blog/2017-05-27-ocr/pdf_compras.pdf). 
+Vamos usar [esse pdf de exemplo](https://github.com/curso-r/site/raw/master/content/blog/2017-05-27-ocr/pdf_compras.pdf).
 
 Se estiver no desktop, é possível ver o documento abaixo:
 
@@ -138,12 +138,12 @@ Essa função serve para arrumar os nomes zoados que vêm no arquivo:
 
 ```{r}
 arrumar_nomes <- function(x) {
-  x %>% 
-    tolower() %>% 
-    str_trim() %>% 
-    str_replace_all('[[:space:]]+', '_') %>% 
-    str_replace_all('%', 'p') %>% 
-    str_replace_all('r\\$', '') %>% 
+  x %>%
+    tolower() %>%
+    str_trim() %>%
+    str_replace_all('[[:space:]]+', '_') %>%
+    str_replace_all('%', 'p') %>%
+    str_replace_all('r\\$', '') %>%
     abjutils::rm_accent()
 }
 ```
@@ -151,19 +151,19 @@ arrumar_nomes <- function(x) {
 Agora veja a magia do `tidyverse` posta em prática:
 
 ```{r warning=FALSE, message=FALSE}
-tab_tidy <- tab %>% 
+tab_tidy <- tab %>%
   # transforma matrizes em tibbles
-  map(as_tibble) %>% 
+  map(as_tibble) %>%
   # empilha
-  bind_rows() %>% 
+  bind_rows() %>%
   # arruma nomes a partir da primeira linha
   set_names(arrumar_nomes(.[1,])) %>%
   # tira primeira linha
-  slice(-1) %>% 
+  slice(-1) %>%
   # tira espaços extras
-  mutate_all(funs(str_replace_all(., '[[:space:]]+', ' '))) %>% 
+  mutate_all(funs(str_replace_all(., '[[:space:]]+', ' '))) %>%
   # tira espaços nas bordas
-  mutate_all(str_trim) 
+  mutate_all(str_trim)
 ```
 
 A Tabela \@ref(tab:tabela) mostra as primeiras cinco linhas do resultado.

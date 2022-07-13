@@ -10,7 +10,7 @@ summary: "Ao contrário de outros usos pro R, web-scrapping não tem uma receita
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Quando eu trabalhei no Núcleo de Estudos da Violência da USP, obter informações da Secretaria de Segurança Pública de São Paulo (SSP) era uma tarefa meio esotérica. Coletávamos os dados de todos os DP's de São Paulo, que são aproximadamente 100, e, como fazer isso manualmente era demorado, aplicávamos uma solução automática em dois passos. Primeiro _raspávamos_ o site da SSP em Python<!--, com um script desenvolvido antes da minha entrada,--> e depois rodávamos uma macro em VBA chamada "Mestre Dos Magos", que era responsável por consolidar as séries históricas em excel. Eu achava o procedimento um pouco hermético porque nenhum deles tinha sido feito por mim ou pela minha equipe, era uma herança que a gente não sabia como consertar se desse algum problema. Para dar um exemplo, no final da minha breve estadia no NEV o script não funcionava mais, então era necessário baixar tudo manualmente.
@@ -36,15 +36,15 @@ Tanto o NEV quanto a minha namorada tinham interesse nas tabelas que apareciam n
 
 ## Identifique o que o site faz por trás
 
-Identificar o que o site faz por trás provavelmente é a fase mais complicada da construção de um _scraper_. A dificuldade é que não existe um algoritmo que faça isso pra você. Normalmente eu sigo alguns passos, mas eles exigem uma dose de _insight_ para funcionar, o que implica que talvez não seja possível seguir todos os passos em sequência. 
+Identificar o que o site faz por trás provavelmente é a fase mais complicada da construção de um _scraper_. A dificuldade é que não existe um algoritmo que faça isso pra você. Normalmente eu sigo alguns passos, mas eles exigem uma dose de _insight_ para funcionar, o que implica que talvez não seja possível seguir todos os passos em sequência.
 
 1. Entre na página imediatamente anterior à página que você quer acessar.
 2. Abra as ferramentas de desenvolvedor dos seu navegador (isso normalmente é equivalente à "aperte F12").
 3. Selecione a aba "Network" (ou "Rede") na caixa de ferramentas do desenvolvedor.
 4. Vá para a página que você quer.
-5. Na lista de requisições que o site fez ao servidor, identifique aquela(s) que é(são) relevante(s) a sua pesquisa. 
+5. Na lista de requisições que o site fez ao servidor, identifique aquela(s) que é(são) relevante(s) a sua pesquisa.
 
-Parece muito louco né? No geral, é muito louco sim, mas quando você dá sorte é fácil. Vou mostrar o que acontece no nosso exemplo: 
+Parece muito louco né? No geral, é muito louco sim, mas quando você dá sorte é fácil. Vou mostrar o que acontece no nosso exemplo:
 
 ### A página imediatamente anterior
 
@@ -55,7 +55,7 @@ Eu quero a url http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx com alguma sel
 Em qualquer navegador, as ferramentas do desenvolvedor mostram o _background_ do que aparece na tela. Se estiver nessa aba, quando você entrar em http://www.ssp.sp.gov.br/Estatistica/Pesquisa.aspx e apertar F5, vai encontrar uma tela mais ou menos parecida com a tela abaixo:
 
 ```{r, echo = FALSE, fig.width=8, fig.height=6}
-a <- magick::image_read('../../static/data/scrapper-ssp/print_1.png') 
+a <- magick::image_read('../../static/data/scrapper-ssp/print_1.png')
 plot(a)
 ```
 
@@ -66,7 +66,7 @@ Cada linha representa uma requisição, que é essencialmente o envio de um arqu
 O próximo passo é identificar o que é que o navegador pede ao servidor quando te devolve o que você quer. Se você escolher o ano de 2017 na caixa de seleção de anos, por exemplo, vai encontrar uma tela parecida com essa aqui.
 
 ```{r, echo = FALSE, fig.width=8, fig.height=6}
-a <- magick::image_read('../../static/data/scrapper-ssp/print_2.png') 
+a <- magick::image_read('../../static/data/scrapper-ssp/print_2.png')
 plot(a)
 ```
 
@@ -75,7 +75,7 @@ Antes de prosseguir, é necessário fazer uma inspeção meticulosa de todas as 
 Segundo o nosso dedo duro, a requisição utiliza o método "POST" e, quando clicamos nela, temos informações sobre ela no painel ao lado. Como eu falei acima, uma requisição é um arquivo .html que "pede" alguma ao servidor com base no seu conteúdo. No geral, um bom lugar para procurar o que a requisição está pedindo é o seu conjunto de parâmetros, na aba "Params" do painel de detalhamento da requisição.
 
 ```{r, echo = FALSE, fig.width=8, fig.height=6}
-a <- magick::image_read('../../static/data/scrapper-ssp/print_3.png') 
+a <- magick::image_read('../../static/data/scrapper-ssp/print_3.png')
 plot(a)
 ```
 
@@ -113,7 +113,7 @@ Agora vamos fazer a requisição. O passo seguinte é apenas pra traduzir o resu
 ```{r, eval = FALSE}
 resposta <- httr::POST(url,
                        body = params,
-                       encode = 'form') %>% 
+                       encode = 'form') %>%
     xml2::read_html()
     # traduz o resultado
 ```
@@ -121,7 +121,7 @@ resposta <- httr::POST(url,
 Como vamos saber se deu certo? Existem vários jeitos, mas, por simplicidade, aqui vamos apenas checar se alguma tabela contida em `resposta` é igual à tabela que extraímos manualmente do site. Vamos fazer isso usando a função `rvest::html_table()`.
 
 ```{r, eval = FALSE}
-resposta %>% 
+resposta %>%
   rvest::html_table()
 # extrai todas as tabelas de um código em html.
 ```
@@ -129,14 +129,14 @@ resposta %>%
 Como se vê acima, nada que _se parece_ com uma tabela na resposta da nossa requisição é a tabelinha que identificamos no site. Muita coisa pode ter dado errado, mas vamos começar pelo que é mais evidente: nós ignoramos os parâmetros `__VIEWSTATE` e `__EVENTVALIDATION`. Em última instância, nos vamos precisar _entender_ o que esses parâmetros significam, mas primeiro vamos tentar simplesmente obter uma cópia desses valores diretamente do site. Dando um ctrl+f no painel de ferramentas de desenvolvedor identificamos que o valores dessa variáveis sai de umas tags `input` nomeadas de acordo com o parâmetro que representam.
 
 ```{r, eval = FALSE}
-view_state <- httr::POST(url) %>% 
-  xml2::read_html() %>% 
-  rvest::html_nodes("input[name='__VIEWSTATE']") %>% 
+view_state <- httr::POST(url) %>%
+  xml2::read_html() %>%
+  rvest::html_nodes("input[name='__VIEWSTATE']") %>%
   rvest::html_attr("value")
 
-event_validation <- httr::POST(url) %>% 
-  xml2::read_html() %>% 
-  rvest::html_nodes("input[name='__EVENTVALIDATION']") %>% 
+event_validation <- httr::POST(url) %>%
+  xml2::read_html() %>%
+  rvest::html_nodes("input[name='__EVENTVALIDATION']") %>%
   rvest::html_attr("value")
 ```
 
@@ -159,17 +159,17 @@ E o código da requisição fica:
 ```{r, eval = FALSE}
 resposta <- httr::POST(url,
                        body = params,
-                       encode = 'form') %>% 
-    xml2::read_html() %>% 
+                       encode = 'form') %>%
+    xml2::read_html() %>%
   rvest::html_table()
 ```
 
 Exatamente a tabelinha que queríamos! Entretanto, nem tudo são flores. Como eu mencionei ali em cima, tanto a minha namorada quanto o NEV tinham interesse no número de BO's, que não é o que obtivemos fazendo a requisição via R. Fuçando um pouco, é fácil ver que o que obtivemos são os números de produtividade policial. Será que é fácil mexer nos parâmetros pra obter os números de BO's?
 
-Felizmente, a resposta é sim, mas não é tão simples quanto parece. Se de outra tela qualquer você clicar em "Ocorrências Registradas por Mês" você vai perceber que o "__EVENTTARGET" mudou para `ctl00$conteudo$$btnMes`, mas, a despeito do que se poderia imaginar, os outros parâmetros permaneceram com os nomes intactos. 
+Felizmente, a resposta é sim, mas não é tão simples quanto parece. Se de outra tela qualquer você clicar em "Ocorrências Registradas por Mês" você vai perceber que o "__EVENTTARGET" mudou para `ctl00$conteudo$$btnMes`, mas, a despeito do que se poderia imaginar, os outros parâmetros permaneceram com os nomes intactos.
 
 ```{r, echo = FALSE, fig.width=8, fig.height=6}
-a <- magick::image_read('../../static/data/scrapper-ssp/print_4.png') 
+a <- magick::image_read('../../static/data/scrapper-ssp/print_4.png')
 plot(a)
 ```
 
@@ -188,7 +188,7 @@ params <- list(`__EVENTTARGET` = "ctl00$conteudo$$ddlAnos",
 
 resposta <- httr::POST(url,
                        body = params,
-                       encode = 'form') %>% 
+                       encode = 'form') %>%
     xml2::read_html()
 ```
 
@@ -203,15 +203,15 @@ Agora vem a repetição, o passo final da raspagem. Antes de qualquer coisa prec
 baixa_bo_municipio_ano <- function(ano, municipio){
 pivot <- httr::GET(url)
 #serve apenas para pegarmos um view_state e um event_validation valido
-  
-view_state <- pivot %>% 
-  xml2::read_html() %>% 
-  rvest::html_nodes("input[name='__VIEWSTATE']") %>% 
+
+view_state <- pivot %>%
+  xml2::read_html() %>%
+  rvest::html_nodes("input[name='__VIEWSTATE']") %>%
   rvest::html_attr("value")
 
-event_validation <- pivot %>% 
-  xml2::read_html() %>% 
-  rvest::html_nodes("input[name='__EVENTVALIDATION']") %>% 
+event_validation <- pivot %>%
+  xml2::read_html() %>%
+  rvest::html_nodes("input[name='__EVENTVALIDATION']") %>%
   rvest::html_attr("value")
 
 params <- list(`__EVENTTARGET` = "ctl00$conteudo$$btnMes",
@@ -224,15 +224,15 @@ params <- list(`__EVENTTARGET` = "ctl00$conteudo$$btnMes",
              `ctl00$conteudo$ddlMunicipios` = municipio,
              `ctl00$conteudo$ddlDelegacias` = "0")
 
- httr::POST(url, body = params, encode = 'form') %>% 
-  xml2::read_html() %>% 
-  rvest::html_table() %>% 
-  dplyr::first() %>% 
+ httr::POST(url, body = params, encode = 'form') %>%
+  xml2::read_html() %>%
+  rvest::html_table() %>%
+  dplyr::first() %>%
   #' serve pra pegar apenas a primeira tabela da página,
-  #' se houver mais do que uma. Estou assumindo que a 
+  #' se houver mais do que uma. Estou assumindo que a
   #' tabela que eu quero é sempre a primeira.
   dplyr::mutate(municipio = municipio,
-                ano = ano) 
+                ano = ano)
 }
 ```
 
@@ -241,7 +241,7 @@ Pra ilustar um grande loop, vamos baixar os BO's de todos os municípios, no ano
 ```{r, eval = FALSE}
 GRID <- expand.grid(municipio = 1:645, ano = '2016', stringsAsFactors = F)
 
-D <- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = "ocorrencias") %>% 
+D <- purrr::by_row(GRID, baixa_bo_municipio_ano, .to = "ocorrencias") %>%
   tidyr::unnest(ocorrencias)
 ```
 
@@ -257,37 +257,37 @@ plot(x)
 
 ```{r, echo = FALSE, message=F, warning=F, comment=F, fig.align='center'}
 # library(tidyverse)
-# 
+#
 # D <- readRDS("2017-05-19-scrapper-ssp/dados_ssp.rds")
 
-# tabela_munis <- rvest::html_session('https://pt.wikipedia.org/wiki/Lista_de_munic%C3%ADpios_de_S%C3%A3o_Paulo_por_popula%C3%A7%C3%A3o') %>% 
-#   rvest::html_table(fill = T, header = T) %>% 
+# tabela_munis <- rvest::html_session('https://pt.wikipedia.org/wiki/Lista_de_munic%C3%ADpios_de_S%C3%A3o_Paulo_por_popula%C3%A7%C3%A3o') %>%
+#   rvest::html_table(fill = T, header = T) %>%
 #   dplyr::first() %>%
-#   janitor::clean_names() %>% 
-#   filter(!is.na(as.numeric(`posição`))) %>% 
-#   dplyr::select(-dplyr::contains("na")) %>% 
-#   dplyr::arrange(`município`) %>% 
-#   dplyr::mutate(id = 1:n()) %>% 
-#   dplyr::filter(id < 645) %>% 
-#   dplyr::select(-`posição`) %>% 
+#   janitor::clean_names() %>%
+#   filter(!is.na(as.numeric(`posição`))) %>%
+#   dplyr::select(-dplyr::contains("na")) %>%
+#   dplyr::arrange(`município`) %>%
+#   dplyr::mutate(id = 1:n()) %>%
+#   dplyr::filter(id < 645) %>%
+#   dplyr::select(-`posição`) %>%
 #   dplyr::mutate(pop = as.numeric(str_replace_all(`estimativa_2016`,"[:space:]|,","")))
 
 # tabela_munis <- readRDS("2017-05-19-scrapper-ssp/tabela_muni.rds")
-# 
+#
 # D_resumo <- D %>%
-#   filter(str_detect(Natureza, regex("homic[ií]d", ignore_case = T))) %>% 
+#   filter(str_detect(Natureza, regex("homic[ií]d", ignore_case = T))) %>%
 #   group_by(municipio) %>%
-#   summarise(valor = sum(Total)) %>% 
-#   mutate(municipio = as.numeric(municipio)) %>% 
-#   filter(municipio < 645) %>% 
-#   left_join(tabela_munis, by = c('municipio'='id')) %>% 
+#   summarise(valor = sum(Total)) %>%
+#   mutate(municipio = as.numeric(municipio)) %>%
+#   filter(municipio < 645) %>%
+#   left_join(tabela_munis, by = c('municipio'='id')) %>%
 #   mutate(valor_abs = valor,
 #     valor = 10^4*valor/pop)
 
 #library(raster)
-#br <- getData("GADM", country = "BRA", level = 2) 
+#br <- getData("GADM", country = "BRA", level = 2)
 # br <- readRDS("2017-05-19-scrapper-ssp/mapa.rds")
-# 
+#
 # K <- which(br$NAME_1 == "São Paulo")
 # br_sp <- br[K,]
 # br_sp <- br_sp[rank(br_sp$NAME_2),]
@@ -295,10 +295,10 @@ plot(x)
 # br2 <- tmaptools::append_data(br_sp, D_resumo, key.shp = 'ID', key.data = "municipio")
 # library(tmap)
 # quebras <- as.numeric(round(quantile(D_resumo$valor, na.rm = T, prob = seq(0,1,0.15)),1))
-# tm_shape(br2)+ 
+# tm_shape(br2)+
 #   tm_fill(col="valor", breaks = quebras, title = "Homicídios/10 mil habs") +
 #   tm_borders(col="white", alpha=.8) +
-#   tm_scale_bar() + 
+#   tm_scale_bar() +
 #   tm_compass(position=c("RIGHT","TOP"),type="4star")
 
 ```

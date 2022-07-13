@@ -29,7 +29,7 @@ library(gridExtra)</code></pre>
   u_api &lt;- &#39;https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize&#39;
   result &lt;- httr::POST(
     url = u_api,
-    httr::content_type(&#39;application/json&#39;), 
+    httr::content_type(&#39;application/json&#39;),
     httr::add_headers(.headers = c(&#39;Ocp-Apim-Subscription-Key&#39; = key)),
     body = list(url = u_img),
     encode = &#39;json&#39;
@@ -136,16 +136,17 @@ library(gridExtra)</code></pre>
 <div id="resultados" class="section level2">
 <h2>Resultados</h2>
 <p>A Figura <a href="#fig:media">1</a> mostra a média de cada emoção nas seis fotos. Para minha surpresa, a emoção com maior proporção média foi “neutro”, com peso de quase 50%. As emoções seguintes são “felicidade”, “raiva” e “desdém”. A emoção “tristeza”, que achei que seria frequente por conta da cara de dor do Aécio, ficou com uma proporção média de apenas 5,5%.</p>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:media"></span>
+<pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
+## &quot;none&quot;)` instead.</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:media"></span>
 <img src="/posts/2017-04-09-aecio_files/figure-html/media-1.png" alt="Média de cada emoção nas seis fotos baixadas." width="864" />
 <p class="caption">
 Figura 1: Média de cada emoção nas seis fotos baixadas.
 </p>
 </div>
 <p>A Figura <a href="#fig:grafinal">2</a> mostra os resultados individuais das imagens. O primeiro resultado faz sentido, já que o Aécio está nitidamente rindo. Em todos os casos, é possível interpretar os resultados olhando a imagem. Por exemplo, o caso com “tristeza” mais alto é o que observamos as sombrancelhas mais caídas.</p>
-<div class="figure" style="text-align: center"><span id="fig:grafinal"></span>
-<img src="/images/posts/conteudo/aecio/aecgrafs.png" alt="Emoções do Aécio em cada imagem." width="70%" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:grafinal"></span>
+<img src="../../../../../../images/posts/conteudo/aecio/aecgrafs.png" alt="Emoções do Aécio em cada imagem." width="70%" />
 <p class="caption">
 Figura 2: Emoções do Aécio em cada imagem.
 </p>

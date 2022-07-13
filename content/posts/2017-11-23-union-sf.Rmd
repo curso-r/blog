@@ -9,7 +9,7 @@ summary: "Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. 
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval=FALSE)
+knitr::opts_chunk$set(collapse = TRUE, eval=FALSE)
 ```
 
 Eu precisava escrever esse post porque estou morrendo de tesão por essa linguagem maravilhosa. O R é incrível. O [`tidyverse`](https://tidyverse.org) é incrível. Estatística é incrível. Não me aguento!!
@@ -26,9 +26,9 @@ Eu faço parte da [Associação Brasileira de Jurimetria (ABJ)](http://abj.org.b
 
 Num projeto recente, eu precisava levantar uma tabela de **municípios**, **comarcas**, **circunscrições** e **regiões administrativas** do Tribunal de Justiça de São Paulo. Minha tarefa era visualizar essas informações em mapas. Fazendo curta uma história longa, podemos dizer que:
 
-- uma **comarca** é o conjunto de um ou mais municípios contíguos 
-    - (contíguos = municípios que se tocam); 
-- uma **circunscrição** é um conjunto de uma ou mais comarcas contíguas; 
+- uma **comarca** é o conjunto de um ou mais municípios contíguos
+    - (contíguos = municípios que se tocam);
+- uma **circunscrição** é um conjunto de uma ou mais comarcas contíguas;
 - e uma **região** é... adivinha?
 
 No Estado de São Paulo, temos no total:
@@ -107,16 +107,16 @@ dir.create("shp", showWarnings = FALSE)
 u_ibge <- paste0(
   "ftp://geoftp.ibge.gov.br/organizacao_do_territorio/",
   "malhas_territoriais/malhas_municipais/",
-  "municipio_2015/UFs/SP/sp_municipios.zip", 
+  "municipio_2015/UFs/SP/sp_municipios.zip",
   collapse = "")
 ```
 
 Utilizamos o pacote `httr` para baixar o arquivo zipado.
 
 ```{r eval=FALSE}
-# Salva o arquivo em disco. httr::progress() 
+# Salva o arquivo em disco. httr::progress()
 # serve para mostrar o andamento do download
-httr::GET(u_ibge, 
+httr::GET(u_ibge,
           httr::write_disk("shp/sp.zip"),
           httr::progress())
 
@@ -133,11 +133,11 @@ No final, você terá esses arquivos na pasta:
 
 ```{r eval=FALSE}
 dir("shp")
-# "35MUE250GC_SIR.cpg" 
-# "35MUE250GC_SIR.dbf" 
-# "35MUE250GC_SIR.prj" 
+# "35MUE250GC_SIR.cpg"
+# "35MUE250GC_SIR.dbf"
+# "35MUE250GC_SIR.prj"
 # "35MUE250GC_SIR.shp"
-# "35MUE250GC_SIR.shx" 
+# "35MUE250GC_SIR.shx"
 # "sp.zip"
 ```
 
@@ -154,7 +154,7 @@ dplyr::glimpse(d_sf_municipio)
 # $ geometry   <simple_feature> MULTIPOLYGON (((-51.8600105..., MULTIPOLYGON...
 ```
 
-Observe que temos três colunas na base de dados, nome do município, código do município e `geometry`. Essa terceira é do tipo `simple_feature` e carrega objetos do tipo `MULTIPOLYGON`. Ou seja, um objeto lido pelo `sf` nada mais é do que um `data.frame` que tem uma coluna especial, capaz de guardar objetos mais complexos, como polígonos. 
+Observe que temos três colunas na base de dados, nome do município, código do município e `geometry`. Essa terceira é do tipo `simple_feature` e carrega objetos do tipo `MULTIPOLYGON`. Ou seja, um objeto lido pelo `sf` nada mais é do que um `data.frame` que tem uma coluna especial, capaz de guardar objetos mais complexos, como polígonos.
 
 > Chamamos esse tipo de coluna especial de `list-column`. Quem faz nossos [cursos avançados](http://curso-r.com/cursos/r4ds/) acaba aprendendo esses conceitos a partir do aninhamento de objetos e utilização de algoritmos mais complexos usando o pacote `purrr`.
 
@@ -179,11 +179,11 @@ dplyr::glimpse(muni_comarcas_completo)
 Para isso, vamos primeiro arrumar os nomes de `d_sf_municipio` e depois usar `dplyr::inner_join()`, assim:
 
 ```{r eval=FALSE}
-d_sf_municipio <- d_sf_municipio %>% 
+d_sf_municipio <- d_sf_municipio %>%
   # deixa os nomes das colunas minusculos
-  janitor::clean_names() %>% 
+  janitor::clean_names() %>%
   # tira os acentos
-  dplyr::mutate(municipio = abjutils::rm_accent(nm_municip)) %>% 
+  dplyr::mutate(municipio = abjutils::rm_accent(nm_municip)) %>%
   # bases unidas jamais serão vencidas!
   dplyr::inner_join(muni_comarcas_completo, "municipio")
 
@@ -219,9 +219,9 @@ Aqui é onde a mágica acontece! Para unir os polígonos do mapa, por incrível 
 No nosso caso, vamos usar `group_by()` (ou `sf::group_by.sf()`) e `summarise()` (ou`sf::summarise.sf()`):
 
 ```{r eval=FALSE}
-d_sf_comarca <- d_sf_municipio %>% 
-  dplyr::group_by(comarca) %>% 
-  dplyr::summarise() %>% 
+d_sf_comarca <- d_sf_municipio %>%
+  dplyr::group_by(comarca) %>%
+  dplyr::summarise() %>%
   dplyr::ungroup()
 
 dplyr::glimpse(d_sf_comarca)
@@ -234,10 +234,10 @@ dplyr::glimpse(d_sf_comarca)
 Simples assim! Note que agora temos 319 objetos, que é exatamente o número de comarcas. Se quiser adicionar mais variáveis, basta incluí-las no `summarise()`:
 
 ```{r eval=FALSE}
-d_sf_comarca <- d_sf_municipio %>% 
-  dplyr::group_by(comarca) %>% 
+d_sf_comarca <- d_sf_municipio %>%
+  dplyr::group_by(comarca) %>%
   # a entrancia identifica o quão grande/relevante é uma comarca
-  dplyr::summarise(entrancia = dplyr::first(entrancia)) %>% 
+  dplyr::summarise(entrancia = dplyr::first(entrancia)) %>%
   dplyr::ungroup()
 ```
 
@@ -259,9 +259,9 @@ E você quer desenhar mapas com esses títulos
 
 ```{r eval=FALSE}
 titulos <- c(
-  "Municípios", 
-  "Comarcas", 
-  "Circunscrições judiciárias", 
+  "Municípios",
+  "Comarcas",
+  "Circunscrições judiciárias",
   "Regiões Admnistrativas")
 ```
 

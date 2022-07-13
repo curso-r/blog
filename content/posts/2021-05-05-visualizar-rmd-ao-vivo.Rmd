@@ -10,7 +10,7 @@ draft: false
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Quando você está criando uma apresentação de slides super elegante com o [pacote xaringan](https://slides.yihui.org/xaringan/#1) ou um relatório minimalista com alguma encarnação do [pacote rmarkdown](https://prettydoc.statr.me/leonids.html), é normal sentir falta de visualizar o resultado final ao vivo. Essa é uma funcionalidade muito comum em vários outros softwares de edição de documentos e a falta dela pode ser frustrante no nosso contexto, mesmo que `rmarkdown` tenha vantagens como flexibilidade e reprodutibilidade.

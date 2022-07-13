@@ -8,8 +8,6 @@ author: ["Daniel"]
 summary: "Greta é um pacote de modelagem estatística que permite que você defina seus modelos interativamente em R e depois os estime usando MCMC."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Estou bem longe de ter experiência em modelagem bayesiana usando linguagens de
@@ -56,16 +54,16 @@ draws &lt;- mcmc(m, n_samples = 1000)</code></pre>
 <p>Podemos obter as estimativas pontuais dos parâmetros pegando, por exemplo, a mediana
 dessa amostra do MCMC.</p>
 <pre class="r"><code>apply(draws[[1]], 2, median)
-##         a         b        sd 
+##         a         b        sd
 ## 4.2805710 0.4219092 0.3697692</code></pre>
 <p>Esse resultado é muito similar ao que pode ser obtido por uma regressão linear simples:</p>
 <pre class="r"><code>lm(y ~ x)
-## 
+##
 ## Call:
 ## lm(formula = y ~ x)
-## 
+##
 ## Coefficients:
-## (Intercept)            x  
+## (Intercept)            x
 ##      4.3066       0.4089</code></pre>
 </div>
 <div id="modelo-linear-heterocedástico" class="section level1">
@@ -82,9 +80,9 @@ set.seed(11071995)
 X &lt;- sample((N/100):(N*3), N)
 Y &lt;- rnorm(N,X,4*sqrt(X))
 
-qplot(X,Y) + 
-  theme_bw(15) + 
-  geom_point(color = &#39;darkorange&#39;)  </code></pre>
+qplot(X,Y) +
+  theme_bw(15) +
+  geom_point(color = &#39;darkorange&#39;)</code></pre>
 <p><img src="/posts/2017-07-09-greta_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>
 X2 &lt;- sqrt(X)
@@ -111,7 +109,7 @@ m &lt;- model(alpha, beta)
 draws &lt;- mcmc(m, n_samples = 1000)</code></pre>
 <p>Agora as estimativas pontuais:</p>
 <pre class="r"><code>apply(draws[[1]], 2, median)
-##    alpha     beta 
+##    alpha     beta
 ## 4.077689 1.002791</code></pre>
 <p>Como esperado, chegamos em estimativas bem próximas do que foi simulado.</p>
 <p>Por hoje é isso!! Abraços!</p>

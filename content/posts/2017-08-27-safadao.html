@@ -8,8 +8,6 @@ author: ["Julio"]
 summary: "Nesse funal de semana decidi assistir alguns vídeos do YouTube do Siraj Raval e acompanhar o curso do Andrew Ng. Depois de aprender várias coisas interessantes, fiquei com uma vontade insana de implementar um modelo pra gerar músicas aleatórias do Wesley Safadão. Eis o ..."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Nesse final de semana decidi assistir a alguns vídeos do YouTube do <a href="https://www.youtube.com/channel/UCWN3xxRkmTPmbKwht9FuE5A">Siraj Raval</a> e ao curso do <a href="https://www.coursera.org/learn/nlp-sequence-models">Andrew Ng sobre deep learning</a>. Após assistir alguns vídeos, fiquei com uma vontade insana de implementar um modelo pra gerar músicas aleatórias do <a href="https://pt.wikipedia.org/wiki/Wesley_Safad%C3%A3o">Wesley Safadão</a>!</p>
@@ -42,22 +40,22 @@ summary: "Nesse funal de semana decidi assistir alguns vídeos do YouTube do Sir
 <pre class="r"><code>library(magrittr)
 link_base &lt;- &#39;https://www.letras.mus.br&#39;
 # listando os links
-ws_links &lt;- paste0(link_base, &#39;/wesley-safadao/&#39;) %&gt;% 
-  rvest::html_session() %&gt;% 
-  rvest::html_nodes(&#39;.cnt-list--alp &gt; ul &gt; li &gt; a&#39;) %&gt;% 
+ws_links &lt;- paste0(link_base, &#39;/wesley-safadao/&#39;) %&gt;%
+  rvest::html_session() %&gt;%
+  rvest::html_nodes(&#39;.cnt-list--alp &gt; ul &gt; li &gt; a&#39;) %&gt;%
   rvest::html_attr(&#39;href&#39;)</code></pre>
 <p>Em seguida, criamos uma função que pega a letra a partir de uma página.</p>
 <pre class="r"><code>pegar_letra &lt;- function(link) {
   # do link até a parte que tem o conteúdo
-  result &lt;- paste0(link_base, link) %&gt;% 
-    rvest::html_session() %&gt;% 
-    rvest::html_nodes(&#39;.cnt-letra &gt; article &gt; p&#39;) %&gt;% 
+  result &lt;- paste0(link_base, link) %&gt;%
+    rvest::html_session() %&gt;%
+    rvest::html_nodes(&#39;.cnt-letra &gt; article &gt; p&#39;) %&gt;%
     # Peguei o texto com as tags html para pegar os \n
-    as.character() %&gt;% 
-    stringr::str_replace_all(&#39;&lt;[brp/]+&gt;&#39;, &#39;\n&#39;) %&gt;% 
-    paste(collapse = &#39;\n\n&#39;) %&gt;% 
+    as.character() %&gt;%
+    stringr::str_replace_all(&#39;&lt;[brp/]+&gt;&#39;, &#39;\n&#39;) %&gt;%
+    paste(collapse = &#39;\n\n&#39;) %&gt;%
     # Limpeza do texto
-    limpar_musica() %&gt;% 
+    limpar_musica() %&gt;%
     tokenizers::tokenize_characters(strip_non_alphanum = FALSE, simplify = TRUE)
   c(result, &#39;@&#39;) # Adicionando @ no final
 }</code></pre>
@@ -70,12 +68,12 @@ ws_letras &lt;- unlist(purrr::map(ws_links, ~{
 }))</code></pre>
 <p>Note que eu escondi de vocês a função <code>limpar_musica()</code>. Essa função aplica uma série de <a href="http://material.curso-r.com/stringr/">expressões regulares</a> para limpar os textos.</p>
 <pre class="r"><code>limpar_musica &lt;- function(txt) {
-  txt %&gt;% 
-    stringr::str_trim() %&gt;% 
-    stringr::str_to_lower() %&gt;% 
+  txt %&gt;%
+    stringr::str_trim() %&gt;%
+    stringr::str_to_lower() %&gt;%
     stringr::str_replace_all(&#39;[^a-z0-9êâôáéíóúãõàç;,!?: \n-]&#39;, &#39;&#39;) %&gt;%
     stringr::str_replace_all(&#39;[0-9]+x| bis&#39;, &#39;&#39;) %&gt;%
-    stringr::str_replace_all(&#39;([ ,?!])+&#39;, &#39;\\1&#39;) %&gt;% 
+    stringr::str_replace_all(&#39;([ ,?!])+&#39;, &#39;\\1&#39;) %&gt;%
     stringr::str_replace_all(&#39; ([;,!?:-])&#39;, &#39;\\1&#39;) %&gt;%
     stringr::str_replace_all(&#39;\n{3,}&#39;, &#39;\n\n&#39;)
 }</code></pre>
@@ -116,12 +114,12 @@ model %&gt;%
   layer_activation(&quot;softmax&quot;)
 # custo e otimizador
 model %&gt;% compile(
-  loss = &quot;categorical_crossentropy&quot;, 
+  loss = &quot;categorical_crossentropy&quot;,
   optimizer = optimizer_adam(lr = 0.0001)
 )
 # ajuste
 model %&gt;% fit(
-  keras_data$X, keras_data$y, 
+  keras_data$X, keras_data$y,
   batch_size = 256, epochs = 5
 )</code></pre>
 <p>Também temos duas funções interessantes a serem discutidas. A primeira é a <code>sample_mod()</code>, uma função que recebe as probabilidades de cada letra e gera uma nova letra com essas probabilidades. O parâmetro <code>diversity=</code> aumenta ou diminui manualmente todas essas probabilidades, fazendo o modelo alterar um pouco seu comportamento. Quando maior esse parâmetro, maior a chance de saírem caracteres inesperados e, quanto menor, maior a chance de sair um texto completamente repetitivo.</p>

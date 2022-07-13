@@ -11,7 +11,7 @@ alternativa: ""
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, collapse = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, eval = FALSE)
 library(magrittr)
 ```
 
@@ -21,7 +21,7 @@ library(magrittr)
 
 Imagine se você pudesse aproveitar da quantidade e da variedade enorme de módulos e bibliotecas do Python no ambiente amigável do RStudio? Graças ao pacote [`reticulate`](https://rstudio.github.io/reticulate/) isso é possível de uma maneira familiar para quem quem já é usuário do R.
 
-O `reticulate` é um pacote que proporciona a integração Python & R via R e pode ser bastante útil se você quiser fazer todas as análises no ambiente do Rstudio. Os módulos, classes e funções do Python importados podem ser utilizados como se fossem funções nativas do R. 
+O `reticulate` é um pacote que proporciona a integração Python & R via R e pode ser bastante útil se você quiser fazer todas as análises no ambiente do Rstudio. Os módulos, classes e funções do Python importados podem ser utilizados como se fossem funções nativas do R.
 
 Para utilizar o pacote são necessárias a instalação do Python com versão superior a 2.7, a instalação dos módulos do Python que serão utilizados durante a análise e a instalação do pacote via `install.packages()`.
 
@@ -71,9 +71,9 @@ E podemos misturar funções do R e do python:
 ```{r}
 library(magrittr)
 
-rnorm(10) %>% 
-  np$abs() %>% 
-  np$cumproduct() %>% 
+rnorm(10) %>%
+  np$abs() %>%
+  np$cumproduct() %>%
   plot()
 ```
 
@@ -103,7 +103,7 @@ fits$info(im.file)
 ```
 Filename: ~/.astropy/cache/download/py2/2c9202ae878ecfcb60878ceb63837f5f
 No.    Name      Ver    Type      Cards   Dimensions   Format
-  0  PRIMARY       1 PrimaryHDU     161   (891, 893)   int16   
+  0  PRIMARY       1 PrimaryHDU     161   (891, 893)   int16
   1  er.mask       1 TableHDU        25   1600R x 4C   [F6.2, F6.2, F6.2, F6.2]
 ```
 
@@ -111,8 +111,8 @@ Agora vamos transformar nossa imagem em uma matriz de pixels e plotar com a fun�
 
 ```{r, eval = FALSE}
 im.data <- fits$getdata(im.file)
-im.data %>% 
-  t() %>% 
+im.data %>%
+  t() %>%
   image(col = gray(seq(0, 1, length = 256)))
 ```
 

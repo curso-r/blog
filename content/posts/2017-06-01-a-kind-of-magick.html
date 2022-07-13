@@ -8,8 +8,6 @@ author: ["William"]
 summary: "Já vimos como o Rstudio se torna uma ferramanta poderosa quando combinado com certos pacotes, como o knitr e shiny, ou outros recursos, como o markdown e o git. Hoje, veremos como transformar o Rstudio em um elegante e interativo editor de imagens utilizando o pacote magick."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Já vimos como o Rstudio se torna uma ferramenta poderosa quando combinado com certos pacotes, como o <code>knitr</code> e <code>shiny</code>, ou outros recursos, como o <em>markdown</em> e o <em>git</em>. Hoje, veremos como transformar o Rstudio num elegante e interativo editor de imagens utilizando o pacote <code>magick</code>.</p>
@@ -25,8 +23,8 @@ summary: "Já vimos como o Rstudio se torna uma ferramanta poderosa quando combi
 <h2>Lendo e escrevendo imagens</h2>
 <p>Para começar a usar as funções do <code>magick</code>, carregue o pacote.</p>
 <pre class="r"><code>library(magick)
-## Linking to ImageMagick 6.9.11.32
-## Enabled features: cairo, fontconfig, freetype, lcms, pango, rsvg, webp
+## Linking to ImageMagick 6.9.12.3
+## Enabled features: cairo, fontconfig, freetype, heic, lcms, pango, raw, rsvg, webp
 ## Disabled features: fftw, ghostscript, x11
 library(magrittr)</code></pre>
 <p>Vamos utilizar a seguinte imagem como exemplo neste post:</p>
@@ -76,10 +74,10 @@ image_info(freddie_resized)
 <pre class="r"><code>image_flop(freddie_resized)</code></pre>
 <p><img src="/posts/2017-06-01-a-kind-of-magick_files/figure-html/unnamed-chunk-15-1.png" width="768" /></p>
 <p>Com o pipe, fica fácil aplicar todas as funções ao mesmo tempo.</p>
-<pre class="r"><code>freddie_resized %&gt;% 
-  image_crop(&quot;100x150+280+30&quot;) %&gt;% 
-  image_border(&quot;purple&quot;, &quot;20x10&quot;) %&gt;% 
-  image_flip %&gt;% 
+<pre class="r"><code>freddie_resized %&gt;%
+  image_crop(&quot;100x150+280+30&quot;) %&gt;%
+  image_border(&quot;purple&quot;, &quot;20x10&quot;) %&gt;%
+  image_flip %&gt;%
   image_flop</code></pre>
 <p><img src="/posts/2017-06-01-a-kind-of-magick_files/figure-html/unnamed-chunk-17-1.png" width="384" /></p>
 </div>
@@ -90,7 +88,7 @@ image_info(freddie_resized)
 <p><img src="/posts/2017-06-01-a-kind-of-magick_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <pre class="r"><code>image_noise(freddie_resized)</code></pre>
 <p><img src="/posts/2017-06-01-a-kind-of-magick_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<pre class="r"><code>image_annotate(freddie_resized, &quot;Farrokh Bulsara&quot;, size = 30, color = &quot;red&quot;, 
+<pre class="r"><code>image_annotate(freddie_resized, &quot;Farrokh Bulsara&quot;, size = 30, color = &quot;red&quot;,
                boxcolor = &quot;white&quot;, degrees = 9, location = &quot;+60+30&quot;)</code></pre>
 <p><img src="/posts/2017-06-01-a-kind-of-magick_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>

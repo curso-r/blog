@@ -10,7 +10,7 @@ summary: "Versionamento de código é uma ferramenta que veio para ficar. Não d
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Versionamento de código é uma ferramenta que veio para ficar. Não dá para calcular o quanto de dor de cabeça, horas perdidas e frustrações ela economiza e já economizou na história da humanidade.
@@ -69,7 +69,7 @@ No exemplo acima eu poderia acessar o conteúdo do meu projeto no link `https://
 
 Boas práticas:
 
-- Nomes sem espaço e sem caracteres estranhos. Deixe o nome bem simples! 
+- Nomes sem espaço e sem caracteres estranhos. Deixe o nome bem simples!
 
     - RUIM: `projeção de preços`
     - BOM: `projecao_de_precos`
@@ -124,7 +124,7 @@ Agora tem dois commits prontos para serem guardados no nosso repositório centra
 
 ### Passo 4 - Push: Subindo os commits para o Github
 
-Push é tão fácil quanto apertar um botão. 
+Push é tão fácil quanto apertar um botão.
 
 ```{r, fig.align='center', fig.height = 5, echo=FALSE}
 knitr::include_graphics("/images/posts/conteudo/rstudio-e-github/passo_4_push.gif", error = FALSE)

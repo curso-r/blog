@@ -9,8 +9,6 @@ retired: true
 alternativa: ""
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Há bastante tempo tenho vontade de fazer análises usando dados de multas de São Paulo.
@@ -66,7 +64,7 @@ que possui as informações das multas para carros de forma eletrônica.</p>
 <pre class="r"><code>carros_summary &lt;- carros_eletronicas %&gt;%
   group_by(data) %&gt;%
   summarise(qtd = sum(qtd))</code></pre>
-<pre class="r"><code>carros_summary %&gt;% 
+<pre class="r"><code>carros_summary %&gt;%
   ggplot(aes(data, qtd)) +
   geom_line()</code></pre>
 <p>Vemos nesse gráfico que o número de multas (por radar) era sempre por volta de 10.000
@@ -85,23 +83,23 @@ vamos primeiro agrupar em grandes temas:</p>
 <p>O agrupamento final ficou assim:</p>
 <pre class="r"><code>depara &lt;- carros_eletronicas %&gt;%
   group_by(enquadramento) %&gt;%
-  summarise(qtd = sum(qtd)) %&gt;% 
+  summarise(qtd = sum(qtd)) %&gt;%
   arrange(qtd) %&gt;%
   select(-qtd)</code></pre>
 <pre class="r"><code>depara$agrup_enquadramento &lt;- c(
-  &quot;Conversão proibida&quot;, &quot;Velocidade&quot;, &quot;Faixa de Pedestres&quot;, 
+  &quot;Conversão proibida&quot;, &quot;Velocidade&quot;, &quot;Faixa de Pedestres&quot;,
   &quot;Faixa de ônibus&quot;, &quot;Sinal vermelho&quot;, &quot;Faixa de ônibus&quot;,
   &quot;Conversão proibida&quot;, &quot;Faixa de ônibus&quot;, &quot;Velocidade&quot;,
   &quot;Rodízio&quot;, &quot;Velocidade&quot;)
 
-depara %&gt;% 
+depara %&gt;%
   knitr::kable()</code></pre>
 <pre class="r"><code>carros_summary_enquad &lt;- carros_eletronicas %&gt;%
   left_join(depara, by = &quot;enquadramento&quot;) %&gt;%
   group_by(data, agrup_enquadramento) %&gt;%
   summarise(qtd = sum(qtd))</code></pre>
-<pre class="r"><code>carros_summary_enquad %&gt;% 
-  ungroup() %&gt;% 
+<pre class="r"><code>carros_summary_enquad %&gt;%
+  ungroup() %&gt;%
   ggplot(aes(data, qtd, color = agrup_enquadramento)) +
   geom_line()</code></pre>
 <p>No gráfico, vemos que em 2015, o tipo de multa que mais aumentou em quantidade foi
@@ -114,7 +112,7 @@ Vamos agora matar algumas curiosidades.</p>
 <ol style="list-style-type: decimal">
 <li>Quais são os horários com mais multas em SP?</li>
 </ol>
-<pre class="r"><code>carros_summary_hora &lt;- carros_eletronicas %&gt;% 
+<pre class="r"><code>carros_summary_hora &lt;- carros_eletronicas %&gt;%
   group_by(hora) %&gt;%
   summarise(qtd = sum(qtd))</code></pre>
 <pre class="r"><code>carros_summary_hora %&gt;%
@@ -124,7 +122,7 @@ Vamos agora matar algumas curiosidades.</p>
 entre 7 e 10 da manhã e 17h e 19h. Isso até faz sentido, mas nessas horas o trânsito
 da cidade está todo parado. Será que a distribuição fica diferente por tipo de multa?
 Principalmente as de velocidade.</p>
-<pre class="r"><code>carros_depara_enquad &lt;- carros_eletronicas %&gt;% 
+<pre class="r"><code>carros_depara_enquad &lt;- carros_eletronicas %&gt;%
   left_join(depara, by = &quot;enquadramento&quot;) %&gt;%
   group_by(hora, agrup_enquadramento) %&gt;%
   summarise(qtd = sum(qtd))</code></pre>
@@ -139,7 +137,7 @@ durante a madrugada.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Qual é o dia da semana com mais multas?</li>
 </ol>
-<pre class="r"><code>carros_depara_enquad_wday &lt;- carros_eletronicas %&gt;% 
+<pre class="r"><code>carros_depara_enquad_wday &lt;- carros_eletronicas %&gt;%
   left_join(depara, by = &quot;enquadramento&quot;) %&gt;%
   group_by(dia_da_semana = wday(data), agrup_enquadramento) %&gt;%
   summarise(qtd = sum(qtd))</code></pre>
@@ -161,7 +159,7 @@ o número de multas por excesso de velocidade (claro, as ruas estão mais vazias
 <pre class="r"><code>top10_motivos &lt;- top10_locais %&gt;%
   left_join(carros_eletronicas, by = &quot;local&quot;) %&gt;%
   left_join(depara, by = &quot;enquadramento&quot;) %&gt;%
-  mutate(local = stringr::str_wrap(local, width = 20) %&gt;% 
+  mutate(local = stringr::str_wrap(local, width = 20) %&gt;%
            forcats::fct_reorder(-n)) %&gt;%
   group_by(local, agrup_enquadramento) %&gt;%
   summarise(qtd = sum(qtd))</code></pre>

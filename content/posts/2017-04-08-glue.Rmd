@@ -10,7 +10,7 @@ summary: "Uma tarefa muito comum no R é colar textos. As funções mais importa
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Uma tarefa muito comum no `R` é colar textos. As funções mais importantes para isso são `paste()` e `sprintf()`, que vêm com o pacote `base`. Nesse artigo, vamos falar dessas duas funções e de um novo pacote do `tidyverse`, o `glue`.
@@ -114,10 +114,10 @@ glue('{p * 100}% das pessoas adoram R.')
 glue('{scales::percent(p)} das pessoas adoram R.')
 ```
 
-A função `collapse()` é parecida com o `paste()` quando `collapse = ''`, mas só aceita um objeto como entrada:
+A função `glue_collapse()` é parecida com o `paste()` quando `collapse = ''`, mas só aceita um objeto como entrada:
 
 ```{r}
-x <- collapse(1:10)
+x <- glue_collapse(1:10)
 x
 all.equal(x, paste(1:10, collapse = ''))
 ```
@@ -129,15 +129,15 @@ library(magrittr)
 ```
 
 ```{r}
-glue('{letters}/{LETTERS}') %>% 
-  collapse(', ')
+glue('{letters}/{LETTERS}') %>%
+  glue_collapse(', ')
 ```
 
 O `glue` também tem uma função extra para trabalhar melhor com o `%>%`, o `glue_data()`. O primeiro argumento dessa função é uma lista ou `data.frame`, e seus nomes são utilizados como variáveis para alimentar as chaves das strings. Use o `.` para fazer operações com toda a base de dados:
 
 ```{r}
-mtcars %>% 
-  head() %>% 
+mtcars %>%
+  head() %>%
   glue_data('O carro {row.names(.)} rende {mpg} milhas por galão.')
 ```
 

@@ -9,10 +9,10 @@ summary: "No mundo do web scraping, muitas vezes precisamos acessar sites HTTPS,
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-No mundo do web scraping, muitas vezes precisamos acessar sites `HTTPS`, a versão `S`egura do `HTTP` (Hyper Text Transfer Protocol). Esse protocolo é utilizado para encriptar as mensagens trocadas por usuário e servidor. 
+No mundo do web scraping, muitas vezes precisamos acessar sites `HTTPS`, a versão `S`egura do `HTTP` (Hyper Text Transfer Protocol). Esse protocolo é utilizado para encriptar as mensagens trocadas por usuário e servidor.
 
 O pacote `httr` utiliza um padrão `SSL` (Secure Sockets Layer) para lidar com `HTTPS`. O SSL nada mais é que uma forma de informar ao servidor que você é você, garantindo que suas mensagens só possam ser interpretadas por esse servidor, e vice-versa. O padrão do `httr` funciona bem para a maioria dos sites, permitindo o acesso sem sofrimento.
 
@@ -30,7 +30,7 @@ Para solucionar o problema acima, rode:
 httr::GET("https://esaj.tjsp.jus.br", httr::config(ssl_verifypeer = FALSE))
 ```
 
-E... Feliz web scraping! 
+E... Feliz web scraping!
 
 **OBS:** Certa vez um amigo teve problema com SSL mesmo tentando a solução acima numa máquina com Ubuntu Resolvemos o problema reinstalando a biblioteca `libcurl4-openssl-dev` via `apt-get` e o pacote `curl` do R. Assim:
 

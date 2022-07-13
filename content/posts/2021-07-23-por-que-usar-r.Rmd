@@ -10,7 +10,7 @@ draft: false
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 Programação é uma das habilidades mais importantes da atualidade, principalmente para quem mexe com análise de dados. Hoje nós vamos explorar 5 motivos para te lembrar ou relembrar de porque R é uma das maiores linguagens para Ciência de Dados. Alguns dos motivos se aplicam a todas as linguagens de programação, mas sempre vamos destacar porque o R é especial, e alguns outros são específicos da nossa querida linguagem. Vamos a eles!
@@ -25,13 +25,13 @@ Várias pesssoas importantes da comunidade de estatística e machine learning pa
 
 # Motivo 3: R possui um ecossistema que incentiva a reprodutibilidade
 
-Uma das maiores virtudes de se usar uma linguagem de programação para análise de dados é garantir que qualquer resultado, da conta mais simples ao gráfico mais complexo, pode ser reproduzida de maneira completamente fiel por um programa de computador. Isso é importante por vários motivos, mas principalmente porque (1) te ajuda a economizar tempo, já que você pode simplesmente usar o mesmo programa para vários problemas parecidos, e (2) em muitos contextos, como na pesquisa científica por exemplo, é importante que se saiba com muita precisão como cada resultado foi produzido, inclusive para que ele possa ser verificado por pares posteriormente. 
+Uma das maiores virtudes de se usar uma linguagem de programação para análise de dados é garantir que qualquer resultado, da conta mais simples ao gráfico mais complexo, pode ser reproduzida de maneira completamente fiel por um programa de computador. Isso é importante por vários motivos, mas principalmente porque (1) te ajuda a economizar tempo, já que você pode simplesmente usar o mesmo programa para vários problemas parecidos, e (2) em muitos contextos, como na pesquisa científica por exemplo, é importante que se saiba com muita precisão como cada resultado foi produzido, inclusive para que ele possa ser verificado por pares posteriormente.
 
 Então, se já nos convencemos de que reprodutibilidade é importante, podemos ver claramente porque R é tão especial: existe todo um ecossistema que suporta e incentiva a reprodutibilidade. Desde a existência do pacote `reprex` (que te ajuda a compartilhar pequenos pedaços de código em texto simples) até ferramentas como `Rmarkdown` e as boas práticas incentivadas pelo RStudio, por exemplo. Além disso, como grande parte da comunidade R é formada por pessoas que trabalham na academia, muito do que se produz e discute nos blogs e fóruns é como garantir que nossas análises sejam reprodutíveis.
 
 # Motivo 4: R tem uma comunidade vibrante e crescente
- 
-Ter alguém para conversar e tirar dúvidas é uma parte importante do aprendizado de praticamente qualquer tópico. Em R no Brasil e no mundo temos uma grande e crescente comunidade disposta a ajudar e discutir, inclusive divulgando materiais gratuitos introdutórios e avançados para que muitas pessoas possam aproveitar. Nesse sentido, um esforço particularmente relevante da comunidade foca-se também em promover a inclusão de grupos sub representados no mundo `tech`, como é o caso de iniciativas como a [R-Ladies](https://rladies.org/). 
+
+Ter alguém para conversar e tirar dúvidas é uma parte importante do aprendizado de praticamente qualquer tópico. Em R no Brasil e no mundo temos uma grande e crescente comunidade disposta a ajudar e discutir, inclusive divulgando materiais gratuitos introdutórios e avançados para que muitas pessoas possam aproveitar. Nesse sentido, um esforço particularmente relevante da comunidade foca-se também em promover a inclusão de grupos sub representados no mundo `tech`, como é o caso de iniciativas como a [R-Ladies](https://rladies.org/).
 
 # Motivo 5: Os focos da linguagem são modelagem, visualização e análise de dados
 
@@ -41,4 +41,4 @@ Desde os seus primórdios em meados de 1976, R e suas encarnações anteriores f
 
 Se você quiser dar os seus primeiros passos para aprender a manipular dados com R, dê uma olhada no nosso curso [R para Ciência de Dados I](https://curso-r.com/cursos/r4ds-1/) e aproveite!
 
-Caso você tenha dúvidas, entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail contato@curso-r.com. 
+Caso você tenha dúvidas, entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail contato@curso-r.com.

@@ -9,7 +9,7 @@ summary: "WoE (weight of evidence) é uma ferramenta bastante usada em aplicaç�
 ---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 WoE (weight of evidence) é uma ferramenta bastante usada em aplicações de regressão logística, principalmente na área de score de crédito. Simploriamente falando, ele transforma categorias em números que refletem a diferença entre elas pelo critério de separação do **Y = 1** e **Y = 0**.

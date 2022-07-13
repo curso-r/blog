@@ -9,7 +9,7 @@ summary: "Já vimos como o Rstudio se torna uma ferramanta poderosa quando combi
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Já vimos como o Rstudio se torna uma ferramenta poderosa quando combinado com certos pacotes, como o `knitr` e `shiny`, ou outros recursos, como o *markdown* e o *git*. Hoje, veremos como transformar o Rstudio num elegante e interativo editor de imagens utilizando o pacote `magick`.
@@ -82,7 +82,7 @@ A maioria das transformações que você pode fazer com as imagens utilizará um
 Para mais detalhes sobre essa sintaxe, consulte [este link](http://www.imagemagick.org/Magick++/Geometry.html).
 
 
-Vamos testar essas funções na nossa imagem! 
+Vamos testar essas funções na nossa imagem!
 
 Começaremos a redimensionando para facilitar o uso e a visualização de algumas funções.
 
@@ -134,10 +134,10 @@ image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_4
 Com o pipe, fica fácil aplicar todas as funções ao mesmo tempo.
 
 ```{r, eval = FALSE}
-freddie_resized %>% 
-  image_crop("100x150+280+30") %>% 
-  image_border("purple", "20x10") %>% 
-  image_flip %>% 
+freddie_resized %>%
+  image_crop("100x150+280+30") %>%
+  image_border("purple", "20x10") %>%
+  image_flip %>%
   image_flop
 ```
 
@@ -167,7 +167,7 @@ image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_7
 
 
 ```{r, eval = FALSE}
-image_annotate(freddie_resized, "Farrokh Bulsara", size = 30, color = "red", 
+image_annotate(freddie_resized, "Farrokh Bulsara", size = 30, color = "red",
                boxcolor = "white", degrees = 9, location = "+60+30")
 ```
 

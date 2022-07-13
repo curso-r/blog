@@ -9,12 +9,12 @@ summary: "Na jornada da ciência de dados, muitas vezes precisamos rodar um mesm
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Na jornada da ciência de dados, muitas vezes precisamos rodar um mesmo algoritmo em vários objetos distintos. Quando o algoritmo é pesado ou a lista de objetos é longa, é importante saber em que passo estamos e quanto vai demorar para terminar.
 
-Uma forma de resolver esse problema é usando o pacote `progress`. O objeto `progress_bar` desse pacote é do tipo [`R6`](https://cran.r-project.org/web/packages/R6/vignettes/Introduction.html) e tem um método `new()` para criar objetos do tipo "barra". Uma barra criada também é do tipo `R6` e possui o método `tick()` para imprimir uma barra de progresso no console. 
+Uma forma de resolver esse problema é usando o pacote `progress`. O objeto `progress_bar` desse pacote é do tipo [`R6`](https://cran.r-project.org/web/packages/R6/vignettes/Introduction.html) e tem um método `new()` para criar objetos do tipo "barra". Uma barra criada também é do tipo `R6` e possui o método `tick()` para imprimir uma barra de progresso no console.
 
 No exemplo abaixo, nosso interesse é aplicar a função `funcao_demorada` nos números `1:5` (um de cada vez, sem usar vetorização) e guardá-los numa lista.
 
@@ -53,7 +53,7 @@ Como resultados, temos:
 resultados
 ```
 
-No entanto, sabemos que os laços `for` e `while` do `R` [são problemáticos](http://stackoverflow.com/questions/7142767/why-are-loops-slow-in-r). A melhor e mais estilosa forma de fazer esse tipo de operação no `R` é usando *funcionais*. 
+No entanto, sabemos que os laços `for` e `while` do `R` [são problemáticos](http://stackoverflow.com/questions/7142767/why-are-loops-slow-in-r). A melhor e mais estilosa forma de fazer esse tipo de operação no `R` é usando *funcionais*.
 
 Funcionais são funções de funções. Usamos esses caras sempre que queremos aplicar uma função a diversos objetos. Eles são alternativas mais concisas, elegantes e muitas vezes mais eficientes do que os conhecidos `for` e `while`.
 
@@ -65,7 +65,7 @@ Uma vantagem do `plyr` é a possibilidade de adicionar barras de progresso como 
 resultados <- plyr::llply(nums, funcao_demorada, .progress = 'text')
 ```
 
-Os resultados são idênticos e foram omitidos. Bem mais simples, não? 
+Os resultados são idênticos e foram omitidos. Bem mais simples, não?
 
 ## Usando `purr::map` no lugar de `plyr::llply`
 
@@ -165,12 +165,12 @@ Os resultados da Tabela \@ref(tab:eficiencia) são surpreendentes. Primeiro, as 
 library(magrittr)
 library(tidyverse)
 benchmark <- readRDS('../../static/data/progress/benchmark_progress.rds')
-benchmark %>% 
-  microbenchmark:::summary.microbenchmark() %>% 
-  as_tibble() %>% 
-  dplyr::select(-lq, -uq, -neval) %>% 
-  dplyr::mutate_if(is.numeric, dplyr::funs(round(./1e3, 3))) %>% 
-  #purrr::set_names(c('Função', 'Min', 'Média', 'Mediana', 'Máximo')) %>% 
+benchmark %>%
+  microbenchmark:::summary.microbenchmark() %>%
+  as_tibble() %>%
+  dplyr::select(-lq, -uq, -neval) %>%
+  dplyr::mutate_if(is.numeric, dplyr::funs(round(./1e3, 3))) %>%
+  #purrr::set_names(c('Função', 'Min', 'Média', 'Mediana', 'Máximo')) %>%
   knitr::kable(caption = 'Resultados do benchmark. Os tempos estão em milisegundos.')
 ```
 
@@ -185,9 +185,9 @@ library(tidyverse)
 ## saveRDS(m, 'for_microbenchmark.rds')
 m <- readRDS('../../static/data/progress/for_microbenchmark.rds')
 xises <- as.numeric(stringr::str_match(m$expr, ':([0-9]+)')[,2])
-tibble(itens = xises, y = m$time) %>% 
-  group_by(itens) %>% 
-  ungroup() %>% 
+tibble(itens = xises, y = m$time) %>%
+  group_by(itens) %>%
+  ungroup() %>%
   ggplot(aes(x = itens, y = y / 1e6)) +
   geom_point() +
   geom_smooth(method = 'loess') +
@@ -198,8 +198,8 @@ tibble(itens = xises, y = m$time) %>%
 
 ## Resumo
 
-- Use o objeto `progress::progress_bar` sempre que quiser fazer barras de progresso. 
-- Use o método `$new(total = n)` para criar uma barra. 
+- Use o objeto `progress::progress_bar` sempre que quiser fazer barras de progresso.
+- Use o método `$new(total = n)` para criar uma barra.
 - Use o método `$tick()` dentro do loop para mostrar que andou um passo do algoritmo.
 - Tome cuidado com a eficiência do algoritmo quando usa barras de progresso.
 

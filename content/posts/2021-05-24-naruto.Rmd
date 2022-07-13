@@ -1,14 +1,14 @@
 ---
 title: "Buscando informações na Wikipédia: Lista de episódios de Naruto Shippuden"
-author: ["Beatriz Milz"] 
+author: ["Beatriz Milz"]
 date: '2021-05-24'
-categories: ["tutoriais"] 
+categories: ["tutoriais"]
 image: "https://i.ibb.co/RPfS5Q4/781172d23d3d6d1f372ae6772da1f602056d1825v2-hq.jpg"
 tags: ["web scraping", "faxina", "purrr", "rvest"]
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 Alguns animes tem muitos *fillers*, que são episódios que não se baseiam na história original, e não agregam na história principal. Muitas vezes parece uma **encheção de linguiça** mesmo, contendo diversos episódios em sequência que não contribuem com a história que estamos acompanhando.
@@ -41,11 +41,11 @@ O que o objeto `wikipedia_html` contém?
 wikipedia_html
 ```
 
-Esse objeto apresenta o código HTML referente à página que queremos raspar! 
+Esse objeto apresenta o código HTML referente à página que queremos raspar!
 
 ### Buscando informações sobre a primeira temporada
 
-Agora precisamos descobrir como acessar as informações que queremos. [Olhando a página](https://pt.wikipedia.org/wiki/Lista_de_epis%C3%B3dios_de_Naruto_Shippuden), podemos ver que os dados de cada temporada estão apresentados em uma tabela diferente. Vamos tentar primeiramente buscar as informações para a tabela referente à primeira temporada, e quando este código estiver funcionando bem, podemos adaptar o código para buscar os dados das outras temporadas! 
+Agora precisamos descobrir como acessar as informações que queremos. [Olhando a página](https://pt.wikipedia.org/wiki/Lista_de_epis%C3%B3dios_de_Naruto_Shippuden), podemos ver que os dados de cada temporada estão apresentados em uma tabela diferente. Vamos tentar primeiramente buscar as informações para a tabela referente à primeira temporada, e quando este código estiver funcionando bem, podemos adaptar o código para buscar os dados das outras temporadas!
 
 Estou utilizando o navegador Google Chrome, e esse navegador tem uma opção que ajuda muito a explorar o código: o inspetor de elementos! Para acessar essa ferramenta, você pode usar o atalho `Ctrl` + `Shift` + `C`, ou clicando no menu superior: "Visualizar" > "Desenvolvedor" > "Inspecionar elementos". Caso você utilize outro navegador, recomendo que procure o equivalente ao inspetor de elementos deste navegador.
 
@@ -62,34 +62,34 @@ O `XPath` copiado é: `//*[@id="mw-content-text"]/div[1]/table[4]`. Com isso, po
 # Carregando o pipe do pacote magrittr
 library(magrittr, include.only = "%>%")
 
-# Podemos buscar o conteúdo com o xpath, 
+# Podemos buscar o conteúdo com o xpath,
 # e as tabelas que estão presentescom a função html_table()
 tabela <- "https://pt.wikipedia.org/wiki/Lista_de_epis%C3%B3dios_de_Naruto_Shippuden" %>%
   # ler o html
   rvest::read_html() %>%
   # buscar o xpath
-  rvest::html_node(xpath = '//*[@id="mw-content-text"]/div[1]/table[4]') %>% 
+  rvest::html_node(xpath = '//*[@id="mw-content-text"]/div[1]/table[4]') %>%
   # ler a tabela
   rvest::html_table()
 
 ```
 
-Vamos observar essa tabela referente à primeira temporada: ela contém algumas colunas repetidas, e existe mais de uma linha com informações para o mesmo episódio. Será necessário fazer uma leve **faxina de dados** antes de analisar os dados! 
+Vamos observar essa tabela referente à primeira temporada: ela contém algumas colunas repetidas, e existe mais de uma linha com informações para o mesmo episódio. Será necessário fazer uma leve **faxina de dados** antes de analisar os dados!
 
 ```{r echo=TRUE}
 dplyr::glimpse(tabela)
 ```
 
-Antes de avançarmos, vamos fazer uma pré-faxina leve: adicionar o número da temporada na base, e transformar o número do episódio em texto (já que a informação se é filler ou não aparece nessa coluna, mas nem todas as temporadas tem fillers - assim padronizamos e evitamos erros posteriormente). 
+Antes de avançarmos, vamos fazer uma pré-faxina leve: adicionar o número da temporada na base, e transformar o número do episódio em texto (já que a informação se é filler ou não aparece nessa coluna, mas nem todas as temporadas tem fillers - assim padronizamos e evitamos erros posteriormente).
 
 ```{r echo=TRUE}
-tabela %>% 
+tabela %>%
   # limpar os nomes das variáveis
-  janitor::clean_names() %>% 
-  # adicionando o número da temporada 
+  janitor::clean_names() %>%
+  # adicionando o número da temporada
   dplyr::mutate(numero_temporada = 1,
                 # transforma a variável `no` em texto
-                no = as.character(no)) %>% 
+                no = as.character(no)) %>%
   dplyr::glimpse()
 ```
 
@@ -127,22 +127,22 @@ Os números ao final do `XPath` se iniciam no número 4, e são incrementados de
   - Temporada 3: `//*[@id="mw-content-text"]/div[1]/table[8]`
   - ......
   - Temporada 20: `//*[@id="mw-content-text"]/div[1]/table[42]`
-  
+
 Podemos criar uma sequência com a função `seq()`, para para buscar todas as tabelas de uma vez, sendo que a sequência deve começar no número 4, e incrementar de 2 em 2, até o número 42, formando um vetor de 20 números (referente às 20 temporadas).
 
 
-Podemos usar a função `purrr::map2_dfr()` para aplicar a função `buscar_tabela()` para buscar as informações das tabelas de todas as temporadas, e unir em uma única base. 
+Podemos usar a função `purrr::map2_dfr()` para aplicar a função `buscar_tabela()` para buscar as informações das tabelas de todas as temporadas, e unir em uma única base.
 
 ```{r cache=TRUE}
 tabela_bruta <-
-  purrr::map2_dfr(.x = seq(from = 4, to = 42, by = 2), 
+  purrr::map2_dfr(.x = seq(from = 4, to = 42, by = 2),
                   # A sequencia começa em 4 e vai até 42, contando de 2 em 2.
-                  # assim teremos um vetor com 20 números, referente às 
+                  # assim teremos um vetor com 20 números, referente às
                   # 20 temporadas! Isso será usado no primeiro argumento
-                  # da função buscar_tabela, ou seja, 
+                  # da função buscar_tabela, ou seja,
                   # no argumento  `n_tabela`.
                   .y = 1:20, # isso será usado no segundo argumento
-                  # da funcao buscar_tabela, ou seja, 
+                  # da funcao buscar_tabela, ou seja,
                   # no argumento `numero_temporada`.
                   .f = buscar_tabela # função que queremos utilizar
                   )
@@ -170,17 +170,17 @@ Vamos então fazer uma faxina nessa base, e deixar ela tidy! Vamos começar tent
 
 ```{r}
 tabela_faxinando <- tabela_bruta  %>%
-  
+
   # separar a coluna `no` em: `numero_episodio` e `tipo_episodio`
-  tidyr::separate(no, into = c("numero_episodio", "tipo_episodio"), "\\(", extra = "merge") %>% 
-  
+  tidyr::separate(no, into = c("numero_episodio", "tipo_episodio"), "\\(", extra = "merge") %>%
+
   dplyr::mutate(
     # transformar a variavel `numero_episodio` em tipo numérico
     numero_episodio = readr::parse_number(numero_episodio),
-    
+
     # remover o parenteses desnecessário na variável tipo_episodio
     tipo_episodio = stringr::str_replace_all(tipo_episodio, "\\)", ""),
-    
+
     # Na variavel `tipo_episodio`, quando está vazio é porque faz
     # parte da história principal (é chamado de Canônico).
     # Então vamos usar dplyr::case_when() para arrumar essa variável.
@@ -188,8 +188,8 @@ tabela_faxinando <- tabela_bruta  %>%
       is.na(tipo_episodio) ~ "Canon",
       tipo_episodio == "½filler" ~ "Semi-filler",
       TRUE ~ tipo_episodio
-    ), 
-    
+    ),
+
     # transformar a variavel `data_de_estreia` em tipo data
     data_de_estreia = readr::parse_date(
       data_de_estreia,
@@ -199,10 +199,10 @@ tabela_faxinando <- tabela_bruta  %>%
   )  %>%
   # remover colunas repetidas do titulo do episodio
   dplyr::select(-titulo_original, -titulo_original_2) %>%
-  
+
   # renomeia para deixar o nome da variável mais claro
   dplyr::rename("titulo_episodio" = titulo_s_em_portugues) %>%
-  
+
   # move a coluna numero_temporada para o inicio
   dplyr::relocate(numero_temporada, .before = numero_episodio)
 ```
@@ -216,9 +216,9 @@ dplyr::glimpse(tabela_faxinando)
 Agora vamos arrumar algo muito importante: queremos que cada linha represente um episódio único.
 
 ```{r}
-episodios_naruto_shippuden <- tabela_faxinando %>% 
+episodios_naruto_shippuden <- tabela_faxinando %>%
   # remover os NA`s presentes na coluna  `numero_episodio`
-  tidyr::drop_na(numero_episodio)  %>% 
+  tidyr::drop_na(numero_episodio)  %>%
   # aqui teremos duas linhas por episódio, sendo que elas estão repetidas.
   # a função dplyr::distinct() permitirá descartar as linhas repetidas
   dplyr::distinct()
@@ -234,8 +234,8 @@ dplyr::glimpse(episodios_naruto_shippuden)
 Além disso, conseguimos conferir a quantidade de episódios filler:
 
 ```{r, out.width="50%"}
-episodios_naruto_shippuden %>% 
-  dplyr::count(tipo_episodio, sort = TRUE) %>% 
+episodios_naruto_shippuden %>%
+  dplyr::count(tipo_episodio, sort = TRUE) %>%
   knitr::kable(col.names = c("Tipo de episódio", "Número de episódios"))
 ```
 
@@ -252,7 +252,7 @@ paleta <- c("#fe7934",
             "#083b7c",
             "#e1e020",
             "#ba1820",
-            
+
             "#403e4b")
 
 # O pacote que disponibiliza a função ggwaffle é:
@@ -265,7 +265,7 @@ paleta <- c("#fe7934",
    dplyr::mutate(tipo_episodio = forcats::fct_relevel(
      tipo_episodio,
      c("Canon", "Omake", "Novel", "Gaiden", "Semi-filler", "Filler")
-   )) %>% 
+   )) %>%
   ggplot2::ggplot(ggplot2::aes(fill = tipo_episodio, values = n)) +
   waffle::geom_waffle(
     n_rows = 5,
@@ -321,7 +321,7 @@ As únicas temporadas livres de *fillers* são a primeira e a segunda! Depois de
 
 ## Conclusão
 
-Espero que esse post tenha sido interessante, e seja útil para ~~quem não quer perder tempo com fillers~~ quem deseja obter algum conteúdo do Wikipédia de forma mais fácil! 
+Espero que esse post tenha sido interessante, e seja útil para ~~quem não quer perder tempo com fillers~~ quem deseja obter algum conteúdo do Wikipédia de forma mais fácil!
 
 Tchau! Até a próxima!
 

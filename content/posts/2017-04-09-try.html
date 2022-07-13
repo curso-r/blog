@@ -8,8 +8,6 @@ author: ["Julio"]
 summary: "Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão tidy dessas soluções."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão <code>tidy</code> dessas soluções.</p>
@@ -43,8 +41,8 @@ x
 <li><code>possibly()</code> é uma versão mais otimista do <code>safely()</code>, que exige a definição de <code>otherwise =</code> e não guarda as mensagens de erro.</li>
 <li><code>quietly()</code> não trata erros (ou seja, ela trava quando dá erro), mas guarda informações sobre <em>warnings</em> e <em>messages</em>.</li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
-<img src="/images/posts/conteudo/try/adverbs.jpg" alt="Admita, você não imaginava que teria de pensar em gramática para programar em R."  />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="../../../../../../images/posts/conteudo/try/adverbs.jpg" alt="Admita, você não imaginava que teria de pensar em gramática para programar em R."  />
 <p class="caption">
 Figura 1: Admita, você não imaginava que teria de pensar em gramática para programar em R.
 </p>
@@ -66,7 +64,7 @@ quiet_log &lt;- quietly(log)</code></pre>
 <pre class="r"><code>entradas &lt;- list(10, -1, &#39;a&#39;)</code></pre>
 <p>Agora, os resultados:</p>
 <pre class="r"><code>## Esse código vai travar
-map(entradas, log) 
+map(entradas, log)
 ## Warning in .Primitive(&quot;log&quot;)(x, base): NaNs produced
 ## Error in .Primitive(&quot;log&quot;)(x, base): non-numeric argument to mathematical function</code></pre>
 <ul>
@@ -115,7 +113,7 @@ map(entradas, possible_log)
 <li><code>quietly()</code>:</li>
 </ul>
 <pre class="r"><code>## Também trava, mesmo problema de log
-map(entradas, quiet_log) 
+map(entradas, quiet_log)
 ## Error in .Primitive(&quot;log&quot;)(x, base): non-numeric argument to mathematical function
 
 ## Quando funciona, retorna todos os warnings e messages
@@ -155,18 +153,18 @@ map(entradas[1:2], quiet_log)
 # adiciona um resultado default caso dê erro. No caso, NA.
 safe_log2 &lt;- log %&gt;% safely(otherwise = NA_real_)
 
-d_result &lt;- entradas %&gt;% 
-  map(safe_log2) %&gt;% 
+d_result &lt;- entradas %&gt;%
+  map(safe_log2) %&gt;%
   # ao invés de uma lista de tamanho 3 com 2 elementos (result e error),
   # temos uma lista de tamanho 2 (result e error) com 3 elementos.
-  transpose() %&gt;%    
+  transpose() %&gt;%
   # simplifica o vetor de resultados
-  simplify_all() %&gt;% 
+  simplify_all() %&gt;%
   # converte para data frame
   as_tibble()
 
 d_result
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##   result error     
 ##    &lt;dbl&gt; &lt;list&gt;    
 ## 1   2.30 &lt;NULL&gt;    

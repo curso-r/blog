@@ -8,8 +8,6 @@ author: ["Julio"]
 summary: "No mundo do web scraping, muitas vezes precisamos acessar sites HTTPS, a versão segura do HTTP (Hyper Text Transfer Protocol). Esse protocolo é utilizado para encriptar as mensagens trocadas por usuário e servidor. O pacote httr utiliza um padrão SSL (Secure Sockets Layer) para lidar com HTTPS..."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>No mundo do web scraping, muitas vezes precisamos acessar sites <code>HTTPS</code>, a versão <code>S</code>egura do <code>HTTP</code> (Hyper Text Transfer Protocol). Esse protocolo é utilizado para encriptar as mensagens trocadas por usuário e servidor.</p>
@@ -17,10 +15,10 @@ summary: "No mundo do web scraping, muitas vezes precisamos acessar sites HTTPS,
 <p>No entanto, alguns sites dão o seguinte erro:</p>
 <pre class="r"><code>httr::GET(&quot;https://esaj.tjsp.jus.br&quot;)
 ## Response [https://esaj.tjsp.jus.br/esaj/portal.do?servico=740000]
-##   Date: 2021-01-25 19:35
+##   Date: 2022-07-13 18:39
 ##   Status: 200
 ##   Content-Type: text/html;charset=ISO-8859-1
-##   Size: 47.3 kB
+##   Size: 71.4 kB
 ## 
 ## 
 ## 
@@ -36,10 +34,10 @@ summary: "No mundo do web scraping, muitas vezes precisamos acessar sites HTTPS,
 <p>Para solucionar o problema acima, rode:</p>
 <pre class="r"><code>httr::GET(&quot;https://esaj.tjsp.jus.br&quot;, httr::config(ssl_verifypeer = FALSE))
 ## Response [https://esaj.tjsp.jus.br/esaj/portal.do?servico=740000]
-##   Date: 2021-01-25 19:35
+##   Date: 2022-07-13 18:39
 ##   Status: 200
 ##   Content-Type: text/html;charset=ISO-8859-1
-##   Size: 47.3 kB
+##   Size: 71.4 kB
 ## 
 ## 
 ## 

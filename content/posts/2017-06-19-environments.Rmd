@@ -9,7 +9,7 @@ summary: "Se você já utilizou o R algumas vezes, com certeza já se deparou co
 ---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Se você utiliza o R regularmente, com certeza já se deparou com o termo *environment*. Ele aparece como um painel do RStudio, quando acessamos o código de uma função e (implicitamente) quando carregamos pacotes. Neste post, vamos tentar responder as três perguntas básicas sobre qualquer coisa no R: 1. o que é? 2. para que serve? e 3. como NÃO usar?
@@ -98,11 +98,11 @@ Essa estrutura é muito útil na hora de utilizar funções. Sempre que uma fun�
 
 ```{r}
 f <- function(a, b) {
-  
+
   c <- a + b
-  
+
   return(c)
-  
+
 }
 
 environment(f)
@@ -119,10 +119,10 @@ c
 Segundo, podemos utilizar objetos dentro da função sem defini-los lá dentro.
 
 ```{r}
-f <- function(b) { 
+f <- function(b) {
 
   return(a + b)
-    
+
 }
 
 f(108)
@@ -132,9 +132,9 @@ Neste caso, como o R não encontrou o símbolo `a` dentro do *environment* de av
 
 ## Como não usar?
 
-Agora que temos uma visão ao menos superficial da estrutura de *environments*, podemos entender melhor porque usar a função `attach()` é uma prática não recomendada ao programar em R. 
+Agora que temos uma visão ao menos superficial da estrutura de *environments*, podemos entender melhor porque usar a função `attach()` é uma prática não recomendada ao programar em R.
 
-Se utilizarmos a função `search()`, ela nos devolverá o "caminho" de *environments*, começando do *global* (*magrathea* não será exibido). 
+Se utilizarmos a função `search()`, ela nos devolverá o "caminho" de *environments*, começando do *global* (*magrathea* não será exibido).
 
 ```{r}
 search()
@@ -151,7 +151,7 @@ search()
 É por isso que, ao carregar um pacote, podemos utilizar as suas funções sem a necessidade de escrever coisas do tipo `ggplot2::geom_point()`. Agora, veja o que acontece quando usamos a função `attach()`
 
 ```{r}
-mighty <- list("Jason" = "vermelho", "Zach" = "Preto", "Billy" = "Azul", 
+mighty <- list("Jason" = "vermelho", "Zach" = "Preto", "Billy" = "Azul",
      "Trini" = "Amarela", "Kimberly" = "Rosa", "Thomas" = "Verde")
 
 attach(mighty)
@@ -169,7 +169,7 @@ O *environment* do pacote `dplyr` aparece antes do `mighty`. Isso quer dizer que
 
 
 ```{r}
-dados <- tibble::tibble(paciente = 1:30, 
+dados <- tibble::tibble(paciente = 1:30,
                         cancer = rbinom(30, size = 1, prob = 0.5))
 
 attach(dados)

@@ -9,8 +9,6 @@ retired: true
 alternativa: ""
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Está no ar o <a href="https://brbloggers.com.br">bR Bloggers</a>! bR Bloggers é um agregador
@@ -72,33 +70,33 @@ o R. O código está disponível abaixo:</p>
 <pre class="r"><code>library(tidyverse)
 library(ggforce)
 # https://pt.wikipedia.org/wiki/Bandeira_do_Brasil#Cores
-cores_br &lt;- list(verde = &#39;#009C3B&#39;, 
-                 amarelo = &#39;#FFDF00&#39;, 
-                 azul = &#39;#002776&#39;, 
+cores_br &lt;- list(verde = &#39;#009C3B&#39;,
+                 amarelo = &#39;#FFDF00&#39;,
+                 azul = &#39;#002776&#39;,
                  branco = &quot;#FFFFFF&quot;)
 
-p &lt;- tibble(x = 1, y = 1, lab1 = &#39;b&#39;, lab2 = &#39;R&#39;) %&gt;% 
+p &lt;- tibble(x = 1, y = 1, lab1 = &#39;b&#39;, lab2 = &#39;R&#39;) %&gt;%
   ggplot(aes(x0 = x, y0 = y, r = y)) +
-  geom_circle(size = 5, 
-              n = 5.5, 
-              fill = &#39;transparent&#39;, 
-              color = cores_br$verde, 
+  geom_circle(size = 5,
+              n = 5.5,
+              fill = &#39;transparent&#39;,
+              color = cores_br$verde,
               linetype = 1) +
-  geom_circle(size = 4, 
-              n = 5.5, 
-              fill = &#39;transparent&#39;, 
-              color = cores_br$amarelo, 
+  geom_circle(size = 4,
+              n = 5.5,
+              fill = &#39;transparent&#39;,
+              color = cores_br$amarelo,
               linetype = 2) +
   geom_text(aes(x, y, label = lab1),
-            family = &quot;Ubuntu&quot;, 
-            size = 45, 
-            nudge_x = -.3, 
-            nudge_y = -.1, 
+            family = &quot;Ubuntu&quot;,
+            size = 45,
+            nudge_x = -.3,
+            nudge_y = -.1,
             colour = cores_br$azul) +
   geom_text(aes(x, y, label = lab2),
-            family = &quot;Century&quot;, 
-            size = 60, 
-            nudge_x = .3, 
+            family = &quot;Century&quot;,
+            size = 60,
+            nudge_x = .3,
             colour = cores_br$azul,
             fontface = &#39;bold&#39;) +
   coord_equal() +

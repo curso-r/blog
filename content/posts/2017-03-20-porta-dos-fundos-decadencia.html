@@ -8,8 +8,6 @@ author: ["William"]
 summary: "Há alguns anos eu acompanho o canal Porta dos Fundos no YouTube, assistindo os vídeos quase sempre no dia de lançamento. Nos últimos meses, no entanto, meu entusiasmo com o canal vem diminuindo. Não sei se eu que fiquei chato ou se outras pessoas compartilham a minha opinião de que o conteúdo do Porta piorou. Então resolvi scrapear informações do canal e montar algumas visualizações para tirar essa dúvida."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Há alguns anos eu acompanho o canal Porta dos fundos no YouTube, assistindo os vídeos quase sempre no dia de lançamento. Mesmo dividido entre esquetes boas e ruins, me considero um fã da trupe de humoristas (e do Totoro também), principalmente pelo humor sarcástico e pela satirização de diversos tabus da nossa sociedade.</p>
@@ -24,7 +22,7 @@ summary: "Há alguns anos eu acompanho o canal Porta dos Fundos no YouTube, assi
 <p>Feito isso, rode o código abaixo com o <em>id</em> e <em>secret</em> obtidos pela plataforma para configurar o acesso do <code>tuber</code> à API.</p>
 <pre class="r"><code>library(tuber)
 
-yt_oauth(app_id = &quot;seu_app_id&quot;, 
+yt_oauth(app_id = &quot;seu_app_id&quot;,
          app_secret = &quot;seu_app_secret&quot;)</code></pre>
 <p>Se tudo foi configurado corretamente, ele abrirá uma aba no seu navegador confirmando a autenticação, e você poderá voltar ao R para começar a scrapear.</p>
 </div>
@@ -41,17 +39,17 @@ library(ggplot2)        # Gráficos</code></pre>
 <p>Por default, a função <code>yt_search()</code> retorna no máximo 50 resultados. Contudo, se setarmos os parâmetros <code>type = "video"</code> e <code>channal_id = "id_de_algum_canal"</code>, o número máximo passa a ser 500 resultados.</p>
 <p>Para facilitar o trabalho, eu criei a função <code>get_videos_porta()</code>. Ela recebe uma data de início e de término (em um dataframe com apenas uma linha) e devolve todos os vídeos do canal Porta dos Fundos nesse período.</p>
 <pre class="r"><code>get_videos_porta &lt;- function(dates) {
-  
-  yt_search(term = &quot;&quot;, 
+
+  yt_search(term = &quot;&quot;,
             type = &quot;video&quot;,
             channel_id = &quot;UCEWHPFNilsT0IfQfutVzsag&quot;,
             published_after = dates$start,
             published_before = dates$end)
-  
+
 }</code></pre>
 <p>Cada linha do dataframe de datas a seguir representa períodos de um ano, de 2012 a 2017. Isso implica que, em cada busca, vou receber os vídeos do Porta dos Fundos para cada um desses anos. O mutate formata as datas no padrão exigido pela função <code>yt_search()</code>. Veja <code>help(yt_search)</code> para mais informações.</p>
 <pre class="r"><code>dates &lt;- tibble(start = seq(ymd(&quot;2012-01-01&quot;), ymd(&quot;2017-01-01&quot;), by = &quot;years&quot;),
-                        end = seq(ymd(&quot;2012-12-31&quot;), ymd(&quot;2017-12-31&quot;), by = &quot;years&quot;)) %&gt;% 
+                        end = seq(ymd(&quot;2012-12-31&quot;), ymd(&quot;2017-12-31&quot;), by = &quot;years&quot;)) %&gt;%
   mutate(start = paste(start, &quot;T0:00:00Z&quot;, sep = &quot;&quot;),
          end = paste(end, &quot;T0:00:00Z&quot;, sep = &quot;&quot;))
 </code></pre>
@@ -64,11 +62,11 @@ videos &lt;- by_row(.d = dates, ..f = get_videos_porta, .to = &quot;videos_info&
 <h1>Passo 3: pegar as estatísticas de cada vídeo</h1>
 <p>Para facilitar essa etapa, eu criei a função <code>get_videos_stats()</code>, que recebe um dataframe de uma linha contendo uma coluna <code>$video_id</code> e, usando a função <code>tuber::get_stats()</code>, faz o scrape das estatísticas do vídeo.</p>
 <pre class="r"><code>get_videos_stats &lt;- function(df_row) {
-  
+
   get_stats(video_id = df_row$video_id)
 }</code></pre>
 <p>Cada elemento da coluna <code>$video_info</code> contém um dataframe com as informações dos vídeos de um determinado ano. Com a função <code>dplyr::bind_rows()</code>, juntamos esses dataframes em um só. Então selecionamos as colunas de interesse: <em>title</em>, <em>publishedAt</em> e <em>video_id</em>. Por fim, utilizamos os <em>id’s</em> para baixar as estatísticas de cada vídeo usando a função <code>get_videos_stats()</code>. As estatísticas são salvas na coluna <code>$videos_stats</code> do objeto <code>dados</code>.</p>
-<pre class="r"><code>dados &lt;- bind_rows(videos$videos_info) %&gt;% 
+<pre class="r"><code>dados &lt;- bind_rows(videos$videos_info) %&gt;%
   select(title, publishedAt, video_id) %&gt;%
   by_row(..f = get_videos_stats, .to = &quot;videos_stats&quot;)</code></pre>
 </div>
@@ -76,11 +74,11 @@ videos &lt;- by_row(.d = dates, ..f = get_videos_porta, .to = &quot;videos_info&
 <h1>Passo 4: as visualizações</h1>
 <p>A primeira visualização que resolvi fazer foi um gráfico do número de visualizações pela data de publicação. Uma análise descuidada desse gráfico pode indicar uma clara redução dos números de views ao longo do tempo. No entanto, é preciso levar em conta que vídeos mais antigos tendem a ter mais views por simplesmente estarem disponíveis há mais tempo. Apesar disso, dois fatores me fazem acreditar que a magnitude do número de views de um vídeo é alcançada nos primeiros dias após o lançamento. O primeiro se deve ao sistema de recomendações do YouTube. Na página inicial, nem sempre os vídeos recomendados são dos canais que você se inscreveu. Na página de canais inscritos, se você tiver muitas inscrições, é fácil perder um vídeo ou outro de um dos canais que acompanha. O segundo se deve à enorme quantidade de conteúdo disponível hoje em dia, muito² maior do que há quatro, cinco anos. Eu, por exemplo, sou inscrito em mais de vinte canais e não consigo acompanhar nem cinco deles. Para quem não pode ficar o dia todo vendo vídeos, realmente há muita competição por espaço no YouTube.</p>
 <p>E apresento ainda um terceiro fator, contrariando a expectativa de existirem apenas dois. Vivemos na era do <em>hype</em>. O que é velho, o que é notícia da semana passada, já não interessa mais.</p>
-<pre class="r"><code>dados %&gt;% 
-  mutate(views = map(videos_stats, .f = &#39;viewCount&#39;)) %&gt;% 
-  unnest(views) %&gt;% 
+<pre class="r"><code>dados %&gt;%
+  mutate(views = map(videos_stats, .f = &#39;viewCount&#39;)) %&gt;%
+  unnest(views) %&gt;%
   mutate(views = as.numeric(views),
-         publishedAt = as_date(publishedAt)) %&gt;% 
+         publishedAt = as_date(publishedAt)) %&gt;%
   ggplot(aes(x = publishedAt, y = views)) +
   geom_line(aes(y = 1000000, colour = &quot;1 Milhão&quot;)) +
   geom_line(aes(y = 10000000, colour = &#39;10 Milhões&#39;)) +
@@ -90,14 +88,14 @@ videos &lt;- by_row(.d = dates, ..f = get_videos_porta, .to = &quot;videos_info&
   theme_bw()</code></pre>
 <p><img src="/images/posts/conteudo/porta-dos-fundos-decadencia/views_porta_png.png" /></p>
 <p>Também fiz um gráfico da proporção likes/dislikes pela data de publicação do vídeo. Parece haver uma leve redução dessa proporção no último ano, mas é arriscado tirar uma conclusão. Refazendo essa análise no fim de 2017, talvez fique mais claro se o público do canal concorda comigo sobre a qualidade do conteúdo nos últimos tempos.</p>
-<pre class="r"><code>dados %&gt;% 
+<pre class="r"><code>dados %&gt;%
   mutate(likes = map(videos_stats, .f = &#39;likeCount&#39;),
-         dislikes = map(videos_stats, .f = &#39;dislikeCount&#39;)) %&gt;% 
-  unnest(likes, dislikes) %&gt;% 
+         dislikes = map(videos_stats, .f = &#39;dislikeCount&#39;)) %&gt;%
+  unnest(likes, dislikes) %&gt;%
   mutate(likes = as.numeric(likes),
          dislikes = as.numeric(dislikes),
          publishedAt = as_date(publishedAt),
-         prop = likes/dislikes) %&gt;% 
+         prop = likes/dislikes) %&gt;%
   ggplot(aes(x = publishedAt)) +
   geom_line(aes(y = prop)) +
   labs(x = &quot;Data de publicação&quot;, y = &quot;Likes/Dislikes&quot;) +

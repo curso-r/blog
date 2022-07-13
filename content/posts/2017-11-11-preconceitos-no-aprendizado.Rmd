@@ -9,7 +9,7 @@ summary: "Uma breve reflexão sobre o preconceito de estudar assuntos difíceis.
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Volta e meia eu escuto as famosas frases
@@ -30,6 +30,6 @@ Uma das belezas da Estatística é nos fazer perder esse preconceito\footnote{Ou
 
 Trazendo a reflexão aqui para o nosso mundinho, já ouvi muitas vezes colegas dizendo, principalmente na Graduação, que não usam o R porque ele é difícil ou porque não gostam de programar. A minha opinião sobre a primeira desculpa está nos parágrafos acima. Sobre a segunda, vou discutir no próximo e último post desta série: a relação entre Estatística e programação.
 
-Resumindo a ópera: sempre vamos apanhar aprendendo, e vamos apanhar mais ainda quando não gostamos do que estamos estudando, mas cedo ou tarde, com a quantidade certa de esforço, o conhecimento dá as caras. 
+Resumindo a ópera: sempre vamos apanhar aprendendo, e vamos apanhar mais ainda quando não gostamos do que estamos estudando, mas cedo ou tarde, com a quantidade certa de esforço, o conhecimento dá as caras.
 
 E no bar, na hora de dividir a conta, o problema não é você ser de Humanas. O problema é a sua preguiça. :D

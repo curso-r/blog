@@ -9,7 +9,7 @@ summary: "Neste post, iniciarei uma série com algumas reflexões sobre temas qu
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 > --- Não sabia que nessa cidade a cada 20 minutos atropelam um homem? <br>
@@ -41,7 +41,7 @@ Felizmente, esse comportamento vem mudando, mesmo que a passos lentos. Profissio
 
 Eu vejo essa mudança, e as pessoas ao meu redor também a veem. Mas o exemplo que citei acima me faz acreditar que preciso espiar fora da minha bolha.
 
-Por isso, vou começar uma pequena série de posts, dando a minha opinião sobre algumas coisas que orbitam a educação estatística e a programação, com o objetivo de gerar reflexão e discussão sobre o assunto. A Estatística vem crescendo como carreira, o estatístico vem se tornando cada vez mais protagonista, e vejo esse momento como o ideal para melhorarmos a educação da nossa disciplina. 
+Por isso, vou começar uma pequena série de posts, dando a minha opinião sobre algumas coisas que orbitam a educação estatística e a programação, com o objetivo de gerar reflexão e discussão sobre o assunto. A Estatística vem crescendo como carreira, o estatístico vem se tornando cada vez mais protagonista, e vejo esse momento como o ideal para melhorarmos a educação da nossa disciplina.
 
 A minha ideia inicial era fazer um único post, mas na era dos textões, não quero colocar mais um na fila de vocês. Assim, dividirei nos seguintes tópicos:
 

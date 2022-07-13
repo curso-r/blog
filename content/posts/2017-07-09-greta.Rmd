@@ -9,17 +9,17 @@ summary: "Greta é um pacote de modelagem estatística que permite que você def
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Estou bem longe de ter experiência em modelagem bayesiana usando linguagens de
 programação probabilística como Stan ou BUGS, mas vi esse pacote chamado [`greta`](https://goldingn.github.io/greta/get_started.html)
-que me chamou a atenção. 
+que me chamou a atenção.
 
 O `greta` é um pacote feito totalmente em R, mas que usa o TensorFlow como backend
 para fazer os seus cálculos. Isso tudo por intermédio do `reticulate`. A vantagem de
 usar o TensorFlow como *backend* é a escalabilidade: o `greta` pode ser rápido até
-mesmo em bases de dados grandes e também pode ser acelerada usando clusters de CPU's 
+mesmo em bases de dados grandes e também pode ser acelerada usando clusters de CPU's
 ou GPU's.
 
 O `greta` já está disponível no CRAN e pode ser instalado com:
@@ -62,7 +62,7 @@ m <- model(a, b, sd)
 draws <- mcmc(m, n_samples = 1000)
 ```
 
-Você pode fazer um gráfico para visualizar as estimativas dos parâmetros usando o 
+Você pode fazer um gráfico para visualizar as estimativas dos parâmetros usando o
 `bayesplot`:
 
 ```{r, eval = FALSE}
@@ -76,7 +76,7 @@ dessa amostra do MCMC.
 
 ```{r, eval = FALSE}
 apply(draws[[1]], 2, median)
-##         a         b        sd 
+##         a         b        sd
 ## 4.2805710 0.4219092 0.3697692
 ```
 
@@ -84,12 +84,12 @@ Esse resultado é muito similar ao que pode ser obtido por uma regressão linear
 
 ```{r, eval = FALSE}
 lm(y ~ x)
-## 
+##
 ## Call:
 ## lm(formula = y ~ x)
-## 
+##
 ## Coefficients:
-## (Intercept)            x  
+## (Intercept)            x
 ##      4.3066       0.4089
 ```
 
@@ -110,9 +110,9 @@ set.seed(11071995)
 X <- sample((N/100):(N*3), N)
 Y <- rnorm(N,X,4*sqrt(X))
 
-qplot(X,Y) + 
-  theme_bw(15) + 
-  geom_point(color = 'darkorange')  
+qplot(X,Y) +
+  theme_bw(15) +
+  geom_point(color = 'darkorange')
 
 X2 <- sqrt(X)
 dataset <- data.frame(Y,X,X2)
@@ -146,7 +146,7 @@ Agora as estimativas pontuais:
 
 ```{r, eval = FALSE}
 apply(draws[[1]], 2, median)
-##    alpha     beta 
+##    alpha     beta
 ## 4.077689 1.002791
 ```
 

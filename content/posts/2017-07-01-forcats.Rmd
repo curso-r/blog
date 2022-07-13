@@ -9,10 +9,10 @@ summary: "Neste post, falaremos sobre o forcats, um pacote recheado de excelente
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-Se você ainda não é adepta ou adepto do [tidyverse](http://tidyverse.org/), provavelmente precisa setar `stringsAsFactors = FALSE` em algum momento ou sempre trabalha com fatores em vez de *strings*. 
+Se você ainda não é adepta ou adepto do [tidyverse](http://tidyverse.org/), provavelmente precisa setar `stringsAsFactors = FALSE` em algum momento ou sempre trabalha com fatores em vez de *strings*.
 
 *Strings* são sequências de caracteres que podem ser acessados pela sua posição. Assim, podemos usar [expressões regulares](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) para modificar partes da sequência que correspondam a um determinado padrão. Fatores são inteiros com categorias (ou *labels*) formadas por *strings* guardadas apenas uma vez no atributo `levels`. Por facilitarem a ordenação de valores de texto, eles são importantes para a criação de variáveis *dummies* e a definição de contrastes em funções de modelagem estatística, como a `lm()`, e a organização de atributos gráficos, como no pacote `ggplot2`.
 
@@ -33,7 +33,7 @@ library(tidyverse)
 O `forcats` é um pacote bastante simples. Basicamente, ele é composto por funções de apenas dois tipos:
 
 - Funções que começam com `fct_`, que recebem uma lista de fatores e devolvem um fator.
-- Funções que começam com `lvl_`, que modificam os níveis de um fator. 
+- Funções que começam com `lvl_`, que modificam os níveis de um fator.
 
 Veja a seguir exemplos de como utilizar as principais funções.
 
@@ -49,8 +49,8 @@ fct_recode(fator, direcao = "Scorsese")
 
 # Alterando todas
 fct_recode(fator,
-           direcao = "Scorsese", 
-           direcao = "Patty Jenkins",    
+           direcao = "Scorsese",
+           direcao = "Patty Jenkins",
            elenco = "DiCaprio",
            elenco = "Gal Gadot")
 ```
@@ -60,7 +60,7 @@ fct_recode(fator,
 Junta categorias em grupos manualmente definidos.
 
 ```{r}
-# Objeto simulando uma amostra do personagem 
+# Objeto simulando uma amostra do personagem
 # de série favorito de 100 pessoas
 nomes <- c("Sheldon", "Leonard", "Penny", "Howard", "Rajesh",
            "Ted", "Marshall", "Robin", "Lily", "Barney",
@@ -69,10 +69,10 @@ nomes <- c("Sheldon", "Leonard", "Penny", "Howard", "Rajesh",
 per_fav<- sample(x = nomes, size = 100, replace = T) %>%
   as.factor
 
-head(per_fav)           
+head(per_fav)
 
 # Conta o número de observações em cada categoria
-fct_count(per_fav)        
+fct_count(per_fav)
 
 # Junta as categorias
 per_fav2 <- fct_collapse(per_fav,
@@ -91,16 +91,16 @@ fct_count(per_fav2)
 Ordena as categorias de um fator segundo uma função. No exemplo abaixo, ordenamos os fatores da variável `carb` (número de carburadores) segundo a mediana da variável `mpg` (milhas por galão de combustível).
 
 ```{r}
-mtcars %>% 
+mtcars %>%
   ggplot(aes(x = as.factor(carb), y = mpg)) +
   geom_boxplot()
-mtcars %>% 
-  mutate(carb = fct_reorder(.f = as.factor(carb), 
+mtcars %>%
+  mutate(carb = fct_reorder(.f = as.factor(carb),
                             .x = mpg,
-                            .fun = median)) %>% 
+                            .fun = median)) %>%
   ggplot(aes(x = carb, y = mpg)) +
   geom_boxplot()
-  
+
 ```
 
 
@@ -114,20 +114,20 @@ fct_count(letras)
 
 # Por default, a categoria "Other" sempre será menor
 # que as outras categorias.
-letras %>%                  
-  fct_lump(other_level = "Outros") %>%       
+letras %>%
+  fct_lump(other_level = "Outros") %>%
   fct_count
 
 # Espeficicando o argumento "n = 4", preservamos os
 # 4 valores mais comuns
-letras %>% 
-  fct_lump(n = 4, other_level = "Outros") %>% 
+letras %>%
+  fct_lump(n = 4, other_level = "Outros") %>%
   fct_count
 
 # Espeficicando o argumento "n = -4", preservamos
 # apenas os 4 valores que menos aparecem
-letras %>% 
-  fct_lump(n = -4, other_level = "Principais") %>% 
+letras %>%
+  fct_lump(n = -4, other_level = "Principais") %>%
   fct_count
 ```
 

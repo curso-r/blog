@@ -11,22 +11,22 @@ alternativa: ""
 ---
 
 ```{r echo=FALSE, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
 ```
 
 
 ```{r eval=FALSE, echo=FALSE}
 library(tidyverse)
 library(magick)
-im1 <- image_read("img/Music.jpg") %>% 
+im1 <- image_read("img/Music.jpg") %>%
   image_scale("280x280")
-im2 <- image_read("img/Rlogo.png") %>% 
-  image_scale("300x300") %>% 
+im2 <- image_read("img/Rlogo.png") %>%
+  image_scale("300x300") %>%
   image_background("white")
-image_join(im1, im2) %>% 
-  image_append() %>% 
+image_join(im1, im2) %>%
+  image_append() %>%
   image_border('white', 'x75') %>%
-  image_scale("400x297") %>% 
+  image_scale("400x297") %>%
   image_write('../../static/images/posts/banner/music01.jpg')
 ```
 
@@ -121,7 +121,7 @@ note
 ```
 
 ```{r note, fig.width=2, fig.height=1.5, message=FALSE, warning=FALSE, eval = FALSE}
-note %>% 
+note %>%
   plot()
 ```
 
@@ -132,14 +132,14 @@ note %>%
 ### Corais do Bach
 
 ```{r message=FALSE}
-get_composer("bach") %>% 
+get_composer("bach") %>%
   head()
 ```
 
 Vamos pegar uma delas e guardar numa variável
 
 ```{r}
-bach_music <- get_composer("bach")[61] %>% 
+bach_music <- get_composer("bach")[61] %>%
   read_music()
 ```
 
@@ -148,7 +148,7 @@ bach_music <- get_composer("bach")[61] %>%
 Basta rodar `plot()`!!
 
 ```{r bach, fig.width=6, fig.height=5, eval = FALSE}
-bach_music %>% 
+bach_music %>%
   plot()
 ```
 

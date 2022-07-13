@@ -7,8 +7,6 @@ author: ["Athos"]
 image: "images/posts/banner/lolla-spotify_s.jpeg"
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>No dia em que fui ao Lollapalooza eu descobri o <a href="https://github.com/tiagomendesdantas/Rspotify">Rspotify</a>, um wraper da API do Spotify e daí me veio a ideia de juntar infos dos dois assuntos.</p>
@@ -49,18 +47,18 @@ library(tidyverse)</code></pre>
 <pre class="r"><code># programacao do site do lollapalooza 2017 ----------------------
 
 lolla2017_programacao &lt;- &quot;https://www.lollapaloozabr.com/lineup-horarios/&quot; %&gt;%
-  GET() %&gt;% 
+  GET() %&gt;%
   read_html() %&gt;%
   html_table() %&gt;%
   set_names(c(&quot;sabado&quot;, &quot;domingo&quot;)) %&gt;%
-  at_depth(2, ~ .x %&gt;% 
-             stri_replace_all_regex(&quot; {2,}&quot;, &quot;&quot;) %&gt;% 
-             stri_replace_all_regex(&quot;[\\n]{1}&quot;, &quot;,&quot;) %&gt;% 
-             stri_replace_all_regex(&quot;[,]{2,}&quot;, &quot;\\\n&quot;) %&gt;% 
-             read.csv(text = ., header = FALSE, 
+  at_depth(2, ~ .x %&gt;%
+             stri_replace_all_regex(&quot; {2,}&quot;, &quot;&quot;) %&gt;%
+             stri_replace_all_regex(&quot;[\\n]{1}&quot;, &quot;,&quot;) %&gt;%
+             stri_replace_all_regex(&quot;[,]{2,}&quot;, &quot;\\\n&quot;) %&gt;%
+             read.csv(text = ., header = FALSE,
                       col.names = c(&quot;artist&quot;, &quot;hora&quot;))) %&gt;%
-  map(~ .x[-1] %&gt;% 
-        data_frame(palco = names(.), programacao_palco = .) %&gt;% 
+  map(~ .x[-1] %&gt;%
+        data_frame(palco = names(.), programacao_palco = .) %&gt;%
         unnest(programacao_palco)) %&gt;%
   data_frame(dia = names(.), programacao = .) %&gt;%
   unnest(programacao) %&gt;%
@@ -73,6 +71,13 @@ lolla2017_programacao &lt;- &quot;https://www.lollapaloozabr.com/lineup-horarios
          dia = fct_relevel(dia, c(&quot;sabado&quot;, &quot;domingo&quot;)))</code></pre>
 <p><strong>Resultado</strong></p>
 <table>
+<colgroup>
+<col width="9%" />
+<col width="14%" />
+<col width="23%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">dia</th>
@@ -160,9 +165,9 @@ lolla2017_programacao &lt;- &quot;https://www.lollapaloozabr.com/lineup-horarios
 
 possibly_searchArtist &lt;- possibly(searchArtist, NA_character_)
 
-artistas_fora_da_playlist &lt;- lolla2017_programacao %&gt;% 
-  filter(!artist %in% lolla2017_playlist$artist) %$% 
-  artist %&gt;% 
+artistas_fora_da_playlist &lt;- lolla2017_programacao %&gt;%
+  filter(!artist %in% lolla2017_playlist$artist) %$%
+  artist %&gt;%
   data_frame(artist = .) %&gt;%
   mutate(search_artist = map(artist, ~ .x %&gt;% possibly_searchArtist),
          artist_info = map2(search_artist, artist, ~ {
@@ -174,9 +179,16 @@ artistas_fora_da_playlist &lt;- lolla2017_programacao %&gt;%
          }})) %&gt;%
   select(-search_artist) %&gt;%
   unnest(artist_info) %&gt;%
-  select(artist, id, name, popularity, followers) </code></pre>
+  select(artist, id, name, popularity, followers)</code></pre>
 <p><strong>Resultado</strong></p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="21%" />
+<col width="30%" />
+<col width="21%" />
+<col width="14%" />
+<col width="13%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">artist</th>
@@ -232,7 +244,7 @@ artistas_fora_da_playlist &lt;- lolla2017_programacao %&gt;%
                        lolla2017_playlist %&gt;% bind_rows(artistas_fora_da_playlist),
                        by = &quot;artist&quot;) %&gt;%
   select(-id, -name) %&gt;%
-  dplyr::filter(followers %&gt;% is.na %&gt;% not) </code></pre>
+  dplyr::filter(followers %&gt;% is.na %&gt;% not)</code></pre>
 <p><strong>Base final</strong></p>
 <table style="width:100%;">
 <colgroup>
@@ -348,7 +360,8 @@ artistas_fora_da_playlist &lt;- lolla2017_programacao %&gt;%
   summarise(artist = first(artist),
             n = n(),
             mean_popularity = mean(popularity))</code></pre>
-<pre><code>## `summarise()` regrouping output by &#39;dia&#39;, &#39;hora&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;dia&#39;, &#39;hora&#39;. You can override using the
+## `.groups` argument.</code></pre>
 <pre class="r"><code>lolla2017_grafico %&gt;%
   ggplot(aes(x = ymd_hm(format(hora, &quot;2017-03-26 %H%M&quot;)), y = mean_popularity, colour = palco)) +
   geom_line() +

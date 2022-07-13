@@ -9,7 +9,7 @@ summary: "O keras é um novo pacote do R feito para ajustar modelos de redes neu
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 
@@ -34,7 +34,7 @@ Authors@R: c(
   person("Yuan", "Tang", role = c("ctb", "cph")),
   person("Daniel", "Falbel", role = c("ctb", "cph"))
   )
-Description: Interface to 'Keras', a high-level neural networks API which 
+Description: Interface to 'Keras', a high-level neural networks API which
   runs on top of TensorFlow. 'Keras' was developed with a focus on enabling
   fast experimentation, supports both convolutional networks and recurrent
   networks (as well as combinations of the two), and seamlessly on both CPUs

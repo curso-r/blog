@@ -26,7 +26,18 @@ km &lt;- survfit(Surv(time, status) ~ sex, data = lung)</code></pre>
 <pre class="r"><code>d_km &lt;- tidy(km)
 
 knitr::kable(head(d_km))</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="10%" />
+<col width="11%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="9%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="right">time</th>
@@ -111,11 +122,11 @@ knitr::kable(head(d_km))</code></pre>
 </table>
 <p>O gráfico da Figura <a href="#fig:ruim">1</a> usa a função <code>geom_ribbon()</code> para gerar os intervalos de confiança. Essa função liga os pontos da faixa diretamente, o que é inadequado do ponto de vista estatístico.</p>
 <pre class="r"><code>ggplot(d_km, aes(x = time, y = estimate, colour = strata)) +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = strata), 
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = strata),
               alpha = .1, size = .1) +
   geom_step() +
   theme_bw(16)</code></pre>
-<div class="figure"><span id="fig:ruim"></span>
+<div class="figure"><span style="display:block;" id="fig:ruim"></span>
 <img src="/posts/2017-02-18-ggalt_files/figure-html/ruim-1.png" alt="Intervalos de confiança usando apenas `ggplot2` e `geom_ribbon()`." width="672" />
 <p class="caption">
 Figura 1: Intervalos de confiança usando apenas <code>ggplot2</code> e <code>geom_ribbon()</code>.
@@ -123,11 +134,11 @@ Figura 1: Intervalos de confiança usando apenas <code>ggplot2</code> e <code>ge
 </div>
 <p>Na Figura <a href="#fig:bom">2</a>, adicionamos o parâmetro <code>stat = "stepribbon"</code>, que faz com que o <code>ggplot</code> utilize a função <code>stat_stepribbon()</code> do <code>ggalt</code> para o cálculo da faixa. Isso faz com que os intervalos tenham comportamento de escada, como queríamos.</p>
 <pre class="r"><code>ggplot(d_km, aes(x = time, y = estimate, colour = strata)) +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = strata), 
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = strata),
               stat = &#39;stepribbon&#39;, alpha = .1, size = .1) +
   geom_step() +
   theme_bw(16)</code></pre>
-<div class="figure"><span id="fig:bom"></span>
+<div class="figure"><span style="display:block;" id="fig:bom"></span>
 <img src="/posts/2017-02-18-ggalt_files/figure-html/bom-1.png" alt="Intervalos de confiança usando `stat = 'stepribbon'`." width="672" />
 <p class="caption">
 Figura 2: Intervalos de confiança usando <code>stat = 'stepribbon'</code>.

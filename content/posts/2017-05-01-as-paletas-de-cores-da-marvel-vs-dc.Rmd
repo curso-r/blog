@@ -9,7 +9,7 @@ summary: "A cor é uma diferença notável entre os filmes da Marvel e da DC. En
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, eval = FALSE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
 ```
 
 A cor é uma diferença notável entre os filmes da Marvel e da DC. Enquanto a Disney/Marvel Studios costuma lançar filmes com tons mais claros e alegres, a Warner tem optado por cenários escuros, com um aspecto mais sombrios. Essas escolhas são um reflexo do clima das histórias de cada universo: aventuras engraçaralhas com um drama superficial vs seja lá o que passa na cabeça do [Zack Snyder](http://retalhoclub.com.br/wp-content/uploads/2017/03/03.jpg).
@@ -47,9 +47,9 @@ Como vamos trabalhar com mais de uma imagem, eu criei a função `ler_imagem()` 
 
 ```{r}
 ler_imagem <- function(caminho) {
-  img <- readJPEG(caminho) %>% 
+  img <- readJPEG(caminho) %>%
     apply(3, as.numeric)
-  
+
 }
 ```
 
@@ -64,16 +64,16 @@ Abaixo estão as funções `cria_paleta()` e `exibir()` do post do Dani. A únic
 
 ```{r}
 criar_paleta <- function(img_matrix, num_cores){
-  
+
   km <- kmeans(img_matrix, centers = num_cores)
-  
+
   img_df <- tibble(
-    r = img_matrix[,1], 
-    g = img_matrix[,2], 
+    r = img_matrix[,1],
+    g = img_matrix[,2],
     b = img_matrix[,3],
     cluster = km$cluster
   )
-  
+
   centroides <- img_df %>%
     group_by(cluster) %>%
     summarise_all(mean)
@@ -88,7 +88,7 @@ exibir <- function(x) {
   n <- length(x)
   old <- par(mar = c(0.5, 0.5, 0.5, 0.5))
   on.exit(par(old))
-  
+
   image(1:n, 1, as.matrix(1:n), col = x,
         ylab = "", xaxt = "n", yaxt = "n", bty = "n")
 }

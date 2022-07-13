@@ -8,18 +8,18 @@ author: ["Daniel"]
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 No início de Janeiro desse ano ocorreu a primeira [rstudio::conf](https://www.rstudio.com/conference/),
-uma conferência sobre R promovida pela Rstudio. A conferência parece ter sido 
-bem animada! Teve até um passeio para o parque do Harry Potter na Florida, 
+uma conferência sobre R promovida pela Rstudio. A conferência parece ter sido
+bem animada! Teve até um passeio para o parque do Harry Potter na Florida,
 e surgiram memes como a imagem abaixo.
 
 ![](/images/posts/conteudo/all-things-r-and-rstudio/hadley-meme.jpg)
 
 Em termos de conteúdo, parece que foi
-sensacional. Para quem não teve oportunidade de ir, os videos da conferência 
+sensacional. Para quem não teve oportunidade de ir, os videos da conferência
 foram divulgados [aqui](https://www.rstudio.com/resources/webinars/#rstudioconf) como bem
 lembrado pelo [blog Análise Real](https://analisereal.com/2017/02/16/videos-da-rstudio-conference-disponiveis/).
 
@@ -35,30 +35,30 @@ pena ver [o vídeo](https://www.rstudio.com/resources/videos/all-things-r-and-rs
 
 -------------
 
-A sessão começa com 2 perguntas do moderador [Joseph Rickert](https://www.rstudio.com/rviews/author/josephrickert/). A primeira falando 
+A sessão começa com 2 perguntas do moderador [Joseph Rickert](https://www.rstudio.com/rviews/author/josephrickert/). A primeira falando
 sobre a conferência em que J.J., Joe e Hadley, é claro, estão muito satisfeitos.
-Gosto bastante da resposta do Hadley para essa pergunta: 
+Gosto bastante da resposta do Hadley para essa pergunta:
 
 > Nossa métrica de sucesso é o seu sucesso e é muito bom ver vocês usando as ferramentas
 > que desenvolvemos para resolver problemas importantes. Isso é fantástico.
 
-A segunda pergunta é filosófica, mas o objetivo é saber dos participantes o que 
+A segunda pergunta é filosófica, mas o objetivo é saber dos participantes o que
 os motiva nos trabalhos open-source. J.J. Allaire argumenta que desenvolver software
-*open-source* é muito gratificante porque estes são duráveis, não estão ligados ao 
+*open-source* é muito gratificante porque estes são duráveis, não estão ligados ao
 sucesso ou fracasso de nenhuma companhia. Ele acha que se você quer encontrar significado
-no seu trabalho e ver que seu software teve impacto na comunidade não tem nada melhor 
+no seu trabalho e ver que seu software teve impacto na comunidade não tem nada melhor
 do que desenvolver *open-source*.
 
 A partir daí as perguntas são abertas ao público (11 min do vídeo). A primeira pergunta é
 bem interessante: Quais são os limites do R? A resposta do J.J. Allaire é muito
-boa e está razoavelmente bem explicada [nessa entrevista](https://www.rstudio.com/rviews/2016/10/12/interview-with-j-j-allaire/) 
+boa e está razoavelmente bem explicada [nessa entrevista](https://www.rstudio.com/rviews/2016/10/12/interview-with-j-j-allaire/)
 que ele deu para o blog do RStudio em Outubro do ano passado. Basicamente, ele diz que
-se o R for encarado como uma linguagem de programação ele possui limites bem claros, 
+se o R for encarado como uma linguagem de programação ele possui limites bem claros,
 porque o R não foi desenvolvido para ser uma linguagem de programação e sim para ser
-uma interface de usuário. O R, quando ainda era S, foi desenvolvido para ser uma 
+uma interface de usuário. O R, quando ainda era S, foi desenvolvido para ser uma
 interface para códigos em Fortran. Como interface de usuário, segundo Allaire, o R pode
-ser interligado sempre à melhor ferramenta de computação que existir. Portanto, 
-se pensarmos no R como interface de usuário, não há limites. Ainda nesta pergunta, 
+ser interligado sempre à melhor ferramenta de computação que existir. Portanto,
+se pensarmos no R como interface de usuário, não há limites. Ainda nesta pergunta,
 Joe Cheng fez uma comparação interessante entre R, Python e Go.
 
 Uma outra pergunta interessante é sobre como convencer quem usa Excel a começar
@@ -73,5 +73,5 @@ o futuro do R quanto a tipagem (relacionando com TypeScript, etc.), ferramentas 
 para Shiny, inovação e empoderamento no R, R Users Group, paralelização, CRAN e Github e
 planos do RStudio para os próximos anos.
 
-Enfim, espero que este post tenha dado vontade de assistir o vídeo. Convido-os a 
+Enfim, espero que este post tenha dado vontade de assistir o vídeo. Convido-os a
 comentar as partes que vocês acharam mais interessantes!

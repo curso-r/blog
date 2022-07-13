@@ -10,33 +10,33 @@ alternativa: ""
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
 ```
 
-Há bastante tempo tenho vontade de fazer análises usando dados de multas de São Paulo. 
+Há bastante tempo tenho vontade de fazer análises usando dados de multas de São Paulo.
 O problema é: estes dados estão disponíveis? Na teoria, sim. Os dados de multas, como
 quantidade de multas por tipo de infração, dia e horário, e outros são divulgados no
 [portal da Mobilidade Segura](http://mobilidadesegura.prefeitura.sp.gov.br/QvAJAXZfc/opendoc.htm?document=Painel_Mobilidade_Segura.qvw&host=QVS%40c65v27i&anonymous=true) da Prefeitura de São Paulo. Na prática, é um pouco
-diferente. Apesar do site fornecer uma opção de exportação, a tabela 
+diferente. Apesar do site fornecer uma opção de exportação, a tabela
 exportada não é completa e muitas informações ficam faltando. Dá bastante trabalho
 para exportar todas as informações.
 
 Para não ter o trabalho de exportar tabela por tabela, fiz uma requisição para a
-prefeitura, por meio da Lei de Acesso à Informação, pedindo acesso direto ao banco de 
+prefeitura, por meio da Lei de Acesso à Informação, pedindo acesso direto ao banco de
 dados que fornece as informações para o Portal. A resposta foi a seguinte:
 
-> Prezado Senhor Daniel, Agradecemos o contato e informamos que o seu pedido foi indeferido com fundamento no art. 16, inciso III, do Decreto nº 53.623/2012, pois a base de dados contém informações pessoais que não podem ser disponibilizadas a terceiros. Os demais dados encontram-se inseridos no Painel Mobilidade Segura para consulta pelos interessados com a possibilidade de exportar arquivos. Informamos ainda que na época da sua solicitação, os painéis se encontravam atualizados, visto que a atualização mensal ocorre após os 70 dias da data da infração 
+> Prezado Senhor Daniel, Agradecemos o contato e informamos que o seu pedido foi indeferido com fundamento no art. 16, inciso III, do Decreto nº 53.623/2012, pois a base de dados contém informações pessoais que não podem ser disponibilizadas a terceiros. Os demais dados encontram-se inseridos no Painel Mobilidade Segura para consulta pelos interessados com a possibilidade de exportar arquivos. Informamos ainda que na época da sua solicitação, os painéis se encontravam atualizados, visto que a atualização mensal ocorre após os 70 dias da data da infração
 
-A resposta ao meu ver é totalmente contraditória: ao mesmo tempo que eu não posso 
+A resposta ao meu ver é totalmente contraditória: ao mesmo tempo que eu não posso
 receber os dados porque eles são confidenciais, eu posso obtê-los pelo site, que
 "oferece possibilidade de exportação de arquivos". (???)
 
-Antes mesmo de pedir acesso ao banco de dados tinha pensado em desenvolver um 
-webscrapper para fazer o download automático das planilhas, mas a tecnologia com 
+Antes mesmo de pedir acesso ao banco de dados tinha pensado em desenvolver um
+webscrapper para fazer o download automático das planilhas, mas a tecnologia com
 a qual o portal foi desenvolvido (QlikView) dificulta muito o desenvolviento.
 
 Sobrou fazer o download manual mesmo. Até agora fiz o download de todos as planilhas
-de 2014 a 2016 contendo infrações capturadas tanto eletrônica quanto manualmente 
+de 2014 a 2016 contendo infrações capturadas tanto eletrônica quanto manualmente
 de carros (ainda faltam ônibus, utilitários, etc.) por hora do dia. Isso quer dizer
 que já temos planilhas suficientes para criar uma tabela:
 
@@ -49,11 +49,11 @@ que já temos planilhas suficientes para criar uma tabela:
 * quantidade de multas
 
 Disponibilizei esses dados [neste repositório](https://github.com/dfalbel/spmultas)
-do Github. 
+do Github.
 
 Agora com as análises a seguir, espero criar curiosidade e interesse para que mais
-pessoas possam ajudar no download completo dos dados. Na página inicial do 
-repositório, adicionei, um mini-tutorial de como você pode ajudar fazendo os 
+pessoas possam ajudar no download completo dos dados. Na página inicial do
+repositório, adicionei, um mini-tutorial de como você pode ajudar fazendo os
 downloads.
 
 Vamos às análises.
@@ -95,7 +95,7 @@ carros_summary <- carros_eletronicas %>%
 ```
 
 ```{r}
-carros_summary %>% 
+carros_summary %>%
   ggplot(aes(data, qtd)) +
   geom_line()
 ```
@@ -119,7 +119,7 @@ O agrupamento final ficou assim:
 ```{r eval=FALSE}
 depara <- carros_eletronicas %>%
   group_by(enquadramento) %>%
-  summarise(qtd = sum(qtd)) %>% 
+  summarise(qtd = sum(qtd)) %>%
   arrange(qtd) %>%
   select(-qtd)
 ```
@@ -127,12 +127,12 @@ depara <- carros_eletronicas %>%
 
 ```{r, results='asis'}
 depara$agrup_enquadramento <- c(
-  "Conversão proibida", "Velocidade", "Faixa de Pedestres", 
+  "Conversão proibida", "Velocidade", "Faixa de Pedestres",
   "Faixa de ônibus", "Sinal vermelho", "Faixa de ônibus",
   "Conversão proibida", "Faixa de ônibus", "Velocidade",
   "Rodízio", "Velocidade")
 
-depara %>% 
+depara %>%
   knitr::kable()
 ```
 
@@ -145,14 +145,14 @@ carros_summary_enquad <- carros_eletronicas %>%
 ```
 
 ```{r}
-carros_summary_enquad %>% 
-  ungroup() %>% 
+carros_summary_enquad %>%
+  ungroup() %>%
   ggplot(aes(data, qtd, color = agrup_enquadramento)) +
   geom_line()
 ```
 
 No gráfico, vemos que em 2015, o tipo de multa que mais aumentou em quantidade foi
-velocidade e rodízio. 
+velocidade e rodízio.
 
 ## Curiosidades
 
@@ -162,7 +162,7 @@ Vamos agora matar algumas curiosidades.
 1. Quais são os horários com mais multas em SP?
 
 ```{r eval=FALSE}
-carros_summary_hora <- carros_eletronicas %>% 
+carros_summary_hora <- carros_eletronicas %>%
   group_by(hora) %>%
   summarise(qtd = sum(qtd))
 ```
@@ -179,7 +179,7 @@ da cidade está todo parado. Será que a distribuição fica diferente por tipo 
 Principalmente as de velocidade.
 
 ```{r eval=FALSE}
-carros_depara_enquad <- carros_eletronicas %>% 
+carros_depara_enquad <- carros_eletronicas %>%
   left_join(depara, by = "enquadramento") %>%
   group_by(hora, agrup_enquadramento) %>%
   summarise(qtd = sum(qtd))
@@ -192,7 +192,7 @@ carros_depara_enquad %>%
 ```
 
 Veja que interessante! O grande responsável pelo pico da hora do rush é o rodízio.
-(Essa é justamente a hora em que ele está valendo.) As multas de velocidade diminuem 
+(Essa é justamente a hora em que ele está valendo.) As multas de velocidade diminuem
 um pouco durante o trânsito e acontecem mais durante o dia e não durante a noite
 como poderíamos imaginar. Vemos também que as multas de farol vermelho acontecem mais
 durante a madrugada.
@@ -200,7 +200,7 @@ durante a madrugada.
 2. Qual é o dia da semana com mais multas?
 
 ```{r eval=FALSE}
-carros_depara_enquad_wday <- carros_eletronicas %>% 
+carros_depara_enquad_wday <- carros_eletronicas %>%
   left_join(depara, by = "enquadramento") %>%
   group_by(dia_da_semana = wday(data), agrup_enquadramento) %>%
   summarise(qtd = sum(qtd))
@@ -235,7 +235,7 @@ Agora vamos ver os motivos, em cada um desses lugares.
 top10_motivos <- top10_locais %>%
   left_join(carros_eletronicas, by = "local") %>%
   left_join(depara, by = "enquadramento") %>%
-  mutate(local = stringr::str_wrap(local, width = 20) %>% 
+  mutate(local = stringr::str_wrap(local, width = 20) %>%
            forcats::fct_reorder(-n)) %>%
   group_by(local, agrup_enquadramento) %>%
   summarise(qtd = sum(qtd))

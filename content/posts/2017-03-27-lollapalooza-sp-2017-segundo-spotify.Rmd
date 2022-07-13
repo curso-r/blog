@@ -8,7 +8,7 @@ image: "images/posts/banner/lolla-spotify_s.jpeg"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE, cache = TRUE)
+knitr::opts_chunk$set(eval = FALSE)
 ```
 
 No dia em que fui ao Lollapalooza eu descobri o [Rspotify](https://github.com/tiagomendesdantas/Rspotify), um wraper da API do Spotify e daí me veio a ideia de juntar infos dos dois assuntos.
@@ -25,7 +25,7 @@ Lollapalooza deste ano em São Paulo contou com 47 bandas distribuídas em quatr
 
 ### Pré-requisitos
 
-**Pacotes** 
+**Pacotes**
 ```{r, echo=FALSE, eval=TRUE}
 load("../../static/data/lollapalooza-sp-2017-segundo-spotify/lolla2017.RData")
 load("../../static/data/lollapalooza-sp-2017-segundo-spotify/lolla2017_playlist.RData")
@@ -56,7 +56,7 @@ O `Rspotify` é um pacote novo e que ainda não está no CRAN, mas já está fun
 
 **Conta no Spotify**
 
-Para utilizar a API do Spotify é necessário ter um cadastro no site deles, como se pode imaginar. 
+Para utilizar a API do Spotify é necessário ter um cadastro no site deles, como se pode imaginar.
 
 **App no Spotify**
 
@@ -74,18 +74,18 @@ Vamos ao código! Dica: a melhor maneira de aprender o que cada passo do código
 # programacao do site do lollapalooza 2017 ----------------------
 
 lolla2017_programacao <- "https://www.lollapaloozabr.com/lineup-horarios/" %>%
-  GET() %>% 
+  GET() %>%
   read_html() %>%
   html_table() %>%
   set_names(c("sabado", "domingo")) %>%
-  at_depth(2, ~ .x %>% 
-             stri_replace_all_regex(" {2,}", "") %>% 
-             stri_replace_all_regex("[\\n]{1}", ",") %>% 
-             stri_replace_all_regex("[,]{2,}", "\\\n") %>% 
-             read.csv(text = ., header = FALSE, 
+  at_depth(2, ~ .x %>%
+             stri_replace_all_regex(" {2,}", "") %>%
+             stri_replace_all_regex("[\\n]{1}", ",") %>%
+             stri_replace_all_regex("[,]{2,}", "\\\n") %>%
+             read.csv(text = ., header = FALSE,
                       col.names = c("artist", "hora"))) %>%
-  map(~ .x[-1] %>% 
-        data_frame(palco = names(.), programacao_palco = .) %>% 
+  map(~ .x[-1] %>%
+        data_frame(palco = names(.), programacao_palco = .) %>%
         unnest(programacao_palco)) %>%
   data_frame(dia = names(.), programacao = .) %>%
   unnest(programacao) %>%
@@ -135,9 +135,9 @@ Algumas bandas ficaram de fora da playlist e por isso fiz uma pesquisa por nome 
 
 possibly_searchArtist <- possibly(searchArtist, NA_character_)
 
-artistas_fora_da_playlist <- lolla2017_programacao %>% 
-  filter(!artist %in% lolla2017_playlist$artist) %$% 
-  artist %>% 
+artistas_fora_da_playlist <- lolla2017_programacao %>%
+  filter(!artist %in% lolla2017_playlist$artist) %$%
+  artist %>%
   data_frame(artist = .) %>%
   mutate(search_artist = map(artist, ~ .x %>% possibly_searchArtist),
          artist_info = map2(search_artist, artist, ~ {
@@ -149,7 +149,7 @@ artistas_fora_da_playlist <- lolla2017_programacao %>%
          }})) %>%
   select(-search_artist) %>%
   unnest(artist_info) %>%
-  select(artist, id, name, popularity, followers) 
+  select(artist, id, name, popularity, followers)
 ```
 
 **Resultado**
@@ -168,7 +168,7 @@ lolla2017 <- left_join(lolla2017_programacao,
                        lolla2017_playlist %>% bind_rows(artistas_fora_da_playlist),
                        by = "artist") %>%
   select(-id, -name) %>%
-  dplyr::filter(followers %>% is.na %>% not) 
+  dplyr::filter(followers %>% is.na %>% not)
 ```
 
 **Base final**

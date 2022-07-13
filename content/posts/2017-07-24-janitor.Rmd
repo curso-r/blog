@@ -9,7 +9,7 @@ summary: "Neste post, apresentaremos o pacote janitor, uma ótima alternativa na
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 [No primeiro post](http://curso-r.com/blog/2017/07/12/2017-07-13-bds_nomes_variaveis/) sobre arrumação de base de dados, a gente viu como usar as funções do `stringr` para arrumar o nome das variáveis. Seguindo a dica do [Julio](https://www.facebook.com/julio.trecenti), o quebrador de captchas, vamos falar do pacote `janitor`, que traz algumas funções para dar aquele trato nas BDs.
@@ -31,8 +31,8 @@ library(janitor)
 Assim como no post passado, utilizaremos a base com informações de pacientes com arritmia cardíaca, cujas variáveis selecionadas foram:
 
 ```{r, include=FALSE}
-dados <- readxl::read_excel("../../static/data/bds_nomes_variaveis/dados_nomes_variaveis.xlsx") %>% 
-  mutate(ID = 1:n()) %>% 
+dados <- readxl::read_excel("../../static/data/bds_nomes_variaveis/dados_nomes_variaveis.xlsx") %>%
+  mutate(ID = 1:n()) %>%
   select(ID, everything())
 ```
 
@@ -44,8 +44,8 @@ dados %>% names
 Os nomes têm letras maiúsculas, acentos, parênteses, pontos e barras, o que atrapalha na hora da programação. Para resolver esse problema, usamos a função `clean_names()`.
 
 ```{r}
-dados %>% 
-  clean_names() %>% 
+dados %>%
+  clean_names() %>%
   names
 ```
 
@@ -53,8 +53,8 @@ Veja que a função removeu os parênteses, pontos e barras e substituiu os espa
 
 ```{r}
 dados %>%
-  clean_names() %>% 
-  names %>% 
+  clean_names() %>%
+  names %>%
   abjutils::rm_accent()
 ```
 
@@ -62,8 +62,8 @@ E para substituir na base.
 
 ```{r}
 nomes <- dados %>%
-  clean_names() %>% 
-  names %>% 
+  clean_names() %>%
+  names %>%
   abjutils::rm_accent()
 
 names(dados) <- nomes
@@ -85,11 +85,11 @@ dados[3,]
 Essa foi a solução que eu pensei para resolver o problema utilizando a função `remove_empty()`.
 
 ```{r}
-dados %<>% 
-  as.data.frame %>% 
+dados %<>%
+  as.data.frame %>%
   `row.names<-`(dados$id) %>%
-  select(-id) %>% 
-  remove_empty(which = c("rows")) %>% 
+  select(-id) %>%
+  remove_empty(which = c("rows")) %>%
   mutate(id = row.names(.)) %>%
   select(id, everything())
 
@@ -128,11 +128,11 @@ Por fim, o `janitor` também tem funções equivalentes à `table()` para produz
 
 
 ```{r}
-mtcars %>% 
+mtcars %>%
   tabyl(cyl)
 
-mtcars %>% 
-  tabyl(cyl) %>% 
+mtcars %>%
+  tabyl(cyl) %>%
   adorn_totals
 ```
 
