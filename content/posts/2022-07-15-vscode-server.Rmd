@@ -1,0 +1,73 @@
+---
+title: "Acesso Remoto ao VS Code"
+date: "2022-07-15"
+tags: ["rstudio", "vscode"]
+categories: ["tutoriais"]
+image: "images/posts/banner/vscode-server.webp"
+author: ["Caio"]
+summary: "Como emular o RStudio Server usando o VS Code."
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = "#>")
+```
+
+Uma das melhores funcionalidades do RStudio é, sem sombra de dúvidas, o
+[RStudio Server](https://www.rstudio.com/products/rstudio/download-server/).
+Para ser mais preciso, ele é a melhor _versão_ do RStudio; esse produto é, na
+verdade, uma integração entre a IDE RStudio e um programa de acesso remoto.
+
+De forma bem resumida, ao instalar o RStudio Server em um servidor, você nunca
+mais precisa se preocupar com SSH. Todo o acesso ao servidor passa a ser através
+de uma interface web que é idêntica ao RStudio normal, o que significa que você
+pode programar usando os recursos do seu servidor, mas com a mesmíssima IDE que
+você já usa no dia-a-dia.
+
+Mesmo depois que eu passei a
+[usar o VS Code](https://blog.curso-r.com/posts/2021-11-06-r-no-vscode/) para
+programar R no meu computador, eu continuei usando o RStudio Server no servidor
+da empresa. Mês passado, entretanto, eu descobri uma funcionalidade incrível do
+VS Code que me permitiu abandonar de uma vez por todas o RStudio: o
+[VS Code Remote Development](https://code.visualstudio.com/docs/remote/remote-overview).
+
+Diferentemente do RStudio Server, o Remote Development não é instalado no
+servidor, mas sim no seu computador. Essa ferramenta usa SSH por trás dos panos
+para trazer todos os arquivos do servidor até o seu VS Code local e, quando você
+executa algum comando, ela faz o caminho reverso para rodar o código no
+servidor.
+
+Isso não é nada novo! Todo mundo que já usou SSH alguma vez na vida e precisou
+abrir um editor de texto remoto (`vim` ou `nano`), provavelmente não vai
+estranhar o modo como o Remote Development funciona. A única diferença é que o
+RD traz o código até o VS Code e não até o seu terminal.
+
+Há vantagens e desvantagens nessa abordagem: por um lado, o servidor não vai
+precisar gastar recursos renderizando a interface do RStudio Server, mas por
+outro, não tem um jeito muito simples de passar o seu acesso para outra pessoa
+(dado que não é só um site que você acessa de qualquer lugar). A melhor solução
+é sempre a que se encaixa melhor no seu fluxo de trabalho.
+
+O processo para configurar o RD é bastante simples e pode ser encontrado
+inteiramente na [página](https://code.visualstudio.com/docs/remote/ssh-tutorial)
+do Remote development via SSH. Em resumo, você precisa instalar a extensão,
+conectar com o seu servidor via SSH e configurar as suas extensões para o
+ambiente remoto.
+
+O passo mais complexo é o último, mas mesmo ele é até que bastante intuitivo. Na
+época eu tive dificuldade de entender que as minhas extensões não funcionavam no
+modo remoto porque eu precisava instalá-las de novo! Essencialmente, eu
+precisava configurar a extensão do R para funcionar com os programas do servidor
+e não mais os da minha máquina.
+
+E isso é tudo! Espero que este post tenha sido útil para apresentar uma
+funcionalidade muito legal da IDE que eu tenho usado todos os dias pelos últimos
+meses. Até a próxima :)
+
+P.S.: Além da solução que eu apresentei, há ainda duas outras: o
+[RStudio Workbench](https://www.rstudio.com/products/workbench/) (um produto
+pago da RStudio) passou a
+[permitir](https://support.rstudio.com/hc/en-us/articles/1500011478222-Using-VS-Code-Sessions-with-RStudio-Workbench)
+o uso da interface do VS Code e, recentemente, a Microsoft anunciou o
+[VS Code Server](https://code.visualstudio.com/blogs/2022/07/07/vscode-server),
+que eu ainda não tive oportunidade de testar.
