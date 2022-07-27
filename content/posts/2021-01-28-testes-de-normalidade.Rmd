@@ -3,7 +3,7 @@ title: "Testes de normalidade em R - Parte 1: Gráficos"
 date: "2021-01-28"
 tags: ["faxina", "modelagem"]
 categories: ["análises", "conceitos", "tutoriais"]
-image: "images/posts/banner/gaussian.png"
+image: "images/posts/banner/gaussian.webp"
 author: ["Fernando"]
 summary: "Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No primeiro texto, vamos te mostrar como construir um QQplot da sua variável contra a distribuição normal e como interpretar esse tipo de gráfico."
 draft: false

@@ -3,13 +3,13 @@ title: "WoE em R com tidywoe"
 date: "2017-07-06"
 tags: ["woe"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/tidywoe_hex2.png"
+image: "images/posts/banner/tidywoe_hex2.webp"
 author: ["Athos"]
 summary: "WoE (weight of evidence) é uma ferramenta bastante usada em aplicações de regressão logística, principalmente na área de score de crédito. O pacote tidywoe oferece uma interface simples para facilitar essa tarefa."
 ---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 WoE (weight of evidence) é uma ferramenta bastante usada em aplicações de regressão logística, principalmente na área de score de crédito. Simploriamente falando, ele transforma categorias em números que refletem a diferença entre elas pelo critério de separação do **Y = 1** e **Y = 0**.

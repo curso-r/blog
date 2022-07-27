@@ -3,7 +3,7 @@ title: "pesqEle: dados de pesquisas eleitorais"
 date: "2018-05-30"
 tags: ["app", "pacotes"]
 categories: ["análises"]
-image: "images/posts/banner/pesqEle.png"
+image: "images/posts/banner/pesqEle.webp"
 author: ["Julio"]
 summary: "Nesse ano eleitoral, a preocupação com as pesquisas eleitorais é ainda maior. É nossa obrigação como cidadãos e cidadãs acompanhar e monitorar as pesquisas eleitorais registradas, detectando e apontando o dedo para possíveis fraudes. Esse post busca ajudar..."
 retired: true

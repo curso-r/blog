@@ -3,7 +3,7 @@ title: "Como contar dias úteis no R"
 date: "2021-07-16"
 tags: ["tutoriais"]
 categories: ["pacotes"]
-image: "images/posts/banner/calendario.png"
+image: "images/posts/banner/calendario.webp"
 author: ["Fernando"]
 summary: "Contar os dias entre duas datas é uma coisa facilitada pelo R, mas hoje vamos explorar um pacote que ajuda a conatr apenas os dias úteis entre duas datas"
 draft: false

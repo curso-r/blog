@@ -3,13 +3,11 @@ title: "Tidy Data, Teste T Pareado e Modelos Mistos"
 date: "2017-10-27"
 tags: ["estatística", "tidy"]
 categories: ["conceitos"]
-image: "images/posts/banner/banner-tidy-data.png"
+image: "images/posts/banner/banner-tidy-data.webp"
 author: ["Daniel"]
 summary: "O que teste t-pareado, modelos mistos e tidy data podem ter a ver? Veja neste post como a estrutura dos seus dados pode afetar a forma que você fará a sua análise."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>O que teste t-pareado, modelos mistos e tidy data podem ter a ver? Veja neste post como a estrutura dos seus dados pode afetar a forma que você fará a sua análise.</p>
@@ -124,12 +122,12 @@ esse teste no R. Agora vamos arrumar o banco de dados.</p>
 
 data:  df$idh[df$ano == 2015] and df$idh[df$ano == 2014]
 t = 27.355, df = 49, p-value &lt; 2.2e-16
-alternative hypothesis: true difference in means is not equal to 0
+alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
  0.09000554 0.10427822
 sample estimates:
-mean of the differences 
-             0.09714188 </code></pre>
+mean difference 
+     0.09714188 </code></pre>
 <p>Mas aí estamos voltando para a forma desarrumada para fazer o teste.
 Outra forma de fazer é considerar essa comparação de médias como um problema de regressão em que a suposição independência das observações não é válida, uma vez que dado um pais, com certeza existe relação entre o idh de 2014 e de 2015.</p>
 <p>Vamos ajustar um modelo com efeitos aleatórios para esse problema e comparar os resultados.</p>
@@ -137,7 +135,7 @@ Outra forma de fazer é considerar essa comparação de médias como um problema
 model &lt;- lme(idh ~ as.factor(ano), random = ~1|Pais, data = df)
 summary(model)
 Linear mixed-effects model fit by REML
- Data: df 
+  Data: df 
         AIC       BIC   logLik
   -184.7518 -174.4119 96.37588
 
@@ -146,7 +144,7 @@ Random effects:
         (Intercept)   Residual
 StdDev:   0.3009017 0.01775584
 
-Fixed effects: idh ~ as.factor(ano) 
+Fixed effects:  idh ~ as.factor(ano) 
                        Value  Std.Error DF  t-value p-value
 (Intercept)        0.4840132 0.04262795 49 11.35436       0
 as.factor(ano)2015 0.0971419 0.00355117 49 27.35491       0
@@ -156,7 +154,7 @@ as.factor(ano)2015 -0.042
 
 Standardized Within-Group Residuals:
         Min          Q1         Med          Q3         Max 
--1.88877770 -0.44544521 -0.01239249  0.39934207  1.84475543 
+-1.88877771 -0.44544521 -0.01239249  0.39934207  1.84475543 
 
 Number of Observations: 100
 Number of Groups: 50 </code></pre>

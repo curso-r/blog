@@ -3,13 +3,11 @@ title: "As cores da Marvel vs DC"
 date: "2017-05-01"
 tags: ["imagens", "cinema", "kmeans"]
 categories: ["análises"]
-image: "images/posts/banner/marvel_vs_dc.jpeg"
+image: "images/posts/banner/marvel_vs_dc.webp"
 author: ["William"]
 summary: "A cor é uma diferença notável entre os filmes da Marvel e da DC. Enquanto a Disney/Marvel Studios costuma lançar filmes com tons mais claros e alegres, a Warner tem optado por cenários escuros, com um aspecto mais sombrios. Neste post, vamos utilizar o Kmeans para obter a paleta de cores mais utilizadas por cada estúdio."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>A cor é uma diferença notável entre os filmes da Marvel e da DC. Enquanto a Disney/Marvel Studios costuma lançar filmes com tons mais claros e alegres, a Warner tem optado por cenários escuros, com um aspecto mais sombrios. Essas escolhas são um reflexo do clima das histórias de cada universo: aventuras engraçaralhas com um drama superficial vs seja lá o que passa na cabeça do <a href="http://retalhoclub.com.br/wp-content/uploads/2017/03/03.jpg">Zack Snyder</a>.</p>
@@ -25,25 +23,25 @@ library(glue)</code></pre>
 arquivos_cw &lt;- glue(&quot;images/cw_{n}.jpg&quot;, n = 1:10)</code></pre>
 <p>Como vamos trabalhar com mais de uma imagem, eu criei a função <code>ler_imagem()</code> para ler os arquivos.</p>
 <pre class="r"><code>ler_imagem &lt;- function(caminho) {
-  img &lt;- readJPEG(caminho) %&gt;% 
+  img &lt;- readJPEG(caminho) %&gt;%
     apply(3, as.numeric)
-  
+
 }</code></pre>
 <p>Podemos então usar a função <code>map()</code> para aplicá-la a todos os 10 arquivos. A função <code>reduce(rbind)</code> transforma as 10 matrizes de pixels em uma matriz só, como se as imagens estivessem coladas uma embaixo da outra.</p>
 <pre class="r"><code>img_bvs &lt;- map(arquivos_bvs, ler_imagem) %&gt;% reduce(rbind)
 img_cw &lt;- map(arquivos_cw, ler_imagem) %&gt;% reduce(rbind)</code></pre>
 <p>Abaixo estão as funções <code>cria_paleta()</code> e <code>exibir()</code> do post do Dani. A única diferença aqui é que a função <code>cria_paleta()</code> já recebe a matriz representando a imagem.</p>
 <pre class="r"><code>criar_paleta &lt;- function(img_matrix, num_cores){
-  
+
   km &lt;- kmeans(img_matrix, centers = num_cores)
-  
+
   img_df &lt;- tibble(
-    r = img_matrix[,1], 
-    g = img_matrix[,2], 
+    r = img_matrix[,1],
+    g = img_matrix[,2],
     b = img_matrix[,3],
     cluster = km$cluster
   )
-  
+
   centroides &lt;- img_df %&gt;%
     group_by(cluster) %&gt;%
     summarise_all(mean)
@@ -58,7 +56,7 @@ exibir &lt;- function(x) {
   n &lt;- length(x)
   old &lt;- par(mar = c(0.5, 0.5, 0.5, 0.5))
   on.exit(par(old))
-  
+
   image(1:n, 1, as.matrix(1:n), col = x,
         ylab = &quot;&quot;, xaxt = &quot;n&quot;, yaxt = &quot;n&quot;, bty = &quot;n&quot;)
 }

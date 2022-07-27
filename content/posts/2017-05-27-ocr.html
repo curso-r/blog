@@ -3,7 +3,7 @@ title: "PDF e OCR"
 date: "2017-05-28T13:07:31+02:00"
 tags: ["pdf", "pacotes", "ocr"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/pdf-to-text.jpg"
+image: "images/posts/banner/pdf-to-text.webp"
 author: ["Julio"]
 draft: false
 summary: "Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com jurimetria e preciso extrair dados de diários oficiais, petições, sentenças, então já viu né... A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é digital ou digitalizado?"
@@ -46,17 +46,20 @@ txt &lt;- pdf_text(pdf)
 cat(str_trunc(txt[1], 500))
 ## TJ/SP - Comarca de São Paulo
 ## Movimento Judiciário
+## 
 ## Referência: Janeiro de 2011
 ## Foro: ADAMANTINA
 ## Unidade: 02 CUMULATIVA
 ## Planilha: CIVEL
+## 
+## 
 ## Dados da Unidade
-## 1. Total de feitos em andamento                                           2756
-## 2. Precatórias                                                               6
+## 1. Total de feitos em andamento                                            2756
+## 2. Precatórias                                                                6
 ## 3. Processos
-##    3.1 Processos cíveis                                                   2078
-##      3.1.1 De Conhecimento                                                1111
-##    3.1.2 De Execu...</code></pre>
+##   3.1 Processos cíveis                                                     2078
+##     3.1.1 De Conhecimento                                                  1111
+##   3.1.2 De...</code></pre>
 </div>
 <div id="pdf-para-html-ou-xml" class="section level3">
 <h3>PDF para HTML ou XML</h3>
@@ -65,14 +68,14 @@ cat(str_trunc(txt[1], 500))
 <pre class="r"><code>pdf_html &lt;- function(pdf) {
   infos &lt;- pdf_info(pdf)              # pega infos do pdf
   html &lt;- tempfile(fileext = &#39;.html&#39;) # cria arquivo temporário
-  
-  # monta comando a ser executado. 
+
+  # monta comando a ser executado.
   # não sei se funciona em Windows ;)
-  command &lt;- sprintf(&#39;pdftohtml -f 1 -l %s -q -i -s -noframes %s %s&#39;, 
+  command &lt;- sprintf(&#39;pdftohtml -f 1 -l %s -q -i -s -noframes %s %s&#39;,
                      infos$pages,
                      normalizePath(pdf),
                      html)
-  
+
   system(command)                     # roda comando e salva
   txt &lt;- readr::read_file(html)       # lê arquivo salvo
   file.remove(html)                   # remove arquivo temporário
@@ -81,17 +84,17 @@ cat(str_trunc(txt[1], 500))
 <p>Você pode brincar com o HTML usando o pacote <code>rvest</code>:</p>
 <pre class="r"><code>library(rvest)</code></pre>
 <pre class="r"><code>html &lt;- pdf_html(pdf)</code></pre>
-<pre class="r"><code>html %&gt;% 
-  read_html() %&gt;% 
-  html_nodes(&#39;div&#39;) %&gt;% 
+<pre class="r"><code>html %&gt;%
+  read_html() %&gt;%
+  html_nodes(&#39;div&#39;) %&gt;%
   head()
 ## {xml_nodeset (6)}
-## [1] &lt;div id=&quot;page1-div&quot; style=&quot;position:relative;width:1263px;height:892 ...
-## [2] &lt;div id=&quot;page2-div&quot; style=&quot;position:relative;width:1263px;height:892 ...
-## [3] &lt;div id=&quot;page3-div&quot; style=&quot;position:relative;width:1263px;height:892 ...
-## [4] &lt;div id=&quot;page4-div&quot; style=&quot;position:relative;width:1263px;height:892 ...
-## [5] &lt;div id=&quot;page5-div&quot; style=&quot;position:relative;width:1263px;height:892 ...
-## [6] &lt;div id=&quot;page6-div&quot; style=&quot;position:relative;width:1263px;height:892 ...</code></pre>
+## [1] &lt;div id=&quot;page1-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [2] &lt;div id=&quot;page2-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [3] &lt;div id=&quot;page3-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [4] &lt;div id=&quot;page4-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [5] &lt;div id=&quot;page5-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [6] &lt;div id=&quot;page6-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...</code></pre>
 </div>
 <div id="pdf-para-tabelas" class="section level3">
 <h3>PDF para tabelas</h3>
@@ -107,31 +110,41 @@ cat(str_trunc(txt[1], 500))
 tab &lt;- extract_tables(&#39;../../static/data/ocr/pdf_compras.pdf&#39;)</code></pre>
 <p>Essa função serve para arrumar os nomes zoados que vêm no arquivo:</p>
 <pre class="r"><code>arrumar_nomes &lt;- function(x) {
-  x %&gt;% 
-    tolower() %&gt;% 
-    str_trim() %&gt;% 
-    str_replace_all(&#39;[[:space:]]+&#39;, &#39;_&#39;) %&gt;% 
-    str_replace_all(&#39;%&#39;, &#39;p&#39;) %&gt;% 
-    str_replace_all(&#39;r\\$&#39;, &#39;&#39;) %&gt;% 
+  x %&gt;%
+    tolower() %&gt;%
+    str_trim() %&gt;%
+    str_replace_all(&#39;[[:space:]]+&#39;, &#39;_&#39;) %&gt;%
+    str_replace_all(&#39;%&#39;, &#39;p&#39;) %&gt;%
+    str_replace_all(&#39;r\\$&#39;, &#39;&#39;) %&gt;%
     abjutils::rm_accent()
 }</code></pre>
 <p>Agora veja a magia do <code>tidyverse</code> posta em prática:</p>
-<pre class="r"><code>tab_tidy &lt;- tab %&gt;% 
+<pre class="r"><code>tab_tidy &lt;- tab %&gt;%
   # transforma matrizes em tibbles
-  map(as_tibble) %&gt;% 
+  map(as_tibble) %&gt;%
   # empilha
-  bind_rows() %&gt;% 
+  bind_rows() %&gt;%
   # arruma nomes a partir da primeira linha
   set_names(arrumar_nomes(.[1,])) %&gt;%
   # tira primeira linha
-  slice(-1) %&gt;% 
+  slice(-1) %&gt;%
   # tira espaços extras
-  mutate_all(funs(str_replace_all(., &#39;[[:space:]]+&#39;, &#39; &#39;))) %&gt;% 
+  mutate_all(funs(str_replace_all(., &#39;[[:space:]]+&#39;, &#39; &#39;))) %&gt;%
   # tira espaços nas bordas
-  mutate_all(str_trim) </code></pre>
+  mutate_all(str_trim)</code></pre>
 <p>A Tabela <a href="#tab:tabela">1</a> mostra as primeiras cinco linhas do resultado.</p>
 <table>
-<caption><span id="tab:tabela">Table 1: </span>Base arrumada a partir de arquivo pdf, usando o pacote tabulizer.</caption>
+<caption><span id="tab:tabela">Tabela 1: </span>Base arrumada a partir de arquivo pdf, usando o pacote tabulizer.</caption>
+<colgroup>
+<col width="1%" />
+<col width="7%" />
+<col width="14%" />
+<col width="9%" />
+<col width="35%" />
+<col width="5%" />
+<col width="7%" />
+<col width="19%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">uf</th>

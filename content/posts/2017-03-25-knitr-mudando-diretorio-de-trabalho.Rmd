@@ -4,13 +4,13 @@ pubdate: "2017-03-25"
 date: "2017-03-25"
 tags: ["R Markdown", "knitr"]
 categories: ["tutoriais"]
-image: "images/posts/banner/cat-balls-of-wool.jpg"
+image: "images/posts/banner/cat-balls-of-wool.webp"
 author: ["William"]
 summary: "O pacote `knitr` é um mecanismo rápido, elegante e flexível para gerar relatórios dinâmicos no R. Ele trabalha lado a lado com o `rmarkdown` para transformar arquivos `.Rmd` em diversos formatos, como html, pdf e até mesmo word. Quando estamos trabalhando com arquivos Rmarkdown no Rstudio, mudar o diretório de trabalho pode levar a resultados inesperados se não for feito da maneira correta."
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 O pacote `knitr` é um mecanismo rápido, elegante e flexível para gerar relatórios dinâmicos no R. Ele trabalha lado a lado com o `rmarkdown` para transformar arquivos `.Rmd` em diversos formatos, como html, pdf e até mesmo word. Misturando *chunks* de código em R com texto puro, LaTeX e html, a tarefa de criar outputs para análises estatísticas no R ficou muito mais simples.
@@ -22,9 +22,9 @@ A primeira ideia que vem à cabeça é usar a função `setwd()` dentro de algum
 ```{r}
 setwd('../')
 
-# Warning message: you changed the working directory 
-# to C:/novo_diretorio (probably via setwd()). 
-# It will be restored to C:/diretorio_do_Rdm. 
+# Warning message: you changed the working directory
+# to C:/novo_diretorio (probably via setwd()).
+# It will be restored to C:/diretorio_do_Rdm.
 # See the Note section in ?knitr::knit.
 ```
 

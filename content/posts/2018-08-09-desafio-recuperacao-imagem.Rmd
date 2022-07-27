@@ -3,7 +3,7 @@ title: "Desafio de Dados - Recuperação de imagens"
 date: "2018-08-09"
 tags: ["app", "pacotes"]
 categories: ["divulgação"]
-image: "images/posts/banner/purple_wave.jpg"
+image: "images/posts/banner/purple_wave.webp"
 author: ["Athos","Daniel", "Bruna Wundervald"]
 summary: "Na segunda edição do Desafio de Dados vamos tentar recuperar a cor de uma imagem usando modelos de regressão e árvore de decisão."
 draft: false
@@ -25,15 +25,15 @@ ser representada por um banco de dados com 5 colunas (`x`, `y`,
 
 - Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da 
-[imagem purple_wave.jpg.](/images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg)
+[imagem purple_wave.jpg.](/images/posts/conteudo/desafio-recuperacao-img/purple_wave.webp)
 
-![](/images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg)
+![](/images/posts/conteudo/desafio-recuperacao-img/purple_wave.webp)
 
 - Verificar qual modelo entre regressão linear e árvores de decisão é o
 mais adequado para recuperar a o componente azul da 
-[imagem xadrez_colorido.jpg.](/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg)
+[imagem xadrez_colorido.jpg.](/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.webp)
 
-![](/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.jpg)
+![](/images/posts/conteudo/desafio-recuperacao-img/xadrez_colorido.webp)
 
 # Como começar?
 
@@ -44,7 +44,7 @@ imagens no R e transforme para data.frame:
 library(tidyverse)
 library(jpeg)
 # carrega uma imagem jpeg no R
-download.file("http://curso-r.comimages/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg", 
+download.file("http://curso-r.comimages/posts/conteudo/desafio-recuperacao-img/purple_wave.webp", 
               destfile = "purple_wave.jpg")
 
 img <- readJPEG("purple_wave.jpg")
@@ -71,7 +71,7 @@ library(jpeg)
 library(tidyverse)
 # carrega uma imagem jpeg no R
 
-img <- readJPEG("../../static/images/posts/conteudo/desafio-recuperacao-img/purple_wave.jpg")
+img <- readJPEG("../../static/images/posts/conteudo/desafio-recuperacao-img/purple_wave.webp")
 
 # transforma o array da imagem em data.frame com infos de posicao (x,y)
 # e cor (r,g,b) dimensões da imagem

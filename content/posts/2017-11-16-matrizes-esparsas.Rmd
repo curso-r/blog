@@ -3,13 +3,13 @@ title: "Matrizes Esparsas no R"
 date: "2017-11-16"
 tags: ["estatística"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/banner-sparse-matrix.jpg"
+image: "images/posts/banner/banner-sparse-matrix.webp"
 author: ["Daniel"]
 summary: "Matrizes esparsas são matrizes em que a maior parte dos elementos é igual a zero. Existem maneiras muito eficientes de lidar com esse tipo de matrizes no R e é disso que vamos falar neste post."
 ---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 
@@ -31,7 +31,7 @@ x <- matrix(sample(c(0,1), size = nrow*ncol, replace = TRUE,prob = c(0.99, 0.1))
 ```
 
 Se você tiver um computador com bastante RAM, talvez consiga rodar isso, mas provavelmente você
-terá um erro do tipo `Error: cannot allocate vector of size 74.5 Gb`. 
+terá um erro do tipo `Error: cannot allocate vector of size 74.5 Gb`.
 
 De fato, essa matriz ocupa bastante memória:
 
@@ -40,8 +40,8 @@ pryr::object_size(x)
 #> 4 GB
 ```
 
-Será que existe uma forma mais eficiente de representar essa matriz na memória do computador? 
-A resposta é sim! E no R vamos usar o pacote `Matrix`. 
+Será que existe uma forma mais eficiente de representar essa matriz na memória do computador?
+A resposta é sim! E no R vamos usar o pacote `Matrix`.
 
 Existem diversas formas de transformar a matriz `x` em uma matriz esparsa, a forma mais simples é:
 
@@ -52,13 +52,13 @@ pryr::object_size(x_s)
 #> 550 MB
 ```
 
-Ou seja, a matriz esparsa ocupa quase 1/8 menos memória do que a matriz densa. A maioria dos métodos 
-para matrizes no R estão também implementados para matrizes esparsas. Isso quer dizer que você pode fazer 
+Ou seja, a matriz esparsa ocupa quase 1/8 menos memória do que a matriz densa. A maioria dos métodos
+para matrizes no R estão também implementados para matrizes esparsas. Isso quer dizer que você pode fazer
 `x*y`, `x+y`, `x/y`, `x%*%y`, `x[1,1]`, etc. como se fossem matrizes normais. Na prática o pacote `Matrix`
-representa as matrizes esparsas internamente de uma forma muito mais inteligente, sem gastar memória com os valores nulos. 
+representa as matrizes esparsas internamente de uma forma muito mais inteligente, sem gastar memória com os valores nulos.
 
-Uma outra grande vantagem é que muitos pacotes possuem implementações mais eficientes (tanto em tempo de execução quanto em memória utilizada) para matrizes esparsas, 
-por exemplo o [`glmnet`](https://cran.r-project.org/web/packages/glmnet/) muito usado para fazer regressão do 
+Uma outra grande vantagem é que muitos pacotes possuem implementações mais eficientes (tanto em tempo de execução quanto em memória utilizada) para matrizes esparsas,
+por exemplo o [`glmnet`](https://cran.r-project.org/web/packages/glmnet/) muito usado para fazer regressão do
 tipo LASSO. O [`recommenderlab`](https://github.com/mhahsler/recommenderlab) que implementa alguns
 algoritmos de recomendação também é inteiramente baseado em matrizes esparsas.
 O pacote [`text2vec`](http://text2vec.org/index.html) que implementa algoritmos como GloVe também usa muito esse tipo de matrizes.
@@ -84,7 +84,7 @@ library(Matrix)
 sparseMatrix(bd$cliente, bd$itens)
 ```
 
-Outra função importante é a `sparse.model.matrix`. Ela é equivalente à função `model.matrix` mas cria uma matriz de modelo esparsa o que pode ser útil quando você tem um fator que possui muitos níveis no seu modelo. A vignette 
+Outra função importante é a `sparse.model.matrix`. Ela é equivalente à função `model.matrix` mas cria uma matriz de modelo esparsa o que pode ser útil quando você tem um fator que possui muitos níveis no seu modelo. A vignette
 [*Sparse Model Matrices*](https://cran.r-project.org/web/packages/Matrix/vignettes/sparseModels.pdf) fala sobre isso.
 
 Também é possível programar em Rcpp usando matrizes esparsas usando o RcppArmadillo, veja [esse exemplo](http://gallery.rcpp.org/articles/armadillo-sparse-matrix/) para mais detalhes.

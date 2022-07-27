@@ -3,13 +3,13 @@ title: "Como fazer o R avisar pelo telegram que bitcoin tá barato"
 date: "2017-08-19"
 tags: ["telegram", "bitcoin"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/r_telegram_bitcoin.jpeg"
+image: "images/posts/banner/r_telegram_bitcoin.webp"
 author: ["Athos"]
 summary: "Uma brincadeira de fazer o R enviar uma mensagem ao seu celular via Telegram quando o preço da bitcoin subir ou cair muito!"
 ---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 
@@ -26,7 +26,7 @@ Herói do dia: [Luca Biglia](https://github.com/lbraglia), autor do pacote `tele
 Como mencionei, Vou construir um **Acompanhador de bitcoin** pra ilustrar e ao fim do post teremos feito o R mandar um telegram quando o preço da bitcoin atingir um dado patamar.
 
 ```{r, fig.align='center', echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/r-telegram-bitcoin/serie_bitcoin.png", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/r-telegram-bitcoin/serie_bitcoin.webp", error = FALSE)
 ```
 
 ## Ingredientes
@@ -55,7 +55,7 @@ Antes de mais nada, uma breve introdução às coisas que aparecerão por aqui:
 
 - [telegram](https://telegram.org/): é igual ao Whatsapp, mas melhorado.
 - [BotFather](https://telegram.me/botfather): um contato do seu celular (no telegram) que te ajuda a criar um bot do telegram.
-- [bitcoin](https://en.wikipedia.org/wiki/Bitcoin): moeda digital de sucesso. 
+- [bitcoin](https://en.wikipedia.org/wiki/Bitcoin): moeda digital de sucesso.
 - [BlinkTrade](https://blinktrade.com/docs/): dentre outras coisas, fornece API para valores da bitcoin em tempo real.
 
 ## Acompanhador de bitcoin
@@ -73,7 +73,7 @@ O README que tá no [github do pacote](https://github.com/lbraglia/telegram) é 
 3) Agora copie e cole o token que o BotFather te enviou no `.Renviron`. O meu bot tem o username `AthosDamianiBot`, então eu devo colocar o nome da variável assim:
 
 ```{r, fig.align='center', echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/r-telegram-bitcoin/Renvirom_1.png", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/r-telegram-bitcoin/Renvirom_1.webp", error = FALSE)
 ```
 
 Se você usar essa convenção de nome você poderá usar a função `bot_token()` pra pegar o seu token. Caso contrário vai ter que apelar para a `Sys.getenv()`.
@@ -92,7 +92,7 @@ bot <- TGBot$new(token = bot_token('AthosDamianiBot'))
 bot$getMe()
 ```
 
-2) Agora precisamos do `chat_id`. Para isso, no seu telegram, procure o seu bot como se fosse um contato (que nem você fez com o BotFather) e comece uma conversa com ele. 
+2) Agora precisamos do `chat_id`. Para isso, no seu telegram, procure o seu bot como se fosse um contato (que nem você fez com o BotFather) e comece uma conversa com ele.
 
 3) No R, chame o método `bot$getUpdates()` para pegar no R as mensagens que você enviou a ele e, finalmente, encontre o `chat_id` escondido no `msgs`.
 
@@ -120,10 +120,10 @@ Os preços da bitcoin são fornecidos pela API da [BlinkTrade](https://blinktrad
 library(jsonlite)
 library(tidyverse)
 
-safe_fromJSON <- safely(fromJSON, as.numeric(NA)) 
-nova_consulta_list <- safe_fromJSON("https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC") 
+safe_fromJSON <- safely(fromJSON, as.numeric(NA))
+nova_consulta_list <- safe_fromJSON("https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC")
 
-nova_consulta <- nova_consulta_list$result %>% 
+nova_consulta <- nova_consulta_list$result %>%
         as.tibble %>%
         mutate(timestamp = lubridate::now())
 
@@ -147,25 +147,25 @@ O esqueleto do acompanhador é composto por um loop infinito (`while(TRUE)`), um
 
 acompanhar_bitcoin <- function(frequencia = 30) {
   load("historico.RData")
-  
+
   # loop infinito
   while(TRUE) {
     # pega a cotação do bitcoin brasil (BTCBRL) da API do blinktrade
-    nova_consulta_list <- safe_fromJSON("https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC") 
-    
-    # verifica se a API retornou uma lista 
+    nova_consulta_list <- safe_fromJSON("https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC")
+
+    # verifica se a API retornou uma lista
     if("list" %in% class(nova_consulta_list$result)) {
-      nova_consulta <- nova_consulta_list$result %>% 
+      nova_consulta <- nova_consulta_list$result %>%
         as.tibble %>%
         mutate(timestamp = lubridate::now())
-      
-      
+
+
       # ---------------------
       #
       # espaço reservado para as regras!
       #
       # ---------------------
-      
+
       # guarda a consulta
       historico <- bind_rows(historico, nova_consulta)
       save(historico, file = "historico.RData")
@@ -175,7 +175,7 @@ acompanhar_bitcoin <- function(frequencia = 30) {
 }
 ```
 
-### Passo 7: Regras para mensagens de telegram 
+### Passo 7: Regras para mensagens de telegram
 
 Agora é a hora de decidir o que o bot deve nos avisar! Deixei dois exemplos simples abaixo usando o método `bot$sendMessage()`, que como o nome sugere faz o bot enviar mensagem pra gente. Agora, toda vez que o preço da bitcoin valer menos que R\$13.600 ou valer mais que R\$14.600 eu vou ficar sabendo na hora!
 

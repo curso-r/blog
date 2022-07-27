@@ -3,7 +3,7 @@ title: "Análise das emoções de Aécio Neves"
 date: "2017-04-15"
 tags: ["API"]
 categories: ["análises"]
-image: "images/posts/banner/aecio.jpg"
+image: "images/posts/banner/aecio.webp"
 author: ["Julio"]
 summary: "Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: 'Por quê ele sempre faz tanta cara de dor?'"
 type: "featured"
@@ -11,12 +11,12 @@ featuredImage: "images/featured-post/feat-aecio.jpg"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: 'Por que ele sempre faz tanta cara de dor?'
 
-Pensando nisso, decidi pegar algumas fotos famosas dele e aplicar um algoritmo de Inteligência Artificial para reconhecimento de emoções. Se minha hipótese estiver correta, provavelmente esse algoritmo retornaria emoções como "dor", "tristeza" ou "descontentamento". 
+Pensando nisso, decidi pegar algumas fotos famosas dele e aplicar um algoritmo de Inteligência Artificial para reconhecimento de emoções. Se minha hipótese estiver correta, provavelmente esse algoritmo retornaria emoções como "dor", "tristeza" ou "descontentamento".
 
 A API escolhida para essa tarefa foi a [Microsoft Emotions API](https://www.microsoft.com/cognitive-services/en-us/emotion-api). O motivo por trás da escolha não é nada especial: foi o primeiro resultado que apareceu no Google para mim!
 
@@ -55,7 +55,7 @@ pegar_emocoes <- function(u_img, key) {
   u_api <- 'https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize'
   result <- httr::POST(
     url = u_api,
-    httr::content_type('application/json'), 
+    httr::content_type('application/json'),
     httr::add_headers(.headers = c('Ocp-Apim-Subscription-Key' = key)),
     body = list(url = u_img),
     encode = 'json'
@@ -91,12 +91,12 @@ knitr::kable(d_emocoes)
 A Figura \@ref(fig:media) mostra a média de cada emoção nas seis fotos. Para minha surpresa, a emoção com maior proporção média foi "neutro", com peso de quase 50%. As emoções seguintes são "felicidade", "raiva" e "desdém". A emoção "tristeza", que achei que seria frequente por conta da cara de dor do Aécio, ficou com uma proporção média de apenas 5,5%.
 
 ```{r media, fig.width=9, fig.height=4, echo=FALSE, fig.align = 'center', fig.cap='Média de cada emoção nas seis fotos baixadas.'}
-d_plot_sum <- d_emocoes %>% 
-  gather(emotion, val, -id) %>% 
-  group_by(emotion) %>% 
-  summarise(prop = mean(val)) %>% 
+d_plot_sum <- d_emocoes %>%
+  gather(emotion, val, -id) %>%
+  group_by(emotion) %>%
+  summarise(prop = mean(val)) %>%
   mutate(emotion = fct_reorder(emotion, prop))
-p <- d_plot_sum %>% 
+p <- d_plot_sum %>%
   ggplot(aes(x = emotion, y = prop, fill = emotion)) +
   geom_col() +
   theme_bw(14) +
@@ -114,13 +114,13 @@ plotar_img <- function(d, i) {
   # img <- httr::content(httr::GET(u_imagens[i]))
   img <- jpeg::readJPEG(p_imagens[i])
   g <- grid::rasterGrob(img, interpolate = TRUE)
-  d_plot <- d %>% 
-    gather(emotion, val, -id) %>% 
-    filter(id == as.character(i)) %>% 
+  d_plot <- d %>%
+    gather(emotion, val, -id) %>%
+    filter(id == as.character(i)) %>%
     mutate(emotion = emotion %>%
-             as.factor() %>% 
+             as.factor() %>%
              lvls_reorder(c(4, 8, 3, 7, 2, 1, 5, 6)))
-  d_plot %>% 
+  d_plot %>%
     ggplot(aes(x = emotion, y = val, fill = emotion)) +
     geom_col() +
     scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
@@ -135,7 +135,7 @@ gridExtra::grid.arrange(grobs = plots, ncol = 2)
 ```
 
 ```{r grafinal, out.width="70%", echo=FALSE, fig.align="center", fig.cap='Emoções do Aécio em cada imagem.'}
-knitr::include_graphics("/images/posts/conteudo/aecio/aecgrafs.png", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/aecio/aecgrafs.webp", error = FALSE)
 ```
 
 ## Conclusão

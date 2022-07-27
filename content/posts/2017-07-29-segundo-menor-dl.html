@@ -3,7 +3,7 @@ title: "Regressão Logística em: a menor deep learning do mundo"
 date: "2017-07-29"
 tags: ["deep learning", "redes neurais", "regressão logística", "keras", "glm"]
 categories: ["conceitos"]
-image: "images/posts/banner/what_if_i_told_you.jpeg"
+image: "images/posts/banner/what_if_i_told_you.webp"
 author: ["Athos"]
 summary: "Deep learning é uma grande novidade, mas há muitos mitos em sua volta que acaba espantando pessoas que poderiam usufruir e contribuir para a comunidade de analista de dados. Esse post tem o intuito de abrir um pouquinho a caixa preta para quebrar algumas dessas fábulas."
 ---
@@ -79,9 +79,9 @@ Porém, <span class="math inline">\(x\)</span> não é linhar no logito de <code
 <p><strong>OBS 2:</strong> é claro que nesse caso bem simples de uma variável conseguiríamos inspecionar os dados para chegar em boas transformações de <span class="math inline">\(x\)</span> de tal forma que o ajuste da logística ficasse tão bom quanto o de uma rede neural, mas se acrescentássemos muitas outras variáveis aí a coisa complicaria!</p>
 <p>Em representação de redes neurais, as fórmulas acima ficam assim:</p>
 <p><strong>Resposta <code>y_1</code></strong></p>
-<p><img src="/images/posts/conteudo/segundo-menor-dl/y1.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/segundo-menor-dl/y1.webp" /><!-- --></p>
 <p><strong>Resposta <code>y_2</code></strong></p>
-<p><img src="/images/posts/conteudo/segundo-menor-dl/y2.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/segundo-menor-dl/y2.webp" /><!-- --></p>
 <p>O que era <strong>função de ligação</strong> no GLM, em redes neurais virou <strong>função de ativação</strong> (no final eu falo mais sobre vocabulários que mudaram).</p>
 </div>
 <div id="olhada-nos-dados" class="section level3">
@@ -332,7 +332,7 @@ Vale mais a pena trazer todos os praticantes de estatística e machine learning 
 <h3>N-ésimo menor deep learning</h3>
 <p>Vimos acima o menor e o segundo menor Deep Learnings (que de profundo não têm nada =P). Mas podemos ir o tão profundo quanto quisermos!
 A representação de redes neurais sai fácil:</p>
-<p><img src="/images/posts/conteudo/segundo-menor-dl/dl_inf.png" /><!-- --></p>
+<p><img src="/images/posts/conteudo/segundo-menor-dl/dl_inf.webp" /><!-- --></p>
 <p>Já a representação matemática fica esquisita:</p>
 <p><span class="math display">\[E[Y|x] = \frac{1}{1 + \exp{\left(\beta_{p-1} + \beta_p\frac{1}{\frac{\vdots}{1 + \exp{\left(\beta_{6} + \beta_{7}\frac{1}{1 + \exp{\left(\beta_4 + \beta_5\frac{1}{1 + \exp{\left(\beta_2 + \beta_3\frac{1}{1 + \exp{\left(\beta_0 + \beta_1x\right)}}\right)}}\right)}}\right)}}}\right)}}\]</span></p>
 </div>

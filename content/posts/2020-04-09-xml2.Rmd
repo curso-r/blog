@@ -3,16 +3,16 @@ title: "Abaixo ao rvest!"
 date: "2020-04-09"
 tags: ["xml2", "rvest"]
 categories: ["pacotes"]
-image: "images/posts/banner/xml2.jpeg"
+image: "images/posts/banner/xml2.webp"
 author: ["Caio"]
 summary: "O rvest já não é mais o melhor pacote para web scraping. Está na hora de voltar para o xml2!"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
 ```
 
-**Se você estiver interessado em web scraping, considere participar do nosso 
+**Se você estiver interessado em web scraping, considere participar do nosso
 [workshop](https://www.curso-r.com/cursos/web-scraping-2/) no dia 25/04/2020!
 Lá vou ensinar tudo sobre `httr`, `xml2` e muito mais.**
 

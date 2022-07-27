@@ -3,7 +3,7 @@ title: "Mínimos quadrados com restrições lineares"
 date: "2017-08-07"
 tags: ["conceitos", "regressão"]
 categories: ["conceitos"]
-image: "images/posts/banner/jackie_chan.jpg"
+image: "images/posts/banner/jackie_chan.webp"
 author: ["Fernando"]
 summary: "Às vezes a solução do seu problema está a um peteleco de uma regressão de mínimos quadrados. Neste post vamos implementar uma minimização de soma de quadrados quando os coeficientes da regressão são restritos linearmente."
 ---

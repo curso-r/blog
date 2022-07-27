@@ -3,7 +3,7 @@ title: "Tudo sobre o pacote {Rspotify}"
 date: "2022-06-28"
 tags: ["tutoriais", "spotify", "música"]
 categories: ["tutoriais"]
-image: "images/posts/banner/2022-06-28-rspotify.jpg"
+image: "images/posts/banner/2022-06-28-rspotify.webp"
 author: ["Tereza"]
 summary: "obtendo informações dos seus artistas e músicas favoritas do Spotify"
 draft: false
@@ -28,22 +28,22 @@ draft: false
 <p>(obs: estou assumindo que você possui uma conta no Spotify. Não precisa ser premium, então caso não possua ainda, é só criar uma)</p>
 <p>1 - Entre <a href="https://developer.spotify.com/dashboard/">nesse link</a></p>
 <p>Você será redirecionado para essa página:</p>
-<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify001.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify001.webp" style="display: block; margin: auto;" /></p>
 <p>2 - Clique em <strong>Log in</strong> e faça o login com a sua conta do Spotify</p>
 <p>3 - Agora, clique em <strong>Create an app</strong></p>
-<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify002.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify002.webp" style="display: block; margin: auto;" /></p>
 <p>4 - Dê um nome e uma descrição para o seu app, assinale a caixinha de Termos de Uso, e então, clique em <strong>Create</strong></p>
-<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify003.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify003.webp" style="display: block; margin: auto;" /></p>
 <p>5 - Depois de criar o app, você será redirecionado para essa tela. Clique em <strong>edit settings</strong></p>
-<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify004.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify004.webp" style="display: block; margin: auto;" /></p>
 <p>6 - Preencha o campo <strong>Redirect URIs</strong> com “<a href="http://localhost:1410/" class="uri">http://localhost:1410/</a>” (sem as aspas), e clique em <strong>Add</strong></p>
-<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify005.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify005.webp" style="display: block; margin: auto;" /></p>
 <p>A tela deve ficar assim:</p>
-<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify006.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify006.webp" style="display: block; margin: auto;" /></p>
 <p>7 - Agora, role até o final da página e clique em <strong>Save</strong></p>
-<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify007.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify007.webp" style="display: block; margin: auto;" /></p>
 <p>8 - Clique no botão <strong>Show client secret</strong></p>
-<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify008.png" style="display: block; margin: auto;" /></p>
+<p><img src="/images/posts/conteudo/2022-06-28-rspotify/rspotify008.webp" style="display: block; margin: auto;" /></p>
 <p>Veja que na tela estão o <strong>Client ID</strong> e o <strong>Client Secret</strong>. São esse dois tokens que usaremos para ter acesso às funções do <code>Rspotify</code>.</p>
 <p>Agora, com o R aberto e o pacote <code>Rspotify</code> carregado, rode o seguinte código, substituindo o segundo e terceito argumentos pelos tokens <strong>Client ID</strong> e <strong>Client Secret</strong>, respectivamente:</p>
 <pre class="r"><code>keys &lt;- spotifyOAuth(&quot;nome_qualquer_aqui&quot;,

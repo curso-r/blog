@@ -3,7 +3,7 @@ title: "Gráficos Miojo: mapas temáticos, the tidy way"
 date: "2019-02-04"
 categories: ["tutoriais"]
 tags: ["mapas"]
-image: "images/posts/banner/mapinha.png"
+image: "images/posts/banner/mapinha.webp"
 author: ["Julio"]
 summary: "Nesse post vamos fazer mapas temáticos do Brasil, usando princípios tidy."
 editor_options: 
@@ -33,7 +33,7 @@ get_brmap("City", geo.filter = list(State = 33)) %>%
   geom_sf(aes(fill = pop2017/1e6))
 ```
 
-![](/images/posts/conteudo/sf-miojo/mapa_rj.png)
+![](/images/posts/conteudo/sf-miojo/mapa_rj.webp)
 
 No caso, estamos fazendo um mapa do Rio de Janeiro (Unidade Federativa de código 33) e colorindo o mapa dos municípios com a população das cidades em 2017 (`pop2017`, dividida por um milhão). A cidade em azul claro é a capital.
 
@@ -134,7 +134,7 @@ uf_map %>%
   geom_sf(aes(fill = idh))
 ```
 
-![](/images/posts/conteudo/sf-miojo/mapa_uf.png)
+![](/images/posts/conteudo/sf-miojo/mapa_uf.webp)
 
 O gráfico mostra claramente o aspecto regional do IDH nos estados do Brasil. 
 
@@ -153,7 +153,7 @@ muni_map %>%
   geom_sf(aes(fill = idhm))
 ```
 
-![](/images/posts/conteudo/sf-miojo/mapa_muni_feio.png)
+![](/images/posts/conteudo/sf-miojo/mapa_muni_feio.webp)
 
 Podemos também quebrar pelas regiões com um simples `facet_wrap()`:
 
@@ -164,7 +164,7 @@ muni_map %>%
   facet_wrap(~Region)
 ```
 
-![](/images/posts/conteudo/sf-miojo/mapa_muni_feio_facet.png)
+![](/images/posts/conteudo/sf-miojo/mapa_muni_feio_facet.webp)
 
 Parece que estamos indo bem. Alguns problemas que podemos notar:
 
@@ -195,7 +195,7 @@ muni_map %>%
         axis.ticks = element_blank())
 ```
 
-![](/images/posts/conteudo/sf-miojo/mapa_muni_bonito.png)
+![](/images/posts/conteudo/sf-miojo/mapa_muni_bonito.webp)
 
 Outra coisa legal de fazer é demarcar os estados com outra largura da linha. Podemos fazer isso adicionando mais um `geom_sf()`:
 
@@ -218,7 +218,7 @@ muni_map %>%
 ```
 
 
-![](/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf.png)
+![](/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf.webp)
 
 No caso, usei a paleta de cores `viridis`. Eu gosto muito dessa paleta e uso sempre que possível :)
 
@@ -249,7 +249,7 @@ muni_map %>%
         axis.ticks = element_blank())
 ```
 
-![](/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png)
+![](/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.webp)
 
 Não sei vocês, mas para mim faz muito mais sentido olhar o gráfico categorizado do que o contínuo.
 
@@ -292,7 +292,7 @@ library(patchwork)
 reduce(mapas, magrittr::add)
 ```
 
-![](/images/posts/conteudo/sf-miojo/mapa_muni_bonito_cat_facet.png)
+![](/images/posts/conteudo/sf-miojo/mapa_muni_bonito_cat_facet.webp)
 
 Pronto! Temos nossos mapas lindos maravilhosos no *tidy way*!
 

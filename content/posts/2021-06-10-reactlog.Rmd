@@ -3,7 +3,7 @@ title: "Diagramas de reatividade no shiny (reactlog)"
 date: "2021-06-10"
 tags: ["shiny", "reatividade", "reactlog"]
 categories: ["tutoriais"]
-image: "images/posts/banner/reactlog.png"
+image: "images/posts/banner/reactlog.webp"
 author: ["William"]
 summary: "Aprenda a construir um diagrama do fluxo reatividade do seu Shiny app." 
 ---
@@ -43,13 +43,13 @@ Por fim, rode o seu app e utilize o comando `CTRL + F3` (no Mac, `command + F3`)
 
 
 ```{r, echo = FALSE, fig.cap="Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput.", fig.alt = "Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput."}
-knitr::include_graphics("/images/posts/conteudo/reactlog/app_hist_normal.png")
+knitr::include_graphics("/images/posts/conteudo/reactlog/app_hist_normal.webp")
 ```
 
 Veja agora o diagrama de reatividade associado a esse app. A forma dos 4 elementos mais a esquerda representa inputs ou valores reativos, a forma do elemento `plotObj` representa expressões reativas e a forma do elemento `output$hist` representa os outputs (ou observadores).
 
 ```{r, echo = FALSE, fig.cap="Diagrama de reatividade do app anterior.", fig.alt = "Diagrama de reatividade do app anterior criado pelo pacote reactlog."}
-knitr::include_graphics("/images/posts/conteudo/reactlog/reaclog_diagrama_completo.png")
+knitr::include_graphics("/images/posts/conteudo/reactlog/reaclog_diagrama_completo.webp")
 ```
 
 Parece muito mais complicado do que deveria, né? Acontece que além do input e output, o diagrama também apresenta elementos referentes ao tamanho da janela da pessoa que está utilizando o app. Esses elementos influenciam na imagem produzida para o gráfico dentro do HTML, que é redimensionada a depender do tamanho da tela. Por isso a existência do elemento intermediário `plotObj`, que guarda as instruções para gerar o gráfico criadas pelo código R. Assim, o código R no servidor não precisa ser rodado novamente para que a imagem do gráfico seja redimensionada.
@@ -57,7 +57,7 @@ Parece muito mais complicado do que deveria, né? Acontece que além do input e 
 Podemos filtrar o diagrama para mostrar apenas o fluxo relacionado aos inputs do aplicativo escrevendo `input` no campo de busca. Repare também que os comandos no canto superior esquerdo permitem visualizar o fluxo de reatividade das ações realizadas entre a inicialização do app e o momento em que criamos o diagrama (quando pressionamos CTRL + F3).
 
 ```{r, echo = FALSE, fig.cap="Diagrama de reatividade do app anterior.", fig.alt = "Diagrama de reatividade do app anterior criado pelo pacote reactlog."}
-knitr::include_graphics("/images/posts/conteudo/reactlog/reactlog_comandos.png")
+knitr::include_graphics("/images/posts/conteudo/reactlog/reactlog_comandos.webp")
 ```
 
 Em resumo, com um diagrama de reatividade em mãos, podemos:

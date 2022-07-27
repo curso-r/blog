@@ -3,7 +3,7 @@ title: "{tabulizer}: Tabela do PDF para data.frame em segundos"
 date: "2021-01-08"
 tags: ["faxina", "pdf", "tabulizer", "pdftools"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/tabulizer.png"
+image: "images/posts/banner/tabulizer.webp"
 author: ["Athos"]
 summary: "Como extrair uma tabela de um PDF facilmente com a função tabulizer::extract_tables()"
 ---
@@ -43,7 +43,7 @@ pdftools::pdf_convert(url_pdf, pages = 153, filenames = "pag153.png")
 
 ```{r}
 # mostra a imagem PNG.
-knitr::include_graphics("/images/posts/conteudo/tabulizer/pag153.png")
+knitr::include_graphics("/images/posts/conteudo/tabulizer/pag153.webp")
 ```
 
 ## Extração da tabela PDF -> R

@@ -3,13 +3,11 @@ title: "Unindo mapas: the tidy way"
 date: "2017-11-24"
 tags: ["sf", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/sf.png"
+image: "images/posts/banner/sf.webp"
 author: ["Julio"]
 summary: "Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. Dessa vez, o grande culpado foi o sf, um pacote ainda em estágio de desenvolvimento mas que já considero pacas..."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Eu precisava escrever esse post porque estou morrendo de tesão por essa linguagem maravilhosa. O R é incrível. O <a href="https://tidyverse.org"><code>tidyverse</code></a> é incrível. Estatística é incrível. Não me aguento!!</p>
@@ -39,7 +37,7 @@ summary: "Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. 
 <blockquote>
 <p>P.S.: Não se esqueça do ciclo da ciência de dados! Vou falar disso sem parar para explicar. Na dúvida, leia o <a href="http://r4ds.had.co.nz/" class="uri">http://r4ds.had.co.nz/</a></p>
 </blockquote>
-<p><img src="/images/posts/conteudo/union-sf/data-science.png" /></p>
+<p><img src="/images/posts/conteudo/union-sf/data-science.webp" /></p>
 <p><br/></p>
 <p>As partes de <code>import</code> e <code>tidy</code> desse projeto processo foram sofríveis. Precisei fazer vários web scrapers e diversos códigos para lidar com nomes zoados dos municípios de São Paulo, como Moji/Mogi, Estrela D’Oeste/Doeste, Brodowski/Brodosqui etc. Quem quiser pode dar uma olhada nos códigos do <a href="https://github.com/abjur/abjMaps">github da ABJ</a>.</p>
 </div>
@@ -82,12 +80,12 @@ dir.create(&quot;shp&quot;, showWarnings = FALSE)
 u_ibge &lt;- paste0(
   &quot;ftp://geoftp.ibge.gov.br/organizacao_do_territorio/&quot;,
   &quot;malhas_territoriais/malhas_municipais/&quot;,
-  &quot;municipio_2015/UFs/SP/sp_municipios.zip&quot;, 
+  &quot;municipio_2015/UFs/SP/sp_municipios.zip&quot;,
   collapse = &quot;&quot;)</code></pre>
 <p>Utilizamos o pacote <code>httr</code> para baixar o arquivo zipado.</p>
-<pre class="r"><code># Salva o arquivo em disco. httr::progress() 
+<pre class="r"><code># Salva o arquivo em disco. httr::progress()
 # serve para mostrar o andamento do download
-httr::GET(u_ibge, 
+httr::GET(u_ibge,
           httr::write_disk(&quot;shp/sp.zip&quot;),
           httr::progress())
 </code></pre>
@@ -96,11 +94,11 @@ httr::GET(u_ibge,
 unzip(&quot;shp/sp.zip&quot;, exdir = &quot;shp/&quot;)</code></pre>
 <p>No final, você terá esses arquivos na pasta:</p>
 <pre class="r"><code>dir(&quot;shp&quot;)
-# &quot;35MUE250GC_SIR.cpg&quot; 
-# &quot;35MUE250GC_SIR.dbf&quot; 
-# &quot;35MUE250GC_SIR.prj&quot; 
+# &quot;35MUE250GC_SIR.cpg&quot;
+# &quot;35MUE250GC_SIR.dbf&quot;
+# &quot;35MUE250GC_SIR.prj&quot;
 # &quot;35MUE250GC_SIR.shp&quot;
-# &quot;35MUE250GC_SIR.shx&quot; 
+# &quot;35MUE250GC_SIR.shx&quot;
 # &quot;sp.zip&quot;</code></pre>
 <p>Para ler esses arquivos estranhos num objeto do R, utilizamos a função <code>sf::st_read()</code>, simples assim:</p>
 <pre class="r"><code>library(tidyverse)
@@ -130,11 +128,11 @@ dplyr::glimpse(muni_comarcas_completo)
 # $ num_regiao        &lt;chr&gt; &quot;5ª RAJ&quot;, &quot;5ª RAJ&quot;, &quot;4ª RAJ&quot;, &quot;4ª RAJ&quot;, &quot;4ª RA...
 # $ regiao            &lt;chr&gt; &quot;Presidente Prudente&quot;, &quot;Presidente Prudente&quot;, ...</code></pre>
 <p>Para isso, vamos primeiro arrumar os nomes de <code>d_sf_municipio</code> e depois usar <code>dplyr::inner_join()</code>, assim:</p>
-<pre class="r"><code>d_sf_municipio &lt;- d_sf_municipio %&gt;% 
+<pre class="r"><code>d_sf_municipio &lt;- d_sf_municipio %&gt;%
   # deixa os nomes das colunas minusculos
-  janitor::clean_names() %&gt;% 
+  janitor::clean_names() %&gt;%
   # tira os acentos
-  dplyr::mutate(municipio = abjutils::rm_accent(nm_municip)) %&gt;% 
+  dplyr::mutate(municipio = abjutils::rm_accent(nm_municip)) %&gt;%
   # bases unidas jamais serão vencidas!
   dplyr::inner_join(muni_comarcas_completo, &quot;municipio&quot;)
 
@@ -155,15 +153,15 @@ dplyr::glimpse(d_sf_municipio)
 # $ geometry          &lt;simple_feature&gt; MULTIPOLYGON (((-51.8600105..., MUL...</code></pre>
 <p>Se você quiser fazer um gráfico feinho só pra saber o que está rolando, use <code>plot()</code>:</p>
 <pre class="r"><code>plot(d_sf_municipio[, c(&quot;num_regiao&quot;, &quot;geometry&quot;)])</code></pre>
-<p><img src="/images/posts/conteudo/union-sf/sf_blog01.png" /></p>
+<p><img src="/images/posts/conteudo/union-sf/sf_blog01.webp" /></p>
 </div>
 <div id="parte-2-agrupando-os-municípios" class="section level3">
 <h3>Parte 2: agrupando os municípios</h3>
 <p>Aqui é onde a mágica acontece! Para unir os polígonos do mapa, por incrível que pareça, utilizaremos o pacote <code>dplyr</code>. O autor do pacote <code>sf</code>, Edzer Pebesma, teve a incrível ideia de criar um método <code>S3</code> para objetos do tipo <code>sf</code> (como é nosso caso), já fazendo algumas operações para nós. Na prática, o pacote estende e reimplementa mais de 20 funções provenientes do <code>dplyr</code>. Veja <code>?sf::dplyr</code> para detalhes.</p>
 <p>No nosso caso, vamos usar <code>group_by()</code> (ou <code>sf::group_by.sf()</code>) e <code>summarise()</code> (ou<code>sf::summarise.sf()</code>):</p>
-<pre class="r"><code>d_sf_comarca &lt;- d_sf_municipio %&gt;% 
-  dplyr::group_by(comarca) %&gt;% 
-  dplyr::summarise() %&gt;% 
+<pre class="r"><code>d_sf_comarca &lt;- d_sf_municipio %&gt;%
+  dplyr::group_by(comarca) %&gt;%
+  dplyr::summarise() %&gt;%
   dplyr::ungroup()
 
 dplyr::glimpse(d_sf_comarca)
@@ -172,10 +170,10 @@ dplyr::glimpse(d_sf_comarca)
 # $ comarca   &lt;chr&gt; &quot;ADAMANTINA&quot;, &quot;AGUAI&quot;, &quot;AGUAS DE LINDOIA&quot;, &quot;AGUDOS&quot;, &quot;...
 # $ geometry  &lt;simple_feature&gt; MULTIPOLYGON (((-50.9930145..., MULTIPOLYGO...</code></pre>
 <p>Simples assim! Note que agora temos 319 objetos, que é exatamente o número de comarcas. Se quiser adicionar mais variáveis, basta incluí-las no <code>summarise()</code>:</p>
-<pre class="r"><code>d_sf_comarca &lt;- d_sf_municipio %&gt;% 
-  dplyr::group_by(comarca) %&gt;% 
+<pre class="r"><code>d_sf_comarca &lt;- d_sf_municipio %&gt;%
+  dplyr::group_by(comarca) %&gt;%
   # a entrancia identifica o quão grande/relevante é uma comarca
-  dplyr::summarise(entrancia = dplyr::first(entrancia)) %&gt;% 
+  dplyr::summarise(entrancia = dplyr::first(entrancia)) %&gt;%
   dplyr::ungroup()</code></pre>
 <p>Para criar <code>d_sf_circunscricao</code> e <code>d_sf_regiao</code> utilizamos o mesmo procedimento.</p>
 </div>
@@ -189,9 +187,9 @@ dplyr::glimpse(d_sf_comarca)
   d_sf_regiao)</code></pre>
 <p>E você quer desenhar mapas com esses títulos</p>
 <pre class="r"><code>titulos &lt;- c(
-  &quot;Municípios&quot;, 
-  &quot;Comarcas&quot;, 
-  &quot;Circunscrições judiciárias&quot;, 
+  &quot;Municípios&quot;,
+  &quot;Comarcas&quot;,
+  &quot;Circunscrições judiciárias&quot;,
   &quot;Regiões Admnistrativas&quot;)</code></pre>
 <p>Vamos usar o <code>purrr::map2()</code> para montar nossos gráficos em <code>ggplot2</code> e guardar numa lista. Internamente, utilizaremos o <code>geom_sf()</code>, uma extensão do <code>ggplot2</code> criada para tratar objetos do pacote <code>sf</code>. Um código minimalista seria</p>
 <pre class="r"><code>graficos &lt;- purrr::map2(mapas, titulos, ~{
@@ -203,7 +201,7 @@ dplyr::glimpse(d_sf_comarca)
 <p>Você pode usar a função <code>gridExtra::grid.arrange()</code> para juntar essa lista de gráficos em um gráfico só, rodando</p>
 <pre class="r"><code>gridExtra::grid.arrange(grobs = graficos)</code></pre>
 <p>O resultado final é o gráfico abaixo.</p>
-<p><img src="/images/posts/conteudo/union-sf/sf_blog02.png" /></p>
+<p><img src="/images/posts/conteudo/union-sf/sf_blog02.webp" /></p>
 <p>Coisa mais linda!</p>
 </div>
 </div>

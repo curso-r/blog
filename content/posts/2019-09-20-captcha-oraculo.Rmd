@@ -3,7 +3,7 @@ title: "Quebrando Captchas - Parte VII: Oráculos"
 date: "2019-11-20"
 categories: ["tutoriais"]
 tags: ["captcha"]
-image: "images/posts/banner/captcha_07.png"
+image: "images/posts/banner/captcha_07.webp"
 author: ["Julio"]
 summary: "Nesse post não vou falar da companhia Oracle, muito menos de Pythia, a oráculo de Delphi. Aqui vou mostrar uma parte pouco discutida dos captchas, que é a possibilidade de usar oráculos para aprender."
 editor_options: 
@@ -11,7 +11,7 @@ editor_options:
 ---
 
 ```{r, echo=FALSE, eval=FALSE, include=FALSE}
-image_read('../../static/images/posts/banner/captcha_01.png') %>%
+image_read('../../static/images/posts/banner/captcha_01.webp') %>%
   image_crop("420x100+0+101") %>%
   image_border(color = 'white', "0x108") %>%
   image_noise() %>%
@@ -20,7 +20,7 @@ image_read('../../static/images/posts/banner/captcha_01.png') %>%
                  location = '+300+10', color = 'red') %>%
   image_annotate('Oráculos', size = 40, font = 'ubuntu',
                  color = 'black', location = '+10+240') %>%
-  image_write("../../static/images/posts/banner/captcha_07.png")
+  image_write("../../static/images/posts/banner/captcha_07.webp")
 ```
 
 
@@ -99,7 +99,7 @@ result <- oracle_mnist(type = 0)
 ```
 
 
-![](/images/posts/conteudo/captcha-oraculo-1/captcha1.png)
+![](/images/posts/conteudo/captcha-oraculo-1/captcha1.webp)
 
     Answer: 87685
 
@@ -125,7 +125,7 @@ E esse é um caso que errei, e mandei mostrar todos os outputs possíveis:
 result <- oracle_mnist(type = 2)
 ```
 
-![](/images/posts/conteudo/captcha-oraculo-1/captcha2.png)
+![](/images/posts/conteudo/captcha-oraculo-1/captcha2.webp)
 
     Answer: 56198
 
@@ -351,7 +351,7 @@ result$res
 
 Veja qual foi o caso que o modelo errou:
 
-![](/images/posts/conteudo/captcha-oraculo-1/captcha3.png)
+![](/images/posts/conteudo/captcha-oraculo-1/captcha3.webp)
 
 Não parece tão fácil de ver que é um 7, né?
 

@@ -3,7 +3,7 @@ title: "Entendendo a reatividade: observers"
 date: "2021-11-05"
 tags: ["shiny", "reatividade"]
 categories: ["conceitos"]
-image: "images/posts/banner/efeito-domino.jpg"
+image: "images/posts/banner/efeito-domino.webp"
 author: ["William"]
 summary: "Todo observer é uma função render?"
 ---

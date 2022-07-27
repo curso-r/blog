@@ -3,7 +3,7 @@ title: "Resolvendo Captchas com o {luz}"
 date: "2021-12-27"
 tags: ["torch", "luz"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/captcha-luz.png"
+image: "images/posts/banner/captcha-luz.webp"
 author: ["Julio"]
 summary: "Resolvendo Captchas usando o pacote {luz}, com detalhes sobre datasets, dataloaders e métricas customizadas."
 draft: false
@@ -19,7 +19,7 @@ Sabe aquelas imagens que aparecem quando você está preenchendo um formulário 
 
 
 <div style="width:70%;margin:auto;">
-![](/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg)
+![](/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp)
 </div>
 
 <center>Figura: Exemplo de captcha do site do Tribunal Regional do Trabalho (TRT).</center>
@@ -56,12 +56,12 @@ Vamos investigar os elementos do luz a seguir. Como exemplo, utilizaremos os nos
 O exemplo da vez será o TRT, pois a base é pequenininha e é um Captcha relativamente fácil de resolver.
 
 ```{r include=FALSE}
-knitr::include_graphics("../../static/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg")
+knitr::include_graphics("../../static/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp")
 ```
 
 <div style="min-width:200px;margin:auto;">
 
-![](/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg)
+![](/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp)
 </div>
 
 ## Dados, datasets e dataloaders
@@ -351,7 +351,7 @@ captcha |>
 
 <div style="min-width:200px;margin:auto;">
 
-![](/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg)
+![](/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp)
 </div>
 
 

@@ -3,7 +3,7 @@ title: "O que é um gráfico estatístico?"
 date: "2017-02-20"
 tags: ["gráficos", "ggplot2"]
 categories: ["conceitos"]
-image: "images/posts/banner/grafico-interrogacao.png"
+image: "images/posts/banner/grafico-interrogacao.webp"
 author: ["William"]
 summary: "Os gráficos são técnicas estatísticas para visualização de dados amplamente utilizados em todas as áreas da pesquisa. A sua popularidade se deve à maneira como elucidam informações que estavam escondidas nas colunas do banco de dados, sendo que muitos deles podem ser compreendidos até mesmo por leigos no assunto em questão. Mas será que podemos definir formalmente o que é um gráfico estatístico?"
 ---
@@ -21,10 +21,10 @@ summary: "Os gráficos são técnicas estatísticas para visualização de dados
 <p>Os conceitos criados por Leland e Hadley defendem que essa estrutura pode ser utilizada para construir e entender qualquer tipo de gráfico, dando a eles, dessa maneira, a sua definição formal.</p>
 <pre class="r"><code>ggplot(mtcars) +
   geom_point(aes(x = disp, y = mpg, shape = as.factor(am), color = cyl)) +
-  labs(x = &quot;Tonelagem&quot;, y = &quot;Milhas por galão&quot;, 
+  labs(x = &quot;Tonelagem&quot;, y = &quot;Milhas por galão&quot;,
        shape = &quot;Transmissão&quot;, color = &quot;Cilindros&quot;) +
   scale_shape_discrete(labels = c(&quot;Automática&quot;,&quot;Manual&quot;)) +
   theme_bw() +
-  theme(legend.position = &quot;bottom&quot;) </code></pre>
+  theme(legend.position = &quot;bottom&quot;)</code></pre>
 <p><img src="/posts/2017-02-20-o-que-e-um-grafico-estatistico_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Por fim, é preciso frisar que, apesar de a gramática prover uma forte fundação para a construção de gráficos, ela não indica qual gráfico deve ser usado ou como ele deve parecer. Essas escolhas, fundamentadas na pergunta a ser respondida, nem sempre são triviais, e negligenciá-las pode gerar gráficos mal construídos e conclusões equivocadas. Cabe a nós, estatísticos, desenvolver, aprimorar e divulgar as técnicas de visualização adequadas para cada tipo de variável, assim como apontar ou denunciar os usos incorretos e mal-intencionados. Mas, em um mundo cuja veracidade das notícias é cada vez menos importante, é papel de todos ter senso crítico para entender e julgar as informações trazidas por um gráfico.</p>

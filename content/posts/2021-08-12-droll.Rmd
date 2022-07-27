@@ -3,7 +3,7 @@ title: "Rolando Dados com {droll}"
 date: "2021-08-12"
 tags: ["dnd", "probabilidade", "dados"]
 categories: ["pacotes"]
-image: "images/posts/banner/droll.jpg"
+image: "images/posts/banner/droll.webp"
 author: ["Caio"]
 summary: "Um pacote em R analisar rolagens de dados e calcular suas probabilidades"
 draft: false

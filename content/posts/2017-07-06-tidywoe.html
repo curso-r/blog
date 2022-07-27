@@ -3,13 +3,11 @@ title: "WoE em R com tidywoe"
 date: "2017-07-06"
 tags: ["woe"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/tidywoe_hex2.png"
+image: "images/posts/banner/tidywoe_hex2.webp"
 author: ["Athos"]
 summary: "WoE (weight of evidence) é uma ferramenta bastante usada em aplicações de regressão logística, principalmente na área de score de crédito. O pacote tidywoe oferece uma interface simples para facilitar essa tarefa."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>WoE (weight of evidence) é uma ferramenta bastante usada em aplicações de regressão logística, principalmente na área de score de crédito. Simploriamente falando, ele transforma categorias em números que refletem a diferença entre elas pelo critério de separação do <strong>Y = 1</strong> e <strong>Y = 0</strong>.</p>
@@ -44,7 +42,16 @@ tea_mini &lt;- tea %&gt;% select(breakfast, how, where, price)</code></pre>
 <h3>add_woe()</h3>
 <p>A função <code>add_woe()</code> serve para adicionar as versões WoE’s das variáveis em sua amostra de dados.</p>
 <pre class="r"><code>tea_mini %&gt;% add_woe(breakfast)</code></pre>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="17%" />
+<col width="10%" />
+<col width="15%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">breakfast</th>
@@ -182,6 +189,15 @@ tea_mini_woe_dic_arrumado &lt;- tea_mini_woe_dic %&gt;% mutate(woe = if_else(exp
 # Passe esse dicionário para o add_woe()
 tea_mini %&gt;% add_woe(breakfast, .woe_dictionary = tea_mini_woe_dic_arrumado)</code></pre>
 <table>
+<colgroup>
+<col width="18%" />
+<col width="10%" />
+<col width="15%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">breakfast</th>

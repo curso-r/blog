@@ -3,7 +3,7 @@ title: "Abandonando o Termo 'master' no GitHub"
 date: "2020-07-27"
 tags: ["github", "git"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/blm.jpeg"
+image: "images/posts/banner/blm.webp"
 author: ["Caio"]
 summary: "Assim como algumas linguagens de programação no passado, o GitHub está abandonado o termo 'master'. Veja como se adiantar e adotar o 'main' a partir de já."
 editor_options:

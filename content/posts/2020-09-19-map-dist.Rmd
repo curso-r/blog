@@ -3,7 +3,7 @@ title: "Qual a capital mais distante de Brasília?"
 date: "2020-09-19"
 tags: ["visualizacao", "mapas", "leaflet", "plotly"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/map-dist.png"
+image: "images/posts/banner/map-dist.webp"
 author: ["Julio"]
 summary: "Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!"
 draft: false
@@ -185,7 +185,7 @@ p_leaflet <- da_countries %>%
 p_leaflet
 ```
 
-![](/images/posts/conteudo/map-dist/leaflet.png)
+![](/images/posts/conteudo/map-dist/leaflet.webp)
 
 Acesse o mapa dinâmico [neste link](/posts/2020-09-19-map-dist_files/p_leaflet_world.html).
 
@@ -224,7 +224,7 @@ p_plotly <- plot_ly(height = 1000) %>%
 p_plotly
 ```
 
-![](/images/posts/conteudo/map-dist/plotly.png)
+![](/images/posts/conteudo/map-dist/plotly.webp)
 
 Acesse o mapa dinâmico [neste link](/posts/2020-09-19-map-dist_files/p_plotly_world.html).
 

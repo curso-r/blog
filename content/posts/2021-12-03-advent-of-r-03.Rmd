@@ -3,7 +3,7 @@ title: "Advent of R: Dia 03"
 date: "2021-12-03"
 tags: ["advent-of-r", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/advent-of-r-03.jpeg"
+image: "images/posts/banner/advent-of-r-03.webp"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 03."
 draft: false

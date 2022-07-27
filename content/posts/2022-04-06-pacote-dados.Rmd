@@ -63,7 +63,7 @@ Existem bases bem legais disponíveis, como:
 - A base de dados de personagens da franquia Star Wars, disponibilizada originalmente no pacote [dplyr](https://dplyr.tidyverse.org/reference/starwars.html). Por isso, é esperado que seja bastante útil em exemplos de manipulação de dados. Porém podemos criar visualizações bem legais também usando esses dados! Aliás, essa é a base utilizada no [desafio 3](https://blog.curso-r.com/posts/2022-04-05-desafio-3/), focado em visualização de dados, com o objetivo de replicar esse gráfico:
 
 ```{r echo=FALSE, fig.align='center', out.width="95%"}
-knitr::include_graphics("https://blog.curso-r.com/images/posts/conteudo/desafio-3/grafico.png")
+knitr::include_graphics("https://blog.curso-r.com/images/posts/conteudo/desafio-3/grafico.webp")
 ```
 
 Espie a base por aqui:

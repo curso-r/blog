@@ -3,13 +3,13 @@ title: "A kind of magick"
 date: "2017-06-01"
 tags: ["imagens", "pacotes", "magick"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/freddie-mercury.jpeg"
+image: "images/posts/banner/freddie-mercury.webp"
 author: ["William"]
 summary: "Já vimos como o Rstudio se torna uma ferramanta poderosa quando combinado com certos pacotes, como o knitr e shiny, ou outros recursos, como o markdown e o git. Hoje, veremos como transformar o Rstudio em um elegante e interativo editor de imagens utilizando o pacote magick."
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Já vimos como o Rstudio se torna uma ferramenta poderosa quando combinado com certos pacotes, como o `knitr` e `shiny`, ou outros recursos, como o *markdown* e o *git*. Hoje, veremos como transformar o Rstudio num elegante e interativo editor de imagens utilizando o pacote `magick`.
@@ -41,13 +41,13 @@ library(magrittr)
 Vamos utilizar a seguinte imagem como exemplo neste post:
 
 ```{r, echo = FALSE, fig.width = 8, fig.height = 7, eval = TRUE}
-plot(image_read('../../static/images/posts/conteudo/a-kind-of-magick/freddie-mercury.jpeg'))
+plot(image_read('../../static/images/posts/conteudo/a-kind-of-magick/freddie-mercury.webp'))
 ```
 
 A função `image_read()` lê imagens de arquivos, como `.jpg` ou `png`. Diversas outras extensões são suportadas. Utilize `str(magick::magick_config())` para verificar quais formatos estão disponíveis na sua versão do ImageMagick.
 
 ```{r, echo = FALSE, fig.width = 8, fig.height = 7, eval = TRUE}
-freddie <- image_read('../../static/images/posts/conteudo/a-kind-of-magick/freddie-mercury.jpeg')
+freddie <- image_read('../../static/images/posts/conteudo/a-kind-of-magick/freddie-mercury.webp')
 image_info(freddie)
 ```
 
@@ -82,7 +82,7 @@ A maioria das transformações que você pode fazer com as imagens utilizará um
 Para mais detalhes sobre essa sintaxe, consulte [este link](http://www.imagemagick.org/Magick++/Geometry.html).
 
 
-Vamos testar essas funções na nossa imagem! 
+Vamos testar essas funções na nossa imagem!
 
 Começaremos a redimensionando para facilitar o uso e a visualização de algumas funções.
 
@@ -98,7 +98,7 @@ image_crop(freddie_resized, "100x150+280+30")
 ```
 
 ```{r, echo = FALSE, fig.width = 4, fig.height = 3}
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_1.jpg") %>% plot
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_1.webp") %>% plot
 ```
 
 Colocar uma borda.
@@ -108,7 +108,7 @@ image_border(freddie_resized, "purple", "20x10")
 ```
 
 ```{r, echo = FALSE, fig.width = 8, fig.height = 7}
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_2.jpg") %>% plot
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_2.webp") %>% plot
 ```
 
 Girá-la de ponta-cabeça.
@@ -118,7 +118,7 @@ image_flip(freddie_resized)
 ```
 
 ```{r, echo = FALSE, fig.width = 8, fig.height = 7}
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_3.jpg") %>% plot
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_3.webp") %>% plot
 ```
 
 E inverter a direção.
@@ -128,21 +128,21 @@ image_flop(freddie_resized)
 ```
 
 ```{r, echo = FALSE, fig.width = 8, fig.height = 7}
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_4.jpg") %>% plot
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_4.webp") %>% plot
 ```
 
 Com o pipe, fica fácil aplicar todas as funções ao mesmo tempo.
 
 ```{r, eval = FALSE}
-freddie_resized %>% 
-  image_crop("100x150+280+30") %>% 
-  image_border("purple", "20x10") %>% 
-  image_flip %>% 
+freddie_resized %>%
+  image_crop("100x150+280+30") %>%
+  image_border("purple", "20x10") %>%
+  image_flip %>%
   image_flop
 ```
 
 ```{r, echo = FALSE, fig.width = 4, fig.height = 3}
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_5.jpg") %>% plot
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_5.webp") %>% plot
 ```
 
 # Filtros e efeitos
@@ -154,7 +154,7 @@ image_blur(freddie_resized, 10, 5)
 ```
 
 ```{r, echo = FALSE, fig.width = 7, fig.height = 5}
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_6.jpg")  %>% plot
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_6.webp")  %>% plot
 ```
 
 ```{r, eval = FALSE}
@@ -162,17 +162,17 @@ image_noise(freddie_resized)
 ```
 
 ```{r, echo = FALSE, fig.width = 7, fig.height = 5}
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_7.jpg") %>% plot
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_7.webp") %>% plot
 ```
 
 
 ```{r, eval = FALSE}
-image_annotate(freddie_resized, "Farrokh Bulsara", size = 30, color = "red", 
+image_annotate(freddie_resized, "Farrokh Bulsara", size = 30, color = "red",
                boxcolor = "white", degrees = 9, location = "+60+30")
 ```
 
 ```{r, echo = FALSE, fig.width = 7, fig.height = 5}
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_9.jpg") %>% plot
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_9.webp") %>% plot
 ```
 
 # O que mais dá para fazer?
@@ -192,7 +192,7 @@ grid.raster(freddie_cropped, width = 0.15, height = 0.3,
 library(ggplot2)
 library(grid)
 qplot(speed, dist, data = cars, geom = c("point", "smooth"))
-image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_1.jpg") %>%
+image_read(path = "../../static/images/posts/conteudo/a-kind-of-magick/freddie_1.webp") %>%
   grid.raster(width = 0.15, height = 0.3, hjust = -2, vjust = 1)
 ```
 

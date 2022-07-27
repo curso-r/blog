@@ -3,7 +3,7 @@ title: "O Zen do R (Parte 1)"
 date: "2019-07-02"
 tags: ["Zen do R"]
 categories: ["divulgação"]
-image: "images/posts/banner/zen-do-r-intro.jpeg"
+image: "images/posts/banner/zen-do-r-intro.webp"
 author: ["Caio"]
 summary: "O primeiro post em uma série sobre o nosso novo livro!
 Introduzindo O Zen do R."

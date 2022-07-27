@@ -4,11 +4,11 @@ date: "2017-02-21"
 tags: ["pacotes"]
 categories: ["top 10"]
 author: ["Athos"]
-image: "images/posts/banner/podio-pacotes.png"
+image: "images/posts/banner/podio-pacotes.webp"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 O R mudou muito nos últimos 5 anos graças a criações de novos pacotes focados nas questões mais práticas do dia a dia de um cientista de dados. Abaixo coloquei meu top 10 de pacotes que revolucionaram o jeito de programar em R e fizeram meu trabalho mais ágil e prazeroso:
@@ -60,7 +60,7 @@ OBS: foi feito para funcionar com o *"pipe"* (%>%).
 
 ### [2. ggplot2](http://docs.ggplot2.org/current/) (visualização)
 
-A medalha de prata eu acho que é o pacote mais famoso do R. 
+A medalha de prata eu acho que é o pacote mais famoso do R.
 
 O R é conhecido pela sua rica capacidade gráfica, mas foi o [ggplot2](http://docs.ggplot2.org/current/) que trouxe a alegria de viver para os usuários minimamente preocupados com a boa aparência de suas visualizações. O [ggplot2](http://docs.ggplot2.org/current/) permite usar a "gramática de gráficos" ([*grammar of graphics*](http://vita.had.co.nz/papers/layered-grammar.pdf)) para construir gráficos em camadas e customizáveis. Há uma pequena curva de aprendizado, mas o tempo investido se paga no primeiro gráfico gerado. Gráficos que seriam veradeiras obras da engenharia se feitas no R-base não passariam de 5 linhas de [ggplot2](http://docs.ggplot2.org/current/) e ainda ficariam mais bonitos!
 

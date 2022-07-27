@@ -3,13 +3,13 @@ title: "Você está a menos de 1 km de um Hambúrguer?"
 date: "2017-04-10"
 tags: ["GoogleMaps", "API", "leaflet"]
 categories: ["análises"]
-image: "images/posts/banner/man-with-a-map.jpeg"
+image: "images/posts/banner/man-with-a-map.webp"
 author: ["William"]
 summary: "Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos utilizar o pacote `leaflet` para criar mapas com os dados coletados e descobrir se estamos a menos de 1 km de hospitais, delagacias, corpos de bombeiros e, o mais importante, de uma hamburgueria."
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Se você estiver no centro de São Paulo, quanto será que você precisa andar para achar uma hamburgueria? Será que a sua casa fica a menos de 1 km de hospitais, delagacias ou corpo de bombeiros? Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos gerar mapas com o pacote `leaflet` para visualizar os dados coletados e responder essas perguntas.
@@ -57,18 +57,18 @@ O que precisamos fazer é criar a url de requisição, acessá-la, guardar os da
 
 
 ```{r, eval = F}
-get_googlemaps_data <- function(keyword, type = "", central_lat = -23.55052, 
+get_googlemaps_data <- function(keyword, type = "", central_lat = -23.55052,
                                 central_log = -46.63331, radius = 15000, key) {
-  
+
   basic_url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?"
-  
+
   if(type != "") {
-    
+
     type %<>%
-      str_replace_all(" ", "+") %>%  # Os espaços precisam ser 
+      str_replace_all(" ", "+") %>%  # Os espaços precisam ser
       str_c("&type=", .)             # substituídos por '+'.
   }
-  
+
   complete_url <- str_c(basic_url,        # Criando a url de requisição
                        "location=",       # com os parâmetros de busca.
                        central_lat,
@@ -81,17 +81,17 @@ get_googlemaps_data <- function(keyword, type = "", central_lat = -23.55052,
                        str_replace_all(keyword, " ", "+"),
                        "&key=",
                        key)
-  
+
   json <- RCurl::getURL(complete_url)            # Acessando a URL.
   list_info <- jsonlite::fromJSON(json)   # Transformando json em lista.
-  
-  
-  
+
+
+
   # Guardando a latitude e longitude em um df, assim como o lugar pesquisado.
   df <- tibble::tibble(lat = list_info$results$geometry$location$lat,
                long = list_info$results$geometry$location$lng,
                place = keyword)
-   
+
   return(df)
 }
 
@@ -104,7 +104,7 @@ Também podemos utilizar a função `purrr:map_df()` para gerar um data frame co
 ```{r, eval = F}
 places <- c("pronto socorro", "delegacia", "bombeiros", "hamburguer", "pizza")
 
-df_places <- places %>% 
+df_places <- places %>%
   purrr::map_df(.f = get_googlemaps_data, key = key)
 ```
 
@@ -129,9 +129,9 @@ Eu pesquisei por "pronto socorro" porque a pesquisa hospitais também resulta em
 
 ```{r, cache = FALSE}
 library(leaflet)
-df_places %>% 
-  dplyr::filter(place == "pronto socorro") %>% 
-  leaflet %>% 
+df_places %>%
+  dplyr::filter(place == "pronto socorro") %>%
+  leaflet %>%
   addTiles() %>%
   addCircles(lng = ~long, lat = ~lat, weight = 5,
              radius = 1000, color = "blue", fillOpacity = 0.5)
@@ -141,9 +141,9 @@ df_places %>%
 ### Delegacias
 
 ```{r, cache = FALSE}
-df_places %>% 
-  dplyr::filter(place == "delegacia") %>% 
-  leaflet %>% 
+df_places %>%
+  dplyr::filter(place == "delegacia") %>%
+  leaflet %>%
   addTiles() %>%
   addCircles(lng = ~long, lat = ~lat, weight = 5,
              radius = 1000, color = "blue", fillOpacity = 0.5)
@@ -152,9 +152,9 @@ df_places %>%
 ### Bombeiros
 
 ```{r, cache = FALSE}
-df_places %>% 
-  dplyr::filter(place == "delegacia") %>% 
-  leaflet %>% 
+df_places %>%
+  dplyr::filter(place == "delegacia") %>%
+  leaflet %>%
   addTiles() %>%
   addCircles(lng = ~long, lat = ~lat, weight = 5,
              radius = 1000, color = "blue", fillOpacity = 0.5)
@@ -165,9 +165,9 @@ df_places %>%
 Repare que o único local na região mais central de SP em que você pode ficar a mais de um quilômetro de uma hamburgueria é no meio do parque Ibirapuera.
 
 ```{r, cache = FALSE}
-df_places %>% 
-  dplyr::filter(place == "hamburguer") %>% 
-  leaflet %>% 
+df_places %>%
+  dplyr::filter(place == "hamburguer") %>%
+  leaflet %>%
   addTiles() %>%
   addCircles(lng = ~long, lat = ~lat, weight = 5,
              radius = 1000, color = "blue", fillOpacity = 0.5)
@@ -178,9 +178,9 @@ df_places %>%
 Se a busca devolvesse todos os resultados possíveis, esse mapa teria um círculo azul com ~15 km de raio formado por milhares de círculos menores. =D
 
 ```{r, cache = FALSE}
-df_places %>% 
-  dplyr::filter(place == "pizza") %>% 
-  leaflet %>% 
+df_places %>%
+  dplyr::filter(place == "pizza") %>%
+  leaflet %>%
   addTiles() %>%
   addCircles(lng = ~long, lat = ~lat, weight = 5,
              radius = 1000, color = "blue", fillOpacity = 0.5)
@@ -189,4 +189,4 @@ df_places %>%
 
 Sem dúvidas, a utilização dos dados aqui foi bem superficial, apenas ilustrativa. O ideal seria juntar essas informações de geolocalização com dados de criminalidade, saúde pública, socioeconômicos, consumo etc. Dependendo da disponibilidade de dados, há espaço para muitas análises interessantes utilizando essas informações do Google Maps. Com certeza voltaremos neste assunto em posts futuros. =)
 
-Comentários? Sugestões? Críticas? Você está a menos de um quilômetro dos comentários! Deixe a sua mensagem! 
+Comentários? Sugestões? Críticas? Você está a menos de um quilômetro dos comentários! Deixe a sua mensagem!

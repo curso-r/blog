@@ -3,8 +3,8 @@ title: "Feedback dos trabalhos do R para Ciência de Dados (Parte III): Dicas pa
 date: "2021-03-15"
 tags: ["rmarkdown"]
 categories: ["divulgação"]
-image: "images/posts/banner/reproducibility_court.jpeg"
-featuredImage: "images/posts/banner/reproducibility_court.png"
+image: "images/posts/banner/reproducibility_court.webp"
+featuredImage: "images/posts/banner/reproducibility_court.webp"
 author: ["Beatriz Milz", "William"]
 summary: "Comentamos algumas dicas sobre elaboração de relatórios. Ilustração sobre o pacote rmarkdown, criada por Allison Horst."
 draft: false

@@ -3,15 +3,13 @@ title: "Pacote reticulate"
 date: "2017-11-20"
 tags: ["reticulate", "python"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/reticulate.png"
-author: ["Gabriela Lima Borges (convidada)"]
+image: "images/posts/banner/reticulate.webp"
+author: ["Gabriela Lima Borges"]
 summary: "Imagine se você pudesse aproveitar da quantidade e da variedade enorme de módulos e bibliotecas do Python no ambiente amigável do RStudio? Graças ao pacote..."
 retired: true
 alternativa: ""
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <blockquote>
@@ -46,9 +44,9 @@ np$abs(-1)</code></pre>
 <p>E podemos misturar funções do R e do python:</p>
 <pre class="r"><code>library(magrittr)
 
-rnorm(10) %&gt;% 
-  np$abs() %&gt;% 
-  np$cumproduct() %&gt;% 
+rnorm(10) %&gt;%
+  np$abs() %&gt;%
+  np$cumproduct() %&gt;%
   plot()</code></pre>
 </div>
 <div id="exemplo" class="section level1">
@@ -64,12 +62,12 @@ im.file &lt;- down$download_file(url, cache=TRUE)
 fits$info(im.file)</code></pre>
 <pre><code>Filename: ~/.astropy/cache/download/py2/2c9202ae878ecfcb60878ceb63837f5f
 No.    Name      Ver    Type      Cards   Dimensions   Format
-  0  PRIMARY       1 PrimaryHDU     161   (891, 893)   int16   
+  0  PRIMARY       1 PrimaryHDU     161   (891, 893)   int16
   1  er.mask       1 TableHDU        25   1600R x 4C   [F6.2, F6.2, F6.2, F6.2]</code></pre>
 <p>Agora vamos transformar nossa imagem em uma matriz de pixels e plotar com a função image do R.</p>
 <pre class="r"><code>im.data &lt;- fits$getdata(im.file)
-im.data %&gt;% 
-  t() %&gt;% 
+im.data %&gt;%
+  t() %&gt;%
   image(col = gray(seq(0, 1, length = 256)))</code></pre>
-<p><img src="/images/posts/conteudo/reticulate/Rplot.png" /></p>
+<p><img src="/images/posts/conteudo/reticulate/Rplot.webp" /></p>
 </div>

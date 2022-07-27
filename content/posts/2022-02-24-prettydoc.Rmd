@@ -3,7 +3,7 @@ title: "Personalizando seus relatórios R Markdown em HTML com o {prettydoc}"
 date: "2022-02-24"
 tags: ["tutoriais"]
 categories: ["tutoriais"]
-image: "images/posts/banner/2022-02-24-prettydoc.jpg"
+image: "images/posts/banner/2022-02-24-prettydoc.webp"
 author: ["Tereza"]
 summary: "Este tutorial é para você que usa o R Markdown para criar relatórios em HTML e quer deixá-los mais bonitos e apresentáveis!"
 draft: false
@@ -22,25 +22,25 @@ install.packages("prettydoc")
 2. Crie um arquivo **R Markdown**.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc001.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc001.webp")
 ```
 
 3. Selecione a opção **HTML** como formato de saída, e então, clique em **From Template**.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc002.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc002.webp")
 ```
 
 4. Selecione a opção **Lightweight and Pretty Document (HTML)** e então, clique em **OK**.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc003.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc003.webp")
 ```
 
 5. Um documento R Markdown como esse será criado:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc004.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc004.webp")
 ```
 
 O importante aqui é o cabeçalho YAML (parte destacada na imagem), ele que vai garantir a personalização do seu relatório. 
@@ -52,7 +52,7 @@ O prettydoc possui 5 templates, são eles: `cayman`, `tactile`, `architect`, `le
 6. Para visualizar cada template, basta colocar o respectivo nome no campo **"theme: "**, e apertar o botão **Knit**.
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc005.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc005.webp")
 ```
 
 Vamos dar uma olhada em cada template:
@@ -60,31 +60,31 @@ Vamos dar uma olhada em cada template:
 #### cayman:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc006.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc006.webp")
 ```
 
 #### tactile:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc007.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc007.webp")
 ```
 
 #### architect:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc008.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc008.webp")
 ```
 
 #### leonids:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc009.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc009.webp")
 ```
 
 #### hpstr:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc010.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc010.webp")
 ```
 
 
@@ -95,19 +95,19 @@ Você pode ver mais sobre os templates [nessa página](https://prettydoc.statr.m
 Por exemplo, temos aqui esse relatório com a saída HTML:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc011.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc011.webp")
 ```
 
 Que gera o seguinte HTML ao *Knitar*:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc012.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc012.webp")
 ```
 
 Ao substituir o cabeçalho (e alterar os campos de Título, Autor e Data), o nosso documento ficou assim:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc013.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc013.webp")
 ```
 
 Aqui estamos usando o template `cayman`, mas você pode escolher o que preferir!
@@ -115,7 +115,7 @@ Aqui estamos usando o template `cayman`, mas você pode escolher o que preferir!
 E voilà, ao *Knitar* esse documento, o seguinte HTML é gerado:
 
 ```{r, fig.align='center', echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc014.png")
+knitr::include_graphics("/images/posts/conteudo/2022-02-24-prettydoc/prettydoc014.webp")
 ```
 
 

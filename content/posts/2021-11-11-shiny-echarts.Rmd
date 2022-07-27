@@ -3,7 +3,7 @@ title: "Gráficos no Shiny: echarts"
 date: "2021-11-16"
 tags: ["shiny", "gráficos", "echarts"]
 categories: ["pacotes"]
-image: "images/posts/banner/echarts.png"
+image: "images/posts/banner/echarts.webp"
 author: ["William"]
 summary: "Conheça uma ótima opção para fazer gráficos interativos."
 ---

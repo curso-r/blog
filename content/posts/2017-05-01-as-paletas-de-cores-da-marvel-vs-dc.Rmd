@@ -3,13 +3,13 @@ title: "As cores da Marvel vs DC"
 date: "2017-05-01"
 tags: ["imagens", "cinema", "kmeans"]
 categories: ["análises"]
-image: "images/posts/banner/marvel_vs_dc.jpeg"
+image: "images/posts/banner/marvel_vs_dc.webp"
 author: ["William"]
 summary: "A cor é uma diferença notável entre os filmes da Marvel e da DC. Enquanto a Disney/Marvel Studios costuma lançar filmes com tons mais claros e alegres, a Warner tem optado por cenários escuros, com um aspecto mais sombrios. Neste post, vamos utilizar o Kmeans para obter a paleta de cores mais utilizadas por cada estúdio."
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, eval = FALSE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
 ```
 
 A cor é uma diferença notável entre os filmes da Marvel e da DC. Enquanto a Disney/Marvel Studios costuma lançar filmes com tons mais claros e alegres, a Warner tem optado por cenários escuros, com um aspecto mais sombrios. Essas escolhas são um reflexo do clima das histórias de cada universo: aventuras engraçaralhas com um drama superficial vs seja lá o que passa na cabeça do [Zack Snyder](http://retalhoclub.com.br/wp-content/uploads/2017/03/03.jpg).
@@ -18,12 +18,12 @@ Para estudar melhor a paleta de cores utilizadas nos filmes, vamos aplicar a an�
 
 ```{r, echo=FALSE, fig.width=8, fig.height=7, eval = TRUE, message=FALSE}
 library(magick)
-x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/bvs.jpg')
+x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/bvs.webp')
 plot(x)
 ```
 
 ```{r, echo=FALSE, fig.width=8, fig.height=5, eval = TRUE}
-x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/cw.jpg')
+x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/cw.webp')
 plot(x)
 ```
 
@@ -47,9 +47,9 @@ Como vamos trabalhar com mais de uma imagem, eu criei a função `ler_imagem()` 
 
 ```{r}
 ler_imagem <- function(caminho) {
-  img <- readJPEG(caminho) %>% 
+  img <- readJPEG(caminho) %>%
     apply(3, as.numeric)
-  
+
 }
 ```
 
@@ -64,16 +64,16 @@ Abaixo estão as funções `cria_paleta()` e `exibir()` do post do Dani. A únic
 
 ```{r}
 criar_paleta <- function(img_matrix, num_cores){
-  
+
   km <- kmeans(img_matrix, centers = num_cores)
-  
+
   img_df <- tibble(
-    r = img_matrix[,1], 
-    g = img_matrix[,2], 
+    r = img_matrix[,1],
+    g = img_matrix[,2],
     b = img_matrix[,3],
     cluster = km$cluster
   )
-  
+
   centroides <- img_df %>%
     group_by(cluster) %>%
     summarise_all(mean)
@@ -88,7 +88,7 @@ exibir <- function(x) {
   n <- length(x)
   old <- par(mar = c(0.5, 0.5, 0.5, 0.5))
   on.exit(par(old))
-  
+
   image(1:n, 1, as.matrix(1:n), col = x,
         ylab = "", xaxt = "n", yaxt = "n", bty = "n")
 }
@@ -103,7 +103,7 @@ exibir(paleta_bvs)
 ```
 
 ```{r, echo=FALSE, fig.width=8, fig.height=4, eval = TRUE}
-x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/paleta_bvs.jpeg')
+x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/paleta_bvs.webp')
 plot(x)
 ```
 
@@ -115,7 +115,7 @@ exibir(paleta_cw)
 ```
 
 ```{r, echo=FALSE, fig.width=8, fig.height=4, eval = TRUE}
-x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/paleta_cw.jpeg')
+x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/paleta_cw.webp')
 plot(x)
 ```
 
@@ -124,7 +124,7 @@ Observe que o filme da DC tem cores mais escuras e fortes, com vários tons de a
 Podemos fazer a análise agora para o pôster de cada filme (o que aparece no IMDB):
 
 ```{r, echo=FALSE, fig.width=8, fig.height=5, eval = TRUE}
-x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/posteres.jpg')
+x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/posteres.webp')
 plot(x)
 ```
 
@@ -135,7 +135,7 @@ exibir(paleta_bvs)
 ```
 
 ```{r, echo=FALSE, fig.width=8, fig.height=4, eval = TRUE}
-x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/paleta_poster_bvs.jpeg')
+x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/paleta_poster_bvs.webp')
 plot(x)
 ```
 
@@ -146,7 +146,7 @@ exibir(paleta_cw)
 ```
 
 ```{r, echo=FALSE, fig.width=8, fig.height=4, eval = TRUE}
-x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/paleta_poster_cw.jpeg')
+x <- image_read('../../static/images/posts/conteudo/as-paletas-de-cores-da-marvel-vs-dc/paleta_poster_cw.webp')
 plot(x)
 ```
 

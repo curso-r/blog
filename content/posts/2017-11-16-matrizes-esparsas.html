@@ -3,13 +3,11 @@ title: "Matrizes Esparsas no R"
 date: "2017-11-16"
 tags: ["estatística"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/banner-sparse-matrix.jpg"
+image: "images/posts/banner/banner-sparse-matrix.webp"
 author: ["Daniel"]
 summary: "Matrizes esparsas são matrizes em que a maior parte dos elementos é igual a zero. Existem maneiras muito eficientes de lidar com esse tipo de matrizes no R e é disso que vamos falar neste post."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Matrizes esparsas são matrizes em que a maior parte dos elementos é igual a zero.
@@ -58,23 +56,23 @@ Algo mais ou menos assim:</p>
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">6</td>
+<td align="right">17</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
-<td align="right">18</td>
+<td align="right">30</td>
 </tr>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">13</td>
+<td align="right">7</td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
-<td align="right">8</td>
+<td align="right">14</td>
 </tr>
 <tr class="odd">
 <td align="right">2</td>
-<td align="right">33</td>
+<td align="right">42</td>
 </tr>
 <tr class="even">
 <td align="right">3</td>
@@ -82,59 +80,59 @@ Algo mais ou menos assim:</p>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">17</td>
+<td align="right">4</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="right">30</td>
+<td align="right">24</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">46</td>
+<td align="right">16</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="right">12</td>
+<td align="right">10</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
-<td align="right">36</td>
+<td align="right">9</td>
 </tr>
 <tr class="even">
 <td align="right">7</td>
-<td align="right">19</td>
+<td align="right">41</td>
 </tr>
 <tr class="odd">
 <td align="right">8</td>
-<td align="right">28</td>
+<td align="right">6</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
-<td align="right">42</td>
+<td align="right">47</td>
 </tr>
 <tr class="odd">
 <td align="right">8</td>
-<td align="right">25</td>
+<td align="right">38</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
-<td align="right">5</td>
+<td align="right">21</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
-<td align="right">43</td>
+<td align="right">37</td>
 </tr>
 <tr class="even">
 <td align="right">9</td>
-<td align="right">20</td>
+<td align="right">35</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
-<td align="right">34</td>
+<td align="right">11</td>
 </tr>
 <tr class="even">
 <td align="right">9</td>
-<td align="right">45</td>
+<td align="right">31</td>
 </tr>
 </tbody>
 </table>
@@ -143,25 +141,25 @@ Algo mais ou menos assim:</p>
 sparseMatrix(bd$cliente, bd$itens)
 ## 9 x 49 sparse Matrix of class &quot;ngCMatrix&quot;
 ##                                                                                
-##  [1,] . . . . . | . . . . . . | . . . . | . . . . . . . . . . . . . . . . . . .
-##  [2,] . . . . . . . | . . . . . . . . . . . . . . . . . . . . . . . . | . . . .
-##  [3,] . . . . . . . . . . . . . . . . | . . . . . . . . . . . . . . . . . . . .
-##  [4,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . | . . . . . . .
-##  [5,] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-##  [6,] . . . . . . . . . . . | . . . . . . . . . . . . . . . . . . . . . . . . .
-##  [7,] . . . . . . . . . . . . . . . . . . | . . . . . . . . . . . . . . . . | .
-##  [8,] . . . . | . . . . . . . . . . . . . . . . . . . | . . | . . . . . . . . .
-##  [9,] . . . . . . . . . . . . . . . . . . . | . . . . . . . . . . . . . | . . .
+##  [1,] . . . . . . | . . . . . . . . . | . . . . . . . . . . . . | . . . . . . .
+##  [2,] . . . . . . . . . . . . . | . . . . . . . . . . . . . . . . . . . . . . .
+##  [3,] . . . | . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##  [4,] . . . . . . . . . . . . . . . . . . . . . . . | . . . . . . . . . . . . .
+##  [5,] . . . . . . . . . . . . . . . | . . . . . . . . . . . . . . . . . . . . .
+##  [6,] . . . . . . . . . | . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##  [7,] . . . . . . . . | . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##  [8,] . . . . . | . . . . . . . . . . . . . . | . . . . . . . . . . . . . . . .
+##  [9,] . . . . . . . . . . | . . . . . . . . . . . . . . . . . . . | . . . | . |
 ##                              
 ##  [1,] . . . . . . . . . . . .
-##  [2,] . . . . . . . . . . . .
+##  [2,] . . . . | . . . . . . .
 ##  [3,] . . . . . . . . . . . |
 ##  [4,] . . . . . . . . . . . .
-##  [5,] . . . . . . . . | . . .
+##  [5,] . . . . . . . . . . . .
 ##  [6,] . . . . . . . . . . . .
-##  [7,] . . . . . . . . . . . .
-##  [8,] . . . . | . . . . . . .
-##  [9,] . . . . . | . | . . . .</code></pre>
+##  [7,] . . . | . . . . . . . .
+##  [8,] | . . . . . . . . | . .
+##  [9,] . . . . . . . . . . . .</code></pre>
 <p>Outra função importante é a <code>sparse.model.matrix</code>. Ela é equivalente à função <code>model.matrix</code> mas cria uma matriz de modelo esparsa o que pode ser útil quando você tem um fator que possui muitos níveis no seu modelo. A vignette
 <a href="https://cran.r-project.org/web/packages/Matrix/vignettes/sparseModels.pdf"><em>Sparse Model Matrices</em></a> fala sobre isso.</p>
 <p>Também é possível programar em Rcpp usando matrizes esparsas usando o RcppArmadillo, veja <a href="http://gallery.rcpp.org/articles/armadillo-sparse-matrix/">esse exemplo</a> para mais detalhes.</p>

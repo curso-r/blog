@@ -3,15 +3,13 @@ title: "Quebrando Captchas - Parte V: Fazendo redes convolucionais na mão"
 date: "2017-11-12"
 tags: ["captcha"]
 categories: ["análises"]
-image: "images/posts/banner/captcha_05.png"
+image: "images/posts/banner/captcha_05.webp"
 author: ["Julio"]
 summary: "Nesse post vou mostrar como ajustar redes neurais convolucionais na mão. Muita mão na massa envolvida, muitos captchas e muita diversão. Vamos juntos desmistificar a magia negra do deep learning..."
 retired: true
 alternativa: ""
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Voltando aos saudosos captchas. Demorei para fazer esse post pois estava esperando o lançamento do <a href="https://www.coursera.org/learn/convolutional-neural-networks">curso de redes neurais convolucionais do Andrew Ng</a>. O curso foi muito bom, valeu à pena! E, como prometido, vamos agora trabalhar com modelagem dos captchas.</p>
@@ -25,8 +23,8 @@ alternativa: ""
 # devtools::install_github(&quot;decryptr/decryptrModels&quot;)
 library(decryptr)
 arq &lt;- captcha_download_rfb(dest = &quot;img&quot;)
-arq %&gt;% 
-  read_captcha() %&gt;% 
+arq %&gt;%
+  read_captcha() %&gt;%
   purrr::pluck(1) %&gt;%
   plot()</code></pre>
 <p>Também precisaremos do <a href="https://keras.rstudio.com/"><code>keras</code></a>, um pacote maravilhoso feito pela turma do <a href="https://rstudio.com">RStudio</a>, com contribuições do <a href="http://curso-r.com/author/daniel/">Daniel Falbel</a>. Não esqueça de fazer o <code>tensorflow</code> funcionar na sua máquina! <a href="http://curso-r.com/blog/2017/06/08/2017-06-08-keras-no-ubuntu/">Esse post</a> do <a href="http://curso-r.com/author/athos/">Athos Damiani</a> pode ajudar.</p>
@@ -53,7 +51,7 @@ library(magick)</code></pre>
 kern_horizontal</code></pre>
 <p>E considere essa imagem super complexa:</p>
 <p>Na prática, essa imagem é isso aqui (tirei algumas linhas e colunas):</p>
-<pre class="r"><code>emoji &lt;- load_image(&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot;)[,,1] 
+<pre class="r"><code>emoji &lt;- load_image(&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.webp&quot;)[,,1]
 round(emoji, 1)[1:10, 1:12]</code></pre>
 <p>Tome por exemplo o ponto <span class="math inline">\((i,j) = (12,16)\)</span>. A vizinhança 3x3 em torno desse ponto é dada por</p>
 <pre class="r"><code>emoji[12 + (-1):1, 16 + (-1):1]</code></pre>
@@ -87,10 +85,10 @@ round(emoji, 1)[1:10, 1:12]</code></pre>
 }</code></pre>
 <p>(desculpe aos amigos por usar <code>for</code>. Shame on me…)</p>
 <p>Voltando para nossa imagem agora. No nosso caso, o resultado fica assim:</p>
-<pre class="r"><code>&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot; %&gt;% 
-  load_image() %&gt;% 
-  convolve(kern_horizontal) %&gt;% 
-  image_read() %&gt;% 
+<pre class="r"><code>&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.webp&quot; %&gt;%
+  load_image() %&gt;%
+  convolve(kern_horizontal) %&gt;%
+  image_read() %&gt;%
   plot()</code></pre>
 <p>Ficou um pouco assustador, não? Essa matriz não foi escolhida por acaso. Ela serve para destacar padrões horizontais da imagem. Como a primeira linha é formada <code>-1</code>s e a última é formada por <code>1</code>s, a matriz fica com valor alto se a parte de cima do pixel for preta e a parte de baixo for branca (<code>grande * 1 + pequeno * (-1)</code>). A parte destacada da imagem acabou sendo os olhos (pois temos maior concentração de pixels pretos ali), além das extremidades superior e inferior do rosto.</p>
 <p>Com esse kernel aqui (vertical), a parte destacada do rosto são as extremidades dos lados:</p>
@@ -99,10 +97,10 @@ round(emoji, 1)[1:10, 1:12]</code></pre>
                        c(-1, 0, 1))
 kern_vertical
 
-&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.png&quot; %&gt;% 
-  load_image() %&gt;% 
-  convolve(kern_vertical) %&gt;% 
-  image_read() %&gt;% 
+&quot;../../staticimages/posts/conteudo/captcha-conv/emoji3.webp&quot; %&gt;%
+  load_image() %&gt;%
+  convolve(kern_vertical) %&gt;%
+  image_read() %&gt;%
   plot()</code></pre>
 <p><hline /></p>
 </div>
@@ -111,26 +109,26 @@ kern_vertical
 <p>Não tem segredo! Basta reaplicar o que já vimos. Vou apenas introduzir uma nova função chamada <code>add_bias()</code>, que simplesmente adiciona uma constante numérica para a matriz. Isso pode auxiliar na visualização, pois controlamos melhor os valores que ficam dentro do intervalo <code>[0,1]</code>. Lá na frente você entenderá o porquê do “bias”.</p>
 <pre class="r"><code>add_bias &lt;- function (x, b) x + b</code></pre>
 <p>Esse é o resultado de adicionar o kernel vertical e bias de <code>0.8</code>.</p>
-<pre class="r"><code>arq %&gt;% 
-  load_image() %&gt;% 
-  convolve(kern_vertical) %&gt;% 
-  add_bias(.8) %&gt;% 
-  image_read() %&gt;% 
+<pre class="r"><code>arq %&gt;%
+  load_image() %&gt;%
+  convolve(kern_vertical) %&gt;%
+  add_bias(.8) %&gt;%
+  image_read() %&gt;%
   plot()</code></pre>
 <p>Agora o kernel na horizontal. Note que identificamos padrões das linhas horizontais que tentam atrapalhar a visão das letras.</p>
-<pre class="r"><code>arq %&gt;% 
-  load_image() %&gt;% 
-  convolve(kern_horizontal) %&gt;% 
-  add_bias(.8) %&gt;% 
-  image_read() %&gt;% 
+<pre class="r"><code>arq %&gt;%
+  load_image() %&gt;%
+  convolve(kern_horizontal) %&gt;%
+  add_bias(.8) %&gt;%
+  image_read() %&gt;%
   plot()</code></pre>
 <p>Colocando um após o outro, temos um resultado bem esquisito:</p>
-<pre class="r"><code>arq %&gt;% 
-  load_image() %&gt;% 
-  convolve(kern_horizontal) %&gt;% 
-  convolve(kern_vertical) %&gt;% 
-  add_bias(.7) %&gt;% 
-  image_read() %&gt;% 
+<pre class="r"><code>arq %&gt;%
+  load_image() %&gt;%
+  convolve(kern_horizontal) %&gt;%
+  convolve(kern_vertical) %&gt;%
+  add_bias(.7) %&gt;%
+  image_read() %&gt;%
   plot()</code></pre>
 <p>Também vou introduzir uma função chamada <code>relu()</code> aqui. <strong>ReLu</strong> significa <em>Restricted Linear Unit</em> e é uma função bem simples que zera tudo aquilo que é negativo e mantém tudo aquilo que é positivo. Assim, temos:</p>
 <pre class="r"><code>relu &lt;- function(x) (x + abs(x)) / 2
@@ -138,16 +136,16 @@ relu(-1)
 relu( 3)</code></pre>
 <p>Para visualização, essa função não serve para muita coisa, pois já fazemos a substituição de valores negativos por zero. No entanto, podemos fazer combos com a aplicação de várias convoluções. O resultado dos combos não seria possível somente com somas e multiplicações. Na prática, o que estou afirmando é que com a aplicação de convoluções, bias e ReLu, podemos montar operações <strong>não lineares</strong> para extrair componentes da imagem.</p>
 <p>Olhe o exemplo abaixo. Parece que consegui identificar bem as coisas que são inúteis na imagem. Isso pode ser útil… ou não.</p>
-<pre class="r"><code>arq %&gt;% 
-  load_image() %&gt;% 
+<pre class="r"><code>arq %&gt;%
+  load_image() %&gt;%
   # primeira convolucao
   convolve(kern_horizontal) %&gt;%
-  add_bias(-.25) %&gt;% 
-  relu() %&gt;% 
+  add_bias(-.25) %&gt;%
+  relu() %&gt;%
   # segunda convolucao
-  convolve(kern_vertical) %&gt;% 
-  add_bias(.1) %&gt;% 
-  image_read() %&gt;% 
+  convolve(kern_vertical) %&gt;%
+  add_bias(.1) %&gt;%
+  image_read() %&gt;%
   plot()</code></pre>
 <p>Isso tudo nos leva a pensar: será que eu consigo pensar em kernels que me ajudem a identificar as letras de uma forma razoável?</p>
 <p><hline /></p>
@@ -171,31 +169,31 @@ w_{51} &amp; w_{52} &amp; w_{53} &amp; w_{54} &amp; w_{55}
 m$model</code></pre>
 <pre><code>Model
 ____________________________________________________________________________________________________
-Layer (type)                                 Output Shape                            Param #        
+Layer (type)                                 Output Shape                            Param #
 ====================================================================================================
-conv2d_4 (Conv2D)                            (None, 50, 180, 12)                     312            
+conv2d_4 (Conv2D)                            (None, 50, 180, 12)                     312
 ____________________________________________________________________________________________________
-max_pooling2d_4 (MaxPooling2D)               (None, 25, 90, 12)                      0              
+max_pooling2d_4 (MaxPooling2D)               (None, 25, 90, 12)                      0
 ____________________________________________________________________________________________________
-conv2d_5 (Conv2D)                            (None, 25, 90, 48)                      14448          
+conv2d_5 (Conv2D)                            (None, 25, 90, 48)                      14448
 ____________________________________________________________________________________________________
-max_pooling2d_5 (MaxPooling2D)               (None, 12, 45, 48)                      0              
+max_pooling2d_5 (MaxPooling2D)               (None, 12, 45, 48)                      0
 ____________________________________________________________________________________________________
-conv2d_6 (Conv2D)                            (None, 12, 45, 96)                      115296         
+conv2d_6 (Conv2D)                            (None, 12, 45, 96)                      115296
 ____________________________________________________________________________________________________
-max_pooling2d_6 (MaxPooling2D)               (None, 6, 22, 96)                       0              
+max_pooling2d_6 (MaxPooling2D)               (None, 6, 22, 96)                       0
 ____________________________________________________________________________________________________
-flatten_2 (Flatten)                          (None, 12672)                           0              
+flatten_2 (Flatten)                          (None, 12672)                           0
 ____________________________________________________________________________________________________
-dense_3 (Dense)                              (None, 32)                              405536         
+dense_3 (Dense)                              (None, 32)                              405536
 ____________________________________________________________________________________________________
-dropout_2 (Dropout)                          (None, 32)                              0              
+dropout_2 (Dropout)                          (None, 32)                              0
 ____________________________________________________________________________________________________
-dense_4 (Dense)                              (None, 210)                             6930           
+dense_4 (Dense)                              (None, 210)                             6930
 ____________________________________________________________________________________________________
-reshape_2 (Reshape)                          (None, 6, 35)                           0              
+reshape_2 (Reshape)                          (None, 6, 35)                           0
 ____________________________________________________________________________________________________
-activation_2 (Activation)                    (None, 6, 35)                           0              
+activation_2 (Activation)                    (None, 6, 35)                           0
 ====================================================================================================
 Total params: 542,522
 Trainable params: 542,522
@@ -238,10 +236,10 @@ w_list[[1]]</code></pre>
 <p>Para cada um dos doze kernels, calculamos uma matriz convoluída. Esses os resultados que o modelo entende serem úteis para prever o captcha.</p>
 <p>O código abaixo aplica <code>convolve()</code>, <code>add_bias()</code> e <code>relu()</code> para todos os kernels. Para isso usamos o <code>purrr</code>. Se você não entende <code>purrr</code>, leia <a href="http://ctlente.com/pt/purrr-magic/">este maravilhoso post do Caio Lente</a>.</p>
 <pre class="r"><code>conv1 &lt;- purrr::map2(w_list, bias, ~{
-  arq %&gt;% 
-    load_image() %&gt;% 
-    convolve(.x) %&gt;% 
-    add_bias(.y) %&gt;% 
+  arq %&gt;%
+    load_image() %&gt;%
+    convolve(.x) %&gt;%
+    add_bias(.y) %&gt;%
     relu()
 })</code></pre>
 <p>E como será que ficam essas imagens? Abaixo, temos o resultado da aplicação dos doze kernels. A maioria parece estar extraindo partes das letras. A sétima (posição <code>(2,3)</code>) parece estar pegando o ruído e a quarta parece guardar a imagem original.</p>
@@ -268,11 +266,11 @@ w_list[[1]]</code></pre>
 }</code></pre>
 <p>A aplicação da primeira convolução com max pooling é feita igual anteriormente:</p>
 <pre class="r"><code>result_conv1 &lt;- purrr::map2(w_list, bias, ~{
-  arq %&gt;% 
-    load_image() %&gt;% 
-    convolve(.x) %&gt;% 
+  arq %&gt;%
+    load_image() %&gt;%
+    convolve(.x) %&gt;%
     add_bias(.y) %&gt;%
-    relu() %&gt;% 
+    relu() %&gt;%
     max_pool()
 })</code></pre>
 <p>No final, temos essas imagens com resolução <code>25x90</code> (as originais são <code>50x180</code>).</p>
@@ -301,14 +299,14 @@ dim(w2)</code></pre>
 </ol>
 <p>Logo, temos 2 laços. O código para fazer isso fica assim:</p>
 <pre class="r"><code>result_conv2 &lt;- purrr::map(1:dim(w2)[4], ~{
-  kern &lt;- w2[,,,.x] %&gt;% 
-    plyr::alply(3, identity) %&gt;% 
+  kern &lt;- w2[,,,.x] %&gt;%
+    plyr::alply(3, identity) %&gt;%
     purrr::map(as.matrix)
   actual_bias &lt;- bias2[[.x]]
-  purrr::map2(result_conv1, kern, convolve) %&gt;% 
-    purrr::reduce(magrittr::add) %&gt;% 
+  purrr::map2(result_conv1, kern, convolve) %&gt;%
+    purrr::reduce(magrittr::add) %&gt;%
     add_bias(actual_bias) %&gt;%
-    relu() %&gt;% 
+    relu() %&gt;%
     max_pool()
 })</code></pre>
 <p>Plotamos os 48 resultados abaixo. Alguns resultados foram completamente zerados (eles devem ser úteis em outros captchas mais esquisitos), enquanto os demais pegam pedaços da imagem anterior que mal lembram o captcha original. A imagem da posição <code>(4,1)</code> é uma das únicas que mostra o captcha claramente. Isso mostra uma coisa comum do deep learning: quanto mais profundo vamos, menos entendemos o que de fato o modelo está fazendo. Recomendo fortemente a leitura <a href="https://distill.pub/2017/feature-visualization/">desse blog do distill</a>, que discute o assunto detalhadamente</p>
@@ -324,14 +322,14 @@ dim(w3)</code></pre>
 <pre><code>[1]  5  5 48 96</code></pre>
 <p>Revisando o algoritmo:</p>
 <pre class="r"><code>result_conv3 &lt;- purrr::map(1:dim(w3)[4], ~{
-  kern &lt;- w3[,,,.x] %&gt;% 
-    plyr::alply(3, identity) %&gt;% 
+  kern &lt;- w3[,,,.x] %&gt;%
+    plyr::alply(3, identity) %&gt;%
     purrr::map(as.matrix)
   actual_bias &lt;- bias3[[.x]]
-  purrr::map2(result_conv2, kern, convolve) %&gt;% 
-    purrr::reduce(magrittr::add) %&gt;% 
+  purrr::map2(result_conv2, kern, convolve) %&gt;%
+    purrr::reduce(magrittr::add) %&gt;%
     add_bias(actual_bias) %&gt;%
-    relu() %&gt;% 
+    relu() %&gt;%
     max_pool()
 })</code></pre>
 <p>Plotando os resultados, temos</p>
@@ -347,21 +345,21 @@ dim(w3)</code></pre>
 m2</code></pre>
 <pre><code>Model
 ____________________________________________________________________________________________________
-Layer (type)                                 Output Shape                            Param #        
+Layer (type)                                 Output Shape                            Param #
 ====================================================================================================
-conv2d_4_input (InputLayer)                  (None, 50, 180, 1)                      0              
+conv2d_4_input (InputLayer)                  (None, 50, 180, 1)                      0
 ____________________________________________________________________________________________________
-conv2d_4 (Conv2D)                            (None, 50, 180, 12)                     312            
+conv2d_4 (Conv2D)                            (None, 50, 180, 12)                     312
 ____________________________________________________________________________________________________
-max_pooling2d_4 (MaxPooling2D)               (None, 25, 90, 12)                      0              
+max_pooling2d_4 (MaxPooling2D)               (None, 25, 90, 12)                      0
 ____________________________________________________________________________________________________
-conv2d_5 (Conv2D)                            (None, 25, 90, 48)                      14448          
+conv2d_5 (Conv2D)                            (None, 25, 90, 48)                      14448
 ____________________________________________________________________________________________________
-max_pooling2d_5 (MaxPooling2D)               (None, 12, 45, 48)                      0              
+max_pooling2d_5 (MaxPooling2D)               (None, 12, 45, 48)                      0
 ____________________________________________________________________________________________________
-conv2d_6 (Conv2D)                            (None, 12, 45, 96)                      115296         
+conv2d_6 (Conv2D)                            (None, 12, 45, 96)                      115296
 ____________________________________________________________________________________________________
-max_pooling2d_6 (MaxPooling2D)               (None, 6, 22, 96)                       0              
+max_pooling2d_6 (MaxPooling2D)               (None, 6, 22, 96)                       0
 ====================================================================================================
 Total params: 130,056
 Trainable params: 130,056
@@ -376,8 +374,8 @@ dim(res)</code></pre>
 <p>O resultado pode ser plotado da seguinte forma:</p>
 <pre class="r"><code>par(mfrow = c(12, 8), mar = c(.1,.1,.1,.1))
 purrr::walk(seq_len(dim(res)[4]), ~{
-  array(res[,,,.x], c(dim(res)[2:3], 3)) %&gt;% 
-  image_read() %&gt;% 
+  array(res[,,,.x], c(dim(res)[2:3], 3)) %&gt;%
+  image_read() %&gt;%
   plot()
 })</code></pre>
 <p>Ufa, ficou igualzinho!</p>
@@ -402,19 +400,19 @@ all.equal(sort(res), sort(w_calculado), tolerance = 1e-6)</code></pre>
 <p>Como já estamos no framework do <code>keras</code>, acabamos fazendo tudo lá dentro. Após jogar tudo no vetorzão, aplicamos mais dois layers de redes neurais comuns, que funcionam como a regressão logística. O único detalhe sensível é que, como estamos prevendo 6 letras ao mesmo tempo, precisamos novamente transformar esse vetor em uma matriz <code>35x6</code>, sendo <code>35</code> o total de letras possíveis por posição e <code>6</code> a quantidade de posições.</p>
 <p>Abaixo, montei uma tabelinha com as probabilidades de cada letra nas posições correspondentes. Substituí valores muito pequenos por <code>.</code> para ver melhor.</p>
 <pre class="r"><code>res2 &lt;- keras::predict_proba(m$model, X)
-probabilidades &lt;- res2[1,,] %&gt;% 
-  tibble::as_tibble() %&gt;% 
-  purrr::set_names(m$labs) %&gt;% 
-  tidyr::gather(letra, prob) %&gt;% 
-  dplyr::group_by(letra) %&gt;% 
-  dplyr::mutate(pos = 1:n()) %&gt;% 
-  dplyr::ungroup() %&gt;% 
-  dplyr::mutate(prob = dplyr::if_else(prob &lt; 5e-5, &quot;.&quot;, as.character(round(prob, 6))) ) %&gt;% 
+probabilidades &lt;- res2[1,,] %&gt;%
+  tibble::as_tibble() %&gt;%
+  purrr::set_names(m$labs) %&gt;%
+  tidyr::gather(letra, prob) %&gt;%
+  dplyr::group_by(letra) %&gt;%
+  dplyr::mutate(pos = 1:n()) %&gt;%
+  dplyr::ungroup() %&gt;%
+  dplyr::mutate(prob = dplyr::if_else(prob &lt; 5e-5, &quot;.&quot;, as.character(round(prob, 6))) ) %&gt;%
   tidyr::spread(pos, prob, sep = &quot;&quot;)</code></pre>
 <p>Ficamos então com “o” na primeira posição, “g” na segunda posição, “7” na terceira posição, “v” na quarta posição, “5” na quinta posição e “q” na sexta posição. Ou seja, “og7v5q”.</p>
 <p>Vamos ver a imagem novamente:</p>
-<pre class="r"><code>arq %&gt;% 
-  read_captcha() %&gt;% 
+<pre class="r"><code>arq %&gt;%
+  read_captcha() %&gt;%
   purrr::pluck(1) %&gt;%
   plot()</code></pre>
 <p>Parece que funcionou!</p>

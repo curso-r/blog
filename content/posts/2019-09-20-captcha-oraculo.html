@@ -3,7 +3,7 @@ title: "Quebrando Captchas - Parte VII: Oráculos"
 date: "2019-11-20"
 categories: ["tutoriais"]
 tags: ["captcha"]
-image: "images/posts/banner/captcha_07.png"
+image: "images/posts/banner/captcha_07.webp"
 author: ["Julio"]
 summary: "Nesse post não vou falar da companhia Oracle, muito menos de Pythia, a oráculo de Delphi. Aqui vou mostrar uma parte pouco discutida dos captchas, que é a possibilidade de usar oráculos para aprender."
 editor_options: 
@@ -67,7 +67,7 @@ oracle_mnist &lt;- function(model = &quot;ask&quot;, type = 0) {
 }</code></pre>
 <p>Vamos testar! Esse é um caso que acertei</p>
 <pre class="r"><code>result &lt;- oracle_mnist(type = 0)</code></pre>
-<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha1.png" /></p>
+<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha1.webp" /></p>
 <pre><code>Answer: 87685</code></pre>
 <pre class="r"><code>result$res</code></pre>
 <pre><code>$predito
@@ -83,7 +83,7 @@ $gabarito
 NULL</code></pre>
 <p>E esse é um caso que errei, e mandei mostrar todos os outputs possíveis:</p>
 <pre class="r"><code>result &lt;- oracle_mnist(type = 2)</code></pre>
-<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha2.png" /></p>
+<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha2.webp" /></p>
 <pre><code>Answer: 56198</code></pre>
 <pre class="r"><code>result$res</code></pre>
 <pre><code>$predito
@@ -281,7 +281,7 @@ $quais
 $gabarito
 [1] 1 2 2 7 7</code></pre>
 <p>Veja qual foi o caso que o modelo errou:</p>
-<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha3.png" /></p>
+<p><img src="/images/posts/conteudo/captcha-oraculo-1/captcha3.webp" /></p>
 <p>Não parece tão fácil de ver que é um 7, né?</p>
 </div>
 <div id="pacote-mimir" class="section level2">

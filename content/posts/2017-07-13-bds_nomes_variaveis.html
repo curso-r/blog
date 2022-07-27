@@ -3,13 +3,11 @@ title: "Arrumando BDs: nome das variáveis"
 date: "2017-07-12"
 tags: ["base de dados", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/bds_ruins.jpg"
+image: "images/posts/banner/bds_ruins.webp"
 author: ["William"]
 summary: "Neste post, mostraremos uma forma rápida para padronizar os nomes das variáveis de uma base de dados, deixando-os mais adequados para o restante da análise."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Arrumar base de dados é uma tarefa chata, perigosa e pode consumir uma grande parcela do tempo total do projeto.</p>
@@ -29,9 +27,9 @@ dados %&gt;% names
 ## [16] &quot;Refrig/dia&quot;           &quot;Sedentario&quot;           &quot;ativ. Fisica&quot;</code></pre>
 <p>Vejam que os nomes têm letras maiúsculas, acentos, parênteses, pontos e barras. Não é impossível fazer a análise com esses nomes, mas geralmente atrapalha bastante quando precisamos selecionar algumas dessas colunas. O ideal seria ter os nomes padronizados, até para ficar mais fácil de lembrarmos deles.</p>
 <p>Para deixar o exemplo reprodutível sem a necessidade de baixar a bd, gerei o código para criar um vetor com o nome das variáveis.</p>
-<pre class="r"><code>dados %&gt;% 
-  names %&gt;% 
-  paste0(&quot;&#39;&quot;, ., &quot;&#39;&quot;,  collapse = &quot;, &quot;) %&gt;% 
+<pre class="r"><code>dados %&gt;%
+  names %&gt;%
+  paste0(&quot;&#39;&quot;, ., &quot;&#39;&quot;,  collapse = &quot;, &quot;) %&gt;%
   paste0(&quot;c(&quot;, ., &quot;)&quot;)
 ## [1] &quot;c(&#39;Sexo&#39;, &#39;Nascimento&#39;, &#39;Idade&#39;, &#39;Inclusão&#39;, &#39;Cor&#39;, &#39;Peso&#39;, &#39;Altura&#39;, &#39;cintura&#39;, &#39;IMC&#39;, &#39;Superfície corporal&#39;, &#39;Tabagismo&#39;, &#39;cg.tabag (cig/dia)&#39;, &#39;Alcool (dose/semana)&#39;, &#39;Drogas ilícitas&#39;, &#39;Cafeína/dia&#39;, &#39;Refrig/dia&#39;, &#39;Sedentario&#39;, &#39;ativ. Fisica&#39;)&quot;</code></pre>
 <p>Para padronizar os nomes (todos ao mesmo tempo), utilizei o código abaixo. Se você não está familiarizado com as expressões regulares (regex), temos um <a href="http://material.curso-r.com/stringr/#express%C3%B5es-regulares">pequeno tuturial no material do nosso curso</a>. Veja o que cada linha faz.</p>
@@ -44,12 +42,12 @@ dados %&gt;% names
 <li><code>stringr::str_replace("_$", "")</code>: remove os subtraços no final dos nomes.</li>
 </ul>
 <pre class="r"><code>nomes &lt;- dados %&gt;%
-  names %&gt;% 
-  stringr::str_trim() %&gt;% 
-  stringr::str_to_lower() %&gt;% 
-  abjutils::rm_accent() %&gt;% 
-  stringr::str_replace_all(&quot;[/&#39; &#39;.()]&quot;, &quot;_&quot;) %&gt;% 
-  stringr::str_replace_all(&quot;_+&quot;, &quot;_&quot;) %&gt;% 
+  names %&gt;%
+  stringr::str_trim() %&gt;%
+  stringr::str_to_lower() %&gt;%
+  abjutils::rm_accent() %&gt;%
+  stringr::str_replace_all(&quot;[/&#39; &#39;.()]&quot;, &quot;_&quot;) %&gt;%
+  stringr::str_replace_all(&quot;_+&quot;, &quot;_&quot;) %&gt;%
   stringr::str_replace(&quot;_$&quot;, &quot;&quot;)
 
 nomes

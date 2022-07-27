@@ -79,10 +79,10 @@ weight = 5
 
 # deult parameter
 [params]
-logo = "images/logo.png"
-footerLogo = "images/footerLogo.png"
+logo = "images/logo.webp"
+footerLogo = "images/footerLogo.webp"
 home = "Home"
-footerImage = "images/footerImage.jpg"
+footerImage = "images/footerImage.webp"
 # theme layout ( two layout is available, "1" and "2" )
 layout = "1"
 # Meta data

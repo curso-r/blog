@@ -3,13 +3,11 @@ title: "Salvando data.frames: uma comparação"
 date: "2017-07-20"
 tags: ["base de dados"]
 categories: ["tutoriais"]
-image: "images/posts/banner/banner-datasets.jpg"
+image: "images/posts/banner/banner-datasets.webp"
 author: ["Daniel"]
 summary: "Salvar data.frames para ler depois é uma tarefa muito comum para quem trabalha com R. Veja aqui algumas maneiras de como fazer isso de forma rápida e de forma que possa te salvar tempo na hora de carregá-lo novamente."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Salvar data.frames para ler depois é uma tarefa muito comum para quem trabalha com R,
@@ -32,17 +30,17 @@ x &lt;- data.frame(
   stringsAsFactors = FALSE)</code></pre>
 <p>Agora veja o tempo que demoramos para salvá-lo com o <code>saveRDS</code>.</p>
 <pre class="r"><code>system.time({
-  saveRDS(x, &quot;~/Desktop/saveRDS.rds&quot;)  
+  saveRDS(x, &quot;~/Desktop/saveRDS.rds&quot;)
 })
- #   user  system elapsed 
- # 19.300   0.112  19.386 </code></pre>
+ #   user  system elapsed
+ # 19.300   0.112  19.386</code></pre>
 <p>O espaço ocupado pelo arquivo é de 95MB. Indicando para a função que você não deseja
 comprimir:</p>
 <pre class="r"><code>system.time({
-  saveRDS(x, &quot;~/Desktop/saveRDS2.rds&quot;, compress = FALSE)  
+  saveRDS(x, &quot;~/Desktop/saveRDS2.rds&quot;, compress = FALSE)
 })
-#  user  system elapsed 
-# 0.260   0.116   0.377 </code></pre>
+#  user  system elapsed
+# 0.260   0.116   0.377</code></pre>
 <p>O tempo vai para menos de 1s. Mas agora o arquivo ficou com 200MB.
 O pacote <code>readr</code> tem uma função chamada <code>write_rds</code> que é um wrapper de <code>saveRDS</code>
 que por padrão não comprime os arquivos, já que o Hadley diz que armazenamento é,
@@ -50,15 +48,15 @@ em geral, muito mais barato do que tempo de processamento.</p>
 <p>É importante também verificar o tempo que demoramos para ler o arquivo novamente para
 o R. No caso ler o arquivo comprimido demora 2x mais do que o arquivo não comprimido.</p>
 <pre class="r"><code>system.time({
-  a &lt;- readRDS(&quot;~/Desktop/saveRDS.rds&quot;)  
+  a &lt;- readRDS(&quot;~/Desktop/saveRDS.rds&quot;)
 })
-#  user  system elapsed 
-# 1.068   0.040   1.105 
+#  user  system elapsed
+# 1.068   0.040   1.105
 system.time({
-  a &lt;- readRDS(&quot;~/Desktop/saveRDS2.rds&quot;)  
+  a &lt;- readRDS(&quot;~/Desktop/saveRDS2.rds&quot;)
 })
-#  user  system elapsed 
-# 0.380   0.068   0.447 </code></pre>
+#  user  system elapsed
+# 0.380   0.068   0.447</code></pre>
 <p>Para salvar <code>data.frames</code> do R no disco, <code>saveRDS</code> é sempre a minha primeira opção:
 é relativamente rápido para ler e escrever e não exige instalação de nenhum pacote.</p>
 <p>Além disso, o <code>saveRDS</code> serve para praticamente qualquer tipo de objeto do R, ou seja,
@@ -88,14 +86,14 @@ a RAM de uma vez só.</p>
 system.time({
   write_feather(x, &quot;~/Desktop/feather.feather&quot;)
 })
-#  user  system elapsed 
-# 0.172   0.084   0.253 </code></pre>
+#  user  system elapsed
+# 0.172   0.084   0.253</code></pre>
 <p>O arquivo produzido pesa 162MB. Para ler o arquivo salvo:</p>
 <pre class="r"><code>system.time({
   a &lt;- read_feather(&quot;~/Desktop/feather.feather&quot;)
 })
-#  user  system elapsed 
-# 0.112   0.020   0.131 </code></pre>
+#  user  system elapsed
+# 0.112   0.020   0.131</code></pre>
 <p>Usando o <code>feather</code> para ler apenas algumas linhas e colunas.</p>
 <pre class="r"><code>a &lt;- feather(&quot;~/Desktop/feather.feather&quot;)
 b &lt;- a[5000:6000, 1:3]</code></pre>
@@ -103,7 +101,7 @@ b &lt;- a[5000:6000, 1:3]</code></pre>
 <div id="fst" class="section level1">
 <h1>fst</h1>
 <p><a href="https://github.com/fstpackage/fst"><code>fst</code> é um pacote</a> para ler e escrever <code>data.frames</code> de forma muito rápida.</p>
-<p><img src="/images/posts/conteudo/escrevendo-data-frames/README-speedCode-1.png" /></p>
+<p><img src="/images/posts/conteudo/escrevendo-data-frames/README-speedCode-1.webp" /></p>
 <p>A imagem (retirada <a href="https://github.com/fstpackage/fst">daqui</a>) acima mostra a sua velocidade. O <code>fst</code> é mais ou menos 3 vezes mais rápido
 para ler os arquivos salvos e cerca de 2x mais rápido para escrevê-los. O arquivo
 salvo pelo <code>fst</code> é também um pouco menor: 130MB.</p>
@@ -111,12 +109,12 @@ salvo pelo <code>fst</code> é também um pouco menor: 130MB.</p>
 <pre class="r"><code>library(fst)
 # salvar
 write.fst(x, &quot;/home/daniel/Desktop/dataset.fst&quot;)
-  
+
 # ler
 a &lt;- read.fst(&quot;~/Desktop/dataset.fst&quot;)
 
 # ler apenas algumas linhas e colunas
-b &lt;- read.fst(&quot;~/Desktop/dataset.fst&quot;, c(&quot;Logicals&quot;, &quot;Text&quot;), 2000, 4990) </code></pre>
+b &lt;- read.fst(&quot;~/Desktop/dataset.fst&quot;, c(&quot;Logicals&quot;, &quot;Text&quot;), 2000, 4990)</code></pre>
 <p><strong>Note</strong> Como o Sillas mencionou nos comentários, a versão do CRAN do <code>fst</code> salva
 datas como numericos no arquivo. Os números podedm sser convertidos para data novamente
 usando a função <code>as.Date</code> do pacote <code>zoo</code>, mas tem que tomar cuidado!</p>

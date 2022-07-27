@@ -3,7 +3,7 @@ title: "Programando com a comunidade"
 date: "2019-08-19"
 tags: ["comunidade"]
 categories: ["discussões"]
-image: "images/posts/banner/comunidade.jpeg"
+image: "images/posts/banner/comunidade.webp"
 author: ["Julio"]
 summary: "Trabalhar em grupo é difícil, mas os esforços se pagam. Aqui discuto alguns aspectos importantes para tirar proveito da melhor parte do R: a comunidade (Imagem de Allison Holst)."
 ---
@@ -23,7 +23,7 @@ Esse post é uma tentativa de desenvolver esse tópico adicional. Me baseei na p
 Todos nós fazemos parte da comunidade. Ela é o motor que faz a ciência aberta andar e os pacotes do R serem criados. Ninguém é dono da comunidade -- e nunca será. A única forma de tirar proveito dela, é contribuindo, pois ao contribuir, colocamos atraímos a atenção dos trabalhos das outras pessoas. É como se fosse o modelo da colcha de retalhos da teoria da relatividade do Einstein: cada pessoa atrai os trabalhos das outra pessoas, que seguem em diferentes direções.
 
 ```{r, fig.cap="Quem será que é a bolinha amarela?"}
-knitr::include_graphics("/images/posts/conteudo/comunidade/rubber-sheet.png", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/comunidade/rubber-sheet.webp", error = FALSE)
 ```
 
 Contribuir com a comunidade tem duas vantagens principais, ambas indiretas:
@@ -42,7 +42,7 @@ Mas é claro que essas vantagens vêm com um custo. Para contribuir de forma efe
 Na comunidade do R, isso envolve, por exemplo: i) usar do GitHub, ii) os [princípios tidy](https://tidyverse.tidyverse.org/articles/manifesto.html) e iii) estilos de programação, como o [styleguide do tidyverse](https://style.tidyverse.org), dentre muitos outros. 
 
 ```{r}
-knitr::include_graphics("/images/posts/conteudo/comunidade/gentileza.png", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/comunidade/gentileza.webp", error = FALSE)
 ```
 
 É importante destacar que esses padrões não são regras definitivas; são apenas convenções! Isso significa que não devemos ficar bravos com quem não usa, até porque nós mesmos podemos acabar não usando no futuro.
@@ -62,7 +62,7 @@ Mas tome cuidado. As redes socias tentam de todas as formas se tornar o objetivo
 A rede social pode ser tóxica e nos tornar improdutivos. Por isso, temos de usá-la com parcimônia e consciência.
 
 ```{r, fig.cap="https://xkcd.com/2051/"}
-knitr::include_graphics("/images/posts/conteudo/comunidade/bad_opinions.png", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/comunidade/bad_opinions.webp", error = FALSE)
 ```
 
 ## A comunidade é inclusiva
@@ -74,7 +74,7 @@ Agora, regra da comunidade é ser __gentil__, mesmo com quem não é gentil com 
 Na comunidade do R, isso acontece de forma muito especial. É só ler o [meu post sobre a useR](https://www.curso-r.com/blog/2019-07-14-user2019/) ou o [post da Bruna sobre a rstudio::conf](https://www.curso-r.com/blog/2019-01-30-rconf/) para notar o quanto isso é importante. E é impossível não mencionar aqui o impacto que o RLadies tem nesse grande avanço. Talvez um gráfico seja melhor do que palavras para explicar esse fenômeno:
 
 ```{r, fig.cap="https://twitter.com/RLadiesGlobal/status/1148600179236442112/photo/1"}
-knitr::include_graphics("/images/posts/conteudo/comunidade/rladies-growth.jpeg", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/comunidade/rladies-growth.webp", error = FALSE)
 ```
 
 ## É trabalho mesmo?

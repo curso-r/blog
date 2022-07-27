@@ -3,7 +3,7 @@ title: "Três Pontinhos: Como Funcionam os Dots"
 date: "2021-12-03"
 tags: ["conceitos", "dots"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/tutorial-dots.jpg"
+image: "images/posts/banner/tutorial-dots.webp"
 author: ["Caio"]
 summary: "Com certeza você já lidou com os '...' do R, mas talvez ainda não saiba como eles funcionam. Está na hora de mudar isso!"
 draft: false

@@ -3,7 +3,7 @@ title: "Quebrando CAPTCHAs - Parte III: Segmentação de imagens"
 date: "2017-07-22"
 tags: ["captcha"]
 categories: ["análises"]
-image: "images/posts/banner/captcha_03.png"
+image: "images/posts/banner/captcha_03.webp"
 author: ["Julio"]
 summary: "Digamos que você tenha uma base de dados de treino composta por N imagens com os textos classificados. Nossa resposta nesse caso é uma palavra de k caracteres, com p valores possíveis cada. O problema de modelar o CAPTCHA diretamente é que a variável resposta tem um..."
 retired: true

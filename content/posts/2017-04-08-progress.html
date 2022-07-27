@@ -3,13 +3,11 @@ title: "As barras do progresso"
 date: "2017-04-10"
 tags: ["coding", "pacotes", "progress"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/progress.png"
+image: "images/posts/banner/progress.webp"
 author: ["Julio"]
 summary: "Na jornada da ciência de dados, muitas vezes precisamos rodar um mesmo algoritmo em vários objetos distintos. Quando o algoritmo é pesado ou a lista de objetos é longa, é importante saber em que passo estamos e quanto vai demorar para terminar."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Na jornada da ciência de dados, muitas vezes precisamos rodar um mesmo algoritmo em vários objetos distintos. Quando o algoritmo é pesado ou a lista de objetos é longa, é importante saber em que passo estamos e quanto vai demorar para terminar.</p>
@@ -186,7 +184,7 @@ purrr_sem &lt;- function(nums) {
 </tbody>
 </table>
 <p>Mas não leve esses resultados tão a sério. Na prática, a parte mais demorada fica na função aplicada e não no funcional utilizado, implicando que essas diferenças sejam ignoráveis. Só recomendo mesmo abandonar o <code>for()</code> para operações desse tipo, pois o tempo de execução não cresce <strong>linearmente</strong> com o tamanho dos objetos, como é possível ver na Figura <a href="#fig:for">1</a>.</p>
-<div class="figure"><span id="fig:for"></span>
+<div class="figure"><span style="display:block;" id="fig:for"></span>
 <img src="/posts/2017-04-08-progress_files/figure-html/for-1.png" alt="Tempo do for em função do número de inputs" width="768" />
 <p class="caption">
 Figura 1: Tempo do for em função do número de inputs
@@ -210,7 +208,7 @@ Figura 1: Tempo do for em função do número de inputs
 <li><a href="http://adv-r.had.co.nz/Functional-programming.html">Programação funcional</a>.</li>
 </ul>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
 <li id="fn1"><p>É provável que o <code>purrr</code> ganhe essa funcionalidade num futuro próximo. <a href="https://github.com/tidyverse/purrr/issues/149">Veja essa discussão</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>

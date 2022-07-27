@@ -3,12 +3,11 @@ title: "Environments"
 date: "2017-06-19"
 tags: ["environments"]
 categories: ["conceitos"]
-image: "images/posts/banner/parallel-universe.jpeg"
+image: "images/posts/banner/parallel-universe.webp"
 author: ["William"]
 summary: "Se você já utilizou o R algumas vezes, com certeza já se deparou com o termo environment. Neste post, vamos tentar responder as três perguntas básicas para entendermos alguma coisa no R: 1. o que é? 2. para que serve? e 3. como NÃO usar?"
 ---
 
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>Se você utiliza o R regularmente, com certeza já se deparou com o termo <em>environment</em>. Ele aparece como um painel do RStudio, quando acessamos o código de uma função e (implicitamente) quando carregamos pacotes. Neste post, vamos tentar responder as três perguntas básicas sobre qualquer coisa no R: 1. o que é? 2. para que serve? e 3. como NÃO usar?</p>
@@ -51,11 +50,11 @@ summary: "Se você já utilizou o R algumas vezes, com certeza já se deparou co
 ## [1] 16</code></pre>
 <p>Essa estrutura é muito útil na hora de utilizar funções. Sempre que uma função é chamada, um novo <em>environment</em> é criado, o <em>environment</em> de avaliação, que contém os objetos usados como argumento da função, os objetos criados dentro da função e aponta para o <em>environment</em> onde a função foi criada (geralmente o <em>global</em>).</p>
 <pre class="r"><code>f &lt;- function(a, b) {
-  
+
   c &lt;- a + b
-  
+
   return(c)
-  
+
 }
 
 environment(f)
@@ -67,10 +66,10 @@ environment(f)
 c
 ## [1] 16</code></pre>
 <p>Segundo, podemos utilizar objetos dentro da função sem defini-los lá dentro.</p>
-<pre class="r"><code>f &lt;- function(b) { 
+<pre class="r"><code>f &lt;- function(b) {
 
   return(a + b)
-    
+
 }
 
 f(108)
@@ -93,7 +92,7 @@ search()
 ##  [7] &quot;package:datasets&quot;  &quot;package:methods&quot;   &quot;Autoloads&quot;        
 ## [10] &quot;package:base&quot;</code></pre>
 <p>É por isso que, ao carregar um pacote, podemos utilizar as suas funções sem a necessidade de escrever coisas do tipo <code>ggplot2::geom_point()</code>. Agora, veja o que acontece quando usamos a função <code>attach()</code></p>
-<pre class="r"><code>mighty &lt;- list(&quot;Jason&quot; = &quot;vermelho&quot;, &quot;Zach&quot; = &quot;Preto&quot;, &quot;Billy&quot; = &quot;Azul&quot;, 
+<pre class="r"><code>mighty &lt;- list(&quot;Jason&quot; = &quot;vermelho&quot;, &quot;Zach&quot; = &quot;Preto&quot;, &quot;Billy&quot; = &quot;Azul&quot;,
      &quot;Trini&quot; = &quot;Amarela&quot;, &quot;Kimberly&quot; = &quot;Rosa&quot;, &quot;Thomas&quot; = &quot;Verde&quot;)
 
 attach(mighty)
@@ -118,12 +117,12 @@ search()
 ##  [7] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
 ## [10] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
 <p>O <em>environment</em> do pacote <code>dplyr</code> aparece antes do <code>mighty</code>. Isso quer dizer que os objetos do <em>mighty</em> podem ser mascarados por todos os pacotes que você carregar a seguir. Veja um simples exemplo de como as coisas podem dar errado.</p>
-<pre class="r"><code>dados &lt;- tibble::tibble(paciente = 1:30, 
+<pre class="r"><code>dados &lt;- tibble::tibble(paciente = 1:30,
                         cancer = rbinom(30, size = 1, prob = 0.5))
 
 attach(dados)
 cancer
-##  [1] 1 0 0 0 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 0 0 1 0 1 0 1 0</code></pre>
+##  [1] 1 0 0 1 0 0 1 1 1 0 0 1 1 0 1 1 1 0 1 0 0 0 1 0 1 1 0 1 0 1</code></pre>
 <p>Com o código acima, criamos um banco de dados representando 30 pacientes com (1) ou sem (0) um certo tipo de câncer. As variáveis <code>paciente</code> e <code>cancer</code> foram anexadas ao rodarmos <code>attach(dados)</code>.</p>
 <p>Agora, imagine se esse banco de dados tiver informações de tempo até a remissão do câncer e quisermos rodar modelos de sobrevivência. Um passo natural seria carregar a biblioteca <code>survival</code>.</p>
 <pre class="r"><code>library(survival)

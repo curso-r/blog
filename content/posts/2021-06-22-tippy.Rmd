@@ -3,7 +3,7 @@ title: "Colocando tooltips no Shiny (e no Rmarkdown)"
 date: "2021-06-22"
 tags: ["shiny", "tooltips"]
 categories: ["tutoriais"]
-image: "images/posts/banner/tippy.jpeg"
+image: "images/posts/banner/tippy.webp"
 author: ["William"]
 summary: "Aprenda colocar tooltips em aplicativos Shiny e arquivos R Markdown."
 ---
@@ -50,7 +50,7 @@ tippy::with_tippy(
 ```
 
 ```{r, echo = FALSE, fig.alt="Tooltip colocada em um numericInput", out.width="70%"}
-knitr::include_graphics("/images/posts/conteudo/tippy/tippy.png")
+knitr::include_graphics("/images/posts/conteudo/tippy/tippy.webp")
 ```
 
 Você também pode aplicar a mesma *tooltip* a vários elementos utilizando a função `tippy_class()`.
@@ -90,7 +90,7 @@ fluidRow(
 ```
 
 ```{r, echo = FALSE, fig.alt="Tooltip colocada em um valueBox.", out.width="90%"}
-knitr::include_graphics("/images/posts/conteudo/tippy/tippy_class.png")
+knitr::include_graphics("/images/posts/conteudo/tippy/tippy_class.webp")
 ```
 
 Você pode customizar a *tooltip* seguindo os parâmetros da [documentação oficial da biblioteca `tippy.js`](https://atomiks.github.io/tippyjs/v6/all-props/).
@@ -105,7 +105,7 @@ tippy::tippy_class(
 ```
 
 ```{r, echo = FALSE, fig.alt="Tooltip aparecendo no lado esquerdo do valueBox.", out.width="90%"}
-knitr::include_graphics("/images/posts/conteudo/tippy/tippy_left.png")
+knitr::include_graphics("/images/posts/conteudo/tippy/tippy_left.webp")
 ```
 
 Os fragmentos de código acima pertencem ao app a seguir. Rode o app para ver as *tooltips* em funcionamento.

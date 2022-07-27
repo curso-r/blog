@@ -3,15 +3,13 @@ title: "K-means e paleta de cores"
 date: "2017-04-22"
 tags: ["imagens", "cluster", "kmeans"]
 categories: ["análises"]
-image: "images/posts/banner/paleta-cores.png"
+image: "images/posts/banner/paleta-cores.webp"
 author: ["Daniel"]
-summary: "Uma aplicação interessante de algoritmos de clusterização é a obtenção de 
+summary: "Uma aplicação interessante de algoritmos de clusterização é a obtenção de
 paletas de cores a partir de imagens. Veja como isso pode ser feito usando
 o R."
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Uma aplicação interessante de algoritmos de clusterização é a obtenção de
@@ -29,7 +27,7 @@ img &lt;- readJPEG(&quot;img/david-bowie.jpg&quot;)</code></pre>
 <p>Podemos exibir a imagem no R, convertendo o array, primeiro em um obheto do tipo
 <code>raster</code> e depois simplesmente usando a função <code>plot</code>.</p>
 <pre class="r"><code>plot(as.raster(img))</code></pre>
-<p><img src="/images/posts/conteudo/paleta-de-cores/david-bowie.jpg" /></p>
+<p><img src="/images/posts/conteudo/paleta-de-cores/david-bowie.webp" /></p>
 <p>O problema de obter a paleta de cores de uma imagem pode ser formulado como um
 problema de clusterização: “obter grupos de individuos que possuem a menor diferença dentro de cada um e a maior diferença possível entre os grupos de
 acordo com algumas características das unidades amostrais”.</p>
@@ -53,8 +51,8 @@ Podemos obter isso com algumas manipulações usando o <code>dplyr</code>.</p>
 <pre class="r"><code>library(tibble)
 library(dplyr)
 img_df &lt;- tibble(
-  r = img_matrix[,1], 
-  g = img_matrix[,2], 
+  r = img_matrix[,1],
+  g = img_matrix[,2],
   b = img_matrix[,3],
   cluster = km$cluster
   )
@@ -62,7 +60,7 @@ centroides &lt;- img_df %&gt;%
   group_by(cluster) %&gt;%
   summarise_all(mean)</code></pre>
 <pre class="r"><code>centroides
-## # A tibble: 6 x 4
+## # A tibble: 6 × 4
 ##   cluster     r      g     b
 ##     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1       1 0.221 0.273  0.441
@@ -97,8 +95,8 @@ Vamos colocar todo o código que fizemos passo a passo aqui em uma única funç�
   # treina o algoritmo de k médias
   km &lt;- kmeans(img_matrix, centers = num_cores)
   img_df &lt;- tibble(
-    r = img_matrix[,1], 
-    g = img_matrix[,2], 
+    r = img_matrix[,1],
+    g = img_matrix[,2],
     b = img_matrix[,3],
     cluster = km$cluster
   )
@@ -116,7 +114,7 @@ Vamos colocar todo o código que fizemos passo a passo aqui em uma única funç�
 Wes Anderson, que é famoso por fazer filmes com belas paletas de cores.</p>
 <pre class="r"><code>moonrise &lt;- readJPEG(&quot;img/moonrise-kingdom.jpg&quot;)
 plot(as.raster(moonrise))</code></pre>
-<p><img src="/images/posts/conteudo/paleta-de-cores/moonrise-kingdom.jpg" /></p>
+<p><img src="/images/posts/conteudo/paleta-de-cores/moonrise-kingdom.webp" /></p>
 <pre class="r"><code>paleta &lt;- criar_paleta(moonrise, 6)</code></pre>
 <pre class="r"><code>exibir(paleta)</code></pre>
 <p><img src="/posts/2017-04-21-paleta-de-cores_files/figure-html/paleta2-1.png" width="672" /></p>

@@ -3,7 +3,7 @@ title: "Shiny em Produção: dockerize seu app com 1 linha"
 date: "2019-09-13"
 tags: ["docker", "shiny"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/app-docker.jpeg"
+image: "images/posts/banner/app-docker.webp"
 author: ["Caio"]
 summary: "Depois de transformar seu shiny app em pacote, agora só resta transformá-lo em docker."
 ---

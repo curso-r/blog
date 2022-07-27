@@ -3,7 +3,7 @@ title: "São Paulo e o problema da mochila"
 date: "2017-08-12"
 tags: ["mapas"]
 categories: ["análises"]
-image: "images/posts/banner/pug_knapsack.png"
+image: "images/posts/banner/pug_knapsack.webp"
 author: ["Julio"]
 summary: "São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios."
 retired: false
@@ -227,7 +227,7 @@ da_sf %>%
 ```
 
 ```{r final, fig.cap="Resultado final da análise. A área em azul tem a mesma população da área em vermelho!", eval=TRUE, echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/sao-paulo/mapa_final.png")
+knitr::include_graphics("/images/posts/conteudo/sao-paulo/mapa_final.webp")
 ```
 
 É isso! Happy coding ;)

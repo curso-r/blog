@@ -19,7 +19,7 @@ Junto com o pacote, o CONRE3 fez também um aplicativo em shiny, disponível [ne
 
 A ideia dessa primeira edição do Desafio de Dados é replicar o mapa da página inicial do aplicativo que mostra a distribuição de pesquisas eleitorais por estado do Brasil.
 
-![](/images/posts/conteudo/desafio-dados/1-pesqele.png)
+![](/images/posts/conteudo/desafio-dados/1-pesqele.webp)
 
 Os dados podem ser obtidos rodando o trecho de código abaixo:
 

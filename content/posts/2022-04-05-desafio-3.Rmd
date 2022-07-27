@@ -3,7 +3,7 @@ title: "Desafio #3: Gráfico Temático Star Wars"
 date: "2022-04-05"
 tags: ["desafio curso-r", "visualização"]
 categories: ["Desafio"]
-image: "images/posts/banner/desafio-3.jpg"
+image: "images/posts/banner/desafio-3.webp"
 author: ["Tereza"]
 summary: "Esse é o primeiro desafio de visualização da Curso-R! Resolva-o e poste a sua solução em nosso Discourse!"
 ---
@@ -97,7 +97,7 @@ grafico <-
 grafico_final <- ggimage::ggbackground(gg = grafico,
                       background = imagem) 
 
-ggsave(filename = "../../static/images/posts/conteudo/desafio-3/grafico.png",
+ggsave(filename = "../../static/images/posts/conteudo/desafio-3/grafico.webp",
        plot = grafico_final, width = 10, height = 6, dpi = 600)
 
 
@@ -107,7 +107,7 @@ ggsave(filename = "../../static/images/posts/conteudo/desafio-3/grafico.png",
 
 
 ```{r echo=FALSE, fig.align="center", message=FALSE, warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/desafio-3/grafico.png")
+knitr::include_graphics("/images/posts/conteudo/desafio-3/grafico.webp")
 ```
 
 

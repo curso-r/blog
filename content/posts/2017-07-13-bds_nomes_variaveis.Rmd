@@ -3,20 +3,20 @@ title: "Arrumando BDs: nome das variáveis"
 date: "2017-07-12"
 tags: ["base de dados", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/bds_ruins.jpg"
+image: "images/posts/banner/bds_ruins.webp"
 author: ["William"]
 summary: "Neste post, mostraremos uma forma rápida para padronizar os nomes das variáveis de uma base de dados, deixando-os mais adequados para o restante da análise."
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-Arrumar base de dados é uma tarefa chata, perigosa e pode consumir uma grande parcela do tempo total do projeto. 
+Arrumar base de dados é uma tarefa chata, perigosa e pode consumir uma grande parcela do tempo total do projeto.
 
 A tarefa é chata porque é um grande retrabalho que muitas vezes cai na mão dos estatísticos. Mandar de volta para o responsável corrigir é uma opção, mas já passei por situações em que o tempo perdido no vai-e-vem da bd foi bem maior do que o tempo que eu gastaria para arrumar eu mesmo (e no fim, o banco ainda continha erros). Bds apropriadas para a análise poderiam (e deveriam) ser montados pelo pesquisador ou responsável desde o início, pois, em geral, são bem mais simples do que as que costumamos receber. Por isso, sempre vale espalhar as boas práticas de construção de bds na hora de pegar um trabalho.
 
-É uma tarefa perigosa porque mexer nos dados é sempre uma fonte de erro, principalmente quando fazemos alterações diretamente na planilha e/ou não temos conhecimento técnico sobre as variáveis. 
+É uma tarefa perigosa porque mexer nos dados é sempre uma fonte de erro, principalmente quando fazemos alterações diretamente na planilha e/ou não temos conhecimento técnico sobre as variáveis.
 
 Por fim, se a base é muito grande e tem muitos erros, precisamos encontrar formas eficientes para corrigi-la, pois mexer em variável por variável, se não for inviável, pode demandar muito tempo.
 
@@ -26,7 +26,7 @@ Sendo assim, vamos começar aqui uma pequena série de posts para ajudar nessa t
 dados <- readxl::read_excel("../../static/data/bds_nomes_variaveis/dados_nomes_variaveis.xlsx")
 ```
 
-Para isso, vou utilizar como exemplo algumas variáveis de uma base com que trabalhei alguns anos atrás. A bd original (que continha informações de pacientes do Instituto do Coração) tinha cerca 170 variáveis, então selecionei apenas algumas. 
+Para isso, vou utilizar como exemplo algumas variáveis de uma base com que trabalhei alguns anos atrás. A bd original (que continha informações de pacientes do Instituto do Coração) tinha cerca 170 variáveis, então selecionei apenas algumas.
 
 ```{r, message = FALSE}
 library(tidyverse)
@@ -39,13 +39,13 @@ Vejam que os nomes têm letras maiúsculas, acentos, parênteses, pontos e barra
 Para deixar o exemplo reprodutível sem a necessidade de baixar a bd, gerei o código para criar um vetor com o nome das variáveis.
 
 ```{r}
-dados %>% 
-  names %>% 
-  paste0("'", ., "'",  collapse = ", ") %>% 
+dados %>%
+  names %>%
+  paste0("'", ., "'",  collapse = ", ") %>%
   paste0("c(", ., ")")
 ```
 
-Para padronizar os nomes (todos ao mesmo tempo), utilizei o código abaixo. Se você não está familiarizado com as expressões regulares (regex), temos um [pequeno tuturial no material do nosso curso](http://material.curso-r.com/stringr/#express%C3%B5es-regulares). Veja o que cada linha faz. 
+Para padronizar os nomes (todos ao mesmo tempo), utilizei o código abaixo. Se você não está familiarizado com as expressões regulares (regex), temos um [pequeno tuturial no material do nosso curso](http://material.curso-r.com/stringr/#express%C3%B5es-regulares). Veja o que cada linha faz.
 
 - `stringr::str_trim()`: remove espaços do começo e do final. Não tinha nenhum caso neste exemplo, mas é sempre bom garantir.
 - `stringr::str_to_lower()`: transforma letras maiúsculas em minúsculas.
@@ -56,12 +56,12 @@ Para padronizar os nomes (todos ao mesmo tempo), utilizei o código abaixo. Se v
 
 ```{r}
 nomes <- dados %>%
-  names %>% 
-  stringr::str_trim() %>% 
-  stringr::str_to_lower() %>% 
-  abjutils::rm_accent() %>% 
-  stringr::str_replace_all("[/' '.()]", "_") %>% 
-  stringr::str_replace_all("_+", "_") %>% 
+  names %>%
+  stringr::str_trim() %>%
+  stringr::str_to_lower() %>%
+  abjutils::rm_accent() %>%
+  stringr::str_replace_all("[/' '.()]", "_") %>%
+  stringr::str_replace_all("_+", "_") %>%
   stringr::str_replace("_$", "")
 
 nomes

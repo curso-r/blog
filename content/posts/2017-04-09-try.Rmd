@@ -3,14 +3,14 @@ title: "Tratando erros: the tidy way"
 date: "2017-04-20"
 tags: ["coding", "pacotes", "purrr"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/error.jpg"
+image: "images/posts/banner/error.webp"
 author: ["Julio"]
 summary: "Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão tidy dessas soluções."
 ---
 
 
 ```{r echo=F}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão `tidy` dessas soluções.
@@ -48,7 +48,7 @@ Hoje em dia, o jeito mais arrumado de tratar erros é usando as funções `purrr
 - `quietly()` não trata erros (ou seja, ela trava quando dá erro), mas guarda informações sobre *warnings* e *messages*.
 
 ```{r, echo=FALSE, fig.cap='Admita, você não imaginava que teria de pensar em gramática para programar em R.', fig.width=8, fig.height=4, fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/try/adverbs.jpg", error = FALSE)
+knitr::include_graphics("/images/posts/conteudo/try/adverbs.webp", error = FALSE)
 ```
 
 Vamos ver as três funções colocadas em prática. Como exemplo usaremos a função `log`, que i) retorna um número quando a entrada é um número positivo, ii) dá um warning quando a entrada é um número menor ou igual a zero, e iii) dá um erro se a entrada não é um número.
@@ -78,7 +78,7 @@ Agora, os resultados:
 
 ```{r, error=TRUE}
 ## Esse código vai travar
-map(entradas, log) 
+map(entradas, log)
 ```
 
 - `safely()`:
@@ -99,7 +99,7 @@ map(entradas, possible_log)
 
 ```{r error = TRUE}
 ## Também trava, mesmo problema de log
-map(entradas, quiet_log) 
+map(entradas, quiet_log)
 
 ## Quando funciona, retorna todos os warnings e messages
 map(entradas[1:2], quiet_log)
@@ -115,13 +115,13 @@ library(tibble)
 # adiciona um resultado default caso dê erro. No caso, NA.
 safe_log2 <- log %>% safely(otherwise = NA_real_)
 
-d_result <- entradas %>% 
-  map(safe_log2) %>% 
+d_result <- entradas %>%
+  map(safe_log2) %>%
   # ao invés de uma lista de tamanho 3 com 2 elementos (result e error),
   # temos uma lista de tamanho 2 (result e error) com 3 elementos.
-  transpose() %>%    
+  transpose() %>%
   # simplifica o vetor de resultados
-  simplify_all() %>% 
+  simplify_all() %>%
   # converte para data frame
   as_tibble()
 

@@ -3,7 +3,7 @@ title: "Estatística e Música"
 date: "2017-11-03"
 tags: ["música"]
 categories: ["análises"]
-image: "images/posts/banner/music01.jpg"
+image: "images/posts/banner/music01.webp"
 author: ["Julio"]
 summary: "Já pensou em juntar estatística e música? Nessa série de posts mostro como estou pensando em fazer isso e os pacotes que vou criar nessa jornada..."
 retired: true
@@ -11,23 +11,23 @@ alternativa: ""
 ---
 
 ```{r echo=FALSE, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE, eval = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
 ```
 
 
 ```{r eval=FALSE, echo=FALSE}
 library(tidyverse)
 library(magick)
-im1 <- image_read("img/Music.jpg") %>% 
+im1 <- image_read("img/Music.jpg") %>%
   image_scale("280x280")
-im2 <- image_read("img/Rlogo.png") %>% 
-  image_scale("300x300") %>% 
+im2 <- image_read("img/Rlogo.png") %>%
+  image_scale("300x300") %>%
   image_background("white")
-image_join(im1, im2) %>% 
-  image_append() %>% 
+image_join(im1, im2) %>%
+  image_append() %>%
   image_border('white', 'x75') %>%
-  image_scale("400x297") %>% 
-  image_write('../../static/images/posts/banner/music01.jpg')
+  image_scale("400x297") %>%
+  image_write('../../static/images/posts/banner/music01.webp')
 ```
 
 > Para quem está esperando posts sobre captchas, esperem mais um pouquinho. Em novembro voltarei a postar sobre esse assunto.
@@ -49,21 +49,21 @@ Apesar da minha falta de conhecimento sobre o tema, acredito que a área de comp
 **Leitura**: extrair dados estruturados dos áudios. Envolve *Music Information Retrieval* - MIR
 
 ```{r, echo=FALSE, out.width='40%', fig.align='center'}
-knitr::include_graphics('/images/posts/conteudo/music01/music-download.png')
+knitr::include_graphics('/images/posts/conteudo/music01/music-download.webp')
 ```
 
 
 **Composição**: Criar ou completar músicas automaticamente
 
 ```{r, echo=FALSE, out.width='40%', fig.align='center'}
-knitr::include_graphics('/images/posts/conteudo/music01/music-generate.png')
+knitr::include_graphics('/images/posts/conteudo/music01/music-generate.webp')
 ```
 
 
 **Edição**: Adicionar efeitos na música para produção
 
 ```{r, echo=FALSE, out.width='40%', fig.align='center'}
-knitr::include_graphics('/images/posts/conteudo/music01/music-transform.png')
+knitr::include_graphics('/images/posts/conteudo/music01/music-transform.webp')
 ```
 
 Meu foco será na parte de composição, com foco em harmonização, que significa criar e completar harmonias das músicas dado algum estilo (e.g. Bach ou Beatles). Também tentarei criar soluções de improviso, apesar de não garantir nada.
@@ -121,25 +121,25 @@ note
 ```
 
 ```{r note, fig.width=2, fig.height=1.5, message=FALSE, warning=FALSE, eval = FALSE}
-note %>% 
+note %>%
   plot()
 ```
 
-![](/images/posts/conteudo/music01/note-1.png)
+![](/images/posts/conteudo/music01/note-1.webp)
 
 ## Exemplo
 
 ### Corais do Bach
 
 ```{r message=FALSE}
-get_composer("bach") %>% 
+get_composer("bach") %>%
   head()
 ```
 
 Vamos pegar uma delas e guardar numa variável
 
 ```{r}
-bach_music <- get_composer("bach")[61] %>% 
+bach_music <- get_composer("bach")[61] %>%
   read_music()
 ```
 
@@ -148,11 +148,11 @@ bach_music <- get_composer("bach")[61] %>%
 Basta rodar `plot()`!!
 
 ```{r bach, fig.width=6, fig.height=5, eval = FALSE}
-bach_music %>% 
+bach_music %>%
   plot()
 ```
 
-![](/images/posts/conteudo/music01/bach-1.png)
+![](/images/posts/conteudo/music01/bach-1.webp)
 
 No RStudio, você pode usar a função `view()` para visualizar a música em melhor resolução no Viewer Pane.
 

@@ -1,14 +1,14 @@
 ---
 title: "Acessando bases públicas em R: o pacote basedosdados"
-author: ["Fernando"] 
+author: ["Fernando"]
 date: '2021-05-28'
-categories: ["tutoriais"] 
-image: "images/posts/banner/bdmais_logo.png"
+categories: ["tutoriais"]
+image: "images/posts/banner/bdmais_logo.webp"
 tags: ["web scraping", "faxina", "purrr", "rvest"]
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 Todo mundo que trabalha com Ciência de Dados uma hora ou outra vai se ver mexendo com informações públicas, direta ou indiretamente. O governo é um grande repositório de dados, por isso é muito provável que uma hora ou outra algum dado disponibilizado publicamente seja relevante para você.
@@ -21,15 +21,15 @@ No post de hoje, vamos explorar o pacote `basedosdados` e também vamos ver como
 
 # O pacote `basedosdados`
 
-Os dados do BD+ são dispobinibilizados em uma instância do `BigQuery`, um serviço da `Google Cloud Platform` que possibilita a construção de um data warehouse sem servidor, escalável e de alto desempenho. As consultas à plataforma podem ser realizados em ANSI SQL (uma linguagem de consultas segundo o padrão americano). O pacote `basedosdados` oferece algumas funções auxiliares para simplificar o processo de submissão de uma query. 
+Os dados do BD+ são dispobinibilizados em uma instância do `BigQuery`, um serviço da `Google Cloud Platform` que possibilita a construção de um data warehouse sem servidor, escalável e de alto desempenho. As consultas à plataforma podem ser realizados em ANSI SQL (uma linguagem de consultas segundo o padrão americano). O pacote `basedosdados` oferece algumas funções auxiliares para simplificar o processo de submissão de uma query.
 
-Antes de explorar as funções do pacote, é necessário que você crie um projeto na `GCP`, pois o `BigQuery` do BD+ é apenas o repositório dos dados: a execução das queries propriamente ditas é realizada e cobrada na ponta que submeteu as queries. Ou seja, tipicamente você criaria uma query para ser executada tomando como referência o  `BigQuery` do BD+, mas os custos de execução ficam atrelados à sua própria conta `GCP`. Entretanto, **isso não é motivo para preocupação**: a `GCP` atualmente disponibiliza gratuitamente a manipulação de 1 TB de dados/mês e o armazenamento de 100 GB para qualquer pessoa. 
+Antes de explorar as funções do pacote, é necessário que você crie um projeto na `GCP`, pois o `BigQuery` do BD+ é apenas o repositório dos dados: a execução das queries propriamente ditas é realizada e cobrada na ponta que submeteu as queries. Ou seja, tipicamente você criaria uma query para ser executada tomando como referência o  `BigQuery` do BD+, mas os custos de execução ficam atrelados à sua própria conta `GCP`. Entretanto, **isso não é motivo para preocupação**: a `GCP` atualmente disponibiliza gratuitamente a manipulação de 1 TB de dados/mês e o armazenamento de 100 GB para qualquer pessoa.
 
 Para seguir os próximos passos e aprender mais sobre a `GCP` acesse https://console.cloud.google.com/.
 
 ## Acessando o BD+ com o pacote `basedosdados`
 
-O pacote `basedosdados` tem quatro funções: `read_sql`, `download`, `set_billing_id` e `get_billing_id`. Os ingredientes principais para usar essas funções são o `billing_id`, que é o nome da sua conta criada na `GCP` e `query`, uma consulta escrita na linguagem SQL própria do `BigQuery`. 
+O pacote `basedosdados` tem quatro funções: `read_sql`, `download`, `set_billing_id` e `get_billing_id`. Os ingredientes principais para usar essas funções são o `billing_id`, que é o nome da sua conta criada na `GCP` e `query`, uma consulta escrita na linguagem SQL própria do `BigQuery`.
 
 No exemplo abaixo vamos baixar os PIBs de alguns anos lá da `BD+`:
 
@@ -84,7 +84,7 @@ escola <- tbl(conexao_ideb, "escola") %>%
   collect()
 ```
 
-Show de bola, né? Então vai agora apoiar a galera do BD+ pra garantir que a gente continue contando com uma iniciativa tão legal na nossa comunidade! 
+Show de bola, né? Então vai agora apoiar a galera do BD+ pra garantir que a gente continue contando com uma iniciativa tão legal na nossa comunidade!
 
 # Gostou? Quer saber mais?
 
@@ -92,4 +92,4 @@ Acesse o site do [BD+](https://basedosdados.org/) e todas as suas redes sociais.
 
 Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso [R para Ciência de Dados I](https://curso-r.com/cursos/r4ds-1/) e aproveite!
 
-Caso você tenha dúvidas, entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail contato@curso-r.com. 
+Caso você tenha dúvidas, entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail contato@curso-r.com.

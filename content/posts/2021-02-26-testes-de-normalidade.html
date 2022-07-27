@@ -3,7 +3,7 @@ title: "Testes de normalidade em R - Parte 3: Quando eu devo fazer um teste de n
 date: "2021-02-26"
 tags: ["faxina", "modelagem"]
 categories: ["análises", "conceitos", "tutoriais", "r"]
-image: "images/posts/banner/gaussian-3.png"
+image: "images/posts/banner/gaussian-3.webp"
 author: ["Fernando"]
 summary: "Nessa série de posts te mostramos como descobrir se uma variável segue ou não a distribuição normal. No último texto da série, vamos conversar um pouco sobre em quais situações é importante executar testes de normalidade."
 draft: false
@@ -34,9 +34,9 @@ draft: false
 <h2>Por que devo testar normalidade depois de ajustar uma clusterização usando o método das k-médias?</h2>
 <p>Aqui a coisa é um pouco mais feia do que no caso da regressão, mas também é interessante. Uma das maneiras de construir esse algoritmo é assumindo que dentro dos seus dados, sem que você saiba, existe um certo número de distribuições gaussianas. O método das k-médias é perfeito quando essa hipótese é verdadeira: ele é capaz de encontrar perfeitamente esses grupos com um tamanho de amostra suficientemente grande. Mas o que acontece se essa hipótese for falsa?</p>
 <p>Um exemplo interessante <a href="http://varianceexplained.org/figs/2015-01-16-kmeans-free-lunch/hclust-1.png">analisado pelo David Robinson</a> é o caso em que os dados estão distribuídos ao longo de um círculo. A imagem abaixo mostra o que acontece quando rodamos um algoritmo de k-médias nesse conjunto de dados: nós quebramos as esferas/círculos no meio.</p>
-<p><img src = "https://blog.curso-r.com/images/posts/conteudo/normalidade/plot_kmeans-1.png"></p>
+<p><img src = "https://blog.curso-r.com/images/posts/conteudo/normalidade/plot_kmeans-1.webp"></p>
 <p>Esquisito né? Os dados de fato se dividem em dois grupos (o círculo de fora e a bola de dentro), o k-médias rodou, mas encontrou grupos diferentes dos “reais”. Essa é uma situação em que usar um teste de normalidade poderia nos dar uma dica de que estamos nesse cenário de desalinho entre o algoritmo utilizado e os dados disponíveis: é muito claro que os grupos encontrados pelo k-médias não seguem uma distribuição normal multivariada. A partir desse teste, poderíamos partir para um outro algoritmo que fosse capaz de encontrar esse padrão, como uma clusterização hierárquica.</p>
-<p><img src = "https://blog.curso-r.com/images/posts/conteudo/normalidade/plot_kmeans-2.png"></p>
+<p><img src = "https://blog.curso-r.com/images/posts/conteudo/normalidade/plot_kmeans-2.webp"></p>
 </div>
 </div>
 <div id="considerações-finais" class="section level1">

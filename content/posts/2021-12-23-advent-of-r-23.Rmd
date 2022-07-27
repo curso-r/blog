@@ -3,7 +3,7 @@ title: "Advent of R: Dia 23"
 date: "2021-12-23"
 tags: ["advent-of-r", "tidyverse"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/advent-of-r-23.jpeg"
+image: "images/posts/banner/advent-of-r-23.webp"
 author: ["Caio"]
 summary: "Resolvendo o Advent of Code 2021 com R: Dia 23."
 draft: false

@@ -43,7 +43,7 @@ Para importar uma tabela que está no Google Sheets, primeiramente precisamos id
 
 
 ```{r echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/url.png")
+knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/url.webp")
 ```
 
 Um exemplo de url é o seguinte, e ele encaminha para [essa tabela](https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077).
@@ -77,13 +77,13 @@ respostas_formulario <- read_sheet(url)
 Para fazer uma nova autenticação, basta escolher a opção `0`, e uma janela do navegador abrirá para fazer a autenticação:
 
 ```{r echo=FALSE, out.width="50%", fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/auth1.png")
+knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/auth1.webp")
 ```
 
 Precisamos então clicar no email desejado, selecionar todas as opções de acesso e clicar em "Continuar":
 
 ```{r echo=FALSE, out.width="50%", fig.align='center'}
-knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/auth2.png")
+knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/auth2.webp")
 ```
 
 Caso funcione, a seguinte mensagem aparecerá no navegador: `Authentication complete. Please close this page and return to R`. Isso significa que podemos voltar ao R!
@@ -192,25 +192,25 @@ Eu gosto muito de usar esse pacote para importar respostas de [formulários do G
 Aqui mostrarei como fazer isso! Primeiro precisamos criar um formulário (caso ele ainda não exista):
 
 ```{r echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/forms1.png")
+knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/forms1.webp")
 ```
 
 Ao criar o formulário, podemos clicar em "Respostas" e então clicar no logo do Google Sheets (um quadrado verde com uma linha branca horizontal e outra vertical):
 
 ```{r echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/forms2.png")
+knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/forms2.webp")
 ```
 
 O Google Forms irá perguntar qual o nome da Google Sheet a ser criada (ou também podemos selecionar uma Google Sheets que já existe):
 
 ```{r echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/forms3.png")
+knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/forms3.webp")
 ```
 
 Depois de selecionar qual a Google Sheet ficará vinculada ao formulário, a Google Sheet será aberta e podemos ver as respostas:
 
 ```{r echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/forms4.png")
+knitr::include_graphics("/images/posts/conteudo/2022-03-08-googlesheets4/forms4.webp")
 ```
 Cada coluna terá informações de uma pergunta do formulário. Inicialmente, a base terá 0 linhas, pois quando criamos o formulário ele tem 0 respostas. Porém, após alguém responder o formulário, a Google Sheet é automaticamente atualizada e apresentará a resposta. Podemos importar os dados usando a função `read_sheet()`, como mostrado anteriormente:
 

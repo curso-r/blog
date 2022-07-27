@@ -3,7 +3,7 @@ title: "Melhores trabalhos do curso R para Ciência de dados I (maio de 2020)"
 date: "2020-06-18"
 tags: ["relatórios"]
 categories: ["divulgação"]
-image: "images/posts/banner/mariokart.png"
+image: "images/posts/banner/mariokart.webp"
 author: ["William"]
 summary: "Apresentamos os melhores trabalhos de conclusão do nosso curso de R para Ciência de dados I e comentamos aspectos importantes sobre a comunicação dos resultados das nossas análises."
 ---
@@ -30,7 +30,7 @@ Destaques do trabalho da [Louise Mamedio](https://www.facebook.com/louise.schnei
 - Bom humor. A parte técnica muito bem diluída em um texto muito gostoso de ser lido, o que é muito convidativo para leitores pouco acostumados com análises de dados.
 - Direto ao ponto. Todos os seus textos são informativos, sem enrolação ou mera descrição do que já está sendo mostrado no gráfico.
 
-<img src = "/images/posts/conteudo/ganhadores-r4ds1-202005/louise.png">
+<img src = "/images/posts/conteudo/ganhadores-r4ds1-202005/louise.webp">
 
 
 Veja o trabalho completo aqui: [https://curso-r.github.io/202005-r4ds-1/trabalhos_vencedores/concursolouise.html](https://curso-r.github.io/202005-r4ds-1/trabalhos_vencedores/concursolouise.html)
@@ -42,7 +42,7 @@ Destaques do trabalho da [Camila Bertini](https://www.linkedin.com/in/camila-b-m
 - Técnica. Dashboard muito bem construído e organizado.
 - Visual. Gráficos e tabelas bem formatados, com cores, labels e legendas que ajudam a interpretação.
 
-<img src = "/images/posts/conteudo/ganhadores-r4ds1-202005/camila.png">
+<img src = "/images/posts/conteudo/ganhadores-r4ds1-202005/camila.webp">
 
 Veja o trabalho completo aqui: [https://curso-r.github.io/202005-r4ds-1/trabalhos_vencedores/Desafio_flexdasboard.html](https://curso-r.github.io/202005-r4ds-1/trabalhos_vencedores/Desafio_flexdasboard.html)
 
@@ -54,7 +54,7 @@ Destaques do trabalho do [Rodrigo Almeida](linkedin.com/in/rodrigoalmeidafigueir
 - Organização. O texto explica a análise de maneira muito bem organizada.
 - Análise crítica. As visualizações escolhidas para apresentar cada informação e a definição das variáveis com poder de atuação mostram como técnica e conhecimento do tema (negócio) devem se relacionar em uma análise de dados.
 
-<img src = "/images/posts/conteudo/ganhadores-r4ds1-202005/rodrigo.png">
+<img src = "/images/posts/conteudo/ganhadores-r4ds1-202005/rodrigo.webp">
 
 Veja o trabalho completo aqui: [https://curso-r.github.io/202005-r4ds-1/trabalhos_vencedores/Projeto_Curso-R.html](https://curso-r.github.io/202005-r4ds-1/trabalhos_vencedores/Projeto_Curso-R.html)
 
@@ -66,6 +66,6 @@ Destaques do trabalho da Mariana Costa.
 - Visual. Gráficos e tabelas bem formatados, com cores, labels e legendas que ajudam a interpretação.s
 - Conclusão clara e direta ao ponto.
 
-<img src = "/images/posts/conteudo/ganhadores-r4ds1-202005/mari.png">
+<img src = "/images/posts/conteudo/ganhadores-r4ds1-202005/mari.webp">
 
 Veja o trabalho completo aqui: [https://curso-r.github.io/202005-r4ds-1/trabalhos_vencedores/analise_descritiva.pdf](https://curso-r.github.io/202005-r4ds-1/trabalhos_vencedores/analise_descritiva.pdf)

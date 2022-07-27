@@ -3,7 +3,7 @@ title: "Instalando Anaconda + TensorFlow + Keras para R no Ubuntu 16.04 Server"
 date: "2017-06-08"
 tags: ["deep learning", "tensorflow", "keras"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/keras_no_ubuntu2.png"
+image: "images/posts/banner/keras_no_ubuntu2.webp"
 author: ["Athos"]
 summary: "Passo a passo de como preparar o Keras para R no Ubuntu 16.04 em cima do Anaconda."
 ---

@@ -3,7 +3,7 @@ title: "Causal Discovery: como estimar redes causais no R"
 date: "2021-04-27"
 tags: ["faxina", "modelagem"]
 categories: ["análises", "conceitos", "tutoriais"]
-image: "images/posts/banner/pc-alg.png"
+image: "images/posts/banner/pc-alg.webp"
 author: ["Fernando"]
 summary: "Correlação não é causalidade. Você certamente já ouviu essa frase, né? Nesse post, vamos te mostrar alguns jeitos de encontrar aquelas correlações que de fato valem o seu tempo."
 draft: false

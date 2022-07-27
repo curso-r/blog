@@ -68,7 +68,7 @@ Microsoft365R::get_personal_onedrive()
 O navegador abrirá uma janela para que a autenticação seja feita:
 
 ```{r echo=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-03-18-onedrive/auth-onedrive.png")
+knitr::include_graphics("/images/posts/conteudo/2022-03-18-onedrive/auth-onedrive.webp")
 ```
 
 

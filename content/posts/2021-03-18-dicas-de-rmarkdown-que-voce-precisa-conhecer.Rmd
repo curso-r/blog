@@ -3,7 +3,7 @@ title: "3 Dicas de Rmarkdown que você precisa saber"
 date: "2021-03-18"
 tags: ["faxina", "gráficos"]
 categories: ["conceitos"]
-image: "images/posts/banner/rmarkdown_wizards.jpeg"
+image: "images/posts/banner/rmarkdown_wizards.webp"
 author: ["Fernando"]
 summary: "RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos lindos e muito elegantes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer."
 draft: false
@@ -37,7 +37,7 @@ Muitas vezes a gente quer impressionar com um documento colorido, com uma fonte 
 
 Esse é um daqueles casos em que uma imagem vale mais do que mil palavras... Dá uma olhada nesse exemplo de visualização da tabela `mtcars` que podemos construir usando o pacote `flextable`:
 
-<img src = "https://blog.curso-r.com/images/posts/conteudo/dicas-rmarkdown/flextable_exemplo.png">
+<img src = "https://blog.curso-r.com/images/posts/conteudo/dicas-rmarkdown/flextable_exemplo.webp">
 
 Muito bonito, né? O pacote `flextable` é uma biblioteca em R que foi construída pensando em (a) construir tabelas muito bonitas e versáteis sem quase nenhum sofrimento e (b) usar o mesmo pacote para fazer tabelas para Word, PDF, PPT e HTML. A sintaxe é um pouco carregada, mas o resultado compensa muito.
 

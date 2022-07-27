@@ -3,7 +3,7 @@ title: "Acessando APIs com R: GitHub - Parte 1"
 date: "2022-02-19"
 tags: ["api", "github", "git", "purrr"]
 categories: ["pacotes"]
-image: "images/posts/banner/octocat.png"
+image: "images/posts/banner/octocat.webp"
 author: ["Beatriz"]
 summary: "Segundo post sobre acesso à APIs."
 draft: false

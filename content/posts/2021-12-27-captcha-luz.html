@@ -3,7 +3,7 @@ title: "Resolvendo Captchas com o {luz}"
 date: "2021-12-27"
 tags: ["torch", "luz"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/captcha-luz.png"
+image: "images/posts/banner/captcha-luz.webp"
 author: ["Julio"]
 summary: "Resolvendo Captchas usando o pacote {luz}, com detalhes sobre datasets, dataloaders e métricas customizadas."
 draft: false
@@ -14,7 +14,7 @@ draft: false
 
 <p>Sabe aquelas imagens que aparecem quando você está preenchendo um formulário ou quer acessar uma página específica, pedindo para você decifrar o texto? Isso é o que chamamos de CAPTCHA (<strong>Completely Automated Public Turing test to tell Computers and Humans Apart</strong>).</p>
 <div style="width:70%;margin:auto;">
-<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg" /></p>
+<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp" /></p>
 </div>
 <center>
 Figura: Exemplo de captcha do site do Tribunal Regional do Trabalho (TRT).
@@ -39,7 +39,7 @@ Figura: Exemplo de captcha do site do Tribunal Regional do Trabalho (TRT).
 <p>Vamos investigar os elementos do luz a seguir. Como exemplo, utilizaremos os nossos queridos Captchas, para não ficar na mesmisse do MNIST 😉</p>
 <p>O exemplo da vez será o TRT, pois a base é pequenininha e é um Captcha relativamente fácil de resolver.</p>
 <div style="min-width:200px;margin:auto;">
-<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg" /></p>
+<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp" /></p>
 </div>
 </div>
 <div id="dados-datasets-e-dataloaders" class="section level2">
@@ -271,7 +271,7 @@ captcha |&gt;
   captcha::read_captcha() |&gt; 
   plot()</code></pre>
 <div style="min-width:200px;margin:auto;">
-<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.jpeg" /></p>
+<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp" /></p>
 </div>
 <pre class="r"><code>fitted &lt;- luz::luz_load(&quot;caminho/para/trt.pt&quot;)
 captcha::decrypt(captcha, fitted)</code></pre>

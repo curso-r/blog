@@ -3,7 +3,7 @@ title: "Entendendo a reatividade: fundamentos"
 date: "2021-09-13"
 tags: ["shiny", "reatividade"]
 categories: ["conceitos"]
-image: "images/posts/banner/reacao-cadeia.jpg"
+image: "images/posts/banner/reacao-cadeia.webp"
 author: ["William"]
 summary: "Vamos olhar mais de perto o conceito de reatividade do Shiny."
 ---
@@ -47,7 +47,7 @@ Muitas vezes, um aplicativo shiny precisa de passos intermediários, entre o inp
 Imagine um app que gere uma amostra de números aleatórios entre 1 e 10 e que o tamanho dessa amostra é definido por um input. Além disso, imagine que esse app também indique em texto qual foi o número mais sorteado. A figura a seguir mostra uma implementação desse app.
 
 ```{r, echo = FALSE}
-knitr::include_graphics("/images/posts/conteudo/reatividade-pt1/app_reactive.png")
+knitr::include_graphics("/images/posts/conteudo/reatividade-pt1/app_reactive.webp")
 ```
 
 Repare no código do app, apresentado a seguir, que a criação da amostra não poderia ter sido feita diretamente dentro das funções `renderPlot()` e `renderText()`, pois gerariam amostras diferentes^[Claro que poderíamos usar a função `set.seed()` para garantir que as amostras fossem as mesmas, mas imagine que não queremos escolher uma semente para a geração dos dados ou que, em algum outro contexto, o processo de amostragem fosse demorado e não queremos fazê-lo duas vezes.]. Por outro lado, a geração da amostra precisa estar dentro de um contexto reativo, pois ela utiliza um valor reativo (`input$num`), o que tira da mesa a proposta de fazer isso diretamente dentro da função `server`.

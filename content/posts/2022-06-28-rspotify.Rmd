@@ -3,7 +3,7 @@ title: "Tudo sobre o pacote {Rspotify}"
 date: "2022-06-28"
 tags: ["tutoriais", "spotify", "música"]
 categories: ["tutoriais"]
-image: "images/posts/banner/2022-06-28-rspotify.jpg"
+image: "images/posts/banner/2022-06-28-rspotify.webp"
 author: ["Tereza"]
 summary: "obtendo informações dos seus artistas e músicas favoritas do Spotify"
 draft: false
@@ -42,7 +42,7 @@ Para obter esse token, siga os seguintes passos:
 Você será redirecionado para essa página:
 
 ```{r echo=FALSE, fig.align='center', warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify001.png")
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify001.webp")
 ```
 
 2 - Clique em **Log in** e faça o login com a sua conta do Spotify
@@ -50,43 +50,43 @@ knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify001.
 3 - Agora, clique em **Create an app**
 
 ```{r echo=FALSE, fig.align='center', warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify002.png")
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify002.webp")
 ```
 
 4 - Dê um nome e uma descrição para o seu app, assinale a caixinha de Termos de Uso, e então, clique em **Create**
 
 ```{r echo=FALSE, fig.align='center', warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify003.png")
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify003.webp")
 ```
 
 5 - Depois de criar o app, você será redirecionado para essa tela. Clique em **edit settings**
 
 ```{r echo=FALSE, fig.align='center', warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify004.png")
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify004.webp")
 ```
 
 6 - Preencha o campo **Redirect URIs** com "http://localhost:1410/" (sem as aspas), e clique em **Add**
 
 ```{r echo=FALSE, fig.align='center', warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify005.png")
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify005.webp")
 ```
 
 A tela deve ficar assim:
 
 ```{r echo=FALSE, fig.align='center', warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify006.png")
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify006.webp")
 ```
 
 7 - Agora, role até o final da página e clique em **Save**
 
 ```{r echo=FALSE, fig.align='center', warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify007.png")
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify007.webp")
 ```
 
 8 - Clique no botão **Show client secret**
 
 ```{r echo=FALSE, fig.align='center', warning=FALSE}
-knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify008.png")
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify008.webp")
 ```
 
 Veja que na tela estão o **Client ID** e o **Client Secret**. São esse dois tokens que usaremos para ter acesso às funções do `Rspotify`.

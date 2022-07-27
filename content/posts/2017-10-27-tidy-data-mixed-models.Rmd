@@ -3,13 +3,13 @@ title: "Tidy Data, Teste T Pareado e Modelos Mistos"
 date: "2017-10-27"
 tags: ["estatística", "tidy"]
 categories: ["conceitos"]
-image: "images/posts/banner/banner-tidy-data.png"
+image: "images/posts/banner/banner-tidy-data.webp"
 author: ["Daniel"]
 summary: "O que teste t-pareado, modelos mistos e tidy data podem ter a ver? Veja neste post como a estrutura dos seus dados pode afetar a forma que você fará a sua análise."
 ---
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, cache = TRUE)
+knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 
@@ -109,11 +109,11 @@ summary(model)
 Estamos interessados em comparar a significância do efeito fixo da variável ano nesse
 modelo com a do teste t-pareado. Veja que no caso a estatística T do testes é idêntica: 27.35.
 
-Vimos que a forma como os dados estão estruturados no seu banco de dados pode influenciar 
-a técnica utilizada para a sua análise. Se ele estivesse na forma *desarrumada* o mais natural 
+Vimos que a forma como os dados estão estruturados no seu banco de dados pode influenciar
+a técnica utilizada para a sua análise. Se ele estivesse na forma *desarrumada* o mais natural
 seria aplicar um teste t pareado, se ele estivesse em formado *tidy* o natural seria usar um
-modelo misto. No seu paper, Hadley argumenta que a maioria dos 
-softwares esperam que o seu banco de dados esteja *arrumado* no sentido de que 
+modelo misto. No seu paper, Hadley argumenta que a maioria dos
+softwares esperam que o seu banco de dados esteja *arrumado* no sentido de que
 cada variável é uma coluna e cada observação é uma linha.
 
 
