@@ -23,7 +23,7 @@ A rstudio::conf é um evento anual organizado pela RStudio. O evento reúne as c
 
 Este ano, o evento tem foco principal no Quarto. Trata-se de um software desenvolvido para produzir documentos científicos (relatórios, artigos, apresentações), funcionando como um complemento ao Pandoc para processar códigos (em R, python, julia, javascript) inseridos nos documentos. Se você se interessou pela ferramenta, vale a pena dar uma olhada [nesse post da Beatriz Milz](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/index.html).
 
-Mas claro que a conferência não será só sobre Quarto. Teremos conteúdos maravilhosos nos próximos dias, como avanços no `{shiny}`, `{tidymodels}` e outras ferramentas que amamos e 
+Mas claro que a conferência não será só sobre Quarto. Teremos conteúdos maravilhosos nos próximos dias, como avanços no `{shiny}`, `{tidymodels}` e outras ferramentas que amamos.
 
 ## O hotel
 
@@ -45,7 +45,7 @@ E de repente, senta na nossa mesa o próprio Hadley, nosso deuso do R. Foi muito
 
 Não vou detalhar muito sobre as conversas para manter a privacidade de todos, mas foi uma experiência muito legal e muito leve. Falamos de muitos assuntos, sendo que poucos eram de fato relacionados ao R. 
 
-Por algum motivo, o Hadley decidiu sentar com a gente novamente! No dia seguinte, almoçamos com ele, logo depois que ele fez o anúncio da mudança de nome da empresa. Acho que ele gosta dos BR. Almoçamos com ele e com o Christoph Dervieux, autor do blogdown e outros pacotes relacionados a RMarkdown.
+Por algum motivo, o Hadley decidiu sentar com a gente novamente! No dia seguinte, almoçamos com ele, logo depois que ele fez o anúncio da mudança de nome da empresa. Acho que ele gosta dos BR. Almoçamos com ele e com o Christoph Dervieux, um dos autores do blogdown e outros pacotes relacionados a RMarkdown.
 
 Depois de duas refeições, nos sentimos no direito de tirar uma foto... E está aqui!!
 
@@ -60,6 +60,7 @@ A apresentação dos dois gira em torno da evolução da RStudio de uma empresa 
 Com isso, pelo que disseram, a RStudio passou a sentir cada vez mais que o nome da empresa já não representava suas ações, já que todos os produtos (Connect, Package Manager etc) levam consigo a ideia de que são feitos para o R, o que não é verdade. Por isso, a empresa precisou mudar de nome.
 
 Agora, RStudio é **Posit**. O site ainda não está no ar, mas eles fizeram uma [página para falar da mudança](https://posit.co). A empresa mudará o nome totalmente em outubro/2022. Ou seja, essa foi a última `rstudio::conf`, e a próxima será... `from posit import conf`?
+
 
 ## Keynote 1: tidymodels 1.0.0
 
