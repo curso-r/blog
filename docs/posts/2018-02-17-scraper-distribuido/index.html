@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Web Scraper Distribuído</title>
+  <meta name="title" content="Web Scraper Distribuído">
+  <meta name="description" content="Como aumentar em dezenas de vezes a velocidade de um web scraper sem mudar o seu código.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2018-02-17-scraper-distribuido/">
+  <meta property="og:title" content="Web Scraper Distribuído">
+  <meta property="og:description" content="Como aumentar em dezenas de vezes a velocidade de um web scraper sem mudar o seu código.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/scraper-distribuido.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2018-02-17-scraper-distribuido/">
+  <meta property="twitter:title" content="Web Scraper Distribuído">
+  <meta property="twitter:description" content="Como aumentar em dezenas de vezes a velocidade de um web scraper sem mudar o seu código.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/scraper-distribuido.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/scraper-distribuido.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Web Scraper Distribuído</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            17 de
+            fevereiro de
+            2018
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/web-scraping">web-scraping</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p>Caso você já tenha se aventurado no mundo do web scraping, é provável que
+tenha se deparado com um grande problema: volume. Muitas vezes, antes fazer uma
+análise, precisamos scrapear um número colossal de páginas até que tenhamos
+dados o suficiente para a nossa tarefa, número esse que chega a ser proibitivo
+a ponto de não conseguirmos fazer aquilo que queremos.</p>
+<p>Neste post vou explicar duas técnicas para aumentar em dezenas de vezes a
+velocidade dos seus scrapers de forma que você nunca mais precise de preocupar
+com a quantidade de dados necessária para uma análise.</p>
+<div id="scrapers-sequenciais" class="section level2">
+<h2>Scrapers sequenciais</h2>
+<p>Um scraper sequencial é qualquer scraper que baixe uma página por vez, ou seja,
+que varra as páginas em sequência baixando uma a uma. Como veremos na seção a
+seguir isso não é muito eficiente, mas é mesmo assim o que a maioria de nós faz.</p>
+<p><strong>Nota:</strong> Nos exemplos que darei daqui em diante estarei baixando uma lista de
+1441 artigos da Wikipédia obtida com o pacote <code>WikipediR</code>. Se você quiser
+reproduzir os meus achados, disponibilizei um arquivo com o código completo em
+um <a href="https://gist.github.com/ctlente/84f230a88cae01537ac5ca4eff091221">Gist</a></p>
+<p>Veja mais ou menos como funcionaria para baixar um link da Wikipédia por vez:</p>
+<pre class="r"><code># Função para baixar uma página da Wikipédia
+download_wiki &lt;- function(url, path) {
+  
+  # Converter um URL em um nome de arquivo
+  file &lt;- url %&gt;%
+    utils::URLdecode() %&gt;%
+    stringr::str_extract(&quot;(?&lt;=/)[^/]+$&quot;) %&gt;%
+    stringr::str_replace_all(&quot;[:punct:]&quot;, &quot;&quot;) %&gt;%
+    stringr::str_to_lower() %&gt;%
+    stringr::str_c(normalizePath(path), &quot;/&quot;, ., &quot;.html&quot;)
+  
+  # Salvar a página no disco
+  httr::GET(url, httr::write_disk(file, TRUE))
+  
+  return(file)
+}
+
+# Baixar arquivos sequencialmente
+files &lt;- purrr::map_chr(links, download_wiki, &quot;~/Desktop/Wiki&quot;)</code></pre>
+<p>Nada muito complexo até aí. Com a <code>purrr::map_chr()</code> itero com facilidade nos
+links e os baixo sequencialmente (se você quiser saber mais sobre a função
+<code>map()</code> veja <a href="http://ctlente.com/pt/purrr-magic/">este post</a>). O código acima
+demorou mais ou menos 5 minutos para executar na minha máquina.</p>
+</div>
+<div id="scrapers-em-paralelo" class="section level2">
+<h2>Scrapers em paralelo</h2>
+<p>Uma das formas mais simples de aumentar a eficiência de um web scraper é através
+de paralelização. Um fato que nem todos sabem é que praticamente qualquer scraper
+passa a maior parte do tempo esperando respostas do servidor; seja para carregar
+uma nova página ou seja para baixar a página em questão, ficar esperando é o que
+o seu scraper provavelmente mais faz.</p>
+<p>Isso quer dizer que seu computador poderia ter, em qualquer dado momento, múltiplos
+scrapers rodando simultaneamente sem perder eficiência! Enquanto o processador está
+salvando no disco os resultados de um scraper, é perfeitamente possível ter muitos
+outros ativos e esperando uma resposta do servidor.</p>
+<p>No exemplo de código abaixo uso uma função muito simples para paralelizar a
+execução do scraper. <code>parallel::mcmapply()</code> (<em>multicore mapply()</em>) é análoga a
+<code>map()</code>, com a diferença de que ela instancia as chamadas para a função
+<code>download_wiki()</code> em múltiplos threads de execução, tirando vantagem do fato
+de que cada instância fica parada a maior parte do tempo.</p>
+<pre class="r"><code># Criar uma versão empacotada de download_wiki()
+download_wiki_ &lt;- purrr::partial(
+  download_wiki, path = &quot;~/Desktop/Wiki&quot;, .first = FALSE)
+
+# Baixar arquivos em paralelo
+files &lt;- parallel::mcmapply(
+  download_wiki_, links, SIMPLIFY = TRUE, mc.cores = 4)</code></pre>
+<p>No código acima, crio uma versão pré-preenchida de <code>download_wiki()</code> para não
+precisar lidar com argumentos constantes na chamada para <code>parallel::mcmapply()</code>,
+mas depois disso a única coisa que preciso fazer é especificar o número de
+cores disponíveis no meu computador para que o pacote <code>parallel</code> faça a sua
+magia. Desta forma, com uma chamada marginalmente mais complexa, consegui
+baixar os mesmos arquivos em meros 1.2 minutos.</p>
+</div>
+<div id="scrapers-distribuídos" class="section level2">
+<h2>Scrapers distribuídos</h2>
+<p>Para o nosso <em>grand finale</em> temos um pequeno salto de dificuldade. Agora que
+somos capazes de usar todo o potencial do nosso computador, a única forma de
+fazer scraping mais rápido é usando <strong>mais</strong> computadores.</p>
+<p>Isso parece loucura, mas usando máquinas virtuais da
+<a href="https://aws.amazon.com/pt/ec2/">Amazon</a> ou da
+<a href="https://cloud.google.com/compute/">Google</a> essa é na verdade uma tarefa
+bastante simples! Podemos criar algumas instâncias virtuais e enviar os
+links para que elas os baixem, distribuindo o download entre várias
+máquinas.</p>
+<p><img src="/blog/2018-02-17-scraper-distribuido/scheme.png" /></p>
+<p>Para permitir que uma máquina virtual receba o comando de download, criei
+um pequeno servidor HTTP em cada uma, assim elas ficarão esperando por
+uma chamada POST contendo os URLs a serem baixados.</p>
+<pre class="python"><code># Trecho do código em python do servidor que lida com POSTs
+def do_POST(self):
+  content_length = int(self.headers[&#39;Content-Length&#39;])
+  post_data = self.rfile.read(content_length)
+  call([&quot;Rscript&quot;, &quot;~/script.R&quot;, post_data])</code></pre>
+<p>Como pode-se ver no código acima, a única coisa que o servidor faz é
+coletar os dados enviados pelo post e redirecioná-los para o script
+<code>script.R</code>. Lá o R coleta os links vindos de <code>post_data</code> e os baixa
+(usando, é claro, <code>parallel::mcmapply</code>).</p>
+<pre class="r"><code>#!/usr/bin/env Rscript
+args = commandArgs(trailingOnly=TRUE)
+
+# Tratar o pacote de dados enviado no POST
+links &lt;- stringr::str_split(args[1], &quot; &quot;)[[1]]</code></pre>
+<p>Acima temos a única diferença no código em R (que agora se encontra nas máquinas
+virtuais): o tratamento necessário em <code>script.R</code> dos dados trazidos pela chamada
+POST.</p>
+<p>O último passo é, em nossa máquina local, quebrar a lista de links em um pacote
+para cada máquina serva; assim que as máquinas receberem esses links via HTTP
+elas começarão, distribuidamente, a baixá-los em paralelo.</p>
+<pre class="r"><code># Quebrar os links de acordo com o número de servos
+num_workers &lt;- 3
+links_split &lt;- links %&gt;%
+  split(., ceiling(seq_along(.)/(length(.)/num_workers))) %&gt;%
+  purrr::map(stringr::str_c, collapse = &quot; &quot;)
+
+# Dados do endpoint
+workers &lt;- &quot;localhost&quot; # AQUI VÃO OS IPS DOS SERVOS
+endpoints &lt;- stringr::str_c(&quot;http://&quot;, workers, &quot;:8000&quot;)
+
+# Chamar todos os servos mas não esperar por eles
+for (i in seq_len(num_workers)) {
+  command &lt;- paste0(&quot;curl -d &#39;&quot;, links_split[[i]], &quot;&#39; &quot;, endpoints[i])
+  system(command, wait = FALSE)
+}</code></pre>
+<p>Usando 3 máquinas virtuais de 4 cores cada no Google Cloud Platform, o download
+das 1400 páginas demorou meros 34 segundos. Isso é uma melhora de aproximadamente
+10 vezes na performance em relação à execução sequencial!</p>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Como vimos nos exemplos acima, scrapers são por padrão processos lentos e
+ineficientes. Usando uma arquitetura razoavelmente simples distribuída e paralela
+podemos aumentar em até uma ordem de grandeza a eficiência de um scraper sem nem
+pensar sobre o seu código! Na prática, podemos aumentar e diminuir o quanto
+quisermos o número de servos ou de cores em cada servo, permitindo que qualquer
+scraper possa virar uma máquina incrível de coleta de dados.</p>
+<p>Caso você tenha se interessado pelo conteúdo abordado nesse post, eu e o pessoal
+da <a href="http://curso-r.com/">Curso-R</a> vamos dar no dia 10/03/2018 um workshop
+em São Paulos sobre <a href="http://workshop.curso-r.com/web-scraping/">web scraping com R</a>.
+Lá você vai ter a oportunidade de aprender, do zero, como fazer bons web scrapers
+em R além de muitas dicas como a desse post para tornar seus scrapers ainda melhores.</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

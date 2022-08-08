@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>manipulação on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/manipula%C3%A7%C3%A3o/</link>
+    <description>Recent content in manipulação on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 02 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/manipula%C3%A7%C3%A3o/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Desafio #1: Manipulando a base de filmes do IMDB</title>
+      <link>https://blog.curso-r.com/posts/2022-02-02-desafio-1/</link>
+      <pubDate>Wed, 02 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-02-02-desafio-1/</guid>
+      <description>Esse é o primeiro desafio de programação proposto pela curso-R! Resolva-o e poste a sua solução em nosso Discourse!</description>
+    </item>
+    
+    <item>
+      <title>Manipulação de dados usando o pacote data.table</title>
+      <link>https://blog.curso-r.com/posts/2021-06-01-data-table/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-01-data-table/</guid>
+      <description>Você certamente já ouviu falar no pacote dplyr, mas também conhece o pacote data.table? No post de hoje vamos explorar um pouco desse grande pacote!</description>
+    </item>
+    
+    <item>
+      <title>Aplauda-me</title>
+      <link>https://blog.curso-r.com/posts/2020-08-27-applause/</link>
+      <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-08-27-applause/</guid>
+      <description>Fizemos um teste do pacote {applause}.</description>
+    </item>
+    
+    <item>
+      <title>As novas funções de pivotagem</title>
+      <link>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-08-13-pivotagem/</guid>
+      <description>Apresentamos aqui as novas funções de pivotagem do {tidyr}.</description>
+    </item>
+    
+  </channel>
+</rss>

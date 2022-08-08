@@ -1,0 +1,106 @@
+---
+title: "Criando um relatório personalizado no Word através do R Markdown"
+date: "2021-12-23"
+tags: ["tutoriais"]
+categories: ["tutoriais"]
+image: "images/posts/banner/word-rmarkdown.webp"
+author: ["Tereza"]
+summary: "Aprenda a ter maior controle sobre a formatação de relatórios em Word gerados a partir do R Markdown"
+draft: false
+---
+
+Este tutorial é para você que quer usar o R Markdown para criar arquivos em Word e quer ter maior controle sobre a formatação desses documentos!
+
+É uma dica muito útil, pois você não terá mais que perder tempo formatando o seu relatório depois de escrevê-lo, ele já sairá estilizado e formatado do jeito que você quiser!
+
+Então, vamos ao tutorial:
+
+1. Abra o **RStudio** e crie um arquivo **R Markdown**.
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word001.webp")
+```
+
+2. Selecione a opção **Word** como formato de saída.
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word002.webp")
+```
+
+3. Salve o arquivo.
+
+4. Dê um **Knit**, apertando no botão do canto superior esquerdo (ou **Knit to Word**).
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word003.webp")
+```
+
+5. Um arquivo Word aparecerá na sua tela, como esse:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word004.webp")
+```
+
+6. Agora, edite esse arquivo com a formatação que deseja ter em seu relatório!
+
+7. Clique no botão do canto inferior direito da aba **Estilos**. Deixe essa aba aberta.
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word005.webp")
+```
+
+8. Clique em cima do título ("Untitled", na imagem), e note que na aba **Estilos** a caixa **Título** será automaticamente selecionada.
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word006.webp")
+```
+
+9. Clique na seta à direita da caixa **Título**, e então, em **Modificar**.
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word007.webp")
+```
+
+10. Edite a formatação do jeito que preferir. No nosso exemplo, ficou assim:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word008.webp")
+```
+
+11. Quando terminar a edição, clique em **Ok** no canto inferior direito.
+
+12. Para editar outro elemento do texto, basta clicar em cima desse elemento, e a caixa do elemento será automaticamente selecionada na aba **Estilos**. (na imagem exemplo, clicamos no link "http://rmarkdown.rstudio.com" e na aba "Estilos" a caixa de **Hiperlink** foi automaticamente selecionada)
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word009.webp")
+```
+
+13. Prossiga como anteriormente, clicando na seta à direita da caixa, e então, em **Modificar**.
+
+14. Quando a formatação estiver do jeito que você quiser, salve o arquivo. Aqui estamos usando o nome **Template_1.docx**. Feche o arquivo.
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word010.webp")
+```
+
+15. Voltando ao RStudio, crie outro arquivo R Markdown, com **Word** como formato de saída.
+
+16. Escreva o seu relatório.
+
+17. Edite o começo do texto, especificando o seu arquivo de referência (sim, o arquivo que você acabou de editar!), ele deve ficar assim:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word011.webp")
+```
+
+18. Salve o arquivo.
+
+19. Dê um **Knit**, apertando no botão do canto superior esquerdo (ou **Knit to Word**).
+
+20. Prontinho! Aparecerá na tela o arquivo Word com o seu relatório personalizado como no arquivo de referência!
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/word-rmarkdown/word012.webp")
+```
+
+Obs: Antes de apertar o botão **Knit**, certifique-se de que o arquivo Word está fechado. Se não, aparecerá um erro na tela do R.

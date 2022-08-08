@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tutoriais on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/tutoriais/</link>
+    <description>Recent content in tutoriais on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Tue, 28 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/tutoriais/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tudo sobre o pacote {Rspotify}</title>
+      <link>https://blog.curso-r.com/posts/2022-06-28-rspotify/</link>
+      <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-06-28-rspotify/</guid>
+      <description>obtendo informações dos seus artistas e músicas favoritas do Spotify</description>
+    </item>
+    
+    <item>
+      <title>Conheça o pacote {skimr}</title>
+      <link>https://blog.curso-r.com/posts/2022-05-05-skimr/</link>
+      <pubDate>Thu, 05 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-05-05-skimr/</guid>
+      <description>Uma ótima ferramenta para usar em suas análises exploratórias</description>
+    </item>
+    
+    <item>
+      <title>Criando gráficos ggplot2 com o pacote {esquisse}</title>
+      <link>https://blog.curso-r.com/posts/2022-03-22-esquisse/</link>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-03-22-esquisse/</guid>
+      <description>Uma ferramenta que simplifica muito a criação de gráficos em ggplot2</description>
+    </item>
+    
+    <item>
+      <title>Personalizando seus relatórios R Markdown em HTML com o {prettydoc}</title>
+      <link>https://blog.curso-r.com/posts/2022-02-24-prettydoc/</link>
+      <pubDate>Thu, 24 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-02-24-prettydoc/</guid>
+      <description>Este tutorial é para você que usa o R Markdown para criar relatórios em HTML e quer deixá-los mais bonitos e apresentáveis!</description>
+    </item>
+    
+    <item>
+      <title>Importando e exportando tabelas do R para o Excel através da área de transferência</title>
+      <link>https://blog.curso-r.com/posts/2021-12-27-clipr/</link>
+      <pubDate>Mon, 27 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-27-clipr/</guid>
+      <description>Aprenda a importar/exportar tabelas do R através do pacote clipr</description>
+    </item>
+    
+    <item>
+      <title>Criando um relatório personalizado no Word através do R Markdown</title>
+      <link>https://blog.curso-r.com/posts/2021-12-23-word-rmarkdown/</link>
+      <pubDate>Thu, 23 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-23-word-rmarkdown/</guid>
+      <description>Aprenda a ter maior controle sobre a formatação de relatórios em Word gerados a partir do R Markdown</description>
+    </item>
+    
+    <item>
+      <title>Manipulando datas com o lubridate</title>
+      <link>https://blog.curso-r.com/posts/2021-11-16.lubridate/</link>
+      <pubDate>Tue, 16 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-16.lubridate/</guid>
+      <description>Aprenda a converter e a fazer operações com datas no R</description>
+    </item>
+    
+    <item>
+      <title>5 motivos para usar R</title>
+      <link>https://blog.curso-r.com/posts/2021-07-23-por-que-usar-r/</link>
+      <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-23-por-que-usar-r/</guid>
+      <description>Tanto para quem já conhece quanto pra quem ainda dá os primeiros passos, sempre é bom relembrar porque o R é tão bacana.</description>
+    </item>
+    
+    <item>
+      <title>Como contar dias úteis no R</title>
+      <link>https://blog.curso-r.com/posts/2021-07-16-bizdays/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-16-bizdays/</guid>
+      <description>Contar os dias entre duas datas é uma coisa facilitada pelo R, mas hoje vamos explorar um pacote que ajuda a conatr apenas os dias úteis entre duas datas</description>
+    </item>
+    
+  </channel>
+</rss>

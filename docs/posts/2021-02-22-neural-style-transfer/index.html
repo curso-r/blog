@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Neural Style Transfer com Torch</title>
+  <meta name="title" content="Neural Style Transfer com Torch">
+  <meta name="description" content="Neural Style Transfer é uma das técnicas mais divertidas de deep learning. O post mostra como implementar uma rede de NST com o torch.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-02-22-neural-style-transfer/">
+  <meta property="og:title" content="Neural Style Transfer com Torch">
+  <meta property="og:description" content="Neural Style Transfer é uma das técnicas mais divertidas de deep learning. O post mostra como implementar uma rede de NST com o torch.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/cristoredentorfinal.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-02-22-neural-style-transfer/">
+  <meta property="twitter:title" content="Neural Style Transfer com Torch">
+  <meta property="twitter:description" content="Neural Style Transfer é uma das técnicas mais divertidas de deep learning. O post mostra como implementar uma rede de NST com o torch.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/cristoredentorfinal.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/cristoredentorfinal.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Neural Style Transfer com Torch</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Athos">Athos</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            22 de
+            fevereiro de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/deep-learning">deep learning</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/torch">torch</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/neural-style-transfer">neural style transfer</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/modelagem">modelagem</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code>library(torch)
+library(torchvision)
+library(zeallot)
+device &lt;- torch_device(if(cuda_is_available()) &quot;cuda&quot; else &quot;cpu&quot;)
+cpu &lt;- torch_device(&quot;cpu&quot;)</code></pre>
+<p>Neural Style Transfer é uma das técnicas mais divertidas e “artísticas” do deep learning. A imagem abaixo resume o que a gente vai fazer.</p>
+<div class="figure">
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/nst.webp" alt="" />
+<p class="caption">content</p>
+</div>
+<p>Você fornece duas imagens à rede neural: <code>style</code> e <code>content</code> e o resultado será a imagem <code>content</code> com o estilo de <code>style</code>. É como se fosse um filtro do instagram, mas com o estilo do seu artista predileto =P.</p>
+<p>Este post é uma adaptação para R + torch do exercício do curso <a href="https://www.coursera.org/learn/convolutional-neural-networks/">‘Convolutional Neural Networks’ do deeplearning.ai</a> que eu fiz, originalmente em Python + tensorflow. Quando comecei a escrever esse post, tinha a intenção de ser o mais didático possível, mas acho que eu não conseguiria superar o curso do Coursera, então vou me ater aos principais pontos e comentar o código para quem quiser criar suas próprias imagens! Além disso, <a href="https://www.youtube.com/watch?v=iAyL5iCWWAs">este vídeo em português mostra um sumário da estratégia do NST.</a></p>
+<p>PS: durante a escrita desse post eu descobri que o Daniel já tinha feito <a href="https://torchvision.mlverse.org/articles/examples/style-transfer.html">um codigozinho de NST para o torchvision.</a> Parte do código roubei de lá kkk.</p>
+<div id="conceitos-e-ideias-importantes" class="section level2">
+<h2>Conceitos e ideias importantes</h2>
+<p>A ideia é gerar uma imagem <code>generated</code> G que tenha conteúdo similar a <code>content</code> C e estilo similar a <code>style</code> S. O conteúdo e o estilo são, geralmente, extraídos de uma convnet pré-treinada. O artigo original <span class="citation">(<a href="#ref-gatys2015neural" role="doc-biblioref">Gatys, Ecker, and Bethge 2015</a>)</span> utiliza o VGG19, que já vem dentro do {torchvision}.</p>
+<pre class="r"><code># VGG19 model
+vgg &lt;- model_vgg19(pretrained = TRUE)$features$to(device = device)
+
+# congelando os pesos
+vgg$parameters %&gt;% purrr::walk(function(param) param$requires_grad_(FALSE))</code></pre>
+<p>Então o VGG19 vai nos fornecer as features e agora precisamos definir funções de custo para achar a imagem que tem o melhor compromisso entre o conteúdo de uma imagem e o estilo de outra. A construção do algoritmo pode ser divida em três partes:</p>
+<ul>
+<li>Função de custo do <code>content</code>: <span class="math inline">\(L_{content}(C, G)\)</span></li>
+<li>Função de custo do <code>style</code>: <span class="math inline">\(L_{style}(S, G)\)</span></li>
+<li>Função de custo global: <span class="math inline">\(L(G) = \alpha L_{content}(C, G) + \beta L_{style}(S, G)\)</span></li>
+</ul>
+<div id="função-de-custo-do-content" class="section level3">
+<h3>Função de custo do <code>content</code></h3>
+<p>Sobre a escolha entre camadas rasas versus camadas profundas:</p>
+<ul>
+<li>As primeiras camadas de uma rede convolucional tendem a extrair padrões mais básicos como bordas e texturas simples.</li>
+<li>Camadas mais profundas costumam captar características mais sofisticadas como texturas detalhadas e objetos.</li>
+</ul>
+<p>E sobre a escolha de uma camada do meio, queremos a imagem <code>generated</code> com conteúdo similar ao <code>content</code>. A estratégia é:</p>
+<ol style="list-style-type: decimal">
+<li>escolher uma camada da rede para representar este tal “conteúdo.”</li>
+<li>pegar essa camada para cada uma das imagens <code>content</code> e <code>generated</code>.</li>
+<li>fazer a rede forçar com que essas duas camadas sejam o mais parecidas possível.</li>
+</ol>
+<p>Então a função de custo para refletir o ponto (3) pode ser simplesmente o erro quadrático médio entre os pixels dessa camada:</p>
+<pre class="r"><code>content_loss &lt;- function(content_layer, generated_layer) {
+  nnf_mse_loss(content_layer, generated_layer)
+}</code></pre>
+<p>OBS: Na prática, você irá obter o resultado “mais legal” se <strong>escolher camadas da meiúca</strong>: nem tão rasa, nem tão profunda. Já que a VGG19 possui 37 camadas, a escolhida pode ser, por exemplo, a camada 14.</p>
+</div>
+<div id="função-de-custo-do-style" class="section level3">
+<h3>Função de custo do <code>style</code></h3>
+<p>A finalidade da função de custo do <code>style</code> é minimizar a distância entre as tais <em>Gram matrix</em> das imagens <code>style</code> e <code>generated</code>.</p>
+<div id="gram-matrix" class="section level4">
+<h4>Gram matrix</h4>
+<p>A matriz de estilo é chamada de <em>Gram matrix</em> na literatura. Na matemática, dado um conjunto de vetores, a <em>Gram matrix</em> é matriz dos produtos internos dos pares destes vetores. É como se fosse uma matriz de correlação, mas sem centralizar pela média. Na prática, pega-se uma camada da rede, transforma em um tensor 2D (matriz) e calcula <span class="math inline">\(A * A^T\)</span>.</p>
+<pre class="r"><code>gram_matrix &lt;- function(tensor) {
+  c(b,c,h,w) %&lt;-% tensor$size()
+  tensor &lt;- tensor$view(c(c, h*w))
+  torch_matmul(tensor, tensor$t())/(h*w)
+}</code></pre>
+<p>A função de custo <span class="math inline">\(L_{style}(S, G)\)</span> é o bom e velho erro quadrático médio entre as <em>Gram matrices</em>.</p>
+<pre class="r"><code>style_loss &lt;- function(style_layer, generated_layer) {
+  style_gram &lt;- gram_matrix(style_layer)
+  generated_gram &lt;- gram_matrix(generated_layer)
+  nnf_mse_loss(style_gram, generated_gram)
+}</code></pre>
+</div>
+<div id="camadas-dos-estilos" class="section level4">
+<h4>Camadas dos estilos</h4>
+<p>Em vez de uma, pega-se cinco camadas intermediárias da rede para calcular as distâncias entre as respectivas <em>Gram matrices</em>. A função de custo vai passar a ser uma ponderação dessas cinco distâncias: <span class="math inline">\(L_{style}(S, G) = \sum_{l=1}^{5}\lambda^{[l]}L_{style}^{[l]}(S,G)\)</span></p>
+<pre class="r"><code>style_layers &lt;- c(2, 7, 12, 21, 29) # escolha das layers da VGG
+lambdas &lt;- 1e5/(c(1,10,10,10,10)^2) # pesos para cada uma das layers no estilo final</code></pre>
+<p>Agora vale criar uma nn_module() que retorne as camadas intermediárias da rede (no caso VGG19). O argumento <code>layers_out</code> permite escolher quais camadas queremos trazer.</p>
+<pre class="r"><code>features &lt;- nn_module(
+  initialize = function(convnet) {
+    # poderia ser qualquer convnet pré-treinada. Iremos usar a VGG19
+    self$convnet &lt;- convnet
+  },
+  forward = function(img, layers_out = NULL) {
+    layers &lt;- seq_along(self$convnet) # 1 a 37
+    if(is.null(layers_out)) layers_out &lt;- layers
+    conv_outs &lt;- purrr::accumulate(layers, ~self$convnet[[.y]](.x), .init = img) # lista de 37 tensores
+    conv_outs[layers_out] # lista apenas com as layers selecionadas
+  }
+)</code></pre>
+</div>
+</div>
+</div>
+<div id="otimização" class="section level2">
+<h2>Otimização</h2>
+<p>Abaixo segue código comentado para rodar a otimização.</p>
+<pre class="r"><code>#funções auxiliares
+to_r &lt;- function(x) as.numeric(x$to(device = cpu))
+                               
+plot_image &lt;- function(tensor) {
+  im &lt;- tensor$to(device = &quot;cpu&quot;)[1,..]$
+    permute(c(2, 3, 1))$
+    to(device = &quot;cpu&quot;)$
+    clamp(0,1) %&gt;% # make it [0,1]
+    as.array()
+  par(mar = c(0,0,0,0))
+  plot(as.raster(im))
+}
+
+load_image &lt;- function(path, geometry = &quot;250x200&quot;) {
+  img &lt;- path %&gt;%
+    magick_loader() %&gt;%
+    magick::image_resize(geometry) %&gt;%
+    transform_to_tensor() %&gt;%
+    torch_unsqueeze(1)
+  
+  img$to(device = device)
+}</code></pre>
+<p>Os parâmetros e inputs que valem a pena experimentar são:</p>
+<ul>
+<li><code>content</code> e <code>style</code>: Imagens de input: a de conteúdo e a de estilo.</li>
+<li><code>content_layer</code>: a layer da VGG19 para extrair o conteúdo imagem de conteúdo.</li>
+<li><code>style_layers</code>: as layers da VGG19 para extrair o estilo imagem de estilo.</li>
+<li><code>lambdas</code>: os pesos de cada feature de estilo na otimização.</li>
+<li><code>content_weight</code>: o peso das features de conteúdo na otimização.</li>
+<li><code>style_weight</code>: o peso das features de estilo (global) na otimização.</li>
+</ul>
+<p>Outros dois parâmetros que afetam drasticamente o resultado são as dimensões das duas imagens de input. No código abaixo onde tem <code>"400x400"</code> e <code>"350x500"</code> pode-se trocar por outras dimensões a fim de se obter resultados diferentes.</p>
+<p>No processo de criação você irá mexer nesses parâmetros o tempo todo!</p>
+<pre class="r"><code># INPUT: content and style images
+content &lt;- load_image(&quot;content/posts/2021-02-22-neural-style-transfer/cristoredentor3.jpg&quot;, &quot;400x400&quot;)
+style &lt;- load_image(&quot;content/posts/2021-02-22-neural-style-transfer/vangogh_starry_night.jpg&quot;, &quot;350x500&quot;)
+
+# style and content feature setup
+content_layer &lt;- 14
+style_layers &lt;- c(2, 7, 12, 21, 29)
+lambdas &lt;- 1e5/(c(1,10,10,10,10)^2)
+content_weight &lt;- 2
+style_weight &lt;- 4e-1</code></pre>
+<div class="figure">
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentor3.webp" alt="" />
+<p class="caption">content</p>
+</div>
+<div class="figure">
+<img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/vangogh_starry_night.webp" alt="" />
+<p class="caption">style</p>
+</div>
+<pre class="r"><code># FEATURES: extraídas da VGG19
+vgg_features &lt;- features(vgg)
+content_features &lt;- vgg_features(content, content_layer)
+style_features &lt;- vgg_features(style, style_layers)
+
+# OUTPUT: generated image
+generated &lt;- torch_clone(content)$requires_grad_(TRUE)
+optim &lt;- optim_adam(generated, lr = 0.02)
+lr_scheduler &lt;- lr_step(optim, 100, 0.9)
+
+# loop de otimização
+for(step in seq_len(8000)) {
+  optim$zero_grad()
+  # atualiza as features da imagem que está sendo gerada
+  generated_features &lt;- vgg_features(generated, c(content_layer, style_layers))
+  
+  # losses
+  LC &lt;- content_loss(content_features[[1]], generated_features[[1]])
+  LS &lt;- 0
+  for(i in seq_along(lambdas)) 
+    LS &lt;- LS + lambdas[i]*style_loss(style_features[[i]], generated_features[-1][[i]])  
+  
+  loss &lt;- content_weight * LC + style_weight * LS
+  
+  loss$backward()
+  optim$step()
+  lr_scheduler$step()
+  
+  # feedback
+  if(step %% 100 == 0) {
+    cat(glue::glue(&quot;LC = {to_r(LC)} - LS = {to_r(LS)} - Loss = {to_r(loss)}\n\n&quot;))
+    plot_image(generated)
+  }
+}
+
+# imagem final
+plot_image(generated)</code></pre>
+<pre><code>LC = 2.70741701126099 - LS = 36.7998428344727 - Loss = 20.1347713470459
+LC = 2.61282753944397 - LS = 24.3190288543701 - Loss = 14.9532661437988
+LC = 2.54735898971558 - LS = 19.7909469604492 - Loss = 13.0110969543457
+LC = 2.49572896957397 - LS = 16.9353790283203 - Loss = 11.7656097412109
+LC = 2.44669985771179 - LS = 16.6177845001221 - Loss = 11.5405139923096</code></pre>
+<p><img src="/images/posts/conteudo/2021-02-22-neural-style-transfer/cristoredentorfinal.webp" /></p>
+<p>E aí? Ficou com cara de pintura? Comente o que achou! Tente com suas imagens e compartilhe com a gente =). Aprender como NST funciona é um grande exercício para aprimorar o entendimento sobre modelos de deep learning em geral, principalmente sobre como podemos criar funções de custo mais especializadas em um determinado contexto.</p>
+</div>
+<div id="aprenda-deep-learning-com-a-curso-r" class="section level2">
+<h2>Aprenda Deep learning com a Curso-R</h2>
+<p>Se você quiser entrar no incrível mundo das redes profundas, nosso curso de <a href="https://www.curso-r.com/cursos/deep-learning/">Deep Learning</a> é a melhor porta de entrada, conheça!</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-gatys2015neural" class="csl-entry">
+Gatys, Leon A., Alexander S. Ecker, and Matthias Bethge. 2015. <span>“A Neural Algorithm of Artistic Style.”</span> <a href="http://arxiv.org/abs/1508.06576">http://arxiv.org/abs/1508.06576</a>.
+</div>
+</div>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

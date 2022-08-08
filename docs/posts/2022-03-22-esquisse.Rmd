@@ -1,0 +1,108 @@
+---
+title: "Criando gráficos ggplot2 com o pacote {esquisse}"
+date: "2022-03-22"
+tags: ["tutoriais"]
+categories: ["tutoriais"]
+image: "images/posts/banner/2022-03-22-esquisse.webp"
+author: ["Tereza"]
+summary: "Uma ferramenta que simplifica muito a criação de gráficos em ggplot2"
+draft: false
+---
+
+Você já conhece o esquisse?
+
+O [esquisse](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html) é um pacote que permite a criação de gráficos em {ggplot2} de maneira *point and click*, o que torna a construção de gráficos uma tarefa bem mais simples, pois não há necessidade de digitar as linhas de código! 
+
+Além disso, é possível recuperar o código que gerou os gráficos, o que é ótimo para garantir a reprodutibilidade dos resultados!
+
+Legal, né? 
+
+Aqui vai um breve tutorial de como usar essa ferramenta:
+
+1. Instale o pacote {esquisse}:
+
+```{r eval=FALSE}
+install.packages("esquisse")
+```
+
+2. Carregue o pacote
+
+```{r}
+library(esquisse)
+```
+
+3. Carregue os seus dados. No nosso caso, estamos usando a base de dados **pinguins**, do pacote {dados}
+
+(Para instalar esse pacote, basta rodar o comando `install.packages("dados")`)
+
+
+
+```{r}
+dados <- dados::pinguins
+```
+
+4. Execute o seguinte comando:
+
+```{r eval=FALSE}
+dados |> esquisser()
+```
+
+E então, uma página como essa será aberta:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-03-22-esquisse/esquisse001.webp")
+```
+
+É nessa interface/página que criaremos o nosso gráfico!
+
+
+5. Crie e edite o gráfico na maneira que desejar! 
+
+Na imagem abaixo, podemos ver os botões para escolher o tipo de gráfico, e quais variáveis estarão mapeadas em cada atributo estético.
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-03-22-esquisse/esquisse002.webp")
+```
+
+Na aba “Labels & Title” você pode editar os títulos e legendas:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-03-22-esquisse/esquisse003.webp")
+```
+
+Na aba “Appearance” você pode mudar as cores e aparência do gráfico, de maneira geral:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-03-22-esquisse/esquisse004.webp")
+```
+
+Além disso, na aba “Data” é possível filtrar algumas variáveis da base de dados, e isso é feito com a função filter do {dplyr}:
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-03-22-esquisse/esquisse005.webp")
+```
+
+E enfim, na aba “Code” você pode recuperar o código que gera o gráfico, para colocá-lo em sua análise de dados, por exemplo!
+
+```{r, fig.align='center', echo = FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-03-22-esquisse/esquisse006.webp")
+```
+
+Ao copiar o código gerado e executar no R, o seguinte gráfico é gerado:
+
+```{r}
+library(ggplot2)
+
+ggplot(dados) +
+ aes(x = comprimento_bico, y = comprimento_nadadeira, colour = especie) +
+ geom_point(shape = "circle", 
+ size = 2.1) +
+ scale_color_viridis_d(option = "plasma", direction = 1) +
+ labs(x = "legenda do eixo x", 
+ y = "legenda do eixo y", title = "Título do Gráfico!", subtitle = "Subtítulo do Gráfico!") +
+ theme_minimal()
+```
+
+
+
+

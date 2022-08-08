@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Manipulação de dados usando o pacote data.table</title>
+  <meta name="title" content="Manipulação de dados usando o pacote data.table">
+  <meta name="description" content="Você certamente já ouviu falar no pacote dplyr, mas também conhece o pacote data.table? No post de hoje vamos explorar um pouco desse grande pacote!">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-06-01-data-table/">
+  <meta property="og:title" content="Manipulação de dados usando o pacote data.table">
+  <meta property="og:description" content="Você certamente já ouviu falar no pacote dplyr, mas também conhece o pacote data.table? No post de hoje vamos explorar um pouco desse grande pacote!">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/dtplyr.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-06-01-data-table/">
+  <meta property="twitter:title" content="Manipulação de dados usando o pacote data.table">
+  <meta property="twitter:description" content="Você certamente já ouviu falar no pacote dplyr, mas também conhece o pacote data.table? No post de hoje vamos explorar um pouco desse grande pacote!">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/dtplyr.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/dtplyr.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Manipulação de dados usando o pacote data.table</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Fernando">Fernando</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            1 de
+            junho de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/faxina">faxina</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/manipula%c3%a7%c3%a3o">manipulação</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/pacotes">pacotes</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>A manipulação de dados, ou <em>data wrangling</em>, consome a maior parte do tempo de quem trabalha com Ciência de Dados. Provavelmente por isso existem vários frameworks diferentes para executar comandos dessa categoria. Em R, as duas principais bibliotecas para isso são o <code>dplyr</code> e o <code>data.table</code>. Existem muitas diferenças entre esses dois pacotes e hoje vamos explorar o pacote <code>data.table</code> e também a ponte entre os dois, chamado <code>dtplyr</code>.</p>
+<div id="por-que-existem-dois-pacotes" class="section level1">
+<h1>Por que existem dois pacotes?</h1>
+<p>A diferença entre os dois pacotes pode ser resumida em dois tópicos:</p>
+<ul>
+<li><p>Velocidade e uso de memória do código: o <code>data.table</code> em geral é mais veloz. De tempos em tempos são feitas comparações de performance entre <code>dplyr</code> e <code>data.table</code> e o pacote <code>data.table</code> roda em menos tempo em vários cenários, como pode ser visto <a href="https://github.com/Rdatatable/data.table/wiki/Benchmarks-:-Grouping">aqui</a> e <a href="https://iyarlin.github.io/2020/05/26/dtplyr_benchmarks/">aqui</a>.</p></li>
+<li><p>Sintaxe: o <code>dplyr</code> é um dos pacotes principais do <code>tidyverse</code>, <code>data.table</code> é mais fiel à sintaxe do R puro. <code>dplyr</code> foi feito para ser usado com pipes, imita a sintaxe dos verbos de SQL, já o <code>data.table</code> traz novas features à sintaxe comum do R.</p></li>
+</ul>
+<p>Antes de explorar o <code>data.table</code> e o <code>dtplyr</code>, nenhum dos dois pacotes é absolutamente melhor do que o outro. Embora o <code>data.table</code> seja mais veloz e consuma menos memória que o <code>dplyr</code>, os códigos escritos nesse framework exigem uma sintaxe específica. Pelo tempo, o <code>data.table</code> tem uma vantagem, mas uma sintaxe <code>dplyr</code> pode ser compreendida por interpretadores de <code>SQL</code> ou até mesmo <code>spark</code>. Além disso, códigos <code>dplyr</code> são compatíveis com outros frameworks <code>tidy</code>, tal como o pacote <code>tidyr</code>, o pacote <code>purrr</code> etc. Essas diferenças podem diminuir o valor da eficiência do <code>data.table</code>: se o <strong>computador</strong> gasta menos tempo executando um comando, mas <strong>você</strong> gasta mais o seu tempo (ou o de outras <strong>pessoas</strong>), a eficiência valeu a pena? É importante considerar o contexto.</p>
+</div>
+<div id="o-pacote-data.table-e-o-pacote-dtplyr" class="section level1">
+<h1>O pacote <code>data.table</code> e o pacote <code>dtplyr</code></h1>
+<p>A ideia básica do <code>data.table</code> é incluir muitas funcionalidades ao operador <code>[</code>. Um <code>data.frame</code> transformado em um <code>data.table</code> passa a funcionar da seguinte maneira:</p>
+<pre class="r"><code>library(data.table)
+
+DTvoos &lt;- data.table(dados::voos)
+
+DTvoos[
+  mes == &quot;9&quot;,
+  # antes da primeira vírgula podemos fazer filtros
+  .(valor = mean(atraso_saida, na.rm = TRUE)),
+  # depois da segunda vírgula podemos manipular colunas:
+  # aqui podemos fazer seleções e também podemos criar
+  # novas colunas. a seleção funciona que nem o &quot;[&quot;
+  # normal. para criar colunas nomeadas, precisamos
+  # usar a notação &quot;.()&quot;
+  #
+  # na verdade, no segundo elemento podemos colocar também uma função que retorne uma tibble
+  # inclusive existem vários helpers para usar aqui, como o .N, que conta o numero de linhas
+  # da tibble agrupada, .SD, que permite fazermos manipulações mais complexas
+  # nos pedacos da base etc
+  by = .(origem)
+  # na terceira vírgula, podemos fazer contas agrupadas usando o parâmetro &quot;by&quot;
+  # que fica disponível uma vez que fazemos &quot;library(data.table)&quot;. Para escolher
+  # as funções que serão usadas no agrupamento sem aspas, precisamos usar a
+  # notação 
+]</code></pre>
+<pre><code>##    origem    valor
+## 1:    JFK 6.635776
+## 2:    EWR 7.290954
+## 3:    LGA 6.207439</code></pre>
+<p>Embora a notação do <code>.()</code> seja bem diferente do que normalmente fazemos em <code>dplyr</code>, a lógica do pacote é similar:
+as operacoes são separadas em filtros, manipulações e agrupamentos. As manipulações nas colunas podem ser bastante variadas e isso é um ponto de divergência importante entre o <code>dplyr</code> e o <code>data.table</code>, mas também é verdade que existem várias similaridades. Por isso existe o pacote <code>dtplyr:</code></p>
+</div>
+<div id="traduzindo-dplyr-para-data.table-o-pacote-dtplyr" class="section level1">
+<h1>Traduzindo <code>dplyr</code> para <code>data.table</code>: o pacote <code>dtplyr</code></h1>
+<p>A lógica aqui é simples: como o <code>data.table</code> e o <code>dplyr</code> são minimamente parecidos, muitos códigos <code>dplyr</code> podem ser traduzidor para <code>data.table</code> e as computações podem ser feitas só apos a tradução. Dê uma olhada no código abaixo,
+que os dados que vieram de base e a chamada que foi feita usando o <code>data.table</code>:</p>
+<pre class="r"><code>library(dtplyr)
+library(magrittr)
+library(dplyr)
+library(tidyr)
+
+voos2 &lt;- lazy_dt(dados::voos)
+# esse aqui é o pulo do gato. um `lazy_dt` vai sempre traduzir 
+# os verbos do dplyr para comandos `DT`
+
+voos2 %&gt;% 
+  group_by(origem) %&gt;%
+  summarise(
+    valor = mean(atraso_saida, na.rm = TRUE)
+  )</code></pre>
+<pre><code>## Source: local data table [3 x 2]
+## Call:   `_DT1`[, .(valor = mean(atraso_saida, na.rm = TRUE)), keyby = .(origem)]
+## 
+##   origem valor
+##   &lt;chr&gt;  &lt;dbl&gt;
+## 1 EWR     15.1
+## 2 JFK     12.1
+## 3 LGA     10.3
+## 
+## # Use as.data.table()/as.data.frame()/as_tibble() to access results</code></pre>
+<p>Claro que existem situações em que a tradução não será possível, principalmente quando tentarmos usar funções do pacote
+<code>tidyr</code> que não tem suporte no <code>dtplyr</code>. Por outro lado, para grande parte das manipulações simples que fazemos com <code>dplyr</code>, o pacote <code>dtplyr</code> vai dar conta.</p>
+</div>
+<div id="comparações-e-considerações-finais" class="section level1">
+<h1>Comparações e considerações finais</h1>
+<p>Então, o que a gente deve usar corriqueiramente? Essa pergunta evidentemente não tem uma resposta única, pois como já observamos aqui a ferramenta melhor para resolver um problema depende do contexto em que você está. Entretanto, temos algumas vantagens em usar o <code>dtplyr</code> quando é possível, pois ele é agnóstico. Além disso, ele tem vantagens como deixar explícito na sintaxe a ordem em que os comandos de um <code>data.table</code> são executados, o que não acontece no próprio <code>data.table</code>, que depende de conhecimento sobre o funcionamento interno do código.</p>
+<p>De toda forma, existe espaço pra todo mundo e certamente quem programa em R se beneficia de conhecer os dois pacotes!</p>
+</div>
+<div id="gostou-quer-saber-mais" class="section level1">
+<h1>Gostou? Quer saber mais?</h1>
+<p>Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso <a href="https://curso-r.com/cursos/r4ds-1/">R para Ciência de Dados I</a> e aproveite!</p>
+<p>Caso você tenha dúvidas, entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail <a href="mailto:contato@curso-r.com" class="email">contato@curso-r.com</a>.</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

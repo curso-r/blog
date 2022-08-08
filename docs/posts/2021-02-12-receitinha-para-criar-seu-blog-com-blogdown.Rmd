@@ -1,0 +1,54 @@
+---
+title: "Receitinha para criar seu blog com {blogdown}"
+date: "2021-02-12"
+tags: ["blog", "blogdown", "web"]
+categories: ["tutoriais"]
+image: "images/posts/banner/receitinha-blogdown.webp"
+featuredImage: "images/posts/banner/receitinha-blogdown.webp"
+author: ["William"]
+summary: "Passo a passo para criar o seu blog com {blogdown} em minutos."
+draft: false
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE
+)
+```
+
+Abaixo segue um passo-a-passo para criar seu blogzinho com o R + blogdown e escrever posts com todo o poder do RMarkdown.
+
+## Caminho das pedras do {blogdown}
+
+- Abrir o RStudio limpo (sem estar em nenhum projeto)
+
+- Criar o projeto com git/github
+  - `usethis::create_project()`
+  - `usethis::use_git()`
+  - `usethis::use_github()`
+
+- Criar o site com o pacote `{blogdown}`
+  - `install.packages("blogdown")`
+  - `blogdown::new_site("caminho", theme = "usuario/repositorio")`
+  - [https://themes.gohugo.io/](https://themes.gohugo.io/) para escolher temas 
+  
+- Configurar o site no arquivo config.toml
+
+- Mexer nos posts dentro da pasta `content/post`
+  - Usar `blogdown::new_post()` para criar novos pots.
+
+- Rodar `blogdown::serve_site()` para testar local.
+
+- Rodar `blogdown::build_site()` para montar o site final.
+
+- Subir para o Github para colocar em produção (se estiver usando o GH pages)
+
+[Clique aqui para assistir ao pedaço de live gravada da gente criando um blogdown do zero.](https://www.youtube.com/watch?v=PjUcR2cZTW8)
+
+[E aqui para ver o repo do github com os códigos resultantes!](https://curso-r.github.io/exemploBlogdown/)
+
+E se quiser ajuda profissional nessa caminhada, conheça nossos [cursos de deploy, visualização e relatórios!](curso-r.com/cursos)
+

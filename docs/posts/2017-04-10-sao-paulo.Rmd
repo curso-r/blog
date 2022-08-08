@@ -1,0 +1,233 @@
+---
+title: "São Paulo e o problema da mochila"
+date: "2017-08-12"
+tags: ["mapas"]
+categories: ["análises"]
+image: "images/posts/banner/pug_knapsack.webp"
+author: ["Julio"]
+summary: "São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios."
+retired: false
+alternativa: ""
+---
+
+```{r echo=F}
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
+```
+
+São Paulo é a minha cidade preferida. Não só porque moro aqui, mas também porque é uma cidade cheia de diversidade, boa gastronomia e oportunidades. Para sentir um pouco dessa *vibe*, recomendo passear na avenida Paulista aos domingos. É sensacional!
+
+Mas a cidade da diversidade só é o que é porque temos muita, muita gente nela. O município tem 12 milhões de habitantes. Esse número é tão grande que temos um paulistano para cada 17 brasileiros! Se São Paulo fosse um país, [seria o 77 do mundo](https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population), ganhando de países como a Bélgica, Grécia, Portugal, Bolívia e muitas outras.
+
+Outro dia eu estava pensando na seguinte problemática: qual é a área do Brasil ocupada pela população de São Paulo? Ou seja, se pegarmos os municípios com grandes áreas, quanto do país conseguiríamos preencher com 12 milhões de habitantes?
+
+O interessante é que essa questão recai exatamente no *problema da mochila*, que é um famoso desafio de programação inteira. Depois de [estudar profundamente no wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem) (😄), vi que o problema não é tão trivial como parece.
+
+## O problema da mochila
+
+Considere o seguinte contexto: você tem uma mochila com capacidade de 15kg e precisa carregar a combinação de itens com maior valor, com cada item possuindo valores e pesos diferentes. 
+
+```{r, fig.cap='Knapsack problem. Retirado do [Wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem#/media/File:Knapsack.svg).', echo=FALSE}
+# knitr::include_graphics('img/knapsack.svg')
+knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Knapsack.svg/250px-Knapsack.svg.png')
+```
+
+Outra forma de pensar nesse problema é com um cardápio de restaurante:
+
+```{r echo=FALSE, fig.cap='XKCD sobre o knapsack problem.'}
+knitr::include_graphics('https://imgs.xkcd.com/comics/np_complete.png')
+```
+
+Em linguagem matemática, o que temos é a task:
+
+$$
+\begin{aligned}
+& \text{maximizar } \sum_{i=1}^n v_i x_i \\ 
+& \text{sujeito à } \sum_{i=1}^n w_i x_i \leq W, \text{ com } x_i \in\{0,1\}\\ 
+\end{aligned}
+$$
+
+No nosso caso essas letras significam isso aqui:
+
+- $n$ é o número de municípios no Brasil (5570).
+- $v_i$ é a área do município $i$.
+- $w_i$ é a população do município $i$.
+- $W$ é a população de São Paulo (12 milhões).
+- $x=(x_1,\dots,x_n)^\top$ é o vetor que seleciona os municípios. Se o município $i$ faz parte da solução $x_i=1$ e, caso contrário, $x_i=0$. 
+
+Ou seja, queremos escolher municípios para colocar na mochila tentando maximizar a área, mas o máximo de população que podemos contemplar é 12 milhões.
+
+O problema da mochila é muito interessante pois trata-se de um problema NP-difícil, ou seja, não existe um algoritmo de polinomial capaz de resolvê-lo. Se $w_i > 0, \forall i\in1,\dots,n$ então a solução pode ser encontrada com um algoritmo pseudo-polinomial.
+
+### Forma ad-hoc
+
+Se $x_i$ pudesse assumir valores entre zero e um (ou seja, se pudéssemos selecionar apenas pedaços de municípios), a solução seria trivial. Bastaria colocar os municípios em ordem decrescente pela razão $v_i/w_i$ e escolher os municípios ou parte deles até obter $W$.
+
+Isso indica uma forma sub-ótima de resolver o problema. Chamamos essa solução de ad-hoc. A solução é encontrada assim:
+
+1. Colocar os municípios em ordem decrescente pela razão $v_i/w_i$,
+1. Escolher os municípios de maior razão até que a população do próximo município estoure $W$.
+1. Escolher outros municípios com maior razão na ordem até não ser possível incluir mais nenhum município.
+
+### Solução ótima
+
+A solução ótima pode ser encontrada usando a função `mknapsack()` do pacote `adagio`. Por exemplo, considere os vetores de pesos `w`, valores `p` e máximo `cap` abaixo.
+
+```{r eval=FALSE}
+p <- c(15, 100, 90, 60, 40, 15, 10,  1)
+w <- c( 2,  20, 20, 30, 40, 30, 60, 10)
+cap <- 102
+```
+
+O vetor-solução é dado por
+
+```{r eval=FALSE}
+is <- adagio::mknapsack(p, w, cap)
+is$ksack
+```
+
+    [1] 1 1 1 1 0 1 0 0
+
+
+## Dados
+
+As áreas e estimativas das populações dos municípios do Brasil em 2010 foram obtidas dos pacotes `{geobr}` e `{abjData}`. A leitura é realizada usando pacotes do `{tidyverse}`.
+
+**Pacotes:**
+
+```{r pkg, message=FALSE, warning=FALSE}
+library(magrittr)
+library(sf)
+```
+
+```{r}
+da_sf <- geobr::read_municipality(year = 2010)
+dados <- da_sf %>% 
+  dplyr::mutate(area = as.numeric(sf::st_area(geom)) / 1e6) %>% 
+  tibble::as_tibble() %>% 
+  dplyr::select(-geom) %>% 
+  dplyr::mutate(muni_id = as.character(code_muni)) %>% 
+  dplyr::inner_join(
+    dplyr::filter(abjData::pnud_min, ano == "2010"), 
+    "muni_id"
+  ) %>% 
+  dplyr::select(muni_id, area, pop) %>% 
+  dplyr::mutate(razao = area / pop) %>% 
+  dplyr::filter(area > 0)
+```
+
+## Resultados
+
+A solução ad-hoc e ótima são computadas com esse código:
+
+```{r}
+d_solucao <- dados %>% 
+  dplyr::arrange(dplyr::desc(razao)) %>% # ordena para solucao adhoc funcionar
+  dplyr::mutate(
+    area2 = as.integer(area * 1000), # necessario para mknapsack funcionar
+    s_knapsack = adagio::mknapsack(area2, pop, max(pop))$ksack,
+    acu = cumsum(pop),
+    s_adhoc0 = dplyr::if_else(acu < max(pop), 1, 0),
+    s_adhoc = s_adhoc0
+  ) 
+```
+
+Agora, vamos melhorar a solução ad-hoc incluindo os melhores municípios.
+
+```{r}
+id_melhor <- 0
+pop_faltam <- with(d_solucao, max(pop) - sum(s_adhoc0 * pop))
+while (is.na(id_melhor)) {
+  # pega id do melhor municipio a ser incluido
+  id_melhor <- with(d_solucao, which(pop <= pop_faltam & s_adhoc == 0)[1])
+  if (is.na(id_melhor)) {
+    d_solucao$s_adhoc[id_melhor] <- 1
+    pop_faltam <- with(d_solucao, max(pop) - sum(s_adhoc * pop))
+  }
+}
+```
+
+A Tabela abaixo mostra os municípios que foram classificados diferentemente nos dois métodos. Note que a solução ótima trocou apenas um município da solução adhoc (Nova Aurora - GO) pelo município de Monte Alegre de Minas - MG.
+
+```{r dif}
+d_solucao %>% 
+  dplyr::filter(s_adhoc != s_knapsack) %>% 
+  dplyr::inner_join(abjData::muni, "muni_id") %>% 
+  select(uf_nm, muni_nm, area, pop, s_adhoc, s_knapsack) %>% 
+  knitr::kable(caption = 'Municípios diferentes nas duas soluções.')
+```
+
+|uf_nm          |muni_nm          |     area|  pop| s_adhoc| s_knapsack|
+|:--------------|:----------------|--------:|----:|-------:|----------:|
+|Piauí          |Colônia Do Piauí | 949.0047| 7387|       0|          1|
+|Tocantins      |Riachinho        | 517.6699| 4030|       0|          1|
+|Santa Catarina |Palmeira         | 289.4767| 2291|       0|          1|
+
+
+A Tabela abaixo mostra a diferença dos resultados dos dois métodos. A solução ótima fica com apenas 92 pessoas a menos que São Paulo.
+
+```{r echo=FALSE}
+d_solucao %>%
+  dplyr::summarise(
+    sol_knapsack = sum(pop * s_knapsack),
+    sol_adhoc = sum(pop * s_adhoc),
+    area_knapsack = sum(area * s_knapsack),
+    area_adhoc = sum(area * s_adhoc),
+    max = max(pop)
+  ) %>%
+  tidyr::gather(key, value, -max) %>%
+  tidyr::separate(key, c('tipo', 'metodo'), sep = '_', fill = 'right') %>%
+  tidyr::spread(tipo, value) %>%
+  dplyr::mutate(dif = max - sol, area = as.character(area)) %>%
+  tibble::add_row(
+    metodo = 'São Paulo', 
+    area = '-', 
+    sol = as.numeric(.$max[1]), 
+    dif = 0
+  ) %>%
+  dplyr::select(-max) %>% 
+  purrr::set_names(
+    c('Método', 'Área total', 'População total', 
+      'Diferença para sp')
+  )
+```
+
+|Método    |Área total       | População total| Diferença para sp|
+|:---------|:----------------|---------------:|-----------------:|
+|adhoc     |5669732.52073351 |        11152637|             13906|
+|knapsack  |5671488.67201654 |        11166345|               198|
+|São Paulo | -               |        11166543|                 0|
+
+## Mapa final
+
+Visualmente, a solução ótima e a solução adhoc são idênticas. Por isso vou mostrar apenas como fica o mapa para a solução ótima.
+
+O resultado aparece na Figura \@ref(fig:final). É realmente impressionante ver que aquela regiãozinha vermelha tem a mesma população que toda a região azul do mapa.
+
+```{r fig.cap="Resultado final da análise. A área em azul tem a mesma população da área em vermelho!", fig.width=10, fig.height=10}
+da_sf %>% 
+  dplyr::mutate(muni_id = as.character(code_muni)) %>% 
+  dplyr::inner_join(d_solucao, "muni_id") %>% 
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(
+    ggplot2::aes(fill = as.factor(s_knapsack)),
+    size = 0
+  ) +
+  ggplot2::geom_sf(
+    fill = "red",
+    size = 0,
+    colour = "black",
+    data = dplyr::filter(da_sf, code_muni == "3550308")
+  ) +
+  ggplot2::scale_fill_manual(
+    values = c("gray90", viridis::viridis(1, 1, .2, .8))
+  ) +
+  ggplot2::theme_void() +
+  ggplot2::theme(legend.position = "bottom") +
+  ggplot2::labs(fill = "Solução")
+```
+
+```{r final, fig.cap="Resultado final da análise. A área em azul tem a mesma população da área em vermelho!", eval=TRUE, echo=FALSE}
+knitr::include_graphics("/images/posts/conteudo/sao-paulo/mapa_final.webp")
+```
+
+É isso! Happy coding ;)

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>faxina on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/faxina/</link>
+    <description>Recent content in faxina on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/faxina/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Manipulação de dados usando o pacote data.table</title>
+      <link>https://blog.curso-r.com/posts/2021-06-01-data-table/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-01-data-table/</guid>
+      <description>Você certamente já ouviu falar no pacote dplyr, mas também conhece o pacote data.table? No post de hoje vamos explorar um pouco desse grande pacote!</description>
+    </item>
+    
+    <item>
+      <title>Acessando bases públicas em R: o pacote basedosdados</title>
+      <link>https://blog.curso-r.com/posts/2021-05-28-basedosdados/</link>
+      <pubDate>Fri, 28 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-28-basedosdados/</guid>
+      <description>Todo mundo que trabalha com Ciência de Dados uma hora ou outra vai se ver mexendo com informações públicas, direta ou indiretamente.</description>
+    </item>
+    
+    <item>
+      <title>Buscando informações na Wikipédia: Lista de episódios de Naruto Shippuden</title>
+      <link>https://blog.curso-r.com/posts/2021-05-24-naruto/</link>
+      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-24-naruto/</guid>
+      <description>Alguns animes tem muitos fillers, que são episódios que não se baseiam na história original, e não agregam na história principal.</description>
+    </item>
+    
+    <item>
+      <title>Causal Discovery: como estimar redes causais no R</title>
+      <link>https://blog.curso-r.com/posts/2021-04-27-causal-discovery-como-estimar-redes-causais-no-r/</link>
+      <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-04-27-causal-discovery-como-estimar-redes-causais-no-r/</guid>
+      <description>Correlação não é causalidade. Você certamente já ouviu essa frase, né? Nesse post, vamos te mostrar alguns jeitos de encontrar aquelas correlações que de fato valem o seu tempo.</description>
+    </item>
+    
+    <item>
+      <title>3 Dicas de Rmarkdown que você precisa saber</title>
+      <link>https://blog.curso-r.com/posts/2021-03-18-dicas-de-rmarkdown-que-voce-precisa-conhecer/</link>
+      <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-03-18-dicas-de-rmarkdown-que-voce-precisa-conhecer/</guid>
+      <description>RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos lindos e muito elegantes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer.</description>
+    </item>
+    
+    <item>
+      <title>3 livros essenciais para Cientistas de Dados </title>
+      <link>https://blog.curso-r.com/posts/2021-03-08-recomendacao-livros/</link>
+      <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-03-08-recomendacao-livros/</guid>
+      <description>Ciência de Dados é uma área nova e, embora relacionada a muitas outras áreas mais tradicionais como estatística e computação, pode parecer um mar vasto demais. Por isso, nesse post vamos te recomendar 3 livros muito legais para começar os seus estudos.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 3: Quando eu devo fazer um teste de normalidade?</title>
+      <link>https://blog.curso-r.com/posts/2021-02-26-testes-de-normalidade/</link>
+      <pubDate>Fri, 26 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-26-testes-de-normalidade/</guid>
+      <description>Nessa série de posts te mostramos como descobrir se uma variável segue ou não a distribuição normal. No último texto da série, vamos conversar um pouco sobre em quais situações é importante executar testes de normalidade.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 2: Testes</title>
+      <link>https://blog.curso-r.com/posts/2021-02-04-testes-de-normalidade/</link>
+      <pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-04-testes-de-normalidade/</guid>
+      <description>Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No segundo texto, vamos te mostrar como realizar uma bateria de testes de hipóteses para verificar se uma variável segue ou não a distribuição normal.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 1: Gráficos</title>
+      <link>https://blog.curso-r.com/posts/2021-01-28-testes-de-normalidade/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-01-28-testes-de-normalidade/</guid>
+      <description>Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No primeiro texto, vamos te mostrar como construir um QQplot da sua variável contra a distribuição normal e como interpretar esse tipo de gráfico.</description>
+    </item>
+    
+    <item>
+      <title>{tabulizer}: Tabela do PDF para data.frame em segundos</title>
+      <link>https://blog.curso-r.com/posts/2021-01-08-tabulizer/</link>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-01-08-tabulizer/</guid>
+      <description>Como extrair uma tabela de um PDF facilmente com a função tabulizer::extract_tables()</description>
+    </item>
+    
+    <item>
+      <title>Movimento da faxina de dados</title>
+      <link>https://blog.curso-r.com/posts/2019-08-30-faxina/</link>
+      <pubDate>Wed, 18 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-30-faxina/</guid>
+      <description>A faxina de dados é uma etapa essencial do ciclo da ciência de dados, que nunca será automatizada. Seja parte desse movimento.</description>
+    </item>
+    
+  </channel>
+</rss>

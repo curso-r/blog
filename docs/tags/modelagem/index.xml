@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>modelagem on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/modelagem/</link>
+    <description>Recent content in modelagem on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Tue, 27 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/modelagem/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Causal Discovery: como estimar redes causais no R</title>
+      <link>https://blog.curso-r.com/posts/2021-04-27-causal-discovery-como-estimar-redes-causais-no-r/</link>
+      <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-04-27-causal-discovery-como-estimar-redes-causais-no-r/</guid>
+      <description>Correlação não é causalidade. Você certamente já ouviu essa frase, né? Nesse post, vamos te mostrar alguns jeitos de encontrar aquelas correlações que de fato valem o seu tempo.</description>
+    </item>
+    
+    <item>
+      <title>3 livros essenciais para Cientistas de Dados </title>
+      <link>https://blog.curso-r.com/posts/2021-03-08-recomendacao-livros/</link>
+      <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-03-08-recomendacao-livros/</guid>
+      <description>Ciência de Dados é uma área nova e, embora relacionada a muitas outras áreas mais tradicionais como estatística e computação, pode parecer um mar vasto demais. Por isso, nesse post vamos te recomendar 3 livros muito legais para começar os seus estudos.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 3: Quando eu devo fazer um teste de normalidade?</title>
+      <link>https://blog.curso-r.com/posts/2021-02-26-testes-de-normalidade/</link>
+      <pubDate>Fri, 26 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-26-testes-de-normalidade/</guid>
+      <description>Nessa série de posts te mostramos como descobrir se uma variável segue ou não a distribuição normal. No último texto da série, vamos conversar um pouco sobre em quais situações é importante executar testes de normalidade.</description>
+    </item>
+    
+    <item>
+      <title>Neural Style Transfer com Torch</title>
+      <link>https://blog.curso-r.com/posts/2021-02-22-neural-style-transfer/</link>
+      <pubDate>Mon, 22 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-22-neural-style-transfer/</guid>
+      <description>Neural Style Transfer é uma das técnicas mais divertidas de deep learning. O post mostra como implementar uma rede de NST com o torch.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 2: Testes</title>
+      <link>https://blog.curso-r.com/posts/2021-02-04-testes-de-normalidade/</link>
+      <pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-04-testes-de-normalidade/</guid>
+      <description>Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No segundo texto, vamos te mostrar como realizar uma bateria de testes de hipóteses para verificar se uma variável segue ou não a distribuição normal.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 1: Gráficos</title>
+      <link>https://blog.curso-r.com/posts/2021-01-28-testes-de-normalidade/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-01-28-testes-de-normalidade/</guid>
+      <description>Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No primeiro texto, vamos te mostrar como construir um QQplot da sua variável contra a distribuição normal e como interpretar esse tipo de gráfico.</description>
+    </item>
+    
+    <item>
+      <title>Monty hall e diagramas de influência</title>
+      <link>https://blog.curso-r.com/posts/2018-09-03-monty-hall/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-09-03-monty-hall/</guid>
+      <description>O problema de Monty Hall é talvez o mais eloquente exemplo de como a probabilidade pode confundir a mente humana. Esse problema desafiou a comunidade científica no final do século XX e chegou até a ser considerado um paradoxo. Nesse post mostramos uma solução simples e elegante para o problema usando diagramas de influência e o pacote bnlearn.</description>
+    </item>
+    
+    <item>
+      <title>Modelando a variância da normal</title>
+      <link>https://blog.curso-r.com/posts/2017-02-21-regressao-heterocedastica/</link>
+      <pubDate>Thu, 09 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-21-regressao-heterocedastica/</guid>
+      <description>Verificar as suposições dos modelos é muito importante quando fazemos inferência estatística. Em particular, a suposição de homocedasticidade dos modelos de regressão linear é especialmente importante, pois influencia o cálculo de erros padrão, intervalos de confiança e valores-p. Neste post, vou mostrar três pacotes do R que ajustam modelos de regressão linear heterocedastica.</description>
+    </item>
+    
+  </channel>
+</rss>

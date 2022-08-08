@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Markdown on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/r-markdown/</link>
+    <description>Recent content in R Markdown on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 05 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Como pré-visualizar um relatório em  RMarkdown</title>
+      <link>https://blog.curso-r.com/posts/2021-05-05-visualizar-rmd-ao-vivo/</link>
+      <pubDate>Wed, 05 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-05-visualizar-rmd-ao-vivo/</guid>
+      <description>Você também sente falta de visualizar o seu Rmd completo enquanto escreve o código? Nesse post você vai descobrir como resolver esse problema!</description>
+    </item>
+    
+    <item>
+      <title>radix: um template RMarkdown</title>
+      <link>https://blog.curso-r.com/posts/2018-07-27-radix/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-27-radix/</guid>
+      <description>Neste post vamos apresentar o template Radix para RMarkdown: um formato criado especificamente para escrever artigos científicos para páginas da internet.</description>
+    </item>
+    
+    <item>
+      <title>Top 3 pacotes pra usar com rmarkdown</title>
+      <link>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</link>
+      <pubDate>Sat, 15 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-15-top-3-rmarkdown/</guid>
+      <description>Neste post, vou listar três pacotes que são úteis pra fazer relatórios bonitos em Rmarkdown.</description>
+    </item>
+    
+    <item>
+      <title>Knitr: mudando o diretório de trabalho</title>
+      <link>https://blog.curso-r.com/posts/2017-03-25-knitr-mudando-diretorio-de-trabalho/</link>
+      <pubDate>Sat, 25 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-25-knitr-mudando-diretorio-de-trabalho/</guid>
+      <description>O pacote &lt;code&gt;knitr&lt;/code&gt; é um mecanismo rápido, elegante e flexível para gerar relatórios dinâmicos no R. Ele trabalha lado a lado com o &lt;code&gt;rmarkdown&lt;/code&gt; para transformar arquivos &lt;code&gt;.Rmd&lt;/code&gt; em diversos formatos, como html, pdf e até mesmo word. Quando estamos trabalhando com arquivos Rmarkdown no Rstudio, mudar o diretório de trabalho pode levar a resultados inesperados se não for feito da maneira correta.</description>
+    </item>
+    
+  </channel>
+</rss>

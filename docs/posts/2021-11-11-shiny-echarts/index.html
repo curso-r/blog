@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Gráficos no Shiny: echarts</title>
+  <meta name="title" content="Gráficos no Shiny: echarts">
+  <meta name="description" content="Conheça uma ótima opção para fazer gráficos interativos.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-11-11-shiny-echarts/">
+  <meta property="og:title" content="Gráficos no Shiny: echarts">
+  <meta property="og:description" content="Conheça uma ótima opção para fazer gráficos interativos.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/echarts.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-11-11-shiny-echarts/">
+  <meta property="twitter:title" content="Gráficos no Shiny: echarts">
+  <meta property="twitter:description" content="Conheça uma ótima opção para fazer gráficos interativos.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/echarts.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/echarts.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Gráficos no Shiny: echarts</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=William">William</a>
+            
+            em
+            <a href="/categories/pacotes">Pacotes</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            16 de
+            novembro de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/shiny">shiny</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/gr%c3%a1ficos">gráficos</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/echarts">echarts</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/echarts4r/echarts-en.min.js"></script>
+<script src="/rmarkdown-libs/echarts4r/ecStat.min.js"></script>
+<script src="/rmarkdown-libs/echarts4r/dataTool.min.js"></script>
+<script src="/rmarkdown-libs/echarts4r-binding/echarts4r.js"></script>
+
+
+<p>No último post, vimos como usar o pacote <code>plotly</code> para gerar gráficos dinâmicos do zero ou aproveitando um gráfico feito em <code>ggplot</code>. Neste post, falaremos de outra biblioteca gráfica em JavaScript que possui pacote em R: o <code>echarts</code>.</p>
+<p>O pacote em questão se chama <code>echarts4r</code>, portanto, se você ainda não o estiver instalado, rode o código abaixo:</p>
+<pre class="r"><code>install.packages(&quot;echarts4r&quot;)</code></pre>
+<p>Leia mais:</p>
+<ul>
+<li><p><a href="https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/">Gráficos no Shiny: ggplot2</a></p></li>
+<li><p><a href="https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/">Gráficos no Shiny: echarts</a></p></li>
+</ul>
+<div id="o-pacote-echarts4r" class="section level2">
+<h2>O pacote <code>echarts4r</code></h2>
+<p>O pacote <code>echarts4r</code> <strong>não</strong> possui uma função <code>ggecharts</code>, equivalente à <code>ggplotly</code> do pacote <code>plotly</code>, que possibilitaria transformar gráficos feitos em <code>ggplot</code> em gráficos <code>echarts</code>. Assim, precisamos sempre construir nossos gráficos do zero, usando a sintaxe do <code>echarts</code>/<code>echarts4r</code>.</p>
+<p>O <code>echarts4r</code> possui semelhanças e diferenças com relação ao <code>ggplot2</code>. A semelhança mais importante é que construímos gráficos em camadas. A primeira diferença relevante é que essas camadas são unidas pelo <code>%&gt;%</code>/<code>|&gt;</code>, não pelo <code>+</code>. Outra diferença é que não temos uma função <code>aes()</code>, então o mapeamento das variáveis é feito diretamente nos argumentos das funções.</p>
+<p>Vamos começar com um exemplo simples: um gráfico de dispersão.</p>
+<pre class="r"><code>library(echarts4r)
+
+mtcars |&gt; 
+  e_charts(x = wt) |&gt; 
+  e_scatter(serie = mpg)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true}],"xAxis":[{"type":"value"}],"legend":{"data":["mpg"]},"series":[{"data":[{"value":[1.513,30.4]},{"value":[1.615,30.4]},{"value":[1.835,33.9]},{"value":[1.935,27.3]},{"value":[2.14,26]},{"value":[2.2,32.4]},{"value":[2.32,22.8]},{"value":[2.465,21.5]},{"value":[2.62,21]},{"value":[2.77,19.7]},{"value":[2.78,21.4]},{"value":[2.875,21]},{"value":[3.15,22.8]},{"value":[3.17,15.8]},{"value":[3.19,24.4]},{"value":[3.215,21.4]},{"value":[3.435,15.2]},{"value":[3.44,18.7]},{"value":[3.44,19.2]},{"value":[3.44,17.8]},{"value":[3.46,18.1]},{"value":[3.52,15.5]},{"value":[3.57,14.3]},{"value":[3.57,15]},{"value":[3.73,17.3]},{"value":[3.78,15.2]},{"value":[3.84,13.3]},{"value":[3.845,19.2]},{"value":[4.07,16.4]},{"value":[5.25,10.4]},{"value":[5.345,14.7]},{"value":[5.424,10.4]}],"name":"mpg","type":"scatter","symbol":null,"coordinateSystem":"cartesian2d","yAxisIndex":0,"xAxisIndex":0,"symbolSize":3}]},"dispose":true},"evals":[],"jsHooks":[]}</script>
+<p>Veja que o gráfico não possui <code>tooltip</code> por padrão. Precisamos incluí-la na pipeline:</p>
+<pre class="r"><code>mtcars |&gt; 
+  e_charts(x = wt) |&gt; 
+  e_scatter(serie = mpg) |&gt; 
+  e_tooltip()</code></pre>
+<div id="htmlwidget-2" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true}],"xAxis":[{"type":"value"}],"legend":{"data":["mpg"]},"series":[{"data":[{"value":[1.513,30.4]},{"value":[1.615,30.4]},{"value":[1.835,33.9]},{"value":[1.935,27.3]},{"value":[2.14,26]},{"value":[2.2,32.4]},{"value":[2.32,22.8]},{"value":[2.465,21.5]},{"value":[2.62,21]},{"value":[2.77,19.7]},{"value":[2.78,21.4]},{"value":[2.875,21]},{"value":[3.15,22.8]},{"value":[3.17,15.8]},{"value":[3.19,24.4]},{"value":[3.215,21.4]},{"value":[3.435,15.2]},{"value":[3.44,18.7]},{"value":[3.44,19.2]},{"value":[3.44,17.8]},{"value":[3.46,18.1]},{"value":[3.52,15.5]},{"value":[3.57,14.3]},{"value":[3.57,15]},{"value":[3.73,17.3]},{"value":[3.78,15.2]},{"value":[3.84,13.3]},{"value":[3.845,19.2]},{"value":[4.07,16.4]},{"value":[5.25,10.4]},{"value":[5.345,14.7]},{"value":[5.424,10.4]}],"name":"mpg","type":"scatter","symbol":null,"coordinateSystem":"cartesian2d","yAxisIndex":0,"xAxisIndex":0,"symbolSize":3}],"tooltip":{"trigger":"item"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+<p>Para fazermos um gráfico de linhas, usamos a função <code>e_line()</code>. Cada tipo de gráfico será produzido a partir de uma função do tipo <code>e_*()</code>, equivalente às funções <code>geom_*()</code> no <code>ggplot2</code>.</p>
+<pre class="r"><code>ggplot2::txhousing |&gt; 
+  dplyr::mutate(year = as.character(year)) |&gt; 
+  dplyr::group_by(year) |&gt; 
+  dplyr::summarise(sales = mean(sales, na.rm = TRUE)) |&gt; 
+  e_charts(x = year) |&gt; 
+  e_line(serie = sales) |&gt; 
+  e_tooltip()</code></pre>
+<div id="htmlwidget-3" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true}],"xAxis":[{"data":["2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015"],"type":"category","boundaryGap":true}],"legend":{"data":["sales"]},"series":[{"data":[{"value":["2000","478.4581"]},{"value":["2001","495.6167"]},{"value":["2002","531.9728"]},{"value":["2003","539.0849"]},{"value":["2004","577.2337"]},{"value":["2005","635.9074"]},{"value":["2006","664.8815"]},{"value":["2007","620.6458"]},{"value":["2008","520.0451"]},{"value":["2009","469.2169"]},{"value":["2010","440.2428"]},{"value":["2011","447.1071"]},{"value":["2012","520.0217"]},{"value":["2013","608.1561"]},{"value":["2014","626.3043"]},{"value":["2015","658.6203"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"sales","type":"line","coordinateSystem":"cartesian2d"}],"tooltip":{"trigger":"item"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+<p>Ao contrário do <code>ggplot2</code>, dados agrupados com <code>dplyr::group_by()</code> influenciam a construção do gráfico. No código abaixo, a base sai do <code>summarise</code> agrupada por <code>city</code>, fazendo com que o <code>echarts</code> construa uma linha para cada cidade.</p>
+<pre class="r"><code>ggplot2::txhousing |&gt; 
+  dplyr::filter(city %in% c(&quot;Austin&quot;, &quot;Dallas&quot;, &quot;Houston&quot;)) |&gt; 
+  dplyr::mutate(year = as.character(year)) |&gt; 
+  dplyr::group_by(city, year) |&gt; 
+  dplyr::summarise(sales = mean(sales, na.rm = TRUE)) |&gt; 
+  e_charts(x = year) |&gt; 
+  e_line(serie = sales) |&gt; 
+  e_tooltip()</code></pre>
+<div id="htmlwidget-4" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true}],"xAxis":[{"data":["2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015"],"type":"category","boundaryGap":true}],"legend":{"data":["Austin","Dallas","Houston"]},"series":[{"data":[{"value":["2000","1551.750"]},{"value":["2001","1532.667"]},{"value":["2002","1559.667"]},{"value":["2003","1649.417"]},{"value":["2004","1880.583"]},{"value":["2005","2242.083"]},{"value":["2006","2523.667"]},{"value":["2007","2337.333"]},{"value":["2008","1870.000"]},{"value":["2009","1728.917"]},{"value":["2010","1656.000"]},{"value":["2011","1767.333"]},{"value":["2012","2126.750"]},{"value":["2013","2536.333"]},{"value":["2014","2579.417"]},{"value":["2015","2696.857"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"Austin","type":"line","coordinateSystem":"cartesian2d"},{"data":[{"value":["2000","3787.167"]},{"value":["2001","3916.000"]},{"value":["2002","3933.250"]},{"value":["2003","4106.500"]},{"value":["2004","4542.833"]},{"value":["2005","4998.333"]},{"value":["2006","5352.167"]},{"value":["2007","4974.583"]},{"value":["2008","4237.333"]},{"value":["2009","3824.250"]},{"value":["2010","3531.917"]},{"value":["2011","3554.667"]},{"value":["2012","4200.917"]},{"value":["2013","4976.167"]},{"value":["2014","5012.833"]},{"value":["2015","5247.857"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"Dallas","type":"line","coordinateSystem":"cartesian2d"},{"data":[{"value":["2000","4371.583"]},{"value":["2001","4488.000"]},{"value":["2002","4713.583"]},{"value":["2003","5061.000"]},{"value":["2004","5581.583"]},{"value":["2005","6066.667"]},{"value":["2006","6749.500"]},{"value":["2007","6472.333"]},{"value":["2008","5430.750"]},{"value":["2009","5008.833"]},{"value":["2010","4733.917"]},{"value":["2011","4904.500"]},{"value":["2012","5720.250"]},{"value":["2013","6737.333"]},{"value":["2014","6951.000"]},{"value":["2015","6872.714"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"Houston","type":"line","coordinateSystem":"cartesian2d"}],"tooltip":{"trigger":"item"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+<p>A biblioteca <code>echarts</code> possui uma extensa variedade de gráficos disponíveis. Você pode visitar a <a href="https://echarts.apache.org/examples/en/index.html">galeria de exemplos</a> para ter uma boa ideia do que é possível fazer. Além disso, clicando nos exemplos, você tem acesso aos códigos JavaScript utilizados para construir os gráficos.</p>
+<p>Com as funções do pacote <code>echarts4r</code>, podemos fazer bastante do que a biblioteca <code>echarts</code> tem para oferecer. O que mostramos neste post foi tão pouco que nem poderíamos chamar de uma introdução. Para aprender mais sobre o <code>echarts4r</code> vale bastante a pena olhar <a href="https://echarts4r.john-coene.com/index.html">os tutoriais na página do pacote</a>.</p>
+<p>Em alguns casos, vamos encontrar gráficos ou elementos dentro de um gráfico que não podem ser construídos a partir dos parâmetros das funções do <code>echarts4r</code>. Nesses casos, vamos precisar nos socorrer da <a href="https://echarts.apache.org/en/option.html#title">documentação do <code>echarts</code></a> e usar parâmetros que não estão definidos nas funções do <code>echarts4r</code> (o que é possível já que a maioria das funções possuem <code>...</code>).</p>
+<p>A documentação do <code>echarts</code> pode assustar à primeira vista, mas segue um modelo padrão de documentação de bibliotecas JavaScript. Conforme vamos usando mais essas bibliotecas, seja para fazer gráficos, tabelas, mapas ou o que for, vamos nos acostumando a consumir essas documentações.</p>
+<p>Nesse sentido, uma forma de seguir a maneira JavaScript de construir um <code>echarts</code> é usar a função <code>e_list()</code>. Com ela, definimos os parâmetros do gráfico a partir de listas e conseguimos reproduzir linha a linha um exemplo feito em JS. A seguir, reproduzimos exatamente <a href="https://echarts.apache.org/examples/en/editor.html?c=pie-borderRadius">este exemplo</a>. Veja que a sintaxe dos dois códigos é muito parecida.</p>
+<pre class="r"><code>e_chart() |&gt; 
+  e_list(list(
+    tooltip = list(trigger = &quot;item&quot;),
+    legend = list(top = &quot;5%&quot;, left = &quot;center&quot;),
+    series = list(
+      list(
+        name = &quot;Access From&quot;,
+        type = &quot;pie&quot;,
+        radius = c(&quot;40%&quot;, &quot;70%&quot;),
+        avoidLabelOverlap = FALSE,
+        itemStyle = list(
+          borderRadius = 10,
+          borderColor = &quot;#fff&quot;,
+          borderWidth = 2
+        ),
+        label = list(show = FALSE, position = &quot;center&quot;),
+        emphasis = list(
+          label = list(
+            show = TRUE, 
+            fontSize = 40,
+            fontWeight = &quot;bold&quot;
+          )
+        ),
+        labelLine = list(show = FALSE),
+        data = list(
+          list(value = 1048, name = &quot;Search Engine&quot;),
+          list(value = 735, name = &quot;Direct&quot;),
+          list(value = 580, name = &quot;Email&quot;),
+          list(value = 484, name = &quot;Union Ads&quot;),
+          list(value = 300, name = &quot;Video Ads&quot;)
+        )
+      )
+    )
+  ))</code></pre>
+<div id="htmlwidget-5" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"tooltip":{"trigger":"item"},"legend":{"top":"5%","left":"center"},"series":[{"name":"Access From","type":"pie","radius":["40%","70%"],"avoidLabelOverlap":false,"itemStyle":{"borderRadius":10,"borderColor":"#fff","borderWidth":2},"label":{"show":false,"position":"center"},"emphasis":{"label":{"show":true,"fontSize":40,"fontWeight":"bold"}},"labelLine":{"show":false},"data":[{"value":1048,"name":"Search Engine"},{"value":735,"name":"Direct"},{"value":580,"name":"Email"},{"value":484,"name":"Union Ads"},{"value":300,"name":"Video Ads"}]}]},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="no-shiny" class="section level2">
+<h2>No Shiny</h2>
+<p>Para adicionar um <code>echarts</code> no Shiny, utilizamos o par de funções <code>echarts4r::echarts4rOutput()</code> e <code>echarts4r::renderEcharts4r()</code>. Na função <code>renderEcharts4r()</code>, basta passarmos um código que retorne um gráfico <code>echarts</code>.</p>
+<p>Rode o app abaixo para ver um exemplo.</p>
+<pre class="r"><code>library(shiny)
+library(echarts4r)
+
+vars &lt;- ggplot2::txhousing |&gt;
+  dplyr::select(where(is.numeric), -year, -month, -date) |&gt;
+  names()
+
+cidades &lt;- unique(ggplot2::txhousing$city)
+
+ui &lt;- fluidPage(
+  titlePanel(&quot;echarts&quot;),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        &quot;cidades&quot;,
+        &quot;Selecione as cidades&quot;,
+        multiple = TRUE,
+        choices = cidades,
+        selected = cidades[1]
+      ),
+      selectInput(
+        &quot;serie&quot;,
+        &quot;Selecione a série&quot;,
+        choices = vars,
+        selected = vars[1]
+      )
+    ),
+    mainPanel(
+      echarts4r::echarts4rOutput(&quot;plot&quot;)
+    )
+  )
+)
+
+server &lt;- function(input, output, session) {
+  output$plot &lt;- echarts4r::renderEcharts4r({
+    ggplot2::txhousing |&gt;
+      dplyr::filter(city %in% input$cidades) |&gt;
+      dplyr::mutate(year = as.character(year)) |&gt;
+      dplyr::group_by(city, year) |&gt;
+      dplyr::summarise(avg_serie = mean(.data[[input$serie]], na.rm = TRUE)) |&gt;
+      e_charts(x = year) |&gt;
+      e_line(serie = avg_serie) |&gt;
+      e_tooltip()
+  })
+}
+
+shinyApp(ui, server)</code></pre>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+<p>Até a próxima!</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

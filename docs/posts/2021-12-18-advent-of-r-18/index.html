@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Advent of R: Dia 18</title>
+  <meta name="title" content="Advent of R: Dia 18">
+  <meta name="description" content="Resolvendo o Advent of Code 2021 com R: Dia 18.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-12-18-advent-of-r-18/">
+  <meta property="og:title" content="Advent of R: Dia 18">
+  <meta property="og:description" content="Resolvendo o Advent of Code 2021 com R: Dia 18.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/advent-of-r-18.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-12-18-advent-of-r-18/">
+  <meta property="twitter:title" content="Advent of R: Dia 18">
+  <meta property="twitter:description" content="Resolvendo o Advent of Code 2021 com R: Dia 18.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/advent-of-r-18.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/advent-of-r-18.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Advent of R: Dia 18</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            18 de
+            dezembro de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/advent-of-r">advent-of-r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/tidyverse">tidyverse</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>O <a href="https://adventofcode.com">Advent of Code</a> é um
+<a href="https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento">Calendário do Advento</a>
+desenvolvido por <a href="https://github.com/topaz">Eric Wastl</a> composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.</p>
+<p>Meu objetivo com o <strong>Advent of R</strong> é resolver todos os problemas do
+<a href="https://adventofcode.com/2021">Advent of Code 2021</a> em R e documentar o
+processo através desta
+<a href="https://blog.curso-r.com/tags/advent-of-r/">série de posts</a>. Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+<a href="https://github.com/curso-r/advent-of-r">repositório público</a> no GitHub.</p>
+<p>A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="peixe-caracol-a" class="section level2">
+<h2>Peixe-Caracol (A)</h2>
+<p>Chegou o <a href="https://adventofcode.com/2021/day/18">dia 18</a> do AoC e mais uma vez
+o problema não foi muito difícil apesar do enunciado monstruoso. Uma coisa que
+notei hoje é que havia vários caminhos para resolver o exercício que pareciam
+igualmente razoáveis. No final eu decidi usar regex, uma das melhores e mais
+temidas funcionalidades de qualquer linguagem de programação.</p>
+<p>O enunciado pedia para aprendermos a fazer somas usando os números dos
+peixes-caracol… A primeira característica desse sistema aritmético é que um
+número é representado por pares de elementos na forma <code>[x,y]</code>, que podem ser
+números normais ou outros pares; por exemplo <code>[[1,2],3]</code>. Além disso, há duas
+limitações para os números: nunca pode haver um par dentro de 4 ou mais pares e
+nenhum número normal pode ser maior que 9.</p>
+<p>A soma dos peixes-caracol coloca cada um dos dois números como elementos de um
+novo par. Se o primeiro número for <code>[a,b]</code> e o segundo <code>[x,y]</code>, então a soma
+deles é <code>[[a,b],[x,y]]</code>. Obviamente isso pode criar um número que viola a
+as limitações acima, então precisamos aplicar as regras da <em>explosão</em> e da
+<em>quebra</em>. Abaixo eu descrevo as regras e as funções que criei para implementar
+cada uma:</p>
+<p>A regra da explosão sempre vem primeiro e ela deve ser aplicada o maior número
+possível de vezes antes de partirmos para a regra da quebra.</p>
+<pre class="r"><code># Exemplo:
+# [[6,[5,[4,[3,2]]]],1]
+#
+# Passos da explosão:
+# 1. Encontrar o primeiro par simples que está dentro de 4 ou mais pares
+# [3,2]
+#
+# 2. Denominar as partes do par com x e y:
+# [x,y] = [3,2]
+#
+# 3. Somar x ao número normal mais próximo à esquerda (se houver)
+# [[6,[5,[4 + 3,[3,2]]]],1]
+# [[6,[5,[7,[3,2]]]],1]
+#
+# 4. Somar y ao número normal mais próximo à direita (se houver)
+# [[6,[5,[7,[3,2]]]],1 + 2]
+# [[6,[5,[7,[3,2]]]],3]
+#
+# 5. Substituir o par por 0
+# [[6,[5,[7,0]]],3]</code></pre>
+<pre class="r"><code># Encontrar posição de um par que precisa ser explodido
+find_explode &lt;- function(num) {
+  chrs &lt;- stringr::str_split(num, &quot;&quot;)[[1]]
+
+  # Iterar nos caracteres para encontrar um par profundo demais
+  counter &lt;- 0
+  for (i in seq_along(chrs)) {
+    if (chrs[i] == &quot;[&quot;) {
+      counter &lt;- counter + 1
+    } else if (chrs[i] == &quot;]&quot;) {
+      counter &lt;- counter - 1
+
+      # Se o par for profundo demais, retornar
+      if (counter &gt;= 4) {
+
+        # Encontrar o começo do par
+        len &lt;- num |&gt;
+          stringr::str_sub(end = i) |&gt;
+          stringr::str_extract(&quot;\\[[^\\[]*?$&quot;) |&gt;
+          stringr::str_length() |&gt;
+          magrittr::subtract(1)
+
+        # Retornar &quot;coordenadas&quot; do par
+        return(c(i - len, i))
+      }
+    }
+  }
+
+  # Se não ouver par para explodir, returnar NULL
+  return(NULL)
+}
+
+# Aplicar o algoritmo da explosão
+explode &lt;- function(num) {
+
+  # Encontrar um par para explodir
+  pos &lt;- find_explode(num)
+
+  # Se não houver par, retornar o número
+  if (is.null(pos)) return(num)
+
+  # Extrair números normais do par
+  pair &lt;- num |&gt;
+    stringr::str_sub(pos[1], pos[2]) |&gt;
+    stringr::str_extract_all(&quot;[0-9]+&quot;) |&gt;
+    purrr::pluck(1) |&gt;
+    as.numeric()
+
+  # Pegar a parte esquerda do número (até o par que vai explodir)
+  lhs &lt;- stringr::str_sub(num, end = pos[1] - 1)
+
+  # Encontrar o número normal mais próximo de pair[1] e somar
+  left_num &lt;- lhs |&gt;
+    stringr::str_extract(&quot;[0-9]+(?=[^0-9]+$)&quot;) |&gt;
+    as.numeric() |&gt;
+    magrittr::add(pair[1])
+
+  # Pegar a parte direita do número (a partir do par que vai explodir)
+  rhs &lt;- stringr::str_sub(num, pos[2] + 1)
+
+  # Encontrar o número normal mais próximo de pair[2] e somar
+  right_num &lt;- rhs |&gt;
+    stringr::str_extract(&quot;^[^0-9]+[0-9]+&quot;) |&gt;
+    stringr::str_remove(&quot;^[^0-9]+&quot;) |&gt;
+    as.numeric() |&gt;
+    magrittr::add(pair[2])
+
+  # Substituir os números normais que mudamos
+  lhs &lt;- stringr::str_replace(lhs, &quot;[0-9]+([^0-9]+)$&quot;, paste0(left_num, &quot;\\1&quot;))
+  rhs &lt;- stringr::str_replace(rhs, &quot;^([^0-9]+)[0-9]+&quot;, paste0(&quot;\\1&quot;, right_num))
+
+  # Colar as partes esquerda e direita de volta
+  return(paste0(lhs, &quot;0&quot;, rhs))
+}</code></pre>
+<p>Se não houver mais como aplicar a explosão, então podemos fazer uma quebra e
+voltar para o começo do algoritmo: aplicar quantas explosões forem possíveis e
+depois tentar uma quebra. Quando nenhuma regra puder ser aplicada, então
+encontramos o resultado da soma.</p>
+<pre class="r"><code># Exemplo:
+# [11,1]
+#
+# Passos da quebra:
+# 1. Encontrar o primeiro número normal maior que 9
+# 11
+#
+# 2. Criar um novo par onde o elemento da esquerda é o número dividido por 2
+#    arredondado para baixo e o elemento da direita é o número dividido por 2
+#    arredondado para cima.
+# [5,6]
+#
+# 3. Substituir o número normal pelo par criado
+# [[5,6],1]</code></pre>
+<pre class="r"><code># Aplicar o algoritmo da quebra
+split &lt;- function(num) {
+
+  # Verificar se algo precisa ser quebrado e retornar o número se não
+  if (!stringr::str_detect(num, &quot;[0-9]{2,}&quot;)) return(num)
+
+  # Criar um par a partir das metades do primeiro número normal &gt; 9
+  pair &lt;- num |&gt;
+    stringr::str_extract(&quot;[0-9]{2,}&quot;) |&gt;
+    as.numeric() |&gt;
+    {\(n) paste0(&quot;[&quot;, floor(n / 2), &quot;,&quot;, ceiling(n / 2), &quot;]&quot;)}()
+
+  # Substituir o número normal pelo par criado
+  stringr::str_replace(num, &quot;[0-9]{2,}&quot;, pair)
+}</code></pre>
+<p>Agora que sabemos como explodir e qubrar, podemos implementar o algoritmo
+completo da soma dos peixes-caracol. Notem o <code>next</code> no loop; ele é essencial
+por causa da exigência de aplicarmos a explosão quantas vezes forem necessárias.</p>
+<pre class="r"><code># Soma dos peixes-caracol
+snailfish_sum &lt;- function(num1, num2) {
+
+  # Juntar números como elementos de um novo par
+  num &lt;- paste0(&quot;[&quot;, num1, &quot;,&quot;, num2, &quot;]&quot;)
+
+  # Aplicar explosão e quebra até o número não mudar mais
+  num_ &lt;- &quot;&quot;
+  while (num_ != num) {
+    num_ &lt;- num
+
+    # Explodir e, se o número tiver mudado, voltar
+    num &lt;- explode(num)
+    if (num_ != num) next
+
+    # Qubrar
+    num &lt;- split(num)
+  }
+
+  return(num)
+}</code></pre>
+<p>Mas o enunciado não pedia para simplesmente implementarmos a soma dos
+peixes-caracol… A resposta final deveria ser a magnitude do número obtido a
+partir de somas sucessivas. Essencialmente, a nossa entrada era uma sequência
+de números <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, etc. e devíamos calcular
+<code>(((A + B) + C) + D) + ...</code>. Já a magnitude de um número envolve outro
+algoritmo; a magnitude de um <code>[x,y]</code> qualquer é <code>3*x + 2*y</code>, mas devemos aplicar
+isso recursivamente, entrando nas camadas mais profundas do número e voltando
+para a superfície.</p>
+<pre class="r"><code># Fazer uma rodada do algoritmo da magnitude
+get_one_magnitude &lt;- function(num) {
+
+  # Pegar a magnitude do par mais à esquerda
+  val &lt;- num |&gt;
+    stringr::str_extract(&quot;\\[[^\\[\\]]+\\]&quot;) |&gt;
+    stringr::str_extract_all(&quot;[0-9]+&quot;) |&gt;
+    purrr::pluck(1) |&gt;
+    as.numeric() |&gt;
+    {\(n) 3 * n[1] + 2 * n[2]}() |&gt;
+    as.character()
+
+  # Trocar o par pela sua magnitude
+  stringr::str_replace(num, &quot;\\[[^\\[\\]]+\\]&quot;, val)
+}
+
+# Aplicar o algoritmo completo da magnitude
+get_magnitude &lt;- function(num) {
+
+  # Enquanto ainda houver pares, fazer uma rodada do cálculo
+  while (stringr::str_detect(num, &quot;\\[&quot;)) {
+    num &lt;- get_one_magnitude(num)
+  }
+
+  # Retornar magnitude convertida para um valor numérico
+  return(as.numeric(num))
+}</code></pre>
+<p>Enfim, depois de uma parede de texto e uma parede de código, podemos finalmente
+juntar tudo na solução do primeiro item.</p>
+<pre class="r"><code># Reduce list of numbers with snalfish addition and get magnitude
+&quot;data-raw/18a_snailfish.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  purrr::reduce(snailfish_sum) |&gt;
+  get_magnitude()
+#&gt; [1] 4124</code></pre>
+</div>
+<div id="peixes-caracol-b" class="section level2">
+<h2>Peixes-Caracol (B)</h2>
+<p>Em um ato de bondade, o autor do Advent of Code fez um item 2 bem simples. Dados
+todos os números <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, etc. que recebemos como entrada,
+precisávamos combinar todos para encontrar a maior magnitude possível. Minha
+solução foi gerar todas as somas possíveis (<code>A + B</code>, <code>B + A</code>, <code>A + C</code>, <code>C + A</code>,
+etc., notando que <code>A + B != B + A</code>) e simplesmente calcular a magnitude de
+todas. A resposta do item devia ser justamente essa maior magnitude possível.</p>
+<pre class="r"><code># Cruzar os números consigo mesmos e somar toda combinação
+&quot;data-raw/18b_snailfish.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  {\(ns) list(ns, ns)}() |&gt;
+  purrr::cross(`==`) |&gt;
+  purrr::map_dbl(~get_magnitude(snailfish_sum(.x[[1]], .x[[2]]))) |&gt;
+  max()
+#&gt; [1] 4673</code></pre>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

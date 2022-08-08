@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rstudio::conf on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/rstudioconf/</link>
+    <description>Recent content in rstudio::conf on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 29 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/rstudioconf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>rstudio::conf 2022, segundo dia de palestras</title>
+      <link>https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/</link>
+      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/</guid>
+      <description>Segundo dia do evento mais importante da RStudio/Posit em 2022!</description>
+    </item>
+    
+    <item>
+      <title>rstudio::conf 2022, primeiro dia de palestras</title>
+      <link>https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/</link>
+      <pubDate>Wed, 27 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/</guid>
+      <description>Primeiro dia do evento mais importante da RStudio em 2022!</description>
+    </item>
+    
+  </channel>
+</rss>

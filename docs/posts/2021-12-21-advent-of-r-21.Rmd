@@ -1,0 +1,206 @@
+---
+title: "Advent of R: Dia 21"
+date: "2021-12-21"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-21.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 21."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Dados de Dirac (A)
+
+O [dia 21](https://adventofcode.com/2021/day/21) do AoC começou bem. O primeiro
+item foi bastante direto e tranquilo... O que complicou tudo foi o segundo.
+
+Começamos aprendendo as regras de um jogo chamado Dados de Dirac. Ele é composto
+um tabuleiro circular que vai de 1 a 10, um dado e dois peões para representar
+os dois jogadores. Cada jogador rola o dado 3 vezes, soma os resultados e anda
+aquele número de casas no tabuleiro; o número da casa em que ele caiu é então
+adicionado à pontuação do jogador. Cada jogador começa em uma casa escolhida
+aleatoriamente e ganha o primeiro a atingir 1000 ou mais pontos.
+
+O primeiro item pedia para simularmos um jogo de Dados de Dirac com um dado
+determinístico antes de partirmos para a versão oficial. Nós recebemos como
+entrada a posição de início de cada jogador e a mecânica de funcionamento do
+dado: ele ia de 1 a 100 e seu resultado sempre vinha nessa ordem (ou seja, o
+primeiro jogador rolaria 1, 2, 3, o segundo rolaria 4, 5, 6, etc.). Nosso
+objetivo era simular o jogo até que alguém ganhasse e retornar a pontuação do
+jogador perdedor multiplicada pelo número de vezes que o dado foi rolado naquele
+jogo.
+
+```r
+# Ler posições iniciais
+pos <- "data-raw/21a_dirac_dice.txt" |>
+  readr::read_lines() |>
+  stringr::str_extract("[0-9]+$") |>
+  as.numeric()
+
+# Posições iniciais
+p1_pos <- pos[1]
+p2_pos <- pos[2]
+
+# Pontuações iniciais
+p1_pts <- 0
+p2_pts <- 0
+
+# Fazer os dados irem do valor máximo para 1
+die_mod <- function(e1, e2) ((e1 - 1) %% e2) + 1
+
+# Iterar até o jogo acabar
+die <- 1
+counter <- 0
+while (TRUE) {
+
+  # J1 rola 3 vezes
+  p1_rolls <- die:(die + 2)
+  p1_rolls <- die_mod(p1_rolls, 100)
+
+  # Atualizar estado do dado e contador de rolagem
+  die <- die_mod(p1_rolls[3] + 1, 100)
+  counter <- counter + 3
+
+  # Atualizar pontuação do J1
+  p1_pos <- p1_pos + sum(p1_rolls)
+  p1_pos <- die_mod(p1_pos, 10)
+  p1_pts <- p1_pts + p1_pos
+
+  # Parar se J1 ganhou
+  if (p1_pts >= 1000) break
+
+  # J2 rola 3 vezes
+  p2_rolls <- die:(die + 2)
+  p2_rolls <- die_mod(p2_rolls, 100)
+
+  # Atualizar estado do dado e contador de rolagem
+  die <- die_mod(p2_rolls[3] + 1, 100)
+  counter <- counter + 3
+
+  # Atualizar pontuação do J2
+  p2_pos <- p2_pos + sum(p2_rolls)
+  p2_pos <- die_mod(p2_pos, 10)
+  p2_pts <- p2_pts + p2_pos
+
+  # Parar se J2 ganhou
+  if (p2_pts >= 1000) break
+}
+
+# Contador * pontuação do perdedor
+min(p1_pts, p2_pts) * counter
+#> [1] 597600
+```
+
+## Dados de Dirac (B)
+
+Bem direto, certo? Uma pena que o segundo item não tinha nada a ver... Agora
+deveríamos simular o jogo com o epônimo Dado de Dirac. Ele tem 3 lados (de 1 a
+3) e, cada vez que ele é rolado, um universo paralelo é criado para cada
+possível resultado. Em suma, no final do jogo haveria um universo para cada
+caminho que o jogo poderia hipoteticamente tomar. Felizmente, com o Dado de
+Dirac, o jogo ia só até 21 pontos.
+
+Nossa missão era, dadas as posições iniciais, calcular em quantos universos
+ganhava o jogador que ganhava mais vezes. Não parece tão difícil até você
+perceber que teremos algo em torno de 700 _trilhões_ de universos para
+considerar. Espero que esteja claro que tentar gerar todas as rodadas não vai
+funcionar.
+
+A solução ideal para esse problema é
+[programação dinâmica](https://pt.wikipedia.org/wiki/Programa%C3%A7%C3%A3o_din%C3%A2mica)
+(PD) que, apesar do nome esotérico, não é tão misteriosa assim. De forma bem
+superficial, um algoritmo que usa PD começa dividindo o problema principal em
+sub-problemas mais simples e armazenando seus resultados; a parte vital é,
+então, utilizar esses resultados já calculados para evitar contas desnecessárias
+mais para frente.
+
+Concretamente, queremos dividir o jogo em estados distintos definidos pelos
+quartetos `(p1_pos, p2_pos, p1_pts, p2_pts)`. Vejamos como funcionaria um trecho
+desse algoritmo:
+
+1. Começamos por um estado no final do jogo: `(3, 8, 19, 21)`. Neste universo,
+sabemos que o J2 ganhou, então salvamos a informação `(3, 8, 19, 21) = (0, 1)`.
+
+2. Mais para frente, encontramos o estado `(3, 5, 19, 13)`. O J2 pode rolar uma
+série de valores aqui que precisamos verificar, mas, se ele rolar 1 + 1 + 1,
+sabemos que cairemos no estado `(3, 8, 19, 21)`! Sendo assim, podemos pular este
+cálculo e verificar apenas as outras rolagens possíveis.
+
+3. Com PD, calcularemos primeiro estados mais fáceis e, conforme formos
+evoluindo para o começo do jogo, já teremos calculado o número de vitórias de
+cada jogador em cada futuro. Assim, basta somar esses futuros e passar para um
+estado anterior.
+
+```r
+# Ler posições iniciais
+pos <- "data-raw/21b_dirac_dice.txt" |>
+  readr::read_lines() |>
+  stringr::str_extract("[0-9]+$") |>
+  as.numeric()
+
+# Posições iniciais
+p1_pos <- pos[1]
+p2_pos <- pos[2]
+
+# Fazer os dados irem do valor máximo para 1
+die_mod <- function(e1, e2) ((e1 - 1) %% e2) + 1
+
+# Criar um identificar para `states`
+id <- function(a, b, c, d) paste0(a, ",", b, ",", c, ",", d)
+
+# Contar vitórias de cada jogador a partir de cada estado do jogo
+states <- list()
+count_states <- function(p1_pos, p2_pos, p1_pts = 0, p2_pts = 0) {
+  this_id <- id(p1_pos, p2_pos, p1_pts, p2_pts)
+
+  # Condições de parada
+  if (p1_pts >= 21) return(c(1, 0))
+  if (p2_pts >= 21) return(c(0, 1))
+  if (this_id %in% names(states)) return(states[[this_id]])
+
+  # Todas as combinações possíveis de rolagens
+  rolls <- list(1:3, 1:3, 1:3) |>
+    purrr::cross() |>
+    purrr::map(purrr::flatten_int) |>
+    purrr::map_int(sum)
+
+  # Iterar nas rolagens e fazer a recursão para os próximos estados
+  wins_total <- c(0, 0)
+  for (roll in rolls) {
+    p1_pos_ <- die_mod(p1_pos + roll, 10)
+
+    # Ir para o próximo estado e somar vitórias
+    wins <- count_states(p2_pos, p1_pos_, p2_pts, p1_pts + p1_pos_)
+    wins_total <- wins_total + rev(wins)
+  }
+
+  # Atualizar `states` e retornar
+  states[[this_id]] <<- wins_total
+  return(wins_total)
+}
+
+# Rodar programação dinâmica
+count_states(p1_pos, p2_pos) |>
+  max() |>
+  format(scientific = FALSE)
+#> [1] 634769613696613
+```

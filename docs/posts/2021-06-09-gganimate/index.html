@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Animando gráficos feitos em ggplot2: o pacote gganimate</title>
+  <meta name="title" content="Animando gráficos feitos em ggplot2: o pacote gganimate">
+  <meta name="description" content="Quer dar um upgrade nos seus gráficos e colocar uma animaçãozinha? Use o pacote gganimate!">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-06-09-gganimate/">
+  <meta property="og:title" content="Animando gráficos feitos em ggplot2: o pacote gganimate">
+  <meta property="og:description" content="Quer dar um upgrade nos seus gráficos e colocar uma animaçãozinha? Use o pacote gganimate!">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/gganimate_logo_small.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-06-09-gganimate/">
+  <meta property="twitter:title" content="Animando gráficos feitos em ggplot2: o pacote gganimate">
+  <meta property="twitter:description" content="Quer dar um upgrade nos seus gráficos e colocar uma animaçãozinha? Use o pacote gganimate!">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/gganimate_logo_small.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/gganimate_logo_small.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Animando gráficos feitos em ggplot2: o pacote gganimate</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Fernando">Fernando</a>
+            
+            em
+            <a href="/categories/pacotes">Pacotes</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            9 de
+            junho de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/ggplot2">ggplot2</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Você provavelmente conhece o pacote <code>ggplot2</code>, mas você sabia que também é possível criar gráficos animados sem nenhuma dificuldade? Essa é exatamente a função do pacote <code>gganimate</code> e hoje nós vamos conversar um pouco sobre as animações.</p>
+<div id="ideia-geral" class="section level1">
+<h1>Ideia geral</h1>
+<p>O pacote <code>gganimate</code> parte de um objeto <code>ggplot2</code> que pode ser decomposto em vários plots repetidos. A animação que vemos na tela é uma composição a partir de todas essas imagens. As possibilidades de composição são definidas pelas chamadas à funções <code>transition_*</code>, que definem de que modo a sua animação deve ser se comportar entre um gráfico e outro. Você pode conferir a nossa <a href="https://www.youtube.com/watch?v=LXZhvWE2ne8&amp;t=890s">live</a> ou o cheatsheet para ver alguns exemplos.</p>
+<p>O exemplo abaixo usa <em>transition_reveal(data_aplicacao)</em> do pacote <code>gganimate</code> para transformar um <code>ggplot2</code> comum em várias imagens que representam a curva de pessoas vacinadas ao longo do tempo:</p>
+<pre class="r"><code>library(tidyverse)
+library(bigrquery)
+
+conexao_covid &lt;- dbConnect(
+  bigrquery::bigquery(),
+  project = &quot;basedosdados&quot;,
+  dataset = &quot;br_ms_vacinacao_covid19&quot;,
+  billing = &quot;live-curso-r-bd-2&quot;
+)
+
+conexao_populacao &lt;- dbConnect(
+  bigrquery::bigquery(),
+  project = &quot;basedosdados&quot;,
+  dataset = &quot;br_ibge_populacao&quot;,
+  billing = &quot;live-curso-r-bd-2&quot;
+)
+
+vacinacao_base &lt;- tbl(conexao_covid, &quot;microdados_vacinacao&quot;) %&gt;%
+  count(sigla_uf, data_aplicacao, dose) %&gt;%
+  collect() %&gt;%
+  mutate(
+    data_aplicacao = as.Date(data_aplicacao)
+  )
+
+populacao_estados &lt;- tbl(conexao_populacao, &quot;municipio&quot;) %&gt;%
+  filter(ano == 2020) %&gt;%
+  collect() %&gt;%
+  mutate(
+    id_estado = str_sub(id_municipio, 1, 2),
+    sigla_uf = case_when(
+      id_estado == &quot;12&quot; ~ &quot;AC&quot;,
+      id_estado == &quot;27&quot; ~ &quot;AL&quot;,
+      id_estado == &quot;16&quot; ~ &quot;AP&quot;,
+      id_estado == &quot;13&quot; ~ &quot;AM&quot;,
+      id_estado == &quot;29&quot; ~ &quot;BA&quot;,
+      id_estado == &quot;53&quot; ~ &quot;DF&quot;,
+      id_estado == &quot;23&quot; ~ &quot;CE&quot;,
+      id_estado == &quot;32&quot; ~ &quot;ES&quot;,
+      id_estado == &quot;52&quot; ~ &quot;GO&quot;,
+      id_estado == &quot;21&quot; ~ &quot;MA&quot;,
+      id_estado == &quot;51&quot; ~ &quot;MT&quot;,
+      id_estado == &quot;50&quot; ~ &quot;MS&quot;,
+      id_estado == &quot;31&quot; ~ &quot;MG&quot;,
+      id_estado == &quot;15&quot; ~ &quot;PA&quot;,
+      id_estado == &quot;25&quot; ~ &quot;PB&quot;,
+      id_estado == &quot;41&quot; ~ &quot;PR&quot;,
+      id_estado == &quot;26&quot; ~ &quot;PE&quot;,
+      id_estado == &quot;22&quot; ~ &quot;PI&quot;,
+      id_estado == &quot;33&quot; ~ &quot;RJ&quot;,
+      id_estado == &quot;24&quot; ~ &quot;RN&quot;,
+      id_estado == &quot;43&quot; ~ &quot;RS&quot;,
+      id_estado == &quot;11&quot; ~ &quot;RO&quot;,
+      id_estado == &quot;14&quot; ~ &quot;RR&quot;,
+      id_estado == &quot;42&quot; ~ &quot;SC&quot;,
+      id_estado == &quot;35&quot; ~ &quot;SP&quot;,
+      id_estado == &quot;28&quot; ~ &quot;SE&quot;,
+      id_estado == &quot;17&quot; ~ &quot;TO&quot;
+    )
+  ) %&gt;%
+  group_by(sigla_uf) %&gt;%
+  summarise(
+    populacao = sum(populacao)
+  )
+
+vacinacao_base_por_estado &lt;- vacinacao_base %&gt;%
+  ungroup() %&gt;%
+  mutate(
+    regiao = case_when(
+      sigla_uf %in% c(&quot;SP&quot;, &quot;RJ&quot;, &quot;MG&quot;, &quot;ES&quot;) ~ &quot;Sudeste&quot;,
+      sigla_uf %in% c(&quot;SC&quot;, &quot;PR&quot;, &quot;RS&quot;) ~ &quot;Sul&quot;,
+      sigla_uf %in% c(&quot;MT&quot;, &quot;DF&quot;, &quot;GO&quot;, &quot;MS&quot;) ~ &quot;Centro-Oeste&quot;,
+      sigla_uf %in% c(&quot;AC&quot;, &quot;AM&quot;, &quot;RO&quot;, &quot;RR&quot;, &quot;PA&quot;, &quot;AP&quot;, &quot;TO&quot;) ~ &quot;Norte&quot;,
+      TRUE ~ &quot;Nordeste&quot;
+    )
+  ) %&gt;%
+  filter(dose == &quot;2&quot;) %&gt;%
+  group_by(regiao, sigla_uf) %&gt;%
+  arrange(regiao, sigla_uf, data_aplicacao) %&gt;%
+  mutate(
+    n_acum = cumsum(n),
+  ) %&gt;%
+  filter(data_aplicacao &gt;= as.Date(&quot;2021-01-01&quot;)) %&gt;%
+  left_join(
+    populacao_estados
+  ) %&gt;%
+  mutate(
+    percentual_vacinado = n_acum/populacao
+  )
+
+populacao_regiao &lt;- vacinacao_base_por_estado %&gt;%
+  group_by(regiao) %&gt;%
+  summarise(
+    populacao = sum(unique(populacao))
+  )
+
+vacinacao_base_por_regiao &lt;-  vacinacao_base %&gt;%
+  ungroup() %&gt;%
+  mutate(
+    regiao = case_when(
+      sigla_uf %in% c(&quot;SP&quot;, &quot;RJ&quot;, &quot;MG&quot;, &quot;ES&quot;) ~ &quot;Sudeste&quot;,
+      sigla_uf %in% c(&quot;SC&quot;, &quot;PR&quot;, &quot;RS&quot;) ~ &quot;Sul&quot;,
+      sigla_uf %in% c(&quot;MT&quot;, &quot;DF&quot;, &quot;GO&quot;, &quot;MS&quot;) ~ &quot;Centro-Oeste&quot;,
+      sigla_uf %in% c(&quot;AC&quot;, &quot;AM&quot;, &quot;RO&quot;, &quot;RR&quot;, &quot;PA&quot;, &quot;AP&quot;, &quot;TO&quot;) ~ &quot;Norte&quot;,
+      TRUE ~ &quot;Nordeste&quot;
+    )
+  ) %&gt;%
+  filter(dose == &quot;2&quot;) %&gt;%
+  group_by(regiao, data_aplicacao) %&gt;%
+  summarise(
+    n = sum(n)
+  ) %&gt;%
+  group_by(regiao) %&gt;%
+  arrange(regiao, data_aplicacao) %&gt;%
+  mutate(
+    n_acum = cumsum(n),
+  ) %&gt;%
+  filter(data_aplicacao &gt;= as.Date(&quot;2021-02-01&quot;)) %&gt;%
+  left_join(
+    populacao_regiao
+  ) %&gt;%
+  mutate(
+    percentual_vacinado = n_acum/populacao
+  )
+
+library(gganimate)
+
+grafico_por_regiao &lt;- vacinacao_base_por_regiao %&gt;%
+  #filter(regiao == &quot;Sudeste&quot;) %&gt;%
+  #filter(data_aplicacao &lt;= as.Date(&quot;2021-04-15&quot;)) %&gt;%
+  ungroup() %&gt;%
+  arrange(data_aplicacao) %&gt;%
+  #mutate(data_aplicacao = as.numeric(data_aplicacao)) %&gt;%
+  ggplot(aes(x = data_aplicacao, y = percentual_vacinado, color = regiao)) +
+  #geom_col() +
+  #geom_line(size = 1.2) +
+  geom_point(size = 6) +
+  transition_reveal(data_aplicacao) +
+  scale_color_viridis_d() +
+  theme_bw(20) +
+  shadow_wake(wake_length = 0.5, size = 3) +
+  ease_aes(&quot;cubic-in&quot;) +
+  labs(x = &quot;Data de referência&quot;, y= &quot;% da população vacinado com a 2a dose&quot;,
+       titulo = &quot;Evolução da vacinação contra COVID-19 no Brasil por região&quot;,
+       caption = &quot;Fonte: openDataSus/Base dos dados&quot;)
+
+animate(grafico_por_regiao, height = 600, width =800)</code></pre>
+<p><img src="/posts/2021-06-09-gganimate_files/figure-html/unnamed-chunk-1-1.gif" /><!-- --></p>
+</div>
+<div id="gostou-quer-saber-mais" class="section level1">
+<h1>Gostou? Quer saber mais?</h1>
+<p>Confira a nossa <a href="https://www.youtube.com/watch?v=LXZhvWE2ne8&amp;t=890s">live</a>!</p>
+<p>Se você quiser aprender um pouco mais sobre RMarkdown e Visualização de Dados em geral, dê uma olhada no nosso curso <a href="https://curso-r.com/cursos/visualizacao/">Relatórios e visualização de dados</a> e aproveite!</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>análises on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/categories/an%C3%A1lises/</link>
+    <description>Recent content in análises on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sun, 05 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/an%C3%A1lises/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ranking de jogadores de Tênis</title>
+      <link>https://blog.curso-r.com/posts/2022-06-05-ranking-tenis/</link>
+      <pubDate>Sun, 05 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-06-05-ranking-tenis/</guid>
+      <description>Análise do ranking dos jogadores ao longo do tempo</description>
+    </item>
+    
+    <item>
+      <title>Matrizes de correlação com o R usando o pacote GGally</title>
+      <link>https://blog.curso-r.com/posts/2021-09-03-matrizes-correlacao/</link>
+      <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-09-03-matrizes-correlacao/</guid>
+      <description>Muitas vezes queremos ter um jeito rápido de visualizar as relações que existem entre as colunas das nossas bases de dados. No post de hoje vamos falar sobre como fazer isso usando uma matriz de correlação.</description>
+    </item>
+    
+    <item>
+      <title>Causal Discovery: como estimar redes causais no R</title>
+      <link>https://blog.curso-r.com/posts/2021-04-27-causal-discovery-como-estimar-redes-causais-no-r/</link>
+      <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-04-27-causal-discovery-como-estimar-redes-causais-no-r/</guid>
+      <description>Correlação não é causalidade. Você certamente já ouviu essa frase, né? Nesse post, vamos te mostrar alguns jeitos de encontrar aquelas correlações que de fato valem o seu tempo.</description>
+    </item>
+    
+    <item>
+      <title>Uma maneira prática de encontrar outliers nos seus dados</title>
+      <link>https://blog.curso-r.com/posts/2021-04-15-como-encontrar-outliers/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-04-15-como-encontrar-outliers/</guid>
+      <description>Você já passou pela situação de fazer um gráfico e se deparar com um monte de pontos bizarros? Quando você nem seguer consegue ver o que está acontecendo porque um ponto está deixando a sua escala completamente bagunçada? Hoje, nós vamos falar sobre uma estratégia rápida e fácil que tem o potencial de te ajudar a encontrar todos os seus outliers sem ter dor de cabeça.</description>
+    </item>
+    
+    <item>
+      <title>Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto</title>
+      <link>https://blog.curso-r.com/posts/2021-04-01-acessar-cnpj/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-04-01-acessar-cnpj/</guid>
+      <description>Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito, muito rápido!</description>
+    </item>
+    
+    <item>
+      <title>Efeito da ausência de torcida nos jogos do Brasileirão</title>
+      <link>https://blog.curso-r.com/posts/2021-03-05-brasileirao-sem-torcida/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-03-05-brasileirao-sem-torcida/</guid>
+      <description>Analisamos os resultados do Brasileirão para investigar o efeito da ausência de torcida na última edição do campeonato.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 3: Quando eu devo fazer um teste de normalidade?</title>
+      <link>https://blog.curso-r.com/posts/2021-02-26-testes-de-normalidade/</link>
+      <pubDate>Fri, 26 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-26-testes-de-normalidade/</guid>
+      <description>Nessa série de posts te mostramos como descobrir se uma variável segue ou não a distribuição normal. No último texto da série, vamos conversar um pouco sobre em quais situações é importante executar testes de normalidade.</description>
+    </item>
+    
+    <item>
+      <title>Neural Style Transfer com Torch</title>
+      <link>https://blog.curso-r.com/posts/2021-02-22-neural-style-transfer/</link>
+      <pubDate>Mon, 22 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-22-neural-style-transfer/</guid>
+      <description>Neural Style Transfer é uma das técnicas mais divertidas de deep learning. O post mostra como implementar uma rede de NST com o torch.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 2: Testes</title>
+      <link>https://blog.curso-r.com/posts/2021-02-04-testes-de-normalidade/</link>
+      <pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-04-testes-de-normalidade/</guid>
+      <description>Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No segundo texto, vamos te mostrar como realizar uma bateria de testes de hipóteses para verificar se uma variável segue ou não a distribuição normal.</description>
+    </item>
+    
+    <item>
+      <title>Testes de normalidade em R - Parte 1: Gráficos</title>
+      <link>https://blog.curso-r.com/posts/2021-01-28-testes-de-normalidade/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-01-28-testes-de-normalidade/</guid>
+      <description>Nessa série de posts vamos te mostrar como descobrir se uma variável segue ou não a distribuição normal. No primeiro texto, vamos te mostrar como construir um QQplot da sua variável contra a distribuição normal e como interpretar esse tipo de gráfico.</description>
+    </item>
+    
+    <item>
+      <title>Bechdel: Filme e Machismo</title>
+      <link>https://blog.curso-r.com/posts/2020-06-09-bechdel/</link>
+      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-09-bechdel/</guid>
+      <description>O teste de Bechdel avalia se um filme atende a uma condição simples: duas mulheres (com nomes) conversam entre si sobre algo que não seja homem. Existe um banco de dados de filmes avaliados por pelo índice Bechdel e nós analisamos.</description>
+    </item>
+    
+    <item>
+      <title>A Poupança de Beethoven</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</guid>
+      <description>Explorando um pouco sobre currying e ggplot através da maluquice que são os juros compostos.</description>
+    </item>
+    
+    <item>
+      <title>Camadas de Fake News</title>
+      <link>https://blog.curso-r.com/posts/2020-01-21-fake-news/</link>
+      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-01-21-fake-news/</guid>
+      <description>Uma fake news dura de roer. Como um gráfico pode estar tecnicamente certo e ao mesmo tempo não ser correto.</description>
+    </item>
+    
+    <item>
+      <title>Quem segura a barra do Porta dos Fundos?</title>
+      <link>https://blog.curso-r.com/posts/2020-01-06-porta/</link>
+      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-01-06-porta/</guid>
+      <description>O Porta dos Fundos (PDF) é um dos meus canais preferidos do youtube. Muitos consideram que é um dos maiores grupos de humor do século. Outros acreditam que eles começaram muito bem, mas que agora já perderam a graça.</description>
+    </item>
+    
+    <item>
+      <title>Explorando a base de dados de CNPJ da Receita Federal</title>
+      <link>https://blog.curso-r.com/posts/2019-09-20-qsacnpj/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-20-qsacnpj/</guid>
+      <description>A base de dados de CNPJ da Receita Federal do Brasil (RFB) é, na minha opinião, uma das maiores conquistas de dados abertos do Brasil. Nesse post vou passar alguns links para ler a base e alguns gráficos simples.</description>
+    </item>
+    
+    <item>
+      <title>A (não) eficácia do sistema de cotas na FUVEST</title>
+      <link>https://blog.curso-r.com/posts/2019-11-27-fuvest/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-11-27-fuvest/</guid>
+      <description>Em mais de 30% das carreiras no vestibular da USP as notas de corte para candidatos da escola pública são maiores do que as notas de corte para candidatos da ampla concorrência.</description>
+    </item>
+    
+    <item>
+      <title>Comunidade R Brasil no Telegram</title>
+      <link>https://blog.curso-r.com/posts/2019-09-10-rbrasil/</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-10-rbrasil/</guid>
+      <description>Nesse post, baixamos os dados do Telegram da comunidade RBrasil e fizemos alguns gráficos divertidos.</description>
+    </item>
+    
+    <item>
+      <title>Verificando afirmações com dados abertos</title>
+      <link>https://blog.curso-r.com/posts/2019-09-03-sinesp/</link>
+      <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-03-sinesp/</guid>
+      <description>Nesse post, analisamos dados do SINESP para verificar as informações de um tweet do Ministro Sérgio Moro sobre a queda nas ocorrências de crimes no primeiro bimestre de 2018.</description>
+    </item>
+    
+    <item>
+      <title>Analisando o seu histórico do Netflix</title>
+      <link>https://blog.curso-r.com/posts/2019-06-05-netflix/</link>
+      <pubDate>Thu, 06 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-06-05-netflix/</guid>
+      <description>Neste post, vamos brincar com o histórico de visualização do Netflix.</description>
+    </item>
+    
+    <item>
+      <title>Quebrando Captchas - Parte VI: Redes Generativas Adversariais com Classificador Auxiliar</title>
+      <link>https://blog.curso-r.com/posts/2019-03-04-gan-captcha/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-03-04-gan-captcha/</guid>
+      <description>Nesse post vou trabalhar com Captchas e GANs. Se você não sabe o que é um Captcha e como estamos trabalhando para resolvê-los até agora, recomendo que você veja a série de posts da Curso-R sobre o tema. Se você não sabe nada de GAN, acredito que seja possível acompanhar esse post.</description>
+    </item>
+    
+    <item>
+      <title>Precisamos falar sobre a participação de mulheres em eventos de estatística</title>
+      <link>https://blog.curso-r.com/posts/2019-02-16-eventos-mf/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-02-16-eventos-mf/</guid>
+      <description>Nos últimos anos, vários grupos têm monitorado e denunciado ocorrências desse fenômeno na comunidade científica. Para enriquecer os debates aqui no Brasil, decidimos organizar os dados de três eventos recentes de estatística.</description>
+    </item>
+    
+    <item>
+      <title>A poluição do ar durante a greve dos caminhoneiros</title>
+      <link>https://blog.curso-r.com/posts/2018-06-18-poluicao-greve-caminhoneiros/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-06-18-poluicao-greve-caminhoneiros/</guid>
+      <description>Neste post, vamos avaliar descritivamente as concentrações de alguns poluentes durante a greve dos caminhoneiros</description>
+    </item>
+    
+    <item>
+      <title>pesqEle: dados de pesquisas eleitorais</title>
+      <link>https://blog.curso-r.com/posts/2018-05-30-pesqele/</link>
+      <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-30-pesqele/</guid>
+      <description>Nesse ano eleitoral, a preocupação com as pesquisas eleitorais é ainda maior. É nossa obrigação como cidadãos e cidadãs acompanhar e monitorar as pesquisas eleitorais registradas, detectando e apontando o dedo para possíveis fraudes. Esse post busca ajudar&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>chorrrds: Analisando acordes de músicas brasileiras</title>
+      <link>https://blog.curso-r.com/posts/2018-04-25-chorrrds/</link>
+      <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-04-25-chorrrds/</guid>
+      <description>Esse post da nossa convidada Bruna é mais uma bela aplicação de estatística em música, usando o R. Novos pacotes, lindas visualizações e insights super legais sobre a música brasileira&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Quebrando Captchas - Parte V: Fazendo redes convolucionais na mão</title>
+      <link>https://blog.curso-r.com/posts/2017-11-10-captcha-conv/</link>
+      <pubDate>Sun, 12 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-10-captcha-conv/</guid>
+      <description>Nesse post vou mostrar como ajustar redes neurais convolucionais na mão. Muita mão na massa envolvida, muitos captchas e muita diversão. Vamos juntos desmistificar a magia negra do deep learning&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Estatística e Música</title>
+      <link>https://blog.curso-r.com/posts/2017-11-03-music01/</link>
+      <pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-03-music01/</guid>
+      <description>Já pensou em juntar estatística e música? Nessa série de posts mostro como estou pensando em fazer isso e os pacotes que vou criar nessa jornada&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Aquele 1% é Deep Learning - Gerando letras do Wesley Safadão</title>
+      <link>https://blog.curso-r.com/posts/2017-08-27-safadao/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-27-safadao/</guid>
+      <description>Nesse funal de semana decidi assistir alguns vídeos do YouTube do Siraj Raval e acompanhar o curso do Andrew Ng. Depois de aprender várias coisas interessantes, fiquei com uma vontade insana de implementar um modelo pra gerar músicas aleatórias do Wesley Safadão. Eis o &amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>São Paulo e o problema da mochila</title>
+      <link>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</link>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-10-sao-paulo/</guid>
+      <description>São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios.</description>
+    </item>
+    
+    <item>
+      <title>Quebrando CAPTCHAs - Parte IV: Trabalhando com a imagem completa</title>
+      <link>https://blog.curso-r.com/posts/2017-06-29-captcha-dados/</link>
+      <pubDate>Mon, 31 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-29-captcha-dados/</guid>
+      <description>No último post sobre CAPTCHAs nós vimos que a segmentação das imagens é um problema complicado. O Daniel nos disse que estava trabalhando no pacote do Keras e que existia uma forma de trabalhar com a imagem completa, sem segmentar. Foi só quando ele mostrou um acerto de 100% em um CAPTCHA que fomos convencidos, e passamos a chamar esse modelo de&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Quebrando CAPTCHAs - Parte III: Segmentação de imagens</title>
+      <link>https://blog.curso-r.com/posts/2017-06-29-captcha-segment/</link>
+      <pubDate>Sat, 22 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-29-captcha-segment/</guid>
+      <description>Digamos que você tenha uma base de dados de treino composta por N imagens com os textos classificados. Nossa resposta nesse caso é uma palavra de k caracteres, com p valores possíveis cada. O problema de modelar o CAPTCHA diretamente é que a variável resposta tem um&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Web scraping do site da Secretaria de Segurança Pública de São Paulo</title>
+      <link>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</link>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-19-scrapper-ssp/</guid>
+      <description>Ao contrário de outros usos pro R, web-scrapping não tem uma receita bem definida. Mesmo definindo passos intermediários, alguns scrapers usam ideias que funcionam apenas em casos específicos. Neste post vamos estudar a construção de um Web Scraping com ideias facilmente generalizáveis.</description>
+    </item>
+    
+    <item>
+      <title>As cores da Marvel vs DC</title>
+      <link>https://blog.curso-r.com/posts/2017-05-01-as-paletas-de-cores-da-marvel-vs-dc/</link>
+      <pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-01-as-paletas-de-cores-da-marvel-vs-dc/</guid>
+      <description>A cor é uma diferença notável entre os filmes da Marvel e da DC. Enquanto a Disney/Marvel Studios costuma lançar filmes com tons mais claros e alegres, a Warner tem optado por cenários escuros, com um aspecto mais sombrios. Neste post, vamos utilizar o Kmeans para obter a paleta de cores mais utilizadas por cada estúdio.</description>
+    </item>
+    
+    <item>
+      <title>O Porta dos Fundos está em decadência? (REVISITED)</title>
+      <link>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</link>
+      <pubDate>Fri, 28 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-28-porta-dos-fundos-decadencia-revisited/</guid>
+      <description>Às vezes a venda de uma empresa é um sinal de que algo não vai bem. Além disso, a briga entre as novas mídias e as velhas mídias é brutal, então se um conglomerado televisivo compra um dos gigantes da internet brasileira deve ter acontecido algum um tipo de canibalismo. Motivados pela nova casa do PDF, neste post revisitamos a análise sobre a decadência do Porta dos Fundos.</description>
+    </item>
+    
+    <item>
+      <title>K-means e paleta de cores</title>
+      <link>https://blog.curso-r.com/posts/2017-04-21-paleta-de-cores/</link>
+      <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-21-paleta-de-cores/</guid>
+      <description>Uma aplicação interessante de algoritmos de clusterização é a obtenção de paletas de cores a partir de imagens. Veja como isso pode ser feito usando o R.</description>
+    </item>
+    
+    <item>
+      <title>Análise das emoções de Aécio Neves</title>
+      <link>https://blog.curso-r.com/posts/2017-04-09-aecio/</link>
+      <pubDate>Sat, 15 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-09-aecio/</guid>
+      <description>Aécio Neves é um político importante no Brasil. Por muito pouco não foi eleito Presidente da República em 2014 e é certamente um nome bem influente na atualidade. Mas sério, toda vez que eu vejo esse cara falando, não dou a mínima para quem ele é. Eu apenas fico pensando: &amp;lsquo;Por quê ele sempre faz tanta cara de dor?&amp;rsquo;</description>
+    </item>
+    
+    <item>
+      <title>Você está a menos de 1 km de um Hambúrguer?</title>
+      <link>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</link>
+      <pubDate>Mon, 10 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</guid>
+      <description>Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos utilizar o pacote &lt;code&gt;leaflet&lt;/code&gt; para criar mapas com os dados coletados e descobrir se estamos a menos de 1 km de hospitais, delagacias, corpos de bombeiros e, o mais importante, de uma hamburgueria.</description>
+    </item>
+    
+    <item>
+      <title>Multas em São Paulo</title>
+      <link>https://blog.curso-r.com/posts/2017-04-01-multas-em-sp/</link>
+      <pubDate>Sat, 01 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-01-multas-em-sp/</guid>
+      <description>Há bastante tempo tenho vontade de fazer análises usando dados de multas de São Paulo.</description>
+    </item>
+    
+    <item>
+      <title>Lollapalooza segundo o Spotify</title>
+      <link>https://blog.curso-r.com/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify/</link>
+      <pubDate>Mon, 27 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-27-lollapalooza-sp-2017-segundo-spotify/</guid>
+      <description>No dia em que fui ao Lollapalooza eu descobri o Rspotify, um wraper da API do Spotify e daí me veio a ideia de juntar infos dos dois assuntos.</description>
+    </item>
+    
+    <item>
+      <title>O Porta dos Fundos está em decadência?</title>
+      <link>https://blog.curso-r.com/posts/2017-03-20-porta-dos-fundos-decadencia/</link>
+      <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-20-porta-dos-fundos-decadencia/</guid>
+      <description>Há alguns anos eu acompanho o canal Porta dos Fundos no YouTube, assistindo os vídeos quase sempre no dia de lançamento. Nos últimos meses, no entanto, meu entusiasmo com o canal vem diminuindo. Não sei se eu que fiquei chato ou se outras pessoas compartilham a minha opinião de que o conteúdo do Porta piorou. Então resolvi scrapear informações do canal e montar algumas visualizações para tirar essa dúvida.</description>
+    </item>
+    
+  </channel>
+</rss>

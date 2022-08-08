@@ -1,0 +1,213 @@
+---
+title: "Advent of R: Dia 13"
+date: "2021-12-13"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-13.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 13."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Origami Transparente (A)
+
+O [dia 13](https://adventofcode.com/2021/day/13) foi um belo alívio comparado
+com o dia anterior. Nossa missão hoje era descobrir o código de um sensor a
+partir de um código escrito em papel transparente. A entrada era uma série de
+coordenadas de pontos no papel e uma sequência de instruções de como dobrar o
+papel para obter o código final.
+
+Partindo do princípio de que a matriz começava no ponto `(0, 0)` na esqueda
+superior, o primeiro item pedia para que lêssemos a nossa lista de coordenadas e
+contasse o número de pontos (`#`) visíveis depois de realizar a primeira
+instrução que nos era dada. Para ilustrar como as dobras ocorriam, veja os
+resultados de uma dobra em `y = 7` e, depois, de uma dobra em `x = 5`:
+
+```r
+# Papel inicial
+# ...#..#..#.
+# ....#......
+# ...........
+# #..........
+# ...#....#.#
+# ...........
+# ...........
+# ...........
+# ...........
+# ...........
+# .#....#.##.
+# ....#......
+# ......#...#
+# #..........
+# #.#........
+
+# Linha em y = 7
+# ...#..#..#.
+# ....#......
+# ...........
+# #..........
+# ...#....#.#
+# ...........
+# ...........
+# -----------
+# ...........
+# ...........
+# .#....#.##.
+# ....#......
+# ......#...#
+# #..........
+# #.#........
+
+# Resultado da primeira dobra
+# #.##..#..#.
+# #...#......
+# ......#...#
+# #...#......
+# .#.#..#.###
+# ...........
+# ...........
+
+# Linha em x = 5
+# #.##.|#..#.
+# #...#|.....
+# .....|#...#
+# #...#|.....
+# .#.#.|#.###
+# .....|.....
+# .....|.....
+
+# Resultado final
+# #####
+# #...#
+# #...#
+# #...#
+# #####
+# .....
+# .....
+```
+
+O maior desafio no código em R foi arrumar todas as coordenadas e sub-matrizes
+para um sistema que começa em 1 e não em 0. Eu também resolvi fazer uma aposta:
+o primeiro item pedia para fazer apenas a primeira dobra, então eu imaginei que
+o segundo item pediria para fazer todas. Minha decisão, portanto, foi tentar já
+generalizar meu algortimo para que ele funcionasse com o mínimo de alterações
+possíveis para realizar várias dobras.
+
+```r
+# Ler tabela de onde os pontos estão
+dots <- "data-raw/13a_transparent_origami.txt" |>
+  readr::read_lines() |>
+  stringr::str_subset("^[0-9]") |>
+  tibble::tibble() |>
+  purrr::set_names("dot") |>
+  tidyr::separate(dot, c("x", "y"), ",") |>
+  dplyr::mutate_all(as.integer) |>
+  dplyr::mutate_all(`+`, 1L)
+
+# Ler instruções das dobras
+instructions <- "data-raw/13a_transparent_origami.txt" |>
+  readr::read_lines() |>
+  stringr::str_subset("^[^0-9]") |>
+  tibble::tibble() |>
+  purrr::set_names("fold") |>
+  tidyr::separate(fold, c("axis", "line"), "=") |>
+  dplyr::mutate(
+    axis = stringr::str_sub(axis, -1),
+    line = as.integer(line) + 1L
+  )
+
+# Colocar os pontos no papel
+paper <- matrix(FALSE, nrow = max(dots$y), ncol = max(dots$x))
+for (i in seq_len(nrow(dots))) {
+  paper[dots$y[i], dots$x[i]] <- TRUE
+}
+
+# Rodar apenas a primeira instrução
+for (i in 1) {
+
+  # Achar o eixo e o ponto da dobra
+  axis <- instructions$axis[i]
+  line <- instructions$line[i]
+
+  # Dobras de acordo com o eixo
+  if (axis == "x") {
+
+    # Número de colunas à direita da dobra
+    size <- length((line + 1):dim(paper)[2])
+
+    # Pegar colunas à direita, invertê-las e fazer um OR com o lado esquerdo
+    paper[, (line - size):(line - 1)] <-
+      paper[, (line + 1):(line + size)][, size:1] |
+      paper[, (line - size):(line - 1)]
+
+    # Descartar colunas representando o papel dobrado
+    paper <- paper[, 1:(line - 1)]
+
+  } else {
+
+    # Número de linhas abaixo da dobra
+    size <- length((line + 1):dim(paper)[1])
+
+    # Pegar linhas abaixo da dobra, invertê-las e fazer um AND com as acima
+    paper[(line - size):(line - 1), ] <-
+      paper[(line + 1):(line + size), ][size:1, ] |
+      paper[(line - size):(line - 1), ]
+
+    # Descartar linhas representando o papel dobrado
+    paper <- paper[1:(line - 1), ]
+  }
+}
+
+# Contar pontos no papel
+sum(paper)
+#> [1] 765
+```
+
+## Origami Transparente (B)
+
+E minha aposta valeu à pena! De fato o enunciado da parte 2 pedia para que
+realizássemos todas as dobras do nosso conjunto de instruções. No final, se tudo
+estivesse correto, os `#` e `.` do papel deveriam formar 8 letras maiúsculas.
+
+A única alteração no código foi trocar a condição do `for`:
+
+```r
+# Iterar por todas as instruções
+for (i in seq_len(nrow(instructions)))
+```
+
+E, no final, também foi necessário fazer um print melhor da matriz:
+
+```r
+# Imprimir os pontos de um jeito mais amigável
+paper <- ifelse(paper, "#", ".")
+for (i in seq_len(nrow(paper))) {
+  cat(paper[i, ])
+  cat("\n")
+}
+# # # # . . # # # # . # . . # . # # # # . # . . . . # # # . . . # # . . # . . # .
+# # . . # . . . . # . # . # . . . . . # . # . . . . # . . # . # . . # . # . . # .
+# # . . # . . . # . . # # . . . . . # . . # . . . . # . . # . # . . . . # # # # .
+# # # # . . . # . . . # . # . . . # . . . # . . . . # # # . . # . # # . # . . # .
+# # . # . . # . . . . # . # . . # . . . . # . . . . # . . . . # . . # . # . . # .
+# # . . # . # # # # . # . . # . # # # # . # # # # . # . . . . . # # # . # . . # .
+```

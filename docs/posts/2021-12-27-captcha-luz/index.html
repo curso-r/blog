@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Resolvendo Captchas com o {luz}</title>
+  <meta name="title" content="Resolvendo Captchas com o {luz}">
+  <meta name="description" content="Resolvendo Captchas usando o pacote {luz}, com detalhes sobre datasets, dataloaders e métricas customizadas.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-12-27-captcha-luz/">
+  <meta property="og:title" content="Resolvendo Captchas com o {luz}">
+  <meta property="og:description" content="Resolvendo Captchas usando o pacote {luz}, com detalhes sobre datasets, dataloaders e métricas customizadas.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/captcha-luz.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-12-27-captcha-luz/">
+  <meta property="twitter:title" content="Resolvendo Captchas com o {luz}">
+  <meta property="twitter:description" content="Resolvendo Captchas usando o pacote {luz}, com detalhes sobre datasets, dataloaders e métricas customizadas.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/captcha-luz.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/captcha-luz.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Resolvendo Captchas com o {luz}</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Julio">Julio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            27 de
+            dezembro de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/torch">torch</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/luz">luz</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Sabe aquelas imagens que aparecem quando você está preenchendo um formulário ou quer acessar uma página específica, pedindo para você decifrar o texto? Isso é o que chamamos de CAPTCHA (<strong>Completely Automated Public Turing test to tell Computers and Humans Apart</strong>).</p>
+<div style="width:70%;margin:auto;">
+<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp" /></p>
+</div>
+<center>
+Figura: Exemplo de captcha do site do Tribunal Regional do Trabalho (TRT).
+</center>
+<p>O Captcha é um desafio computacional criado para ser difícil de resolver por máquinas mas fácil de resolver por pessoas. No início, a maioria dos Captchas eram formados por letras aleatórias inseridas em imagens ou áudios com algum ruído. Com a popularização das técnicas de Deep Learning, esses desafios se tornaram fáceis de resolver por máquinas, desde que exista uma base suficientemente grande de exemplos classificados.</p>
+<p>Em posts anteriores aqui do blog, eu mostrei como resolvemos Captchas na mão ou usando redes neurais convolucionais. Todos esses posts usavam o <code>{keras}</code> como backend, que era a tecnologia de deep learning que eu conhecia na época.</p>
+<blockquote>
+<p>Observação: alguns dos posts anteriores de Captchas não estão visíveis. Algum dia vou revivê-los!</p>
+</blockquote>
+<p>Neste post, vou mostrar como resolver um Captcha de texto em imagem usando o pacote <code>{luz}</code>. O pacote surgiu para facilitar a vida de quem constrói modelos de Deep Learning usando o <code>{torch}</code>.</p>
+<div id="o-que-é-torch-o-que-é-luz" class="section level2">
+<h2>O que é {torch}? O que é {luz}?</h2>
+<p>O <code>{torch}</code> é um pacote do R criado pelo nosso sócio <a href="https://github.com/dfalbel">Daniel Falbel</a>, que também trabalha na RStudio. O pacote é uma adaptação do <code>pytorch</code>, biblioteca de python muito popular para fazer contas de álgebra matricial e diferenciação automática utilizando GPUs, que são os principais ingredientes utilizados na construção e ajuste de modelos de Deep Learning. A empresa por trás do projeto Torch é o Facebook (Meta?).</p>
+<div style="max-width:200px;margin:auto;">
+<p><img src="https://torch.mlverse.org/css/images/hex/torch.png" /></p>
+</div>
+<p>A dificuldade do pacote <code>{torch}</code> para pessoas que estão começando é a complexidade da sintaxe. A ferramenta é super flexível, permitindo o ajuste de modelos customizados, mas a construção desses modelos está longe de ser trivial. Por exemplo, é comum precisar implementar os passos de atualização dos parâmetros manualmente a partir de algumas funções básicas do pacote.</p>
+<p>O pacote <code>{luz}</code> – sim, o nome é uma brincadeira com a luz que sai de uma tocha… 🥁 – vem com a ideia de facilitar um pouco esse processo. Para conseguir rodar um modelo de deep learning usando o luz, precisamos de apenas i) um dataset/dataloader construído para gerar amostras das bases de dados de treino/validação e ii) um modelo, que deve ser um módulo do torch.</p>
+<div style="max-width:200px;margin:auto;">
+<p><img src="https://torch.mlverse.org/css/images/hex/luz.png" /></p>
+</div>
+<p>Vamos investigar os elementos do luz a seguir. Como exemplo, utilizaremos os nossos queridos Captchas, para não ficar na mesmisse do MNIST 😉</p>
+<p>O exemplo da vez será o TRT, pois a base é pequenininha e é um Captcha relativamente fácil de resolver.</p>
+<div style="min-width:200px;margin:auto;">
+<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp" /></p>
+</div>
+</div>
+<div id="dados-datasets-e-dataloaders" class="section level2">
+<h2>Dados, datasets e dataloaders</h2>
+<p>Uma característica importante de modelos de deep learning é que as bases de dados costumam ser bem grandes. Por isso, foram desenvolvidas técnicas que atualizam os parâmetros do modelo com base apenas em uma amostra dos dados, sem a necessidade de carregar todas as observações na memória do computador. Essa estratégia parece um pouco estranha de início, mas existem muitos estudos que demonstram que elas não só funcionam como também têm chances de trazer propriedades de regularização ao modelo.</p>
+<p>Nesse contexto surgem os <code>dataset()</code>s e <code>dataloader()</code>s do torch. O dataset é um objeto responsável por informar como uma base de dados deve ser acessada (por exemplo, lendo uma imagem, um arquivo csv ou um áudio), e de que forma podemos obter um item dessa base. O dataset é um objeto de classe R6, que é uma espécie de orientação a objetos do R desenvolvida pela RStudio.</p>
+<p>Abaixo, temos o esqueleto de um dataset do torch:</p>
+<pre class="r"><code># isso cria um dataset generator
+ds_generator &lt;- torch::dataset(
+  name = &quot;meu nome!&quot;,
+  objeto_arbitrario = &quot;você pode criar objetos arbitrários aqui&quot;,
+  
+  # isso é rodado quando você cria o dataset(), com parâmetros
+  initialize = function(parametro1, parametro2, repeticoes) {
+    # código arbitrário
+    dados &lt;- matrix(
+      c(parametro1, parametro2),
+      ncol = 2, nrow = repeticoes, byrow = TRUE
+    )
+    ## registra os dados para ser usado em outro lugar
+    self$dados &lt;- dados
+  },
+  
+  # função que pega um item da base
+  .getitem = function(index) {
+    self$dados[index, ]
+  },
+  
+  # função que mede o tamanho da base
+  .length = function() {
+    nrow(self$dados)
+  }
+)
+
+# para criar o dataset mesmo:
+
+ds &lt;- ds_generator(&quot;ola&quot;, &quot;mundo&quot;, 5)</code></pre>
+<pre><code>&lt;meu nome!&gt;
+  Inherits from: &lt;dataset&gt;
+  Public:
+    .getitem: function (ii) 
+    .length: function () 
+    clone: function (deep = FALSE) 
+    dados: ola ola ola ola ola mundo mundo mundo mundo mundo
+    initialize: function (parametro1, parametro2, repeticoes) 
+    objeto_arbitrario: você pode criar objetos arbitrários aqui</code></pre>
+<p>Os objetos registrados podem ser acessados dessa forma:</p>
+<pre class="r"><code>ds$dados</code></pre>
+<p>Legal! agora temos nosso dataset. Agora precisamos de um método para gerar amostras desse dataset. Esse é o <strong>dataloader</strong>, que pode ser criado assim:</p>
+<pre><code>     [,1]  [,2]   
+[1,] &quot;ola&quot; &quot;mundo&quot;
+[2,] &quot;ola&quot; &quot;mundo&quot;
+[3,] &quot;ola&quot; &quot;mundo&quot;
+[4,] &quot;ola&quot; &quot;mundo&quot;
+[5,] &quot;ola&quot; &quot;mundo&quot;</code></pre>
+<pre class="r"><code>dl &lt;- torch::dataloader(ds, batch_size = 2)
+dl</code></pre>
+<pre><code>&lt;dataloader&gt;
+  Public:
+    .auto_collation: active binding
+    .dataset_kind: map
+    .has_getbatch: FALSE
+    .index_sampler: active binding
+    .iter: function () 
+    .length: function () 
+    batch_sampler: utils_sampler_batch, utils_sampler, R6
+    batch_size: 2
+    clone: function (deep = FALSE) 
+    collate_fn: function (batch) 
+    dataset: meu nome!, dataset, R6
+    drop_last: FALSE
+    generator: NULL
+    initialize: function (dataset, batch_size = 1, shuffle = FALSE, sampler = NULL, 
+    multiprocessing_context: NULL
+    num_workers: 0
+    pin_memory: FALSE
+    sampler: utils_sampler_sequential, utils_sampler, R6
+    timeout: -1
+    worker_globals: NULL
+    worker_init_fn: NULL
+    worker_packages: NULL</code></pre>
+<p>Isso pode ser usado para gerar amostras da base de dados, o que é importante para a etapa de ajuste de modelos realizadas pelo <code>{torch}</code> e pelo <code>{luz}</code>.</p>
+<p>No caso dos captchas, eu montei uma função do pacote <code>{captcha}</code> que cria os dataloaders de treino e validação a partir de uma função que faz o download dos arquivos brutos.</p>
+<pre class="r"><code>
+path &lt;- &quot;caminho/para/arquivos/brutos&quot;
+
+# cria o dataset. No caso, estamos usando a base do TRT, 
+# que tem apenas 400 Captchas.
+
+captcha_ds &lt;- captcha::captcha_dataset(
+  root = path,
+  captcha = &quot;trt2&quot;,
+  download = TRUE
+)
+
+
+# cria os dataloaders de treino e validação
+
+## amostra de indices
+id_train &lt;- sample(1:length(captcha_ds), .8 * length(captcha_ds))
+
+## cria o dataloader de treino
+captcha_dl_train &lt;- torch::dataloader(
+  torch::dataset_subset(captcha_ds, id_train),
+  batch_size = 32,
+  shuffle = TRUE
+)
+
+## cria o dataloader de validação
+captcha_dl_valid &lt;- torch::dataloader(
+  torch::dataset_subset(captcha_ds, -id_train),
+  batch_size = 32
+)</code></pre>
+</div>
+<div id="modelo" class="section level2">
+<h2>Modelo</h2>
+<p>Um modelo do torch também é um objeto de classe R6, mas que precisa ter os parâmetros <code>initialize=</code> e <code>forward=</code> implementados. Aqui um exemplo que soma um número ao valor de entrada:</p>
+<pre class="r"><code>model_generator &lt;- torch::nn_module(
+  &quot;meu modelo!&quot;,
+  # aqui inicializamos nosso modelo
+  initialize = function(parametro) {
+    self$valor &lt;- parametro
+  },
+  # aqui calculamos o que o modelo deve calcular
+  forward = function(x) {
+    x + self$valor
+  }
+)
+
+model_generator</code></pre>
+<pre><code>&lt;meu modelo!&gt; object generator
+  Inherits from: &lt;inherit&gt;
+  Public:
+    .classes: meu modelo! nn_module
+    initialize: function (parametro) 
+    forward: function (x) 
+    clone: function (deep = FALSE) 
+  Parent env: &lt;environment: 0x5594bc41f3c0&gt;
+  Locked objects: FALSE
+  Locked class: FALSE
+  Portable: TRUE</code></pre>
+<p>Por exemplo, o modelo abaixo somará 10 ao valor de entrada</p>
+<pre class="r"><code>modelo &lt;- model_generator(10)
+modelo(1)</code></pre>
+<pre><code>[1] 11</code></pre>
+<p>No nosso caso, utilizaremos um modelo já implementado no pacote <code>{captcha}</code>, que utiliza redes neurais convolucionais. É importante mencionar que não é necessário criar o modelo: utilizaremos apenas o model generator.</p>
+<pre class="r"><code>captcha::net_captcha</code></pre>
+<pre><code>&lt;CAPTCHA-CNN&gt; object generator
+  Inherits from: &lt;inherit&gt;
+  Public:
+    .classes: CAPTCHA-CNN nn_module
+    initialize: function (input_dim, output_ndigits, output_vocab_size) 
+    forward: function (x) 
+    clone: function (deep = FALSE) 
+  Parent env: &lt;environment: 0x557dc107da60&gt;
+  Locked objects: FALSE
+  Locked class: FALSE
+  Portable: TRUE</code></pre>
+</div>
+<div id="treino" class="section level2">
+<h2>Treino</h2>
+<p>E agora chegamos na parte mais legal. Com o <code>{luz}</code>, temos uma sintaxe parecida com o <code>{keras}</code>, em que fazemos o setup do modelo e depois ajustamos, com direito a uma barrinha de progresso que já vem automaticamente 🤩</p>
+<pre class="r"><code>fitted &lt;- captcha::net_captcha |&gt;
+  # aqui colocamos a função de perda e o otimizador
+  luz::setup(
+    loss = torch::nn_multilabel_soft_margin_loss(),
+    optimizer = torch::optim_adam
+  ) |&gt;
+  # aqui nós colocamos os hiperparâmetros do modelo
+  # no caso, precisamos passar informações sobre a dimensão
+  # da imagem, o tamanho do vocabulário e a quantidade de letras
+  # em um captcha
+  luz::set_hparams(
+    input_dim = dim(captcha_ds$data)[-1],
+    output_vocab_size = dim(captcha_ds$target)[3],
+    output_ndigits = dim(captcha_ds$target)[2]
+  ) |&gt;
+  # aqui nós colocamos os hiperparâmetros de otimização
+  luz::set_opt_hparams(
+    lr = .1
+  ) |&gt;
+  # ajustar o modelo
+  luz::fit(
+    captcha_dl_train,
+    valid_data = captcha_dl_valid,
+    epochs = 30
+  )</code></pre>
+<p>E pronto! Agora é só ver o modelo rodar e mexer nos hiperparâmetros para que o modelo alcance a acurácia desejada.</p>
+</div>
+<div id="extra-métrica-customizada" class="section level2">
+<h2>Extra: métrica customizada</h2>
+<p>Uma coisa que ficou faltando no código anterior é uma ideia de como fica a acurácia do modelo ao longo do ajuste. Como não existe uma métrica já pronta para calcular o quanto acertamos das 6 letras ao mesmo tempo, precisamos implementar uma métrica customizada para o Captcha.</p>
+<p>Isso não é um grande desafio para o <code>{luz}</code>! Assim como nos datasets e modelos, podemos criar uma métrica com uma classe R6, usando a função <code>luz::luz_metric()</code>. Essa classe deve ter 4 elementos: <code>abbrev=</code>, o nome da métrica, <code>initialize=</code> que seta os parâmetros iniciais, <code>update=</code> que atualiza a métrica a partir de um conjunto novo de outputs e predições e <code>compute=</code> que calcula a métrica atualizada.</p>
+<p>No caso dos Captchas, a métrica fica assim:</p>
+<pre class="r"><code>captcha_accuracy &lt;- luz::luz_metric(
+  abbrev = &quot;Captcha Acc&quot;,
+  initialize = function() {
+    # inicializa os parâmetros
+    self$correct &lt;- 0
+    self$total &lt;- 0
+  },
+  update = function(preds, target) {
+    # extraímos o token com maior probabilidade associada, para cada letra
+    pred &lt;- torch::torch_argmax(preds, dim = 3)
+    # fazemos o mesmo para a variável resposta
+    tgt &lt;- torch::torch_argmax(target$squeeze(), dim = 3)
+    # comparamos os dois resultados e somamos a quantidade de resultados iguais
+    new_correct &lt;- torch::torch_sum(pred == tgt, 2) == dim(pred)[2]
+    new_correct &lt;- new_correct$to(dtype = torch::torch_float())$sum()$item()
+    # atualizamos os valores
+    self$correct &lt;- self$correct + new_correct
+    self$total &lt;- self$total + dim(pred)[1]
+  },
+  compute = function() {
+    # calcula a proporção de acertos
+    self$correct / self$total
+  }
+)</code></pre>
+</div>
+<div id="resultados" class="section level2">
+<h2>Resultados</h2>
+<p>O código completo de ajuste do modelo pode ser encontrado <a href="https://gist.github.com/3c2cd573a184576a27e8ffe5ce04498a">aqui</a>. A sintaxe do pacote <code>{captcha}</code> ainda está instável, então pode ser que o código quebre no futuro.</p>
+<p><img src="/images/posts/conteudo/captcha-luz/luz.gif" /></p>
+<p>Com o código, consegui chegar em uma acurácia de 90% com apenas 400 exemplos classificados!</p>
+<p>Abaixo, um exemplinho de aplicação:</p>
+<pre class="r"><code>captcha &lt;- captcha_ds$files[1]
+
+captcha |&gt; 
+  captcha::read_captcha() |&gt; 
+  plot()</code></pre>
+<div style="min-width:200px;margin:auto;">
+<p><img src="/images/posts/conteudo/captcha-luz/20170412233525_2n73k7.webp" /></p>
+</div>
+<pre class="r"><code>fitted &lt;- luz::luz_load(&quot;caminho/para/trt.pt&quot;)
+captcha::decrypt(captcha, fitted)</code></pre>
+<pre><code>[1] &quot;2n73k7&quot;</code></pre>
+</div>
+<div id="wrap-up" class="section level2">
+<h2>Wrap-up</h2>
+<p>Neste post, vimos que</p>
+<ul>
+<li>O pacote <code>{luz}</code> é uma alterativa ao <code>{keras}</code> que usa o <code>{torch}</code> como backend.</li>
+<li>Para trabalhar com o <code>{luz}</code>, é necessário criar datasets, dataloaders e modelos na forma de classes R6.</li>
+<li>Com o <code>{luz}</code>, é possível criar métricas customizadas para acompanhar o desempenho de um modelo.</li>
+<li>Os modelos de redes neurais convolucionais funcionam bem em tarefas de visão computacional, como os Captchas.</li>
+</ul>
+<p>É isso. Happy coding ;)</p>
+</div>
+<div id="agradecimentos" class="section level2">
+<h2>Agradecimentos</h2>
+<p>Um agradecimento especial à <a href="https://beatrizmilz.com">Beatriz Milz</a> pela revisão do post!</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

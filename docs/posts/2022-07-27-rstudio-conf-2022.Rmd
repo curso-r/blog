@@ -1,0 +1,101 @@
+---
+title: "rstudio::conf 2022, primeiro dia de palestras"
+date: "2022-07-27"
+tags: ["evento", "rstudio::conf"]
+categories: ["Divulgação"]
+image: "images/posts/banner/rstudio-conf-2022.png"
+author: ["Julio"]
+summary: "Primeiro dia do evento mais importante da RStudio em 2022!"
+draft: false
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  collapse = TRUE
+)
+```
+
+## A conferência
+
+A rstudio::conf é um evento anual organizado pela RStudio. O evento reúne as celebridades do R como Hadley Wickham, Jenny Bryan e toda a turma da RStudio, além de pessoas interessadas em conhecer melhor a comunidade e acessar as ferramentas mais quentes no universo da ciência de dados.
+
+Este ano, o evento tem foco principal no Quarto. Trata-se de um software desenvolvido para produzir documentos científicos (relatórios, artigos, apresentações), funcionando como um complemento ao Pandoc para processar códigos (em R, python, julia, javascript) inseridos nos documentos. Se você se interessou pela ferramenta, vale a pena dar uma olhada [nesse post da Beatriz Milz](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/index.html).
+
+Mas claro que a conferência não será só sobre Quarto. Teremos conteúdos maravilhosos nos próximos dias, como avanços no `{shiny}`, `{tidymodels}` e outras ferramentas que amamos.
+
+## O hotel
+
+Ficamos no Gaylord National Harbor, que fica perto de Washington D.C., a cidade que abriga Biden, Kamala & amigos. 
+
+Para mim (Julio) a melhor descrição foi a que a Emma (professora do workshop Building Tidy Tools) nos deu quando conversamos com ela: "it's MAD". É um hotel muito doido, por vários motivos. É muito muito grande, com mais de mil quartos enormes. No meio do hotel tem uma espécie de vila, onde é possível tomar café, jantar, assistir cinema e até mesmo jogar boliche! Nada faz muito sentido e é muito extravagante. Uma experiência genuinamente americana.
+
+Na parte destinada a conferências, o espaço é realmente magnífico. Com salas enormes e equipadas, é um lugar bastante aconchegante para assistir palestra, conhecer pessoas e fazer networking. 
+
+## Os BRs
+
+Parece que existe um ímã que junta os brasileiros na conferência. No início, achávamos que seríamos só Julio Trecenti, Beatriz Milz, Flávia Rius e Daniel Falbel no rolê. Depois, conhecemos Cristiana, Gabriela, que trabalham no Nic.br. Depois encontramos Ricardo Primi que é professor mas foi aluno da Curso-R e sua esposa Tatiana. Depois, encontramos Adriana e Carlos, que trabalha na RStudio e a gente nem sabia. Por último, conhecemos a Ana Carla, que trabalha nos EUA. 
+
+## Refeições com Hadley
+
+No segundo dia dos workshops (26/07) sentamos com nossas novas amigas BR, Cristiana e Gabriela, para trocar ideia. Em seguida, sentou o Immanuel, um pesquisador muito legal que mora na California e trabalha com educação em ciência de dados.
+
+E de repente, senta na nossa mesa o próprio Hadley, nosso deuso do R. Foi muito interessante, porque acho que ele queria fugir dos círculos das pessoas mais famosas, e também um pouco de assuntos relacionados a R.
+
+Não vou detalhar muito sobre as conversas para manter a privacidade de todos, mas foi uma experiência muito legal e muito leve. Falamos de muitos assuntos, sendo que poucos eram de fato relacionados ao R. 
+
+Por algum motivo, o Hadley decidiu sentar com a gente novamente! No dia seguinte, almoçamos com ele, logo depois que ele fez o anúncio da mudança de nome da empresa. Acho que ele gosta dos BR. Almoçamos com ele e com o Christoph Dervieux, um dos autores do blogdown e outros pacotes relacionados a RMarkdown.
+
+Depois de duas refeições, nos sentimos no direito de tirar uma foto... E está aqui!!
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Thankfully Julio asked for a picture, otherwise no one would believe that we had lunch with <a href="https://twitter.com/hadleywickham?ref_src=twsrc%5Etfw">@hadleywickham</a> and <a href="https://twitter.com/chrisderv?ref_src=twsrc%5Etfw">@chrisderv</a> 😄 <a href="https://twitter.com/jtrecenti?ref_src=twsrc%5Etfw">@jtrecenti</a> <a href="https://twitter.com/flaviaerius?ref_src=twsrc%5Etfw">@flaviaerius</a> <a href="https://twitter.com/rprimi?ref_src=twsrc%5Etfw">@rprimi</a> e <a href="https://twitter.com/anakiki1505?ref_src=twsrc%5Etfw">@anakiki1505</a> ! <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> <a href="https://twitter.com/hashtag/RStudioConf?src=hash&amp;ref_src=twsrc%5Etfw">#RStudioConf</a> <a href="https://twitter.com/hashtag/posit?src=hash&amp;ref_src=twsrc%5Etfw">#posit</a> <a href="https://twitter.com/rstudio?ref_src=twsrc%5Etfw">@rstudio</a> <a href="https://twitter.com/hashtag/RStats?src=hash&amp;ref_src=twsrc%5Etfw">#RStats</a> <a href="https://t.co/R8jAOyfUxd">pic.twitter.com/R8jAOyfUxd</a></p>&mdash; Beatriz Milz (@BeaMilz) <a href="https://twitter.com/BeaMilz/status/1552343987536728064?ref_src=twsrc%5Etfw">July 27, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+## Keynote 0: mudança de nome
+
+Depois da musiquinha de entrada (que, por sinal, estava com volume muito alto) entra o queridíssimo Hadley Wickham para abrir o evento. Depois de suas falas iniciais, JJ Allaire, CEO da RStudio começa sua apresentação.
+
+A apresentação dos dois gira em torno da evolução da RStudio de uma empresa que produzia uma IDE para R para uma empresa que tinha como missão facilitar a vida de pessoas que trabalhavam com ciência de dados. Com o passar do tempo, a empresa foi criando ferramentas mais interoperáveis, possibilidade de lidar com várias linguagens e um esquema unificado para criação de documentos científicos, o Quarto.
+
+Com isso, pelo que disseram, a RStudio passou a sentir cada vez mais que o nome da empresa já não representava suas ações, já que todos os produtos (Connect, Package Manager etc) levam consigo a ideia de que são feitos para o R, o que não é verdade. Por isso, a empresa precisou mudar de nome.
+
+Agora, RStudio é **Posit**. O site ainda não está no ar, mas eles fizeram uma [página para falar da mudança](https://posit.co). A empresa mudará o nome totalmente em outubro/2022. Ou seja, essa foi a última `rstudio::conf`, e a próxima será... `from posit import conf`?
+
+
+## Keynote 1: tidymodels 1.0.0
+
+A [apresentação de Max Kuhn e Julia Silge](https://rstudioconf2022.sched.com/event/11iYE/good-practices-for-applied-machine-learning-from-model-development-to-model-deployment?iframe=yes&w=100%&sidebar=yes&bg=no) foi útil para mostrar como que o pacote tidymodels resolve três problemas importantes na modelagem preditiva (supervisionada): ergonomia, efetividade e segurança. Foram apresentados os detalhes de design de pacotes do tidymodels como recipes, tune, workflows, parsnip, dials, yardstick etc. A parte mais importante foi que o tidymodels está oficialmente na versão 1.0.0, o que significa que pode ser considerado estável e, portanto, utilizável para ambientes em produção. O pacote vetiver também foi anunciado, mas sem muitos detalhes de como funciona.
+
+## Bloco tidymodels
+
+- [**censored**](https://rstudioconf2022.sched.com/event/11iYT/censored-survival-analysis-in-tidymodels?iframe=no&w=100%&sidebar=yes&bg=no): Pacote para integrar análise de sobrevivência e tidymodels. Eu gostei, mas fiquei com um gostinho de "quero mais", já que o pacote ainda não permite utilização em workflows, ou seja, ainda não dá para tunar hiperparâmetros.
+- [**tidyclust**](https://rstudioconf2022.sched.com/event/11iYJ/tidyclust-expanding-tidymodels-to-clustering?iframe=no&w=100%&sidebar=yes&bg=no): Pacote para imitar a análise de cluster no framework do tidymodels. O autor teve de basicamente reescrever toda a estrutura do tidymodels -- focada em modelos supervisionados -- para o problema do cluster. Por enquanto está bem no início, e só funciona com o kmeans. Eu achei conceitualmente interessante, mas na prática não sei se a ideia vai pegar ou não (tomara que sim!).
+- [**vetiver**](https://rstudioconf2022.sched.com/event/11iYe/demystifying-mlops?iframe=no&w=100%&sidebar=yes&bg=no): trata-se de uma ferramenta com bastante hype criada pela RStudio para fazer deploy de modelos ajustados com tidymodels e scikit-learn. A ferramenta possui soluções para três problemas: versionamento de modelos (usando o pacote pins), criação de APIs (usando o pacote plumber) e monitoramento (usando os dois pacotes anteriores). O legal é que a ferramenta pretende ser agnóstica ao ambiente utilizado para ajuste do modelo. Vamos ver como funciona na prática!
+
+## Bloco fluxos de análise
+
+- [**Data pipelines**](https://rstudioconf2022.sched.com/event/11iZI/making-data-pipelines-in-r-a-story-from-a-self-taught-perspective?iframe=no&w=100%&sidebar=yes&bg=no): em uma palestra muito bem humorada, Meghan Harris comentou como foi sua experiência trabalhando como única cientista de dados em uma empresa relacionada à área médica. As quatro mensagens principais foram: estudo do problema, documentação, testes e sustentabilidade. Nenhuma ferramenta nova aqui.
+- [**Garbage in, garbage out**](https://rstudioconf2022.sched.com/event/11iYr/garbage-data-and-what-to-do-about-them?iframe=no&w=100%&sidebar=yes&bg=no): em uma palestra ainda mais bem humorada, Jim Kloet comentou sobre dados que não são úteis para determidados problemas. Apresentou práticas para identificar essas bases e lidar com elas. Por trabalhar com faxina de dados, achei a palestra bastante familiar e divertida. Também, nenhuma ferramenta nova aqui.
+- [**Project Immortality**](https://rstudioconf2022.sched.com/event/11iYz/project-immortality-using-github-to-make-your-work-live-forever?iframe=no&w=100%&sidebar=yes&bg=no):  para mim, foi a palestra mais útil do dia. Aprendi que em pacotes de dados que são atualizados periodicamente, pode ser interessante armazenar dados em Releases ao invés de dados na pasta `/data` do pacote. Isso torna o pacote bem mais leve e fácil de manter. Um pacote novo usado para escrever releases que pretendo estudar é o `piggyback`.
+- [**Logging**](https://rstudioconf2022.sched.com/event/11iZ8/r-markdown-rstudio-connect-r-shiny-a-recipe-for-automated-data-processing-error-logging-and-process-monitoring?iframe=no&w=100%&sidebar=yes&bg=no): Essa palestra foi útil para conhecer o pacote `loggit` para guardar os logs de execução de tarefas.
+
+## Bloco Banco de dados
+
+- [**Query optimization**](https://rstudioconf2022.sched.com/event/11iZT/exploring-query-optimization-how-a-few-lines-of-code-can-save-hours-of-time?iframe=no&w=100%&sidebar=yes&bg=no): A palestrante apresentou alguns exemplos de como algumas mudanças básicas nas queries poderiam ajudar a reduzir dramaticamente o tempo de execução. Dentre outros detalhes, ela apresentou uma ferramenta bastante útil do SQL, chamada `EXPLAIN`, utilizada para estimar o tempo de execução da query que foi construída.
+- [**Pacote dm**](https://rstudioconf2022.sched.com/event/11iZZ/dm-analyze-build-and-deploy-relational-data-models?iframe=no&w=100%&sidebar=yes&bg=no): A palestra do Kirill Miller foi bastante difícil de entender (tanto pela densidade do tema quanto pela minha dificuldade em entender o inglês do palestrante), mas acho que consegui entender alguns conceitos do pacote. É uma forma de conseguir representar, dentro do R, a estrutura relacional de um banco de dados, contendo as chaves primárias e chaves estrangeiras, além de ferramentas para melhorar a documentação.
+- [**Pacote dbcooper**](https://rstudioconf2022.sched.com/event/11iZi/dbcooper-turn-any-database-into-an-r-or-python-package?iframe=no&w=100%&sidebar=yes&bg=no): Essa foi a segunda palestra mais útil do dia! O pacote dbcooper, do David Robinson, tem apenas uma função, que transforma uma conexão de banco de dados em funções especializadas para ler cada uma das tabelas daquela base. Por exemplo, se você tem uma base relacional da receita federal, o dbcooper criará funções para pegar os dados de todas as tabelas da base, como estabelecimentos, socios, empresas, entre outros.
+
+## Keynote: shiny para Python
+
+Para finalizar as palestras do primeiro dia, tivemos a [keynote do Joe Cheng](https://rstudioconf2022.sched.com/event/11iZl/the-past-and-future-of-shiny?iframe=no&w=100%&sidebar=yes&bg=no), sobre o passado e o futuro do shiny. O shiny está completando 10 anos de história, e o Joe Cheng apresentou um pouco de como ele surgiu, em uma fala super pessoal e emocionante. 
+
+Uma parte muito comovente foi ver ele contar que estava quase saindo da RStudio (naquele momento, eram somente ele e o JJ na empresa), quando numa bela manhã o ambiente do shiny simplesmente apareceu na cabeça dele. É muito interessante saber que essa ferramenta -- que é uma parte importantíssima da carreira de muitas pessoas que trabalham com ciência de dados -- poderia nunca ter acontecudo.
+
+Em seguida, Joe argumentou os motivos pelos quais o R era muito adequado para o desenvolvimento do shiny. O primeiro é que as pessoas de fato passaram usar o pacote e aprender como funcionam ferramentas web. O segundo é a comunidade R, que foi muito receptiva ao pacote, criando diversas extensões. O terceiro é mais técnico: o R era extremamente adaptado para o ambiente criado pelo shiny.
+
+Para finalizar, foi apresentado como será o shiny para python. A ideia é escrever um pacote que pareça natural para pessoas do python, não uma adaptação do pacote em R. A biblioteca ainda está em formato alpha, então pode mudar bastante.
+
+## Quer saber mais?
+
+Bom, essas foram minhas anotações do dia 01 da rstudio::conf(2022). Todas as palestras ficarão online [neste link](https://www.rstudio.com/conference/stream/). No futuro, eu e a Beatriz faremos mais posts sobre o tema!
+

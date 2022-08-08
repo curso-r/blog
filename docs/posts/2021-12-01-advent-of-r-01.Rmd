@@ -1,0 +1,143 @@
+---
+title: "Advent of R: Dia 01"
+date: "2021-12-01"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-01.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 01."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Varredura de Sonar (A)
+
+A parte 1 do [primeiro exercício](https://adventofcode.com/2021/day/1) do AoC
+envolve ler uma lista de números e ver quantas vezes os valores aumentam em
+relação ao anterior. Em linguagem matemática, precisamos avaliar quantas vezes
+$x_i > x_{i - 1}$.
+
+Por exemplo, suponha a seguinte lista:
+
+```r
+# 199
+# 200
+# 208
+# 210
+# 200
+# 207
+# 240
+# 269
+# 260
+# 263
+```
+
+Nesse caso, precisamos comparar cada número com o da linha anterior e verificar
+se ele representa que a série aumentou, diminuiu ou manteve-se constante.
+
+```r
+# 199 (NA)
+# 200 (aumentou)
+# 208 (aumentou)
+# 210 (aumentou)
+# 200 (diminuiu)
+# 207 (aumentou)
+# 240 (aumentou)
+# 269 (aumentou)
+# 260 (diminuiu)
+# 263 (aumentou)
+```
+
+Tendo isso, podemos concluir que houve 7 aumentos na série exemplo e essa seria
+a resposta do problema.
+
+O meu código para resolver o exercício ficou bem enxuto. Bastou ler a lista de
+número do arquivo disponibilizado como uma tabela e comparar seus valores com
+o seu `dplyr::lag()`; depois disso um `dplyr::summarise()` contou o número de
+`TRUE`s ignorando `NA`s.
+
+```r
+"data-raw/01a_sonar_sweep.txt" |>
+  readr::read_table(col_names = "depth") |>
+  dplyr::mutate(
+    prev_depth = dplyr::lag(depth),
+    is_deeper = depth > prev_depth
+  ) |>
+  dplyr::summarise(n_deeper = sum(is_deeper, na.rm = TRUE)) |>
+  dplyr::pull(n_deeper)
+#> [1] 1228
+```
+
+## Varredura de Sonar (B)
+
+A segunda parte, entretanto, aumenta (com o perdão do trocadilho) a dificuldade.
+Dessa vez precisamos somar uma janela de 3 valores e comparar com a próxima
+janela, ou seja, verificar quantas vezes
+$\sum_{k = i}^{i+2} x_k > \sum_{k = i-1}^{i+1} x_k$.
+
+Observe como as janelas funcionam:
+
+```r
+# 199  A
+# 200  A B
+# 208  A B C
+# 210    B C D
+# 200  E   C D
+# 207  E F   D
+# 240  E F G
+# 269    F G H
+# 260      G H
+# 263        H
+```
+
+Nesse exemplo precisaríamos somar os números da janela A (199, 200, 208) e
+testar se isso é maior que a soma dos números da janela B (200, 208, 210). Então
+compararíamos B com C, C com D e assim por diante.
+
+```r
+# A: 607 (NA)
+# B: 618 (aumentou)
+# C: 618 (não mudou)
+# D: 617 (diminuiu)
+# E: 647 (aumentou)
+# F: 716 (aumentou)
+# G: 769 (aumentou)
+# H: 792 (aumentou)
+```
+
+Alterando o código da primeira parte, eu criei as janelas usando `dplyr::lead()`
+e depois comparei as somas utilizando o mesmo `dplyr::lag()`. Mais uma vez o
+`dplyr::summarise()` contou o número de `TRUE`s ignorando `NA`s.
+
+```r
+"data-raw/01b_sonar_sweep.txt" |>
+  readr::read_table(col_names = "depth") |>
+  dplyr::mutate(
+    depth1 = dplyr::lead(depth, n = 1),
+    depth2 = dplyr::lead(depth, n = 2),
+    sum_depth = depth + depth1 + depth2,
+    prev_sum_depth = dplyr::lag(sum_depth),
+    is_deeper = sum_depth > prev_sum_depth
+  ) |>
+  dplyr::summarise(n_deeper = sum(is_deeper, na.rm = TRUE)) |>
+  dplyr::pull(n_deeper)
+#> [1] 1257
+```

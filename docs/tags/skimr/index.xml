@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>skimr on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/skimr/</link>
+    <description>Recent content in skimr on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 17 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/skimr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Skimr: estatísticas básicas com ❤️</title>
+      <link>https://blog.curso-r.com/posts/2017-06-17-skimr/</link>
+      <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-17-skimr/</guid>
+      <description>Uma coisa muito legal da ROpenSci Unconf 2017 é que ela funcionou como uma hackathon mega produtiva. Dentre os novos pacotes que olhei, o que mais me chamou atenção foi o skimr&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

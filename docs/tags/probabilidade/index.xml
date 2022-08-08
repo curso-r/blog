@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>probabilidade on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/probabilidade/</link>
+    <description>Recent content in probabilidade on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 12 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/probabilidade/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rolando Dados com {droll}</title>
+      <link>https://blog.curso-r.com/posts/2021-08-12-droll/</link>
+      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-08-12-droll/</guid>
+      <description>Um pacote em R analisar rolagens de dados e calcular suas probabilidades</description>
+    </item>
+    
+  </channel>
+</rss>

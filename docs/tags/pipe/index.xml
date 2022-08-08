@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pipe on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/pipe/</link>
+    <description>Recent content in pipe on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 06 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/pipe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>R 4.1: o novo pipe está chegando!</title>
+      <link>https://blog.curso-r.com/posts/2021-05-06-o-novo-pipe-esta-chegando/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-06-o-novo-pipe-esta-chegando/</guid>
+      <description>Em poucos dias será oficialmente lançado o R 4.1, com seu próprio pipe embutido! Neste post falamos sobre o pipe e outras novidades que chegarão ao R em 18/05/2021.</description>
+    </item>
+    
+    <item>
+      <title>Por que usar o %&gt;%</title>
+      <link>https://blog.curso-r.com/posts/2018-07-03-tutorial-pipe/</link>
+      <pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-03-tutorial-pipe/</guid>
+      <description>De onde vem e como funciona o operador pipe.</description>
+    </item>
+    
+  </channel>
+</rss>

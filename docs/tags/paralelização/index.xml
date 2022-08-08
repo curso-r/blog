@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>paralelização on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/paraleliza%C3%A7%C3%A3o/</link>
+    <description>Recent content in paralelização on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sun, 19 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/paraleliza%C3%A7%C3%A3o/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Paralelização no R</title>
+      <link>https://blog.curso-r.com/posts/2017-03-14-parallel/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-03-14-parallel/</guid>
+      <description>Programadores eficientes não precisam escrever algoritmos que rodam rápido. Recomendo fortemente a leitura do livro Efficient R, que discute eficiência com o R de forma exaustiva. Também gosto muito da primeira parte dessa palestra do Hadley, onde ele defende que o cientista de dados deve usar seu tempo pensando no problema e não na forma que vai escrever seu código&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

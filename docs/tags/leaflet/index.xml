@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>leaflet on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/leaflet/</link>
+    <description>Recent content in leaflet on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/leaflet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Qual a capital mais distante de Brasília?</title>
+      <link>https://blog.curso-r.com/posts/2020-09-19-map-dist/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-09-19-map-dist/</guid>
+      <description>Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!</description>
+    </item>
+    
+    <item>
+      <title>Você está a menos de 1 km de um Hambúrguer?</title>
+      <link>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</link>
+      <pubDate>Mon, 10 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-13-o-que-tem-a-um-km/</guid>
+      <description>Neste post, veremos como utilizar uma das APIs do Google Maps para obter informações de geolocalização a partir de uma pesquisa simples. Em seguida, vamos utilizar o pacote &lt;code&gt;leaflet&lt;/code&gt; para criar mapas com os dados coletados e descobrir se estamos a menos de 1 km de hospitais, delagacias, corpos de bombeiros e, o mais importante, de uma hamburgueria.</description>
+    </item>
+    
+    <item>
+      <title>leaflet com markerCluster</title>
+      <link>https://blog.curso-r.com/posts/2017-02-21-markercluster/</link>
+      <pubDate>Wed, 01 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-21-markercluster/</guid>
+      <description>O leaflet é uma biblioteca javascript para criação de mapas interativos. O pacote leaflet do R é um htmlwidget que permite gerar esses mapas de forma direta no R, para usar em documentos &lt;code&gt;RMarkdown&lt;/code&gt; e Shiny.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,74 @@
+---
+title: "Como contar dias úteis no R"
+date: "2021-07-16"
+tags: ["tutoriais"]
+categories: ["pacotes"]
+image: "images/posts/banner/calendario.webp"
+author: ["Fernando"]
+summary: "Contar os dias entre duas datas é uma coisa facilitada pelo R, mas hoje vamos explorar um pacote que ajuda a conatr apenas os dias úteis entre duas datas"
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+```
+
+Em muitas situações, principalmente quando o assunto é finanças, precisamos contar os dias úteis entre duas datas. Como essa é uma questão que depende de calendários regionais, isso pode ser um pouco chato de fazer diretamente no R, pois você precisará importar uma lista de feriados. Felizmente o pacote `bizdays` que está disponível no CRAN ajuda nessa tarefa e hoje vamos explorar algumas de suas funcionalidades.
+
+# Usando o pacote `bizdays`
+
+A função principal do pacote é a função `bizdays`, que recebe duas datas e um calendário e retorna a quantidade de dias úteis entre essas datas.
+
+Atualmente o pacote `bizdays` suporta a lista de feriados do [calendário da ANBIMA](https://www.anbima.com.br/feriados/feriados.asp), que considera os feriados bancários e é a referência mais comum quando o precisamos contar dias úteis. Isso pode acabar atrapalhando algumas aplicações, pois o calendário da ANBIMA considera, por exemplo, que a quinta-feira da Semana Santa é um dia útil. Ele não considera também feriados municipais ou estaduais. Por outro lado, o calendário da ANBIMA é usado como referência em muitos cálculos de instituições financeiras e é o padrão brasileiro em muitos contextos. 
+
+Para contar os dias úteis tomando como referência esse calendário, basta utilizarmos os comandos abaixo
+
+```{r}
+library(bizdays)
+
+primeiro_de_janeiro_2021 <- as.Date("2020-01-01")
+primeiro_de_julho_2021 <- as.Date("2021-07-01")
+
+# A ordem dos parâmetros será
+
+# data de origem
+# data final
+# nome do calendário que será utilizados.
+# podemos acessar a lista usando o comando calendars()
+
+bizdays(primeiro_de_janeiro_2021, primeiro_de_julho_2021, "Brazil/ANBIMA")
+```
+
+# Criando seu próprio calendário
+
+Caso você queira usar um calendário próprio ou incluir novos feriados, você pode criar um novo calendário que ficará disponível para ser usado como referência no terceiro parâmetro da função `bizdays`. Para criar um calendário, precisamos chamar a função `create.calendar` como vemos abaixo:
+
+```{r}
+
+library(bizdays)
+
+data(holidaysANBIMA, package = 'bizdays')
+# carrega a lista de feriados até 2079
+
+
+create.calendar(
+  name = "novo_calendario",
+  holidays = c(holidaysANBIMA,
+               # holidays é um vetor de calendarios. o vetor holidaysANBIMA
+               # contém os feriados do calendário da ANBIMA.
+               as.Date(paste0(2003:2079, "-11-20"))),
+               # aqui incluímos os feriados do
+               # Dia da Conciência Negra no dia 20 de Novembro de todos os anos 
+               # de 2003 a 2079
+  weekdays = c("saturday", "sunday")
+  # aqui definimos quais dias da semana NÃO são considerados dias úteis
+)
+
+bizdays(primeiro_de_janeiro_2021, primeiro_de_julho_2021, "novo_calendario")
+```
+
+# Gostou? Quer saber mais?
+
+Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso [R para Ciência de Dados I](https://curso-r.com/cursos/r4ds-1/) e aproveite!
+
+Caso você tenha dúvidas, entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail contato@curso-r.com. 

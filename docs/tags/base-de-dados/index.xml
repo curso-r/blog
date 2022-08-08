@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>base de dados on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/base-de-dados/</link>
+    <description>Recent content in base de dados on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 03 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/base-de-dados/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Matrizes de correlação com o R usando o pacote GGally</title>
+      <link>https://blog.curso-r.com/posts/2021-09-03-matrizes-correlacao/</link>
+      <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-09-03-matrizes-correlacao/</guid>
+      <description>Muitas vezes queremos ter um jeito rápido de visualizar as relações que existem entre as colunas das nossas bases de dados. No post de hoje vamos falar sobre como fazer isso usando uma matriz de correlação.</description>
+    </item>
+    
+    <item>
+      <title>Uma maneira prática de encontrar outliers nos seus dados</title>
+      <link>https://blog.curso-r.com/posts/2021-04-15-como-encontrar-outliers/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-04-15-como-encontrar-outliers/</guid>
+      <description>Você já passou pela situação de fazer um gráfico e se deparar com um monte de pontos bizarros? Quando você nem seguer consegue ver o que está acontecendo porque um ponto está deixando a sua escala completamente bagunçada? Hoje, nós vamos falar sobre uma estratégia rápida e fácil que tem o potencial de te ajudar a encontrar todos os seus outliers sem ter dor de cabeça.</description>
+    </item>
+    
+    <item>
+      <title>Arrumando BDs: o pacote janitor</title>
+      <link>https://blog.curso-r.com/posts/2017-07-24-janitor/</link>
+      <pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-24-janitor/</guid>
+      <description>Neste post, apresentaremos o pacote janitor, uma ótima alternativa na hora de dar aquele trato na base de dados.</description>
+    </item>
+    
+    <item>
+      <title>Salvando data.frames: uma comparação</title>
+      <link>https://blog.curso-r.com/posts/2017-07-20-escrevendo-data-frames/</link>
+      <pubDate>Thu, 20 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-20-escrevendo-data-frames/</guid>
+      <description>Salvar data.frames para ler depois é uma tarefa muito comum para quem trabalha com R. Veja aqui algumas maneiras de como fazer isso de forma rápida e de forma que possa te salvar tempo na hora de carregá-lo novamente.</description>
+    </item>
+    
+    <item>
+      <title>Arrumando BDs: nome das variáveis</title>
+      <link>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</link>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</guid>
+      <description>Neste post, mostraremos uma forma rápida para padronizar os nomes das variáveis de uma base de dados, deixando-os mais adequados para o restante da análise.</description>
+    </item>
+    
+  </channel>
+</rss>

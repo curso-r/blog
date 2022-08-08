@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Acessando dados do seu One Drive com R</title>
+  <meta name="title" content="Acessando dados do seu One Drive com R">
+  <meta name="description" content="Quer saber como acessar dados do One Drive com R?">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2022-03-18-onedrive/">
+  <meta property="og:title" content="Acessando dados do seu One Drive com R">
+  <meta property="og:description" content="Quer saber como acessar dados do One Drive com R?">
+  <meta property="og:image" content="https://github.com/Azure/Microsoft365R/raw/master/man/figures/logo.png?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2022-03-18-onedrive/">
+  <meta property="twitter:title" content="Acessando dados do seu One Drive com R">
+  <meta property="twitter:description" content="Quer saber como acessar dados do One Drive com R?">
+  <meta property="twitter:image" content="https://github.com/Azure/Microsoft365R/raw/master/man/figures/logo.png">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://github.com/Azure/Microsoft365R/raw/master/man/figures/logo.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Acessando dados do seu One Drive com R</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Beatriz">Beatriz</a>
+            
+            em
+            <a href="/categories/pacotes">Pacotes</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            18 de
+            março de
+            2022
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/api">api</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/one-drive">one drive</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/importa%c3%a7%c3%a3o">importação</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/excel">excel</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/microsoft">microsoft</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/azure">azure</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/microsoft365r">Microsoft365R</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Recentemente, escrevi um <a href="https://blog.curso-r.com/posts/2022-03-08-googlesheets4/">post sobre como é possível acessar dados do Google Sheets com R</a>, além de importar respostas do Google Forms. Algumas pessoas comentaram que utilizam o One Drive, e perguntaram como funcionaria para importar tabelas que estão por lá. Como eu não uso One Drive, dei uma explorada para responder, e neste post falarei um pouco sobre como podemos importar dados que estão na conta do One Drive usando o pacote <code>Microsoft365R</code>.</p>
+<p>O pacote <a href="https://github.com/Azure/Microsoft365R">Microsoft365R</a> é uma interface para acessar o Microsoft 365, e segundo a documentação do pacote, possui funções para interagir com o Microsoft Teams, Outlook, SharePoint Online, e o <strong>OneDrive</strong> (que é o foco deste post!).</p>
+<p>Primeiramente, é necessário instalar o pacote:</p>
+<pre class="r"><code>install.packages(&quot;Microsoft365R&quot;)</code></pre>
+<p>Então, podemos carregá-lo:</p>
+<pre class="r"><code># Carregar pacote Microsoft365R
+library(Microsoft365R)</code></pre>
+<p>Ao carregar o pacote pela primeira vez, a seguinte mensagem aparecerá, dizendo que é possível armazenar as credenciais em uma pasta chamada <code>AzureR</code> e perguntando se permitimos que o pacote crie esse diretório. Eu aceitei respondendo com <code>Yes</code>:</p>
+<pre class="r"><code>The AzureR packages can save your authentication credentials in the directory:
+
+~/Library/Application Support/AzureR
+
+This saves you having to re-authenticate with Azure in future sessions.
+Create this directory? (Yes/no/cancel) </code></pre>
+<p>Depois de responder com <code>Yes</code>, nada aparentemente acontece, porém o pacote é carregado!</p>
+</div>
+<div id="autenticação" class="section level2">
+<h2>Autenticação</h2>
+<p>Ao acessar pela primeira vez, o pacote abrirá uma aba do navegador para fazer a autenticação.</p>
+<p>Neste exemplo, usarei a função <code>Microsoft365R::get_personal_onedrive()</code> que explicarei posteriormente. No console do R, aparecerá a seguinte mensagem ao utilizar alguma função pela primeira vez:</p>
+<pre class="r"><code>Microsoft365R::get_personal_onedrive()
+# Using authorization_code flow
+# Creating Microsoft Graph login for tenant &#39;consumers&#39;
+# Using authorization_code flow
+# Waiting for authentication in browser...
+# Press Esc/Ctrl + C to abort</code></pre>
+<p>O navegador abrirá uma janela para que a autenticação seja feita:</p>
+<p><img src="/images/posts/conteudo/2022-03-18-onedrive/auth-onedrive.webp" /><!-- --></p>
+<p>Após fazer a autenticação, a seguinte mensagem aparecerá no navegador:</p>
+<pre><code>Authenticated with Azure Active Directory. Please close this page and return to R.</code></pre>
+<p>Isso significa que podemos fechar a aba do navegador e retornar ao R. No console do R, aparecerá a seguinte mensagem:</p>
+<pre class="r"><code>Authentication complete.</code></pre>
+</div>
+<div id="acesso-de-conta-pessoal-ou-de-trabalho" class="section level2">
+<h2>Acesso de conta pessoal ou de trabalho?</h2>
+<p>O primeiro passo após autenticar é acessar o One Drive, e a função para fazer isso depende do tipo de acesso da conta: pessoal ou de trabalho. Como o meu acesso é pessoal, vou usar a função <code>get_personal_onedrive()</code>. Mas caso o seu acesso seja de trabalho, utilize a função <code>get_business_onedrive()</code>. É necessário executar a função e salvar o resultado em um objeto.</p>
+<pre class="r"><code>onedrive_da_bea &lt;-  Microsoft365R::get_personal_onedrive()</code></pre>
+<p>Agora a forma de interagir com o pacote é um pouco diferente de como usamos na maior parte das vezes. Isso porque o pacote utiliza objetos que são da classe <code>R6</code>, e que permitem utilizar métodos. O foco deste post não é explicar o que são as classes R6, e escrevi este post pensando em ser útil para pessoas que também não conhecem as classes R6. Caso você tenha interesse em saber mais, deixei alguns links de referência no final do post.</p>
+<p>Para conferir a classe desse objeto, podemos usar a função <code>class()</code>:</p>
+<pre class="r"><code>class(onedrive_da_bea)
+#&gt; [1] &quot;ms_drive&quot;  &quot;ms_object&quot; &quot;R6&quot;  </code></pre>
+<p>Ao executar apenas o objeto, o console apresenta os métodos possíveis:</p>
+<pre class="r"><code>drive_da_bea
+
+#&gt; &lt;Personal OneDrive of Beatriz Milz&gt;
+#&gt;   directory id: df5a76afb6532845 
+#&gt; ---
+#&gt;   Methods:
+#&gt;     create_folder, create_share_link, delete,
+#&gt;     delete_item, do_operation, download_file,
+#&gt;     get_item, get_item_properties, get_list_pager,
+#&gt;     list_files, list_items, list_shared_files,
+#&gt;     list_shared_items, open_item,
+#&gt;     set_item_properties, sync_fields, update,
+#&gt;     upload_file</code></pre>
+<p>Sabendo o nome dos métodos, podemos usá-los usando o seguinte padrão: <code>nome_do_objeto$nome_do_metodo()</code>! Existem vários métodos, e vamos explorar os métodos relacionados à importação. Mas caso você use bastante o One Drive no seu dia-a-dia, recomendo experimentar os outros métodos, como os que servem para manipular arquivos (como criar, atualizar, deletar)!</p>
+</div>
+<div id="navegar-nos-arquivos-do-drive" class="section level2">
+<h2>Navegar nos arquivos do Drive</h2>
+<p>Para conseguir importar um arquivo, é necessário primeiramente encontrar o caminho até este arquivo. E isso funciona de forma similar aos caminhos que já conhecemos nos nossos projetos!
+Vamos usar o método <code>list_files()</code> para listar os arquivos presentes na pasta inicial do meu OneDrive. Como eu raramente uso ele, criei uma pasta de exemplo chamada <code>pasta_de_exemplo</code>, e dentro dela criei um arquivo Excel chamado <code>pinguins</code>. Veja que apareceu apenas a pasta, e não o conteúdo que ela armazena:</p>
+<pre class="r"><code>onedrive_da_bea$list_files() |&gt; dplyr::glimpse()
+
+#&gt; Rows: 1
+#&gt; Columns: 4
+#&gt; $ name  &lt;chr&gt; &quot;pasta_de_exemplo&quot;
+#&gt; $ size  &lt;int&gt; 23041
+#&gt; $ isdir &lt;lgl&gt; TRUE
+#&gt; $ id    &lt;chr&gt; &quot;DF5A76AFB6532845!4368&quot;</code></pre>
+<p>Para ver os arquivos que estão dentro da pasta (e encontrar o excel <code>pinguins</code>), podemos usar o mesmo método utilizado acima, e informar o nome da pasta que queremos listar os arquivos.</p>
+<pre class="r"><code>onedrive_da_bea$list_files(path = &quot;pasta_de_exemplo/&quot;) |&gt; dplyr::glimpse()
+
+#&gt; Rows: 1
+#&gt; Columns: 4
+#&gt; $ name  &lt;chr&gt; &quot;pinguins.xlsx&quot;
+#&gt; $ size  &lt;int&gt; 23041
+#&gt; $ isdir &lt;lgl&gt; FALSE
+#&gt; $ id    &lt;chr&gt; &quot;DF5A76AFB6532845!4369&quot;</code></pre>
+</div>
+<div id="importar-o-arquivo" class="section level2">
+<h2>Importar o arquivo</h2>
+<p>Eu ainda não encontrei um método que permita ler o conteúdo de um Excel diretamente do OneDrive para o R (como fazemos com o Google Drive). Olhando nas <a href="https://github.com/Azure/Microsoft365R">issues do GitHub</a>, parece que essa funcionalidade ainda não foi implementada até o momento, e algumas pessoas inclusive sugeriram melhorias neste sentido.</p>
+<p>A forma que encontrei para importar um Excel do Ondrive foi fazer o download do arquivo Excel que está no Ondrive, e depois importar o arquivo salvo localmente. Para fazer o download e abrir um arquivo Excel, podemos usar o método <code>download_file()</code> para baixar o arquivo, e então a função <code>readxl::read_excel()</code> para importar o arquivo:</p>
+<pre class="r"><code># baixar o arquivo
+onedrive_da_bea$download_file(&quot;pasta_de_exemplo/pinguins.xlsx&quot;, 
+                              dest = &quot;pinguins_onedrive.xlsx&quot;)
+
+# ler o arquivo baixado
+pinguins_do_onedrive &lt;- readxl::read_excel(&quot;pinguins_onedrive.xlsx&quot;)
+dplyr::glimpse(pinguins_do_onedrive)
+#&gt;  Rows: 344
+#&gt;  Columns: 8
+#&gt;  $ especie               &lt;chr&gt; &quot;Pinguim-de-adélia&quot;, &quot;Pinguim-de-adé…
+#&gt;  $ ilha                  &lt;chr&gt; &quot;Torgersen&quot;, &quot;Torgersen&quot;, &quot;Torgersen…
+#&gt;  $ comprimento_bico      &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38…
+#&gt;  $ profundidade_bico     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17…
+#&gt;  $ comprimento_nadadeira &lt;dbl&gt; 181, 186, 195, NA, 193, 190, 181, 19…
+#&gt;  $ massa_corporal        &lt;dbl&gt; 3750, 3800, 3250, NA, 3450, 3650, 36…
+#&gt;  $ sexo                  &lt;chr&gt; &quot;macho&quot;, &quot;fêmea&quot;, &quot;fêmea&quot;, NA, &quot;fême…
+#&gt;  $ ano                   &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, …</code></pre>
+<p>Caso queira abrir o arquivo no navegador (para ver, compartilhar ou coisas similares), use o método <code>open_item()</code>, informando o caminho até o arquivo:</p>
+<pre class="r"><code>onedrive_da_bea$open_item(path = &quot;pasta_de_exemplo/pinguins.xlsx&quot;) </code></pre>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Espero que este post seja útil para quem usa o One Drive também. Também espero que o pacote seja aprimorado para conseguir importar os dados sem que seja necessário baixá-los.</p>
+<p>Caso você encontre algum método melhor para importar os dados, <a href="https://discourse.curso-r.com/">conta pra gente</a>!</p>
+<p>Até a próxima!</p>
+</div>
+<div id="referências" class="section level2">
+<h2>Referências</h2>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/Microsoft365R/vignettes/od_sp.html">Documentação do pacote Microsoft365R - Vignette sobre o OneDrive</a></p></li>
+<li><p><a href="https://github.com/Azure/Microsoft365R">GitHub do pacote Microsoft365R</a></p></li>
+<li><p><a href="https://allisonhorst.github.io/palmerpenguins/">Referência da base dos pinguins</a></p></li>
+<li><p>Avançado: Referências sobre classes R6 em R</p>
+<ul>
+<li><a href="https://r6.r-lib.org/articles/Introduction.html">Documentação do pacote R6</a></li>
+<li><a href="https://adv-r.hadley.nz/r6.html">Livro Advanced R</a></li>
+</ul></li>
+</ul>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Advent of R: Dia 03</title>
+  <meta name="title" content="Advent of R: Dia 03">
+  <meta name="description" content="Resolvendo o Advent of Code 2021 com R: Dia 03.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-12-03-advent-of-r-03/">
+  <meta property="og:title" content="Advent of R: Dia 03">
+  <meta property="og:description" content="Resolvendo o Advent of Code 2021 com R: Dia 03.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/advent-of-r-03.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-12-03-advent-of-r-03/">
+  <meta property="twitter:title" content="Advent of R: Dia 03">
+  <meta property="twitter:description" content="Resolvendo o Advent of Code 2021 com R: Dia 03.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/advent-of-r-03.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/advent-of-r-03.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Advent of R: Dia 03</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            3 de
+            dezembro de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/advent-of-r">advent-of-r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/tidyverse">tidyverse</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>O <a href="https://adventofcode.com">Advent of Code</a> é um
+<a href="https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento">Calendário do Advento</a>
+desenvolvido por <a href="https://github.com/topaz">Eric Wastl</a> composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.</p>
+<p>Meu objetivo com o <strong>Advent of R</strong> é resolver todos os problemas do
+<a href="https://adventofcode.com/2021">Advent of Code 2021</a> em R e documentar o
+processo através desta
+<a href="https://blog.curso-r.com/tags/advent-of-r/">série de posts</a>. Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+<a href="https://github.com/curso-r/advent-of-r">repositório público</a> no GitHub.</p>
+<p>A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="diagnóstico-binário-a" class="section level2">
+<h2>Diagnóstico Binário (A)</h2>
+<p>Na primeira parte do <a href="https://adventofcode.com/2021/day/3">terceiro dia</a> do AoC
+somos apresentados aos diagnósticos do submarino. Cada linha é composta por um
+número binário e precisamos carclular, a partir deles, os índices gama e
+épsilon.</p>
+<pre class="r"><code># 00100
+# 11110
+# 10110
+# 10111
+# 10101
+# 01111
+# 00111
+# 11100
+# 10000
+# 11001
+# 00010
+# 01010</code></pre>
+<p>Cada bit do fator gama é igual ao valor mais comum do bit correspondente na
+entrada, enquanto o épsilon funciona ao contrário. No exemplo acima, o primeiro
+bit mais comum é 1 e o segundo é 0, então o índice gama começará com 10… e o
+índice épsilon começará com 01…</p>
+<p>O meu código quebra os bits da entrada com <code>tidyr::separate()</code> e calcula o valor
+mais frequente com <code>names(sort(-table(.x)))[1]</code> (a moda estatística). É
+importante lembrar que épsilon é o oposto, então eu troquei todos os bits de
+gama com <code>stringr::str_replace_all()</code>. A resposta final é a multiplicação
+de gama por épsilon na base decimal.</p>
+<pre class="r"><code>&quot;data-raw/03a_binary_diagnostic.txt&quot; |&gt;
+  readr::read_table(col_names = &quot;reading&quot;) |&gt;
+  tidyr::separate(reading, paste0(&quot;B&quot;, 0:12), &quot;&quot;) |&gt;
+  dplyr::select(-B0) |&gt;
+  dplyr::summarise_all(~names(sort(-table(.x)))[1]) |&gt;
+  tidyr::unite(&quot;gamma&quot;, dplyr::everything(), sep = &quot;&quot;) |&gt;
+  dplyr::mutate(
+    epsilon = gamma |&gt;
+      stringr::str_replace_all(&quot;0&quot;, &quot;!&quot;) |&gt;
+      stringr::str_replace_all(&quot;1&quot;, &quot;0&quot;) |&gt;
+      stringr::str_replace_all(&quot;!&quot;, &quot;1&quot;) |&gt;
+      strtoi(base = 2),
+    gamma = strtoi(gamma, base = 2),
+    output = gamma * epsilon
+  ) |&gt;
+  dplyr::pull(output)</code></pre>
+</div>
+<div id="diagnóstico-binário-b" class="section level2">
+<h2>Diagnóstico Binário (B)</h2>
+<p>O segundo item desse dia foi o mais difícil de todos, ainda mais considerando
+que eu tento resolver tudo em apenas uma pipeline. Usando os mesmos dados,
+precisamos obter a taxa de O<span class="math inline">\(_2\)</span> e de CO<span class="math inline">\(_2\)</span> do submarino, sendo que as regras
+são as seguintes:</p>
+<ol style="list-style-type: decimal">
+<li><p>Jogue fora os número que não atendem ao critério daquele gás.</p></li>
+<li><p>Se restar apenas 1 número, essa é a taxa daquele gás.</p></li>
+<li><p>Caso contrário, repita o processo com o próximo bit.</p></li>
+</ol>
+<p>E quais são os critérios?</p>
+<ul>
+<li><p>Para o oxigênio, determinamos o valor mais comum para o bit atual e jogamos
+fora todos os números que diferem, nessa posição, desse valor. Se 0 e 1 forem
+igualmente comuns, manter apenas os números com 1 no bit considerado.</p></li>
+<li><p>Para gás carbônico, determinamos o valor menos comum para o bit atual e
+jogamos fora todos os números que diferem, nessa posição, desse valor. Se 0 e 1
+forem igualmente comuns, manter apenas os números com 0 no bit considerado.</p></li>
+</ul>
+<p>O primeiro passo da minha solução foi criar uma função que calcula a anti-moda
+de um vetor. Ela difere da função usada no item anterior somente pelo sinal de
+subtração, mas isso garante a ela uma propriedade importante: se 0 e 1 empatarem
+na contagem, ela retorna o valor que vem antes na ordem alfabética, ou seja, 0.
+Dessa forma a função <code>antimode()</code> realiza exatamente a operação que precisamos
+para determinar a taxa de gás carbônico.</p>
+<pre class="r"><code>antimode &lt;- function(x) names(sort(table(x)))[1]</code></pre>
+<p>A função abaixo é uma versão recursiva do cálculo das taxas dos gases. A coluna
+<code>current</code> é só um atalho para deixar o filtro mais enxuto, pois ela não passa da
+do bit atual. O <code>op()</code>, porém, é a chave que nos permite usar a mesma função
+para calcular O<span class="math inline">\(_2\)</span> e CO<span class="math inline">\(_2\)</span>; por padrão a função filtra os valores iguais à
+anti-moda, mas, com <code>co2 = FALSE</code>, ela filtra os valores diferentes da
+anti-moda, atendendo ao critério do oxigênio (incluindo o desempate)!</p>
+<p>A última linha chama a função de novo para o próximo bit, resolvendo o cálculo.</p>
+<pre class="r"><code>gas &lt;- function(df, co2 = TRUE, bit = 1) {
+
+  # Condição de parada
+  if (bit &gt; 12 || nrow(df) == 1) return(df)
+
+  # Escolher o operador apropriado
+  if (co2) op &lt;- `==` else op &lt;- `!=`
+
+  # Filtrar usando antimode() e fazer a recursão
+  df |&gt;
+    dplyr::mutate(current = .data[[names(df)[bit]]]) |&gt;
+    dplyr::filter(op(current, antimode(current))) |&gt;
+    dplyr::select(-current) |&gt;
+    find_rating(co2 = co2, bit = bit + 1)
+}</code></pre>
+<p>Só nos resta aplicar essa função na lista de números. Para tentar manter o fim
+do código em uma pipeline só (já que não foi possível com o resto), eu usei
+<code>rep_len(list(df), 2)</code> para duplicar a base e poder aplicar <code>gas()</code> e
+<code>gas(co2 = FALSE)</code> em uma linha só com <code>purrr::map2_dfr()</code>. O final do código
+deixa cada taxa em uma linha, junta os seu bits, as converte para decimal e
+multiplica seus valores. Essa é a saída.</p>
+<pre class="r"><code>&quot;data-raw/03b_binary_diagnostic.txt&quot; |&gt;
+  readr::read_table(col_names = &quot;reading&quot;) |&gt;
+  tidyr::separate(reading, paste0(&quot;B&quot;, 0:12), &quot;&quot;) |&gt;
+  dplyr::select(-B0) |&gt;
+  list() |&gt;
+  rep_len(2) |&gt;
+  purrr::map2_dfr(list(gas, \(df) gas(df, FALSE)), ~.y(.x)) |&gt;
+  tidyr::unite(&quot;reading&quot;, dplyr::everything(), sep = &quot;&quot;) |&gt;
+  dplyr::mutate(reading = strtoi(reading, base = 2)) |&gt;
+  dplyr::summarise(output = prod(reading)) |&gt;
+  dplyr::pull(output)</code></pre>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

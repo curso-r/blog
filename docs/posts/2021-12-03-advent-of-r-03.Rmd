@@ -1,0 +1,163 @@
+---
+title: "Advent of R: Dia 03"
+date: "2021-12-03"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-03.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 03."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Diagnóstico Binário (A)
+
+Na primeira parte do [terceiro dia](https://adventofcode.com/2021/day/3) do AoC
+somos apresentados aos diagnósticos do submarino. Cada linha é composta por um
+número binário e precisamos carclular, a partir deles, os índices gama e
+épsilon.
+
+```r
+# 00100
+# 11110
+# 10110
+# 10111
+# 10101
+# 01111
+# 00111
+# 11100
+# 10000
+# 11001
+# 00010
+# 01010
+```
+
+Cada bit do fator gama é igual ao valor mais comum do bit correspondente na
+entrada, enquanto o épsilon funciona ao contrário. No exemplo acima, o primeiro
+bit mais comum é 1 e o segundo é 0, então o índice gama começará com 10... e o
+índice épsilon começará com 01...
+
+O meu código quebra os bits da entrada com `tidyr::separate()` e calcula o valor
+mais frequente com `names(sort(-table(.x)))[1]` (a moda estatística). É
+importante lembrar que épsilon é o oposto, então eu troquei todos os bits de
+gama com `stringr::str_replace_all()`. A resposta final é a multiplicação
+de gama por épsilon na base decimal.
+
+```r
+"data-raw/03a_binary_diagnostic.txt" |>
+  readr::read_table(col_names = "reading") |>
+  tidyr::separate(reading, paste0("B", 0:12), "") |>
+  dplyr::select(-B0) |>
+  dplyr::summarise_all(~names(sort(-table(.x)))[1]) |>
+  tidyr::unite("gamma", dplyr::everything(), sep = "") |>
+  dplyr::mutate(
+    epsilon = gamma |>
+      stringr::str_replace_all("0", "!") |>
+      stringr::str_replace_all("1", "0") |>
+      stringr::str_replace_all("!", "1") |>
+      strtoi(base = 2),
+    gamma = strtoi(gamma, base = 2),
+    output = gamma * epsilon
+  ) |>
+  dplyr::pull(output)
+```
+
+## Diagnóstico Binário (B)
+
+O segundo item desse dia foi o mais difícil de todos, ainda mais considerando
+que eu tento resolver tudo em apenas uma pipeline. Usando os mesmos dados,
+precisamos obter a taxa de O$_2$ e de CO$_2$ do submarino, sendo que as regras
+são as seguintes:
+
+1. Jogue fora os número que não atendem ao critério daquele gás.
+
+2. Se restar apenas 1 número, essa é a taxa daquele gás.
+
+3. Caso contrário, repita o processo com o próximo bit.
+
+E quais são os critérios?
+
+- Para o oxigênio, determinamos o valor mais comum para o bit atual e jogamos
+fora todos os números que diferem, nessa posição, desse valor. Se 0 e 1 forem
+igualmente comuns, manter apenas os números com 1 no bit considerado.
+
+- Para gás carbônico, determinamos o valor menos comum para o bit atual e
+jogamos fora todos os números que diferem, nessa posição, desse valor. Se 0 e 1
+forem igualmente comuns, manter apenas os números com 0 no bit considerado.
+
+O primeiro passo da minha solução foi criar uma função que calcula a anti-moda
+de um vetor. Ela difere da função usada no item anterior somente pelo sinal de
+subtração, mas isso garante a ela uma propriedade importante: se 0 e 1 empatarem
+na contagem, ela retorna o valor que vem antes na ordem alfabética, ou seja, 0.
+Dessa forma a função `antimode()` realiza exatamente a operação que precisamos
+para determinar a taxa de gás carbônico.
+
+```r
+antimode <- function(x) names(sort(table(x)))[1]
+```
+
+A função abaixo é uma versão recursiva do cálculo das taxas dos gases. A coluna
+`current` é só um atalho para deixar o filtro mais enxuto, pois ela não passa da
+do bit atual. O `op()`, porém, é a chave que nos permite usar a mesma função
+para calcular O$_2$ e CO$_2$; por padrão a função filtra os valores iguais à
+anti-moda, mas, com `co2 = FALSE`, ela filtra os valores diferentes da
+anti-moda, atendendo ao critério do oxigênio (incluindo o desempate)!
+
+A última linha chama a função de novo para o próximo bit, resolvendo o cálculo.
+
+```r
+gas <- function(df, co2 = TRUE, bit = 1) {
+
+  # Condição de parada
+  if (bit > 12 || nrow(df) == 1) return(df)
+
+  # Escolher o operador apropriado
+  if (co2) op <- `==` else op <- `!=`
+
+  # Filtrar usando antimode() e fazer a recursão
+  df |>
+    dplyr::mutate(current = .data[[names(df)[bit]]]) |>
+    dplyr::filter(op(current, antimode(current))) |>
+    dplyr::select(-current) |>
+    find_rating(co2 = co2, bit = bit + 1)
+}
+```
+
+Só nos resta aplicar essa função na lista de números. Para tentar manter o fim
+do código em uma pipeline só (já que não foi possível com o resto), eu usei
+`rep_len(list(df), 2)` para duplicar a base e poder aplicar `gas()` e
+`gas(co2 = FALSE)` em uma linha só com `purrr::map2_dfr()`. O final do código
+deixa cada taxa em uma linha, junta os seu bits, as converte para decimal e
+multiplica seus valores. Essa é a saída.
+
+```r
+"data-raw/03b_binary_diagnostic.txt" |>
+  readr::read_table(col_names = "reading") |>
+  tidyr::separate(reading, paste0("B", 0:12), "") |>
+  dplyr::select(-B0) |>
+  list() |>
+  rep_len(2) |>
+  purrr::map2_dfr(list(gas, \(df) gas(df, FALSE)), ~.y(.x)) |>
+  tidyr::unite("reading", dplyr::everything(), sep = "") |>
+  dplyr::mutate(reading = strtoi(reading, base = 2)) |>
+  dplyr::summarise(output = prod(reading)) |>
+  dplyr::pull(output)
+```

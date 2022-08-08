@@ -1,0 +1,97 @@
+---
+title: "Manipulação de dados usando o pacote data.table"
+author: ["Fernando"]
+date: '2021-06-01'
+categories: ["tutoriais"]
+image: "images/posts/banner/dtplyr.webp"
+tags: ["faxina", "manipulação", "pacotes"]
+summary: "Você certamente já ouviu falar no pacote dplyr, mas também conhece o pacote data.table? No post de hoje vamos explorar um pouco desse grande pacote!"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+A manipulação de dados, ou _data wrangling_, consome a maior parte do tempo de quem trabalha com Ciência de Dados. Provavelmente por isso existem vários frameworks diferentes para executar comandos dessa categoria. Em R, as duas principais bibliotecas para isso são o `dplyr` e o `data.table`. Existem muitas diferenças entre esses dois pacotes e hoje vamos explorar o pacote `data.table` e também a ponte entre os dois, chamado `dtplyr`.
+
+# Por que existem dois pacotes?
+
+A diferença entre os dois pacotes pode ser resumida em dois tópicos:
+
+- Velocidade e uso de memória do código: o `data.table` em geral é mais veloz. De tempos em tempos são feitas comparações de performance entre `dplyr` e `data.table` e o pacote `data.table` roda em menos tempo em vários cenários, como pode ser visto [aqui](https://github.com/Rdatatable/data.table/wiki/Benchmarks-:-Grouping) e [aqui](https://iyarlin.github.io/2020/05/26/dtplyr_benchmarks/).
+
+- Sintaxe: o `dplyr` é um dos pacotes principais do `tidyverse`, `data.table` é mais fiel à sintaxe do R puro. `dplyr` foi feito para ser usado com pipes, imita a sintaxe dos verbos de SQL, já o `data.table` traz novas features à sintaxe comum do R.
+
+Antes de explorar o `data.table` e o `dtplyr`, nenhum dos dois pacotes é absolutamente melhor do que o outro. Embora o `data.table` seja mais veloz e consuma menos memória que o `dplyr`, os códigos escritos nesse framework exigem uma sintaxe específica. Pelo tempo, o `data.table` tem uma vantagem, mas uma sintaxe `dplyr` pode ser compreendida por interpretadores de `SQL` ou até mesmo `spark`. Além disso, códigos `dplyr` são compatíveis com outros frameworks `tidy`, tal como o pacote `tidyr`, o pacote `purrr` etc. Essas diferenças podem diminuir o valor da eficiência do `data.table`: se o **computador** gasta menos tempo executando um comando, mas **você** gasta mais o seu tempo (ou o de outras **pessoas**), a eficiência valeu a pena? É importante considerar o contexto.
+
+# O pacote `data.table` e o pacote `dtplyr`
+
+A ideia básica do `data.table` é incluir muitas funcionalidades ao operador `[`. Um `data.frame` transformado em um `data.table` passa a funcionar da seguinte maneira:
+
+```{r}
+library(data.table)
+
+DTvoos <- data.table(dados::voos)
+
+DTvoos[
+  mes == "9",
+  # antes da primeira vírgula podemos fazer filtros
+  .(valor = mean(atraso_saida, na.rm = TRUE)),
+  # depois da segunda vírgula podemos manipular colunas:
+  # aqui podemos fazer seleções e também podemos criar
+  # novas colunas. a seleção funciona que nem o "["
+  # normal. para criar colunas nomeadas, precisamos
+  # usar a notação ".()"
+  #
+  # na verdade, no segundo elemento podemos colocar também uma função que retorne uma tibble
+  # inclusive existem vários helpers para usar aqui, como o .N, que conta o numero de linhas
+  # da tibble agrupada, .SD, que permite fazermos manipulações mais complexas
+  # nos pedacos da base etc
+  by = .(origem)
+  # na terceira vírgula, podemos fazer contas agrupadas usando o parâmetro "by"
+  # que fica disponível uma vez que fazemos "library(data.table)". Para escolher
+  # as funções que serão usadas no agrupamento sem aspas, precisamos usar a
+  # notação
+]
+
+```
+
+Embora a notação do `.()` seja bem diferente do que normalmente fazemos em `dplyr`, a lógica do pacote é similar:
+as operacoes são separadas em filtros, manipulações e agrupamentos. As manipulações nas colunas podem ser bastante variadas e isso é um ponto de divergência importante entre o `dplyr` e o `data.table`, mas também é verdade que existem várias similaridades. Por isso existe o pacote `dtplyr:`
+
+# Traduzindo `dplyr` para `data.table`: o pacote `dtplyr`
+
+A lógica aqui é simples: como o `data.table` e o `dplyr` são minimamente parecidos, muitos códigos `dplyr` podem ser traduzidor para `data.table` e as computações podem ser feitas só apos a tradução. Dê uma olhada no código abaixo,
+que os dados que vieram de base e a chamada que foi feita usando o `data.table`:
+
+```{r}
+library(dtplyr)
+library(magrittr)
+library(dplyr)
+library(tidyr)
+
+voos2 <- lazy_dt(dados::voos)
+# esse aqui é o pulo do gato. um `lazy_dt` vai sempre traduzir
+# os verbos do dplyr para comandos `DT`
+
+voos2 %>%
+  group_by(origem) %>%
+  summarise(
+    valor = mean(atraso_saida, na.rm = TRUE)
+  )
+```
+
+Claro que existem situações em que a tradução não será possível, principalmente quando tentarmos usar funções do pacote
+`tidyr` que não tem suporte no `dtplyr`. Por outro lado, para grande parte das manipulações simples que fazemos com `dplyr`, o pacote `dtplyr` vai dar conta.
+
+# Comparações e considerações finais
+
+Então, o que a gente deve usar corriqueiramente? Essa pergunta evidentemente não tem uma resposta única, pois como já observamos aqui a ferramenta melhor para resolver um problema depende do contexto em que você está. Entretanto, temos algumas vantagens em usar o `dtplyr` quando é possível, pois ele é agnóstico. Além disso, ele tem vantagens como deixar explícito na sintaxe a ordem em que os comandos de um `data.table` são executados, o que não acontece no próprio `data.table`, que depende de conhecimento sobre o funcionamento interno do código.
+
+De toda forma, existe espaço pra todo mundo e certamente quem programa em R se beneficia de conhecer os dois pacotes!
+
+# Gostou? Quer saber mais?
+
+Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso [R para Ciência de Dados I](https://curso-r.com/cursos/r4ds-1/) e aproveite!
+
+Caso você tenha dúvidas, entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail contato@curso-r.com.

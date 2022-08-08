@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto</title>
+  <meta name="title" content="Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto">
+  <meta name="description" content="Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito, muito rápido!">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-04-01-acessar-cnpj/">
+  <meta property="og:title" content="Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto">
+  <meta property="og:description" content="Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito, muito rápido!">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/RECEITA.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-04-01-acessar-cnpj/">
+  <meta property="twitter:title" content="Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto">
+  <meta property="twitter:description" content="Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito, muito rápido!">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/RECEITA.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/RECEITA.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Fernando">Fernando</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            1 de
+            abril de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/rfb">rfb</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/banco-de-dados">banco de dados</a></li>
+        </ul>
+        <article class="content">
+          
+            
+
+
+<p>Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito, muito rápido!</p>
+<p>É um tutorial super simples, de 2 passinhos, que surgiu no contexto de uma pergunta feita lá <a href="https://discourse.curso-r.com/t/raspagem-cnpj-inscricao-e-situacao-cadastral/1084/9">no nosso Discourse</a>. Inclusive, recomendamos que vocês frequentem o nosso fórum, pois muitas dicar de ouro surgem nas conversar que rolam por lá.</p>
+<p>Vamos então ao nosso tutorial:</p>
+<div id="passo-1-baixe-o-banco-de-dados-em-formato-sqlite." class="section level1">
+<h1>Passo 1: Baixe o banco de dados em formato SQLite.</h1>
+<p>SQLite é uma tecnologia muito conveniente para aproveitar as qualidades de um sistema de gerenciamento de banco de dados sem precisar instalar muitos programas ou configurar passos muito complexos. Ao contrário de outras tecnologias, como MySQL por exemplo, SQLite permite que, sem muito trabalho, você consiga fazer queries em uma base grande como a da receita federal e recuperar a resposta para dentro do R. Por isso, nesse nosso tutorial enxuto vamos utilizar essa tecnologia.</p>
+<p>Para simplificar a nossa vida, o querido George Santiago <a href="https://github.com/georgevbsantiago/qsacnpj">disponibiliza para a comunidade</a> um pacote feito de R para processar todos os dados brutos da RFB e uma versão em SQLite dessa mesma base. Sendo assim, como a comunidade já fez uma grande parte do trabalho, o que resta para nós é baixar a base em SQLite <a href="https://bit.ly/3cRruVw">por este link</a>.</p>
+</div>
+<div id="passo-2-acesse-a-base-usando-o-combo-de-pacotes-dbirsqlitedplyr" class="section level1">
+<h1>Passo 2: Acesse a base usando o combo de pacotes <code>DBI</code>+<code>RSQLite</code>+<code>dplyr</code></h1>
+<p>O passo final é usar a infraestrutura do pacote <code>DBI</code> e <code>dplyr</code> para acessar a base SQLite que baixamos no passo anterior. Entretanto, antes de fazer isso, vamos fazer um pequeno tratamento nos nossos CNPJs para que eles saiam do formato padrão 13.347.016/0001-17 para o formato que de armazenamento na base da RFB “13347016000117”. Você pode consultar o código que faz esse procedimento nas linhas abaixo:</p>
+<pre class="r"><code>#install.packages(&quot;stringr&quot;)
+
+lista_de_cnpjs &lt;- c(
+  &#39;13.347.016/0001-17&#39;,
+) %&gt;% 
+  stringr::str_remove_all(&quot;[:punct:]&quot;) %&gt;% 
+  # remove pontuações, tais como &quot;,&quot;, &quot;.&quot; e &quot;-&quot;
+  stringr::str_pad(pad = &quot;0&quot;, width = 14, side = &quot;left&quot;)
+  # caso o CNPJ tenha menos do que 14 digitos, preenche o CNPJ com 0s à esquerda</code></pre>
+<p>Depois dessa limpeza, temos só mais um passo a executar. Precisamos nos conectar com a base de dados em SQLite e utilizar esse vetor de CNPJs como filtro:</p>
+<pre class="r"><code>#install.packages(&quot;RSQLite&quot;)
+#install.packages(&quot;dplyr&quot;)
+
+con &lt;- DBI::dbConnect(RSQLite::SQLite(), &quot;bd_dados_qsa_cnpj.db&quot;)
+# conecta o R ao banco de dados
+
+dados_cadastrais &lt;- dplyr::tbl(con, &quot;cnpj_dados_cadastrais_pj&quot;) %&gt;% 
+  # carrega a tabela de dados cadastrais
+  dplyr::filter(cnpj %in% local(lista_de_cnpjs)) %&gt;% 
+  # filtra as linhas da tabela &quot;cnpj_dados_cadastrais_pj&quot; que estejam no vetor &quot;lista_de_cnpjs&quot;
+  dplyr::collect() %&gt;% 
+  # carrega o resultado da consulta para o R</code></pre>
+<p>ACABOU! Caso você queira consultar mais CNPJs, basta aumentar a lista de documentos lá no vetor <code>lista_de_cnpjs</code>. Bacana, né? Esperamos esses passos tenham tomado só um minuto mesmo. Deixe o seu comentário aí embaixo se demorou mais.</p>
+</div>
+<div id="código-completo" class="section level1">
+<h1>Código completo</h1>
+<p>Para que você consiga sair usando esse código por aí, vamos colocar aqui embaixo o código completo, com todos as partes juntas. Boa sorte!</p>
+<pre class="r"><code>#install.packages(&quot;DBI&quot;)
+#install.packages(&quot;RSQLite&quot;)
+#install.packages(&quot;dplyr&quot;)
+
+con &lt;- DBI::dbConnect(RSQLite::SQLite(), &quot;bd_dados_qsa_cnpj.db&quot;)
+# conecta o R com o SQLite que baixamos
+
+lista_de_cnpjs &lt;- c(
+  &#39;13.347.016/0001-17&#39;,
+  # aqui você insere os CNPJs que quer consultar
+) %&gt;% 
+  stringr::str_remove_all(&quot;[:punct:]&quot;) %&gt;% 
+  # remove pontuações
+  stringr::str_pad(pad = &quot;0&quot;, width = 14, side = &quot;left&quot;)
+  # deixa todos os documento com o mesmo comprimento
+
+cnpj &lt;- dplyr::tbl(con, &quot;cnpj_dados_cadastrais_pj&quot;)
+# acessa a tabela &quot;cnpj_dados_cadastrais_pj&quot;
+
+dados_cadastrais &lt;- dplyr::cnpj %&gt;% 
+  # carrega a tabela de dados cadastrais
+  dplyr::filter(cnpj %in% local(lista_de_cnpjs)) %&gt;% 
+  # filtra as linhas da tabela &quot;cnpj_dados_cadastrais_pj&quot; que estejam no vetor &quot;lista_de_cnpjs&quot;
+  dplyr::collect()
+  # carrega o resultado da consulta para o R</code></pre>
+</div>
+<div id="gostou-quer-saber-mais" class="section level1">
+<h1>Gostou? Quer saber mais?</h1>
+<p>Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso <a href="https://curso-r.com/cursos/r4ds-1/">R para Ciência de Dados I</a> e aproveite!</p>
+<p>Caso você tenha dúvidas entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail <a href="mailto:contato@curso-r.com" class="email">contato@curso-r.com</a>.</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Tutorial: {rlang} para Filhotes</title>
+  <meta name="title" content="Tutorial: {rlang} para Filhotes">
+  <meta name="description" content="Um tutorial sobre {rlang} que vai do básico ao avançado. Zero to hero!">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-07-27-rlang-para-filhotes/">
+  <meta property="og:title" content="Tutorial: {rlang} para Filhotes">
+  <meta property="og:description" content="Um tutorial sobre {rlang} que vai do básico ao avançado. Zero to hero!">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/filhote.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-07-27-rlang-para-filhotes/">
+  <meta property="twitter:title" content="Tutorial: {rlang} para Filhotes">
+  <meta property="twitter:description" content="Um tutorial sobre {rlang} que vai do básico ao avançado. Zero to hero!">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/filhote.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/filhote.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Tutorial: {rlang} para Filhotes</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            27 de
+            julho de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/rlang">rlang</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/tidy">tidy</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/tidyverse">tidyverse</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Este é um tutorial sobre o pacote <code>{rlang}</code>, um dos mais poderosos e menos
+conhecidos do R. Ele é vital para a notação compacta do <code>{tidyverse}</code>, conhecida
+como <strong>tidy eval</strong>, mas mesmo assim poucas pessoas sabem como ele funciona e
+como utilizá-lo para criar funções no estilo tidy.</p>
+<p>O tutorial não é curto, mas fizemos o nosso melhor para começar com calma e
+terminar com colinhas para facilitar o uso deste material no dia a dia. Se for
+necessário, leia e releia uma mesma seção para ter certeza de que o conceito
+apresentado foi completamente absorvido. No caso de dúvidas, entre em contato
+conosco e com o resto da comunidade R no nosso
+<a href="https://discourse.curso-r.com/">Discourse</a>.</p>
+<p>Se estiver com preguiça, deixei uma colinha no final do post. Mas, para os
+corajosos, preparem-se para alguns novos conceitos de programação, vários
+filhotes de cachorro e muito <code>{rlang}</code>!</p>
+<div id="o-melhor-amigo-do-r" class="section level2">
+<h2>O melhor amigo do R</h2>
+<p>A analogia que vamos usar para explicar o <code>{rlang}</code> gira em torno de um parque
+repleto de filhotes fofinhos. Nós temos uma única missão nesse parque: fazer
+carinho nos cachorros. Para isso, temos uma função <code>carinho()</code> que recebe o nome
+de um filhote e imprime uma frase explicando em quem estamos fazendo carinho. O
+objeto que descreve o filhote se resume a uma string com a sua cor.</p>
+<pre class="r"><code>rex &lt;- &quot;laranja&quot;
+carinho(rex)</code></pre>
+<pre><code>#&gt; Fazendo carinho no filhote laranja</code></pre>
+<p>Para facilitar a compreensão do código, vamos também ilustrar esse cenário. Na
+figura abaixo, note que é criado um objeto <code>rex</code> que recebe a figura de um
+filhote laranja. A função <code>carinho()</code> é retratada como uma mão parada que,
+quando executada, retorna uma mão fazendo carinho no filhote de cor apropriada
+(essencialmente a string retornada pelo código acima).</p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/01_pat_rex.webp" style="display: block; margin: auto;" /></p>
+<div id="expressões" class="section level3">
+<h3>Expressões</h3>
+<p>Agora que temos uma base sólida para a analogia, podemos introduzir o primeiro
+conceito importante do <code>{rlang}</code>: <strong>expressões</strong>. Uma expressão no R não passa
+do código antes antes que ele seja avaliado, ou seja, aquilo que você escreve e
+que, depois de executado no console do RStudio, se torna um resultado. Em quase
+100% dos casos, o R não faz nenhuma distinção entre a expressão e o valor que
+ela retorna, de modo que executar <code>carinho(rex)</code> fica equivalente a executar
+<code>carinho("laranja")</code>. Esse comportamento é chamado de <strong>avaliação ansiosa</strong>,
+justamente porque o R avalia cada parte da expressão tão cedo quanto for
+possível.</p>
+<p>Essa, entretanto, não é única forma de avaliação. Também é possível capturar uma
+expressão, “impedindo” o R de avaliá-la, em um processo denominado <strong>avaliação
+preguiçosa</strong>. A função do <code>{rlang}</code> que faz isso se chama <code>expr()</code> e ela retorna
+a expressão passada, vulgo o código escrito.</p>
+<pre class="r"><code>e &lt;- expr(carinho(max))
+e</code></pre>
+<pre><code>#&gt; carinho(max)</code></pre>
+<p>Veja que não importa que não existe ainda um filhote chamado <code>max</code>! Como estamos
+lidando apenas com uma expressão sem contexto, isso é perfeitamente possível.</p>
+<p>Voltando para o nosso parque de cachorros, a avaliação preguiçosa se torna quase
+uma promessa de fazer carinho em um filhote. Temos toda a informação necessária
+(no caso, o nome do filhote), mas não transformamos isso na ação de fazer
+carinho: não “chamamos o filhote para perto” para acariciá-lo. Perceba que na
+figura abaixo não há as marcas de movimento da mão, pois estamos congelando a
+cena antes de o filhote vir até nós.</p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/02_expr.webp" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ambientes" class="section level3">
+<h3>Ambientes</h3>
+<p>Na nossa analogia, o próximo conceito representa o parque em si, um lugar onde
+há uma correspondência entre nomes de cachorros. No R, um <strong>ambiente</strong> funciona
+como um dicionário que contém definições de objetos acompanhados pelos valores
+que eles carregam.</p>
+<p>Abaixo, vamos “trazer” dois novos cachorros para o parque, ou seja, criar dois
+novos objetos. A função <code>env_print()</code> mostra todas as correspondências presentes
+no ambiente (incluindo a da função <code>carinho()</code>), além de algumas informações
+extras que não nos interessam agora.</p>
+<pre class="r"><code>max &lt;- &quot;marrom&quot;
+dex &lt;- &quot;bege&quot;
+env_print()</code></pre>
+<pre><code>#&gt; &lt;environment: global&gt;
+#&gt; parent: &lt;environment: package:rlang&gt;
+#&gt; bindings:
+#&gt;  * rex: &lt;chr&gt;
+#&gt;  * e: &lt;language&gt;
+#&gt;  * mtcars: &lt;tibble[,11]&gt;
+#&gt;  * carinho: &lt;fn&gt;
+#&gt;  * dex: &lt;chr&gt;
+#&gt;  * max: &lt;chr&gt;</code></pre>
+<p>Na analogia, estamos colocando os cachorros <code>max</code> e <code>dex</code> no parque, permitindo
+que possamos eventualmente fazer carinho neles. Vamos apenas ignorar a definição
+da função <code>carinho()</code> para que isso não atrapalhe o resto da explicação.</p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/03_env.webp" style="display: block; margin: auto;" /></p>
+<p>Perceba que o resultado da avaliação de uma expressão depende completamente do
+ambiente. Na hora de executar um código, o R procura as definições de todos os
+objetos no ambiente e os substitui dentro da expressão. Agora vamos ver o que
+aconteceria se tentássemos fazer carinho no filhote chamado <code>max</code> em outro
+parque…</p>
+</div>
+<div id="avaliando-expressões" class="section level3">
+<h3>Avaliando expressões</h3>
+<p><strong>Avaliação nua</strong> (<em>bare evaluation</em> no original) é o processo pelo qual o
+<code>{rlang}</code> permite que forneçamos explicitamente um ambiente no qual avaliar uma
+expressão. É como se pudéssemos escolher o parque no qual vamos chamar um
+filhote para acariciá-lo.</p>
+<p>No código abaixo vamos visitar um outro parque, isto é, criar uma função. O
+ambiente dentro de uma função herda as definições do ambiente global, mas
+podemos fazer alterações lá dentro que não são propagadas para fora. Vide a
+função abaixo: <code>p()</code> define um objeto <code>max</code> com a cor verde e avalia (ou seja,
+executa) uma expressão lá dentro.</p>
+<pre class="r"><code>p &lt;- function(x) {
+  max &lt;- &quot;verde&quot;
+  eval_tidy(x)
+}</code></pre>
+<p>Seguindo a analogia dos filhotes, é como se visitássemos um outro parque onde há
+um cachorro chamado <code>max</code> cuja cor é verde (além dos outros dois cachorros que
+já havíamos visto no parque antigo).</p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/04_fun.webp" style="display: block; margin: auto;" /></p>
+<p>Como a função <code>eval_tidy()</code>, por padrão, utiliza o ambiente corrente para
+avaliar expressões, então <code>p(e)</code> deve indicar carinho em um filhote verde e
+não mais em um filhote marrom. Note que, apesar de não estarmos passando um
+ambiente explicitamente para a <code>eval_tidy()</code>, ela está obtendo esse ambiente
+através de <code>caller_env()</code>, o valor padrão para seu argumento <code>env</code>.</p>
+<pre class="r"><code>p(e)</code></pre>
+<pre><code>#&gt; Fazendo carinho no filhote verde</code></pre>
+<p>Na ilustração a seguir vemos o que aconteceria no nosso parque. Apesar de
+estarmos chamando o nome do cachorro marrom, como estamos em outro parque (uma
+nova função), o cachorro que responderá ao chamado aqui é verde!</p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/05_eval_expr.webp" style="display: block; margin: auto;" /></p>
+</div>
+<div id="quosures" class="section level3">
+<h3>Quosures</h3>
+<p>Agora que você entende o que é uma expressão, o que é um ambiente e como podemos
+avaliar uma expressão dentro de um ambiente, chegou a hora de entender a
+estrutura mais importante do <code>{rlang}</code>: as <strong>quosures</strong>. Esse nome estranho vem
+de <em>quote</em> e <em>closure</em>, dois conceitos extremamente importantes da Ciência da
+Computação, mas explicar o que eles significam foge do escopo deste tutorial.</p>
+<p>Uma quosure, apesar de parecer um conceito complexo, não passa de uma expressão
+que carrega um apontador para seu ambiente consigo. Isso não parece ser muito
+útil, mas é a quosure que permite que as funções do <code>{tidyverse}</code> sejam capazes
+de acessar as colunas de uma tabela e variáveis declaradas no ambiente global.</p>
+<pre class="r"><code>q &lt;- quo(carinho(max))
+q</code></pre>
+<pre><code>#&gt; &lt;quosure&gt;
+#&gt; expr: ^carinho(max)
+#&gt; env:  global</code></pre>
+<p>Pensando nos filhotes, uma quosure é a promessa de fazer carinho em um cachorro
+sabendo exatamente o endereço do parque em que ele estava Note que, na saída
+acima, o <code>env</code> se chama “global”, justamente porque estamos trabalhando
+diretamente na sessão base do R.</p>
+<p>Na figura abaixo, juntamente da cena retratada na ilustração sobre expressões,
+vemos um qualificador de <code>max</code>, especificando onde devemos encontrar ele. Isso
+é significativamente diferente de simplesmente gritar pelo <code>max</code> mais próximo.</p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/06_quo.webp" style="display: block; margin: auto;" /></p>
+</div>
+<div id="avaliando-quosures" class="section level3">
+<h3>Avaliando quosures</h3>
+<p>Assim como utilizamos a avaliação nua para obter o resultado de uma expressão em
+um certo ambiente, podemos usar a <strong>avaliação tidy</strong> (de <em>tidy evaluation</em>) para
+obter o resultado de uma quosure no ambiente que ela carrega.</p>
+<p>Aqui, depois de capturar a quosure, podemos fazer o que quisermos com o ambiente
+na qual avaliaremos ela, pois o único ambiente que importará na avaliação tidy
+é o de seu ambiente de origem. Sendo assim, perceba que o argumento <code>env</code> de
+<code>eval_tidy()</code> não foi levado em conta!</p>
+<pre class="r"><code>p(q)</code></pre>
+<pre><code>#&gt; Fazendo carinho no filhote marrom</code></pre>
+<p>É difícil traduzir esse processo para a analogia dos filhotes, mas seria algo
+como voltar para o endereço do parque original antes de fazer carinho no filhote
+cujo nome é <code>max</code>.</p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/07_eval_quo.webp" style="display: block; margin: auto;" /></p>
+</div>
+<div id="bang-bang" class="section level3">
+<h3>Bang-bang</h3>
+<p>A peça final do quebra-cabeça do <code>{rlang}</code> é o <strong>bang-bang</strong>, também conhecido
+como quasiquotation e expresso na forma de duas exclamações: <code>!!</code>. Essa
+funcionalidade, exclusiva ao <code>{rlang}</code>, permite que façamos uma “avaliação
+ansiosa seletiva” em uma expressão ou quosure. Em breve ficará mais claro onde
+isso pode ser útil, mas antes é necessário ver como usar o bang-bang na prática.</p>
+<p>O bang-bang “força” a avaliação de uma parte da expressão, liberando o R para
+fazer parte do seu trabalho de avaliação ansiosa. Veja, no código abaixo, como
+funciona a captura de uma expressão que usa o bang-bang. Atente-se para o fato
+de que, na seção anterior, alteramos o valor de <code>max</code>.</p>
+<pre class="r"><code>expr(carinho(!!max))</code></pre>
+<pre><code>#&gt; carinho(&quot;marrom&quot;)</code></pre>
+<p>Na analogia dos filhotes, o bang-bang está essencialmente chamando um cachorro
+pelo nome antes que façamos carinho nele. Ao invés do contorno branco que vimos
+nas ilustrações sobre expressões e quosures, agora vemos a mão parada ao lado de
+um filhote específico.</p>
+<p><img src="/images/posts/conteudo/2021-07-16-rlang-para-filhotes/08_bang_bang.webp" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="de-volta-para-casa" class="section level2">
+<h2>De volta para casa</h2>
+<p>Apesar de termos visto um pouco de código R na sessão anterior, agora é
+necessário aprofundar um pouco os exemplos. Prometo que não será nada muito
+difícil, mas é impossível entender como aplicar o <code>{rlang}</code> no mundo real sem
+ver alguns casos de uso.</p>
+<p>Na maior parte das ocasiões, não usaremos nenhuma das funções vistas até agora,
+salvo pelo bang-bang (que na verdade não é uma função, mas sim uma sintaxe). O
+principal uso do <code>{rlang}</code>, na verdade, é capturar código que o <strong>usuário</strong>
+escreve, então é necessário conhecer novas versões de <code>expr()</code> e <code>quo()</code> que são
+capazes de capturar expressões e quosures vindas de fora de uma função.</p>
+<div id="enriquecimento" class="section level3">
+<h3>Enriquecimento</h3>
+<p>O conceito de <strong>enriquecimento</strong> vem de uma analogia meio ruim criada pelo autor
+do <code>{rlang}</code>; para simplificar, pense que as versões enriquecidas de <code>expr()</code> e
+<code>quo()</code> são mais “fortes” que as versões normais, sendo capazes de sair de
+dentro de uma função para capturar expressões do lado de fora.</p>
+<p>Abaixo é possível ver uma função que tenta capturar o nome de um filhote, mas é
+incapaz de fazê-lo por causa da avaliação ansiosa do R. O correto seria capturar
+a expressão escrita pelo usuário e imprimí-la como uma string.</p>
+<pre class="r"><code>nome1 &lt;- function(filhote) {
+  cat(&quot;O nome do filhote é&quot;, filhote)
+}
+nome1(dex)</code></pre>
+<pre><code>#&gt; O nome do filhote é bege</code></pre>
+<p>Podemos ver a versão correta da função desejada em <code>nome2()</code>. Ela captura a
+expressão do usuário com <code>enexpr()</code> (a versão enriquecida de <code>expr()</code>) e
+converte esse objeto em uma string com <code>expr_text()</code>, permitindo que a função
+imprima o nome do filhote.</p>
+<pre class="r"><code>nome2 &lt;- function(filhote) {
+  nome &lt;- enexpr(filhote)
+  cat(&quot;O nome do filhote é&quot;, expr_text(nome))
+}
+nome2(dex)</code></pre>
+<pre><code>#&gt; O nome do filhote é dex</code></pre>
+<p>Como não havia necessidade nenhuma de capturar o ambiente do usuário nesse
+exemplo, usamos apenas <code>enexpr()</code>. Na maioria das situações, entretanto, é
+preciso usar <code>enquo()</code> para obter o comportamento correto. Já que quosures
+incluem expressões, <code>expr()</code> e <code>enexpr()</code> quase nunca são estritamente
+necessárias, então vamos simplificar tudo e seguir apenas com as quosures.</p>
+<p>No código abaixo a função <code>explica()</code> precisa tanto da expressão quanto do
+ambiente da mesma, ou seja, da quosure escrita pelo usuário.</p>
+<pre class="r"><code>explica &lt;- function(acao) {
+  quosure &lt;- enquo(acao)
+  cat(&quot;`&quot;, quo_text(quosure), &quot;` retorna:\n&quot;, sep = &quot;&quot;)
+  eval_tidy(quosure)
+}
+explica(carinho(dex))</code></pre>
+<pre><code>#&gt; `carinho(dex)` retorna:
+#&gt; Fazendo carinho no filhote bege</code></pre>
+<p>Preste bastante atenção em <code>explica()</code>, pois pode ser que não seja fácil
+entender como ela funciona. A primeira função utilizada é a <code>enquo()</code> (<code>quo()</code>
+enriquecida), que captura a expressão do usuário juntamente com o seu ambiente.
+A seguir, temos apenas que converter a quosure em string com <code>quo_text()</code> para
+poder imprimí-la. O último passo é avaliar a quosure para obter um resultado
+exatamente igual ao que o usuário obteria se decidisse executar a expressão
+passada como argumento.</p>
+</div>
+<div id="curly-curly" class="section level3">
+<h3>Curly-curly</h3>
+<p>A combinação da <code>enquo()</code> com o bang-bang é justamente a forma correta de
+implementar funções que trabalham com o <code>{tidyverse}</code>. A função <code>summarise()</code>,
+por exemplo, não passa de um <code>enquo()</code> disfarçado, o que quer dizer que podemos
+usar o bang-bang para “injetar” o nome de uma variável dentro de um cálculo.</p>
+<pre class="r"><code>media1 &lt;- function(df, var) {
+  summarise(df, resultado = mean(var))
+}
+media1(mtcars, cyl)</code></pre>
+<pre><code>#&gt; Error: Problem with `summarise()` column `resultado`.
+#&gt; ℹ `resultado = mean(var)`.
+#&gt; x object &#39;cyl&#39; not found</code></pre>
+<p>O código acima, que não usa bang-bang, retorna um erro. O problema é que a
+<code>summarise()</code> está tentando tirar a média de um objeto chamado <code>var</code>, que
+carrega um objeto chamado <code>cyl</code>, que simplesmente não existe no ambiente global.
+Abaixo, usando bang-bang e <code>enquo()</code>, o código funciona como esperado porque
+<code>mean(!!var)</code> se torna <code>mean(cyl)</code> dentro da <code>summarise()</code>.</p>
+<pre class="r"><code>media2 &lt;- function(df, var) {
+  var &lt;- enquo(var)
+  summarise(df, resultado = mean(!!var))
+}
+media2(mtcars, cyl)</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 1
+#&gt;   resultado
+#&gt;       &lt;dbl&gt;
+#&gt; 1      6.19</code></pre>
+<p>O <code>{tidyverse}</code> nos fornece um atalho para essa combinação poderosa de <code>enquo()</code>
+com <code>!!</code>: o <code>{{ }}</code>, mais conhecido como <strong>curly-curly</strong>. Agora que você já
+entende exatamente o que está acontecendo por trás dos panos, saber onde usar o
+curly-curly é mais fácil.</p>
+<pre class="r"><code>media3 &lt;- function(df, var) {
+  summarise(df, resultado = mean({{var}}))
+}
+media3(mtcars, cyl)</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 1
+#&gt;   resultado
+#&gt;       &lt;dbl&gt;
+#&gt; 1      6.19</code></pre>
+</div>
+<div id="splice" class="section level3">
+<h3>Splice</h3>
+<p>A penúltima funcionalidade do <code>{rlang}</code> a compreender é o conceito de <strong>splice</strong>
+(“emendar” em português), que se manifesta nas versões pluralizadas das funções
+apresentadas até agora. Essencialmente, <code>expr()/enexpr</code> e <code>quo()/enquo()</code> só
+conseguem lidar com uma única expressão ou quosure, então temos outras versões
+para trabalhar com múltiplas expressões ou quosures.</p>
+<p>Na prática, a principal função que utilizaremos é <code>enquos()</code>. Ela captura todo o
+conteúdo de uma <strong>elipse</strong> e o transforma em uma lista de quosures como no
+exemplo abaixo. As versões plurais também acompanham o <strong>bang-bang-bang</strong>, o
+irmão com splice do bang-bang.</p>
+<pre class="r"><code>media4 &lt;- function(df, ...) {
+  vars &lt;- enquos(...)
+  summarise(df, across(c(!!!vars), mean))
+}
+media4(mtcars, cyl, disp, hp)</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 3
+#&gt;     cyl  disp    hp
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  6.19  231.  147.</code></pre>
+<p>Se você não estiver familiarizado com a <code>across()</code>, basta saber apenas que o
+primeiro argumento é um vetor de colunas (similar ao que passaríamos para
+<code>select()</code>) e o segundo é uma função para utilizar no resumo das colunas
+especificadas. Aqui o <code>!!!</code> está apenas transformando a chamada em
+<code>across(c(cyl, disp, hp), mean)</code>.</p>
+</div>
+<div id="símbolos" class="section level3">
+<h3>Símbolos</h3>
+<p>Existe ainda um conceito que não abordamos até agora: <strong>símbolos</strong>. Um símbolo
+não passa do nome de um objeto, ou seja, <code>rex</code>, <code>max</code> e <code>dex</code> na analogia dos
+filhotes; mais especificamente, um símbolo é uma expressão com algumas
+restrições sobre o seu conteúdo. A função <code>sym()</code>, especificamente, transforma
+uma string em um símbolo, permitindo que ela seja usada junto com outras
+expressões.</p>
+<pre class="r"><code>media6 &lt;- function(df, var) {
+  var &lt;- ensym(var)
+  summarise(df, resultado = mean(!!var))
+}
+media6(mtcars, &quot;cyl&quot;)</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 1
+#&gt;   resultado
+#&gt;       &lt;dbl&gt;
+#&gt; 1      6.19</code></pre>
+</div>
+<div id="miscelânea" class="section level3">
+<h3>Miscelânea</h3>
+<p>Fora os vários conceitos já apresentados, restam apenas duas breves
+considerações para praticamente zerar o <code>{rlang}</code>:</p>
+<ol style="list-style-type: decimal">
+<li><p>O curly-curly funciona com strings, mas não com splice, então a família
+<code>sym()</code> torna-se quase desnecessária juntamente com o <code>!!</code> ao mesmo tempo em
+que o <code>!!!</code> permanece essencial.</p></li>
+<li><p>Há um operador específico (<code>:=</code>, chamado de <strong>morsa</strong>) para quando
+precisamos forçar a execução de algo no lado esquerdo de um cálculo, mesmo
+quando usando o curly-curly.</p></li>
+</ol>
+<pre class="r"><code>media7 &lt;- function(df, col, ...) {
+  args &lt;- enquos(...)
+  summarise(df, {{col}} := mean(!!!args))
+}
+media7(mtcars, &quot;nova_coluna&quot;, drat, na.rm = TRUE)</code></pre>
+<pre><code>#&gt; # A tibble: 1 × 1
+#&gt;   nova_coluna
+#&gt;         &lt;dbl&gt;
+#&gt; 1        3.60</code></pre>
+</div>
+</div>
+<div id="de-volta-para-o-trabalho" class="section level2">
+<h2>De volta para o trabalho</h2>
+<p>Depois de tanto conteúdo, agora você consegue entender as colinhas que
+apresentamos abaixo para facilitar o seu uso do <code>{rlang}</code> no dia-a-dia. Ao final
+também deixamos as referências deste tutorial para que você possa aprofundar
+ainda mais os seus conhecimentos de tidy eval.</p>
+<div id="vocabulário" class="section level3">
+<h3>Vocabulário</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Vocábulo
+</th>
+<th style="text-align:left;">
+Tradução
+</th>
+<th style="text-align:left;">
+Significado
+</th>
+<th style="text-align:left;">
+Código
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Ambiente
+</td>
+<td style="text-align:left;">
+<em>Environment</em>
+</td>
+<td style="text-align:left;">
+Dicionário de nomes e valores
+</td>
+<td style="text-align:left;">
+<code>env()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Avaliação ansiosa
+</td>
+<td style="text-align:left;">
+<em>Eager evaluation</em>
+</td>
+<td style="text-align:left;">
+Avaliação de todo objeto o mais rápido possível
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Avaliação nua
+</td>
+<td style="text-align:left;">
+<em>Bare evaluation</em>
+</td>
+<td style="text-align:left;">
+Avaliação que necessita de um ambiente passado explicitamente
+</td>
+<td style="text-align:left;">
+<code>eval_tidy(e)</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Avaliação preguiçosa
+</td>
+<td style="text-align:left;">
+<em>Lazy evaluation</em>
+</td>
+<td style="text-align:left;">
+Avaliação de cada objeto conforme a necessidade
+</td>
+<td style="text-align:left;">
+<code>quo()</code>, etc.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Avaliação tidy
+</td>
+<td style="text-align:left;">
+<em>Tidy evaluation</em>
+</td>
+<td style="text-align:left;">
+Avaliação que utiliza o ambiente da quosure
+</td>
+<td style="text-align:left;">
+<code>eval_tidy(q)</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bang-bang
+</td>
+<td style="text-align:left;">
+<em>Bang-bang</em>
+</td>
+<td style="text-align:left;">
+Operador utilizado para forçar a avaliação de um objeto
+</td>
+<td style="text-align:left;">
+<code>!!</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bang-bang-bang
+</td>
+<td style="text-align:left;">
+<em>Bang-bang-bang</em>
+</td>
+<td style="text-align:left;">
+Operador utilizado para forçar a avaliação de vários objetos
+</td>
+<td style="text-align:left;">
+<code>!!!</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Curly-curly
+</td>
+<td style="text-align:left;">
+<em>Curly-curly</em>
+</td>
+<td style="text-align:left;">
+Atalho para <code>enquo()</code> + <code>!!</code>
+</td>
+<td style="text-align:left;">
+<code>{{ }}</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Elipse
+</td>
+<td style="text-align:left;">
+<em>Ellipsis</em>
+</td>
+<td style="text-align:left;">
+Argumento de uma funcão que pode receber múltiplas entradas
+</td>
+<td style="text-align:left;">
+<code>...</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Enriquecimento
+</td>
+<td style="text-align:left;">
+<em>Enriching</em>
+</td>
+<td style="text-align:left;">
+Processo que permite a captura de código do usuário
+</td>
+<td style="text-align:left;">
+<code>enquo()</code>, etc.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Expressão
+</td>
+<td style="text-align:left;">
+<em>Expression</em>
+</td>
+<td style="text-align:left;">
+Código R antes de avaliado
+</td>
+<td style="text-align:left;">
+<code>expr()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Morsa
+</td>
+<td style="text-align:left;">
+<em>Walrus</em>
+</td>
+<td style="text-align:left;">
+Operador utilizado para permitir expressões do lado esquerdo de uma igualdade
+</td>
+<td style="text-align:left;">
+<code>:=</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Quosure
+</td>
+<td style="text-align:left;">
+<em>Quosure</em>
+</td>
+<td style="text-align:left;">
+Expressão que carrega seu ambiente consigo
+</td>
+<td style="text-align:left;">
+<code>quo()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Símbolo
+</td>
+<td style="text-align:left;">
+<em>Symbol</em>
+</td>
+<td style="text-align:left;">
+Expressão que pode representar apenas o nome de um objeto
+</td>
+<td style="text-align:left;">
+<code>sym()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Splice
+</td>
+<td style="text-align:left;">
+<em>Splice</em>
+</td>
+<td style="text-align:left;">
+Processo que permite a captura de múltiplas expressões, etc.
+</td>
+<td style="text-align:left;">
+<code>quos()</code>, etc.
+</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+<div id="principais-funções" class="section level3">
+<h3>Principais funções</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Objeto
+</th>
+<th style="text-align:left;">
+Simples
+</th>
+<th style="text-align:left;">
+Enriquecido
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Símbolo
+</td>
+<td style="text-align:left;">
+<code>sym()/syms()</code>
+</td>
+<td style="text-align:left;">
+<code>ensym()/ensyms()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Expressão
+</td>
+<td style="text-align:left;">
+<code>expr()/exprs()</code>
+</td>
+<td style="text-align:left;">
+<code>enexpr()/enexprs()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Quosure
+</td>
+<td style="text-align:left;">
+<code>quo()/quos()</code>
+</td>
+<td style="text-align:left;">
+<code>enquo()/enquos()</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="principais-padrões" class="section level3">
+<h3>Principais padrões</h3>
+<p>Os padrões incluem dois exemplos que não foram explicados durante o tutorial.
+Para saber mais, consulte as referências no final do texto.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Descrição
+</th>
+<th style="text-align:left;">
+Usuário
+</th>
+<th style="text-align:left;">
+Programador
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Expressão do lado esquerdo
+</td>
+<td style="text-align:left;">
+<code>media(df, col)</code>
+</td>
+<td style="text-align:left;">
+<code>{{col}} := mean(var)</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Expressão do lado direito
+</td>
+<td style="text-align:left;">
+<code>media(df, var)</code>
+</td>
+<td style="text-align:left;">
+<code>col = mean({{var}})</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Expressões do lado direito
+</td>
+<td style="text-align:left;">
+<code>media(df, var, arg1 = 0)</code>
+</td>
+<td style="text-align:left;">
+<code>col = mean(!!!var)</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Expressões no meio
+</td>
+<td style="text-align:left;">
+<code>agrupar(df, var1, var2)</code>
+</td>
+<td style="text-align:left;">
+<code>group_by(df, ...)</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Símbolo do lado esquerdo
+</td>
+<td style="text-align:left;">
+<code>media(df, &amp;quot;col&amp;quot;)</code>
+</td>
+<td style="text-align:left;">
+<code>{{col}} := mean(var)</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Símbolo do lado direito
+</td>
+<td style="text-align:left;">
+<code>media(df, &amp;quot;var&amp;quot;)</code>
+</td>
+<td style="text-align:left;">
+<code>col = mean(.data$var)</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="referências" class="section level3">
+<h3>Referências</h3>
+<ul>
+<li><p><a href="https://adv-r.hadley.nz/metaprogramming.html"><em>Advanced R: Metaprogramming</em></a></p></li>
+<li><p><a href="https://rlang.r-lib.org/">Documentação do <code>{rlang}</code></a></p></li>
+<li><p><a href="https://www.youtube.com/watch?v=o5_Df-btuD4"><em>Programando com o tidyverse: introdução ao pacote rlang</em></a></p></li>
+<li><p><a href="https://dplyr.tidyverse.org/articles/programming.html"><em>Programming with dplyr</em></a></p></li>
+<li><p><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/tidyeval.pdf"><em>Tidy evaluation with rlang: Cheat Sheet</em></a></p></li>
+<li><p><a href="https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html"><em>Using ggplot2 in packages</em></a></p></li>
+</ul>
+</div>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

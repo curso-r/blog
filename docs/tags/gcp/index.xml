@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gcp on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/gcp/</link>
+    <description>Recent content in gcp on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shiny em Produção: Deploy seu App em 20min</title>
+      <link>https://blog.curso-r.com/posts/2019-09-06-app-deploy/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-06-app-deploy/</guid>
+      <description>Quando você for capaz de tranformar um shiny app em pacote e em imagem de docker, só 20 minutos são necessários para fazer um deploy na nuvem.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,236 @@
+---
+title: "Magic no R com {scryr}"
+date: "2022-01-07"
+tags: ["mtg", "scryr"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/scryr.webp"
+author: ["Caio"]
+summary: "Um pacote em R para acessar o Scryfall, uma API de Magic: The Gathering"
+type: "featured"
+featuredImage: "images/featured-post/feat-magic.jpg"
+---
+
+[scryr](https://github.com/curso-r/scryr) é uma interface em R para o
+[Scryfall](https://scryfall.com/), uma API incrível (e grátis!) de _Magic: The
+Gathering_. Com o scryr você pode transformar dados de cartas em drata frames
+nativos, permitindo integração imediata com qualquer fluxo tidy.
+
+Atualmente há 2 famílias de funções principais: `cards` e `sets`. As outras 4
+(`bulk_data`, `catalogs`, `rulings`, e `symbols`) são majoritariamente
+auxiliares.
+
+```r
+# Instalar o scryr
+install.packages("scryr")
+
+# Carregar o scryr com o dplyr
+library(dplyr)
+library(scryr)
+```
+
+## Cartas
+
+Essa família é, de longe, a mais complicada de entender. Antes de usá-la,
+lembre-se de ler a documentação completa da
+[`scry_cards()`](https://curso-r.github.io/scryr/reference/scry-cards.html)!
+Para os curiosos, outras informações relevantes podem ser encontradas em
+[`vignette("syntax")`](https://curso-r.github.io/scryr/articles/syntax.html)
+(_Query Syntax_) e em
+[`vignette("layouts")`](https://curso-r.github.io/scryr/articles/layouts.html)`
+(_Layouts and Faces_).
+
+A função mais importante aqui é
+[`scry_cards()`](https://curso-r.github.io/scryr/reference/scry-cards.html). Ela
+retorna um data frame de cartas dada uma busca.
+
+```r
+# Vampiros lendários
+vampires <- scry_cards("t:vampire t:legend")
+
+# Há muitas, muitas colunas
+print(vampires)
+#> # A tibble: 48 × 70
+#>    id         name     set   lang  colors color_identity mana_cost   cmc
+#>    <chr>      <chr>    <chr> <chr> <list> <list>         <chr>     <dbl>
+#>  1 913dd06f-… Anje Fa… c19   en    <chr … <chr [2]>      {1}{B}{R}     3
+#>  2 1bfac4ab-… Anje, M… vow   en    <chr … <chr [2]>      {2}{B}{R}     4
+#>  3 b8630ae1-… Anowon,… voc   en    <chr … <chr [1]>      {3}{B}{B}     5
+#>  4 bca84fc4-… Anowon,… znc   en    <chr … <chr [2]>      {2}{U}{B}     4
+#>  5 e811f37a-… Arvad t… dom   en    <chr … <chr [2]>      {3}{W}{B}     5
+#>  6 213ad4ba-… Ascenda… hop   en    <chr … <chr [1]>      {4}{B}{B}     6
+#>  7 e5fb44d7-… Baron S… me1   en    <chr … <chr [1]>      {5}{B}{B…     8
+#>  8 487e843f-… Crovax … tpr   en    <chr … <chr [1]>      {2}{B}{B}     4
+#>  9 2c58ce5e-… Drana, … c17   en    <chr … <chr [1]>      {3}{B}{B}     5
+#> 10 31d0c37f-… Drana, … jmp   en    <chr … <chr [1]>      {1}{B}{B}     3
+#> # … with 38 more rows, and 62 more variables: oracle_text <chr>,
+#> #   power <chr>, toughness <chr>, type_line <chr>, edhrec_rank <int>,
+#> #   keywords <list>, layout <chr>, legalities <list>, oversized <lgl>,
+#> #   reserved <lgl>, oracle_id <chr>, mtgo_id <int>,
+#> #   multiverse_ids <list>, tcgplayer_id <int>, cardmarket_id <int>,
+#> #   uri <chr>, scryfall_uri <chr>, rulings_uri <chr>,
+#> #   prints_search_uri <chr>, artist <chr>, artist_ids <list>, …
+```
+
+Note que várias colunas são list-columns com dados aninhados. Isso é uma
+consequência do modelo de dados do Scryfall e é a principal razão do scryr
+precisar de tibbles para funcionar. Mas não se preocupe! Todos os dados são
+consistentes e bem documentados.
+
+```r
+# Pegar cartas relacionadas a Anje
+vampires %>%
+  filter(name == "Anje, Maid of Dishonor") %>%
+  pull(all_parts)
+#> [[1]]
+#> # A tibble: 2 × 6
+#>   object       id         component  name     type_line   uri
+#>   <chr>        <chr>      <chr>      <chr>    <chr>       <chr>
+#> 1 related_card 1bfac4ab-… combo_pie… Anje, M… Legendary … https://api.s…
+#> 2 related_card a6f374bc-… token      Blood    Token Arti… https://api.s…
+
+# Pegar a identidade de cor da Anje
+vampires %>%
+  filter(name == "Anje Falkenrath") %>%
+  pull(color_identity)
+#> [[1]]
+#> [1] "B" "R"
+```
+
+Também há várias funções "no singular", ou seja, funções que retornam 1 carta ao
+invés de muitas. Elas são
+[`scry_card()`](https://curso-r.github.io/scryr/reference/scry-cards.html) e
+suas irmãs, todos métodos que encontram uma carta dado um certo identificador.
+
+```r
+# Usando ID
+scry_card("913dd06f-ed2f-4128-9c9d-9cd0d8a55425")$name
+#> [1] "Anje Falkenrath"
+
+# Usando nome
+scry_card_name("Anje Falkenrath")$name
+#> [1] "Anje Falkenrath"
+
+# Usando um número de colecionador e um set
+scry_card_number(37, "c19")$name
+#> [1] "Anje Falkenrath"
+
+# Pegar um commander vampiro aleatório
+scry_card_random("t:vampire t:legend")$name
+#> [1] "Vito, Thorn of the Dusk Rose"
+```
+
+Se você não tiver certeza de qual carta você está procurando, não se preocupe. O
+Scryfall também tem um endpoint que tenta autocompletar o nome de uma carta e o
+scryr disponibiliza isso para que você nem precise sair do R para procurar uma
+carta.
+
+```r
+# Olha lá ela
+autocomplete_name("falken")[12]
+#> [1] "Anje Falkenrath"
+```
+
+## Sets
+
+A outra família principal retorna informações sobre sets. De novo há muitas
+list-columns, mas, novamente, todas são tratadas consistentemente; seguindo
+`cards`, `sets` também tem uma função "plural" e uma função "singular". Note que
+[`scry_cards()`](https://curso-r.github.io/scryr/reference/scry-cards.html) é a
+única que pode filtrar seus resultados com o argumento `q`.
+
+```r
+# Pegar todos os sets
+scry_sets()
+#> # A tibble: 721 × 19
+#>    id     code  name  uri   scryfall_uri search_uri released_at set_type
+#>    <chr>  <chr> <chr> <chr> <chr>        <chr>      <date>      <chr>
+#>  1 a6012… tunf  Unfi… http… https://scr… https://a… 2022-04-01  token
+#>  2 b314f… unf   Unfi… http… https://scr… https://a… 2022-04-01  funny
+#>  3 b11b2… pw22  Wiza… http… https://scr… https://a… 2022-03-05  promo
+#>  4 5bd03… tnec  Neon… http… https://scr… https://a… 2022-02-18  token
+#>  5 8bb11… tneo  Kami… http… https://scr… https://a… 2022-02-18  token
+#>  6 5b4d9… nec   Neon… http… https://scr… https://a… 2022-02-18  command…
+#>  7 59a20… neo   Kami… http… https://scr… https://a… 2022-02-18  expansi…
+#>  8 78a7f… cc2   Comm… http… https://scr… https://a… 2022-01-28  command…
+#>  9 5c163… dbl   Inni… http… https://scr… https://a… 2022-01-28  draft_i…
+#> 10 8a673… y22   Alch… http… https://scr… https://a… 2021-12-09  expansi…
+#> # … with 711 more rows, and 11 more variables: card_count <int>,
+#> #   parent_set_code <chr>, digital <lgl>, nonfoil_only <lgl>,
+#> #   foil_only <lgl>, icon_svg_uri <chr>, tcgplayer_id <int>,
+#> #   mtgo_code <chr>, arena_code <chr>, block_code <chr>, block <chr>
+
+# Pegar um único set com um código
+scry_set("vow")
+#> # A tibble: 1 × 19
+#>   id    code  name  mtgo_code arena_code tcgplayer_id uri   scryfall_uri
+#>   <chr> <chr> <chr> <chr>     <chr>             <int> <chr> <chr>
+#> 1 8144… vow   Inni… vow       vow                2862 http… https://scr…
+#> # … with 11 more variables: search_uri <chr>, released_at <date>,
+#> #   set_type <chr>, card_count <int>, printed_size <int>,
+#> #   digital <lgl>, nonfoil_only <lgl>, foil_only <lgl>,
+#> #   block_code <chr>, block <chr>, icon_svg_uri <chr>
+```
+
+## Outras Famílias
+
+Todas as outras famílias retornam muito menos informações do que as acima. Deixo
+vocês com uma pequena demontração do que o resto do scryr pode fazer:
+
+```r
+# Pegar informações de um catálogo
+head(scry_catalog("keyword-actions"))
+#> [1] "Meld"        "Bolster"     "Clash"       "Fateseal"
+#> [5] "Manifest"    "Monstrosity"
+
+# Pegar regras de uma carta
+scry_ruling("913dd06f-ed2f-4128-9c9d-9cd0d8a55425")
+#> # A tibble: 1 × 4
+#>   oracle_id                            source published_at comment
+#>   <chr>                                <chr>  <date>       <chr>
+#> 1 4dab6a96-4376-4aea-983d-406167993214 wotc   2019-08-23   If you disca…
+
+# Pegar informações sobre símbolos
+scry_symbols()
+#> # A tibble: 34 × 11
+#>    symbol colors   cmc loose_variant english           gatherer_alterna…
+#>    <chr>  <list> <dbl> <chr>         <chr>             <list>
+#>  1 {X}    <NULL>   0   X             X generic mana    <chr [2]>
+#>  2 {Y}    <NULL>   0   Y             Y generic mana    <NULL>
+#>  3 {Z}    <NULL>   0   Z             Z generic mana    <NULL>
+#>  4 {0}    <NULL>   0   0             zero mana         <chr [1]>
+#>  5 {½}    <NULL>   0.5 ½             one-half generic… <chr [1]>
+#>  6 {1}    <NULL>   1   1             one generic mana  <chr [1]>
+#>  7 {2}    <NULL>   2   2             two generic mana  <chr [1]>
+#>  8 {3}    <NULL>   3   3             three generic ma… <chr [1]>
+#>  9 {4}    <NULL>   4   4             four generic mana <chr [1]>
+#> 10 {5}    <NULL>   5   5             five generic mana <chr [1]>
+#> # … with 24 more rows, and 5 more variables: transposable <lgl>,
+#> #   represents_mana <lgl>, appears_in_mana_costs <lgl>, funny <lgl>,
+#> #   svg_uri <chr>
+
+# Processar um custo de mana
+parse_cost("2g2")$cost
+#> [1] "{4}{G}"
+
+# Pegar nomes dos arquivos de massa
+scry_bulk_files()$name
+#> [1] "Oracle Cards"   "Unique Artwork" "Default Cards"  "All Cards"
+#> [5] "Rulings"
+
+# Baixar (e processar) todas as regras da base do Scryfall
+scry_bulk_file("Rulings")
+#> # A tibble: 44,486 × 4
+#>    oracle_id                            source published_at comment
+#>    <chr>                                <chr>  <date>       <chr>
+#>  1 0004ebd0-dfd6-4276-b4a6-de0003e94237 wotc   2004-10-04   If there ar…
+#>  2 0007c283-5b7a-4c00-9ca1-b455c8dff8c3 wotc   2019-08-23   The "comman…
+#>  3 0007c283-5b7a-4c00-9ca1-b455c8dff8c3 wotc   2019-08-23   Certain car…
+#>  4 0007c283-5b7a-4c00-9ca1-b455c8dff8c3 wotc   2019-08-23   If your com…
+#>  5 000e5d65-96c3-498b-bd01-72b1a1991850 wotc   2004-10-04   The target …
+#>  6 0012bc78-e69d-4a67-a302-e5fe0dfd4407 wotc   2019-05-03   A land norm…
+#>  7 00187de2-bc48-4137-97d8-a9a0fafc76c1 wotc   2019-01-25   You can alw…
+#>  8 00187de2-bc48-4137-97d8-a9a0fafc76c1 wotc   2019-01-25   Pteramander…
+#>  9 00187de2-bc48-4137-97d8-a9a0fafc76c1 wotc   2019-01-25   If a creatu…
+#> 10 001c6369-df13-427d-89df-718d5c09f382 wotc   2009-05-01   Vedalken He…
+#> # … with 44,476 more rows
+```

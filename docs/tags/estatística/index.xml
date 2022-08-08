@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>estatística on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/estat%C3%ADstica/</link>
+    <description>Recent content in estatística on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/estat%C3%ADstica/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Probabilidade e medida: intuição</title>
+      <link>https://blog.curso-r.com/posts/2019-03-10-probabilidade/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-03-10-probabilidade/</guid>
+      <description>Esse é um post de matemática. Mesmo se você não curte essa faceta da ciência de dados, encorajo vocês a lerem e estudarem esse assunto. Nesse texto vou usar um pouco de teoria dos conjuntos e introduzir a teoria da medida, que é a base matemática de tudo que sabemos sobre probabilidade.</description>
+    </item>
+    
+    <item>
+      <title>Suavização exponencial simples com R</title>
+      <link>https://blog.curso-r.com/posts/2019-02-10-ses/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-02-10-ses/</guid>
+      <description>Nesse post vamos implementar o método de suavização exponencial simples com R.</description>
+    </item>
+    
+    <item>
+      <title>Regressão logística: aspectos computacionais</title>
+      <link>https://blog.curso-r.com/posts/2018-11-18-logistica-comp/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-11-18-logistica-comp/</guid>
+      <description>Nesse post vamos discutir um pouco sobre regressão logística, tensorflow e modelos lineares generalizados.</description>
+    </item>
+    
+    <item>
+      <title>Estatística e programação</title>
+      <link>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</link>
+      <pubDate>Sat, 09 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</guid>
+      <description>Neste post, encerraremos a nossa série sobre aprendizado e educação discutindo a importância da programação dentro da Estatística.</description>
+    </item>
+    
+    <item>
+      <title>Matrizes Esparsas no R</title>
+      <link>https://blog.curso-r.com/posts/2017-11-16-matrizes-esparsas/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-16-matrizes-esparsas/</guid>
+      <description>Matrizes esparsas são matrizes em que a maior parte dos elementos é igual a zero. Existem maneiras muito eficientes de lidar com esse tipo de matrizes no R e é disso que vamos falar neste post.</description>
+    </item>
+    
+    <item>
+      <title>Aprendendo assuntos difíceis</title>
+      <link>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</link>
+      <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</guid>
+      <description>Uma breve reflexão sobre o preconceito de estudar assuntos difíceis.</description>
+    </item>
+    
+    <item>
+      <title>Tidy Data, Teste T Pareado e Modelos Mistos</title>
+      <link>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-10-27-tidy-data-mixed-models/</guid>
+      <description>O que teste t-pareado, modelos mistos e tidy data podem ter a ver? Veja neste post como a estrutura dos seus dados pode afetar a forma que você fará a sua análise.</description>
+    </item>
+    
+    <item>
+      <title>Por que amar Estatística?</title>
+      <link>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</link>
+      <pubDate>Thu, 31 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</guid>
+      <description>Neste post, vou contar como me apaixonei pela Estatística.</description>
+    </item>
+    
+    <item>
+      <title>Eu, a Estatística e a programação</title>
+      <link>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</link>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</guid>
+      <description>Neste post, iniciarei uma série com algumas reflexões sobre temas que orbitam o ensino de Estatística e a importância da programação na vida do estatístico.</description>
+    </item>
+    
+  </channel>
+</rss>

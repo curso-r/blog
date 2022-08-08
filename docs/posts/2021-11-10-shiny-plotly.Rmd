@@ -1,0 +1,139 @@
+---
+title: "Gráficos no Shiny: plotly"
+date: "2021-11-10"
+tags: ["shiny", "gráficos", "plotly"]
+categories: ["pacotes"]
+image: "images/posts/banner/plotly.webp"
+author: ["William"]
+summary: "Transforme seu ggplot em um gráfico animado e intertativo."
+---
+
+Muitas vezes, o destino dos nossos gráficos é um Word ou PDF. Nesses casos, independentemente se vamos ler o documento no computador ou na versão impressa, os gráficos precisam ser uma imagem estática. E então o pacote `ggplot2` brilha.
+
+— Leia mais: [Gráficos no Shiny: ggplot2](https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/)
+
+Quando estamos construindo páginas ou aplicações Web (ou apresentações de slides em HTML), além de gráficos em formato de imagem, podemos construir visualizações utilizando bibliotecas JavaScript, que permitem animações e possuem diversas funcionalidades interativas, como *tooltips*, filtros, zoom e drilldrown.
+
+Neste post, vamos falar da biblioteca `plotly`, que permite transformarmos rapidamente nossos gráficos feitos com `ggplot2` em gráficos animados e interativos.
+
+## O pacote plotly
+
+Antes de mais nada, precisamos instalar o pacote `plotly`.
+
+```{r, eval = FALSE}
+install.packages("plotly")
+```
+
+A função mais legal desse pacote é a `plotly::ggplotly()`. Com ela transformamos facilmente um `ggplot` em um gráfico `plotly`.
+
+```{r, message=FALSE, warning = FALSE}
+library(ggplot2)
+library(plotly)
+
+p <- mtcars |> 
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point()
+
+ggplotly(p)
+```
+
+Veja que esse gráfico possui um visual muito parecido com o do `ggplot` e, além disso,
+
+- mostra uma *tooltip* quando passamos o cursor em cima de um ponto
+
+- permite selecionar uma área do gráfico para dar zoom;
+
+- e possui uma barra de ferramentas que nos permite aumentar e diminuir o zoom, focar em regiões do gráfico e baixar o gráfico como uma imagem estática.
+
+No exemplo a seguir, além das funcionalidades acima, também podemos clicar na legenda para adicionar ou remover grupos de pontos do gráfico.
+
+```{r}
+library(ggplot2)
+library(plotly)
+
+p <- mtcars |> 
+  ggplot(aes(x = wt, y = mpg, color = as.character(cyl))) +
+  geom_point()
+
+ggplotly(p)
+```
+
+Para controlar o que aparece na *tooltip*, podemos usar o parâmetro `tooltip`. Veja que adicionamos o modelo do carro e passamos por meio do aes `text`. O tema escolhido para o ggplot é respeitado pelo plotly.
+
+```{r}
+library(ggplot2)
+library(plotly)
+
+p <- mtcars |> 
+  tibble::rownames_to_column() |> 
+  ggplot(aes(x = wt, y = mpg, color = as.character(cyl), text = rowname)) +
+  geom_point() +
+  theme_minimal()
+
+ggplotly(p, tooltip = c("x", "y", "text"))
+```
+
+Também podemos construir um gráfico diretamente pelo `plotly`, mas isso exige aprendermos a sintaxe do pacote `plotly` e as opções disponíveis da biblioteca `Plotly`.
+
+```{r}
+plot_ly(mtcars, x = ~wt, y = ~mpg, type = "scatter", mode = "markers")
+```
+
+Para aprender mais sobre como fazer gráficos diretamente no `plotly`, confira o [tutorial oficial da biblioteca](https://plotly.com/r/getting-started/#next-steps).
+
+## No Shiny
+
+Para adicionar um plotly no Shiny, criado a partir da função `ggplotly()` ou da função `plot_ly()`, utilizamos o par de funções `plotly::plotlyOutput()` e `plotly::renderPlotly()`. Na função `renderPlotly()`, basta passarmos um código que retorne um gráfico `plotly`, utilizando os `inputs` para especificar as variáveis.
+
+Rode o app abaixo para ver um exemplo.
+
+```{r, eval = FALSE}
+library(shiny)
+library(ggplot2)
+
+vars <- names(mtcars)
+
+ui <- fluidPage(
+  titlePanel("Plotly"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "x",
+        "Eixo x",
+        choices = vars
+      ),
+      selectInput(
+        "y",
+        "Eixo y",
+        choices = vars,
+        selected = vars[2]
+      )
+    ),
+    mainPanel(
+      plotly::plotlyOutput("plot")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  output$plot <- plotly::renderPlotly({
+    p <- mtcars |>
+      tibble::rownames_to_column() |>
+      ggplot(aes(
+        x = .data[[input$x]],
+        y = .data[[input$y]],
+        text = rowname
+      )) +
+      geom_point() +
+      theme_minimal()
+
+    plotly::ggplotly(p)
+  })
+}
+
+shinyApp(ui, server)
+```
+
+É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
+
+Até a próxima!

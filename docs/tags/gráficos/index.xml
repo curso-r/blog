@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gráficos on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/gr%C3%A1ficos/</link>
+    <description>Recent content in gráficos on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Tue, 16 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/gr%C3%A1ficos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gráficos no Shiny: echarts</title>
+      <link>https://blog.curso-r.com/posts/2021-11-11-shiny-echarts/</link>
+      <pubDate>Tue, 16 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-11-shiny-echarts/</guid>
+      <description>Conheça uma ótima opção para fazer gráficos interativos.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos no Shiny: plotly</title>
+      <link>https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/</link>
+      <pubDate>Wed, 10 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/</guid>
+      <description>Transforme seu ggplot em um gráfico animado e intertativo.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos no Shiny: ggplot2</title>
+      <link>https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/</link>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/</guid>
+      <description>Unindo dois dos melhores pacotes do R.</description>
+    </item>
+    
+    <item>
+      <title>3 Dicas de Rmarkdown que você precisa saber</title>
+      <link>https://blog.curso-r.com/posts/2021-03-18-dicas-de-rmarkdown-que-voce-precisa-conhecer/</link>
+      <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-03-18-dicas-de-rmarkdown-que-voce-precisa-conhecer/</guid>
+      <description>RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos lindos e muito elegantes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer.</description>
+    </item>
+    
+    <item>
+      <title>Feedback dos trabalhos do R para Ciência de Dados (Parte II): Dicas para Gráficos</title>
+      <link>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</link>
+      <pubDate>Thu, 17 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</guid>
+      <description>Comentamos algumas dicas sobre elaboração de gráficos em relatórios. Ilustração sobre o pacote ggplot2, criada por Allison Horst.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos miojo: Mapas temáticos do Brasil em 3 minutos ou menos</title>
+      <link>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</guid>
+      <description>Impressionar é muito mais fácil se você usa mapas. Neste post vamos aprender a construir mapas temáticos do Brasil com muita agilidade.</description>
+    </item>
+    
+    <item>
+      <title>Diagramas de Venn em R</title>
+      <link>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</link>
+      <pubDate>Sat, 29 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-29-diagramas-de-venn/</guid>
+      <description>Diagramas de Venn são representações eficientes das conjuntas de quantidades moderadas de variáveis binárias. Neste post você vai aprender a construir os principais tipos de diagramas de Venn que estão implementados em R.</description>
+    </item>
+    
+    <item>
+      <title>O que é um gráfico estatístico?</title>
+      <link>https://blog.curso-r.com/posts/2017-02-20-o-que-e-um-grafico-estatistico/</link>
+      <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-20-o-que-e-um-grafico-estatistico/</guid>
+      <description>Os gráficos são técnicas estatísticas para visualização de dados amplamente utilizados em todas as áreas da pesquisa. A sua popularidade se deve à maneira como elucidam informações que estavam escondidas nas colunas do banco de dados, sendo que muitos deles podem ser compreendidos até mesmo por leigos no assunto em questão. Mas será que podemos definir formalmente o que é um gráfico estatístico?</description>
+    </item>
+    
+    <item>
+      <title>Pacote ggalt</title>
+      <link>https://blog.curso-r.com/posts/2017-02-18-ggalt/</link>
+      <pubDate>Sat, 18 Feb 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-18-ggalt/</guid>
+      <description>O pacote &lt;code&gt;ggalt&lt;/code&gt; é uma extensão ao &lt;code&gt;ggplot2&lt;/code&gt; que permite fazer algumas coisas muito úteis. Uma delas é a possibilidade de fazer faixas de confiança para gráficos do tipo escada. Isso permite adicionar intervalos de confiança para modelos Kaplan-Meier, muito utilizados em Análise de Sobrevivência.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,91 @@
+---
+title: "Faça alinhamentos DnD no R"
+date: "2021-06-29"
+tags: ["shiny", "Dnd", "theoffice"]
+categories: ["pacotes"]
+image: "images/posts/banner/dnd.webp"
+author: ["William", "Fernando"]
+summary: "Crie imagens de alinhamentos DnD direto do R."
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE,
+  fig.align = "center",
+  out.width = "90%"
+)
+```
+
+Se você não sabe o que é DnD, já vamos tirar isso do caminho: DnD não é um novo modelo de Deep Learning. DnD é a abreviação de _Dungeons & Dragons_, um dos jogos de RPG[^sigla] mais famosos da história, considerado a origem dos RPGs modernos.
+
+[^sigla]: Sigla em inglês para _Role Playing Game_ que em português significa _Jogo de intepretação de papéis_. [RPGs](https://pt.wikipedia.org/wiki/Role-playing_game) são jogos parecidos com a encenação de uma peça de teatro, mas com regras como as de Banco Imobiliário para estruturar a interpretação de papéis.
+
+Por falta de oportunidade, eu (William) nunca joguei RPG, mas sempre fui muito fã da ideia e dos conceitos. Uma das paradas que acho mais divertidas é a dinâmica de alinhamentos do DnD. Mestre de muitas aventuras, o Fernando explica a seguir em bom português como esse alinhamento funciona.
+
+## O alinhamento DnD
+
+Em resumo, essa dinâmica diz que qualquer personagem pode ser posicionado em uma matriz de 9 posições, formadas pela combinação de dois eixos: o ético e o moral. 
+
+O lado ético possui 3 categorias: *lawful*, *neutral* e *chaotic*. Uma personagem *lawful* ou _ordeira_ é aquela que segue as leis da sociedade em que vive mesmo que isso possa contrariar suas convicções ou valores pessoais, enquanto um personagem *chaotic* ou _caótico_ se sente confortável em quebrar qualquer tipo de lei, pois faz as suas próprias regras, com pouco ou nenhum apreço pelas normas estabelecidas socialmente. Uma personagem *neutral* ou _neutra_ seria aquela que se insere dentro do conjunto de normas, mas não tem nenhuma convicção forte sobre segui-las ou não. Diferente de uma personagem ordeira, que segue à risca o que está estabelecido, ou caótica, que nega por princípio parte das regras estabelecidas, uma personagem neutra simplesmente não pensa sobre o assunto.
+
+O lado moral também possui 3 categorias: *good*, *neutral* e *evil*. Essa escala é mais fácil de explicar. São as personagens boas (*good*), más (*evil*) e aquelas que vão na onda (*neutral*). Ao contrário do nosso mundo real, a fantasia simulada em um jogo de DnD não tem espaço para relativismo moral e nuances. Uma personagem altruísta, generosa, piedosa e/ou qualquer outra característica que não causa sofrimento nenhum é enquadrada no espectro positivo da escala: ela é boa ou *good*. Já uma personagem egoísta, cruel por esporte, insensível etc é má ou *evil*. A dificuldade aqui está nos personagens *neutros*, mas a ideia é parecida com o que falamos no lado ético: esse posicionamento se define pela distância das outras possibilidades. A neutralidade se define pela ambiguidade: todas as atitudes podem ser legítimas independentemente de leis, sofrimento de outras pessoas etc, tudo depende do contexto, não de convicções fortes ou desejo pessoal. 
+
+Vamos a alguns exemplos: o herói mítico inglês _Robin Hood_ é um bom exemplo de um personagem *chaotic good*, pois ele efetivamente quebra as regras vigentes porque acredita que isso é justo (*roubar* dos ricos), mas o faz para ajudar as pessoas que mais precisam (dar aos *pobres*), um motivo altruísta. Indo para o mundo de Star Wars _Han Solo_ pode ser considerado um personagem *chaotic neutral*, pelo menos no começo da história. Ele é um contrabandista, vive sua vida quebrando sistematicamente as regras e não vê problema nisso, de onde concluímos que ele pelo menos pensou no assunto. Além disso, ele não ajuda o Luke e a Léia, personagens *neutral good*, por nenhum motivo específico. Sua única preocupação inicial é o dinheiro. Para mais exemplos, confira este [vídeo](https://www.youtube.com/watch?v=YgNQ3NXqqiQ) em inglês disponível no Youtube.
+
+Como esse sistema de alinhamentos é flexível o suficiente para enquadrar várias obras diferentes, uma moda que já surgiu e resurgiu na internet algumas vezes é fazer o alinhamento DnD de personagens de alguma série ou filme qualquer.
+
+Veja alguns exemplos de que você pode achar por aí:
+
+```{r, fig.alt = "Alinhamento DnD do Chaves.", echo=FALSE}
+knitr::include_graphics("https://i.redd.it/rjzpebymelf51.jpg")
+```
+
+
+```{r, fig.alt = "Alinhamento DnD do Game of Thrones.", echo = FALSE}
+knitr::include_graphics("https://i.pinimg.com/originals/27/54/0f/27540ff00c2297c08b7d099a0fc9aba7.jpg")
+```
+
+```{r, fig.alt = "Alinhamento DnD do Harry Potter.", echo = FALSE}
+knitr::include_graphics("https://i.pinimg.com/originals/2c/1a/0f/2c1a0f184cb9dcb214b069572d78f13e.jpg")
+```
+
+## O pacote `DnDalignment`
+
+Mesmo não sabendo o que é DnD e nunca tendo jogado RPG, o exercício de alinhar personagens nesse grid geralmemnte é bem divertido, principalmente quando você está discutindo o seu posicionamento com outras pessoas. É uma maneira bem divertida de revisitar e discutir obras que você gosta. :) 
+
+E fica ainda mais divertido se você puder fazer isso no R! :D
+
+Foi por isso que o Fernando e eu criamos o pacote `DnDalignment`. Com ele, você pode facilmente gerar uma imagem de alinhamento DnD com arquivos que estão na sua máquina ou links para imagens na interet.
+
+Antes de mais nada, instale o pacote. Ele só está disponível no GitHub.
+
+```{r, eval = FALSE}
+remotes::install_github("williamorim/DnDalignment")
+```
+
+Para criar o alinhamento, basta usar a função `DnDalignment::create_alignment()`. Cada argumento da função se refere a um alinhamento e você pode passar o caminho para uma imagem local ou o link para uma imagem na internet. 
+
+Para exemplificar, a gente criou o alinhamento dos personagens da série The Office:
+
+```{r}
+library(DnDalignment)
+
+create_alignment(
+  chaotic_good = "https://www.cheatsheet.com/wp-content/uploads/2021/04/The-Office.jpg",
+  neutral_good = "https://uploads.jovemnerd.com.br/wp-content/uploads/2021/02/the-office-jim-canta-musica-abertura.jpg",
+  chaotic_neutral = "https://img.ibxk.com.br/2021/01/20/20133848690155.png",
+  chaotic_evil = "https://www.looper.com/img/gallery/the-todd-packer-scene-in-the-office-that-went-too-far/l-intro-1620750071.jpg",
+  lawful_good = "https://static3.srcdn.com/wordpress/wp-content/uploads/2019/11/Phyllis-The-Office.jpg?q=50&fit=crop&w=740&h=370&dpr=1.5",
+  lawful_evil = "https://i.ytimg.com/vi/BWNhTOd9uXI/maxresdefault.jpg",
+  neutral_evil = "https://cdn.jwplayer.com/v2/media/46qsexlL/poster.jpg?width=720",
+  lawful_neutral = "https://uploads.jovemnerd.com.br/wp-content/uploads/2021/01/the-office-dwight-gerenta.jpg",
+  true_neutral = "https://pbs.twimg.com/media/EXlUzHzXQAEgIZt.png"
+)
+```
+
+E aí? O que achou das nossas escolhas? Se você discorda, tweet o seu alinhamento e marque a gente no Twitter: [Curso-R](https://twitter.com/curso_r), [William](https://twitter.com/wamorim_) e [Fernando](https://twitter.com/Azeloc).
+
+Até a próxima!

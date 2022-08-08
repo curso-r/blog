@@ -1,0 +1,213 @@
+---
+title: "Colocando tooltips no Shiny (e no Rmarkdown)"
+date: "2021-06-22"
+tags: ["shiny", "tooltips"]
+categories: ["tutoriais"]
+image: "images/posts/banner/tippy.webp"
+author: ["William"]
+summary: "Aprenda colocar tooltips em aplicativos Shiny e arquivos R Markdown."
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE
+)
+```
+
+*Tooltips* são uma ótima maneira de se comunicar com a pessoa utilizando o seu app, pois permitem passar todo tipo de informação extra e não ocupam espaço da UI.
+
+Essencialmente, elas são textos que só aparecem quando passamos o mouse em cima de algum elemento da tela. Por exemplo, passe o mouse em cima da frase a seguir:
+
+```{r, echo = FALSE}
+tippy::tippy("Passe o mouse aqui!", tooltip = "Olá! Eu sou uma tooltip :)")
+```
+
+<br>
+
+Existem várias soluções disponíveis para incluirmos *tooltips* em um aplicativo Shiny, mas a minha preferida atualmente é o pacote `tippy`.
+
+Antes de mais nada, instale o pacote:
+
+```{r, eval = FALSE}
+install.packages("tippy")
+```
+
+Para colocar uma *tooltip* em um elemento do seu app, basta usar a função `with_tippy()`.
+
+```{r, eval = FALSE}
+tippy::with_tippy(
+  numericInput(
+    "tamanho",
+    label = "Selecione o tamanho da amostra",
+    value = 1000,
+    step = 1000
+  ),
+  tooltip = "Amostra de uma distribuição Normal com média 0 e variância 100."
+)
+```
+
+```{r, echo = FALSE, fig.alt="Tooltip colocada em um numericInput", out.width="70%"}
+knitr::include_graphics("/images/posts/conteudo/tippy/tippy.webp")
+```
+
+Você também pode aplicar a mesma *tooltip* a vários elementos utilizando a função `tippy_class()`.
+
+```{r, eval = FALSE}
+fluidRow(
+  column(
+    width = 4,
+    div(
+      class = "valuebox-tip",
+      shinydashboard::valueBoxOutput("valor_1", width = 12)
+    )
+  ),
+  column(
+    width = 4,
+    div(
+      class = "valuebox-tip",
+      shinydashboard::valueBoxOutput("valor_2", width = 12)
+    )
+  ),
+  column(
+    width = 4,
+    div(
+      class = "valuebox-tip",
+      shinydashboard::valueBoxOutput("valor_3", width = 12)
+    )
+  ),
+  column(
+    width = 12,
+    plotOutput("grafico")
+  ),
+  tippy::tippy_class(
+    "valuebox-tip",
+    content = "Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard."
+  )
+)
+```
+
+```{r, echo = FALSE, fig.alt="Tooltip colocada em um valueBox.", out.width="90%"}
+knitr::include_graphics("/images/posts/conteudo/tippy/tippy_class.webp")
+```
+
+Você pode customizar a *tooltip* seguindo os parâmetros da [documentação oficial da biblioteca `tippy.js`](https://atomiks.github.io/tippyjs/v6/all-props/).
+
+```{r, eval = FALSE}
+tippy::tippy_class(
+  "valuebox-tip",
+  content = "Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard.",
+  arrow = TRUE,
+  placement = "left"
+)
+```
+
+```{r, echo = FALSE, fig.alt="Tooltip aparecendo no lado esquerdo do valueBox.", out.width="90%"}
+knitr::include_graphics("/images/posts/conteudo/tippy/tippy_left.webp")
+```
+
+Os fragmentos de código acima pertencem ao app a seguir. Rode o app para ver as *tooltips* em funcionamento.
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  shinyWidgets::useShinydashboard(),
+  titlePanel("Usando tooltips"),
+  sidebarLayout(
+    sidebarPanel(
+      tippy::with_tippy(
+        numericInput(
+          "tamanho",
+          label = "Selecione o tamanho da amostra",
+          value = 1000,
+          step = 1000
+        ),
+        tooltip = "Amostra de uma distribuição Normal com média 0 e variância 100."
+      )
+    ),
+    mainPanel(
+      fluidRow(
+        column(
+          width = 4,
+          div(
+            class = "valuebox-tip",
+            shinydashboard::valueBoxOutput("valor_1", width = 12)
+          )
+        ),
+        column(
+          width = 4,
+          div(
+            class = "valuebox-tip",
+            shinydashboard::valueBoxOutput("valor_2", width = 12)
+          )
+        ),
+        column(
+          width = 4,
+          div(
+            class = "valuebox-tip",
+            shinydashboard::valueBoxOutput("valor_3", width = 12)
+          )
+        ),
+        column(
+          width = 12,
+          plotOutput("grafico")
+        ),
+        tippy::tippy_class(
+          "valuebox-tip",
+          content = "Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard.",
+          arrow = TRUE,
+          placement = "left"
+        )
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  amostra <- reactive(rnorm(input$tamanho, sd = 10))
+  
+  output$valor_1 <- shinydashboard::renderValueBox({
+    shinydashboard::valueBox(
+      value = round(mean(amostra()), 1),
+      subtitle = "Média dos valores",
+      icon = icon("info-circle")
+    ) \
+  })
+  
+  output$valor_2 <- shinydashboard::renderValueBox({
+    shinydashboard::valueBox(
+      value = round(var(amostra()), 1),
+      subtitle = "Variância dos valores",
+      icon = icon("info-circle")
+    )
+  })
+  
+  output$valor_3 <- shinydashboard::renderValueBox({
+    shinydashboard::valueBox(
+      value = round(sd(amostra()), 1),
+      subtitle = "Desvio-padrão dos valores",
+      icon = icon("info-circle")
+    )
+  })
+  
+  output$grafico <- renderPlot(hist(amostra()))
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+Como mostramos no exemplo no começo do post, o você também pode colocar *tooltips* em documentos HTML gerados a partir do R Markdown. Para isso, utilize a função `tippy`.
+
+```{r}
+tippy::tippy("Passe o mouse aqui!", tooltip = "Olá! Eu sou uma tooltip :)")
+```
+
+É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
+
+Até a próxima!

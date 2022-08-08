@@ -1,0 +1,243 @@
+---
+title: "Advent of R: Dia 08"
+date: "2021-12-08"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-08.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 08."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Busca em Sete Segmentos (A)
+
+O [oitavo dia](https://adventofcode.com/2021/day/8) do AoC foi bastante difícil
+para mim. O problema começou pelo enunciado, que é longo e complexo, então
+realmente recomendo ler a versão original além do resumo que trago abaixo.
+
+Dito isso, vamos lá. O problema dizia respeito a
+[displays de sete segmentos](https://pt.wikipedia.org/wiki/Display_de_sete_segmentos),
+onde cada número é representado por um conjunto de segmentos acessos; de acordo
+com o diagrama abaixo, vemos que 0 é representado por `abcefg`, 1 é `cf` e assim
+por diante.
+
+```r
+#   0:      1:      2:      3:      4:
+#  aaaa    ....    aaaa    aaaa    ....
+# b    c  .    c  .    c  .    c  b    c
+# b    c  .    c  .    c  .    c  b    c
+#  ....    ....    dddd    dddd    dddd
+# e    f  .    f  e    .  .    f  .    f
+# e    f  .    f  e    .  .    f  .    f
+#  gggg    ....    gggg    gggg    ....
+
+#   5:      6:      7:      8:      9:
+#  aaaa    aaaa    aaaa    aaaa    aaaa
+# b    .  b    .  .    c  b    c  b    c
+# b    .  b    .  .    c  b    c  b    c
+#  dddd    dddd    ....    dddd    dddd
+# .    f  e    f  .    f  e    f  .    f
+# .    f  e    f  .    f  e    f  .    f
+#  gggg    gggg    ....    gggg    gggg
+```
+
+O desafio é que, no nosso submarino, todo os displays estão com os fios
+trocados e, para piorar, cada display tem um arranjo diferente. A entrada do
+problema é uma série de linhas como a abaixo: como os 10 dígitos são
+representados em um display específico (em qualquer ordem) e, depois da barra,
+4 dígitos que precisamos decodificar.
+
+```r
+# acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
+# cdfeb fcadb cdfeb cdbaf
+```
+
+Alguns dígitos são fáceis de identificar. Os números 1, 4, 7 e 8 usam números
+únicos de segmentos, então é possível perceber que, quando `ab` acenderam, o
+display estava tentando mostrar um 1. Seguindo a mesma lógica, `dab` é 7, `eafb`
+é 4 e `acedgfb` é 8.
+
+O objetivo do primeiro item do dia 08 era contar quantas vezes os dígitos 1, 4,
+7 e 8 aparecem nas saídas que devemos decodificar (lado direito da barra). A
+solução foi bem simples, pois bastou pivotar a tabela e filtrar as linhas que
+tinham `stringr::str_length()` igual a 2, 3, 4, ou 7.
+
+```r
+"data-raw/08a_seven_segment_search.txt" |>
+  readr::read_delim(" ", col_names = NULL) |>
+  purrr::set_names(
+    paste0("P", stringr::str_pad(1:10, 2, "left", "0")), "remove",
+    paste0("V", stringr::str_pad(1:4, 2, "left", "0"))
+  ) |>
+  dplyr::select(-remove) |>
+  dplyr::select(V01:V04) |>
+  tidyr::pivot_longer(V01:V04, names_to = "col", values_to = "value") |>
+  dplyr::filter(stringr::str_length(value) %in% c(2, 4, 3, 7)) |>
+  nrow()
+#> [1] 365
+```
+
+## Busca em Sete Segmentos (B)
+
+O verdadeiro problema veio no item 2. Aqui o exercício abandona qualquer
+pretexto de bondade e pede de uma vez para decodificarmos os dígitos depois da
+barra baseados nos 10 padrões antes da barra. A saída deveria ser a soma de
+todos os números de 4 dígitos decodificados.
+
+Minha primeira tentativa de resolver o problema testava cada segmento em cada
+posição (essencialmente verificando todos os possíveis jeitos de embaralhar os
+fios) para ver em qual das configurações os padrões faziam sentido; depois seria
+só bater os padrões com os 4 dígitos da direita para ver quem é quem. Não
+preciso nem dizer que isso seria demorado demais para funcionar.
+
+Depois de um tempo olhando para o arquivo de entrada, entretanto, me veio uma
+luz: talvez eu pudesse analisar a _frequência_ com a qual cada segmento aparece
+nos padrões. Perceba, por exemplo, que no diagrama acima o segmento `e` está
+ligado em 4 dígitos (0, 2, 6 e 8). O fato importante é que ele é o único
+segmento com essa propriedade!
+
+Partindo deste princípio, criei as seguinte regras para o código:
+
+1. O único segmento que aparecer 4 vezes nos padrões corresponderá ao `e`;
+
+2. O único segmento que aparecer 6 vezes nos padrões corresponderá ao `b`;
+
+3. O único segmento que aparecer 9 vezes nos padrões corresponderá ao `f`;
+
+4. No padrão com 2 segmentos acessos, aquele que não representar o `e`
+corresponderá ao `c` (número 1).
+
+5. No padrão com 3 segmentos acessos, aquele que não representar `c` ou `f`
+corresponderá ao `a` (número 7).
+
+6. No padrão com 4 segmentos acessos, aquele que não representar `b`, `c` ou `f`
+corresponderá ao `d` (número 4).
+
+7. O segmento que ainda não tiver correspondente corresponderá ao `g`.
+
+O resto do código cuidava de organizar as letras de cada dígito de modo que
+fosse fácil transpor as correspondências dos 10 padrões para os 4 valores das
+saídas.
+
+```r
+# Decodificar uma linha da entrada
+decode <- function(entry) {
+
+  # Encontra e quebra o padrão que tenha certa str_length()
+  find_by_len <- function(patterns, len) {
+    patterns |>
+      magrittr::extract(stringr::str_length(patterns) == len) |>
+      stringr::str_split("") |>
+      purrr::pluck(1)
+  }
+
+  # Frequências de referência
+  ref_freq <- list(
+    "a" = 8,
+    "b" = 6,
+    "c" = 8,
+    "d" = 7,
+    "e" = 4,
+    "f" = 9,
+    "g" = 7
+  )
+
+  # Valores de referência
+  ref_val <- list(
+    "abdefg" = 6,
+    "abcefg" = 0,
+    "cf" = 1,
+    "acdfg" = 3,
+    "abcdfg" = 9,
+    "abcdefg" = 8,
+    "bcdf" = 4,
+    "acf" = 7,
+    "abdfg" = 5,
+    "acdeg" = 2
+  )
+
+  # Calcular frequências desta entrada
+  cur_freq <- entry |>
+    dplyr::select(P01:P10) |>
+    purrr::flatten_chr() |>
+    stringr::str_split("") |>
+    purrr::flatten_chr() |>
+    table()
+
+  # Criar um dicionário para traduzir os segmentos
+  dict <- list()
+
+  # Traduzir segmentos com frequências únicas
+  dict[["e"]] <- names(cur_freq[cur_freq == 4])
+  dict[["b"]] <- names(cur_freq[cur_freq == 6])
+  dict[["f"]] <- names(cur_freq[cur_freq == 9])
+
+  # Extrair padrões da entrada
+  patterns <- entry |>
+    dplyr::select(P01:P10) |>
+    purrr::flatten_chr()
+
+  # Determinar segmento que falta do 1
+  one <- find_by_len(patterns, 2)
+  dict[["c"]] <- one[!one %in% purrr::flatten_chr(dict)]
+
+  # Determinar segmento que falta do 7
+  seven <- find_by_len(patterns, 3)
+  dict[["a"]] <- seven[!seven %in% purrr::flatten_chr(dict)]
+
+  # Determinar segmento que falta do 4
+  four <- find_by_len(patterns, 4)
+  dict[["d"]] <- four[!four %in% purrr::flatten_chr(dict)]
+
+  # Determinar último segmento que falta
+  dict[["g"]] <- names(cur_freq)[!names(cur_freq) %in% purrr::flatten_chr(dict)]
+
+  # Traduzir segmentos dos valores de saída
+  entry |>
+    dplyr::select(V01:V04) |>
+    purrr::flatten_chr() |>
+    stringr::str_split("") |>
+    purrr::map(~names(dict)[match(.x, dict)]) |>
+    purrr::map(sort) |>
+    purrr::map(stringr::str_c, collapse = "") |>
+    purrr::map(~purrr::flatten_chr(ref_val)[match(.x, names(ref_val))]) |>
+    purrr::flatten_chr() |>
+    as.integer() |>
+    stringr::str_c(collapse = "") |>
+    as.numeric()
+}
+
+# Ler entrada, mapear decode() e somar todas os valores de saída
+"data-raw/08b_seven_segment_search.txt" |>
+  readr::read_delim(" ", col_names = NULL) |>
+  purrr::set_names(
+    paste0("P", stringr::str_pad(1:10, 2, "left", "0")), "remove",
+    paste0("V", stringr::str_pad(1:4, 2, "left", "0"))
+  ) |>
+  dplyr::select(-remove) |>
+  tibble::rowid_to_column("id") |>
+  tidyr::nest(entry = c(P01:V04)) |>
+  dplyr::mutate(output = purrr::map_dbl(entry, decode)) |>
+  dplyr::summarise(output = sum(output)) |>
+  dplyr::pull(output)
+#> [1] 975706
+```

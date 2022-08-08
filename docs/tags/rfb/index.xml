@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rfb on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/rfb/</link>
+    <description>Recent content in rfb on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/rfb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto</title>
+      <link>https://blog.curso-r.com/posts/2021-04-01-acessar-cnpj/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-04-01-acessar-cnpj/</guid>
+      <description>Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito, muito rápido!</description>
+    </item>
+    
+    <item>
+      <title>Explorando a base de dados de CNPJ da Receita Federal</title>
+      <link>https://blog.curso-r.com/posts/2019-09-20-qsacnpj/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-20-qsacnpj/</guid>
+      <description>A base de dados de CNPJ da Receita Federal do Brasil (RFB) é, na minha opinião, uma das maiores conquistas de dados abertos do Brasil. Nesse post vou passar alguns links para ler a base e alguns gráficos simples.</description>
+    </item>
+    
+    <item>
+      <title>rfbCNPJ: Repositório de CNPJs da Receita</title>
+      <link>https://blog.curso-r.com/posts/2018-05-13-rfbcnpj/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-13-rfbcnpj/</guid>
+      <description>Durante nosso último curso de introdução a programação em R, um aluno me pediu ajuda para carregar os dados de CNPJs da Receita Federal. Eu me animei tanto com essa base que decidi montar um pacotinho para baixar ler e organizar esses dados&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

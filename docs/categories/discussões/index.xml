@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>discussões on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/categories/discuss%C3%B5es/</link>
+    <description>Recent content in discussões on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 30 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/discuss%C3%B5es/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>5 motivos para usar R</title>
+      <link>https://blog.curso-r.com/posts/2021-07-23-por-que-usar-r/</link>
+      <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-23-por-que-usar-r/</guid>
+      <description>Tanto para quem já conhece quanto pra quem ainda dá os primeiros passos, sempre é bom relembrar porque o R é tão bacana.</description>
+    </item>
+    
+    <item>
+      <title>R 4.1: o novo pipe está chegando!</title>
+      <link>https://blog.curso-r.com/posts/2021-05-06-o-novo-pipe-esta-chegando/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-06-o-novo-pipe-esta-chegando/</guid>
+      <description>Em poucos dias será oficialmente lançado o R 4.1, com seu próprio pipe embutido! Neste post falamos sobre o pipe e outras novidades que chegarão ao R em 18/05/2021.</description>
+    </item>
+    
+    <item>
+      <title>Movimento da faxina de dados</title>
+      <link>https://blog.curso-r.com/posts/2019-08-30-faxina/</link>
+      <pubDate>Wed, 18 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-30-faxina/</guid>
+      <description>A faxina de dados é uma etapa essencial do ciclo da ciência de dados, que nunca será automatizada. Seja parte desse movimento.</description>
+    </item>
+    
+    <item>
+      <title>Programando com a comunidade</title>
+      <link>https://blog.curso-r.com/posts/2019-07-15-comunidade/</link>
+      <pubDate>Mon, 19 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-15-comunidade/</guid>
+      <description>Trabalhar em grupo é difícil, mas os esforços se pagam. Aqui discuto alguns aspectos importantes para tirar proveito da melhor parte do R: a comunidade (Imagem de Allison Holst).</description>
+    </item>
+    
+    <item>
+      <title>Não use resultados de eleições para avaliar pesquisas eleitorais</title>
+      <link>https://blog.curso-r.com/posts/2018-08-31-eleitorais/</link>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-08-31-eleitorais/</guid>
+      <description>Será que a comparação de resultados de pesquisas eleitorais e resultados de eleições é correta? Nesse artigo, argumentarei que não e darei uma ideia de como as pesquisas eleitorais poderiam ser avaliadas na prática.</description>
+    </item>
+    
+    <item>
+      <title>Estatística e programação</title>
+      <link>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</link>
+      <pubDate>Sat, 09 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-12-09-estatistica-e-programacao/</guid>
+      <description>Neste post, encerraremos a nossa série sobre aprendizado e educação discutindo a importância da programação dentro da Estatística.</description>
+    </item>
+    
+    <item>
+      <title>Aprendendo assuntos difíceis</title>
+      <link>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</link>
+      <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-11-preconceitos-no-aprendizado/</guid>
+      <description>Uma breve reflexão sobre o preconceito de estudar assuntos difíceis.</description>
+    </item>
+    
+    <item>
+      <title>Por que amar Estatística?</title>
+      <link>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</link>
+      <pubDate>Thu, 31 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-31-por-que-amar-estatistica/</guid>
+      <description>Neste post, vou contar como me apaixonei pela Estatística.</description>
+    </item>
+    
+    <item>
+      <title>Eu, a Estatística e a programação</title>
+      <link>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</link>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-17-eu-a-estatistica-e-o-r/</guid>
+      <description>Neste post, iniciarei uma série com algumas reflexões sobre temas que orbitam o ensino de Estatística e a importância da programação na vida do estatístico.</description>
+    </item>
+    
+    <item>
+      <title>Quebrando CAPTCHAs - Introdução</title>
+      <link>https://blog.curso-r.com/posts/2017-06-29-captcha-intro/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-29-captcha-intro/</guid>
+      <description>Sabe aquelas imagens chatas que aparecem quando você está preenchendo um formulário ou quer acessar uma página específica, pedindo para você decifrar o texto? Isso é o que chamamos de CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart). Captchas foram criados para&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

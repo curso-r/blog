@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pacotes on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/categories/pacotes/</link>
+    <description>Recent content in pacotes on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 06 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/pacotes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pacote dados: bases em português para praticar e ensinar</title>
+      <link>https://blog.curso-r.com/posts/2022-04-06-pacote-dados/</link>
+      <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-04-06-pacote-dados/</guid>
+      <description>Quer saber como acessar várias bases de dados em Português com R?</description>
+    </item>
+    
+    <item>
+      <title>Acessando dados do seu One Drive com R</title>
+      <link>https://blog.curso-r.com/posts/2022-03-18-onedrive/</link>
+      <pubDate>Fri, 18 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-03-18-onedrive/</guid>
+      <description>Quer saber como acessar dados do One Drive com R?</description>
+    </item>
+    
+    <item>
+      <title>Acessando dados do Google Sheets com R</title>
+      <link>https://blog.curso-r.com/posts/2022-03-08-googlesheets4/</link>
+      <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-03-08-googlesheets4/</guid>
+      <description>Quer saber como acessar dados do Google Sheets e respostas de Google Forms com R?</description>
+    </item>
+    
+    <item>
+      <title>Acessando APIs com R: GitHub - Parte 1</title>
+      <link>https://blog.curso-r.com/posts/2022-02-19-api-github-1/</link>
+      <pubDate>Sat, 19 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-02-19-api-github-1/</guid>
+      <description>Segundo post sobre acesso à APIs.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos no Shiny: echarts</title>
+      <link>https://blog.curso-r.com/posts/2021-11-11-shiny-echarts/</link>
+      <pubDate>Tue, 16 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-11-shiny-echarts/</guid>
+      <description>Conheça uma ótima opção para fazer gráficos interativos.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos no Shiny: plotly</title>
+      <link>https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/</link>
+      <pubDate>Wed, 10 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/</guid>
+      <description>Transforme seu ggplot em um gráfico animado e intertativo.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos no Shiny: ggplot2</title>
+      <link>https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/</link>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/</guid>
+      <description>Unindo dois dos melhores pacotes do R.</description>
+    </item>
+    
+    <item>
+      <title>Rolando Dados com {droll}</title>
+      <link>https://blog.curso-r.com/posts/2021-08-12-droll/</link>
+      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-08-12-droll/</guid>
+      <description>Um pacote em R analisar rolagens de dados e calcular suas probabilidades</description>
+    </item>
+    
+    <item>
+      <title>Como contar dias úteis no R</title>
+      <link>https://blog.curso-r.com/posts/2021-07-16-bizdays/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-16-bizdays/</guid>
+      <description>Contar os dias entre duas datas é uma coisa facilitada pelo R, mas hoje vamos explorar um pacote que ajuda a conatr apenas os dias úteis entre duas datas</description>
+    </item>
+    
+    <item>
+      <title>Faça alinhamentos DnD no R</title>
+      <link>https://blog.curso-r.com/posts/2021-06-23-dnd/</link>
+      <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-23-dnd/</guid>
+      <description>Crie imagens de alinhamentos DnD direto do R.</description>
+    </item>
+    
+    <item>
+      <title>Animando gráficos feitos em ggplot2: o pacote gganimate</title>
+      <link>https://blog.curso-r.com/posts/2021-06-09-gganimate/</link>
+      <pubDate>Wed, 09 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-09-gganimate/</guid>
+      <description>Quer dar um upgrade nos seus gráficos e colocar uma animaçãozinha? Use o pacote gganimate!</description>
+    </item>
+    
+    <item>
+      <title>Como unir vários gráficos feitos em ggplot2: o pacote patchwork</title>
+      <link>https://blog.curso-r.com/posts/2021-05-19-patchwork/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-19-patchwork/</guid>
+      <description>Você precisa juntar vários ggplots em uma mesma figura e não sabe como fazer isso? Use o pacote patchwork!</description>
+    </item>
+    
+    <item>
+      <title>O pacote {brasileirao}</title>
+      <link>https://blog.curso-r.com/posts/2021-03-02-brasileirao/</link>
+      <pubDate>Tue, 02 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-03-02-brasileirao/</guid>
+      <description>Novo pacote com dados de todas as partidas de 2003 a 2020.</description>
+    </item>
+    
+    <item>
+      <title>Stockfish no R</title>
+      <link>https://blog.curso-r.com/posts/2020-12-18-stockfish/</link>
+      <pubDate>Fri, 18 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-12-18-stockfish/</guid>
+      <description>Um pacote R para analisar jogos de xadrez com o Stockfish</description>
+    </item>
+    
+    <item>
+      <title>Busca textual com R, Shiny e PostgreSQL</title>
+      <link>https://blog.curso-r.com/posts/2020-04-18-fts/</link>
+      <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-04-18-fts/</guid>
+      <description>Este tutorial mostrará como estruturar uma base de dados de textos no PostgreSQL, tokenizá-los e montar um índice invertido a fim de realizar buscas textuais em grande volumes de documentos em poucos segundos.</description>
+    </item>
+    
+    <item>
+      <title>Abaixo ao rvest!</title>
+      <link>https://blog.curso-r.com/posts/2020-04-09-xml2/</link>
+      <pubDate>Thu, 09 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-04-09-xml2/</guid>
+      <description>O rvest já não é mais o melhor pacote para web scraping. Está na hora de voltar para o xml2!</description>
+    </item>
+    
+    <item>
+      <title>gghighlight</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</guid>
+      <description>O gghighlight é uma das extensões do ggplot2. Este post serve como uma pequena introdução é apresentação do que é possível fazer com ele.</description>
+    </item>
+    
+  </channel>
+</rss>

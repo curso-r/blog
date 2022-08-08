@@ -1,0 +1,52 @@
+---
+title: "leaflet com markerCluster"
+date: "2017-03-01"
+tags: ["mapas", "leaflet"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/markercluster.webp"
+author: ["Julio"]
+summary: "O leaflet é uma biblioteca javascript para criação de mapas interativos. O pacote leaflet do R é um htmlwidget que permite gerar esses mapas de forma direta no R, para usar em documentos `RMarkdown` e Shiny."
+retired: false
+alternativa: ""
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, eval = FALSE)
+```
+
+O [*leaflet*](leafletjs.com) é uma biblioteca javascript para criação de mapas interativos. O pacote [`leaflet`](https://rstudio.github.io/leaflet/) do R é um [`htmlwidget`](www.htmlwidgets.org/) que permite gerar esses mapas de forma direta no R, para usar em documentos `RMarkdown` e Shiny.
+
+Uma das ferramentas que mais gosto do leaflet é a função `markerClusterOptions()`, que permite agrupar pontos no mapa em conjuntos de vários pontos.
+
+Como exemplo, utilizaremos uma base de dados que contém a localização e informações das varas da Justiça Estadual no Brasil. A tabela abaixo mostra as cinco primeiras linhas dessa base. A coluna `lab` já foi trabalhada para ser adicionada nos marcadores do mapa como popup.
+
+|muni_id |muni_nm               |       lon|       lat|
+|:-------|:---------------------|---------:|---------:|
+|1100015 |Alta Floresta D'oeste | -62.27467| -12.47017|
+|1100023 |Ariquemes             | -62.95718|  -9.95190|
+|1100031 |Cabixi                | -60.63986| -13.47489|
+|1100049 |Cacoal                | -61.32475| -11.30123|
+|1100056 |Cerejeiras            | -61.26095| -13.20351|
+
+Para utilizar o pacote `leaflet`, basta instalar o pacote via `install.packages()`. Acesse o mapa dinâmico [neste link](/posts/2017-02-21-markercluster/leaf.html). Experimente passear pelo mapa. Procure também algum lugar que tenha várias varas juntas, para ver o que o `markerCluster` faz nesse caso.
+
+```{r mapa, fig.align='center', fig.cap='Mapa das varas estaduais do Brasil.', eval=FALSE}
+library(leaflet)
+abjData::muni %>% 
+  leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(
+    lng = ~lon, 
+    lat = ~lat, 
+    popup = ~muni_nm,
+    clusterOptions = markerClusterOptions()
+  )
+```
+
+- A função `leaflet()` carrega o motor do *leaflet*, ainda em branco.
+- A função `addTiles()` adiciona as camadas de mapas de acordo com o zoom. É possível escolher temas para essas camadas.
+- A função `addMarkers()` mapeia as varas da base de dados de acordo com as respectivas latitude e longitude. 
+    - Note que é necessário adicionar um `~` antes das variáveis para mapeá-las da base de dados. 
+    - A opção `popup` permite adicionar um balão com informações ao clicar num marcador.
+    - A opção `clusterOptions` faz a mágica que agrupa os pontos. A região azul observada ao colocar o mouse sobre um cluster é a casca convexa dos marcadores agrupados.
+

@@ -1,0 +1,190 @@
+---
+title: "Ranking de jogadores de Tênis"
+date: "2022-06-05"
+tags: ["web-scraping", "visualização"]
+categories: ["análises"]
+image: "images/posts/banner/nadal.webp"
+author: ["Julio"]
+summary: "Análise do ranking dos jogadores ao longo do tempo"
+draft: false
+type: "featured"
+featuredImage: "images/featured-post/feat-tennis.jpg"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  collapse = TRUE
+)
+```
+
+## Introdução
+
+Eu gosto bastante de assistir tênis. Não sei jogar nada, mas acho bem legal ver os impressionantes feitos de pessoas como [Rafael Nadal](https://en.wikipedia.org/wiki/Rafael_Nadal) e, mais recentemente, da [Iga Swiatek](https://en.wikipedia.org/wiki/Iga_%C5%9Awi%C4%85tek).
+
+Uma coisa que eu acompanho com frequência é o ranking de esportistas. Para isso, acesso o site [Live Tennis](https://live-tennis.eu/en/atp-live-ranking), que mostra os rankings da [ATP](https://www.atptour.com/) (masculino) e da [WTA](https://www.wtatennis.com/) (feminino) de forma atualizada. 
+
+Esse site, no entanto, não mostra a projeção do ranking dos jogadores ao longo do tempo. Até existe a possibilidade de ver os pontos em uma [projeção de cinco semanas](https://live-tennis.eu/en/forecast-atp-ranking), mas para mim não é muito bom de visualizar.
+
+## Sobre os rankings do tênis
+
+Nesse esporte, o ranking de esportistas é determinado pela soma de pontos obtidos nos campeonatos oficiais determinados pela ATP e pela WTA. Os pontos zeram depois de um ano do campeonato. 
+
+Por exemplo, em 2022 o Rafael Nadal ganhou o campeonato Australian Open, somando 2000 pontos. Os pontos são zerados em 2023, um ano depois do campeonato. Ou seja, o ranking é uma forma de mostrar o desempenho das pessoas no último ano, o que na minha opinião é bem justo!
+
+Eu acho que a projeção do ranking é algo útil para ver quem está perigando cair no ranking. É claro que a projeção é meio fajuta, pois não considera os pontos que os jogadores farão se jogarem os campeonatos, mas ainda assim é legal saber. 
+
+## Download
+
+Nesse post levantei apenas os dados da ATP (masculino). Para pegar os dados, tive de acessar, manualmente, a página de cada jogador, já que o site bloqueia ferramentas automatizadas como Selenium ou mesmo requisições realizando `{httr}`. Obtive os dados de apenas 20 jogadores.
+
+Por exemplo, essa é a página do Rafael Nadal:
+
+```{r, out.width="70%", echo=FALSE}
+knitr::include_graphics("https://i.imgur.com/vTaIsHp.png")
+```
+
+## Importação
+
+Para montar as bases, escrevi um script usando o pacote `{rvest}`. Trata-se de um pacote útil para raspagem de dados, permitindo transformar tabelas HTML em dataframes do R, dentre outras coisas.
+
+
+O código para leitura dos dados ficou assim:
+
+```{r, eval=FALSE}
+parse_file <- function(arq) {
+  
+  # le o arquivo html
+  html <- rvest::read_html(arq)
+  
+  # carrega as tabelas
+  tabelas <- html |> 
+    rvest::html_table(convert = FALSE) |> 
+    magrittr::extract(-c(1,2))
+  
+  # pega os titulos dos campeonatos
+  titulos <- html |> 
+    rvest::html_elements(".module-title") |> 
+    rvest::html_text() |> 
+    stringr::str_squish() |> 
+    stringr::str_subset("^$", negate = TRUE)
+  
+  # arruma e empilha as tabelas
+  tabelas |> 
+    purrr::set_names(titulos) |> 
+    dplyr::bind_rows(.id = "type") |> 
+    dplyr::filter(!stringr::str_detect(type, "Non-Count")) |> 
+    purrr::set_names(
+      "type", "date", "tourn", "x1", "x2", "x3", "round", "points", 
+      "drop_date", "x4"
+    ) |> 
+    dplyr::select(-dplyr::starts_with("x")) |> 
+    dplyr::mutate(
+      points = readr::parse_number(points),
+      drop_date = lubridate::ymd(drop_date)
+    )
+  
+}
+```
+
+No final, temos o seguinte resultado para o Rafael Nadal:
+
+    # A tibble: 10 × 7
+       player                                              type     date  tourn round points drop_date 
+       <chr>                                               <chr>    <chr> <chr> <chr>  <dbl> <date>    
+     1 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm Grand S… 2022… Aust… W       2000 2023-01-30
+     2 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm Grand S… 2020… Rola… W       1000 2022-06-13
+     3 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm Grand S… 2019… Wimb… SF       360 2022-07-11
+     4 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm ATP Mas… 2022… ATP … F        600 2023-03-20
+     5 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm ATP Mas… 2019… ATP … W        500 2022-08-08
+     6 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm ATP Mas… 2022… ATP … QF       180 2023-05-08
+     7 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm ATP Mas… 2022… ATP … R16       90 2023-05-15
+     8 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm ATP Tou… 2022… Acap… W        500 2023-02-27
+     9 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm ATP Tou… 2021… Wash… R16       45 2022-08-08
+    10 Rafael Nadal Rankings Breakdown ATP Tour Tennis.htm Best Of… 2022… Melb… W        250 2023-01-09
+
+
+Depois de montar os dados, ainda tive de passar por uma arrumação de dados simples para obter a base completa
+
+```{r eval=FALSE}
+da_breakdown <- purrr::map_dfr(arqs, parse_file, .id = "player") |> 
+  # arruma os nomes dos arquivos para pegar o nome do jogador
+  dplyr::mutate(player = stringr::str_extract(
+    basename(player), ".*(?= Rankings)"
+  )) |> 
+  dplyr::arrange(drop_date) |> 
+  dplyr::group_by(player) |> 
+  # calcula os pontos ao longo do tempo
+  dplyr::mutate(
+    total_points = sum(points),
+    points_time = total_points - cumsum(points)
+  ) |> 
+  dplyr::ungroup()
+
+# pegar os pontos totais na data de hoje
+da_hoje <- da_breakdown |> 
+  dplyr::distinct(player, .keep_all = TRUE) |> 
+  dplyr::mutate(drop_date = Sys.Date())
+
+# empilha os dados de hoje com a projeção futura
+da_final <- dplyr::bind_rows(da_breakdown, da_hoje)
+```
+
+
+## Transformação
+
+Meu objetivo era, a partir da base de dados obtida, visualizar como fica o ranking de um jogador ao longo do tempo. Para isso, peguei o total de pontos atual do jogador e fui retirando os pontos para cada data, de modo que em uma determinada data eu tenho os pontos totais do jogador. Depois de fazer esse corte, comparamos os pontos entre jogadores e temos o ranking.
+
+O resultado foi a função `pegar_rankings()`:
+
+```{r eval=FALSE}
+pegar_rankings <- function(month) {
+  da_final |> 
+    dplyr::mutate(drop_date = lubridate::floor_date(drop_date, "month")) |> 
+    dplyr::filter(drop_date <= month) |> 
+    # pega o mínimo de pontos (ou seja, os pontos do jogador ao final do mês)
+    dplyr::arrange(points_time) |> 
+    dplyr::distinct(player, .keep_all = TRUE) |> 
+    # ordena os jogadores pelos pontos no mês
+    dplyr::mutate(
+      player = forcats::fct_reorder(player, points_time, max, .desc = TRUE),
+      ranking = as.integer(player)
+    )
+}
+```
+
+Apliquei essa função para cada mês, obtendo uma base dos rankings até o final do ano de 2022:
+
+```{r eval=FALSE}
+proximos_meses <- lubridate::floor_date(Sys.Date() + months(0:6), "month")
+rankings_tempo <- proximos_meses |> 
+  purrr::set_names() |> 
+  purrr::map_dfr(pegar_rankings, .id = "mes") |> 
+  dplyr::mutate(mes = as.Date(mes)) |> 
+  dplyr::arrange(mes, ranking)
+```
+
+## Visualização
+
+Muito bem, vamos à visualização! Meu plano foi mostrar um gráfico em que, no eixo X, temos o tempo e, no eixo Y, temos os nomes dos jogadores. As linhas do gráfico mostram o ranking dos jogadores ao longo do tempo.
+
+```{r, out.width="75%", echo=FALSE}
+knitr::include_graphics("https://i.imgur.com/b7j8DIm.png")
+```
+
+Pelo gráfico, podemos ver que, se todos os jogadores parassem de jogar agora, Nadal se tornaria o primeiro colocado por volta do mês de setembro de 2022. Isso ocorreria porque o Nadal teve uma campanha muito boa em 2022, ganhando o Australian Open e o French Open (Roland Garros). Já Novak Djokovic, atual número um do mundo (que cairá para segundo ao final de junho), teve uma excelente campanha em 2021 e uma campanha ruim em 2022. 
+
+## Comunicação
+
+Para facilitar a visualização dos dados, montei um shiny app que dá ênfase para um jogador específico escolhido.
+
+O app pode ser acessado abaixo:
+
+<iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://rseis.shinyapps.io/rankingTenis/" width="100%" height="600px"></iframe>
+
+O código com todos os scripts pode ser encontrado [neste link](https://gist.github.com/65a657c39451f645d39182a2cdcf085a);
+
+
+Gostou? Compartilhe!
+

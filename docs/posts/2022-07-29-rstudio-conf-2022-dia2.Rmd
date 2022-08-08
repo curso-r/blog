@@ -1,0 +1,81 @@
+---
+title: "rstudio::conf 2022, segundo dia de palestras"
+date: "2022-07-29"
+tags: ["evento", "rstudio::conf"]
+categories: ["Divulgação"]
+image: "images/posts/banner/rstudio-conf-2022.png"
+author: ["Julio"]
+summary: "Segundo dia do evento mais importante da RStudio/Posit em 2022!"
+draft: false
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  collapse = TRUE
+)
+```
+
+Este é o segundo post descrevendo o que aconteceu de mais legal na principal conferência da RStudio. Se você quiser acompanhar o que aconteceu no dia anterior, basta entrar [aqui](https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/).
+
+## Keynote 1: Quarto all the way across the sky
+
+
+Julia Lowndes e Mine Çentikaya-Rundel fizeram uma apresentação linda, cheia de ilustrações da Allison Horst sobre o Quarto. Mostraram como a ferramenta simplifica a construção de relatórios, apresentações e sites usando a ferramenta.
+
+A coisa mais legal que aprendi é que podemos ter documentos .qmd, .Rmd e .ipynb no mesmo site. Dessa forma, é possível que pessoas colaborem usando a ferramenta que mais se sentem confortáveis, sem precisar aprender nada novo, e o Quarto dá conta das transformações.
+
+Para quem não conhece, outra coisa muito legal é que o Quarto não tem nada a ver com o R nem a RStudio IDE. Por isso, ele pode (e já está sendo) usado em diversas plataformas diferentes como VS Code e Jupyter. Se quiser ver um exemplo legal de uso do Quarto, dê uma olhada no livro sobre Pandas, do [Wes Mckinney](https://wesmckinney.com/book/).
+
+**Obs**: sobre o título da seção, [veja esse vídeo maravilhoso](https://www.youtube.com/watch?v=MX0D4oZwCsA) que acusa minha idade.
+
+## Lightning talks
+
+As conferências de R costumam ter uma ou mais sessões das chamadas lightning talks, que são palestras de apenas 5 minutos para que as pessoas apresentem algum pacote novo ou ideia.
+
+
+Como são muitas palestras e muito rápidas, vou tentar listar as minhas favoritas abaixo.
+
+- [Pacote `{clock}`, com Davis Vaughan](https://rstudioconf2022.sched.com/event/11iZu/its-about-time?iframe=yes&w=100%&sidebar=yes&bg=no). O pacote clock já existe a algum tempo e serve para complementar algumas funcionalidades do pacote lubridate. Na sua fala, Davis mostrou um exemplo de como o clock pode ser útil, como fazer a operação "2022-01-30" + 1 mês (ou seja, o que significa 1 mês depois do dia 30 de janeiro de 2022).
+- [WebR, com George Stagg](https://rstudioconf2022.sched.com/event/123PB/webr-r-compiled-for-webassembly-and-running-in-the-browser?iframe=yes&w=100%&sidebar=yes&bg=no). Com o WebR, podemos utilizar o R diretamente no navegador, com o web assembly. Apesar das limitações e apesar de ser mais lento, parece um excelente passo para criar sistemas simples com shiny o shiny. Mas tudo isso será no futuro.
+- [GitHub Codespaces, com David Smith](https://rstudioconf2022.sched.com/event/11iag/zero-setup-r-workshops-with-github-codespaces?iframe=yes&w=100%&sidebar=yes&bg=no). David (conhecido como revodavid, por conta da Revolution Analytics, que foi adquirida pela Microsoft) apresentou sobre uma ferramenta muito legal, que permite que seja aberto um Docker diretamente de um repositório do GitHub. É muito útil para fazer o setup de ambientes na cloud, usando por exemplo o RStudio server e instalando as dependências de pacotes.
+- [GitHub Actions, com Beatriz Milz](https://rstudioconf2022.sched.com/event/11ia9/making-awesome-automations-with-github-actions?iframe=no&w=100%&sidebar=yes&bg=no). Ela falou sobre como essa ferramenta tem ficado popular ultimamente, sendo que o uso de GitHub actions mais que quadruplicou em 2 anos de uso apenas nas organizações da RStudio. Também mostrou como podemos utilizar actions para rodar scripts arbitrários de R, não apenas processos relacionados a CI/CD. Mais informações [no blog dela](https://beamilz.com).
+- [Pacote ggdist, de Mathew Kay](https://rstudioconf2022.sched.com/event/11iaS/visualizing-distributions-and-uncertainty-using-ggdist?iframe=no&w=100%&sidebar=yes&bg=no). Esse pacote é útil para plotar distribuições de probabilidade em R, de vários jeitos diferentes. Eu sinto que o pacote tem até funções demais, o que dificulta para aprender, mas certamente é muito legal.
+- [Pacote naniar, de Nicholas Tierney](https://rstudioconf2022.sched.com/event/11ia4/the-future-of-missing-data?iframe=no&w=100%&sidebar=yes&bg=no). Foi uma apresentação muito engraçada, cheia de ironias. Gostei de conhecer um pouco mais sobre o pacote naniar, pois só havia usado uma dou duas funções do pacote.
+
+## Palestras sobre shiny
+
+Na parte da tarde, tivemos mais duas baterias de palestras, antes da última Keynote. Muita informação!
+
+Acabei escolhendo a parte de shiny, por apresentar muitas novidades interessantes.
+
+- [shinyuibuilder, de Nick Strayer](https://rstudioconf2022.sched.com/event/11ib7/a-new-way-to-build-your-shiny-apps-ui?iframe=no&w=100%&sidebar=yes&bg=no). Agora temos uma ferramenta para fazer o design de shiny apps! Para isso, a equipe da Posit criou uma ferramenta para codar e desenhar a parte da UI de um shinyapp. A ferramenta permite que a pessoa use tanto a interface gráfica quanto o código ao mesmo tempo.
+- [Design de shiny apps, com Greg Swinehart](https://rstudioconf2022.sched.com/event/11iaq/designing-for-people-is-hard?iframe=no&w=100%&sidebar=yes&bg=no). Trata-se do designer da Posit, que fez uma apresentação muito animada -- e longa, pois estrapolou o tempo da fala -- sobre como fazer bons shiny apps. O grande anúncio é que finalmente, FINALMENTE o bslib suportará cards, então poderemos fazer pacotes com Bootstrap 5 sem sofrer para criar as boxes e cards que gostamos tanto no `{bs4Dash}`.
+- [Outro shiny builder, com Peter Gandenberger](https://rstudioconf2022.sched.com/event/11ibG/dashboard-builder-building-shiny-apps-without-writing-any-code?iframe=no&w=100%&sidebar=yes&bg=no). Trata-se de uma mistura de shinyuibuilder com esquisse que permite a criação de apps shiny completos (com ui e server) apenas com drag e drop, com pouquíssimo esforço. Obviamente a ferramenta apresenta limitações, mas pode ser uma boa forma de começar no universo shiny para iniciantes, e pode ser uma ferramenta de produtividade para pessoas experientes.
+
+
+## Palestras sobre Quarto
+
+Na segunda bateria de palestras, decidi participar das palestras sobre Quarto, apesar de ainda estar muito interessado na trilha de shiny. perdi as palestras do Hadley Wickham, sobre o [pacote `{R7}`](https://rstudioconf2022.sched.com/event/11ibi/an-introduction-to-r7?iframe=no&w=100%&sidebar=yes&bg=no) e também a palestra sobre o pacote [`{shinytest2}`](https://rstudioconf2022.sched.com/event/11ibY/shinytest2-unit-testing-for-shiny-applications?iframe=no&w=100%&sidebar=yes&bg=no).
+
+- A [primeira palestra](https://rstudioconf2022.sched.com/event/11ibN/these-are-a-few-of-my-favorite-things-about-quarto-presentations?iframe=no&w=100%&sidebar=yes&bg=no) foi sobre a utilização do Quarto da perspectiva de uma pessoa que não programa no dia-a-dia. Apesar de não ter nada de novo na parte técnica, foi interessante para encorajar as pessoas a usar essa nova ferramenta.
+- [nbdev, de Hamel Husain, da Fast.ai](https://rstudioconf2022.sched.com/event/11ibe/literate-programming-with-jupyter-notebooks-and-quarto?iframe=no&w=100%&sidebar=yes&bg=no). Ele falou de uma ferramenta muito doida que, a partir de um Jupyter Notebook, gera um biblioteca, uma documentação (com Quarto) e um monte de coisas que não entendi. O que eu acho é que tem algumas coisas que são meio impressionantes no Python (como documentação de qualidade) que no R são bem comuns (por conta do `{roxygen2}`), mas não sei.
+- [Mais uma demonstração do Quarto, por Devin Pastoor](https://rstudioconf2022.sched.com/event/11ibV/websites-books-blogs-oh-my-creating-rich-content-with-quarto?iframe=no&w=100%&sidebar=yes&bg=no). Dessa vez foi bem live coding mesmo, e o autor mostrou vários atalhos interessantes do Quarto, como o autocomplete dos arquivos YAML e a possibilidade de criar sites com muita facilidade. Eu fiquei impressionado com a parte de instalação de extensões, que permitem adicionar novas capacidades a sites do quarto. Magic.
+
+## Última Keynote
+
+E o evento estava chegando ao fim. [E foi em grande estilo](https://rstudioconf2022.sched.com/event/11ibk/data-science-training-in-communities-with-limited-technology-resources-and-opportunities?iframe=no&w=100%&sidebar=yes&bg=no). Convidaram o pesquisador Jeff Leek, um dos autores do curso de Data Science do Coursera, criado pela John's Hopkins University. Esse curso é um dos primeiros MOOCs no tema e ficou extremamente popular, com mais de um milhão de pessoas inscritas.
+
+Na palestra, Jeff falou sobre a iniciativa Data Trail, um trabalho maravilhoso que ele iniciou para realizar treinamentos de ciência de dados em comunidades com menos acesso. Ele mostrou como o trabalho foi pesado, mas que teve bons resultados, com várias pessoas do programa acabando empregadas. Um dos insights mais importantes que foram apresentados é que o maior desafio para as pessoas não é aprender ciência de dados, e sim ter a estrutura e o ambiente adequados para isso. Por isso que é importante ajudar com transporte e ferramentas para essas pessoas trabalharem.
+
+No final, Jeff mostrou como expandir essa iniciativa. Ele mostrou como já estão sendo criados alguns projetos satélite do Data Trail em outras cidades dos Estados Unidos. Quem sabe no futuro seja possível expandir para outros países.
+
+## Orlando 2023
+
+No final, foi anunciado que a próxima `posit::conf` (ou seria `from posit import conf`?) será em Orlando, Flórida, em Maio de 2023. Quem tiver interesse de ir, melhor já começar a guardar uma graninha ou se preparar para pedir bolsa!
+
+## Quer saber mais?
+
+Bom, essas foram minhas anotações do dia 01 da rstudio::conf(2022). Todas as palestras ficarão online [neste link](https://www.rstudio.com/conference/stream/). No futuro, faremos mais posts sobre o tema!
+

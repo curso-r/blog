@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ggplot2 on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/ggplot2/</link>
+    <description>Recent content in ggplot2 on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 09 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Animando gráficos feitos em ggplot2: o pacote gganimate</title>
+      <link>https://blog.curso-r.com/posts/2021-06-09-gganimate/</link>
+      <pubDate>Wed, 09 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-09-gganimate/</guid>
+      <description>Quer dar um upgrade nos seus gráficos e colocar uma animaçãozinha? Use o pacote gganimate!</description>
+    </item>
+    
+    <item>
+      <title>Como unir vários gráficos feitos em ggplot2: o pacote patchwork</title>
+      <link>https://blog.curso-r.com/posts/2021-05-19-patchwork/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-19-patchwork/</guid>
+      <description>Você precisa juntar vários ggplots em uma mesma figura e não sabe como fazer isso? Use o pacote patchwork!</description>
+    </item>
+    
+    <item>
+      <title>Bechdel: Filme e Machismo</title>
+      <link>https://blog.curso-r.com/posts/2020-06-09-bechdel/</link>
+      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-09-bechdel/</guid>
+      <description>O teste de Bechdel avalia se um filme atende a uma condição simples: duas mulheres (com nomes) conversam entre si sobre algo que não seja homem. Existe um banco de dados de filmes avaliados por pelo índice Bechdel e nós analisamos.</description>
+    </item>
+    
+    <item>
+      <title>gghighlight</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-gghighlight/</guid>
+      <description>O gghighlight é uma das extensões do ggplot2. Este post serve como uma pequena introdução é apresentação do que é possível fazer com ele.</description>
+    </item>
+    
+    <item>
+      <title>A Poupança de Beethoven</title>
+      <link>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-20-poupanca-beethoven/</guid>
+      <description>Explorando um pouco sobre currying e ggplot através da maluquice que são os juros compostos.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos miojo: Mapas temáticos do Brasil em 3 minutos ou menos</title>
+      <link>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-05-04-mapas-tematicos-3-minutos/</guid>
+      <description>Impressionar é muito mais fácil se você usa mapas. Neste post vamos aprender a construir mapas temáticos do Brasil com muita agilidade.</description>
+    </item>
+    
+    <item>
+      <title>O que é um gráfico estatístico?</title>
+      <link>https://blog.curso-r.com/posts/2017-02-20-o-que-e-um-grafico-estatistico/</link>
+      <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-20-o-que-e-um-grafico-estatistico/</guid>
+      <description>Os gráficos são técnicas estatísticas para visualização de dados amplamente utilizados em todas as áreas da pesquisa. A sua popularidade se deve à maneira como elucidam informações que estavam escondidas nas colunas do banco de dados, sendo que muitos deles podem ser compreendidos até mesmo por leigos no assunto em questão. Mas será que podemos definir formalmente o que é um gráfico estatístico?</description>
+    </item>
+    
+  </channel>
+</rss>

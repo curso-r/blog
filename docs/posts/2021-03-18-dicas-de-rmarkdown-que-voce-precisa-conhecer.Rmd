@@ -1,0 +1,62 @@
+---
+title: "3 Dicas de Rmarkdown que você precisa saber"
+date: "2021-03-18"
+tags: ["faxina", "gráficos"]
+categories: ["conceitos"]
+image: "images/posts/banner/rmarkdown_wizards.webp"
+author: ["Fernando"]
+summary: "RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos lindos e muito elegantes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer."
+draft: false
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE
+)
+```
+
+
+RMarkdown é uma das ferramentas mais importantes e versáteis para quem pratica Ciência de Dados. Como não podia deixar de ser, as vantagens de usar o querido .Rmd se devem às inúmeras soluções que deixam seus documentos elegantes e cheios de detalhes. Nesse post vamos te dar dicas para turbinar o seu RMarkdown com o melhor que o R tem a oferecer. Nossas dicas são curtinhas e objetivas, mas vêm sempre acompanhadas de um documento de exemplo para te ajudar a colocar em prática quando precisar.
+
+Vamos a elas:
+
+# 1. Use o pacote `prettydoc`
+
+Muitas vezes a gente quer impressionar com um documento colorido, com uma fonte elegante e agradável pra quem lê, mas o `html_doc` padrão não ajuda muito nessa empreitada. Nessa situação você tem duas opções: (a) deixar o seu relatório bonito criando um `CSS` customizado para a página, como você pode ver [aqui](https://bookdown.org/yihui/rmarkdown-cookbook/html-css.html) ou (b) usar um template pronto (e bonito) como aqueles do pacote `prettydoc`. Embora as opções de customização sejam um pouco limitadas, praticamente sem esforço você consegue fazer um documento impressionante e que vai pegar muito bom com a sua audiência. Dá uma olhada:
+
+<img src = "https://prettydoc.statr.me/images/cayman.png">
+
+[Exemplo de documento.](https://prettydoc.statr.me/cayman.html)
+
+[Site do pacote.](https://prettydoc.statr.me)
+
+# 2. Construa tabelas usando o pacote `flextable`
+
+Esse é um daqueles casos em que uma imagem vale mais do que mil palavras... Dá uma olhada nesse exemplo de visualização da tabela `mtcars` que podemos construir usando o pacote `flextable`:
+
+<img src = "https://blog.curso-r.com/images/posts/conteudo/dicas-rmarkdown/flextable_exemplo.webp">
+
+Muito bonito, né? O pacote `flextable` é uma biblioteca em R que foi construída pensando em (a) construir tabelas muito bonitas e versáteis sem quase nenhum sofrimento e (b) usar o mesmo pacote para fazer tabelas para Word, PDF, PPT e HTML. A sintaxe é um pouco carregada, mas o resultado compensa muito.
+
+[Exemplo de documento.](https://raw.githubusercontent.com/curso-r/main-visualizacao/master/exemplos_de_aula/01-rmarkdown-word.Rmd)
+
+[Site do pacote.](https://davidgohel.github.io/flextable/)
+
+# 3. Impressione nas suas apresentações usando `xaringan`
+
+Muito do que a gente faz só é divulgado para o mundo se colocamos isso em formato de apresentação de slides. O pacote `xaringan` permite que você faça isso com muito estilo e flexibilidade. Dá uma olhada nesse exemplo e saia usando:
+
+[Exemplo de apresentação + tutorial.](https://beatrizmilz.github.io/aMostra-IME-2019-Xaringan/#1)
+
+[Capítulo de livro sobre o pacote.](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+
+# Gostou? Quer saber mais?
+
+Se você quiser aprender um pouco mais sobre RMarkdown e Visualização de Dados em geral, dê uma olhada no nosso curso [Relatórios e visualização de dados](https://curso-r.com/cursos/visualizacao/) e aproveite!
+
+```{r echo=FALSE, out.width="50%", fig.align="center", fig.cap="Ilustração sobre o pacote rmarkdown, criada por <a href='https://github.com/allisonhorst/stats-illustrations'>Allison Horst</a>."}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/rmarkdown_wizards.png")
+```

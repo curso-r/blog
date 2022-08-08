@@ -1,0 +1,73 @@
+---
+title: "Desafio #1: Manipulando a base de filmes do IMDB"
+date: "2022-02-02"
+tags: ["desafio curso-r", "manipulação"]
+categories: ["Desafio"]
+image: "images/posts/banner/desafio-1.webp"
+author: ["Tereza"]
+summary: "Esse é o primeiro desafio de programação proposto pela curso-R! Resolva-o e poste a sua solução em nosso Discourse!"
+---
+
+Esse é o primeiro post de uma série de desafios de ciência de dados que postaremos aqui no blog!
+
+Os desafios serão bem variados, incluindo temas como Shiny, Manipulação, Visualização, etc...
+
+O intuito desses desafios é mostrar como um problema prático na ciência de dados pode ter as mais diversas soluções! 
+
+Para isso, gostaríamos que você postasse a sua resolução em nosso [Discourse](https://discourse.curso-r.com/), assim, você estaria contribuindo com a variedade de soluções do problema, além de poder receber dicas da comunidade de como melhorar o seu código :)
+
+Então, vamos ao primeiro desafio!
+
+```{r eval=FALSE, include=FALSE}
+# TO DO:
+
+# escrever texto falando sobre os desafios de modo geral
+```
+
+
+## Desafio #1: Manipulando a base de filmes do IMDB
+
+Vamos começar com um desafio de manipulação. 
+Para esse desafio, vamos utilizar a base de filmes do IMDB. Você pode baixá-la [clicando aqui](https://github.com/curso-r/blog/raw/main/static/data/desafios/imdb.rds).
+
+**Desafio**: Escreva um código que transforme a base do IMDB em uma base nomeada *IMDB_atores*, que deve ser formada pelas seguintes colunas:
+
+- `ator`: nome de um(a) ator/atriz
+
+  (cada nome deve aparecer uma vez só)
+
+- `nota_media_imdb`: nota imdb média dos filmes que o(a) ator/atriz particiou
+
+- `media_lucro`: lucro médio dos filmes que o(a) ator/atriz participou
+
+  (obs: `lucro = receita - orcamento`)
+
+- `top1_genero`: gênero mais frequente entre os filmes que o(a) ator/atriz particiou
+
+- `top2_genero`: segundo gênero mais frequente entre os filmes que o(a) ator/atriz particiou
+
+- `top3_genero`: terceiro gênero mais frequente entre os filmes que o(a) ator/atriz particiou
+
+- `primeiro_registro`: ano do primeiro filme que o(a) ator/atriz participou
+
+- `ultimo_registro`: ano do último filme que o(a) ator/atriz particiou
+
+- `filmes`: um *data frame* com informações de todos os filmes que o(a) ator/atriz participou, as colunas desse *data frame* devem ser as seguintes:
+
+  - `título`: nome do filme
+  - `ano`: ano do filme
+  - `diretor`: diretor(a) do filme
+  - `duracao`: duração do filme
+  - `cor`: cor do filme (*Color* ou *Black and White*)
+  - `generos`: generos do filme
+  - `pais`: país do filme
+  - `classificacao`: classificação etária do filme
+  - `nota_imdb`: nota imbd do filme
+  - `orcamento`: orcamento do filme
+  - `receita`: receita do filme
+  - `lucro`: lucro do filme
+
+- `contracenou`: um vetor com os nomes de todos os(as) atores/atrizes que o(a) ator/atriz já contracenou (ou seja, participou do mesmo filme)
+
+Poste a sua resolução em nosso Discourse, respondendo o [tópico criado para esse desafio](https://discourse.curso-r.com/t/desafio-1-manipulando-a-base-de-filmes-do-imdb/1870)! 
+

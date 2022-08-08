@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cron on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/cron/</link>
+    <description>Recent content in cron on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 04 Oct 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/cron/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Agendando scripts do R</title>
+      <link>https://blog.curso-r.com/posts/2018-10-04-hyper-cron/</link>
+      <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-10-04-hyper-cron/</guid>
+      <description>Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos sem gastar muito.</description>
+    </item>
+    
+    <item>
+      <title>Usando o cronR para Agendar Scripts</title>
+      <link>https://blog.curso-r.com/posts/2017-11-13-tutorial-cronr/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-13-tutorial-cronr/</guid>
+      <description>Como agendar a execução de scripts usando o pacote cronR.</description>
+    </item>
+    
+  </channel>
+</rss>

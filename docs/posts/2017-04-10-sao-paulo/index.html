@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>São Paulo e o problema da mochila</title>
+  <meta name="title" content="São Paulo e o problema da mochila">
+  <meta name="description" content="São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2017-04-10-sao-paulo/">
+  <meta property="og:title" content="São Paulo e o problema da mochila">
+  <meta property="og:description" content="São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/pug_knapsack.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2017-04-10-sao-paulo/">
+  <meta property="twitter:title" content="São Paulo e o problema da mochila">
+  <meta property="twitter:description" content="São Paulo tem 12 milhões de habitantes! Nesse post, discutiremos como fazer São Paulo caber numa mochila cheia de municípios.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/pug_knapsack.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/pug_knapsack.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">São Paulo e o problema da mochila</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Julio">Julio</a>
+            
+            em
+            <a href="/categories/an%c3%a1lises">Análises</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            12 de
+            agosto de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/mapas">mapas</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>São Paulo é a minha cidade preferida. Não só porque moro aqui, mas também porque é uma cidade cheia de diversidade, boa gastronomia e oportunidades. Para sentir um pouco dessa <em>vibe</em>, recomendo passear na avenida Paulista aos domingos. É sensacional!</p>
+<p>Mas a cidade da diversidade só é o que é porque temos muita, muita gente nela. O município tem 12 milhões de habitantes. Esse número é tão grande que temos um paulistano para cada 17 brasileiros! Se São Paulo fosse um país, <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">seria o 77 do mundo</a>, ganhando de países como a Bélgica, Grécia, Portugal, Bolívia e muitas outras.</p>
+<p>Outro dia eu estava pensando na seguinte problemática: qual é a área do Brasil ocupada pela população de São Paulo? Ou seja, se pegarmos os municípios com grandes áreas, quanto do país conseguiríamos preencher com 12 milhões de habitantes?</p>
+<p>O interessante é que essa questão recai exatamente no <em>problema da mochila</em>, que é um famoso desafio de programação inteira. Depois de <a href="https://en.wikipedia.org/wiki/Knapsack_problem">estudar profundamente no wikipedia</a> (😄), vi que o problema não é tão trivial como parece.</p>
+<div id="o-problema-da-mochila" class="section level2">
+<h2>O problema da mochila</h2>
+<p>Considere o seguinte contexto: você tem uma mochila com capacidade de 15kg e precisa carregar a combinação de itens com maior valor, com cada item possuindo valores e pesos diferentes.</p>
+<p>Outra forma de pensar nesse problema é com um cardápio de restaurante:</p>
+<p>Em linguagem matemática, o que temos é a task:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \text{maximizar } \sum_{i=1}^n v_i x_i \\ 
+&amp; \text{sujeito à } \sum_{i=1}^n w_i x_i \leq W, \text{ com } x_i \in\{0,1\}\\ 
+\end{aligned}
+\]</span></p>
+<p>No nosso caso essas letras significam isso aqui:</p>
+<ul>
+<li><span class="math inline">\(n\)</span> é o número de municípios no Brasil (5570).</li>
+<li><span class="math inline">\(v_i\)</span> é a área do município <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(w_i\)</span> é a população do município <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(W\)</span> é a população de São Paulo (12 milhões).</li>
+<li><span class="math inline">\(x=(x_1,\dots,x_n)^\top\)</span> é o vetor que seleciona os municípios. Se o município <span class="math inline">\(i\)</span> faz parte da solução <span class="math inline">\(x_i=1\)</span> e, caso contrário, <span class="math inline">\(x_i=0\)</span>.</li>
+</ul>
+<p>Ou seja, queremos escolher municípios para colocar na mochila tentando maximizar a área, mas o máximo de população que podemos contemplar é 12 milhões.</p>
+<p>O problema da mochila é muito interessante pois trata-se de um problema NP-difícil, ou seja, não existe um algoritmo de polinomial capaz de resolvê-lo. Se <span class="math inline">\(w_i &gt; 0, \forall i\in1,\dots,n\)</span> então a solução pode ser encontrada com um algoritmo pseudo-polinomial.</p>
+<div id="forma-ad-hoc" class="section level3">
+<h3>Forma ad-hoc</h3>
+<p>Se <span class="math inline">\(x_i\)</span> pudesse assumir valores entre zero e um (ou seja, se pudéssemos selecionar apenas pedaços de municípios), a solução seria trivial. Bastaria colocar os municípios em ordem decrescente pela razão <span class="math inline">\(v_i/w_i\)</span> e escolher os municípios ou parte deles até obter <span class="math inline">\(W\)</span>.</p>
+<p>Isso indica uma forma sub-ótima de resolver o problema. Chamamos essa solução de ad-hoc. A solução é encontrada assim:</p>
+<ol style="list-style-type: decimal">
+<li>Colocar os municípios em ordem decrescente pela razão <span class="math inline">\(v_i/w_i\)</span>,</li>
+<li>Escolher os municípios de maior razão até que a população do próximo município estoure <span class="math inline">\(W\)</span>.</li>
+<li>Escolher outros municípios com maior razão na ordem até não ser possível incluir mais nenhum município.</li>
+</ol>
+</div>
+<div id="solução-ótima" class="section level3">
+<h3>Solução ótima</h3>
+<p>A solução ótima pode ser encontrada usando a função <code>mknapsack()</code> do pacote <code>adagio</code>. Por exemplo, considere os vetores de pesos <code>w</code>, valores <code>p</code> e máximo <code>cap</code> abaixo.</p>
+<pre class="r"><code>p &lt;- c(15, 100, 90, 60, 40, 15, 10,  1)
+w &lt;- c( 2,  20, 20, 30, 40, 30, 60, 10)
+cap &lt;- 102</code></pre>
+<p>O vetor-solução é dado por</p>
+<pre class="r"><code>is &lt;- adagio::mknapsack(p, w, cap)
+is$ksack</code></pre>
+<pre><code>[1] 1 1 1 1 0 1 0 0</code></pre>
+</div>
+</div>
+<div id="dados" class="section level2">
+<h2>Dados</h2>
+<p>As áreas e estimativas das populações dos municípios do Brasil em 2010 foram obtidas dos pacotes <code>{geobr}</code> e <code>{abjData}</code>. A leitura é realizada usando pacotes do <code>{tidyverse}</code>.</p>
+<p><strong>Pacotes:</strong></p>
+<pre class="r"><code>library(magrittr)
+library(sf)</code></pre>
+<pre class="r"><code>da_sf &lt;- geobr::read_municipality(year = 2010)
+dados &lt;- da_sf %&gt;% 
+  dplyr::mutate(area = as.numeric(sf::st_area(geom)) / 1e6) %&gt;% 
+  tibble::as_tibble() %&gt;% 
+  dplyr::select(-geom) %&gt;% 
+  dplyr::mutate(muni_id = as.character(code_muni)) %&gt;% 
+  dplyr::inner_join(
+    dplyr::filter(abjData::pnud_min, ano == &quot;2010&quot;), 
+    &quot;muni_id&quot;
+  ) %&gt;% 
+  dplyr::select(muni_id, area, pop) %&gt;% 
+  dplyr::mutate(razao = area / pop) %&gt;% 
+  dplyr::filter(area &gt; 0)</code></pre>
+</div>
+<div id="resultados" class="section level2">
+<h2>Resultados</h2>
+<p>A solução ad-hoc e ótima são computadas com esse código:</p>
+<pre class="r"><code>d_solucao &lt;- dados %&gt;% 
+  dplyr::arrange(dplyr::desc(razao)) %&gt;% # ordena para solucao adhoc funcionar
+  dplyr::mutate(
+    area2 = as.integer(area * 1000), # necessario para mknapsack funcionar
+    s_knapsack = adagio::mknapsack(area2, pop, max(pop))$ksack,
+    acu = cumsum(pop),
+    s_adhoc0 = dplyr::if_else(acu &lt; max(pop), 1, 0),
+    s_adhoc = s_adhoc0
+  ) </code></pre>
+<p>Agora, vamos melhorar a solução ad-hoc incluindo os melhores municípios.</p>
+<pre class="r"><code>id_melhor &lt;- 0
+pop_faltam &lt;- with(d_solucao, max(pop) - sum(s_adhoc0 * pop))
+while (is.na(id_melhor)) {
+  # pega id do melhor municipio a ser incluido
+  id_melhor &lt;- with(d_solucao, which(pop &lt;= pop_faltam &amp; s_adhoc == 0)[1])
+  if (is.na(id_melhor)) {
+    d_solucao$s_adhoc[id_melhor] &lt;- 1
+    pop_faltam &lt;- with(d_solucao, max(pop) - sum(s_adhoc * pop))
+  }
+}</code></pre>
+<p>A Tabela abaixo mostra os municípios que foram classificados diferentemente nos dois métodos. Note que a solução ótima trocou apenas um município da solução adhoc (Nova Aurora - GO) pelo município de Monte Alegre de Minas - MG.</p>
+<pre class="r"><code>d_solucao %&gt;% 
+  dplyr::filter(s_adhoc != s_knapsack) %&gt;% 
+  dplyr::inner_join(abjData::muni, &quot;muni_id&quot;) %&gt;% 
+  select(uf_nm, muni_nm, area, pop, s_adhoc, s_knapsack) %&gt;% 
+  knitr::kable(caption = &#39;Municípios diferentes nas duas soluções.&#39;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">uf_nm</th>
+<th align="left">muni_nm</th>
+<th align="right">area</th>
+<th align="right">pop</th>
+<th align="right">s_adhoc</th>
+<th align="right">s_knapsack</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Piauí</td>
+<td align="left">Colônia Do Piauí</td>
+<td align="right">949.0047</td>
+<td align="right">7387</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Tocantins</td>
+<td align="left">Riachinho</td>
+<td align="right">517.6699</td>
+<td align="right">4030</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Santa Catarina</td>
+<td align="left">Palmeira</td>
+<td align="right">289.4767</td>
+<td align="right">2291</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>A Tabela abaixo mostra a diferença dos resultados dos dois métodos. A solução ótima fica com apenas 92 pessoas a menos que São Paulo.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Método</th>
+<th align="left">Área total</th>
+<th align="right">População total</th>
+<th align="right">Diferença para sp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">adhoc</td>
+<td align="left">5669732.52073351</td>
+<td align="right">11152637</td>
+<td align="right">13906</td>
+</tr>
+<tr class="even">
+<td align="left">knapsack</td>
+<td align="left">5671488.67201654</td>
+<td align="right">11166345</td>
+<td align="right">198</td>
+</tr>
+<tr class="odd">
+<td align="left">São Paulo</td>
+<td align="left">-</td>
+<td align="right">11166543</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="mapa-final" class="section level2">
+<h2>Mapa final</h2>
+<p>Visualmente, a solução ótima e a solução adhoc são idênticas. Por isso vou mostrar apenas como fica o mapa para a solução ótima.</p>
+<p>O resultado aparece na Figura <a href="#fig:final">1</a>. É realmente impressionante ver que aquela regiãozinha vermelha tem a mesma população que toda a região azul do mapa.</p>
+<pre class="r"><code>da_sf %&gt;% 
+  dplyr::mutate(muni_id = as.character(code_muni)) %&gt;% 
+  dplyr::inner_join(d_solucao, &quot;muni_id&quot;) %&gt;% 
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(
+    ggplot2::aes(fill = as.factor(s_knapsack)),
+    size = 0
+  ) +
+  ggplot2::geom_sf(
+    fill = &quot;red&quot;,
+    size = 0,
+    colour = &quot;black&quot;,
+    data = dplyr::filter(da_sf, code_muni == &quot;3550308&quot;)
+  ) +
+  ggplot2::scale_fill_manual(
+    values = c(&quot;gray90&quot;, viridis::viridis(1, 1, .2, .8))
+  ) +
+  ggplot2::theme_void() +
+  ggplot2::theme(legend.position = &quot;bottom&quot;) +
+  ggplot2::labs(fill = &quot;Solução&quot;)</code></pre>
+<div class="figure"><span id="fig:final"></span>
+<img src="/images/posts/conteudo/sao-paulo/mapa_final.webp" alt="Resultado final da análise. A área em azul tem a mesma população da área em vermelho!"  />
+<p class="caption">
+Figura 1: Resultado final da análise. A área em azul tem a mesma população da área em vermelho!
+</p>
+</div>
+<p>É isso! Happy coding ;)</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

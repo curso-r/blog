@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shiny on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/shiny/</link>
+    <description>Recent content in shiny on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Tue, 15 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Desafio #2: contador de cliques [Shiny]</title>
+      <link>https://blog.curso-r.com/posts/2022-03-15-desafio-1/</link>
+      <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-03-15-desafio-1/</guid>
+      <description>Mais um desafio Curso-R, agora de Shiny! Resolva e compartilhe a sua solução em nosso Discourse!</description>
+    </item>
+    
+    <item>
+      <title>Gráficos no Shiny: echarts</title>
+      <link>https://blog.curso-r.com/posts/2021-11-11-shiny-echarts/</link>
+      <pubDate>Tue, 16 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-11-shiny-echarts/</guid>
+      <description>Conheça uma ótima opção para fazer gráficos interativos.</description>
+    </item>
+    
+    <item>
+      <title>Gráficos no Shiny: plotly</title>
+      <link>https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/</link>
+      <pubDate>Wed, 10 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/</guid>
+      <description>Transforme seu ggplot em um gráfico animado e intertativo.</description>
+    </item>
+    
+    <item>
+      <title>Entendendo a reatividade: observers</title>
+      <link>https://blog.curso-r.com/posts/2021-11-06-reatividade-pt2/</link>
+      <pubDate>Fri, 05 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-06-reatividade-pt2/</guid>
+      <description>Todo observer é uma função render?</description>
+    </item>
+    
+    <item>
+      <title>Gráficos no Shiny: ggplot2</title>
+      <link>https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/</link>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-10-21-shiny-ggplot2/</guid>
+      <description>Unindo dois dos melhores pacotes do R.</description>
+    </item>
+    
+    <item>
+      <title>Entendendo a reatividade: fundamentos</title>
+      <link>https://blog.curso-r.com/posts/2021-09-12-reatividade-pt1/</link>
+      <pubDate>Mon, 13 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-09-12-reatividade-pt1/</guid>
+      <description>Vamos olhar mais de perto o conceito de reatividade do Shiny.</description>
+    </item>
+    
+    <item>
+      <title>Shiny na useR 2021</title>
+      <link>https://blog.curso-r.com/posts/2021-07-01-shiny-user2021/</link>
+      <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-01-shiny-user2021/</guid>
+      <description>Veja o que rolou de Shiny na userR 2021.</description>
+    </item>
+    
+    <item>
+      <title>Fuja das tags! Incluindo Markdown no Shiny</title>
+      <link>https://blog.curso-r.com/posts/2021-07-22-shiny-markdown/</link>
+      <pubDate>Fri, 23 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-22-shiny-markdown/</guid>
+      <description>Veja como incluir elementos estáticos ao seu aplicativo usando arquivos Markdown.</description>
+    </item>
+    
+    <item>
+      <title>Crie seletores de visualização no Shiny</title>
+      <link>https://blog.curso-r.com/posts/2021-07-01-shiny-seletor-vis/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-01-shiny-seletor-vis/</guid>
+      <description>Aprenda a criar seletores de visualização para o seu aplicativo Shiny.</description>
+    </item>
+    
+    <item>
+      <title>Faça alinhamentos DnD no R</title>
+      <link>https://blog.curso-r.com/posts/2021-06-23-dnd/</link>
+      <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-23-dnd/</guid>
+      <description>Crie imagens de alinhamentos DnD direto do R.</description>
+    </item>
+    
+    <item>
+      <title>Colocando tooltips no Shiny (e no Rmarkdown)</title>
+      <link>https://blog.curso-r.com/posts/2021-06-22-tippy/</link>
+      <pubDate>Tue, 22 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-22-tippy/</guid>
+      <description>Aprenda colocar tooltips em aplicativos Shiny e arquivos R Markdown.</description>
+    </item>
+    
+    <item>
+      <title>Adicionando loaders ao seu Shiny app</title>
+      <link>https://blog.curso-r.com/posts/2021-06-14-loaders/</link>
+      <pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-14-loaders/</guid>
+      <description>Aprenda a adicionar animações de carregamento ao seu aplicativo Shiny.</description>
+    </item>
+    
+    <item>
+      <title>Diagramas de reatividade no shiny (reactlog)</title>
+      <link>https://blog.curso-r.com/posts/2021-06-10-reactlog/</link>
+      <pubDate>Thu, 10 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-10-reactlog/</guid>
+      <description>Aprenda a construir um diagrama do fluxo reatividade do seu Shiny app.</description>
+    </item>
+    
+    <item>
+      <title>Conectando o RStudio com o shinyapps.io</title>
+      <link>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-18-shinyappsio/</guid>
+      <description>Aprenda como conectar a sua conta do shinyapps.io com o RStudio para compartilhar aplicativos Shiny na internet em apenas alguns minutos.</description>
+    </item>
+    
+    <item>
+      <title>Shiny em Produção: Deploy seu App em 20min</title>
+      <link>https://blog.curso-r.com/posts/2019-09-06-app-deploy/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-06-app-deploy/</guid>
+      <description>Quando você for capaz de tranformar um shiny app em pacote e em imagem de docker, só 20 minutos são necessários para fazer um deploy na nuvem.</description>
+    </item>
+    
+    <item>
+      <title>Shiny em Produção: dockerize seu app com 1 linha</title>
+      <link>https://blog.curso-r.com/posts/2019-09-04-app-docker/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-09-04-app-docker/</guid>
+      <description>Depois de transformar seu shiny app em pacote, agora só resta transformá-lo em docker.</description>
+    </item>
+    
+    <item>
+      <title>Shiny em Produção: Rodando seu App com 1 Linha</title>
+      <link>https://blog.curso-r.com/posts/2019-08-27-app-pacote/</link>
+      <pubDate>Fri, 06 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-27-app-pacote/</guid>
+      <description>Um adendo ao pacote para desenvolver shiny apps dentro de pacotes.</description>
+    </item>
+    
+    <item>
+      <title>Shiny Apps Empacotados com o golem</title>
+      <link>https://blog.curso-r.com/posts/2019-07-16-golem/</link>
+      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-16-golem/</guid>
+      <description>Pacote para desenvolver shiny apps dentro de pacotes.</description>
+    </item>
+    
+    <item>
+      <title>Autenticação no Shiny com Auth0</title>
+      <link>https://blog.curso-r.com/posts/2018-09-24-shiny-auth0/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-09-24-shiny-auth0/</guid>
+      <description>Neste post vamos ensinar o passo a passo para adicionar autenticação em seu aplicativo Shiny usando o Auth0.</description>
+    </item>
+    
+    <item>
+      <title>Hospedando seu Shiny app no now</title>
+      <link>https://blog.curso-r.com/posts/2018-03-05-shiny-now/</link>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-03-05-shiny-now/</guid>
+      <description>Neste post você aprenderá a hospedar o seu shiny app usando Docker e o serviço now.sh.</description>
+    </item>
+    
+  </channel>
+</rss>

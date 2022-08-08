@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>useR on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/user/</link>
+    <description>Recent content in useR on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 18 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/user/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shiny na useR 2021</title>
+      <link>https://blog.curso-r.com/posts/2021-07-01-shiny-user2021/</link>
+      <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-01-shiny-user2021/</guid>
+      <description>Veja o que rolou de Shiny na userR 2021.</description>
+    </item>
+    
+  </channel>
+</rss>

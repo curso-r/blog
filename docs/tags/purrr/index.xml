@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>purrr on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/purrr/</link>
+    <description>Recent content in purrr on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 19 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/purrr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Acessando APIs com R: GitHub - Parte 1</title>
+      <link>https://blog.curso-r.com/posts/2022-02-19-api-github-1/</link>
+      <pubDate>Sat, 19 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-02-19-api-github-1/</guid>
+      <description>Segundo post sobre acesso à APIs.</description>
+    </item>
+    
+    <item>
+      <title>Acessando APIs com R: Exemplos com a PokéAPI!</title>
+      <link>https://blog.curso-r.com/posts/2021-11-29-api-pokemon/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-29-api-pokemon/</guid>
+      <description>Primeiro post sobre acesso à APIs usando R.</description>
+    </item>
+    
+    <item>
+      <title>Entendendo Funções Anônimas de Uma Vez por Todas</title>
+      <link>https://blog.curso-r.com/posts/2021-08-16-entendendo-anonimas/</link>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-08-16-entendendo-anonimas/</guid>
+      <description>Funções anônimas, funções lambda, notação de fórmula: muitos nomes para uma coisa que pouca gente entende</description>
+    </item>
+    
+    <item>
+      <title>Acessando bases públicas em R: o pacote basedosdados</title>
+      <link>https://blog.curso-r.com/posts/2021-05-28-basedosdados/</link>
+      <pubDate>Fri, 28 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-28-basedosdados/</guid>
+      <description>Todo mundo que trabalha com Ciência de Dados uma hora ou outra vai se ver mexendo com informações públicas, direta ou indiretamente.</description>
+    </item>
+    
+    <item>
+      <title>Buscando informações na Wikipédia: Lista de episódios de Naruto Shippuden</title>
+      <link>https://blog.curso-r.com/posts/2021-05-24-naruto/</link>
+      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-05-24-naruto/</guid>
+      <description>Alguns animes tem muitos fillers, que são episódios que não se baseiam na história original, e não agregam na história principal.</description>
+    </item>
+    
+    <item>
+      <title>Tratando erros: the tidy way</title>
+      <link>https://blog.curso-r.com/posts/2017-04-09-try/</link>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-09-try/</guid>
+      <description>Tratar erros no R é importante para identificar problemas nos códigos e evitar retrabalho. Quem nunca rodou um algoritmo pesadíssimo que deu errado na última iteração? Nesse artigo, veremos como trabalhar com erros no R e a versão tidy dessas soluções.</description>
+    </item>
+    
+    <item>
+      <title>Medidas-resumo no tidyverse</title>
+      <link>https://blog.curso-r.com/posts/2017-02-20-quartis/</link>
+      <pubDate>Sat, 11 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-20-quartis/</guid>
+      <description>Hoje estava fazendo uma análise exploratória e precisava estudar os quartis de uma variável contínua. A solução usando o tidyverse é tão elegante que valeu um post no blog.</description>
+    </item>
+    
+  </channel>
+</rss>

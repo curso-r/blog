@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>R 4.1: o novo pipe está chegando!</title>
+  <meta name="title" content="R 4.1: o novo pipe está chegando!">
+  <meta name="description" content="Em poucos dias será oficialmente lançado o R 4.1, com seu próprio pipe embutido! Neste post falamos sobre o pipe e outras novidades que chegarão ao R em 18/05/2021.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-05-06-o-novo-pipe-esta-chegando/">
+  <meta property="og:title" content="R 4.1: o novo pipe está chegando!">
+  <meta property="og:description" content="Em poucos dias será oficialmente lançado o R 4.1, com seu próprio pipe embutido! Neste post falamos sobre o pipe e outras novidades que chegarão ao R em 18/05/2021.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/novo-pipe.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-05-06-o-novo-pipe-esta-chegando/">
+  <meta property="twitter:title" content="R 4.1: o novo pipe está chegando!">
+  <meta property="twitter:description" content="Em poucos dias será oficialmente lançado o R 4.1, com seu próprio pipe embutido! Neste post falamos sobre o pipe e outras novidades que chegarão ao R em 18/05/2021.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/novo-pipe.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/novo-pipe.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">R 4.1: o novo pipe está chegando!</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/discuss%c3%b5es">Discussões</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            6 de
+            maio de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/programa%c3%a7%c3%a3o">programação</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/pipe">pipe</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>A profecia estava correta: o R finalmente vai ganhar um pipe próprio, embutido
+à linguagem em si. Mais de 7 anos depois do
+<a href="https://github.com/tidyverse/magrittr/commit/6f79e6dbf81a1a480c3b41c24b0dc40777981338">primeiro commit</a>
+do <code>{magrittr}</code>, o <code>%&gt;%</code>, operador com o qual compartilhamos tantas boas
+memórias, símbolo do R moderno e inspiração para o logo da
+<a href="https://curso-r.com/">Curso-R</a>, vai se tornar obsoleto. De acordo com a
+<a href="https://developer.r-project.org/">agenda</a> do R Project, no badalar da
+meia-noite do dia 18/05/2021 será lançada oficialmente a versão 4.1.0 (“Camp
+Pontanezen”) do R, contendo, dentre outras novidades, suporte para o operador
+<code>|&gt;</code>.</p>
+<p>Devo admitir que estou um pouco triste com a despedida, como se eu estivesse
+prestes a mudar de casa: pode ser que a casa nova seja melhor e maior, mas, de
+uma forma ou de outra, estou abandonando um lugar que foi palco de várias boas
+memórias por um lugar estéril e inerte…</p>
+<p>Só que mesmo assim nós seguimos em frente e mudamos de casa! As lembranças não
+vão embora e temos a oportunidade de criar mais boas memórias com esse novo
+plano de fundo. Sendo assim, vamos entender as principais mudanças do R 4.1 e,
+principalmente, como usar o novo pipe.</p>
+<div id="o-novo-pipe" class="section level2">
+<h2>O novo pipe: <code>|&gt;</code></h2>
+<p>À primeira vista, o novo pipe é igual ao antigo: usado no final de uma linha
+para passar o resultado do que está à sua esquerda como primeiro argumento da
+linha debaixo. Aqui temos um exemplo simples do uso mais comum dos pipes:</p>
+<pre class="r"><code>library(dplyr)
+
+# Uma pipeline com o pipe novo
+starwars |&gt;
+  group_by(species, sex) |&gt;
+  select(species, sex, height) |&gt;
+  summarise(height = mean(height, na.rm = TRUE)) |&gt;
+  pull(height) |&gt;
+  summary()
+#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#&gt;    66.0   163.0   181.3   173.5   196.0   264.0</code></pre>
+<p>As diferenças aparecem quanto tentamos usar o <code>.</code>, a saber, o <em>dot placeholder</em>.
+Bem comum no antigo pipe, o uso do <code>.</code> para escolher onde a substituição deve
+ocorrer é simplesmente proibido no novo pipe. Essa decisão foi tomada porque o
+<code>.</code> gera situações ambíguas como a descrita a seguir:</p>
+<pre class="r"><code># Vamos gerar essa string a partir de &quot;-&quot; %&gt;% paste0()
+&quot;-&gt;&lt;-&quot;
+#&gt; [1] &quot;-&gt;&lt;-&quot;
+
+# Podemos começar colando o hífen na esquerda
+&quot;-&quot; %&gt;%
+  paste0(&quot;&gt;&quot;)
+#&gt; [1] &quot;-&gt;&quot;
+
+# Agora adicionamos o . para colar na direita também...
+# Mas isso dá errado!
+&quot;-&quot; %&gt;%
+  paste0(&quot;&gt;&lt;&quot;, .)
+#&gt; [1] &quot;&gt;&lt;-&quot;
+
+# Precisamos colocar o . em dois lugares diferentes,
+# incluindo, contraintuitivamente, no primeiro argumento
+&quot;-&quot; %&gt;%
+  paste0(., &quot;&gt;&lt;&quot;, .)
+#&gt; [1] &quot;-&gt;&lt;-&quot;</code></pre>
+<p>Assim, em troca de nunca mais precisar carregar o <code>{magrittr}</code>, usar
+<code>usethis::use_pipe()</code> ou se preocupar com o ambiente do <code>{future}</code>, vamos ser
+obrigados a criar funções parciais que sempre esperam a substituição no seu
+primeiro argumento. Mas, falando em funções, chegamos à segunda maior novidade
+do R 4.1…</p>
+</div>
+<div id="funções-anônimas-x" class="section level2">
+<h2>Funções anônimas: <code>\(x)</code></h2>
+<p>Se você se acostumou com a notação de fórmulas do <code>{purrr}</code>, então funções
+anônimas não são nada de novo. Também conhecidas como <em>lambdas</em>, funções
+anônimas não passam de funções que não precisam receber um nome, ou seja, podem
+ser utilizadas pelo programa na hora de sua criação. No caso do <code>{purrr}</code> isso
+se dava através de uma gambiarra feita em cima das fórmulas (<code>~.x</code>), mas, ainda
+assim, isso era melhor do que a sintaxe bastante prolixa que o R básico exigia
+(<code>function(x) x</code>).</p>
+<p>A nova sintaxe é, na minha opinião, bastante melhor que a estratégia do
+<code>{purrr}</code>. Apesar de ela ser um pouco mais extensa, ela funciona em todos os
+lugares (não só no tidyverse), permite nomes arbitrários para os argumentos e
+não bagunça a função do <code>~</code>. A nova função anônima é declarada com uma barra
+oblíqua para a esquerda seguida por todos os argumentos entre parênteses e o
+código; essencialmente, é igual à notação antiga, mas <code>function</code> vira <code>\</code>. A
+escolha do símbolo <code>\</code> também é ótima, pois é igual à de
+<a href="https://wiki.haskell.org/Anonymous_function">outras linguagens</a> e porque lembra
+um λ (lambda) com a perna cortada. Para comparar todas as diferentes notações,
+segue um breve exemplo (saídas suprimidas):</p>
+<pre class="r"><code>library(purrr)
+
+# Sem função anônima
+soma_um &lt;- function(x) {
+  x + 1
+}
+map(1:10, soma_um)
+
+# A notação antiga do {base} é extensa
+map(1:10, function(x) x + 1)
+
+# A notação do {purrr} força o .x
+map(1:10, ~ .x + 1)
+
+# A notação nova permite qualquer nome
+map(1:10, \(n) n + 1)
+
+# A notação nova funciona fora do tidyverse
+lapply(1:10, \(x) x + 1)
+
+# Para mais de 2 argumentos, o {purrr} muda
+pmap(list(1:10, 11:20, 21:30), ~ ..1 + ..2 + ..3)
+
+# A notação nova continua consistente
+pmap(list(1:10, 11:20, 21:30), \(x, y, z) x + y + z)</code></pre>
+<p>De quebra, na minha opinião, também será muito mais fácil de ensinar o <code>\(x)</code> do
+que o <code>~.x</code>. A notação é intuitiva, consistente e funciona fora do tidyverse,
+então, para mim, o novo lambda é até mais interessante do que o novo pipe!</p>
+</div>
+<div id="miscelânea" class="section level2">
+<h2>Miscelânea</h2>
+<p>Dependendo de quando você estiver lendo este post, a versão 4.1 já vai ter
+passado pelo <em>code freeze</em> que está <a href="https://developer.r-project.org/">agendado</a>
+para 11/05/2021, que é quando não são mais permitidas alterações no código da
+nova versão e ela se torna uma <em>release candidate</em>. Conforme escrevo ainda
+estão permitidas alterações no código, então pode ser que alguma coisa mude até
+o lançamento final do R 4.1, mas o grosso não deve mudar muito.</p>
+<p>Assim, para te poupar desse trabalho, eu li o
+<a href="https://stat.ethz.ch/R-manual/R-devel/doc/html/NEWS.html">NEWS</a> da nova versão
+a fim de saber quais são as novidades mais interessantes do 4.1. Fora o novo
+pipe e o novo lambda, achei algumas coisas dignas de nota:</p>
+<ul>
+<li><p>Usar <code>c()</code> para combinar fatores agora retorna um fator que também combina
+todos os níveis (de forma similar ao <code>forcats::fct_c()</code>);</p></li>
+<li><p><code>apply()</code> agora tem um argumento <code>simplify</code> para desabilitar a simplificação
+de resultados;</p></li>
+<li><p>O novo utilitário <code>...names()</code> retorna os nomes dos argumentos passados via
+<code>...</code> (possivelmente facilitando o trabalho do <code>{tidyselect}</code>);</p></li>
+<li><p>As funções <code>URLencode()</code> e <code>URLdecode()</code> agora funcionam com vetores de URIs;</p></li>
+<li><p><code>grep()</code>, <code>sub()</code>, <code>regexp()</code>, etc. ficaram mais rápidas para fatores longos
+com poucos níveis e</p></li>
+<li><p><code>duplicated()</code> e <code>anyDuplicated()</code> agora são otimizados para vetores numéricos
+já ordenados via ALTREP.</p></li>
+</ul>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Se você não consegue esperar para testar as novas funcionalidades, já é possível
+baixar a versão beta do R 4.1 diretamente do
+<a href="https://cran.r-project.org/src/base-prerelease/">site</a> do R Project. O time do
+R Core apenas pede que você
+<a href="https://developer.r-project.org/Blog/public/2021/04/28/r-can-use-your-help-testing-r-before-release/">reporte</a>
+quaisquer bugs detectados!</p>
+<p>Para quem é mais paciente e prefere esperar o lançamento oficial daqui alguns
+dias, abra o seu RStudio, aperte CTRL + SHIFT + M com carinho e agradeça por
+todas as aventuras patrocinadas pelo pipe. O pacote <code>{magrittr}</code> continuará lá,
+funcionando, mas cada vez menos relevante… Apesar de estarmos entrando em uma
+nova fase do R, as lembranças e aprendizados do passado nunca irão embora.</p>
+<p>%&gt;%</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

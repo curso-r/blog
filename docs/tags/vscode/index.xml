@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vscode on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/vscode/</link>
+    <description>Recent content in vscode on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 15 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Acesso Remoto ao VS Code</title>
+      <link>https://blog.curso-r.com/posts/2022-07-15-vscode-server/</link>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-07-15-vscode-server/</guid>
+      <description>Como emular o RStudio Server usando o VS Code.</description>
+    </item>
+    
+    <item>
+      <title>Programando R no VS Code</title>
+      <link>https://blog.curso-r.com/posts/2021-11-06-r-no-vscode/</link>
+      <pubDate>Sat, 06 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-06-r-no-vscode/</guid>
+      <description>Como programar R em um dos editores de código mais populares da atualidade.</description>
+    </item>
+    
+  </channel>
+</rss>

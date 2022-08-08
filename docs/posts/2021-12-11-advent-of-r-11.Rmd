@@ -1,0 +1,199 @@
+---
+title: "Advent of R: Dia 11"
+date: "2021-12-11"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-11.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 11."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final da
+jornada vamos todos ter afiado nossas habilidades de R e, quem sabe, divulgado
+essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Polvo-dumbo (A)
+
+O [dia 11](https://adventofcode.com/2021/day/11) do AoC foi bastante complicado
+e o meu código talvez tenha ficado pior ainda. As instruções eram até simples:
+recebemos uma matriz 10x10 com os níveis de energia de 100
+[polvos-dumbo](https://pt.wikipedia.org/wiki/Grimpoteuthis) e precisávamos
+acompanhar seus níveis de energia ao longo de 100 iterações. As regras eram as
+seguintes:
+
+- Primeiro, o nível de energia de cada polvo sobe em 1.
+
+- Depois, qualquer polvo com nível de energia maior que 9 emite luz (pisca).
+Isso aumenta o nível de energia de todos os polvos adjacentes em 1, incluindo os
+adjacentes diagonalmente. Se isso causar um polvo a atingir um nível de energia
+maior que 9, ele também pisca. Esse processo continua conforme mais polvos
+passam do nível de energia 9. Um polvo só pode piscar uma vez por passo e não
+pode subir mais nenhum nível de energia a partir daí.
+
+- Finalmente, todos os polvos que piscaram durante este passo têm seus níveis de
+energia ajustados para 0 (já que ele usou toda a sua energia para piscar).
+
+Meu código seguia esse procedimento à risca e precisou de 3 loops aninhados para
+funcionar. O truque mais importante foi criar um clone dos polvos que marcava
+todos os polvos que já tinham piscado para garantir que nenhum deles ganharia
+mais energia durante aquele passo; este mecanismo envolvia marcar um polvo que
+piscava com 0 e um polvo que tinha piscado em qualquer ponto anterior do loop
+com -1 (para que ele não fosse contado duas vezes). O resultado final deveria
+ser o número de piscadas totais depois dos 100 passos.
+
+```r
+# Ler matriz
+dumbo <- "data-raw/11a_dumbo_octopus.txt" |>
+  readr::read_table(col_names = FALSE) |>
+  tidyr::separate(X1, paste0("C", 0:10), "") |>
+  dplyr::select(-C0) |>
+  dplyr::mutate_all(as.numeric) |>
+  as.matrix()
+
+# Iterar nos 100 passos
+flashes <- 0
+for (k in 1:100) {
+
+  # Aumentar níveis de energia
+  dumbo <- (dumbo + 1) %% 10
+
+  # Adicionar energia aos polvos cujos vizinhos piscaram
+  flag <- FALSE
+  while(!flag) {
+
+    # Contar piscadas
+    flashes <- flashes + sum(dumbo == 0)
+
+    # Adicionar energia aos polvos adjacentes a piscadas
+    dumbo_ <- dumbo
+    for (i in 1:10) {
+      for (j in 1:10) {
+
+        # Índices dos vizinhos
+        i1 <- i - 1
+        i2 <- min(i + 1, 10)
+        j1 <- j - 1
+        j2 <- min(j + 1, 10)
+
+        # Adicionar energia nos índices (exceto no centro)
+        if (dumbo[i, j] == 0) {
+          dumbo_[i1:i2, j1:j2] <- dumbo_[i1:i2, j1:j2] + 1
+          dumbo_[i, j] <- dumbo_[i, j] - 1
+        }
+      }
+    }
+
+    # Separar piscadas anteriores dos que piscaram na última iteração
+    dumbo <- ifelse(dumbo == -1, 0, dumbo)
+
+    # Sobrescrever as piscadas com 0 (eles não podem receber mais energia)
+    dumbo <- ifelse(dumbo == 0, 0, dumbo_)
+
+    # Verificar se o passo atual acabou
+    if (!any(dumbo > 9)) {
+      flag <- TRUE
+    } else {
+
+      # Prevenir piscadas antigas de serem contadas de novo
+      dumbo <- ifelse(dumbo == 0, -1, dumbo)
+      dumbo <- ifelse(dumbo > 9, 0, dumbo)
+    }
+  }
+}
+
+# Imprimir
+flashes
+#> [1] 1681
+```
+
+## Polvo-dumbo (B)
+
+Felizmente o segundo item o exercício de hoje foi bem mais simples.
+Eventualmente todos os polvos entram em sincronia, ou seja, passam a piscar
+todos juntos; o nosso objetivo era descobrir em que passo isso acontecia. A
+única coisa que precisei fazer com o código do item anterior foi ignorar o
+limite de passos e criar uma verificação para quando todos os polvos atingiam 0
+de energia juntos.
+
+```r
+# Ler matriz
+dumbo <- "data-raw/11b_dumbo_octopus.txt" |>
+  readr::read_table(col_names = FALSE) |>
+  tidyr::separate(X1, paste0("C", 0:10), "") |>
+  dplyr::select(-C0) |>
+  dplyr::mutate_all(as.numeric) |>
+  as.matrix()
+
+# Iterar em 1000 passos
+for (k in 1:1000) {
+  print(k)
+
+  # Aumentar níveis de energia
+  dumbo <- (dumbo + 1) %% 10
+
+  # Adicionar energia aos polvos cujos vizinhos piscaram
+  flag <- FALSE
+  while(!flag) {
+
+    # Adicionar energia aos polvos adjacentes a piscadas
+    dumbo_ <- dumbo
+    for (i in 1:10) {
+      for (j in 1:10) {
+
+        # Índices dos vizinhos
+        i1 <- i - 1
+        i2 <- min(i + 1, 10)
+        j1 <- j - 1
+        j2 <- min(j + 1, 10)
+
+        # Adicionar energia nos índices (exceto no centro)
+        if (dumbo[i, j] == 0) {
+          dumbo_[i1:i2, j1:j2] <- dumbo_[i1:i2, j1:j2] + 1
+          dumbo_[i, j] <- dumbo_[i, j] - 1
+        }
+      }
+    }
+
+    # Separar piscadas anteriores dos que piscaram na última iteração
+    dumbo <- ifelse(dumbo == -1, 0, dumbo)
+
+    # Sobrescrever as piscadas com 0 (eles não podem receber mais energia)
+    dumbo <- ifelse(dumbo == 0, 0, dumbo_)
+
+    # Verificar se o passo atual acabou
+    if (!any(dumbo > 9)) {
+      flag <- TRUE
+    } else {
+
+      # Prevenir piscadas antigas de serem contadas de novo
+      dumbo <- ifelse(dumbo == 0, -1, dumbo)
+      dumbo <- ifelse(dumbo > 9, 0, dumbo)
+    }
+  }
+
+  # Parar se todos os polvos tiverem piscado
+  if (all(dumbo %in% c(0, -1))) {
+    break()
+  }
+}
+
+# Imprimir
+k
+#> [1] 276
+```

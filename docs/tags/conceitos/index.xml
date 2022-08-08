@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>conceitos on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/conceitos/</link>
+    <description>Recent content in conceitos on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 03 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/conceitos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Três Pontinhos: Como Funcionam os Dots</title>
+      <link>https://blog.curso-r.com/posts/2021-12-03-tutorial-dots/</link>
+      <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-03-tutorial-dots/</guid>
+      <description>Com certeza você já lidou com os &amp;lsquo;&amp;hellip;&amp;rsquo; do R, mas talvez ainda não saiba como eles funcionam. Está na hora de mudar isso!</description>
+    </item>
+    
+    <item>
+      <title>Desvendando erros: Entendendo mensagens de erro comuns em R.</title>
+      <link>https://blog.curso-r.com/posts/2021-03-29-desvendando-erros/</link>
+      <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-03-29-desvendando-erros/</guid>
+      <description>Esse post tem como objetivo listar alguns erros comuns quando programamos em R, e dicas de como resolvê-los!</description>
+    </item>
+    
+    <item>
+      <title>Mínimos quadrados com restrições lineares</title>
+      <link>https://blog.curso-r.com/posts/2017-08-07-minimos-quadrados-restrito/</link>
+      <pubDate>Mon, 07 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-08-07-minimos-quadrados-restrito/</guid>
+      <description>Às vezes a solução do seu problema está a um peteleco de uma regressão de mínimos quadrados. Neste post vamos implementar uma minimização de soma de quadrados quando os coeficientes da regressão são restritos linearmente.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Advent of R: Dia 17</title>
+  <meta name="title" content="Advent of R: Dia 17">
+  <meta name="description" content="Resolvendo o Advent of Code 2021 com R: Dia 17.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-12-17-advent-of-r-17/">
+  <meta property="og:title" content="Advent of R: Dia 17">
+  <meta property="og:description" content="Resolvendo o Advent of Code 2021 com R: Dia 17.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/advent-of-r-17.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-12-17-advent-of-r-17/">
+  <meta property="twitter:title" content="Advent of R: Dia 17">
+  <meta property="twitter:description" content="Resolvendo o Advent of Code 2021 com R: Dia 17.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/advent-of-r-17.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/advent-of-r-17.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Advent of R: Dia 17</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            17 de
+            dezembro de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/advent-of-r">advent-of-r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/tidyverse">tidyverse</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>O <a href="https://adventofcode.com">Advent of Code</a> é um
+<a href="https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento">Calendário do Advento</a>
+desenvolvido por <a href="https://github.com/topaz">Eric Wastl</a> composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.</p>
+<p>Meu objetivo com o <strong>Advent of R</strong> é resolver todos os problemas do
+<a href="https://adventofcode.com/2021">Advent of Code 2021</a> em R e documentar o
+processo através desta
+<a href="https://blog.curso-r.com/tags/advent-of-r/">série de posts</a>. Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+<a href="https://github.com/curso-r/advent-of-r">repositório público</a> no GitHub.</p>
+<p>A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!</p>
+<div id="cesta-de-três-a" class="section level2">
+<h2>Cesta de Três (A)</h2>
+<p>O <a href="https://adventofcode.com/2021/day/17">17º dia</a> do AoC foi uma ótima quebra em
+relação aos últimos. O enunciado era simples de entender e a solução foi fácil
+de criar, tudo que eu precisava depois de uma semana cansativa.</p>
+<p>Hoje precisávamos tentar encontrar a chave do nosso submarino em uma fossa
+marinha. A sonda que tínhamos a bordo podia ser arremessada a partir do ponto
+(0, 0) com qualquer velocidade inteira tanto no eixo x quanto no y. A entrada
+do problema era a posição do alvo e a saída do primeiro item deveria ser a
+altura máxima que podíamos arremessar a sonda de modo que ela ainda atingisse
+o alvo.</p>
+<p>As regras para a aceleração da sonda a cada passo eram as seguintes:</p>
+<ul>
+<li><p>A posição x da sonda aumenta um valor igual à sua velocidade x.</p></li>
+<li><p>A posição y da sonda aumenta um valor igual à sua velocidade y.</p></li>
+<li><p>Por causa do atrito, a velocidade x da sonda muda em 1 um direção a 0 (ou
+seja, ela diminui em 1 se a velocidade for maior que 0 e aumenta em 1 caso
+contrário).</p></li>
+<li><p>Por causa da gravidade, a velocidade y da sonda diminui em 1.</p></li>
+</ul>
+<p>O grande truque do exercício era identificar todas as velocidades possíveis da
+sonda e depois verificar qual o levava à maior altura. Como o alvo estava sempre
+abaixo e à direita do (0, 0), podíamos estabelecer os limites inferiores e
+superiores para as velocidades x e y:</p>
+<ul>
+<li><p>A velocidade x necessariamente tem que ser maior que 0, já que precisamos que
+a sonda se mova para frente. Adicionalmente, velocidade x máxima não pode ser
+maior que a fronteira direita do alvo; se o alvo terminar, por exemplo, em
+x = 10, nunca vamos acertá-lo jogando o módulo para frente com velocidade maior
+que 10.</p></li>
+<li><p>Os limites da velocidade y são mais difícil de entender. Em primeiro lugar,
+ela nunca pode ser menor do que a fronteira inferior do alvo (pensando na mesma
+lógica que usamos antes, se o alvo terminar, por exemplo, em y = -10, nunca
+vamos acertá-lo jogando a sonda para baixo com velocidade menor que -10). O
+limite superior vem do fato de que se jogarmos a sonda para cima, não importando
+a velocidade, ela eventualmente vai voltar a y = 0 com velocidade igual à
+velocidade inicial menos 1, mas com sinal negativo; sendo assim, a velocidade y
+máxima é igual ao valor absoluto do limite inferior do alvo.</p></li>
+</ul>
+<pre class="r"><code># Velocidade inicial: (6,3)
+# ..................................
+# .........(3,0).#..#.(2,-1)........
+# .....(4,1).#........#.(1,-2)......
+# ..................................
+# (5,2).#..............#.(0,-3).....
+# ..................................
+# ..................................
+# S.(6,3)..............#.(0,-4).....
+# ..................................
+# ..................................
+# ..................................
+# .....................#.(0,-5).....
+# ....................TTTTTTTTTTT...
+# ....................TTTTTTTTTTT...
+# ....................TTTTTTTTTTT...
+# ....................TTTTTTTTTTT...
+# ....................T#T(0,-6)TT...
+# ..................................
+# ..................................</code></pre>
+<p>Note no diagrama acima a simetria da trajetória no eixo y. Assim fica mais fácil
+entender porque, por exemplo, se o limite inferior do alvo for y = -10, então
+nunca podemos jogar a sonda para cima com velocidade maior que 9; ela voltará
+para y = 0 com velocidade -10 e acertará exatamente a fronteira de baixo do
+alvo.</p>
+<pre class="r"><code># Ler alvo como uma tabela de coordenadas
+target &lt;- &quot;data-raw/17a_trick_shot.txt&quot; |&gt;
+  readr::read_lines() |&gt;
+  stringr::str_split(&quot;[=,]&quot;) |&gt;
+  purrr::pluck(1) |&gt;
+  stringr::str_subset(&quot;^[0-9-]&quot;) |&gt;
+  stringr::str_replace(&quot;\\.\\.&quot;, &quot;:&quot;) |&gt;
+  purrr::map(~eval(parse(text = .x))) |&gt;
+  purrr::cross() |&gt;
+  purrr::transpose() |&gt;
+  purrr::set_names(&quot;x&quot;, &quot;y&quot;) |&gt;
+  tibble::as_tibble() |&gt;
+  tidyr::unnest(c(x, y))
+
+# Todas as possíveis combinações de velocidades x e y válidas
+vels &lt;- purrr::cross(list(
+  1:max(target$x),
+  min(target$y):abs(min(target$y))
+))</code></pre>
+<p>Para calcular a altura máxima que poderíamos arremessar a sonda, eu simulei a
+trajetória a partir de cada um dos pares de velocidades válidas e guardei a
+altura máxima à qual a sonda chegava. No final da iteração, se a sonda de fato
+atingisse o alvo, então eu comparava a altura máxima dessa combinação com a
+altura máxima global e mantinha a maior.</p>
+<pre class="r"><code># Verificar quais pares de velocidades funcionam e pegar a altura máxima
+max_height &lt;- 0
+for (vel in vels) {
+
+  # Posição inicial
+  x_pos &lt;- 0
+  y_pos &lt;- 0
+
+  # Velocidades iniciais
+  x_vel &lt;- vel[[1]]
+  y_vel &lt;- vel[[2]]
+
+  # Encontrar a altura máxima deste par de velocidades
+  max_height_ &lt;- 0
+  while (y_pos &gt;= min(target$y) &amp;&amp; x_pos &lt;= max(target$x)) {
+
+    # Atualizar posições
+    x_pos &lt;- x_pos + x_vel
+    y_pos &lt;- y_pos + y_vel
+
+    # Atualizar altura máxima local
+    if (y_pos &gt; max_height_) max_height_ &lt;- y_pos
+
+    # Se o par de fato leva ao alvo, atualizar altura máxima global
+    if (x_pos %in% target$x &amp;&amp; y_pos %in% target$y) {
+      if (max_height_ &gt; max_height) max_height &lt;- max_height_
+    }
+
+    # Atualizar velocidades
+    x_vel &lt;- if (x_vel &gt; 0) x_vel - 1 else 0
+    y_vel &lt;- y_vel - 1
+  }
+}
+
+# Retornar a altura máxima global
+max_height
+#&gt; [1] 4753</code></pre>
+</div>
+<div id="cesta-de-três-b" class="section level2">
+<h2>Cesta de Três (B)</h2>
+<p>Chegando no item 2, eu percebi que tinha dado muita sorte. O enunciado aqui
+pedia para encontrarmos o número de velocidades iniciais da sonda que a faziam
+chegar ao alvo. Meu código anterior já encontrava todos os pares válidos, mas
+utilizava isso para atualizar a altura máxima; só era necessário trocar a
+variável sendo atualizada dentro do <code>while</code>.</p>
+<pre class="r"><code># Verificar pares de velocidades que funcionam e contá-los
+n_works &lt;- 0
+for (vel in vels) {
+
+  # Posição inicial
+  x_pos &lt;- 0
+  y_pos &lt;- 0
+
+  # Velocidades iniciais
+  x_vel &lt;- vel[[1]]
+  y_vel &lt;- vel[[2]]
+
+  # Encontrar a altura máxima deste par de velocidades
+  max_height_ &lt;- 0
+  while (y_pos &gt;= min(target$y) &amp;&amp; x_pos &lt;= max(target$x)) {
+
+    # Atualizar posições
+    x_pos &lt;- x_pos + x_vel
+    y_pos &lt;- y_pos + y_vel
+
+    # Se o par de fato leva ao alvo, atualizar contador
+    if (x_pos %in% target$x &amp;&amp; y_pos %in% target$y) {
+      n_works &lt;- n_works + 1
+      break
+    }
+
+    # Atualizar velocidades
+    x_vel &lt;- if (x_vel &gt; 0) x_vel - 1 else 0
+    y_vel &lt;- y_vel - 1
+  }
+}
+
+# Retornar número de velocidades que funcionam
+n_works</code></pre>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

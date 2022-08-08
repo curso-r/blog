@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tidyverse on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/tidyverse/</link>
+    <description>Recent content in tidyverse on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 25 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Advent of R: Dia 25</title>
+      <link>https://blog.curso-r.com/posts/2021-12-25-advent-of-r-25/</link>
+      <pubDate>Sat, 25 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-25-advent-of-r-25/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 25.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 24</title>
+      <link>https://blog.curso-r.com/posts/2021-12-24-advent-of-r-24/</link>
+      <pubDate>Fri, 24 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-24-advent-of-r-24/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 24.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 23</title>
+      <link>https://blog.curso-r.com/posts/2021-12-23-advent-of-r-23/</link>
+      <pubDate>Thu, 23 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-23-advent-of-r-23/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 23.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 22</title>
+      <link>https://blog.curso-r.com/posts/2021-12-22-advent-of-r-22/</link>
+      <pubDate>Wed, 22 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-22-advent-of-r-22/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 22.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 21</title>
+      <link>https://blog.curso-r.com/posts/2021-12-21-advent-of-r-21/</link>
+      <pubDate>Tue, 21 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-21-advent-of-r-21/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 21.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 20</title>
+      <link>https://blog.curso-r.com/posts/2021-12-20-advent-of-r-20/</link>
+      <pubDate>Mon, 20 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-20-advent-of-r-20/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 20.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 19</title>
+      <link>https://blog.curso-r.com/posts/2021-12-19-advent-of-r-19/</link>
+      <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-19-advent-of-r-19/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 19.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 18</title>
+      <link>https://blog.curso-r.com/posts/2021-12-18-advent-of-r-18/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-18-advent-of-r-18/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 18.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 17</title>
+      <link>https://blog.curso-r.com/posts/2021-12-17-advent-of-r-17/</link>
+      <pubDate>Fri, 17 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-17-advent-of-r-17/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 17.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 16</title>
+      <link>https://blog.curso-r.com/posts/2021-12-16-advent-of-r-16/</link>
+      <pubDate>Thu, 16 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-16-advent-of-r-16/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 16.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 15</title>
+      <link>https://blog.curso-r.com/posts/2021-12-15-advent-of-r-15/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-15-advent-of-r-15/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 15.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 14</title>
+      <link>https://blog.curso-r.com/posts/2021-12-14-advent-of-r-14/</link>
+      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-14-advent-of-r-14/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 14.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 13</title>
+      <link>https://blog.curso-r.com/posts/2021-12-13-advent-of-r-13/</link>
+      <pubDate>Mon, 13 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-13-advent-of-r-13/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 13.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 12</title>
+      <link>https://blog.curso-r.com/posts/2021-12-12-advent-of-r-12/</link>
+      <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-12-advent-of-r-12/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 12.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 11</title>
+      <link>https://blog.curso-r.com/posts/2021-12-11-advent-of-r-11/</link>
+      <pubDate>Sat, 11 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-11-advent-of-r-11/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 11.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 10</title>
+      <link>https://blog.curso-r.com/posts/2021-12-10-advent-of-r-10/</link>
+      <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-10-advent-of-r-10/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 10.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 09</title>
+      <link>https://blog.curso-r.com/posts/2021-12-09-advent-of-r-09/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-09-advent-of-r-09/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 09.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 08</title>
+      <link>https://blog.curso-r.com/posts/2021-12-08-advent-of-r-08/</link>
+      <pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-08-advent-of-r-08/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 08.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 07</title>
+      <link>https://blog.curso-r.com/posts/2021-12-07-advent-of-r-07/</link>
+      <pubDate>Tue, 07 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-07-advent-of-r-07/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 07.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 06</title>
+      <link>https://blog.curso-r.com/posts/2021-12-06-advent-of-r-06/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-06-advent-of-r-06/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 06.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 05</title>
+      <link>https://blog.curso-r.com/posts/2021-12-05-advent-of-r-05/</link>
+      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-05-advent-of-r-05/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 05.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 04</title>
+      <link>https://blog.curso-r.com/posts/2021-12-04-advent-of-r-04/</link>
+      <pubDate>Sat, 04 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-04-advent-of-r-04/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 04.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 03</title>
+      <link>https://blog.curso-r.com/posts/2021-12-03-advent-of-r-03/</link>
+      <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-03-advent-of-r-03/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 03.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 02</title>
+      <link>https://blog.curso-r.com/posts/2021-12-02-advent-of-r-02/</link>
+      <pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-02-advent-of-r-02/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 02.</description>
+    </item>
+    
+    <item>
+      <title>Advent of R: Dia 01</title>
+      <link>https://blog.curso-r.com/posts/2021-12-01-advent-of-r-01/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-01-advent-of-r-01/</guid>
+      <description>Resolvendo o Advent of Code 2021 com R: Dia 01.</description>
+    </item>
+    
+    <item>
+      <title>Entendendo Funções Anônimas de Uma Vez por Todas</title>
+      <link>https://blog.curso-r.com/posts/2021-08-16-entendendo-anonimas/</link>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-08-16-entendendo-anonimas/</guid>
+      <description>Funções anônimas, funções lambda, notação de fórmula: muitos nomes para uma coisa que pouca gente entende</description>
+    </item>
+    
+    <item>
+      <title>Tutorial: {rlang} para Filhotes</title>
+      <link>https://blog.curso-r.com/posts/2021-07-27-rlang-para-filhotes/</link>
+      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-27-rlang-para-filhotes/</guid>
+      <description>Um tutorial sobre {rlang} que vai do básico ao avançado. Zero to hero!</description>
+    </item>
+    
+    <item>
+      <title>Bechdel: Filme e Machismo</title>
+      <link>https://blog.curso-r.com/posts/2020-06-09-bechdel/</link>
+      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-09-bechdel/</guid>
+      <description>O teste de Bechdel avalia se um filme atende a uma condição simples: duas mulheres (com nomes) conversam entre si sobre algo que não seja homem. Existe um banco de dados de filmes avaliados por pelo índice Bechdel e nós analisamos.</description>
+    </item>
+    
+    <item>
+      <title>Por que usar o %&gt;%</title>
+      <link>https://blog.curso-r.com/posts/2018-07-03-tutorial-pipe/</link>
+      <pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-03-tutorial-pipe/</guid>
+      <description>De onde vem e como funciona o operador pipe.</description>
+    </item>
+    
+    <item>
+      <title>Meus 2 Centavos: análise das notas</title>
+      <link>https://blog.curso-r.com/posts/2018-02-21-2cents/</link>
+      <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-02-21-2cents/</guid>
+      <description>Tiago Belotti do canal do YouTube Meus 2 Centavos é o meu crítico de cinema favorito. Gasto uma quantidade de tempo que não me orgulho vendo os vídeos desse ser maravilhoso. Nesse post mostro como obtive as notas dele para verificar uma dúvida que estava me corroendo&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Unindo mapas: the tidy way</title>
+      <link>https://blog.curso-r.com/posts/2017-11-23-union-sf/</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-11-23-union-sf/</guid>
+      <description>Hoje mais uma vez fui salvo por uma feature pensada no universo tidy. Dessa vez, o grande culpado foi o sf, um pacote ainda em estágio de desenvolvimento mas que já considero pacas&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>brcrimR</title>
+      <link>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</link>
+      <pubDate>Wed, 13 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</guid>
+      <description>brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.</description>
+    </item>
+    
+    <item>
+      <title>Comportamentos imprevisíveis do lubridate</title>
+      <link>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-29-comportamentos-estranhos-lubridate/</guid>
+      <description>R é uma linguagem maravilhosa. Ela possibilita uma ampla gama de aplicações interessantes. O seu maior trunfo está no rico ecossistema de pacotes, que são desenvolvidos e mantidos pela comunidade, sempre criativa na hora de lidar com os problemas. Entretanto, toda essa facilidade cobra um preço. Neste post vamos aprender que às vezes os programas não fazem exatamente o que estão dizendo que fazem.</description>
+    </item>
+    
+    <item>
+      <title>Arrumando BDs: nome das variáveis</title>
+      <link>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</link>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-13-bds_nomes_variaveis/</guid>
+      <description>Neste post, mostraremos uma forma rápida para padronizar os nomes das variáveis de uma base de dados, deixando-os mais adequados para o restante da análise.</description>
+    </item>
+    
+    <item>
+      <title>Medidas-resumo no tidyverse</title>
+      <link>https://blog.curso-r.com/posts/2017-02-20-quartis/</link>
+      <pubDate>Sat, 11 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-20-quartis/</guid>
+      <description>Hoje estava fazendo uma análise exploratória e precisava estudar os quartis de uma variável contínua. A solução usando o tidyverse é tão elegante que valeu um post no blog.</description>
+    </item>
+    
+    <item>
+      <title>Manifesto tidy</title>
+      <link>https://blog.curso-r.com/posts/2017-02-16-manifesto-tidy/</link>
+      <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-16-manifesto-tidy/</guid>
+      <description>O manifesto das ferramentas tidy do Hadley Wickham é um dos documentos mais importantes sobre R dos últimos tempos.</description>
+    </item>
+    
+  </channel>
+</rss>

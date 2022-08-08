@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/blog/</link>
+    <description>Recent content in blog on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 16 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github Pages e Distill: Blog no Ar em 13 Passos</title>
+      <link>https://blog.curso-r.com/posts/2021-08-16-distill_ghpages/</link>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-08-16-distill_ghpages/</guid>
+      <description>Passo a passo de como subir um blog distill no Github Pages</description>
+    </item>
+    
+    <item>
+      <title>Receitinha para criar seu blog com {blogdown}</title>
+      <link>https://blog.curso-r.com/posts/2021-02-12-receitinha-para-criar-seu-blog-com-blogdown/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-02-12-receitinha-para-criar-seu-blog-com-blogdown/</guid>
+      <description>Passo a passo para criar o seu blog com {blogdown} em minutos.</description>
+    </item>
+    
+  </channel>
+</rss>

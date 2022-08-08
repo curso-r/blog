@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Três Pontinhos: Como Funcionam os Dots</title>
+  <meta name="title" content="Três Pontinhos: Como Funcionam os Dots">
+  <meta name="description" content="Com certeza você já lidou com os &lsquo;&hellip;&rsquo; do R, mas talvez ainda não saiba como eles funcionam. Está na hora de mudar isso!">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-12-03-tutorial-dots/">
+  <meta property="og:title" content="Três Pontinhos: Como Funcionam os Dots">
+  <meta property="og:description" content="Com certeza você já lidou com os &lsquo;&hellip;&rsquo; do R, mas talvez ainda não saiba como eles funcionam. Está na hora de mudar isso!">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/tutorial-dots.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-12-03-tutorial-dots/">
+  <meta property="twitter:title" content="Três Pontinhos: Como Funcionam os Dots">
+  <meta property="twitter:description" content="Com certeza você já lidou com os &lsquo;&hellip;&rsquo; do R, mas talvez ainda não saiba como eles funcionam. Está na hora de mudar isso!">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/tutorial-dots.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/tutorial-dots.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Três Pontinhos: Como Funcionam os Dots</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            3 de
+            dezembro de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/conceitos">conceitos</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/dots">dots</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Chamdos de “três pontinhos”, “reticências”, “dots” ou “ellipsis”, os <code>...</code>
+são uma das funcionalidades mais comuns do R, mas ao mesmo tempo uma das menos
+conhecidas. Explicá-los em linguagem técnica é muito simples: eles são os
+<a href="https://en.wikipedia.org/wiki/Variadic_function">argumentos variádicos</a> do R!
+O difícil é entender de verdade o que eles são e como usá-los. Vamos abandonar o
+jargão e sigamos em frente, agora em bom português…</p>
+<p>Obs.: O nome correto no R para os <code>...</code> é dots, então vou usar esse termo a
+partir de agora. A prova disso é que, para consultar a sua documentação,
+executamos <code>?dots</code>.</p>
+<div id="onde-estão" class="section level2">
+<h2>Onde estão</h2>
+<p>Como eu disse anteriormente, eles são bastante comuns, mas quão comuns
+exatamente? Talvez mais do que você imagine. Veja abaixo os
+<a href="https://en.wikipedia.org/wiki/Function_prototype">protótipos</a> de algumas poucas
+funções que talvez você conheça (ignore o <code>NULL</code>, ele é parte da saída da
+função <code>args()</code>):</p>
+<pre class="r"><code>args(sum)</code></pre>
+<pre><code>## function (..., na.rm = FALSE) 
+## NULL</code></pre>
+<pre class="r"><code>args(c)</code></pre>
+<pre><code>## function (...) 
+## NULL</code></pre>
+<pre class="r"><code>args(dplyr::mutate)</code></pre>
+<pre><code>## function (.data, ...) 
+## NULL</code></pre>
+<p>Te convenci? Entender os dots é, portanto, uma excelente arma no arsenal do
+programador de R, tanto que eles são usados pelas funções mais importantes da
+linguagem toda.</p>
+</div>
+<div id="o-que-são" class="section level2">
+<h2>O que são</h2>
+<p>De forma bem geral, os dots são um argumento que, quando colocado na sua função,
+pode ser substituído por qualquer coisa pelo usuário. Na função <code>sum()</code>, por
+exemplo, os dots podem virar uma série de números (quantos o usuário quiser).</p>
+<pre class="r"><code>sum(1, 2, 3, 4, 5)</code></pre>
+<pre><code>## [1] 15</code></pre>
+<p>Quando falamos de argumentos normais, não precisamos declarar seus argumentos
+caso estejamos utilizando-os na ordem correta. Os dots, entretanto, podem ser
+substituídos por qualquer número de objetos, então eles quebram essa regra;
+qualquer argumento que vier <em>depois</em> dos dots precisa ser nomeado.</p>
+<pre class="r"><code># Não funciona do jeito esperado (TRUE mais um elemento dos dots)
+sum(1, 2, NA, 4, 5, TRUE)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code># Agora sim
+sum(1, 2, NA, 4, 5, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 12</code></pre>
+<p>Sem os dots a função <code>sum()</code> estaria limitada a receber um vetor de números,
+mas com essa ferramenta ela passa a poder receber números separados como se
+fossem cada um um argumento. A função <code>c()</code>, entretanto, não poderia ser
+implementada sem os dots.</p>
+<p>O seu poder completo, porém, fica mais claro na função <code>dplyr::select()</code>. Aqui
+vemos que podemos até dar nomes arbitrários para os “argumentos” de dentro dos
+dots e a função pode usá-los sem o menor problema:</p>
+<pre class="r"><code>mtcars |&gt;
+  dplyr::select(mpg, cil = cyl, marcha = gear) |&gt;
+  head()</code></pre>
+<pre><code>##                    mpg cil marcha
+## Mazda RX4         21.0   6      4
+## Mazda RX4 Wag     21.0   6      4
+## Datsun 710        22.8   4      4
+## Hornet 4 Drive    21.4   6      3
+## Hornet Sportabout 18.7   8      3
+## Valiant           18.1   6      3</code></pre>
+<p>Perceba que a função <code>dplyr::select()</code> não tem como saber quantas colunas nós
+vamos selecionar e quais nomes eu vou dar para cada uma, tornando impossível o
+uso de argumentos convencionais. O uso do dots é inevitável nesses casos.</p>
+</div>
+<div id="como-usá-los" class="section level2">
+<h2>Como usá-los</h2>
+<p>Agora que já vimos universalidade e importância dos dots, chegou a hora de
+entender como eles funcionam e como usá-los. Vamos começar com um exemplo
+simples: criar uma função que captura quaisquer argumentos que o usuário
+resolver passar e imprime seus valores.</p>
+<pre class="r"><code># Captura dots e os imprime como uma lista
+captura &lt;- function(...) {
+  list(...)
+}
+
+captura(arg1 = 1, arg2 = &quot;b&quot;, arg3 = FALSE)</code></pre>
+<pre><code>## $arg1
+## [1] 1
+## 
+## $arg2
+## [1] &quot;b&quot;
+## 
+## $arg3
+## [1] FALSE</code></pre>
+<p>Simples, né? 90% das vezes podemos simplesmente transformar os dots em uma lista
+comum com <code>list(...)</code> e utilizá-la normalmente. Em breve ficará mais claro
+por que isso funciona.</p>
+<p>Se quisermos capturar argumentos específicos dentro dos dots, aí podemos usar
+uma função especial chamada <code>...elt()</code> (sim, as reticências fazem parte de seu
+nome):</p>
+<pre class="r"><code># Captura dots e os imprime como uma lista
+captura_segundo &lt;- function(...) {
+  ...elt(2)
+}
+
+captura_segundo(arg1 = 1, arg2 = &quot;b&quot;, arg3 = FALSE)</code></pre>
+<pre><code>## [1] &quot;b&quot;</code></pre>
+<p>A terceira forma de usar os dots é os transportando para uma função que recebe
+dots. Como já deve ter ficado evidente, os dots podem ser substituídos por
+qualquer número de argumentos por parte do usuário, mas eles também podem ser
+passados como argumento no lugar dos dots de outra função!</p>
+<pre class="r"><code>filtra_seleciona &lt;- function(marchas, ...) {
+  mtcars |&gt;
+    dplyr::filter(gear == marchas) |&gt;
+    dplyr::select(...) |&gt;
+    head()
+}
+
+filtra_seleciona(4, mpg, cil = cyl)</code></pre>
+<pre><code>##                mpg cil
+## Mazda RX4     21.0   6
+## Mazda RX4 Wag 21.0   6
+## Datsun 710    22.8   4
+## Merc 240D     24.4   4
+## Merc 230      22.8   4
+## Merc 280      19.2   6</code></pre>
+<p>No caso acima, os dots eram <code>mpg, cil = cyl</code> e isso foi transportado
+perfeitamente para dentro de <code>dplyr::select()</code>.</p>
+<p>Para fechar este tutorial com chave de ouro, vamos criar uma função arbitrária
+que precisa de um argumento depois dos dots: nossa função deve receber qualquer
+quantidade de valores numéricos, ignorar o primeiro e somar o resto com <code>n</code>.</p>
+<pre class="r"><code>ignora_um_soma_n &lt;- function(..., n = 0) {
+  valores &lt;- list(...)
+  valores &lt;- valores[-1]
+  unlist(valores) + n
+}
+
+ignora_um_soma_n(1, 2, 3, 4, 5, n = 10)</code></pre>
+<pre><code>## [1] 12 13 14 15</code></pre>
+<p>Espero que agora esteja pelo menos um pouco mais claro o funcionamento dos dots!
+Se não, pode entrar em contato comigo via <a href="https://twitter.com/ctlente">Twitter</a>
+ou postar uma dúvida no nosso <a href="https://discourse.curso-r.com/">fórum</a>.</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

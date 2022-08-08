@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>divulgação on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/categories/divulga%C3%A7%C3%A3o/</link>
+    <description>Recent content in divulgação on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 29 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/divulga%C3%A7%C3%A3o/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>rstudio::conf 2022, segundo dia de palestras</title>
+      <link>https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/</link>
+      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/</guid>
+      <description>Segundo dia do evento mais importante da RStudio/Posit em 2022!</description>
+    </item>
+    
+    <item>
+      <title>rstudio::conf 2022, primeiro dia de palestras</title>
+      <link>https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/</link>
+      <pubDate>Wed, 27 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/</guid>
+      <description>Primeiro dia do evento mais importante da RStudio em 2022!</description>
+    </item>
+    
+    <item>
+      <title>Shiny na useR 2021</title>
+      <link>https://blog.curso-r.com/posts/2021-07-01-shiny-user2021/</link>
+      <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-01-shiny-user2021/</guid>
+      <description>Veja o que rolou de Shiny na userR 2021.</description>
+    </item>
+    
+    <item>
+      <title>Feedback dos trabalhos do R para Ciência de Dados (Parte III): Dicas para Relatórios</title>
+      <link>https://blog.curso-r.com/posts/2021-03-15-dicas-relatorios-r4ds1_relatorios/</link>
+      <pubDate>Mon, 15 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-03-15-dicas-relatorios-r4ds1_relatorios/</guid>
+      <description>Comentamos algumas dicas sobre elaboração de relatórios. Ilustração sobre o pacote rmarkdown, criada por Allison Horst.</description>
+    </item>
+    
+    <item>
+      <title>Feedback dos trabalhos do R para Ciência de Dados (Parte II): Dicas para Gráficos</title>
+      <link>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</link>
+      <pubDate>Thu, 17 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-17-02-dicas-relatorios-r4ds1_graficos/</guid>
+      <description>Comentamos algumas dicas sobre elaboração de gráficos em relatórios. Ilustração sobre o pacote ggplot2, criada por Allison Horst.</description>
+    </item>
+    
+    <item>
+      <title>Trabalhos premiados do curso R para Ciência de Dados I &#43; Dicas !</title>
+      <link>https://blog.curso-r.com/posts/2020-12-03-dicas-relatorios-r4ds1_tabelas/</link>
+      <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-12-03-dicas-relatorios-r4ds1_tabelas/</guid>
+      <description>Apresentamos os trabalhos de conclusão do nosso curso de R para Ciência de Dados I que foram premiados, e comentamos algumas dicas sobre elaboração de tabelas em relatórios.</description>
+    </item>
+    
+    <item>
+      <title>Melhores trabalhos do curso R para Ciência de dados I (maio de 2020)</title>
+      <link>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</guid>
+      <description>Apresentamos os melhores trabalhos de conclusão do nosso curso de R para Ciência de dados I e comentamos aspectos importantes sobre a comunicação dos resultados das nossas análises.</description>
+    </item>
+    
+    <item>
+      <title>Anunciando a comunidade Curso-R</title>
+      <link>https://blog.curso-r.com/posts/2020-02-21-discourse/</link>
+      <pubDate>Fri, 21 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-02-21-discourse/</guid>
+      <description>A Curso-R lançou criou um lugar para vocÊ discutir R e outros assuntos relacionados.</description>
+    </item>
+    
+    <item>
+      <title>Tidyverse developer day 2019</title>
+      <link>https://blog.curso-r.com/posts/2019-08-12-tidydevday/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-08-12-tidydevday/</guid>
+      <description>Este post tem como objetivo relatar a experiência de participar do Tidyverse Developer Day 2019, e tem como autoras a Beatriz Milz e a Angélica Custódio.</description>
+    </item>
+    
+    <item>
+      <title>Minha experiência na useR!2019</title>
+      <link>https://blog.curso-r.com/posts/2019-07-14-user2019/</link>
+      <pubDate>Sun, 14 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-14-user2019/</guid>
+      <description>Highlights do maior evento sobre R do mundo.</description>
+    </item>
+    
+    <item>
+      <title>O Zen do R (Parte 1)</title>
+      <link>https://blog.curso-r.com/posts/2019-07-02-zen-do-r-intro/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-07-02-zen-do-r-intro/</guid>
+      <description>O primeiro post em uma série sobre o nosso novo livro! Introduzindo O Zen do R.</description>
+    </item>
+    
+    <item>
+      <title>Resumo da rstudio::conf 2019</title>
+      <link>https://blog.curso-r.com/posts/2019-01-30-rconf/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2019-01-30-rconf/</guid>
+      <description>Nesse post a Bruna conta como foi a sua expericência na rstudio conf que aconteceu esse mês em Austin.</description>
+    </item>
+    
+    <item>
+      <title>Desafio de Dados - Recuperação de imagens</title>
+      <link>https://blog.curso-r.com/posts/2018-08-09-desafio-recuperacao-imagem/</link>
+      <pubDate>Thu, 09 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-08-09-desafio-recuperacao-imagem/</guid>
+      <description>Na segunda edição do Desafio de Dados vamos tentar recuperar a cor de uma imagem usando modelos de regressão e árvore de decisão.</description>
+    </item>
+    
+    <item>
+      <title>radix: um template RMarkdown</title>
+      <link>https://blog.curso-r.com/posts/2018-07-27-radix/</link>
+      <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-27-radix/</guid>
+      <description>Neste post vamos apresentar o template Radix para RMarkdown: um formato criado especificamente para escrever artigos científicos para páginas da internet.</description>
+    </item>
+    
+    <item>
+      <title>Desafio de Dados - PesqEle (parte I)</title>
+      <link>https://blog.curso-r.com/posts/2018-07-26-desafio-pesqele/</link>
+      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-07-26-desafio-pesqele/</guid>
+      <description>Nessa primeira edição do Desafio de Dados vamos analisar a base de dados do pesqEle e criar um mapa da distribuição do número de pesquisas por estado.</description>
+    </item>
+    
+    <item>
+      <title>Chamada pra briga - Competição Kaggle Guess The Correlation</title>
+      <link>https://blog.curso-r.com/posts/2018-03-29-guess-the-correlation/</link>
+      <pubDate>Thu, 29 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-03-29-guess-the-correlation/</guid>
+      <description>Criamos uma competição no Kaggle para aprender a máquina adivinhar a correlação de um scatterplot. Desafio lançado!</description>
+    </item>
+    
+    <item>
+      <title>bR Bloggers está no ar</title>
+      <link>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</guid>
+      <description>Está no ar o bR Bloggers! bR Bloggers é um agregador de blogs sobre R escritos em língua portuguesa.</description>
+    </item>
+    
+    <item>
+      <title>Keras: colocando deep learning no pipeline</title>
+      <link>https://blog.curso-r.com/posts/2017-06-05-keras/</link>
+      <pubDate>Mon, 05 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-05-keras/</guid>
+      <description>O keras é um novo pacote do R feito para ajustar modelos de redes neurais profundas. Esse é o primeiro de uma série de posts sobre o assunto. Primeiro, vamos falar dos autores desse pacote&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>R 3.4 disponível!</title>
+      <link>https://blog.curso-r.com/posts/2017-04-24-r34/</link>
+      <pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-04-24-r34/</guid>
+      <description>A versão 3.4 do R foi lançada nesse final de semana! A atualização tem foco principal em performance. Veja as mudanças.</description>
+    </item>
+    
+    <item>
+      <title>rstudio::conf: Sessão Final</title>
+      <link>https://blog.curso-r.com/posts/2017-02-18-all-things-r-and-rstudio/</link>
+      <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-18-all-things-r-and-rstudio/</guid>
+      <description>No início de Janeiro desse ano ocorreu a primeira rstudio::conf, uma conferência sobre R promovida pela Rstudio.</description>
+    </item>
+    
+    <item>
+      <title>O blog da Curso-R</title>
+      <link>https://blog.curso-r.com/posts/2017-02-15-blog-curso-r/</link>
+      <pubDate>Wed, 15 Feb 2017 13:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-02-15-blog-curso-r/</guid>
+      <description>Esse é o blog do Curso-R. Nós somos o Athos, Daniel, Fernando, Julio e William e seremos os autores dos posts desse blog.</description>
+    </item>
+    
+  </channel>
+</rss>

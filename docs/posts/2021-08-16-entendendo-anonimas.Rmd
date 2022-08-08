@@ -1,0 +1,183 @@
+---
+title: "Entendendo Funções Anônimas de Uma Vez por Todas"
+date: "2021-08-16"
+tags: ["tidyverse", "purrr"]
+categories: ["tutoriais"]
+image: "images/posts/banner/lambda.webp"
+author: ["Caio"]
+summary: "Funções anônimas, funções lambda, notação de fórmula: muitos nomes para uma coisa que pouca gente entende"
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "#>")
+library(purrr)
+library(dplyr)
+```
+
+Uma das funcionalidades mais interessantes do R é a possibilidade de estender a
+linguagem para domínios específicos. A
+[_non-standard evaluation_](https://blog.curso-r.com/posts/2021-07-27-rlang-para-filhotes/)
+garante que até modificações à estrutura fundamental do R podem ser realizadas
+sem problema. Hoje vamos falar de um assunto que muita gente quer aprender,
+mas que pouca gente entende de verdade: funções anônimas.
+
+Se você não souber o que é uma função anônima, pode ser que você conheça esse
+conceito por outro nome. Também chamada de "função lambda", "notação de fórmula"
+ou "notação de til", ela aparece principalmente em programas que usam o {purrr}
+apesar de não serem exclusividade desse pacote. Resumindo, se você já viu algo
+do tipo `~.x` e não entendeu do que se tratava, este post é para você.
+
+## Introdução
+
+Funções anônimas são, essencialmente, um jeito de simplificar a criação de
+funções pequenas. Em poucas palavras, o nosso objetivo é não ter que declarar
+uma função nova inteira com `function() { ... }` para poder usá-la dentro de
+um programa.
+
+O exemplo que será utilizado na explicação a seguir será a função `conta_na()`
+que (não surpreendentemente) conta o número de `NA`s em um vetor. Vamos usá-la
+dentro de um `map()` para que ela seja aplicada a todas as colunas de um data
+frame. Sendo assim, partiremos da forma mais verborrágica possível desse código
+e tentaremos chegar, intuitivamente, nas funções anônimas.
+
+Uma ressalva importante é que a notação explicada aqui **só funciona dentro do
+{tidyverse}**! No final do texto será apresentada uma alternativa que funciona
+fora desse contexto, mas, por enquanto, a notação abaixo só pode aparecer nos
+argumentos `.f`, `.fn` e `.fns` utilizados dentro do {tidyverse}.
+
+## Conceito
+
+Vamos imaginar uma função `conta_na()` que conta o número de `NA`s em uma coluna
+de um data frame. Para aplicá-la a todas as colunas do data frame, podemos, por
+exemplo, utilizar a função `map()` do pacote {purrr} como no exemplo abaixo:
+
+```{r}
+conta_na <- function(vetor) {
+  sum(is.na(vetor))
+}
+
+map_dbl(starwars, conta_na)
+```
+
+No R, quando temos uma função simples de uma linha, é perfeitamente possível
+não colocar o seu corpo em uma linha separada. Veja como o código já fica um
+pouco mais compacto (saída omitida daqui em diante):
+
+```{r, eval=FALSE}
+conta_na <- function(vetor) { sum(is.na(vetor)) }
+
+map_dbl(starwars, conta_na)
+```
+
+Agora, se temos uma função que cabe inteira em uma linha, o R nos permite também
+omitir as chaves: por exemplo, m if-else pode ser escrito
+`if (cond) resp1 else resp2` se as respostas não tiverem mais de uma linha. No
+nosso caso, vamos reduzir ainda mais a `conta_na()`:
+
+```{r, eval=FALSE}
+conta_na <- function(vetor) sum(is.na(vetor))
+
+map_dbl(starwars, conta_na)
+```
+
+O próximo passo seria encurtar o nome do argumento da função, utilizando algo
+mais genérico. Poucas pessoas sabem, mas o R permite nomes começando com `.`!
+Por motivos que ficarão claros a seguir, vamos escolher `.x` para ser o nome do
+nosso argumento:
+
+```{r, eval=FALSE}
+conta_na <- function(.x) sum(is.na(.x))
+
+map_dbl(starwars, conta_na)
+```
+
+Agora vem a grande sacada. Tudo que fizemos até agora funciona no R como um
+todo, mas, se atendermos algumas condições extras, podemos reduzir ainda mais
+essa função.
+
+Vamos lá: se a função i) tiver apenas uma linha, ii) tiver apenas 1 argumento,
+iii) tiver `.x` como seu único argumento `.x` e iv) estiver sendo utilizada como
+argumento de uma função do {tidyverse}, então podemos omitir o `function(.x)`
+(já que isso é informação redundante dadas as condições) e trocá-lo por um
+singelo `~`:
+
+```{r, eval=FALSE}
+conta_na <- ~ sum(is.na(.x))
+
+map_dbl(starwars, conta_na)
+```
+
+O último passo é o motivo de chamarmos essa notação de "função anônima". Dado
+que nossa função já é tão pequena e utilizamos ela em apenas um lugar, por que
+precisamos dar um nome para ela? É mais fácil declará-la diretamente dentro do
+`map()` sem um nome, ou seja, "anonimamente":
+
+```{r}
+map_dbl(starwars, ~ sum(is.na(.x)))
+```
+
+Pronto, agora você sabe o que significa uma função do tipo `~.x`. Para treinar,
+tente fazer o processo reverso como no caso abaixo:
+
+```{r, eval=FALSE}
+# Fração de valores distintos dentre todos
+map_dbl(starwars, ~ length(unique(.x)) / length(.x))
+
+# Desanonimizar
+frac_distintos <- ~ length(unique(.x)) / length(.x)
+map_dbl(starwars, frac_distintos)
+
+# Remover a notação de til (não é mais necessário mexer no map())
+frac_distintos <- function(.x) length(unique(.x)) / length(.x)
+
+# Utilizar um nome melhor para o argumento
+frac_distintos <- function(vec) length(unique(vec)) / length(vec)
+
+# Recolocar as chaves
+frac_distintos <- function(vec) { length(unique(vec)) / length(vec) }
+
+# Identar o corpo da função
+frac_distintos <- function(vec) {
+  length(unique(vec)) / length(vec)
+}
+```
+
+Agora fica bem mais fácil de entender o que faz o `map()` lá do começo.
+
+## Futuro
+
+A pergunta óbvia agora é: existe um jeito de fazer algo assim fora do
+{tidyverse}? A resposta é sim e não.
+
+Desde o
+[R 4.1](https://blog.curso-r.com/posts/2021-05-06-o-novo-pipe-esta-chegando/),
+o R introduziu a sua própria notação anônima. Ela funciona de maneira muito
+similar ao `~`, com a diferença de que você precisa dizer o nome do seu
+argumento. Abaixo deixo vocês com o processo de simplificação da função
+`conta_na()` para a sua versão anônima que pode ser utilizada em qualquer
+lugar e não só no {tidyverse}:
+
+```{r}
+# Conta o número de NAs em um vetor
+conta_na <- function(vetor) {
+  sum(is.na(vetor))
+}
+
+# Usar uma linha só
+conta_na <- function(vetor) { sum(is.na(vetor)) }
+
+# Sem necessidade de usar chaves
+conta_na <- function(vetor) sum(is.na(vetor))
+
+# Se a função tem uma linha, podemos usar a nova notação
+conta_na <- \(vetor) sum(is.na(vetor))
+
+# O nome do argumento pode ser qualquer coisa, não importa
+conta_na <- \(v) sum(is.na(v))
+
+# Anonimizar
+map_dbl(starwars, \(v) sum(is.na(v)))
+```
+
+Quase tão bom quanto a notação de til!

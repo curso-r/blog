@@ -1,0 +1,293 @@
+---
+title: "Advent of R: Dia 18"
+date: "2021-12-18"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-18.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 18."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Peixe-Caracol (A)
+
+Chegou o [dia 18](https://adventofcode.com/2021/day/18) do AoC e mais uma vez
+o problema não foi muito difícil apesar do enunciado monstruoso. Uma coisa que
+notei hoje é que havia vários caminhos para resolver o exercício que pareciam
+igualmente razoáveis. No final eu decidi usar regex, uma das melhores e mais
+temidas funcionalidades de qualquer linguagem de programação.
+
+O enunciado pedia para aprendermos a fazer somas usando os números dos
+peixes-caracol... A primeira característica desse sistema aritmético é que um
+número é representado por pares de elementos na forma `[x,y]`, que podem ser
+números normais ou outros pares; por exemplo `[[1,2],3]`. Além disso, há duas
+limitações para os números: nunca pode haver um par dentro de 4 ou mais pares e
+nenhum número normal pode ser maior que 9.
+
+A soma dos peixes-caracol coloca cada um dos dois números como elementos de um
+novo par. Se o primeiro número for `[a,b]` e o segundo `[x,y]`, então a soma
+deles é `[[a,b],[x,y]]`. Obviamente isso pode criar um número que viola a
+as limitações acima, então precisamos aplicar as regras da _explosão_ e da
+_quebra_. Abaixo eu descrevo as regras e as funções que criei para implementar
+cada uma:
+
+A regra da explosão sempre vem primeiro e ela deve ser aplicada o maior número
+possível de vezes antes de partirmos para a regra da quebra.
+
+```r
+# Exemplo:
+# [[6,[5,[4,[3,2]]]],1]
+#
+# Passos da explosão:
+# 1. Encontrar o primeiro par simples que está dentro de 4 ou mais pares
+# [3,2]
+#
+# 2. Denominar as partes do par com x e y:
+# [x,y] = [3,2]
+#
+# 3. Somar x ao número normal mais próximo à esquerda (se houver)
+# [[6,[5,[4 + 3,[3,2]]]],1]
+# [[6,[5,[7,[3,2]]]],1]
+#
+# 4. Somar y ao número normal mais próximo à direita (se houver)
+# [[6,[5,[7,[3,2]]]],1 + 2]
+# [[6,[5,[7,[3,2]]]],3]
+#
+# 5. Substituir o par por 0
+# [[6,[5,[7,0]]],3]
+```
+
+```r
+# Encontrar posição de um par que precisa ser explodido
+find_explode <- function(num) {
+  chrs <- stringr::str_split(num, "")[[1]]
+
+  # Iterar nos caracteres para encontrar um par profundo demais
+  counter <- 0
+  for (i in seq_along(chrs)) {
+    if (chrs[i] == "[") {
+      counter <- counter + 1
+    } else if (chrs[i] == "]") {
+      counter <- counter - 1
+
+      # Se o par for profundo demais, retornar
+      if (counter >= 4) {
+
+        # Encontrar o começo do par
+        len <- num |>
+          stringr::str_sub(end = i) |>
+          stringr::str_extract("\\[[^\\[]*?$") |>
+          stringr::str_length() |>
+          magrittr::subtract(1)
+
+        # Retornar "coordenadas" do par
+        return(c(i - len, i))
+      }
+    }
+  }
+
+  # Se não ouver par para explodir, returnar NULL
+  return(NULL)
+}
+
+# Aplicar o algoritmo da explosão
+explode <- function(num) {
+
+  # Encontrar um par para explodir
+  pos <- find_explode(num)
+
+  # Se não houver par, retornar o número
+  if (is.null(pos)) return(num)
+
+  # Extrair números normais do par
+  pair <- num |>
+    stringr::str_sub(pos[1], pos[2]) |>
+    stringr::str_extract_all("[0-9]+") |>
+    purrr::pluck(1) |>
+    as.numeric()
+
+  # Pegar a parte esquerda do número (até o par que vai explodir)
+  lhs <- stringr::str_sub(num, end = pos[1] - 1)
+
+  # Encontrar o número normal mais próximo de pair[1] e somar
+  left_num <- lhs |>
+    stringr::str_extract("[0-9]+(?=[^0-9]+$)") |>
+    as.numeric() |>
+    magrittr::add(pair[1])
+
+  # Pegar a parte direita do número (a partir do par que vai explodir)
+  rhs <- stringr::str_sub(num, pos[2] + 1)
+
+  # Encontrar o número normal mais próximo de pair[2] e somar
+  right_num <- rhs |>
+    stringr::str_extract("^[^0-9]+[0-9]+") |>
+    stringr::str_remove("^[^0-9]+") |>
+    as.numeric() |>
+    magrittr::add(pair[2])
+
+  # Substituir os números normais que mudamos
+  lhs <- stringr::str_replace(lhs, "[0-9]+([^0-9]+)$", paste0(left_num, "\\1"))
+  rhs <- stringr::str_replace(rhs, "^([^0-9]+)[0-9]+", paste0("\\1", right_num))
+
+  # Colar as partes esquerda e direita de volta
+  return(paste0(lhs, "0", rhs))
+}
+```
+
+Se não houver mais como aplicar a explosão, então podemos fazer uma quebra e
+voltar para o começo do algoritmo: aplicar quantas explosões forem possíveis e
+depois tentar uma quebra. Quando nenhuma regra puder ser aplicada, então
+encontramos o resultado da soma.
+
+```r
+# Exemplo:
+# [11,1]
+#
+# Passos da quebra:
+# 1. Encontrar o primeiro número normal maior que 9
+# 11
+#
+# 2. Criar um novo par onde o elemento da esquerda é o número dividido por 2
+#    arredondado para baixo e o elemento da direita é o número dividido por 2
+#    arredondado para cima.
+# [5,6]
+#
+# 3. Substituir o número normal pelo par criado
+# [[5,6],1]
+```
+
+```r
+# Aplicar o algoritmo da quebra
+split <- function(num) {
+
+  # Verificar se algo precisa ser quebrado e retornar o número se não
+  if (!stringr::str_detect(num, "[0-9]{2,}")) return(num)
+
+  # Criar um par a partir das metades do primeiro número normal > 9
+  pair <- num |>
+    stringr::str_extract("[0-9]{2,}") |>
+    as.numeric() |>
+    {\(n) paste0("[", floor(n / 2), ",", ceiling(n / 2), "]")}()
+
+  # Substituir o número normal pelo par criado
+  stringr::str_replace(num, "[0-9]{2,}", pair)
+}
+```
+
+Agora que sabemos como explodir e qubrar, podemos implementar o algoritmo
+completo da soma dos peixes-caracol. Notem o `next` no loop; ele é essencial
+por causa da exigência de aplicarmos a explosão quantas vezes forem necessárias.
+
+```r
+# Soma dos peixes-caracol
+snailfish_sum <- function(num1, num2) {
+
+  # Juntar números como elementos de um novo par
+  num <- paste0("[", num1, ",", num2, "]")
+
+  # Aplicar explosão e quebra até o número não mudar mais
+  num_ <- ""
+  while (num_ != num) {
+    num_ <- num
+
+    # Explodir e, se o número tiver mudado, voltar
+    num <- explode(num)
+    if (num_ != num) next
+
+    # Qubrar
+    num <- split(num)
+  }
+
+  return(num)
+}
+```
+
+Mas o enunciado não pedia para simplesmente implementarmos a soma dos
+peixes-caracol... A resposta final deveria ser a magnitude do número obtido a
+partir de somas sucessivas. Essencialmente, a nossa entrada era uma sequência
+de números `A`, `B`, `C`, `D`, etc. e devíamos calcular
+`(((A + B) + C) + D) + ...`. Já a magnitude de um número envolve outro
+algoritmo; a magnitude de um `[x,y]` qualquer é `3*x + 2*y`, mas devemos aplicar
+isso recursivamente, entrando nas camadas mais profundas do número e voltando
+para a superfície.
+
+```r
+# Fazer uma rodada do algoritmo da magnitude
+get_one_magnitude <- function(num) {
+
+  # Pegar a magnitude do par mais à esquerda
+  val <- num |>
+    stringr::str_extract("\\[[^\\[\\]]+\\]") |>
+    stringr::str_extract_all("[0-9]+") |>
+    purrr::pluck(1) |>
+    as.numeric() |>
+    {\(n) 3 * n[1] + 2 * n[2]}() |>
+    as.character()
+
+  # Trocar o par pela sua magnitude
+  stringr::str_replace(num, "\\[[^\\[\\]]+\\]", val)
+}
+
+# Aplicar o algoritmo completo da magnitude
+get_magnitude <- function(num) {
+
+  # Enquanto ainda houver pares, fazer uma rodada do cálculo
+  while (stringr::str_detect(num, "\\[")) {
+    num <- get_one_magnitude(num)
+  }
+
+  # Retornar magnitude convertida para um valor numérico
+  return(as.numeric(num))
+}
+```
+
+Enfim, depois de uma parede de texto e uma parede de código, podemos finalmente
+juntar tudo na solução do primeiro item.
+
+```r
+# Reduce list of numbers with snalfish addition and get magnitude
+"data-raw/18a_snailfish.txt" |>
+  readr::read_lines() |>
+  purrr::reduce(snailfish_sum) |>
+  get_magnitude()
+#> [1] 4124
+```
+
+## Peixes-Caracol (B)
+
+Em um ato de bondade, o autor do Advent of Code fez um item 2 bem simples. Dados
+todos os números `A`, `B`, `C`, `D`, etc. que recebemos como entrada,
+precisávamos combinar todos para encontrar a maior magnitude possível. Minha
+solução foi gerar todas as somas possíveis (`A + B`, `B + A`, `A + C`, `C + A`,
+etc., notando que `A + B != B + A`) e simplesmente calcular a magnitude de
+todas. A resposta do item devia ser justamente essa maior magnitude possível.
+
+```r
+# Cruzar os números consigo mesmos e somar toda combinação
+"data-raw/18b_snailfish.txt" |>
+  readr::read_lines() |>
+  {\(ns) list(ns, ns)}() |>
+  purrr::cross(`==`) |>
+  purrr::map_dbl(~get_magnitude(snailfish_sum(.x[[1]], .x[[2]]))) |>
+  max()
+#> [1] 4673
+```

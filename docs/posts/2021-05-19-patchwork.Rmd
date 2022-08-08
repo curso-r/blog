@@ -1,0 +1,132 @@
+---
+title: "Como unir vários gráficos feitos em ggplot2: o pacote patchwork"
+date: "2021-05-19"
+tags: ["ggplot2"]
+categories: ["pacotes"]
+image: "images/posts/banner/sticker-patchwork.webp"
+author: ["Fernando"]
+summary: "Você precisa juntar vários ggplots em uma mesma figura e não sabe como fazer isso? Use o pacote patchwork!"
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Você provavelmente já sabe que o pacote `ggplot2` é uma super ferramenta para construção de gráficos, mas você sabia que também é possível construir composições com vários gráficos sem nenhuma dificuldade? Essa é exatamente a função do pacote `patchwork` e hoje nós vamos conversar um pouco sobre essa que é uma das expressões mais importantes do pacote `ggplot2`.
+
+# Ideia geral
+
+O pacote `patchwork` parte de vários objetos `ggplot2`, nomeados por exemplo como `g1`, `g2`, `g3`, e nos fornece ferramentas para declarar de que forma esses gráficos serão posicionados em uma figura maior. Veja o exemplo abaixo em que colocamos três figuras lado a lado:
+
+```{r}
+library(patchwork)
+library(ggplot2)
+library(magrittr)
+
+# primeiro grafico
+g1 <- dados::pinguins %>%
+  ggplot(aes(x = comprimento_bico, y = profundidade_bico)) +
+  geom_point()
+
+# segundo grafico
+g2 <- dados::pinguins %>%
+  ggplot(aes(x = profundidade_bico)) +
+  geom_density()
+
+# terceiro grafico
+g3 <- dados::pinguins %>%
+  ggplot(aes(x = comprimento_bico)) +
+  geom_density()
+
+# codigo usando o pacote patchwork
+# aqui usamos esse operador '+' (que também poderia ser `|`), que fica disponível
+# quando carregamos o pacote
+g1 + g2 + g3
+
+```
+
+Nesse nosso exemplo, utilizamos o operador `+` para colocar os gráficos lado a lado, ou seja, para criar colunas novas. Se o nosso objetivo fosse criar linhas, precisaríamos usar o operador `/`, que normalmente representa divisões no contexto aritmético. Essa escolha por parte de quem desenvolveu o pacote se dá pelo fato dos divisores (o que vem à esquerda do operador de divisão) serem posicionados na parte inferior das frações. Veja o exemplo abaixo:
+
+```{r}
+# codigo usando o pacote patchwork
+# aqui usamos esse operador '/', que fica disponível
+# quando carregamos o pacote
+g1 / g2 / g3
+```
+
+O verdadeiro poder do pacote `patchwork` se revela quando misturamos essas duas operações e `(`s `)`s para organizar nosso código:
+
+```{r}
+# codigo usando o pacote patchwork
+# aqui usamos esse operador '/', que fica disponível
+# quando carregamos o pacote
+(g1 + g2) / g3
+```
+
+```{r}
+# exemplo mais maluco, podemos misturar quantos gráficos a gente quiser e do jeito que a gente quiser:
+(g1+((g1 + g2) / g3))/g3
+```
+
+# Incluindo elementos que não são gráficos: o pacote `gridExtra`
+
+A lógica geral do pacote `patchwork` também funciona com outros tipos de objetos, como textos e tabelas. Entretanto, as operações que vimos até agora só funcionam se estivermos misturando gráficos do `ggplot2` ou `grob`s oriundos dos pacotes `grid` e `gridExtra`. No exemplo abaixo, podemos ver como incluir tabelas e textos usando as funções `gridExtra::tableGrob` e `gridExtra::textGrob`
+
+```{r}
+# Exemplo com gráfico
+# primeira linha
+(g1 + grid::textGrob("Todos os gráficos indicam que está\nrolando uma parad bi-modal."))/
+# segunda linha
+(g2+g3)
+```
+
+```{r}
+
+tabela <- dados::pinguins %>%
+  dplyr::summarise(
+    comprimento_bico = mean(comprimento_bico, na.rm = TRUE),
+    profundidade_bico = mean(profundidade_bico, na.rm = TRUE)
+  ) %>%
+  tidyr::pivot_longer(dplyr::everything(), names_to = "Variável", values_to = "Média")
+
+# Exemplo com tabela
+# primeira linha
+(g1 + gridExtra::tableGrob(tabela, rows = c("", "")))/
+# segunda linha
+(g2+g3)
+```
+
+# Modificando a composição
+
+Até agora nós vimos como montar o que aparecerá na tela, partindo de objetos pré-prontos, mas o `patchwork` também permite que façamos algumas mudanças na composição final, tanto usando os estilos comuns do `ggplot2` quanto usando as funções `plot_annotation`, para incluir títulos e subtítulos, e `plot_layouts`, para manipular larguras e posicionamentos. Veja o exemplo abaixo, que utiliza todas essas funcionalidades.
+
+```{r}
+((
+  # gráfico
+  (# primeira coluna
+    (g2 / g3) |
+    # segunda coluna
+    g1) +
+    # alterando a largura
+    plot_layout(widths = c(1, 2)
+  )
+) +
+#
+plot_annotation(
+  title = "Comparação entre os a profundidade e o comprimento dos bicos",
+  subtitle = "Os  graficos indicam a presença de uma distribuição bimodal, possivelmente porque existem várias espécies na base.",
+  caption = "Fonte: github.com/cienciadedatos/dados"
+)) &
+# trocando os temas para branco. o operador `&` garante que o tema será aplicado
+# a todos os sub-plots
+theme_bw()
+```
+
+# Considerações finais
+
+Essas são as principais funcionalidades do pacote `patchwork`, a riqueza de possibilidades surge das suas combinações. Para mais detalhes, visite o site com a [documentação oficial do pacote](https://patchwork.data-imaginist.com/index.html).
+
+# Gostou? Quer saber mais?
+
+Se você quiser aprender um pouco mais sobre RMarkdown e Visualização de Dados em geral, dê uma olhada no nosso curso [Relatórios e visualização de dados](https://curso-r.com/cursos/visualizacao/) e aproveite!

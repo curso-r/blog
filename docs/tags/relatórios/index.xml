@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>relatórios on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/relat%C3%B3rios/</link>
+    <description>Recent content in relatórios on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 03 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/relat%C3%B3rios/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Trabalhos premiados do curso R para Ciência de Dados I &#43; Dicas !</title>
+      <link>https://blog.curso-r.com/posts/2020-12-03-dicas-relatorios-r4ds1_tabelas/</link>
+      <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-12-03-dicas-relatorios-r4ds1_tabelas/</guid>
+      <description>Apresentamos os trabalhos de conclusão do nosso curso de R para Ciência de Dados I que foram premiados, e comentamos algumas dicas sobre elaboração de tabelas em relatórios.</description>
+    </item>
+    
+    <item>
+      <title>Melhores trabalhos do curso R para Ciência de dados I (maio de 2020)</title>
+      <link>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-06-20-melhores-trabalhos-r4ds1/</guid>
+      <description>Apresentamos os melhores trabalhos de conclusão do nosso curso de R para Ciência de dados I e comentamos aspectos importantes sobre a comunicação dos resultados das nossas análises.</description>
+    </item>
+    
+  </channel>
+</rss>

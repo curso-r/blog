@@ -1,0 +1,92 @@
+---
+title: "O pacote {brasileirao}"
+date: "2021-03-02"
+tags: ["futebol", "web scraping"]
+categories: ["pacotes"]
+image: "images/posts/banner/brasileirao.webp"
+author: ["William"]
+summary: "Novo pacote com dados de todas as partidas de 2003 a 2020."
+draft: false
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE
+)
+```
+
+Recentemente tive vontade de começar a brincar com dados de futebol, mais especificamente <s>o que sobrou</s> do futebol brasileiro.
+
+Depois de uma busca bem rápida na internet, resolvi que montaria a minha própria base, até como uma forma de praticar [web scraping](https://curso-r.com/cursos/web-scraping/).
+
+Foi assim que surgiu o pacote `{brasileirao}`, que reune os resultados de todas as partidas da Série A do Campeonato Brasileiro das temporadas de 2003 a 2020.
+
+> Abrem-se as cortinas e começa o espetáculo - Fiori Gigliotti, narrador esportivo brasileiro
+
+## O pacote
+
+O pacote está disponível [neste repositório](https://github.com/williamorim/brasileirao). Para instalar direto do R, basta rodar o código abaixo:
+
+```{r, eval = FALSE}
+remotes::install_github("williamorim/brasileirao")
+```
+
+Para acessar os dados das partidas, chame o objeto `matches`.
+
+```{r}
+library(dplyr)
+library(brasileirao)
+matches
+```
+
+Para ver os dados de uma temporada, você pode usar a função `filter()`, do pacote `dplyr`.
+
+```{r}
+matches %>% 
+  filter(season == 2020)
+```
+
+O pacote também possui uma função para padronizar o nome dos times: `fix_names()`. Alguns times, como o Atlético mineiro aparecem como `Atlético MG` e `Atlético-MG` na base. Também há casos de times que mudaram de nome nesse período, como o Athetico e o Grêmio Barueri. Pode isso, Arnaldo?
+
+Veja a seguir um exemplo da função em ação:
+
+```{r}
+atleticos <- matches %>%
+  filter(stringr::str_detect(home, "Atlético")) %>% 
+  pull(home) %>% 
+  unique()
+
+atleticos
+
+fix_names(atleticos)
+```
+
+Ela também pode ser utilizada diretamente em uma coluna com nome de times usando o `mutate()`.
+
+```{r}
+matches %>% 
+  mutate(home = fix_names(home), away = fix_names(away))
+```
+
+O pacote é atualizado diriamente, a partir de um script executado via [Github Actions](https://github.com/features/actions). Esse fluxo é pausado nos meses entre temporadas.
+
+## De onde os dados vieram?
+
+Os dados das temporadas de 2003 a 2019 vieram do site [Chance de gol](https://www.chancedegol.com.br/). Particularmente, eu não gosto muito de previsões de resultados esportivos, mas o site é bem legal para quem gosta do tema! E, claro, ele é bem fácil de scrapear, o que é importante se você é nível 1 em Web Scraping igual eu.
+
+Como no Chance de Gol não tinha os dados da temporada de 2020, eu fui buscar na página do [ge](https://globoesporte.globo.com/futebol/brasileirao-serie-a/). A tarefa também bem tranquila, pois os dados da página são atualizados a partir de uma API, que consegui acessar diretamente.
+
+O código que utilizei nos dois casos pode ser encontrado [aqui](https://github.com/williamorim/brasileirao/blob/master/data-raw/scraping_matches.R).
+
+## Próximos passos
+
+Meu objetivo é continuar implementando o pacote, trazendo mais dados sobre as partidas da Série A (local, público, cartões, posse de bola, chutes a gol etc), além de completar com os dados das demais séries (B, C e D).
+
+Se você encontrar qualquer problema no pacote ou inconsistência nos dados, não deixe de me avisar [abrindo uma issue no repositório](https://github.com/williamorim/brasileirao/issues).
+
+É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. 
+
+Até a próxima!

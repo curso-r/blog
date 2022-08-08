@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plotly on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/plotly/</link>
+    <description>Recent content in plotly on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 10 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/plotly/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gráficos no Shiny: plotly</title>
+      <link>https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/</link>
+      <pubDate>Wed, 10 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-10-shiny-plotly/</guid>
+      <description>Transforme seu ggplot em um gráfico animado e intertativo.</description>
+    </item>
+    
+    <item>
+      <title>Qual a capital mais distante de Brasília?</title>
+      <link>https://blog.curso-r.com/posts/2020-09-19-map-dist/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-09-19-map-dist/</guid>
+      <description>Qual é a capital mais próxima de Brasília? E a mais distante? Tutorial usando o pacote {sf}, com direito a gráficos 3D!</description>
+    </item>
+    
+    <item>
+      <title>Componentes Principais: Intuição</title>
+      <link>https://blog.curso-r.com/posts/2017-06-24-componentes-principais-intuicao/</link>
+      <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-06-24-componentes-principais-intuicao/</guid>
+      <description>Uma ilustração gráfica simples para dar intuição sobre o que uma Análise de Componentes Principais faz.</description>
+    </item>
+    
+  </channel>
+</rss>

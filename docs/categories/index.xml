@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/categories/</link>
+    <description>Recent content in Categories on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 29 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>divulgação</title>
+      <link>https://blog.curso-r.com/categories/divulga%C3%A7%C3%A3o/</link>
+      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/divulga%C3%A7%C3%A3o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutoriais</title>
+      <link>https://blog.curso-r.com/categories/tutoriais/</link>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/tutoriais/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>análises</title>
+      <link>https://blog.curso-r.com/categories/an%C3%A1lises/</link>
+      <pubDate>Sun, 05 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/an%C3%A1lises/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pacotes</title>
+      <link>https://blog.curso-r.com/categories/pacotes/</link>
+      <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/pacotes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Desafio</title>
+      <link>https://blog.curso-r.com/categories/desafio/</link>
+      <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/desafio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>conceitos</title>
+      <link>https://blog.curso-r.com/categories/conceitos/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/conceitos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>discussões</title>
+      <link>https://blog.curso-r.com/categories/discuss%C3%B5es/</link>
+      <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/discuss%C3%B5es/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tutorial</title>
+      <link>https://blog.curso-r.com/categories/tutorial/</link>
+      <pubDate>Fri, 23 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>boas práticas</title>
+      <link>https://blog.curso-r.com/categories/boas-pr%C3%A1ticas/</link>
+      <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/boas-pr%C3%A1ticas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>debugging</title>
+      <link>https://blog.curso-r.com/categories/debugging/</link>
+      <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/debugging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>erros</title>
+      <link>https://blog.curso-r.com/categories/erros/</link>
+      <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/erros/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>r</title>
+      <link>https://blog.curso-r.com/categories/r/</link>
+      <pubDate>Fri, 26 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>top 10</title>
+      <link>https://blog.curso-r.com/categories/top-10/</link>
+      <pubDate>Sat, 15 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/top-10/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,325 @@
+---
+title: "Tudo sobre o pacote {Rspotify}"
+date: "2022-06-28"
+tags: ["tutoriais", "spotify", "música"]
+categories: ["tutoriais"]
+image: "images/posts/banner/2022-06-28-rspotify.webp"
+author: ["Tereza"]
+summary: "obtendo informações dos seus artistas e músicas favoritas do Spotify"
+draft: false
+---
+
+Olá! Quem me conhece sabe que sou um pouco viciada em música, e no contexto do R não poderia ser diferente! hahaha
+
+Faz um tempo que venho mexendo com a API do Spotify no R. Primeiro comecei com o pacote [Rspotify](https://cran.r-project.org/web/packages/Rspotify/index.html), e depois conheci o [spotifyr](https://www.rcharlie.com/spotifyr/) (e foi aí que surtei de vez, descobri que dá pra fazer absolutamente tudo de dentro do R: criar playlists, adicionar músicas em playlists, ver quais foram as minhas últimas músicas escutadas, e tudo mais que você imaginar)
+
+Como o acesso a esses pacotes não é nada trivial, resolvi escrever esse post pra mostrar de uma vez por todas como isso é feito (eu sofri bastante na época que comecei a mexer com eles). Vou mostrar como obter os tokens de acesso do Spotify, e falar um pouco sobre as funções do `Rspotify` também.
+
+Nesse post vou focar só nas funções do `Rspotify` (por serem mais simples), mas pretendo fazer um post dedicado para o `spotifyr` mais pra frente.
+
+## Obtendo os tokens de acesso do Spotify
+
+Primeiro, instale o pacote `Rspotify` através do comando
+
+```{r eval=FALSE}
+install.packages("Rspotify")
+```
+
+Agora, carregue o pacote
+
+```{r}
+library(Rspotify)
+```
+
+Note que todas as funções do `Rspotify` exigem o argumento **token**.
+
+Para obter esse token, siga os seguintes passos:
+
+(obs: estou assumindo que você possui uma conta no Spotify. Não precisa ser premium, então caso não possua ainda, é só criar uma)
+
+1 - Entre [nesse link](https://developer.spotify.com/dashboard/)
+
+Você será redirecionado para essa página:
+
+```{r echo=FALSE, fig.align='center', warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify001.webp")
+```
+
+2 - Clique em **Log in** e faça o login com a sua conta do Spotify
+
+3 - Agora, clique em **Create an app**
+
+```{r echo=FALSE, fig.align='center', warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify002.webp")
+```
+
+4 - Dê um nome e uma descrição para o seu app, assinale a caixinha de Termos de Uso, e então, clique em **Create**
+
+```{r echo=FALSE, fig.align='center', warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify003.webp")
+```
+
+5 - Depois de criar o app, você será redirecionado para essa tela. Clique em **edit settings**
+
+```{r echo=FALSE, fig.align='center', warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify004.webp")
+```
+
+6 - Preencha o campo **Redirect URIs** com "http://localhost:1410/" (sem as aspas), e clique em **Add**
+
+```{r echo=FALSE, fig.align='center', warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify005.webp")
+```
+
+A tela deve ficar assim:
+
+```{r echo=FALSE, fig.align='center', warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify006.webp")
+```
+
+7 - Agora, role até o final da página e clique em **Save**
+
+```{r echo=FALSE, fig.align='center', warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify007.webp")
+```
+
+8 - Clique no botão **Show client secret**
+
+```{r echo=FALSE, fig.align='center', warning=FALSE}
+knitr::include_graphics("/images/posts/conteudo/2022-06-28-rspotify/rspotify008.webp")
+```
+
+Veja que na tela estão o **Client ID** e o **Client Secret**. São esse dois tokens que usaremos para ter acesso às funções do `Rspotify`.
+
+Agora, com o R aberto e o pacote `Rspotify` carregado, rode o seguinte código, substituindo o segundo e terceito argumentos pelos tokens **Client ID** e **Client Secret**, respectivamente:
+
+```{r eval=FALSE}
+keys <- spotifyOAuth("nome_qualquer_aqui",
+                     "cole_aqui_seu_client_id",
+                     "cole_aqui_seu_client_secret")
+```
+
+(obs: os três argumentos da função são do tipo character, então devem estar entre aspas; o primeiro argumento é livre)
+
+Você será redirecionado para uma página de autorização do Spotify no seu navegador. Clique em **Aceito** e volte para o R.
+
+Pronto! Agora é só usar as funções do `Rspotify`, usando `token = keys` como argumento em todas elas.
+
+## Conhecendo as funções do Rspotify
+
+O funcionamento das funções está explicado na [documentação do pacote](https://cran.r-project.org/web/packages/Rspotify/Rspotify.pdf), então vou mostrar só alguns exemplos, sem me preocupar em explicar cada função detalhadamente.
+
+Para os exemplos, vou usar músicas e bandas brasileiras que gosto, então já fica aí a recomendação pra quem quiser! hahaha
+
+
+### searchArtist
+
+A função `searchArtist` pede como argumentos o *nome do artista/banda*, e o *token* (aquele que acabamos de obter). Ela retorna um data frame no qual cada linha é referente a um artista (relacionado com a busca feita). O *id do artista* é especialmente importante, pois algumas funções desse pacote exigem o id como argumento, como veremos em seguida.
+
+```{r eval=FALSE}
+searchArtist("O Grilo", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a1.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+
+### getRelated
+
+A função `getRelated` pede como argumentos o *nome do artista/banda*, e o *token*. Ela retorna algumas informações sobre os artistas relacionados com o artista especificado.
+
+```{r eval=FALSE}
+getRelated("O Grilo", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a2.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getArtist
+
+Essa função pede como argumentos o *id do artista*, e o *token*. Ela retorna algumas informações sobre esse artista. No caso, estou usando o id da banda [*O Grilo*](https://open.spotify.com/artist/22KEpOwThQ5q1DGochfayO?si=b90c470678e14818), que foi obtido acima.
+
+```{r eval=FALSE}
+getArtist("22KEpOwThQ5q1DGochfayO", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a3.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getTopTracks
+
+Essa função pede como argumentos o *id do artista*, a especificação de *um país*, e o *token*. Ela retorna as músicas mais populares daquele artista no país em questão (e algumas informações sobre elas)
+
+```{r eval=FALSE}
+getTopTracks("22KEpOwThQ5q1DGochfayO", country = "BR", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a4.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getAlbums
+
+A função `getAlbums` pede como argumentos o *id do artista/banda*, e o *token*. Ela retorna um data frame no qual cada linha é referente a um album do artista/banda. O *id de cada álbum* também é importante caso queira obter mais informações sobre o álbum.
+
+```{r eval=FALSE}
+getAlbums("22KEpOwThQ5q1DGochfayO", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a5.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getAlbumInfo
+
+Essa função pede como argumentos o *id do álbum*, e o *token*. Ela retorna algumas informações sobre o álbum.
+
+```{r eval=FALSE}
+getAlbumInfo("0I7bofr4iucY3LXUPKv9cz", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a6.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getAlbum
+
+Essa função pede como argumentos o *id do álbum*, e o *token*. Ela retorna informações sobre cada música do álbum.
+
+```{r eval=FALSE}
+getAlbum("0I7bofr4iucY3LXUPKv9cz", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a7.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### searchPlaylist
+
+A função `searchPlaylist` pede como argumentos o *nome de uma playlist*, e o *token*. Ela retorna um data frame no qual cada linha é referente a uma playlist (relacionada com a busca feita). Assim como os outros casos, o *id da playlist* também é importante caso queira obter mais informações sobre ela.
+
+No caso, vamos procurar a playlist [*"Uma Música Por Dia"*](https://open.spotify.com/playlist/4faz4FVeL328piox0lz7UF?si=046d21d978d14cf1), que é uma playlist que atualizo diariamente. (obs: meu id de usuário no spotify é *"therezzza"*)
+
+```{r eval=FALSE}
+searchPlaylist("Uma Música Por Dia", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a8.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+Veja que a playlist que eu queria encontrar está na segunda linha do data frame, vou usá-la na próxima função!
+
+### getPlaylistSongs
+
+Essa função pede como argumentos o *id do usuário*, o *id da playlist* e o *token*, e retorna um data frame com as músicas da playlist (e algumas informações adicionais sobre elas)
+
+```{r eval=FALSE}
+getPlaylistSongs("therezzza", "4faz4FVeL328piox0lz7UF", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a9.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### searchTrack
+
+A função `searchTrack` pede como argumentos o *nome de uma música* (funciona como a busca do Spotify mesmo), e o *token*. Ela retorna um data frame no qual cada linha é referente a uma música (relacionada com a busca feita).
+
+No exemplo, estou procurando a música [*"Geminis"*](https://open.spotify.com/track/7w6IN6ebiY2AOQwZY50NOG?si=4e4c41a7dd344752) da [*Julia Mestre*](https://open.spotify.com/artist/1FnGKreDca8xq3juSi5hAE?si=6s0LdIJiQ0ai07oYHOPGmA).
+
+```{r eval=FALSE}
+searchTrack("Geminis Julia Mestre", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a10.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getTrack
+
+Essa função pede como argumentos o *id da música*, e o *token*. Ela retorna algumas informações sobre a música.
+
+```{r eval=FALSE}
+getTrack("7w6IN6ebiY2AOQwZY50NOG", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a11.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getFeatures
+
+Essa função pede como argumentos o *id da música*, e o *token*. Ela retorna algumas informações mais específicas sobre a música (e é a parte que acho mais legal). Essa informações são algumas "métricas" da música, e dá pra fazer muitas coisas legais com elas, como por exemplo, ordenar uma playlist pelas músicas mais dançantes.
+
+```{r eval=FALSE}
+getFeatures("7w6IN6ebiY2AOQwZY50NOG", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a12.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getUser
+
+Essa função pede como argumentos o *id de um usuário*, e o *token*. Ela retorna algumas informações sobre esse usuário.
+
+No caso, estou usando o id de uma conta minha no spotify, chamada [*"guiadosmusiqueiros"*](https://open.spotify.com/user/bn5u195uotc5u95tfw24ct6uf?si=d0ad76cd89604c8d), que tem playlists de recomendações mais bem organizadas :)
+
+```{r eval=FALSE}
+getUser("bn5u195uotc5u95tfw24ct6uf", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a14.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+### getPlaylists
+
+E por fim, a função `getPlaylists` pede como argumentos o *id de um usuário* e o *token*. Ela retorna informações sobre cada playlist desse usuário!
+
+```{r eval=FALSE}
+getPlaylists("bn5u195uotc5u95tfw24ct6uf", token = keys)
+```
+
+```{r echo=FALSE}
+readr::read_rds("../../static/data/rspotify/a15.rds") |> 
+  knitr::kable() |>
+  kableExtra::kable_material(c("striped", "hover"))
+```
+
+
+```{r echo=FALSE}
+knitr::include_graphics("https://media.giphy.com/media/olAik8MhYOB9K/giphy.gif")
+```
+
+Por hoje é só, pessoal! Espero que o tutorial tenha ficado claro :)

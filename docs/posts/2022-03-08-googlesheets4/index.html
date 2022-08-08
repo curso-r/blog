@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Acessando dados do Google Sheets com R</title>
+  <meta name="title" content="Acessando dados do Google Sheets com R">
+  <meta name="description" content="Quer saber como acessar dados do Google Sheets e respostas de Google Forms com R?">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2022-03-08-googlesheets4/">
+  <meta property="og:title" content="Acessando dados do Google Sheets com R">
+  <meta property="og:description" content="Quer saber como acessar dados do Google Sheets e respostas de Google Forms com R?">
+  <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2022-03-08-googlesheets4/">
+  <meta property="twitter:title" content="Acessando dados do Google Sheets com R">
+  <meta property="twitter:description" content="Quer saber como acessar dados do Google Sheets e respostas de Google Forms com R?">
+  <meta property="twitter:image" content="https://googlesheets4.tidyverse.org/logo.png">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://googlesheets4.tidyverse.org/logo.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Acessando dados do Google Sheets com R</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Beatriz">Beatriz</a>
+            
+            em
+            <a href="/categories/pacotes">Pacotes</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            8 de
+            março de
+            2022
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/api">api</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/google">google</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/importa%c3%a7%c3%a3o">importação</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/google-sheets">google sheets</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>O <a href="https://docs.google.com/spreadsheets/u/0/">Google Sheets</a> é um editor de planilhas da Google, que funciona vinculado ao Google Drive (ou seja, os arquivos ficam na nuvem). O pacote <a href="https://googlesheets4.tidyverse.org/">googlesheets4</a> permite interagir com o Google Sheets através do R. Neste post, vamos mostrar alguns exemplos sobre como podemos importar dados usando o pacote <code>googlesheets4</code>.</p>
+<p>Primeiramente, é necessário instalar o pacote:</p>
+<pre class="r"><code>install.packages(&quot;googlesheets4&quot;)</code></pre>
+<p>Então, podemos carregá-lo:</p>
+<pre class="r"><code># Carregar pacote googlesheets4
+library(googlesheets4)</code></pre>
+<p>Neste exemplo, usaremos a tabela da <a href="https://cran.r-project.org/web/packages/gapminder/README.html">base de dados Gapminder</a>, que apresenta algumas informações por país e ano, como a população total, expectativa de vida ao nascer e o PIB per capita.</p>
+<p>Para importar uma tabela que está no Google Sheets, primeiramente precisamos identificá-la para que o R saiba qual arquivo queremos abrir. Uma forma de fazer isso é usando a <em>URL</em> (ou <em>Uniform Resource Locator</em>), que é também conhecido como <em>o link que usamos no navegador</em>.</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/url.webp" /><!-- --></p>
+<p>Um exemplo de url é o seguinte, e ele encaminha para <a href="https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077">essa tabela</a>.</p>
+<pre><code>https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077</code></pre>
+<p>Sabendo a URL da planilha, podemos salvar em um objeto no R para facilitar o uso!</p>
+<pre class="r"><code># salvar a url/link da planilha que queremos acessar
+url_planilha &lt;- &quot;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077&quot;</code></pre>
+<div id="autenticação" class="section level3">
+<h3>Autenticação</h3>
+<p>Para evitar que alguém que não tem acesso a uma Google Sheet consiga ler a mesma sem permissão, o pacote nos direciona para fazer uma autenticação com uma conta do Google. Esse direcionamento é feito quando usamos alguma função que necessita de autenticação pela primeira vez, e a cada sessão do R (ou seja, sempre que reiniciar), o R perguntará novamente com qual email do Google gostaríamos de autenticar.</p>
+<p>Exemplo: No meu caso, eu já autentiquei anteriormente, então ele apresenta os emails já autenticados.</p>
+<pre class="r"><code>respostas_formulario &lt;- read_sheet(url)
+# → The googlesheets4 package is requesting access to your Google account
+#   Select a pre-authorised account or enter &#39;0&#39; to obtain a new token
+#   Press Esc/Ctrl + C to cancel
+# 
+# 1: bmilz@curso-r.com
+# 2: milz.bea@gmail.com</code></pre>
+<p>Para fazer uma nova autenticação, basta escolher a opção <code>0</code>, e uma janela do navegador abrirá para fazer a autenticação:</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/auth1.webp" width="50%" style="display: block; margin: auto;" /></p>
+<p>Precisamos então clicar no email desejado, selecionar todas as opções de acesso e clicar em “Continuar”:</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/auth2.webp" width="50%" style="display: block; margin: auto;" /></p>
+<p>Caso funcione, a seguinte mensagem aparecerá no navegador: <code>Authentication complete. Please close this page and return to R</code>. Isso significa que podemos voltar ao R!</p>
+<blockquote>
+<p>DEU ERRO! Caso dê erro ao abrir o arquivo, se certifique que você tem acesso de leitura ou edição do Google Sheets desejado.</p>
+</blockquote>
+<p>Agora podemos experimenta as funções do pacote!</p>
+</div>
+<div id="função-sheet_properties" class="section level3">
+<h3>Função <code>sheet_properties()</code></h3>
+<p>A função <code>sheet_properties()</code> permite ver quais abas (chamaremos muitas vezes de <em>sheets</em>, pois é a forma usada no pacote) estão disponíveis na tabela:</p>
+<pre class="r"><code># ver as propriedades da planilha (conseguimos descobrir quais sheets 
+# estão disponíveis)
+sheet_properties(url_planilha)
+## # A tibble: 5 × 8
+##   name     index         id type  visible grid_rows grid_columns data  
+##   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;
+## 1 Africa       0  780868077 GRID  TRUE          625            6 &lt;NULL&gt;
+## 2 Americas     1   45759261 GRID  TRUE          301            6 &lt;NULL&gt;
+## 3 Asia         2 1984823455 GRID  TRUE          397            6 &lt;NULL&gt;
+## 4 Europe       3 1503562052 GRID  TRUE          361            6 &lt;NULL&gt;
+## 5 Oceania      4 1796776040 GRID  TRUE           25            6 &lt;NULL&gt;</code></pre>
+<p>Com isso, sabemos que a tabela que informamos tem 5 abas, sendo elas: Africa, Americas, Asia, Europe e Oceania.</p>
+</div>
+<div id="função-read_sheet" class="section level3">
+<h3>Função <code>read_sheet()</code></h3>
+<p>A função mais útil (na minha opinião) do pacote é a que usamos para ler os dados: <code>read_sheet()</code>!</p>
+<p>Se usarmos essa função sem nenhum argumento além do <em>url</em> da planilha, por padrão a primeira sheet será importada. Como vimos no resultado da função <code>sheet_properties()</code>, a primeira aba da base contém os dados dos países que estão no continente Africano. Então os dados que serão importados são referentes à este continente:</p>
+<pre class="r"><code>planilha &lt;- read_sheet(url_planilha)
+dplyr::glimpse(planilha)
+## Rows: 624
+## Columns: 6
+## $ country   &lt;chr&gt; &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Alge…
+## $ continent &lt;chr&gt; &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, …
+## $ year      &lt;dbl&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+## $ lifeExp   &lt;dbl&gt; 43.077, 45.685, 48.303, 51.407, 54.518, 58.014, 61.368, 65.7…
+## $ pop       &lt;dbl&gt; 9279525, 10270856, 11000948, 12760499, 14760787, 17152804, 2…
+## $ gdpPercap &lt;dbl&gt; 2449.0082, 3013.9760, 2550.8169, 3246.9918, 4182.6638, 4910.…</code></pre>
+<p>Podemos também usar o argumento <code>sheet =</code> para especificar qual aba queremos importar. Podemos fazer a busca pela posição (ou seja, informando um número), ou pelo nome da aba:</p>
+<pre class="r"><code># abrir uma sheet específica: pela posição
+planilha_sheet_3 &lt;- read_sheet(url_planilha, sheet = 3)
+dplyr::glimpse(planilha_sheet_3)
+## Rows: 396
+## Columns: 6
+## $ country   &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, …
+## $ continent &lt;chr&gt; &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asi…
+## $ year      &lt;dbl&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+## $ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.8…
+## $ pop       &lt;dbl&gt; 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 12…
+## $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, …
+
+# abrir uma sheet específica: pelo nome
+planilha_asia &lt;- read_sheet(url_planilha, sheet = &quot;Asia&quot;)
+dplyr::glimpse(planilha_asia)
+## Rows: 396
+## Columns: 6
+## $ country   &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, …
+## $ continent &lt;chr&gt; &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asi…
+## $ year      &lt;dbl&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+## $ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.8…
+## $ pop       &lt;dbl&gt; 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 12…
+## $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, …</code></pre>
+<p>Como todas as tabelas da base tem a mesma estrutura, podemos usar o pacote <a href="https://purrr.tidyverse.org/reference/map.html">purrr</a> para importar todas as abas de uma vez:</p>
+<pre class="r"><code># a função sheet_names permite buscar apenas o nome das abas
+nome_abas &lt;- sheet_names(url_planilha)
+
+# com o purrr, podemos abrir todas as abas de uma vez!
+gapminder_completo &lt;- nome_abas |&gt; 
+  purrr::map_dfr(~ read_sheet(url_planilha, sheet = .x))
+
+dplyr::glimpse(gapminder_completo)
+## Rows: 1,704
+## Columns: 6
+## $ country   &lt;chr&gt; &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Algeria&quot;, &quot;Alge…
+## $ continent &lt;chr&gt; &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, …
+## $ year      &lt;dbl&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+## $ lifeExp   &lt;dbl&gt; 43.077, 45.685, 48.303, 51.407, 54.518, 58.014, 61.368, 65.7…
+## $ pop       &lt;dbl&gt; 9279525, 10270856, 11000948, 12760499, 14760787, 17152804, 2…
+## $ gdpPercap &lt;dbl&gt; 2449.0082, 3013.9760, 2550.8169, 3246.9918, 4182.6638, 4910.…</code></pre>
+</div>
+<div id="outras-funções" class="section level3">
+<h3>Outras funções</h3>
+<p>Esse pacote tem muitas outras funções que interagem com o Googles Sheets, mas que não fazem parte do escopo deste post, como criar uma nova aba e escrever dados em uma aba. Essas funções também são muito úteis!</p>
+</div>
+<div id="e-o-google-forms" class="section level3">
+<h3>E o Google Forms?</h3>
+<p>Eu gosto muito de usar esse pacote para importar respostas de <a href="https://docs.google.com/forms/u/0/">formulários do Google</a>, pois o Google permite vincular respostas dos formulários em uma Google Sheets.</p>
+<p>Aqui mostrarei como fazer isso! Primeiro precisamos criar um formulário (caso ele ainda não exista):</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms1.webp" /><!-- --></p>
+<p>Ao criar o formulário, podemos clicar em “Respostas” e então clicar no logo do Google Sheets (um quadrado verde com uma linha branca horizontal e outra vertical):</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms2.webp" /><!-- --></p>
+<p>O Google Forms irá perguntar qual o nome da Google Sheet a ser criada (ou também podemos selecionar uma Google Sheets que já existe):</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms3.webp" /><!-- --></p>
+<p>Depois de selecionar qual a Google Sheet ficará vinculada ao formulário, a Google Sheet será aberta e podemos ver as respostas:</p>
+<p><img src="/images/posts/conteudo/2022-03-08-googlesheets4/forms4.webp" /><!-- -->
+Cada coluna terá informações de uma pergunta do formulário. Inicialmente, a base terá 0 linhas, pois quando criamos o formulário ele tem 0 respostas. Porém, após alguém responder o formulário, a Google Sheet é automaticamente atualizada e apresentará a resposta. Podemos importar os dados usando a função <code>read_sheet()</code>, como mostrado anteriormente:</p>
+<pre class="r"><code>url &lt;- &quot;https://docs.google.com/spreadsheets/d/1Ch3aMraacwhNo1sU4Z9b54nWYG8gdl18UfLJMzquL8s/&quot;
+
+respostas_formulario &lt;- read_sheet(url)
+
+respostas_formulario
+## # A tibble: 1 × 2
+##   `Carimbo de data/hora` `Pergunta sem título`
+##   &lt;dttm&gt;                 &lt;chr&gt;                
+## 1 2022-03-08 21:29:01    Opção 1</code></pre>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. <strong>Postem também quais funções do pacote vocês gostariam de saber mais!!</strong></p>
+<p>Até a próxima!</p>
+</div>
+</div>
+<div id="referências" class="section level2">
+<h2>Referências</h2>
+<ul>
+<li><p><a href="https://googlesheets4.tidyverse.org/">Documentação do pacote googlesheets4</a></p></li>
+<li><p><a href="https://purrr.tidyverse.org/reference/map.html">Documentação do pacote purrr</a></p></li>
+<li><p><a href="https://www.gapminder.org/data/">Referência da base Gapminder</a></p></li>
+</ul>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

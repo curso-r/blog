@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>widgets on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/widgets/</link>
+    <description>Recent content in widgets on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 01 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/widgets/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Crie seletores de visualização no Shiny</title>
+      <link>https://blog.curso-r.com/posts/2021-07-01-shiny-seletor-vis/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-01-shiny-seletor-vis/</guid>
+      <description>Aprenda a criar seletores de visualização para o seu aplicativo Shiny.</description>
+    </item>
+    
+    <item>
+      <title>Adicionando loaders ao seu Shiny app</title>
+      <link>https://blog.curso-r.com/posts/2021-06-14-loaders/</link>
+      <pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-06-14-loaders/</guid>
+      <description>Aprenda a adicionar animações de carregamento ao seu aplicativo Shiny.</description>
+    </item>
+    
+  </channel>
+</rss>

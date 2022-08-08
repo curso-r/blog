@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>miojo on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/miojo/</link>
+    <description>Recent content in miojo on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 07 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/miojo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pacotes miojo - como fazer um pacote no R em 3 minutos</title>
+      <link>https://blog.curso-r.com/posts/2017-09-07-pacote-miojo/</link>
+      <pubDate>Thu, 07 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-09-07-pacote-miojo/</guid>
+      <description>Veja como fazer um pacote em R e fazer seus códigos voarem na velocidade da luz</description>
+    </item>
+    
+  </channel>
+</rss>

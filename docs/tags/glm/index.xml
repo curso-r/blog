@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>glm on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/glm/</link>
+    <description>Recent content in glm on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 29 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/glm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Regressão Logística em: a menor deep learning do mundo</title>
+      <link>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</link>
+      <pubDate>Sat, 29 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2017-07-29-segundo-menor-dl/</guid>
+      <description>Deep learning é uma grande novidade, mas há muitos mitos em sua volta que acaba espantando pessoas que poderiam usufruir e contribuir para a comunidade de analista de dados. Esse post tem o intuito de abrir um pouquinho a caixa preta para quebrar algumas dessas fábulas.</description>
+    </item>
+    
+  </channel>
+</rss>

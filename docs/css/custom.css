@@ -1,0 +1,128 @@
+/* Título dos posts */
+
+.bg-posts {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-posts:before {
+  content: '';
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.titulo-post {
+  color: #fff;
+}
+
+/* Rodapé */
+
+.bg-footer {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-footer:before {
+  content: '';
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+footer {
+  margin-top: 30px;
+}
+
+footer .img-fluid {
+  max-width: 70%;
+}
+
+footer h6 {
+  color: white;
+  font-size: 15px;
+  font-weight: normal;
+  margin-top: auto;
+}
+
+.copyright {
+  color: white;
+  font-size: 15px;
+  position: relative;
+}
+
+footer i {
+  color: white;
+}
+
+@media (max-width: 575px) {
+  footer {
+    text-align: center;
+  }
+}
+
+/* Geral */
+
+h2, h3, h4, h5, h6 {
+  margin-top: 30px;
+}
+
+.media-body > h5 {
+  margin-top: 0;
+}
+
+.media-body > p {
+  font-size: 13px;
+}
+
+.title-border {
+  margin-top: 0;
+}
+
+.widget > h4 {
+  margin-top: 0;
+}
+
+.content img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content p > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.caption {
+  text-align: center;
+}
+
+.disqus-comments {
+  border-top: 1px solid #f4f4f4;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.widget:first-child {
+  margin-top: 50px;
+}
+
+.form-searh {
+  flex-direction: column;
+  display: inline-block;
+}
+
+.content .ReactTable * {
+  margin-bottom: 0;
+}

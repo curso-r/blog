@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bases de dados on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/bases-de-dados/</link>
+    <description>Recent content in bases de dados on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/bases-de-dados/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bases de dados: para praticar e ensinar</title>
+      <link>https://blog.curso-r.com/posts/2022-06-11-bases-de-dados/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-06-11-bases-de-dados/</guid>
+      <description>Quer saber como acessar várias bases de dados com R?</description>
+    </item>
+    
+    <item>
+      <title>Pacote dados: bases em português para praticar e ensinar</title>
+      <link>https://blog.curso-r.com/posts/2022-04-06-pacote-dados/</link>
+      <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2022-04-06-pacote-dados/</guid>
+      <description>Quer saber como acessar várias bases de dados em Português com R?</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>brcrimR</title>
+  <meta name="title" content="brcrimR">
+  <meta name="description" content="brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2017-09-13-brcrimr/">
+  <meta property="og:title" content="brcrimR">
+  <meta property="og:description" content="brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/ssp.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2017-09-13-brcrimr/">
+  <meta property="twitter:title" content="brcrimR">
+  <meta property="twitter:description" content="brcrimR é um pacote para baixar e processar informações divulgadas pelas secretarias de segurança pública do Brasil. Neste post, apresentamos as funcionalidades do pacote aplicadas ao estado de São Paulo.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/ssp.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/ssp.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">brcrimR</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Fernando">Fernando</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            13 de
+            setembro de
+            2017
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/web-scraping">web scraping</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/tidyverse">tidyverse</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/banco-de-dados">banco de dados</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/dados-abertos">dados abertos</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/api">api</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<p>Em maio deste ano, escrevi um <a href="http://curso-r.com/blog/2017/05/19/2017-05-19-scrapper-ssp/">post</a> sobre <em>web scraping</em> dos dados da secretaria de segurança pública de São Paulo. Como o título indica, o foco do texto é mostrar como se raspa a página de estatísticas da SSP, mas, mais do que isso, o texto também sugere um roteiro de construção de <em>web scrapers</em>.</p>
+<p>Neste post, venho divulgar uma expansão do conteúdo do post passado. Agora é possível acessar os dados da SSP diretamente no R usando o pacote <code>brcrimR</code>, mas a ideia é que no futuro todas as informações divulgadas por alguma Secretaria de Segurança fiquem disponíveis diretamente no R!</p>
+<pre class="r"><code>devtools::install_github(&quot;abjur/brcrimR&quot;)</code></pre>
+<p>O <code>brmcrimR</code> se propõe a resolver três problemas:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Obter informações criminais brasileiras diretamente no R</strong> - Muitas análises interessantes seriam viabilizadas se fosse fácil e rápido carregar informações criminais históricas num <code>data_frame</code>. Fazer isso é a motivação principal do <code>brmcrimR</code>.</li>
+<li><strong>Consolidar tabelas em bases históricas</strong> - Assim como em São Paulo, muitas Secretarias de Segurança disponibilizam as informações filtradas por mês ou localidade. A segunda motivação principal do <code>brcrimR</code> é iterar por essas páginas.</li>
+<li><strong>Padronização</strong> - O objetivo menos direto do <code>brcrimR</code> é padronizar as informações disponibilizadas. Esse não é um problema simplesmente computacional, mas algumas rotinas de pré-processamento podem ajudar no processo.</li>
+</ol>
+<p>Para ilustrar o funcionamento do <code>brcrimR</code>, vamos olhar o que já está implementado em São Paulo.</p>
+<div id="informações-agregadas" class="section level2">
+<h2>Informações agregadas</h2>
+<p>As tabelas de informações agregadas podem ser obtidas seguindo os passos que descrevi <a href="http://curso-r.com/blog/2017/05/19/2017-05-19-scrapper-ssp/">aqui</a>, mas a função <code>brmcrimR::get_summarized_table_sp</code> faz todo o trabalho por nós.</p>
+<pre class="r"><code>brcrimR::get_summarized_table_sp(year = &#39;2016&#39;, city = &#39;1&#39;) %&gt;% 
+  knitr::kable(caption = &quot;Contagem de boletins de ocorrência na cidade de Amparo.&quot;) %&gt;% 
+  kableExtra::kable_styling(font_size = 8)</code></pre>
+<table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:unnamed-chunk-2">Tabela 1: </span>Contagem de boletins de ocorrência na cidade de Amparo.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Natureza
+</th>
+<th style="text-align:right;">
+Jan
+</th>
+<th style="text-align:right;">
+Fev
+</th>
+<th style="text-align:right;">
+Mar
+</th>
+<th style="text-align:right;">
+Abr
+</th>
+<th style="text-align:right;">
+Mai
+</th>
+<th style="text-align:right;">
+Jun
+</th>
+<th style="text-align:right;">
+Jul
+</th>
+<th style="text-align:right;">
+Ago
+</th>
+<th style="text-align:right;">
+Set
+</th>
+<th style="text-align:right;">
+Out
+</th>
+<th style="text-align:right;">
+Nov
+</th>
+<th style="text-align:right;">
+Dez
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:left;">
+municipio
+</th>
+<th style="text-align:left;">
+ano
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+HOMICÍDIO DOLOSO (2)
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nº DE VÍTIMAS EM HOMICÍDIO DOLOSO (3)
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HOMICÍDIO DOLOSO POR ACIDENTE DE TRÂNSITO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nº DE VÍTIMAS EM HOMICÍDIO DOLOSO POR ACIDENTE DE TRÂNSITO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HOMICÍDIO CULPOSO POR ACIDENTE DE TRÂNSITO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HOMICÍDIO CULPOSO OUTROS
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TENTATIVA DE HOMICÍDIO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LESÃO CORPORAL SEGUIDA DE MORTE
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LESÃO CORPORAL DOLOSA
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+171
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LESÃO CORPORAL CULPOSA POR ACIDENTE DE TRÂNSITO
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+191
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LESÃO CORPORAL CULPOSA - OUTRAS
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LATROCÍNIO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nº DE VÍTIMAS EM LATROCÍNIO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TOTAL DE ESTUPRO (4)
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ESTUPRO DE VULNERÁVEL
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TOTAL DE ROUBO - OUTROS (1)
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ROUBO DE VEÍCULO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ROUBO A BANCO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ROUBO DE CARGA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FURTO - OUTROS
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+222
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FURTO DE VEÍCULO
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2016
+</td>
+</tr>
+</tbody>
+</table>
+<p>Para obter os dados históricos, basta usar a função <code>brcrimR::get_historical_summarized_table_sp</code>. Ela funciona da mesma maneira que <code>brcrimR::get_summarized_table_sp</code>, mas pode receber vetores como input. Nesse caso, ela organiza os parâmetros num <em>grid</em> e retorna uma tabela com todas as requisições empilhadas.</p>
+<pre class="r"><code>brcrimR::get_historical_summarized_table_sp(
+  y = c(&#39;2016&#39;, &#39;2017&#39;), c = &#39;1&#39;, ty = &#39;ctl00$conteudo$btnMensal&#39;) %&gt;% 
+  filter(Natureza == &quot;LESÃO CORPORAL CULPOSA POR ACIDENTE DE TRÂNSITO&quot;) %&gt;% 
+  set_names(c(&#39;Natureza&#39;, 1:12, &quot;Total&quot;, &quot;municipio&quot;, &quot;ano&quot;)) %&gt;% 
+  gather(mes, valor, -municipio, -ano, -Natureza, -Total) %&gt;% 
+  filter(!is.na(valor)) %&gt;% 
+  mutate(data_bo = lubridate::dmy(paste(&quot;01&quot;, mes, ano, sep = &quot;-&quot;))) %&gt;% 
+  ggplot(aes(x = data_bo, y = valor)) +
+  geom_bar(stat = &#39;identity&#39;, fill = &#39;royalblue&#39;) +
+  theme_minimal(15) +
+  labs(x = &#39;Mês&#39;, y = &quot;Número de BO&#39;s&quot;)</code></pre>
+<p><img src="/posts/2017-09-13-brcrimr_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="informações-desagregadas" class="section level2">
+<h2>Informações desagregadas</h2>
+<p>Além dos dados agregados, a partir do ano passado a SSP de São Paulo também passou a divulgar informações detalhadas sobre os BO’s da capital no <a href="http://www.ssp.sp.gov.br/transparenciassp/">portal da trasparência</a>. O <a href="https://github.com/jjesusfilho">José de Jesus</a> começou o <a href="https://gist.github.com/jjesusfilho/3b0f99f80a0bce019bda3fce54486b9d"><em>scraping</em> desses conteúdos</a> e eu só encapsulei tudo dentro de um pacote. Vejam só:</p>
+<pre class="r"><code>brcrimR::get_detailed_table_sp(folder = &#39;btnHomicicio&#39;, year = &#39;2017&#39;, month = &#39;1&#39;, department = &#39;0&#39;) %&gt;%
+  select(NUM_BO, BO_INICIADO, DATAOCORRENCIA, BO_AUTORIA, FLAGRANTE, LATITUDE, LONGITUDE) %&gt;% 
+  distinct(NUM_BO, .keep_all = T) %&gt;% 
+  head(10) %&gt;% 
+  knitr::kable(caption = &quot;Algumas colunas de dez BO&#39;s da tabela de boletins de ocorrência de homicídio de janeiro de 2017.&quot;) %&gt;% 
+  kableExtra::kable_styling(font_size = 8)</code></pre>
+<table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:unnamed-chunk-4">Tabela 2: </span>Algumas colunas de dez BO’s da tabela de boletins de ocorrência de homicídio de janeiro de 2017.
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+NUM_BO
+</th>
+<th style="text-align:left;">
+BO_INICIADO
+</th>
+<th style="text-align:left;">
+DATAOCORRENCIA
+</th>
+<th style="text-align:left;">
+BO_AUTORIA
+</th>
+<th style="text-align:left;">
+FLAGRANTE
+</th>
+<th style="text-align:left;">
+LATITUDE
+</th>
+<th style="text-align:left;">
+LONGITUDE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+11589
+</td>
+<td style="text-align:left;">
+31/12/2016 22:02:52
+</td>
+<td style="text-align:left;">
+31/12/2016
+</td>
+<td style="text-align:left;">
+Conhecida
+</td>
+<td style="text-align:left;">
+Não
+</td>
+<td style="text-align:left;">
+-23,6027829499999
+</td>
+<td style="text-align:left;">
+-46,516050348
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1761
+</td>
+<td style="text-align:left;">
+31/12/2016 21:02:50
+</td>
+<td style="text-align:left;">
+31/12/2016
+</td>
+<td style="text-align:left;">
+Conhecida
+</td>
+<td style="text-align:left;">
+Não
+</td>
+<td style="text-align:left;">
+-22,7974702349999
+</td>
+<td style="text-align:left;">
+-45,1786399879999
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2915
+</td>
+<td style="text-align:left;">
+31/12/2016 23:33:16
+</td>
+<td style="text-align:left;">
+31/12/2016
+</td>
+<td style="text-align:left;">
+Conhecida
+</td>
+<td style="text-align:left;">
+Sim
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+01/01/2017 03:45:42
+</td>
+<td style="text-align:left;">
+31/12/2016
+</td>
+<td style="text-align:left;">
+Conhecida
+</td>
+<td style="text-align:left;">
+Não
+</td>
+<td style="text-align:left;">
+-23,4663377281984
+</td>
+<td style="text-align:left;">
+-47,4644919148778
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+01/01/2017 03:40:13
+</td>
+<td style="text-align:left;">
+01/01/2017
+</td>
+<td style="text-align:left;">
+Desconhecida
+</td>
+<td style="text-align:left;">
+Não
+</td>
+<td style="text-align:left;">
+-23,7062770598301
+</td>
+<td style="text-align:left;">
+-46,5997084663396
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+01/01/2017 04:25:12
+</td>
+<td style="text-align:left;">
+01/01/2017
+</td>
+<td style="text-align:left;">
+Desconhecida
+</td>
+<td style="text-align:left;">
+Não
+</td>
+<td style="text-align:left;">
+-23,435339469
+</td>
+<td style="text-align:left;">
+-45,0776321386071
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+01/01/2017 02:30:11
+</td>
+<td style="text-align:left;">
+31/12/2016
+</td>
+<td style="text-align:left;">
+Conhecida
+</td>
+<td style="text-align:left;">
+Sim
+</td>
+<td style="text-align:left;">
+-23,838385412
+</td>
+<td style="text-align:left;">
+-46,5778088709999
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+01/01/2017 04:53:21
+</td>
+<td style="text-align:left;">
+01/01/2017
+</td>
+<td style="text-align:left;">
+Desconhecida
+</td>
+<td style="text-align:left;">
+Não
+</td>
+<td style="text-align:left;">
+-23,6528390081698
+</td>
+<td style="text-align:left;">
+-46,4471844195849
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+859
+</td>
+<td style="text-align:left;">
+31/12/2016 21:35:30
+</td>
+<td style="text-align:left;">
+31/12/2016
+</td>
+<td style="text-align:left;">
+Conhecida
+</td>
+<td style="text-align:left;">
+Não
+</td>
+<td style="text-align:left;">
+-23,6027829499999
+</td>
+<td style="text-align:left;">
+-46,516050348
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13933
+</td>
+<td style="text-align:left;">
+31/12/2016 21:09:59
+</td>
+<td style="text-align:left;">
+31/12/2016
+</td>
+<td style="text-align:left;">
+Conhecida
+</td>
+<td style="text-align:left;">
+Sim
+</td>
+<td style="text-align:left;">
+-23,6221113323333
+</td>
+<td style="text-align:left;">
+-46,4778365256666
+</td>
+</tr>
+</tbody>
+</table>
+<p>É fantástico que a gente tenha acesso a informações tão detalhadas como latitude e longitude de um crime, mas o formato não é lá essas coisas. Como os dados da SSP provavelmente estão armazenados em um banco de dados relacional, a tabela que baixamos parece ser um <code>inner_join</code> de várias tabelas do banco, pois existem repetições da chave primária <code>NUM_BO</code>. É claro que quem tem um pouco de experiência com esse tipo de coisa vai tirar de letra, mas esse certamente não é o melhor formato para a população em geral.</p>
+<p>De toda forma, mesmo nesse formato, é interessante loopar por todas as páginas rapidamente. Por isso, também implementamos a função <code>get_detailed_table_sp</code>, que funciona mais ou menos da mesma forma que a <code>get_historical_summarized_table_sp</code>.</p>
+<pre class="r"><code>brcrimR::get_historical_detailed_table_sp(f = &#39;btnHomicicio&#39;, y = &#39;2017&#39;, m = 1:8, d = &#39;0&#39;)</code></pre>
+</div>
+<div id="próximos-passos" class="section level2">
+<h2>Próximos passos</h2>
+<p>Encerro aqui a apresentação do pacote, com os seus objetivos e funcionalidades básicas. Ele está longe de ser ideal e tem uma listinha de coisas que queremos implementar no futuro, mas como se trata de dados abertos, não vejo porque não contar com a comunidade para isso! Seguem abaixo algumas ideias:</p>
+<ul>
+<li><em>Helper functions</em> para os parâmetros das funções de <em>get</em> de São Paulo. Precisa existir uma função que pegue uma especificação de parâmetro do tipo “Homicídio” e transforme em “btnHomicicio”, que é o parâmetro que precisamos passar pro site do tribunal.</li>
+<li>Um “desacoplador” de tabelas do portal da transparência.</li>
+<li>Implementações de funções parecidas para outros estados.</li>
+</ul>
+<p>Por hoje é isso, pessoal. Happy coding!</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

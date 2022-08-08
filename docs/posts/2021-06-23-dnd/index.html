@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Faça alinhamentos DnD no R</title>
+  <meta name="title" content="Faça alinhamentos DnD no R">
+  <meta name="description" content="Crie imagens de alinhamentos DnD direto do R.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-06-23-dnd/">
+  <meta property="og:title" content="Faça alinhamentos DnD no R">
+  <meta property="og:description" content="Crie imagens de alinhamentos DnD direto do R.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/dnd.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-06-23-dnd/">
+  <meta property="twitter:title" content="Faça alinhamentos DnD no R">
+  <meta property="twitter:description" content="Crie imagens de alinhamentos DnD direto do R.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/dnd.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/dnd.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Faça alinhamentos DnD no R</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+              William e Fernando
+            
+            em
+            <a href="/categories/pacotes">Pacotes</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            29 de
+            junho de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/shiny">shiny</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/dnd">Dnd</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/theoffice">theoffice</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Se você não sabe o que é DnD, já vamos tirar isso do caminho: DnD não é um novo modelo de Deep Learning. DnD é a abreviação de <em>Dungeons &amp; Dragons</em>, um dos jogos de RPG<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> mais famosos da história, considerado a origem dos RPGs modernos.</p>
+<p>Por falta de oportunidade, eu (William) nunca joguei RPG, mas sempre fui muito fã da ideia e dos conceitos. Uma das paradas que acho mais divertidas é a dinâmica de alinhamentos do DnD. Mestre de muitas aventuras, o Fernando explica a seguir em bom português como esse alinhamento funciona.</p>
+<div id="o-alinhamento-dnd" class="section level2">
+<h2>O alinhamento DnD</h2>
+<p>Em resumo, essa dinâmica diz que qualquer personagem pode ser posicionado em uma matriz de 9 posições, formadas pela combinação de dois eixos: o ético e o moral.</p>
+<p>O lado ético possui 3 categorias: <em>lawful</em>, <em>neutral</em> e <em>chaotic</em>. Uma personagem <em>lawful</em> ou <em>ordeira</em> é aquela que segue as leis da sociedade em que vive mesmo que isso possa contrariar suas convicções ou valores pessoais, enquanto um personagem <em>chaotic</em> ou <em>caótico</em> se sente confortável em quebrar qualquer tipo de lei, pois faz as suas próprias regras, com pouco ou nenhum apreço pelas normas estabelecidas socialmente. Uma personagem <em>neutral</em> ou <em>neutra</em> seria aquela que se insere dentro do conjunto de normas, mas não tem nenhuma convicção forte sobre segui-las ou não. Diferente de uma personagem ordeira, que segue à risca o que está estabelecido, ou caótica, que nega por princípio parte das regras estabelecidas, uma personagem neutra simplesmente não pensa sobre o assunto.</p>
+<p>O lado moral também possui 3 categorias: <em>good</em>, <em>neutral</em> e <em>evil</em>. Essa escala é mais fácil de explicar. São as personagens boas (<em>good</em>), más (<em>evil</em>) e aquelas que vão na onda (<em>neutral</em>). Ao contrário do nosso mundo real, a fantasia simulada em um jogo de DnD não tem espaço para relativismo moral e nuances. Uma personagem altruísta, generosa, piedosa e/ou qualquer outra característica que não causa sofrimento nenhum é enquadrada no espectro positivo da escala: ela é boa ou <em>good</em>. Já uma personagem egoísta, cruel por esporte, insensível etc é má ou <em>evil</em>. A dificuldade aqui está nos personagens <em>neutros</em>, mas a ideia é parecida com o que falamos no lado ético: esse posicionamento se define pela distância das outras possibilidades. A neutralidade se define pela ambiguidade: todas as atitudes podem ser legítimas independentemente de leis, sofrimento de outras pessoas etc, tudo depende do contexto, não de convicções fortes ou desejo pessoal.</p>
+<p>Vamos a alguns exemplos: o herói mítico inglês <em>Robin Hood</em> é um bom exemplo de um personagem <em>chaotic good</em>, pois ele efetivamente quebra as regras vigentes porque acredita que isso é justo (<em>roubar</em> dos ricos), mas o faz para ajudar as pessoas que mais precisam (dar aos <em>pobres</em>), um motivo altruísta. Indo para o mundo de Star Wars <em>Han Solo</em> pode ser considerado um personagem <em>chaotic neutral</em>, pelo menos no começo da história. Ele é um contrabandista, vive sua vida quebrando sistematicamente as regras e não vê problema nisso, de onde concluímos que ele pelo menos pensou no assunto. Além disso, ele não ajuda o Luke e a Léia, personagens <em>neutral good</em>, por nenhum motivo específico. Sua única preocupação inicial é o dinheiro. Para mais exemplos, confira este <a href="https://www.youtube.com/watch?v=YgNQ3NXqqiQ">vídeo</a> em inglês disponível no Youtube.</p>
+<p>Como esse sistema de alinhamentos é flexível o suficiente para enquadrar várias obras diferentes, uma moda que já surgiu e resurgiu na internet algumas vezes é fazer o alinhamento DnD de personagens de alguma série ou filme qualquer.</p>
+<p>Veja alguns exemplos de que você pode achar por aí:</p>
+<p><img src="https://i.redd.it/rjzpebymelf51.jpg" title="Alinhamento DnD do Chaves." alt="Alinhamento DnD do Chaves." width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="https://i.pinimg.com/originals/27/54/0f/27540ff00c2297c08b7d099a0fc9aba7.jpg" title="Alinhamento DnD do Game of Thrones." alt="Alinhamento DnD do Game of Thrones." width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="https://i.pinimg.com/originals/2c/1a/0f/2c1a0f184cb9dcb214b069572d78f13e.jpg" title="Alinhamento DnD do Harry Potter." alt="Alinhamento DnD do Harry Potter." width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="o-pacote-dndalignment" class="section level2">
+<h2>O pacote <code>DnDalignment</code></h2>
+<p>Mesmo não sabendo o que é DnD e nunca tendo jogado RPG, o exercício de alinhar personagens nesse grid geralmemnte é bem divertido, principalmente quando você está discutindo o seu posicionamento com outras pessoas. É uma maneira bem divertida de revisitar e discutir obras que você gosta. :)</p>
+<p>E fica ainda mais divertido se você puder fazer isso no R! :D</p>
+<p>Foi por isso que o Fernando e eu criamos o pacote <code>DnDalignment</code>. Com ele, você pode facilmente gerar uma imagem de alinhamento DnD com arquivos que estão na sua máquina ou links para imagens na interet.</p>
+<p>Antes de mais nada, instale o pacote. Ele só está disponível no GitHub.</p>
+<pre class="r"><code>remotes::install_github(&quot;williamorim/DnDalignment&quot;)</code></pre>
+<p>Para criar o alinhamento, basta usar a função <code>DnDalignment::create_alignment()</code>. Cada argumento da função se refere a um alinhamento e você pode passar o caminho para uma imagem local ou o link para uma imagem na internet.</p>
+<p>Para exemplificar, a gente criou o alinhamento dos personagens da série The Office:</p>
+<pre class="r"><code>library(DnDalignment)
+
+create_alignment(
+  chaotic_good = &quot;https://www.cheatsheet.com/wp-content/uploads/2021/04/The-Office.jpg&quot;,
+  neutral_good = &quot;https://uploads.jovemnerd.com.br/wp-content/uploads/2021/02/the-office-jim-canta-musica-abertura.jpg&quot;,
+  chaotic_neutral = &quot;https://img.ibxk.com.br/2021/01/20/20133848690155.png&quot;,
+  chaotic_evil = &quot;https://www.looper.com/img/gallery/the-todd-packer-scene-in-the-office-that-went-too-far/l-intro-1620750071.jpg&quot;,
+  lawful_good = &quot;https://static3.srcdn.com/wordpress/wp-content/uploads/2019/11/Phyllis-The-Office.jpg?q=50&amp;fit=crop&amp;w=740&amp;h=370&amp;dpr=1.5&quot;,
+  lawful_evil = &quot;https://i.ytimg.com/vi/BWNhTOd9uXI/maxresdefault.jpg&quot;,
+  neutral_evil = &quot;https://cdn.jwplayer.com/v2/media/46qsexlL/poster.jpg?width=720&quot;,
+  lawful_neutral = &quot;https://uploads.jovemnerd.com.br/wp-content/uploads/2021/01/the-office-dwight-gerenta.jpg&quot;,
+  true_neutral = &quot;https://pbs.twimg.com/media/EXlUzHzXQAEgIZt.png&quot;
+)</code></pre>
+<p><img src="/posts/2021-06-23-dnd_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>E aí? O que achou das nossas escolhas? Se você discorda, tweet o seu alinhamento e marque a gente no Twitter: <a href="https://twitter.com/curso_r">Curso-R</a>, <a href="https://twitter.com/wamorim_">William</a> e <a href="https://twitter.com/Azeloc">Fernando</a>.</p>
+<p>Até a próxima!</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Sigla em inglês para <em>Role Playing Game</em> que em português significa <em>Jogo de intepretação de papéis</em>. <a href="https://pt.wikipedia.org/wiki/Role-playing_game">RPGs</a> são jogos parecidos com a encenação de uma peça de teatro, mas com regras como as de Banco Imobiliário para estruturar a interpretação de papéis.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

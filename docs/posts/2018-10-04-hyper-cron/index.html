@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Agendando scripts do R</title>
+  <meta name="title" content="Agendando scripts do R">
+  <meta name="description" content="Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos sem gastar muito.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2018-10-04-hyper-cron/">
+  <meta property="og:title" content="Agendando scripts do R">
+  <meta property="og:description" content="Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos sem gastar muito.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/hyper-cron-r.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2018-10-04-hyper-cron/">
+  <meta property="twitter:title" content="Agendando scripts do R">
+  <meta property="twitter:description" content="Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos sem gastar muito.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/hyper-cron-r.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/hyper-cron-r.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Agendando scripts do R</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Daniel">Daniel</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            4 de
+            outubro de
+            2018
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/cron">cron</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p>O <a href="https://ctlente.com">Caio</a> já escreveu <a href="https://www.curso-r.com/blog/2017-11-13-tutorial-cronr/">aqui no blog</a> sobre o CronR, um pacote do R que permite agendar scripts do R para rodar de tempos em tempos. O problema do CronR é que ele necessita que o computador que hospeda o processo fique ligado o tempo todo.</p>
+<p>Em geral, não colocamos processos agendados no nosso próprio computador de trabalho, uma vez que nem sempre o deixamos ligado. Por isso, o mais comum é agendar scripts em um servidor que fique sempre ligado, porém deixar um servidor ligado todos os dias o dia inteiro para rodar um script a cada 12h parece desperdício, certo?</p>
+<p>É aí que entra o <a href="https://www.hyper.sh">Hyper.sh</a>! Para quem não conhece o <a href="https://www.hyper.sh">Hyper</a> é um serviço cloud de hospedagem de containers. Basicamente ele funciona da seguinte maneira: você passa a imagem de um container <a href="https://www.docker.io">Docker</a> e como você quer executá-la lá dentro. O Hyper pode servir tanto para hospedar apps Shiny, API’s em plumber e outros serviços que ficam online o tempo inteiro quanto para executar scripts agendados, e é sobre essa parte que vamos falar nesse post.</p>
+<div id="objetivo" class="section level1">
+<h1>Objetivo</h1>
+<p>Neste post vamos criar e colocar em produção um script em R que envia para você mesmo no Telegram a cada 2 horas uma mensagem do pacote <code>fortunes</code>. Vamos fazer isso simples, mas nada impede de você <a href="https://www.curso-r.com/blog/2017-08-19-r-telegram-bitcoin/">criar um bot que avisa que o Bitcoin tá barato</a>.</p>
+</div>
+<div id="criando-o-bot" class="section level1">
+<h1>Criando o bot</h1>
+<p>Antes de mais nada, vamos criar um bot no Telegram. Para isso <a href="https://telegram.me/botfather">clique neste link</a> e comece a conversar com o BotFather.</p>
+<p><img src="https://user-images.githubusercontent.com/4706822/46452197-d6465c00-c770-11e8-9262-c2dcdd98e9fa.png" /></p>
+<p>Você vai ter que dar um nome e usuário para o seu bot e em troca, o BotFather vai retornar um token, parecido com <code>6768271902:AAGKFXUz7P_Qg2X_pE0ZjKSLPZ45TEX9Z5QL4</code>.</p>
+<p>Esse token é secreto, então não é legal colocá-lo direto no seu script. A forma usual de deixá-lo disponível para o R é colocar no <code>.Renviron</code>.</p>
+</div>
+<div id="colocando-o-token-no-.renviron" class="section level1">
+<h1>Colocando o token no <code>.Renviron</code></h1>
+<p>O <code>.Renviron</code> é um arquivo de configuração do R que permite que você especifique variáveis de ambiente para que fiquem disponíveis para o R. Ele é muito usado para disponibilizar senhas, chaves de API, … - coisas que são secretas e por isso não é boa prática colocá-las no código.</p>
+<p>O jeito mais fácil de abrir o <code>.Renviron</code> é usando o pacote <code>usethis</code>. O <code>usethis</code> é um pacote do R que tem uma série de funções úteis no dia a dia de um desenvolvedor R.</p>
+<p>Instale o pacote e depois rode:</p>
+<pre class="r"><code>usethis::edit_r_environ()</code></pre>
+<p>Se você estiver no RStudio, isso vai abrir o arquivo <code>.Renviron</code>. Adicione a linha:</p>
+<pre><code>R_TELEGRAM_BOT_RBot=6768271902:AAGKFXUz7P_Qg2X_pE0ZjKSLPZ45TEX9Z5QL4</code></pre>
+<p><strong>Não esqueça</strong> de trocar o token que está aí pelo seu token, gerado pelo BotFather.</p>
+<p>Agora vamos testar se está tudo certo. Instale o pacote <code>telegram</code> (<code>install.packages("telegram")</code>) e rode:</p>
+<pre class="r"><code>library(telegram)
+bot &lt;- TGBot$new(token = bot_token(&#39;RBot&#39;))
+bot$getMe()</code></pre>
+<p>Isso deve retornar o nome e username do seu bot.</p>
+</div>
+<div id="comece-um-chat-com-o-seu-bot" class="section level1">
+<h1>Comece um chat com o seu bot</h1>
+<p>Para começar um chat com o seu bot no Telegram volte para a conversa com o BotFather e clique no link que ele te mandou na última mensagem (a mensagem que veio o token)</p>
+<p><img src="https://user-images.githubusercontent.com/4706822/46473446-96a26300-c7b6-11e8-8e81-4d8f504f7496.png" /></p>
+<p>Clique no link e depois comece uma conversa com o seu bot. Agora volte para o R e rode:</p>
+<pre class="r"><code>msgs &lt;- bot$getUpdates()
+msgs$message$chat$id[1]</code></pre>
+<p>Assim você vai ter o o id do seu chat com o seu bot. Vamos setar esse id como o chat padrão do bot.</p>
+<pre class="r"><code>bot$set_default_chat_id(137007207)</code></pre>
+<p>Podemos então começar a enviar mensagens direto do R com:</p>
+<pre class="r"><code>bot$sendMessage(&quot;Oioioioi&quot;)</code></pre>
+</div>
+<div id="criando-o-script" class="section level1">
+<h1>Criando o script</h1>
+<p>No nosso caso, queremos enviar uma mensagem no telegram com mensagens do pacote <code>fortunes</code>.
+A função <code>fortunes</code> solta aleatóriamente frases famosas que apareceram na lista de e-mails do R ao longo do tempo.</p>
+<pre class="r"><code>library(fortunes)
+fortune()
+## 
+## I recently read the small print on the academic license our site has for SAS.
+## You have to:
+## 
+##   1 inform SAS of any taught courses that use SAS,
+##   2 inform SAS of any research projects using SAS,
+##   3 allow SAS to refer to your institution as a SAS user,
+##   4 allow SAS to review your taught courses,
+##   5 ensure your courses are taught using qualified personnel,
+##   6 give SAS your first-born male offspring.
+## 
+## I spoke to our site&#39;s licensing supremos and they say they&#39;ve never heard of
+## anyone complying with 1 or 2. Point 4 sounds like petty fiddling in our
+## educational business, and point 5 left &#39;qualified&#39; undefined. Point 6 doesn&#39;t
+## bother me since I don&#39;t have kids.
+##    -- Barry Rowlingson
+##       R-help (February 2008)</code></pre>
+<p>Vamos criar uma função que envia uma mensagem aleatoriamente pelo Telegram. A função poderia ser algo assim:</p>
+<pre class="r"><code>main &lt;- function() {
+  bot &lt;- TGBot$new(token = bot_token(&#39;RBot&#39;))
+  bot$set_default_chat_id(137007207)
+  bot$sendMessage(fortune())
+}</code></pre>
+<p>Ok? Quando rodamos a função <code>main()</code> recebemos uma nova mensagem no Telegram, certo? Por fim, o nosso script pode ser:</p>
+<pre class="r"><code>library(telegram)
+library(fortunes)
+
+main &lt;- function() {
+  bot &lt;- TGBot$new(token = bot_token(&#39;RBot&#39;))
+  bot$set_default_chat_id(user_id(&#39;me&#39;))
+  bot$sendMessage(fortune())
+}
+
+main()</code></pre>
+<p>Salvei esse código em um arquivo chamado <code>send_fortune.R</code>.</p>
+<p>Eu gosto de encapsular todo o código em uma função sem argumentos para ser mais fácil para parar a execução em caso de errros durante o código, mas isso vai da forma que você preferir programar.</p>
+</div>
+<div id="a-estrutura-do-projeto" class="section level1">
+<h1>A estrutura do projeto</h1>
+<p>O nosso projeto possui a seguinte estrutura:</p>
+<pre><code>.
+├── Dockerfile
+└── send_fortune.R</code></pre>
+<p>O nosso script <code>.R</code> e o <code>Dockerfile</code> que vamos falar em seguida. Nada impede de termos outros arquivos, ok? O que é necessário é que tanto o Dockerfile quanto o script estejam na mesma pasta.</p>
+</div>
+<div id="criando-o-dockerfile" class="section level1">
+<h1>Criando o Dockerfile</h1>
+<p>O Hyper não sabe que o R existe. Ele só sabe executar imagens do Docker. O Docker é uma ferramenta muito poderosa que permite que a partir de um arquivo chamado <code>Dockerfile</code> você especifique exatamente o estado de um computador, simulando a instalação de todos os softwares necessários e etc. Não é objetivo deste post explicar exatamente como funciona o Docker, por isso vamos direto ao necessário.</p>
+<p>Crie um arquivo chamado <code>Dockerfile</code> (sem nenhuma extensão nem nada) e coloque o seguinte dentro dele:</p>
+<pre><code>FROM rocker/tidyverse
+
+COPY . /service
+
+# Install the R libraries needed to run the scripts
+RUN R -e &quot;install.packages(c(&#39;telegram&#39;, &#39;fortunes&#39;), repos = &#39;http://cran.us.r-project.org&#39;)&quot;
+
+# Execute the target script
+CMD [&quot;Rscript&quot;, &quot;/service/send_fortune.R&quot;]</code></pre>
+<p>Vou explicar rapidamente o que significa cada linha do Dcoker:</p>
+<ul>
+<li><code>FROM rocker/tidyverse</code> indica que vamos usar como base para o nosso <em>container</em> a imagem do <code>rocker/tidyverse</code>.</li>
+<li><code>COPY . /service</code> copia todos os arquivos da pasta (indicado pelo <code>.</code>) para a pasta <code>/service</code> dentro do container.</li>
+<li><code>RUN R -e "install.packages(c('telegram', 'fortunes'), repos = 'http://cran.us.r-project.org')"</code> instala os pacotes necessários para a execução do script.</li>
+<li><code>CMD ["Rscript", "/service/send_fortune.R"]</code> indica o comando que será executado. No nosso caso: execute o script <code>send_fortune.R</code> que está na pasta <code>service/</code>.</li>
+</ul>
+</div>
+<div id="construindo-e-subindo-o-container" class="section level1">
+<h1>Construindo e subindo o container</h1>
+<p>Para usar o nosso container no Hyper, precisamos que ele esteja em um <em>registry</em>. O próprio Docker oferece <a href="https://hub.docker.com">um serviço gratuito de hospedagem de containers</a>. Basta criar um login lá.</p>
+<p>Para subir um container para o <em>registry</em> você precisa ter <em>buildado</em> o container localmente. Vamos fazer isso agora. Se você não possui o Docker instalado, instale <a href="https://docs.docker.com/install/">por aqui</a>.</p>
+<p>Abra um terminal na pasta do em que estão os arquivos <code>Dockerfile</code> e <code>send_fortune.R</code> e rode:</p>
+<pre><code>docker build -t seu_user_docker/nome_img .</code></pre>
+<p>Esse passo transforma o seu <code>Dockerfile</code> em uma imagem. O argumento <code>-t</code> dá um nome para sua imagem, no caso estamos usando <code>seu_user_docker/nome_da_img</code> (No meu caso usei <code>dfalbel/hyper-cron-r</code>).</p>
+<p>Com o container <code>buildado</code> você pode testá-lo fazendo o seguinte:</p>
+<pre><code>docker run --env R_TELEGRAM_BOT_RBot=6793020822:AAGKFXUz7P_Qg2X_pshau8432X9ZAKHQL4 dfalbel/hyper-cron-r</code></pre>
+<p>Isso deveria enviar uma mensagem para você no telegram. Se não mandar tem algo errado. <strong>Não esqueça</strong> de trocar o valor do Token para o que você obteve no primeiro passo.</p>
+<p>Passamos o argumento <code>--env</code> para poder passar as variáveis de ambiente que são necessárias para executar o nosso código. No nosso caso, temos que passar o token do Telegram, fiz isso
+passando o <code>--env R_TELEGRAM_BOT_RBot=6793020822:AAGKFXUz7P_Qg2X_pshau8432X9ZAKHQL4</code>.</p>
+<p>Agora vamos subir a imagem para o Docker registry. Se você já criou a sua conta <a href="https://hub.docker.com">aqui</a>, rode e siga as inscrições para efetuar o login no CLI do Docker.</p>
+<pre><code>docker login</code></pre>
+<p>Se seu login deu tudo certo, você pode rodar:</p>
+<pre><code>docker push seu_user_docker/nome_da_img</code></pre>
+<p>Isso vai fazer o upload da sua imagem para o * registry*. No meu caso usei <code>docker push dfalbel/hyper-cron-r</code>.</p>
+<p>Se tiver dado tudo certo, você vai conseguir acessar uma página com uma url parecida com essa:</p>
+<pre><code>https://hub.docker.com/r/seu_user_docker/nome_da_img/</code></pre>
+<p>O Docker hub permite quantas imagens públicas você quiser, mas se não me engano apenas 1 privada. Se você precisar que sua imagem seja privada, tente procurar pelo GCR (Google Container Registry).</p>
+</div>
+<div id="finalmente-o-hyper" class="section level1">
+<h1>Finalmente, o Hyper</h1>
+<p>Se você ainda não criou sua conta no Hyper, <a href="https://www.hyper.sh">crie aqui</a>. Também faça o download do CLI deles, <a href="https://console.hyper.sh/cli/download">aqui</a>. As instruções completas de instalação estão <a href="https://docs.hyper.sh/hyper/GettingStarted/install.html">aqui</a>.</p>
+<p>Com o hyper instalado e se a sua imagem do Docker for pública basta rodar. Está fora do escopo deste tutorial, mas é possível fazer isso com imagens privadas também.</p>
+<pre><code>hyper pull seu_user_docker/nome_da_img/</code></pre>
+<p>Isso irá copiar a sua imagem - do <em>registry</em> para o Hyper. Agora estamos prontos para criar o processo agendado.</p>
+<p>Fazemos isso também com apenas uma linha no Hyper:</p>
+<pre><code>hyper cron create  --minute=*/5 --hour=* --name test-cron-job1 --env R_TELEGRAM_BOT_RBot=6793020822:AAGKFXUz7P_Qg2X_pEAHDGJ8432X9Z5QL4 seu_user_docker/nome_da_img/</code></pre>
+<p>Mais uma vez, <strong>não esqueça</strong> de trocar o valor do token para o token do seu bot!</p>
+<p>O código acima especifica que desejo executar esse container a cada 5 minutos, mas tudo isso pode ser configurado pelas opções do hyper-cron. A documentação completa <a href="https://docs.hyper.sh/hyper/Feature/container/cron.html">está aqui</a>.</p>
+<p>Por exemplo, se quiséssemos rodar o script todo dia às 8h da poderíamos colocar:</p>
+<pre><code>hyper cron create  --minute=0 --hour=11 --name test-cron-job1 --env R_TELEGRAM_BOT_RBot=6793020822:AAGKFXUz7P_Qg2X_pEAHDGJ8432X9Z5QL4 seu_user_docker/nome_da_img/</code></pre>
+<p>Note que no lugar da hora colocamos 11 e não 8, isso se dá porque a hora dos servidores do Hyper é sempre UTC+0, que é 3 horas na frente do fuso de São Paulo.</p>
+<p>Se tudo estiver correto, você pode rodar o seguinte no terminal para ver todos os processos agendados:</p>
+<pre><code>hyper cron ls
+#$ Name                Schedule            Image                  Command
+#$ test-cron-job1      */5 * * * *         dfalbel/hyper-cron-r</code></pre>
+<p>Você também pode olhar o histórico de execuções do seu processo.</p>
+<pre><code>hyper cron history test-cron-job1
+#$ Container                   Start                           End                             Status              Message
+#$ test-cron-job1-1538685600   2018-10-04 20:40:00 +0000 UTC   2018-10-04 20:40:39 +0000 UTC   done                Job[test-cron-job1] is success to run</code></pre>
+</div>
+<div id="custos" class="section level1">
+<h1>Custos</h1>
+<p>O Hyper implica em custos. Ele cobra por segundos de execução do seu script e por GB da sua imagem. Dê uma lida melhor na <a href="https://www.hyper.sh/pricing.html">página de preços</a>.</p>
+<p>Quando terminar, para remover tudo e evitar custos depois, rode:</p>
+<pre><code>hyper cron rm test-cron-job1
+hyper rmi dfalbel/hyper-cron-r</code></pre>
+<p>Substituindo os devidos nomes.</p>
+</div>
+<div id="conclusão" class="section level1">
+<h1>Conclusão</h1>
+<p>Neste post usamos o Hyper e Docker para agendar um script R para rodar de tempos em tempos.
+Sei que tem bastante coisa e não dá para descrever todos os passos com toda precisão necessária para quem está fora do contexto. Por favor, se tiverem problemas ou dúvidas entre em contato para que possa melhorar o post.</p>
+<p>Se você quiser ver o código completo desse tutorial em um lugar só dê uma olhada <a href="https://github.com/dfalbel/hyper-cron-r">neste repositório</a>.</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

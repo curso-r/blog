@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>httr on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/httr/</link>
+    <description>Recent content in httr on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 29 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/httr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Acessando APIs com R: Exemplos com a PokéAPI!</title>
+      <link>https://blog.curso-r.com/posts/2021-11-29-api-pokemon/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-11-29-api-pokemon/</guid>
+      <description>Primeiro post sobre acesso à APIs usando R.</description>
+    </item>
+    
+  </channel>
+</rss>

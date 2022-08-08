@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Acessando APIs com R: Exemplos com a PokéAPI!</title>
+  <meta name="title" content="Acessando APIs com R: Exemplos com a PokéAPI!">
+  <meta name="description" content="Primeiro post sobre acesso à APIs usando R.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2021-11-29-api-pokemon/">
+  <meta property="og:title" content="Acessando APIs com R: Exemplos com a PokéAPI!">
+  <meta property="og:description" content="Primeiro post sobre acesso à APIs usando R.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/API-drake.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2021-11-29-api-pokemon/">
+  <meta property="twitter:title" content="Acessando APIs com R: Exemplos com a PokéAPI!">
+  <meta property="twitter:description" content="Primeiro post sobre acesso à APIs usando R.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/API-drake.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/API-drake.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Acessando APIs com R: Exemplos com a PokéAPI!</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+              Beatriz e Julio
+            
+            em
+            <a href="/categories/conceitos">Conceitos</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            29 de
+            novembro de
+            2021
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/api">api</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/purrr">purrr</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/httr">httr</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/web-scraping">web-scraping</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Olá!</p>
+<p>Recentemente eu (Bea) andei explorando algumas APIs, com ajuda do Julio, que ficou respondendo as dúvidas! No processo aprendemos muitas coisas legais e resolvemos compartilhar com vocês através de alguns posts.</p>
+<p>O tema dá muito pano pra manga, pois <strong>usamos código em R</strong> para automatizar quase tudo! Nas últimas semanas, aprendemos a trabalhar com o GitHub (Ex: criar e configurar repositórios), Zoom (criar chamadas), Google Drive e Sheets (estruturar e editar arquivos), e Google Classroom (criar e configurar salas de aula).</p>
+<p>Tudo isso usando muito <code>tidyverse</code>!</p>
+<p><img src="https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy-downsized-large.gif" width="50%" style="display: block; margin: auto;" /></p>
+<p>Mas calma!! Vamos começar do começo. Neste primeiro post, vamos falar sobre o que é uma API e mostrar um exemplo básico.</p>
+</div>
+<div id="o-que-é-uma-api" class="section level2">
+<h2>O que é uma API?</h2>
+<p>API é uma sigla para <em>Application Programming Interface</em>, ou seja, uma interface de computação. Sem usar palavras complicadas, uma explicação que está nos <a href="https://curso-r.github.io/main-deploy/docs/index.html#12">slides do curso de Deploy!</a> é:</p>
+<blockquote>
+<p>Uma API não deixa de ser um “link” que aceita parâmetros e retorna dados.</p>
+</blockquote>
+<p>As APIs também são abordadas no <a href="https://curso-r.github.io/main-web-scraping/slides/02-introducao-ao-ws.html#8">curso de Web Scraping</a>!</p>
+</div>
+<div id="pokéapi" class="section level2">
+<h2>PokéAPI</h2>
+<p>Um exemplo de acesso à API é buscando na <a href="https://pokeapi.co/">PokéAPI</a>, uma API para buscar Pokémons! E com tantas possibilidades interessantes, porque buscar justamente Pokémons? Essa API tem fins educacionais, portanto é um ótimo lugar para começar a praticar o tema.</p>
+<p><img src="https://media.giphy.com/media/giEBaPNKEtjZtK43oX/giphy.gif" width="30%" style="display: block; margin: auto;" /></p>
+<p>O primeiro passo para acessar qualquer API é procurar uma documentação.</p>
+<p><a href="https://pokeapi.co/docs/v2">Na documentação do PokéAPI</a>, é mostrado que devemos usar o seguinte padrão:</p>
+<pre><code>GET https://pokeapi.co/api/v2/{endpoint}/</code></pre>
+<p>Isso significa que devemos fazer uma requisição <code>GET</code> (apenas para consultar dados), começar com a <em>url base</em> (é a parte que não muda: <code>https://pokeapi.co/api/v2/</code>) e complementar com os parâmetros da busca (que chamamos de <em>endpoint</em>).</p>
+<p>O pacote <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html"><code>httr</code></a> é muito usado para acessar APIs através do R, e disponibiliza uma função chamada <code>httr::GET()</code> para fazer esse tipo de acesso!</p>
+<p>Por exemplo:</p>
+<pre class="r"><code># url_base - nunca muda na mesma API
+url_base &lt;- &quot;https://pokeapi.co/api/v2&quot;      
+
+# endpoint - é o que muda o resultado
+endpoint &lt;- &quot;/pokemon/ditto&quot;                 
+
+# precisamos colar os textos para criar o link
+u_pokemon &lt;- paste0(url_base, endpoint) 
+
+# ver como o texto ficou colado
+# u_pokemon 
+# &gt; &quot;https://pokeapi.co/api/v2/pokemon/ditto&quot;
+
+# fazer a requisição do tipo GET
+r_pokemon &lt;- httr::GET(u_pokemon) 
+
+r_pokemon</code></pre>
+<pre><code>## Response [https://pokeapi.co/api/v2/pokemon/ditto]
+##   Date: 2021-11-29 11:44
+##   Status: 200
+##   Content-Type: application/json; charset=utf-8
+##   Size: 22.3 kB</code></pre>
+<p>Esse resultado é um pouco diferente do que estamos acostumados! O que é mais importante de reparar é o status, pois indica se a requisição foi bem sucedida. <code>Status: 200</code> significa que deu certo! :)</p>
+<p>As APIs costumam retornar arquivos <code>JSON</code>, e para acessar o conteúdo que foi obtido podemos usar a função <code>httr::content()</code>:</p>
+<pre class="r"><code>c_pokemon &lt;- httr::content(r_pokemon)</code></pre>
+<p>Ao salvar o resultado da função em um objeto, podemos ver que agora a classe dele é uma lista:</p>
+<pre class="r"><code>class(c_pokemon)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<p>Podemos manipular essa lista com funções do <code>tidyverse</code> para obter uma tabela, assim fica mais fácil de trabalhar. Mas atenção, da seguinte forma ela ainda não está no formato <code>tidy</code>! <a href="https://curso-r.github.io/main-faxina/slides/02-introducao-faxina.html#1">Saiba mais o que são dados tidy no material do curso de Faxina de Dados</a>.</p>
+<pre class="r"><code>library(magrittr)
+dados_ditto &lt;- c_pokemon %&gt;%
+  purrr::map(unlist, recursive = TRUE) %&gt;%
+  purrr::map(tibble::enframe) %&gt;%
+  purrr::map_dfr(
+    ~dplyr::mutate(.x, dplyr::across(.fns = as.character)), 
+    .id = &quot;id&quot;
+  )
+
+dplyr::glimpse(dados_ditto)</code></pre>
+<pre><code>## Rows: 396
+## Columns: 3
+## $ id    &lt;chr&gt; &quot;abilities&quot;, &quot;abilities&quot;, &quot;abilities&quot;, &quot;abilities&quot;, &quot;abilities&quot;,…
+## $ name  &lt;chr&gt; &quot;ability.name&quot;, &quot;ability.url&quot;, &quot;is_hidden&quot;, &quot;slot&quot;, &quot;ability.nam…
+## $ value &lt;chr&gt; &quot;limber&quot;, &quot;https://pokeapi.co/api/v2/ability/7/&quot;, &quot;FALSE&quot;, &quot;1&quot;, …</code></pre>
+<p><img src="https://media.giphy.com/media/pbGSpeX860JxK/giphy.gif" width="50%" style="display: block; margin: auto;" /></p>
+<p>Agora você pode usar o que aprendemos para pesquisar outros Pokémons! Quem sabe explorar a teoria de que o Ditto é um clone falho do Mew?</p>
+<pre class="r"><code>dados_mew &lt;- &quot;https://pokeapi.co/api/v2/pokemon/mew&quot; %&gt;% 
+  httr::GET() %&gt;% 
+  httr::content() %&gt;%
+  purrr::map(unlist, recursive = TRUE) %&gt;%
+  purrr::map(tibble::enframe) %&gt;%
+  purrr::map_dfr(
+    ~dplyr::mutate(.x, dplyr::across(.fns = as.character)), 
+    .id = &quot;id&quot;
+  )
+
+dplyr::glimpse(dados_mew)</code></pre>
+<pre><code>## Rows: 10,083
+## Columns: 3
+## $ id    &lt;chr&gt; &quot;abilities&quot;, &quot;abilities&quot;, &quot;abilities&quot;, &quot;abilities&quot;, &quot;base_experi…
+## $ name  &lt;chr&gt; &quot;ability.name&quot;, &quot;ability.url&quot;, &quot;is_hidden&quot;, &quot;slot&quot;, &quot;1&quot;, &quot;name&quot;,…
+## $ value &lt;chr&gt; &quot;synchronize&quot;, &quot;https://pokeapi.co/api/v2/ability/28/&quot;, &quot;FALSE&quot;,…</code></pre>
+<p>Saiba mais sobre a teoria aqui:</p>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UQbCZ2cGj4I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</center>
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários. <strong>Comentem também quais exemplos, dentre os que foram listados, vocês gostariam de saber mais!!</strong></p>
+<p>Até a próxima!</p>
+</div>
+<div id="você-pode-se-interessar-também-por" class="section level2">
+<h2>Você pode se interessar também por…</h2>
+<ul>
+<li><p><a href="https://curso-r.github.io/main-deploy/docs/index.html#12">Slides do curso de Deploy</a></p></li>
+<li><p><a href="https://curso-r.github.io/main-web-scraping/slides/02-introducao-ao-ws.html#8">Slides do curso de Web Scraping sobre APIs</a></p></li>
+<li><p><a href="https://curso-r.github.io/main-faxina/slides/02-introducao-faxina.html#1">Slides do curso de Faxina sobre tidy data</a></p></li>
+<li><p>Pacote <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html"><code>httr</code></a></p></li>
+</ul>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/">rstudio::conf 2022, primeiro dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/vscode-server.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-15-vscode-server/">Acesso Remoto ao VS Code</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

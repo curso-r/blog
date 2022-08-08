@@ -1,0 +1,190 @@
+---
+title: "Advent of R: Dia 04"
+date: "2021-12-04"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-04.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 04."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Lula Gigante (A)
+
+O [quarto dia](https://adventofcode.com/2021/day/4) do AoC foi talvez o mais
+interessante até agora. Na primeira parte, precisávamos calcular a pontuação da
+cartela vencedora de um
+[bingo americano](https://en.wikipedia.org/wiki/Bingo_(American_version)): cada
+cartela é composta por 5 linhas e 5 colunas de números que devem ser riscados
+conforme eles são anunciados pelo sistema do submarino. A primeira cartela a
+riscar todos os números de uma linha ou coluna é a vencedora e sua pontuação é
+a soma de todos os números não riscados multiplicada pelo último número
+anunciado.
+
+A entrada era composta por uma linha com os números anunciados em sequência e,
+posteriormente, todas as cartelas da platéia:
+
+```r
+# 7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
+#
+# 22 13 17 11  0
+#  8  2 23  4 24
+# 21  9 14 16  7
+#  6 10  3 18  5
+#  1 12 20 15 19
+#
+#  3 15  0  2 22
+#  9 18 13 17  5
+# 19  8  7 25 23
+# 20 11 10 24  4
+# 14 21 16 12  6
+#
+# 14 21 17 24  4
+# 10 16 15  9 19
+# 18  8 23 26 20
+# 22 11 13  6  5
+#  2  0 12  3  7
+```
+
+Eu escolhi um caminho simples para resolver o problema, apesar de o código não
+ter ficado tão bom assim. Primeiro eu li a sequência de números e criei uma
+função que transpunha uma matrix numérica e a empilhava com a original.
+
+```r
+# Processar os números sorteados
+draws <- "data-raw/04a_giant_squid.txt" |>
+  readr::read_lines(n_max = 1) |>
+  stringr::str_split(",") |>
+  purrr::pluck(1) |>
+  as.numeric()
+
+# Converter as colunas de uma matrix para linhas e empilhar
+cols_to_rows <- function(df) {
+  df |>
+    dplyr::select(-board, -id) |>
+    as.matrix() |>
+    t() |>
+    tibble::as_tibble(rownames = "id") |>
+    purrr::set_names("id", paste0("C", 1:5)) |>
+    dplyr::mutate(board = df$board) |>
+    dplyr::bind_rows(df) |>
+    dplyr::relocate(board, id) |>
+    purrr::set_names("id", "board", paste0("N", 1:5))
+}
+```
+
+O objetivo de `cols_to_rows()` era criar uma tabela final com todas as linhas
+das cartelas e também todas as suas colunas; isso permitiu que eu riscasse os
+números sorteados aplicando `dplyr::na_if()` indiscriminadamente. Quando alguma
+linha da tabela fosse formada somente por `NA`s (indicando que uma linha ou
+coluna de alguma cartela estava completa), bastava extrair a cartela original,
+somar os seus valores não-`NA` e multiplicar o resultado pelo número sorteado
+mais recente. A função utilizada para isso se chamava `winning_score()` e
+operava recursivamente para poupar tempo.
+
+```r
+# Calcular a pontuação da cartela vencedora
+winning_score <- function(df, draws) {
+
+  # Marcar o número sorteado com NA (nas linhas e colunas)
+  df <- dplyr::mutate(df, dplyr::across(c(N1:N5), dplyr::na_if, draws[1]))
+
+  # Filtrar possíveis linhas/colunas completas
+  win <- dplyr::filter(df, dplyr::if_all(c(N1:N5), is.na))
+
+  # Se houver pelo menos uma linha/coluna completa...
+  if (nrow(win) > 0) {
+
+    # Extrair a cartela vencedora, somar os não-NA e multiplicar por draws[1]
+    output <- df |>
+      dplyr::filter(id == win$id, stringr::str_starts(board, "R")) |>
+      dplyr::select(-id, -board) |>
+      purrr::flatten_dbl() |>
+      sum(na.rm = TRUE) |>
+      magrittr::multiply_by(draws[1])
+
+    # Retornar a pontuação
+    return(output)
+  }
+
+  # Recursão para o próximo sorteio
+  winning_score(df, draws[-1])
+}
+
+# Ler cartelas, empilhas linhas com colunas e riscar usando NAs
+"data-raw/04a_giant_squid.txt" |>
+  readr::read_table(skip = 1, col_names = paste0("C", 1:5)) |>
+  dplyr::mutate(board = (dplyr::row_number() - 1) %/% 5) |>
+  dplyr::group_by(board) |>
+  dplyr::mutate(id = paste0("R", 1:5)) |>
+  dplyr::group_split() |>
+  purrr::map_dfr(cols_to_rows) |>
+  winning_score(draws)
+#> [1] 33348
+```
+
+## Lula Gigante (B)
+
+O segundo item do problema pedia o contrário: calcular a pontuação da última
+cartela a ter uma linha ou coluna completa, ou seja, da cartela perdedora. Na
+minha solução todo o código permaneceu igual, salvo pela função
+`winning_score()`, que virou `loosing_score()`. A grande novidade é que, quando
+o programa encontrava uma cartela vencedora, ele verificava se aquela era a
+última. Se não fosse, ele removia aquela cartela da tabela e, se fosse, ele
+retornava a pontuação.
+
+```r
+# Calcular a pontuação da cartela perdedora
+loosing_score <- function(df, draws) {
+
+  # Marcar o número sorteado com NA (nas linhas e colunas)
+  df <- dplyr::mutate(df, dplyr::across(c(N1:N5), dplyr::na_if, draws[1]))
+
+  # Filter possible complete rows or cols
+  win <- dplyr::filter(df, dplyr::if_all(c(N1:N5), is.na))
+
+  # Se houver pelo menos uma linha/coluna completa...
+  if (nrow(win) > 0) {
+
+    # Se restasse apenas uma cartela, calcular a sua pontuação
+    if (length(unique(df$id)) == 1) {
+
+      # Extrair a cartela perdedora, somar os não-NA e multiplicar por draws[1]
+      output <- df |>
+        dplyr::filter(stringr::str_starts(board, "R")) |>
+        dplyr::select(-id, -board) |>
+        purrr::flatten_dbl() |>
+        sum(na.rm = TRUE) |>
+        magrittr::multiply_by(draws[1])
+
+      # Retornar a pontuação
+      return(output)
+    }
+
+    # Jogar fora cartelas que já venceram
+    df <- dplyr::filter(df, !id %in% win$id)
+  }
+
+  # Recursão para o próximo sorteio
+  loosing_score(df, draws[-1])
+}
+```

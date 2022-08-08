@@ -1,0 +1,104 @@
+---
+title: "Como acessar a base de dados de CNPJ da receita federal em literalmente 1 minuto"
+date: "2021-04-01"
+tags: ["rfb", "banco de dados"]
+categories: ["análises"]
+image: "images/posts/banner/RECEITA.webp"
+author: ["Fernando"]
+summary: "Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito, muito rápido!"
+draft: false
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE, 
+  message = FALSE, 
+  collapse = TRUE
+)
+```
+
+Uma das grandes conquistas da comunidade brasileira de dados abertos nos últimos anos foi a disponibilização periódica dos dados cadastrais de todas as pessoas jurídicas brasileiras. Nós já exploramos essa base em detalhes em outros posts do blog e hoje vamos voltar ao assunto te ajudando a acessar essa base de um jeito muito, muito rápido!
+
+É um tutorial super simples, de 2 passinhos, que surgiu no contexto de uma pergunta feita lá [no nosso Discourse](https://discourse.curso-r.com/t/raspagem-cnpj-inscricao-e-situacao-cadastral/1084/9). Inclusive, recomendamos que vocês frequentem o nosso fórum, pois muitas dicar de ouro surgem nas conversar que rolam por lá.
+
+Vamos então ao nosso tutorial:
+
+# Passo 1: Baixe o banco de dados em formato SQLite.
+
+SQLite é uma tecnologia muito conveniente para aproveitar as qualidades de um sistema de gerenciamento de banco de dados sem precisar instalar muitos programas ou configurar passos muito complexos. Ao contrário de outras tecnologias, como MySQL por exemplo, SQLite permite que, sem muito trabalho, você consiga fazer queries em uma base grande como a da receita federal e recuperar a resposta para dentro do R. Por isso, nesse nosso tutorial enxuto vamos utilizar essa tecnologia.
+
+Para simplificar a nossa vida, o querido George Santiago [disponibiliza para a comunidade](https://github.com/georgevbsantiago/qsacnpj) um pacote feito de R para processar todos os dados brutos da RFB e uma versão em SQLite dessa mesma base. Sendo assim, como a comunidade já fez uma grande parte do trabalho, o que resta para nós é baixar a base em SQLite [por este link](https://bit.ly/3cRruVw).
+
+# Passo 2: Acesse a base usando o combo de pacotes `DBI`+`RSQLite`+`dplyr`
+
+O passo final é usar a infraestrutura do pacote `DBI` e `dplyr` para acessar a base SQLite que baixamos no passo anterior. Entretanto, antes de fazer isso, vamos fazer um pequeno tratamento nos nossos CNPJs para que eles saiam do formato padrão 13.347.016/0001-17 para o formato que de armazenamento na base da RFB "13347016000117". Você pode consultar o código que faz esse procedimento nas linhas abaixo:
+
+```{r, eval = FALSE}
+#install.packages("stringr")
+
+lista_de_cnpjs <- c(
+  '13.347.016/0001-17',
+) %>% 
+  stringr::str_remove_all("[:punct:]") %>% 
+  # remove pontuações, tais como ",", "." e "-"
+  stringr::str_pad(pad = "0", width = 14, side = "left")
+  # caso o CNPJ tenha menos do que 14 digitos, preenche o CNPJ com 0s à esquerda
+```
+
+Depois dessa limpeza, temos só mais um passo a executar. Precisamos nos conectar com a base de dados em SQLite e utilizar esse vetor de CNPJs como filtro:
+
+```{r, eval = FALSE}
+#install.packages("RSQLite")
+#install.packages("dplyr")
+
+con <- DBI::dbConnect(RSQLite::SQLite(), "bd_dados_qsa_cnpj.db")
+# conecta o R ao banco de dados
+
+dados_cadastrais <- dplyr::tbl(con, "cnpj_dados_cadastrais_pj") %>% 
+  # carrega a tabela de dados cadastrais
+  dplyr::filter(cnpj %in% local(lista_de_cnpjs)) %>% 
+  # filtra as linhas da tabela "cnpj_dados_cadastrais_pj" que estejam no vetor "lista_de_cnpjs"
+  dplyr::collect() %>% 
+  # carrega o resultado da consulta para o R
+```
+
+ACABOU! Caso você queira consultar mais CNPJs, basta aumentar a lista de documentos lá no vetor `lista_de_cnpjs`. Bacana, né? Esperamos esses passos tenham tomado só um minuto mesmo. Deixe o seu comentário aí embaixo se demorou mais.
+
+# Código completo
+
+Para que você consiga sair usando esse código por aí, vamos colocar aqui embaixo o código completo, com todos as partes juntas. Boa sorte!
+
+```{r, eval = FALSE}
+#install.packages("DBI")
+#install.packages("RSQLite")
+#install.packages("dplyr")
+
+con <- DBI::dbConnect(RSQLite::SQLite(), "bd_dados_qsa_cnpj.db")
+# conecta o R com o SQLite que baixamos
+
+lista_de_cnpjs <- c(
+  '13.347.016/0001-17',
+  # aqui você insere os CNPJs que quer consultar
+) %>% 
+  stringr::str_remove_all("[:punct:]") %>% 
+  # remove pontuações
+  stringr::str_pad(pad = "0", width = 14, side = "left")
+  # deixa todos os documento com o mesmo comprimento
+
+cnpj <- dplyr::tbl(con, "cnpj_dados_cadastrais_pj")
+# acessa a tabela "cnpj_dados_cadastrais_pj"
+
+dados_cadastrais <- dplyr::cnpj %>% 
+  # carrega a tabela de dados cadastrais
+  dplyr::filter(cnpj %in% local(lista_de_cnpjs)) %>% 
+  # filtra as linhas da tabela "cnpj_dados_cadastrais_pj" que estejam no vetor "lista_de_cnpjs"
+  dplyr::collect()
+  # carrega o resultado da consulta para o R
+```
+
+# Gostou? Quer saber mais?
+
+Se você quiser aprender um pouco mais sobre manipulação de dados com R, dê uma olhada no nosso curso [R para Ciência de Dados I](https://curso-r.com/cursos/r4ds-1/) e aproveite!
+
+Caso você tenha dúvidas entre em contato com a gente pelos comentários aqui embaixo, pelo nosso Discourse ou pelo e-mail contato@curso-r.com. 

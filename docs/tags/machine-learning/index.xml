@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>machine learning on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/machine-learning/</link>
+    <description>Recent content in machine learning on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 29 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Predições XGBoost diretamente pelo SQL</title>
+      <link>https://blog.curso-r.com/posts/2020-08-29-xgboost-sql/</link>
+      <pubDate>Sat, 29 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2020-08-29-xgboost-sql/</guid>
+      <description>Criar um XGBoost no R e colocar para o SQL gerar as predições em uma linha de código com o {tidypredict}.</description>
+    </item>
+    
+    <item>
+      <title>Modelos beseados em árvores são imunes à multicolinearidade?</title>
+      <link>https://blog.curso-r.com/posts/2018-05-22-arvore-e-multicolinearidade/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2018-05-22-arvore-e-multicolinearidade/</guid>
+      <description>Modelos baseados em árvores como árvores de decisão, random forest, ligthGBM e xgboost são conhecidos, dentre outras qualidades, pela sua robustês diante do problema de multicolinearidade. Esse post mostra que isso não é totalmente verdade.</description>
+    </item>
+    
+  </channel>
+</rss>

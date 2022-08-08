@@ -1,0 +1,126 @@
+---
+title: "Advent of R: Dia 25"
+date: "2021-12-25"
+tags: ["advent-of-r", "tidyverse"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/advent-of-r-25.webp"
+author: ["Caio"]
+summary: "Resolvendo o Advent of Code 2021 com R: Dia 25."
+draft: false
+---
+
+O [Advent of Code](https://adventofcode.com) é um
+[Calendário do Advento](https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento)
+desenvolvido por [Eric Wastl](https://github.com/topaz) composto por 25
+pequenos exercícios de programação que vão sendo disponibilizados, um a um,
+entre 1º de dezembro e o Natal de cada ano.
+
+Meu objetivo com o **Advent of R** é resolver todos os problemas do
+[Advent of Code 2021](https://adventofcode.com/2021) em R e documentar o
+processo através desta
+[série de posts](https://blog.curso-r.com/tags/advent-of-r/). Todo dia entre
+01/12/2021 e 25/12/2021 eu vou tentar resolver o novo problema, documentar a
+minha solução aqui no blog e subir os meus scripts completos para um
+[repositório público](https://github.com/curso-r/advent-of-r) no GitHub.
+
+A minha esperança é que, com essa série, mais pessoas pratiquem seus
+conhecimentos de R resolvendo exercícios divertidos e desafiadores! Ao final
+da jornada vamos todos ter afiado nossas habilidades de R e, quem sabe,
+divulgado essa linguagem incrível para mais pessoas. Boas festas e bom código!
+
+## Pepino-do-mar (A)
+
+Finalmente chegamos ao [último dia](https://adventofcode.com/2021/day/25) do AoC
+deste ano! O problema de hoje foi um verdadeiro presente de Natal: bem mais
+simples que todos os dias anteriores. Nossa missão era acompanhar os movimentos
+de dois grupos de pepinos-do-mar e encontrar o momento em que eles não poderiam
+mais se mover.
+
+Os pepinos estavam dispostos em uma matriz retangular e se moviam na direção
+para a qual estavam apontando. Se o espaço em frente ao pepino estivesse vago
+(`.`), então ele se movia.
+
+```r
+# Estado inicial:
+# ...>...
+# .......
+# ......>
+# v.....>
+# ......>
+# .......
+# ..vvv..
+#
+# Depis de 1 passo:
+# ..vv>..
+# .......
+# >......
+# v.....>
+# >......
+# .......
+# ....v..
+#
+# Depois de 58 passos (todos travados):
+# ..>>v>vv..
+# ..v.>>vv..
+# ..>>v>>vv.
+# ..>>>>>vv.
+# v......>vv
+# v>v....>>v
+# vvv.....>>
+# >vv......>
+# .>v.vv.v..
+```
+
+Meu código ficou simples. Eu li o mapa do fundo do mar como uma matriz e
+calculei todos os pepinos que podiam se mover; quando nenhum mais pudesse, eu
+retornava o número de passos transcorridos.
+
+```r
+# Ler fundo do mar como matriz
+seafloor <- "data-raw/25a_sea_cucumber.txt" |>
+  readr::read_lines() |>
+  stringr::str_split("") |>
+  purrr::flatten_chr() |>
+  matrix(nrow = 137, ncol = 139, byrow = TRUE)
+
+# Iterar enquanto ainda há movimentos
+i <- 0
+while (TRUE) {
+  i <- i + 1
+
+  # Todos os pepinos
+  e <- which(seafloor == ">")
+  s <- which(seafloor == "v")
+
+  # As suas próximas posições
+  next_e <- ((e + 137) %% 19043) + ((e + 137) %% 19043 == 0) * 19043
+  next_s <- s + 1 - (s %% 137 == 0) * 137
+
+  # Mover todos os pepinos virados para a esquerda
+  allowed_e <- seafloor[next_e] == "."
+  seafloor[next_e[allowed_e]] <- seafloor[e[allowed_e]]
+  seafloor[e[allowed_e]] <- "."
+
+  # Mover todos os pepinos virados para baixo
+  allowed_s <- seafloor[next_s] == "."
+  seafloor[next_s[allowed_s]] <- seafloor[s[allowed_s]]
+  seafloor[s[allowed_s]] <- "."
+
+  # Verificar condição de parada
+  if (all(!allowed_e) && all(!allowed_s)) break
+}
+
+# Imprimir
+print(i)
+#> [1] 518
+```
+
+## Pepino-do-mar (B)
+
+O segundo item me pegou de surpresa porque... Não havia segundo item! A
+historinha que estava sendo contada ao longo do AoC foi finalmente concluída e
+ganhamos a última estrela de graça.
+
+E esse foi o fim da aventura. Muito obrigado por me acompanhar nesses últimos 25
+dias de programação intensa! Espero que tenham gostado e, até que enfim, boas
+festas!

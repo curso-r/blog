@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tutorial on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/categories/tutorial/</link>
+    <description>Recent content in tutorial on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 23 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fuja das tags! Incluindo Markdown no Shiny</title>
+      <link>https://blog.curso-r.com/posts/2021-07-22-shiny-markdown/</link>
+      <pubDate>Fri, 23 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-07-22-shiny-markdown/</guid>
+      <description>Veja como incluir elementos estáticos ao seu aplicativo usando arquivos Markdown.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dots on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/dots/</link>
+    <description>Recent content in dots on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Fri, 03 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/dots/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Três Pontinhos: Como Funcionam os Dots</title>
+      <link>https://blog.curso-r.com/posts/2021-12-03-tutorial-dots/</link>
+      <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2021-12-03-tutorial-dots/</guid>
+      <description>Com certeza você já lidou com os &amp;lsquo;&amp;hellip;&amp;rsquo; do R, mas talvez ainda não saiba como eles funcionam. Está na hora de mudar isso!</description>
+    </item>
+    
+  </channel>
+</rss>
