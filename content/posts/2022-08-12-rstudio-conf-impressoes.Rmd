@@ -59,6 +59,8 @@ Se você tiver interesse em saber mais sobre o workshop, todo o conteúdo está 
 
 - [__Material complementar__](https://workshops.tidymodels.org/slides/annotations.html): são informações extras sobre alguns slides, que também podem ser acessadas pelo ícone __i__ vermelho no canto superior direito. 
 
+<center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Lots of stickers (my first ones!) and learning in the first day of <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> .<br><br>Loving the ML with Tidymodels workshop, and the amazing people around here! <a href="https://t.co/JAckV0atWw">pic.twitter.com/JAckV0atWw</a></p>&mdash; Flávia E. Rius (@flaviaerius) <a href="https://twitter.com/flaviaerius/status/1551723814966394880?ref_src=twsrc%5Etfw">July 26, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
+
 ## Palestras
 
 Os dias 3 e 4 da conferência consistiram em palestras, sendo elas quatro _keynotes_, que são as palestras principais, grandes, sem nenhuma outra acontecendo em paralelo. 
@@ -109,7 +111,47 @@ __Twitter__: [@BeaMilz](https://twitter.com/BeaMilz)
 
 __Blog__: <https://beamilz.com>
 
+Muito do que eu achei interessante já foi falado pela Flávia (neste post) e pelo Júlio (em posts anteriores) sobre a conferência, então vou abordar aqui o que for diferente! Além disso, adicionei alguns tweets postados durante o evento, pois é uma forma legal de ver fotos e conversas que aconteceram por lá!
+
+## Antes da conferência
+
+Como a Flávia, essa também foi a primeira vez que participo da rstudio::conf(). Uma curiosidade é que, por pouco, eu não participei! Eu havia lido um anúncio anteriormente dizendo que o evento não aconteceria, então não fiquei acompanhando o site. Porém, no **último dia disponível** para submeter para a bolsa de diversidade e palestras, eu vi um tweet sobre a conferência e descobri que ela iria acontecer! Compartilhei com as minhas redes e logo corri para submeter uma palestra e também para a bolsa de diversidade. 
+
+Um tempo depois, recebi um email com o convite para ser *Teaching Assistant* (TA) no workshop Building Tidy Tools, ministrado pela [Emma Rand](https://twitter.com/er13_r) e pelo [Ian Lyttle](https://twitter.com/ijlyttle). Eu aceitei e aí começou o processo de organizar tudo para participar do evento! Também recebi depois o email dizendo que a bolsa de diversidade foi aprovada, e que a palestra que eu submeti foi aprovada como uma *lightning talk* (uma palestra de 5 minutos)! Enfim, fiquei extremamente grata por todas essas oportunidades.
+
+<center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Tomorrow starts the <a href="https://twitter.com/rstudio?ref_src=twsrc%5Etfw">@rstudio</a> Conference! I&#39;m very excited to be part of it :)<br><br>Thanks <a href="https://twitter.com/rstudio?ref_src=twsrc%5Etfw">@rstudio</a> for the diversity scholarship!🥳<br><br>Also, glad to be part of the group of R Brazilian users at the conference <a href="https://twitter.com/flaviaerius?ref_src=twsrc%5Etfw">@flaviaerius</a> <a href="https://twitter.com/jtrecenti?ref_src=twsrc%5Etfw">@jtrecenti</a> <a href="https://twitter.com/dfalbel?ref_src=twsrc%5Etfw">@dfalbel</a> 🌎<a href="https://twitter.com/hashtag/rstudioconf?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf</a> <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> <a href="https://t.co/WvLpFZIaw5">pic.twitter.com/WvLpFZIaw5</a></p>&mdash; Beatriz Milz (@BeaMilz) <a href="https://twitter.com/BeaMilz/status/1551343102023143424?ref_src=twsrc%5Etfw">July 24, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
+
+## Participando do workshop como TA
+
+Participar como Teaching Assistant do workshop Building Tidy Tools foi uma experiência INCRÍVEL! As pessoas ministrantes do workshop ([Emma Rand](https://twitter.com/er13_r) e [Ian Lyttle](https://twitter.com/ijlyttle)) são extremamente gentis, e mesmo antes do workshop eles incluiam os TAs nas conversas via email para que a gente já tivesse familiaridade com a estrutura do workshop e os materiais que seriam utilizados.
+
+Aliás, todos os materiais para este workshop estão disponíveis [neste site](https://rstudio-conf-2022.github.io/build-tidy-tools/)!
+
+No primeiro dia do workshop, o foco foi abordar como podemos criar um pacote: no final do primeiro dia, as pessoas participantes já tinham um pacote criado, com algumas funções e seus testes, disponível online, e com uma página web feita com pkgdown! Nesse dia, consegui auxiliar bastante pessoas com dúvidas que surgiam sobre configuração do ambiente para desenvolvimento de pacotes, e os erros que apareciam no caminho durante o workshop. Eu já tinha bastante experiência com vários dos erros que apareceram, pois eu utilizo pacotes diariamente 
+
+<center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">A couple of ussies at the end of “Building Tidy Tools” workshop at <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a><a href="https://twitter.com/er13_r?ref_src=twsrc%5Etfw">@er13_r</a> is a wonderful collaborator! Thanks to TAs <a href="https://twitter.com/tladeras?ref_src=twsrc%5Etfw">@tladeras</a> <a href="https://twitter.com/BeaMilz?ref_src=twsrc%5Etfw">@BeaMilz</a> <a href="https://twitter.com/heyhayhay__?ref_src=twsrc%5Etfw">@heyhayhay__</a> Kailey Mulligan and Elliot Murphy, who kept things moving!<br><br>Thanks also to all our students, great energy! <a href="https://t.co/oclaAfO9d8">pic.twitter.com/oclaAfO9d8</a></p>&mdash; Ian Lyttle (@ijlyttle) <a href="https://twitter.com/ijlyttle/status/1552044478772527105?ref_src=twsrc%5Etfw">July 26, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
+
+## Palestrando na rstudio::conf()
+
 ...
+
+<center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">The material for my talk at <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> about GitHub Actions is available on my blog:<a href="https://t.co/07rEJwFCPn">https://t.co/07rEJwFCPn</a><br><br>Thanks everyone that watched and supported!!<a href="https://twitter.com/hashtag/rstudioconf?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf</a> <a href="https://twitter.com/rstudio?ref_src=twsrc%5Etfw">@rstudio</a> <a href="https://twitter.com/github?ref_src=twsrc%5Etfw">@github</a> <a href="https://twitter.com/GitHubBrasil?ref_src=twsrc%5Etfw">@GitHubBrasil</a> <a href="https://t.co/SHF3bK09Qr">pic.twitter.com/SHF3bK09Qr</a></p>&mdash; Beatriz Milz (@BeaMilz) <a href="https://twitter.com/BeaMilz/status/1552681946198720516?ref_src=twsrc%5Etfw">July 28, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
+
+## Palestras que eu mais gostei
+
+...
+
+## Encontros
+
+...
+
+<center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Part of the fun in R events are playing games with people that we meet from the community! <a href="https://twitter.com/hashtag/rstudioconf?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf</a> <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> <a href="https://twitter.com/hashtag/hanabi?src=hash&amp;ref_src=twsrc%5Etfw">#hanabi</a> <a href="https://twitter.com/rstudio?ref_src=twsrc%5Etfw">@rstudio</a> <a href="https://twitter.com/flaviaerius?ref_src=twsrc%5Etfw">@flaviaerius</a> <a href="https://twitter.com/Devin_lj?ref_src=twsrc%5Etfw">@Devin_lj</a> <a href="https://twitter.com/jtrecenti?ref_src=twsrc%5Etfw">@jtrecenti</a> and David Christensen 🎉 <a href="https://t.co/thndW1Le9C">pic.twitter.com/thndW1Le9C</a></p>&mdash; Beatriz Milz (@BeaMilz) <a href="https://twitter.com/BeaMilz/status/1551739749408415751?ref_src=twsrc%5Etfw">July 26, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
+
+
+## Stickers
+
+<center><blockquote class="twitter-tweet"><p lang="qme" dir="ltr"><a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> <a href="https://t.co/cCn5me1rjc">pic.twitter.com/cCn5me1rjc</a></p>&mdash; Luis D. Verde Arregoitia (@LuisDVerde) <a href="https://twitter.com/LuisDVerde/status/1552037693332357120?ref_src=twsrc%5Etfw">July 26, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
+
 
 # Julio Trecenti
 
@@ -120,6 +162,8 @@ Para mim, a parte mais legal foram os encotros e reencontros presenciais. Além 
 Na parte técnica, para mim o mais legal foi ver como a RStudio, agora Posit, está se aproximando de forma amigável de outras linguagens de programação. Ao invés de simplesmente começar a fazer ferramentas para o Python, a empresa decidiu criar ferramentas multi-linguagem, focando na produção científica (como o [Quarto](https://quarto.org)), que vai muito além das linguagens de programação.
 
 E claro, meu lado tiete adorou ter refeições com o [Hadley](https://hadley.nz) e conversar com outras pessoas famosas, como o JJ Allaire, o [Christophe Dervieux](https://github.com/cderv) e o [Tyler Morgan-Wall](https://twitter.com/tylermorganwall).
+
+<center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Thankfully Julio asked for a picture, otherwise no one would believe that we had lunch with <a href="https://twitter.com/hadleywickham?ref_src=twsrc%5Etfw">@hadleywickham</a> and <a href="https://twitter.com/chrisderv?ref_src=twsrc%5Etfw">@chrisderv</a> 😄 <a href="https://twitter.com/jtrecenti?ref_src=twsrc%5Etfw">@jtrecenti</a> <a href="https://twitter.com/flaviaerius?ref_src=twsrc%5Etfw">@flaviaerius</a> <a href="https://twitter.com/rprimi?ref_src=twsrc%5Etfw">@rprimi</a> e <a href="https://twitter.com/anakiki1505?ref_src=twsrc%5Etfw">@anakiki1505</a> ! <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> <a href="https://twitter.com/hashtag/RStudioConf?src=hash&amp;ref_src=twsrc%5Etfw">#RStudioConf</a> <a href="https://twitter.com/hashtag/posit?src=hash&amp;ref_src=twsrc%5Etfw">#posit</a> <a href="https://twitter.com/rstudio?ref_src=twsrc%5Etfw">@rstudio</a> <a href="https://twitter.com/hashtag/RStats?src=hash&amp;ref_src=twsrc%5Etfw">#RStats</a> <a href="https://t.co/R8jAOyfUxd">pic.twitter.com/R8jAOyfUxd</a></p>&mdash; Beatriz Milz (@BeaMilz) <a href="https://twitter.com/BeaMilz/status/1552343987536728064?ref_src=twsrc%5Etfw">July 27, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
 
 Abraços e até a próxima!
 
