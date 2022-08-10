@@ -1,0 +1,126 @@
+---
+title: "Impressões pessoais da rstudio::conf(2022)"
+date: "2022-08-12"
+tags: ["evento", "rstudio::conf"]
+categories: ["Divulgação"]
+image: "images/posts/banner/rstudio-conf-2022.png"
+author: ["Julio", "Flavia E. Rius", "Beatriz"]
+summary: "Nesse post, apresentamos nossas impressões pessoais sobre o evento"
+draft: true
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  collapse = TRUE
+)
+```
+
+A rstudio::conf(2022) acabou, mas não saiu de nós. Ficaram as memórias, as coisas novas para estudar, e as novas amizades. Nesse post, falamos um pouco de nossas experiências pessoais na conferência. O texto conta com a participação especial da Flávia E. Rius, que particiou do evento comigo (Julio) e com a Beatriz. Confira!
+
+# Flávia E. Rius
+
+__Twitter__: [@flaviaerius](https://twitter.com/flaviaerius) 
+
+__Blog__: <https://flaviaerius.netlify.app>
+
+Participei da rstudio::conf() pela primeira vez neste ano de 2022, e última, já que ano que vem será posit::conf(), e vou contar sobre a minha experiência neste post. Pra deixar todos no contexto, vou me apresentar. Eu sou a Flávia E. Rius, cientista de dados na Mendelics/meuDNA, empresas de análise genômica (sim, do DNA!) Uso o R para a maior parte do meu trabalho, principalmente em limpeza, processamento e estruturação de dados, modelos, e criação de reports e relatórios em Rmarkdown (era pré-Quarto.) Além disso, dou mentorias online para pessoas do mundo todo em R, bioinformática e estatística. Como a Bea, apliquei para a bolsa de Diversity Scholar para participar da conferência, e fui escolhida para recebê-la (yay!)
+
+Essa foi a minha primeira conferência de R, e também a primeira relacionada a Data Science fora do mundo da bioinformática. Foi uma experiência completamente nova.
+
+Escolhi o workshop de ___Machine Learning With Tidymodels___, que aconteceu nos primeiros dois dias do congresso, das 9 às 17h. Os outros dois dias consistiram em palestras acontecendo paralelamente em diferentes salas, e a tarefa de escolher a quais participar não foi fácil.
+
+A primeira impressão que tive ao chegar foi do hotel, gigantesco, e com uma estrutura pra congressos que eu nunca tinha visto antes. O hotel fica localizado numa espécie de cidade turística artificial, chamada National Harbor, no estado de Maryland.
+
+## Workshop: Machine Learning With Tidymodels
+
+Confesso que fui descobrir uma migalha do que eram os tidymodels uma semana antes do workshop. Escolhi ele porque queria aprender mais sobre machine learning (ML), e, apesar de saber que a ferramenta preferida para a aplicação de ML é scikit-learn no python, achei interessantíssimo aprender no R, linguagem que já é confortável pra mim.
+
+Tidymodels são ferramentas dentro de diversos pacotes que, juntas, formam uma maneira nova de criar modelos estatísticos e de ML no R. Dentre os pacotes estão: `recipes`, `rsample`, `parsnip`, `workflows`, `vetiver`, etc..
+
+Resumi em tópicos os pontos altos e não tão altos do workshop abaixo. 
+
+### Pontos altos do workshop:
+
+-   __Modularidade__: com os tidymodels cada etapa é um módulo que fica guardado em uma variável e pode ser aplicada para novos dados. Por exemplo a receita do pacote `recipes` e o workflow do pacote `workflows`. Isso é feito no intuito de guardar todo o processo aplicado nos dados de treino, para, no final, repetir para os dados de teste, ou mesmo reaplicar um pré-processamento e _feature engineering_ para um novo set de dados, por exemplo.
+
+-   __Professores__: Max Kuhn, Julia Silge e Davis Vaughan foram professores excepcionais, com destaque para a Julia, que é fenomenal na didática. Ela explica de uma forma muito fácil e completa, para que todos possam entender. Todos trouxeram sua expertise, um complementando o outro sobre os as dúvidas que iam surgindo (aliás, o grupo de alunos também era muito bom, com dúvidas bastante pertinentes e complementares ao workshop.) Os _Teaching Assistants_ (TAs) foram muito bons em ajudar com as dúvidas, e mesmo os professores, quando não estavam dando a aula, atuaram como TAs, ajudando com as dúvidas dos alunos.
+
+- [__vetiver__](https://vetiver.rstudio.com/): em particular, essa ferramenta fez meus olhos brilharem, apesar de ter sido mostrada bem brevemente. É uma maneira de construir uma API a partir do R para deploy de modelos de machine learning, que já resulta na página da API, e pode até gerar a Dockerfile pra deploy da API em plataformas como o Google App Engine ou AWS.
+
+### Pontos não tão altos do workshop:
+
+-   __Conceitos de ML__: foram usados exemplos de árvores de decisão (_decision trees_) e _random forests_, mas faltou explicar com mais detalhe o que são, e em quais situações podem ser usados. Eu relevei absolutamente essa parte porque sei que não é fácil passar todo o conteúdo necessário, ainda mais em um workshop de apenas dois dias com tanto conteúdo sobre ML e aplicações na ferramenta de foco, os tidymodels.
+
+Se você tiver interesse em saber mais sobre o workshop, todo o conteúdo está disponível online:
+
+- [__Slides e pré-requisitos__](https://workshops.tidymodels.org/): todos os slides foram feitos com Quarto, o que significa que são interativos, ou seja, é possível copiar código e clicar nos links dos slides.
+
+- [__Material complementar__](https://workshops.tidymodels.org/slides/annotations.html): são informações extras sobre alguns slides, que também podem ser acessadas pelo ícone __i__ vermelho no canto superior direito. 
+
+## Palestras
+
+Os dias 3 e 4 da conferência consistiram em palestras, sendo elas quatro _keynotes_, que são as palestras principais, grandes, sem nenhuma outra acontecendo em paralelo. 
+
+A primeira keynote foi sobre tidymodels, com a Julia Silge e o Max Kuhn, e também contou com o super anúncio da mudança de nome da __RStudio__ para __Posit__ pelo Hadley Wickham e o JJ Allaire, fundador e CEO da RStudio (agora Posit.) 
+
+A segunda foi com o Joe Cheng, CTO da RStudio. Ele contou a história sobre como o __Shiny__ surgiu, e trouxe novidades como o __Shiny para python__ e a versão _no code_ do Shiny para R, usando apenas ferramentas de apontar e clicar. 
+
+A terceira, com a Mine Çetinkaya e a Julia Stewart, falou sobre as maravilhas do __Quarto__. Uma ferramenta que me chamou muito a atenção é o _multiplex_, em que o link dos seus slides construídos em Quarto muda os slides conforme você muda na sua apresentação! Muito mágico! Claro que tem muita coisa interessante no Quarto além disso, recomendo dar uma olhada.
+
+A última, com o Jeff Leek, contou sobre o seu projeto social de trazer jovens da periferia para o aprendizado e aplicação de ciência de dados, o [Data Trail](https://www.datatrail.org/). Um projeto muito bonito, em que os alunos são pagos para fazerem o curso, e, ao fim, têm acesso a um estágio na área.
+
+Entre as keynotes várias palestras interessantes aconteceram. As que mais me chamaram a atenção foram:
+
+- ___Demistifying MLOps___, da Isabel Zimmerman, onde ela fez um paralelo entre fazer cookies e os processos de construção, deploy e manutenção de modelos de machine learning usando o `vetiver`; 
+
+- ___Making Data Pipelines With R___, da Meghan S Harris, com dicas valiosas de organização e documentação para pipelines de análise de dados; 
+
+- ___Garbage Data___, do Jim Kloet, que falou sobre o que fazer com a garbage data (dados lixo) e da importância de definir a coleta de dados corretamente; 
+
+- ___Exploring Query Optimization___, da Rebecca Hadi, sobre como lidar com queries de tabelas no SQL com mais de um bilhão de colunas; 
+
+- ___dm: Analyze, build and deploy relational data models___, do Kirill Muller, que mostrou um pacote muito interessante para construir esquemas de bancos de dados relacionais a partir de tibbles no R; 
+
+- ___The Future of missing data___, do Nicholas Tierney, sobre como lidar com dados faltantes, inclusive trazendo maneiras de incluir tais dados em sua análise para entender o que pode ter acontecido com eles. 
+
+- ___Small Team Large Organization: Building Impactful Shiny Dashboards at NIH___, do Jon Nye, que falou sobre o uso de um modelo de machine learning para classificar solicitações de _grants_ (verbas para pesquisa) de acordo com o tema e a relevância; 
+
+- ___Building a ggplot2 rollercoaster___, do Tyler Morgan-Wall, em que ele empregou seus pacotes de animação 3D no R `rayshader` e `rayrender` para obter um cenário 3D com gráficos do ggplot, e criou o pacote `rayrollercoaster` especificamente para a apresentação! A montanha-russa percorre os gráficos usando o percurso que você criar. A meu ponto de vista, a montanha-russa em si é mais uma diversão, mas os outros pacotes do Tyler são bastante úteis para visualização 3D. 
+
+Lembrando que essas foram minhas palestras favoritas de acordo com o que posso aplicar e meus interesses, e dentro das que assisti.
+
+Em resumo, a conferência foi bastante enriquecedora. Aprendi muito sobre tidymodels, machine learning em geral, Quarto, e sobre diversos novos pacotes muito úteis no R (e alguns com versão em python também.) 
+
+Se você estiver considerando ir à conferência no ano que vem, saiba que será um tempo muito bem aproveitado! 
+
+Não deixe de aplicar para a bolsa de diversidade! 
+
+## tl;dr
+
+-   rstudio:conf(2022) foi fenomenal, com uma pegada tech, muitas novidades aplicáveis, e muita gente interessante;
+-   workshop de ML com tidymodels trouxe uma análise de dados reais aplicando conceitos de ML como split de amostra, feature engineering, reamostragem e tunagem. Valeu muito a pena (confira o conteúdo aberto em [workshops.tidymodels.org](workshops.tidymodels.org));
+-   Julio, Bea e Dani aqui do curso-R são pessoas excepcionais, foi o maior prazer conhecê-los!
+
+# Beatriz Milz
+
+__Twitter__: [@BeaMilz](https://twitter.com/BeaMilz) 
+
+__Blog__: <https://beamilz.com>
+
+...
+
+# Julio Trecenti
+
+Como eu já comentei sobre tudo o que passei nos posts anteriores -- [dia 1: aqui](https://blog.curso-r.com/posts/2022-07-27-rstudio-conf-2022/) e [dia 2: aqui](https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/) -- serei bem breve.
+
+Para mim, a parte mais legal foram os encotros e reencontros presenciais. Além da companhia sempre maravilhosa da Bea e da companhia da Flávia que nos acompanhou em toda a viagem, também encontramos novas pessoas do Brasil, reencontramos amigos e conhecemos novas pessoas de fora.
+
+Na parte técnica, para mim o mais legal foi ver como a RStudio, agora Posit, está se aproximando de forma amigável de outras linguagens de programação. Ao invés de simplesmente começar a fazer ferramentas para o Python, a empresa decidiu criar ferramentas multi-linguagem, focando na produção científica (como o [Quarto](https://quarto.org)), que vai muito além das linguagens de programação.
+
+E claro, meu lado tiete adorou ter refeições com o [Hadley](https://hadley.nz) e conversar com outras pessoas famosas, como o JJ Allaire, o [Christophe Dervieux](https://github.com/cderv) e o [Tyler Morgan-Wall](https://twitter.com/tylermorganwall).
+
+Abraços e até a próxima!
+
+
