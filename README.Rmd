@@ -44,7 +44,8 @@ arquivos <- list.files("content/posts/", pattern = ".Rmd$", full.names = TRUE)
 tab <- arquivos %>% 
   purrr::map_dfr(yaml_to_tibble) %>%  
   dplyr::filter(is.na(draft) | draft == "FALSE") %>% 
-  dplyr::mutate(categories = tolower(categories))
+  dplyr::mutate(categories = tolower(categories)) |> 
+  dplyr::mutate(author = stringr::str_replace(author, "Beatriz Milz", "Beatriz"))
 ```
 
 ## Número de posts: `r dplyr::n_distinct(tab$arquivo)`
