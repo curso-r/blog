@@ -3,7 +3,7 @@ title: "Impressões pessoais da rstudio::conf(2022)"
 date: "2022-08-12"
 tags: ["evento", "rstudio::conf"]
 categories: ["Divulgação"]
-image: "images/posts/banner/rstudio-conf-2022.png"
+image: "images/posts/banner/lunch-with-hadley.jpg"
 author: ["Julio", "Flavia E. Rius", "Beatriz"]
 summary: "Nesse post, apresentamos nossas impressões pessoais sobre o evento"
 draft: false
