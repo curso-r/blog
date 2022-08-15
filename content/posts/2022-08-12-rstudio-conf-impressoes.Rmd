@@ -6,7 +6,7 @@ categories: ["Divulgação"]
 image: "images/posts/banner/rstudio-conf-2022.png"
 author: ["Julio", "Flavia E. Rius", "Beatriz"]
 summary: "Nesse post, apresentamos nossas impressões pessoais sobre o evento"
-draft: true
+draft: false
 ---
 
 ```{r, include = FALSE}
@@ -127,31 +127,80 @@ Participar como Teaching Assistant do workshop Building Tidy Tools foi uma exper
 
 Aliás, todos os materiais para este workshop estão disponíveis [neste site](https://rstudio-conf-2022.github.io/build-tidy-tools/)!
 
-No primeiro dia do workshop, o foco foi abordar como podemos criar um pacote: no final do primeiro dia, as pessoas participantes já tinham um pacote criado, com algumas funções e seus testes, disponível online, e com uma página web feita com pkgdown! Nesse dia, consegui auxiliar bastante pessoas com dúvidas que surgiam sobre configuração do ambiente para desenvolvimento de pacotes, e os erros que apareciam no caminho durante o workshop. Eu já tinha bastante experiência com vários dos erros que apareceram, pois eu utilizo pacotes diariamente 
+No primeiro dia do workshop, o foco foi abordar como podemos criar um pacote: no final do primeiro dia, as pessoas participantes já tinham um pacote criado, com algumas funções e seus testes, disponível online, e com uma página web feita com pkgdown! Nesse dia, consegui auxiliar bastante pessoas com dúvidas que surgiam sobre configuração do ambiente para desenvolvimento de pacotes, e os erros que apareciam no caminho durante o workshop. Eu já tinha bastante experiência com vários dos erros que aconteciam, pois eu utilizo pacotes diariamente e também [sou uma das professoras do curso de pacotes na Curso-R](https://loja.curso-r.com/pacotes.html).
+
+No segundo dia do workshop, o conteúdo foi aprofundado e o foco foi a construção de funções de forma que elas funcionem bem de acordo com a filosofia do tidyverse, sendo o destaque (na minha opinião) o conteúdo sobre design de funções e *tidy eval*.
 
 <center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">A couple of ussies at the end of “Building Tidy Tools” workshop at <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a><a href="https://twitter.com/er13_r?ref_src=twsrc%5Etfw">@er13_r</a> is a wonderful collaborator! Thanks to TAs <a href="https://twitter.com/tladeras?ref_src=twsrc%5Etfw">@tladeras</a> <a href="https://twitter.com/BeaMilz?ref_src=twsrc%5Etfw">@BeaMilz</a> <a href="https://twitter.com/heyhayhay__?ref_src=twsrc%5Etfw">@heyhayhay__</a> Kailey Mulligan and Elliot Murphy, who kept things moving!<br><br>Thanks also to all our students, great energy! <a href="https://t.co/oclaAfO9d8">pic.twitter.com/oclaAfO9d8</a></p>&mdash; Ian Lyttle (@ijlyttle) <a href="https://twitter.com/ijlyttle/status/1552044478772527105?ref_src=twsrc%5Etfw">July 26, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
 
+Em resumo: foi uma oportunidade maravilhosa, e agradeço muito à [Mine Çetinkaya-Rundel](https://twitter.com/minebocek) (que estava na organização dos workshops neste evento), aos instrutores e outros TAs, e também aos estudantes que participaram do workshop!
+
+
+## Bolsa de diversidade
+
+Como comentei anteriormente, eu e a Flávia fomos selecionadas para receber uma bolsa de diversidade. Algo que gostei muito foi terem criado um canal do Slack, antes mesmo da conferência, para que pudessemos conversar e conhecer outros bolsistas! Assim, quando chegamos no evento já conheciamos várias pessoas e foi mais fácil de se conectar :) Essa foto tem o registro das pessoas que participaram como bolsistas:
+
+![Imagem das pessoas que participaram como bolsistas de diversidade.](/images/posts/conteudo/2022-rstudio-conf/diversity_scholars.jpg)
+Fonte: Imagem disponibilizada por Katherine Vu (RStudio).
+
+
 ## Palestrando na rstudio::conf()
 
-...
+A minha palestra relâmpago foi sobre um tema que tenho aprendido nos últimos 2 anos e acho muito útil e interessante: automatizações com GitHub Actions.
+
+Um destaque foi o treinamento recebido pela [Articulation](https://www.articulationinc.com/). Todas as pessoas que palestraram no evento receberam convites para participar de um treinamento para oferecer palestras mais interessantes, e eu participei em duas atividades. O treinamento recebido me fez reformular completamente a minha proposta, diminuindo o escopo da palestra e focando em um público-alvo mais restrito: pessoas que ainda não usam GitHub Actions!
+
+Palestrar na rstudio::conf() foi uma experiência muito legal! A energia da platéia foi muito boa, e várias pessoas falaram comigo após a palestra dizendo que acharam interessante!
+
+Todo material (slides e material complementar) [está disponível no meu blog](https://beamilz.com/talks/en/2022-rstudio-conf/).  
+
+
+[![Primeiro slide da palestra](/images/posts/conteudo/2022-rstudio-conf/talk.png)](https://beatrizmilz.github.io/rstudioconf2022/)
+
+
+O Julio me ajudou bastante durante a criação dessa palestra, dando vários feedbacks, e eu o agradeço muito! Além disso, ele comentou um pouco da minha palestra [no post sobre o segundo dia do evento](https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/).
+
 
 <center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">The material for my talk at <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> about GitHub Actions is available on my blog:<a href="https://t.co/07rEJwFCPn">https://t.co/07rEJwFCPn</a><br><br>Thanks everyone that watched and supported!!<a href="https://twitter.com/hashtag/rstudioconf?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf</a> <a href="https://twitter.com/rstudio?ref_src=twsrc%5Etfw">@rstudio</a> <a href="https://twitter.com/github?ref_src=twsrc%5Etfw">@github</a> <a href="https://twitter.com/GitHubBrasil?ref_src=twsrc%5Etfw">@GitHubBrasil</a> <a href="https://t.co/SHF3bK09Qr">pic.twitter.com/SHF3bK09Qr</a></p>&mdash; Beatriz Milz (@BeaMilz) <a href="https://twitter.com/BeaMilz/status/1552681946198720516?ref_src=twsrc%5Etfw">July 28, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
 
-## Palestras que eu mais gostei
+## Quarto 
 
-...
+O [Quarto](https://quarto.org/), para quem não conhece, é a nova geração do RMarkdown. Eu já venho usando o Quarto desde outubro de 2021, enquanto ele estava sendo desenvolvido e aprimorado. Então poucas coisas foram novidades para mim nas palestras sobre Quarto, mas eu gostei de ver como foi dado ênfase! A [keynote 'Hello Quarto'](https://mine.quarto.pub/hello-quarto/#/hello-quarto-title) da [Mine Çetinkaya-Rundel](https://twitter.com/minebocek) e da [Julia Stewart Lowndes](https://twitter.com/juliesquid) foi maravilhosa, com lindas artes da [Allison Horst](https://twitter.com/allison_horst). 
+
+[
+![One penguin standing on another penguin's shoulders in a snowscape, looking through a telescope at a Quarto logo "moon" in the night sky.](/images/posts/conteudo/2022-rstudio-conf/hello-quarto.png)
+](https://mine.quarto.pub/hello-quarto/)
+
+
+> Artwork from "Hello, Quarto" keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by Allison Horst.
+
+
+
+
+Tenho usado bastante e sei que ainda tem muita coisa legal para ser lançada relacionado ao Quarto. Eu e o Julio ficamos tão empolgados, que reestruturamos o [curso de relatórios da Curso-R](https://loja.curso-r.com/relatorios-e-apresentacoes-automaticas.html) (próxima turma começa em 16/08/2022) para abordar bastante conteúdo sobre essa ferramenta nova!
 
 ## Encontros
 
-...
+Uma das coisas mais divertidas foi conhecer tanta gente legal da comunidade, e conversar nos períodos das refeições e nos eventos no período da noite, que dão espaço para conversas entre participates. O tweet abaixo foi tirado na primeira noite do evento: eu e o Julio levamos alguns jogos e jogamos com algumas pessoas que conhecemos por lá!
 
 <center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Part of the fun in R events are playing games with people that we meet from the community! <a href="https://twitter.com/hashtag/rstudioconf?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf</a> <a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> <a href="https://twitter.com/hashtag/hanabi?src=hash&amp;ref_src=twsrc%5Etfw">#hanabi</a> <a href="https://twitter.com/rstudio?ref_src=twsrc%5Etfw">@rstudio</a> <a href="https://twitter.com/flaviaerius?ref_src=twsrc%5Etfw">@flaviaerius</a> <a href="https://twitter.com/Devin_lj?ref_src=twsrc%5Etfw">@Devin_lj</a> <a href="https://twitter.com/jtrecenti?ref_src=twsrc%5Etfw">@jtrecenti</a> and David Christensen 🎉 <a href="https://t.co/thndW1Le9C">pic.twitter.com/thndW1Le9C</a></p>&mdash; Beatriz Milz (@BeaMilz) <a href="https://twitter.com/BeaMilz/status/1551739749408415751?ref_src=twsrc%5Etfw">July 26, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
 
 
 ## Stickers
 
+Uma febre durante o evento é aumentar a coleção de stickers. Esse tweet feito pelo Luis resume vários momentos durante a conferência em que várias pessoas buscavam algum sticker de pacotes queridos em uma mesa cheia deles!
+
+
 <center><blockquote class="twitter-tweet"><p lang="qme" dir="ltr"><a href="https://twitter.com/hashtag/rstudioconf2022?src=hash&amp;ref_src=twsrc%5Etfw">#rstudioconf2022</a> <a href="https://t.co/cCn5me1rjc">pic.twitter.com/cCn5me1rjc</a></p>&mdash; Luis D. Verde Arregoitia (@LuisDVerde) <a href="https://twitter.com/LuisDVerde/status/1552037693332357120?ref_src=twsrc%5Etfw">July 26, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
 
+
+Eu trouxe de volta vários stickers, e já colei no meu computador e estou distribuindo entre os amigos! Esse é o meu computador após a conferência:
+
+![Notebook com vários stickers!](/images/posts/conteudo/2022-rstudio-conf/note-pos-evento.jpeg){width=50%}
+
+## Conclusão da Bea
+
+Enfim, essa conferência foi **INCRÍVEL**! Espero ter oportunidades de participar nas conferências da [posit](https://www.rstudio.com/blog/rstudio-is-becoming-posit/) no futuro :)
 
 # Julio Trecenti
 
