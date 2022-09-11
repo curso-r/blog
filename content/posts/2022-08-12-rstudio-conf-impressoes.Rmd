@@ -148,6 +148,13 @@ Fonte: Imagem disponibilizada por Katherine Vu (RStudio).
 
 A minha palestra relâmpago foi sobre um tema que tenho aprendido nos últimos 2 anos e acho muito útil e interessante: automatizações com GitHub Actions.
 
+::: callout-tip
+A gravação da palestra está disponível [no site da conferência](https://www.rstudio.com/conference/2022/talks/making-awesome-automations-github-actions/)!
+
+[![](https://beamilz.com/posts/2022-08-12-rstudio-conf/pt/img/gravacao.webp){fig-alt="Frame do video da palestra" fig-align="center" width="80%"}](https://www.rstudio.com/conference/2022/talks/making-awesome-automations-github-actions/)
+:::
+
+
 Um destaque foi o treinamento recebido pela [Articulation](https://www.articulationinc.com/). Todas as pessoas que palestraram no evento receberam convites para participar de um treinamento para oferecer palestras mais interessantes, e eu participei em duas atividades. O treinamento recebido me fez reformular completamente a minha proposta, diminuindo o escopo da palestra e focando em um público-alvo mais restrito: pessoas que ainda não usam GitHub Actions!
 
 Palestrar na rstudio::conf() foi uma experiência muito legal! A energia da platéia foi muito boa, e várias pessoas falaram comigo após a palestra dizendo que acharam interessante!
