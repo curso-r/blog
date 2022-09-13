@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Fri, 12 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tutorial</title>
+      <link>https://blog.curso-r.com/categories/tutorial/</link>
+      <pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/categories/tutorial/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>divulgação</title>
       <link>https://blog.curso-r.com/categories/divulga%C3%A7%C3%A3o/</link>
@@ -67,15 +76,6 @@
       <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/categories/discuss%C3%B5es/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tutorial</title>
-      <link>https://blog.curso-r.com/categories/tutorial/</link>
-      <pubDate>Fri, 23 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/categories/tutorial/</guid>
       <description></description>
     </item>
     
