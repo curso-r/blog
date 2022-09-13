@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Como usar senhas sem escreve-las nos scripts</title>
+  <meta name="title" content="Como usar senhas sem escreve-las nos scripts">
+  <meta name="description" content="Nesse post, apresentamos formas de usar senhas, tokens e keys no código em R de forma segura.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2022-09-13-senha-no-script/">
+  <meta property="og:title" content="Como usar senhas sem escreve-las nos scripts">
+  <meta property="og:description" content="Nesse post, apresentamos formas de usar senhas, tokens e keys no código em R de forma segura.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/conteudo/2022-09-13-senha-no-script/logo-featured.jpg?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2022-09-13-senha-no-script/">
+  <meta property="twitter:title" content="Como usar senhas sem escreve-las nos scripts">
+  <meta property="twitter:description" content="Nesse post, apresentamos formas de usar senhas, tokens e keys no código em R de forma segura.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/conteudo/2022-09-13-senha-no-script/logo-featured.jpg">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/conteudo/2022-09-13-senha-no-script/logo-featured.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Como usar senhas sem escreve-las nos scripts</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Beatriz%20Milz">Beatriz Milz</a>
+            
+            em
+            <a href="/categories/tutorial">Tutorial</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            13 de
+            setembro de
+            2022
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/boas-pr%c3%a1ticas">Boas práticas</a></li>
+        </ul>
+        <article class="content">
+          
+            
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>As vezes precisamos usar alguma senha/Token/Key para rodar um código, como por exemplo ao usar uma API que solicita autenticação. Mas isso significa que devemos escrever a senha no próprio script <code>.R</code>, por exemplo?</p>
+<p><strong>Não!</strong> Inclusive isso é um pouco perigoso. Imagina armazenar a senha para um serviço pago, esquecer e disponibilizar o script no GitHub? É receita para receber uma notificação do cartão de crédito cobrando algo que nem usamos… É, já ouvi casos assim!</p>
+<p>Então neste post trago algumas dicas para evitar salvar as senhas nos scripts quando estiver programando.</p>
+</div>
+<div id="variáveis-de-ambiente" class="section level2">
+<h2>Variáveis de ambiente</h2>
+<p>Uma forma de fazer isso é com as variáveis de ambiente (<em>environment variables</em>). Não vou detalhar o conceito de ambientes mas deixei um link nas referências, ao final do post.</p>
+<p>Simplificando, as variáveis de ambientes são objetos que são carregados ao iniciar a sessão do R. Então eles ficarão disponíveis para uso, apesar de não aparecer no painel <em>Environment</em> do RStudio.</p>
+<p>Uma forma de saber quais são as nossas variáveis de ambiente é usando a função <code>Sys.getenv()</code> sem argumentos. Atenção, várias variáveis de configuração irão aparecer no output e não recomendo alterá-las.</p>
+<p>A função <code>Sys.setenv()</code> permite que você salve a senha/token nas variáveis de ambiente. Cuidado, rode essa etapa no console e não salve no script (pois justamente queremos não armazenar as senhas no script, certo?).</p>
+<pre class="r"><code>Sys.setenv(MINHA_SENHA = 1234)</code></pre>
+<p>Para buscar o valor salvo na variável, pode usar a função <code>Sys.getenv()</code>. Essa função podemos usar no nosso script sem problemas!</p>
+<pre class="r"><code>Sys.getenv(&quot;MINHA_SENHA&quot;)
+## [1] &quot;1234&quot;</code></pre>
+</div>
+<div id="indo-além-com-a-ajuda-do-usethis" class="section level2">
+<h2>Indo além com a ajuda do usethis</h2>
+<p>As variáveis de ambiente podem ser vinculadas ao <code>.Rproj</code> ativo, ou ao usuário do computador. Elas ficam salvas no arquivo <code>.Renviron</code>. Para abrir o arquivo e ver as variáveis de ambiente salvas, você pode usar a função <code>usethis::edit_r_environ()</code>:</p>
+<pre class="r"><code># Abre as variáveis de ambiente para o usuário do computador
+usethis::edit_r_environ(scope = &quot;user&quot;)
+#&gt; • Modify &#39;/Users/beatrizmilz/.Renviron&#39;
+#&gt; • Restart R for changes to take effect
+
+# Abre as variáveis de ambiente para o projeto ativo
+usethis::edit_r_environ(scope = &quot;project&quot;)
+#&gt; ✔ Setting active project to &#39;/Users/beatrizmilz/Documents/GitHub/blog-en&#39;
+#&gt; • Modify &#39;.Renviron&#39;
+#&gt; • Restart R for changes to take effect</code></pre>
+<p>O padrão para armazenar variáveis neste arquivo é:</p>
+<pre><code>NOME_VAR=&#39;SENHAAQUI12345&#39;</code></pre>
+<p><strong>Atenção!</strong> Depois de alterar o arquivo <code>.Renviron</code>, é necessário reiniciar o R para que as mudanças sejam consideradas. Isso porque esse arquivo é carregado ao iniciar o R.</p>
+<p><strong>Atenção 2</strong>: Caso você use um arquivo <code>.Renviron</code> vinculado ao seu projeto <code>.Rproj</code>, cuidado ao subir esse arquivo para o GitHub, é perigoso pois pessoas poderão ver suas senhas. Se o seu repositório for público, é essencial que você adicione ele no <code>.gitignore</code>, assim ele será ignorado pelo Git. A função <code>usethis::use_git_ignore()</code> pode nos ajudar nisso:</p>
+<pre class="r"><code>usethis::use_git_ignore(&quot;.Renviron&quot;)
+#&gt; ✔ Adding &#39;.Renviron&#39; to &#39;.gitignore&#39;</code></pre>
+</div>
+<div id="solicitar-a-senha" class="section level2">
+<h2>Solicitar a senha</h2>
+<p>E quando queremos que a pessoa usuária possa sempre escrever a senha? Existe uma função para isso: <code>rstudioapi::askForPassword()</code>. Podemos inclusive escrever a frase que será mostrada ao perguntar a senha. A senha digitada será retornada como um texto, e podemos salvar em um objeto para utilizar posteriormente no que for necessário.</p>
+<pre class="r"><code>senha_informada &lt;- rstudioapi::askForPassword(
+  &quot;Escreva sua senha por favor!&quot;
+)</code></pre>
+<div class="figure">
+<img src="/images/posts/conteudo/2022-09-13-senha-no-script/askforpassword.png" fig-align="center" style="width:90.0%" alt="" />
+<p class="caption">Pop up feito pela função askForPassword.</p>
+</div>
+</div>
+<div id="github-actions" class="section level2">
+<h2>GitHub Actions</h2>
+<p>E quando precisamos usar senhas em códigos rodados com GitHub Actions (GHA)? Se você não conhece nada sobre GHA, <a href="series-gha.qmd">eu tenho alguns posts sobre isso</a>!</p>
+<p>Quando estamos usando GHA, podemos adicionar senhas na sessão SECRETS do GitHub. Assim ninguém (exceto você, quando cria um SECRETS), verá a senha/credenciais.</p>
+<p>Isso fica nas configurações do repositório, e o link usa esse padrão:</p>
+<pre><code>https://github.com/SEU-USUARIO/SEU-REPOSITORIO/settings/secrets/actions</code></pre>
+<p>Exemplo de um repositório privado meu:</p>
+<div class="figure">
+<img src="/images/posts/conteudo/2022-09-13-senha-no-script/githubsecrets.png" fig-align="center" style="width:90.0%" alt="" />
+<p class="caption">Print screen da página de secrets.</p>
+</div>
+<p>Também é preciso adaptar o código do action para buscar essa variável no Secrets. Exemplo de código:</p>
+<pre><code>      - name: Execute Script
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+          NOME_VAR: ${{ secrets.NOME_VAR }}
+        run: |
+          Rscript &quot;seu_script.R&quot;</code></pre>
+<p>Com isso é possível acessar essas variáveis com senha, no script usando a função <code>Sys.getenv('NOME_VAR')</code> que mostrei acima.</p>
+</div>
+<div id="mais-camadas-de-segurança" class="section level2">
+<h2>Mais camadas de segurança</h2>
+<p>Para mais camadas de segurança, recomendo a leitura da <a href="https://httr2.r-lib.org/articles/wrapping-apis.html#secret-management">documentação do pacote httr2, no trecho sobre <em>Secret management</em></a>. Nesse trecho, além de apresentar a opção utilizando a função <code>usethis::edit_r_environ()</code>, também é apresentado as funções <code>httr2::secret_encrypt()</code> e <code>htt2::secret_decrypt()</code>.</p>
+<p>Eu ainda não testei essas funções pois o pacote <code>httr2</code> é bem recente. Segundo o autor do pacote (o <a href="https://hadley.nz/">Hadley Wickham</a>), com essas funções é possível usar criptografia para lidar com as senhas/tokens.</p>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Esperamos que este post seja interessante para você, e que as suas senhas estejam sempre protegidas! Bons estudos e até a próxima!</p>
+</div>
+<div id="referências" class="section level2">
+<h2>Referências</h2>
+<ul>
+<li><p><a href="https://rstudio-education.github.io/hopr/environments.html#assignment">Environments/Ambientes - Hands-On Programming with R</a></p></li>
+<li><p><a href="https://httr2.r-lib.org/articles/wrapping-apis.html#secret-management">Secret management - Documentação do pacote httr2</a></p></li>
+</ul>
+</div>
+<div id="agradecimentos" class="section level2">
+<h2>Agradecimentos</h2>
+<ul>
+<li><p>Julio Trecenti, pela leitura prévia e sugestões feitas no texto.</p></li>
+<li><p>Tive a ideia de escrever esse post ao responder uma pergunta feita pela aluna Mari Ribeiro, em um curso da Curso-R. Obrigada Mari!</p></li>
+</ul>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-09-13-senha-no-script/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/conteudo/2022-09-13-senha-no-script/logo-featured.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-09-13-senha-no-script/">Como usar senhas sem escreve-las nos scripts</a></h5>
+        <p>Por Beatriz Milz em <a href="/categories/tutorial">Tutorial</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-08-12-rstudio-conf-impressoes/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/lunch-with-hadley.jpg"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-08-12-rstudio-conf-impressoes/">Impressões pessoais da rstudio::conf(2022)</a></h5>
+        <p>Por Julio, Flavia E. Rius e Beatriz em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/rstudio-conf-2022.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-07-29-rstudio-conf-2022-dia2/">rstudio::conf 2022, segundo dia de palestras</a></h5>
+        <p>Por Julio em <a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>
