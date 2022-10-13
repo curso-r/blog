@@ -1,0 +1,114 @@
+---
+title: "Pacotes miojo - como fazer um pacote no R em 3 minutos [atualizado]"
+date: "2022-10-13"
+tags: ["miojo"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/package.webp"
+author: ["Julio"]
+summary: "[atualizado] Veja como fazer um pacote em R e fazer seus códigos voarem na velocidade da luz"
+draft: false
+---
+
+
+
+<p>Mais de 5 anos atrás, escrevi um <a href="https://blog.curso-r.com/posts/2017-09-07-pacote-miojo/">blog post</a> criando um pacote do zero em minutos. Desde então, o pacote <code>{usethis}</code> emergiu do <code>{devtools}</code>, se tornando uma das ferramentas mais queridas da comunidade R. Por isso, fiz uma versão atualizada do mesmo post, utilizando as melhores práticas dos dias de hoje.</p>
+<p>Aqui, veremos como fazer um pacote em R muito, muito rápido. Tirei várias coisas que costumo fazer nos pacotes, com dor no coração, tudo pela velocidade, mantendo só o essencial.</p>
+<p>Duas restrições são</p>
+<ol style="list-style-type: decimal">
+<li>O pacote precisa ficar disponível no GitHub.</li>
+<li>O pacote precisa ter pelo menos uma função.</li>
+</ol>
+<p>Essa é a solução que eu acho mais segura e rápida. Você também pode <a href="http://curso-r.com/blog/2017/07/17/2017-07-17-rstudio-e-github/">usar o próprio RStudio para criar pacotes ou clonar coisas do github</a>, mas isso pode dar mais trabalho.</p>
+<div id="passo-1-crie-um-projeto-de-pacote-no-r" class="section level2">
+<h2>Passo 1: Crie um projeto de pacote no R</h2>
+<ul>
+<li>Use a função <code>usethis::create_package("nomeDoPacote")</code></li>
+<li>Escreva o nome do seu pacote. O nome do pacote não pode ter espaços, underline (<code>_</code>) nem hífen (<code>-</code>) nem começar com números.</li>
+</ul>
+<p>Ao fazer isso, o <code>{usethis}</code> abrirá uma nova tela do RStudio, já na estrutura de pacote!</p>
+<p><img src="images/paste-4C36371F.png" /></p>
+<p>Na tela em que você escreveu <code>usethis::create_package()</code>, o console ficará assim:</p>
+<p><img src="/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-4CF58355.png" width="458" /></p>
+<p><strong>Obs</strong>: cuidado para não criar um pacote dentro de um repositório Git (por exemplo, dentro de um projeto que você já está trabalhando). Isso pode dar problemas de conflito.</p>
+</div>
+<div id="passo-2-configurar-git" class="section level2">
+<h2>Passo 2: Configurar Git</h2>
+<p>Rode <code>usethis::use_git()</code> e confirme nas duas perguntas que serão feitas a você</p>
+<p><img src="/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-6D455658.png" width="557" /></p>
+<p>Sua sessão será reiniciada, e o Git está configurado 🎉</p>
+</div>
+<div id="passo-3-configure-o-github" class="section level2">
+<h2>Passo 3: configure o GitHub</h2>
+<p>Rode <code>usethis::use_github()</code> e confirme a pergunta que será feita. Aqui estou assumindo que você tem o Git/GitHub configurado na sua máquina. Se não estiver, siga o fluxo do livro <a href="https://happygitwithr.com/https-pat.html">Happy Git With R</a>.</p>
+<p><img src="/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-E41E23E9.png" /></p>
+<p>Se tudo der certo, seu pacote já estará disponível no seu GitHub!</p>
+</div>
+<div id="passo-4-crie-sua-função" class="section level2">
+<h2>Passo 4: Crie sua função</h2>
+<p>Exemplo:</p>
+<pre class="r"><code>#&#39; Soma 2
+#&#39;
+#&#39; Recebe um vetor de números e retorna um vetor de números somando dois
+#&#39;
+#&#39; @param x vetor de números.
+#&#39;
+#&#39; @export
+soma_2 &lt;- function(x) {
+  x + 2
+}</code></pre>
+<ol style="list-style-type: decimal">
+<li>Crie a função dentro de um arquivo com extensão <code>.R</code> na pasta <code>R</code> . Se quiser, você pode usar a função <code>usethis::use_r()</code> .</li>
+<li>As informações que começam com <code>#'</code> acima da função servem para documentar. Nesse caso,
+<ul>
+<li>a primeira linha é o título</li>
+<li>a segunda linha é a descrição</li>
+<li>a parte que começa com <code>@param</code> descreve o que é o parâmetro de entrada</li>
+<li>a parte que começa com <code>@export</code> diz para o pacote que essa função deve estar disponível para o usuário quando ele rodar <code>library(nomeDoPacote)</code>.</li>
+</ul></li>
+</ol>
+</div>
+<div id="passo-5-document-commit-e-push" class="section level2">
+<h2>Passo 5: document, commit e push!</h2>
+<ol style="list-style-type: decimal">
+<li>Rode <code>devtools::document()</code>.</li>
+<li>Commite suas alterações.</li>
+<li>Dê um push!</li>
+</ol>
+<p>Se não saba o que é commitar e pushar, veja o artigo do <a href="http://curso-r.com/author/athos/">Athos</a> sobre <a href="http://curso-r.com/blog/2017/07/17/2017-07-17-rstudio-e-github/">o uso do git e do GitHub</a>.</p>
+</div>
+<div id="passo-6-instalar-o-pacote-em-outra-máquina" class="section level2">
+<h2>Passo 6: Instalar o pacote em outra máquina</h2>
+<ol style="list-style-type: decimal">
+<li>Mande o nome do seu usuário do GitHub e o nome do seu pacote para sua migue.</li>
+<li>Peça para ela rodar:</li>
+</ol>
+<pre class="r"><code>devtools::install_github(&#39;usuario/nomeDoPacote&#39;)</code></pre>
+<ol style="list-style-type: decimal">
+<li>Agora ela poderá usar sua função!</li>
+</ol>
+<pre class="r"><code>library(nomeDoPacote)
+soma_2(1:10)
+# [1]  3  4  5  6  7  8  9 10 11 12</code></pre>
+<p>Você também pode ver o help da função com <code>?soma_2</code>:</p>
+<p><img src="/images/posts/conteudo/pacote-miojo/documentacao.webp" /></p>
+<p>FIM!</p>
+</div>
+<div id="conclusões" class="section level2">
+<h2>Conclusões</h2>
+<ul>
+<li>Agora você não tem desculpa para não empacotar suas soluções em R.</li>
+<li>Esse tutorial é incompleto! Para acessar mais detalhes, veja <a href="http://r-pkgs.had.co.nz" class="uri">http://r-pkgs.had.co.nz</a>, elaborado por você sabe quem.</li>
+</ul>
+</div>
+<div id="outras-pequenas-dicas-práticas" class="section level2">
+<h2>Outras pequenas dicas práticas</h2>
+<ul>
+<li>Use sempre <code>devtools::check()</code> para checar se seu pacote está 100% bem construído.</li>
+<li>Use <code>usethis::use_package()</code> para usar funções de outros pacotes.</li>
+<li>Sempre use os <code>::</code> para chamar as funções e nunca rode <code>library()</code> ou <code>require()</code> dentro de um pacote.</li>
+<li>Use <code>usethis::use_mit_license()</code> para adicionar um arquivo <code>LICENSE</code> ao seu pacote.</li>
+<li>Use <code>usethis::use_data()</code> para adicionar dados ao seu pacote.</li>
+<li>Use <code>usethis::use_vignettes()</code> para escrever um tutorial sobre seu pacote, <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">igual a esse do dplyr, por exemplo</a>.</li>
+</ul>
+<p>É isso. Happy coding ;)</p>
+</div>
