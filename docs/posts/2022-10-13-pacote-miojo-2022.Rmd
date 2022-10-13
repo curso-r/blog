@@ -1,0 +1,127 @@
+---
+title: "Pacotes miojo - como fazer um pacote no R em 3 minutos [atualizado]"
+date: "2022-10-13"
+tags: ["miojo"]
+categories: ["Tutoriais"]
+image: "images/posts/banner/package.webp"
+author: ["Julio"]
+summary: "[atualizado] Veja como fazer um pacote em R e fazer seus códigos voarem na velocidade da luz"
+draft: false
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+Mais de 5 anos atrás, escrevi um [blog post](https://blog.curso-r.com/posts/2017-09-07-pacote-miojo/) criando um pacote do zero em minutos. Desde então, o pacote `{usethis}` emergiu do `{devtools}`, se tornando uma das ferramentas mais queridas da comunidade R. Por isso, fiz uma versão atualizada do mesmo post, utilizando as melhores práticas dos dias de hoje.
+
+Aqui, veremos como fazer um pacote em R muito, muito rápido. Tirei várias coisas que costumo fazer nos pacotes, com dor no coração, tudo pela velocidade, mantendo só o essencial.
+
+Duas restrições são
+
+1.  O pacote precisa ficar disponível no GitHub.
+2.  O pacote precisa ter pelo menos uma função.
+
+Essa é a solução que eu acho mais segura e rápida. Você também pode [usar o próprio RStudio para criar pacotes ou clonar coisas do github](http://curso-r.com/blog/2017/07/17/2017-07-17-rstudio-e-github/), mas isso pode dar mais trabalho.
+
+## Passo 1: Crie um projeto de pacote no R
+
+-   Use a função `usethis::create_package("nomeDoPacote")`
+-   Escreva o nome do seu pacote. O nome do pacote não pode ter espaços, underline (`_`) nem hífen (`-`) nem começar com números.
+
+Ao fazer isso, o `{usethis}` abrirá uma nova tela do RStudio, já na estrutura de pacote!
+
+![](images/paste-4C36371F.png)
+
+Na tela em que você escreveu `usethis::create_package()`, o console ficará assim:
+
+![](/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-4CF58355.png){width="458"}
+
+**Obs**: cuidado para não criar um pacote dentro de um repositório Git (por exemplo, dentro de um projeto que você já está trabalhando). Isso pode dar problemas de conflito.
+
+## Passo 2: Configurar Git
+
+Rode `usethis::use_git()` e confirme nas duas perguntas que serão feitas a você
+
+![](/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-6D455658.png){width="557"}
+
+Sua sessão será reiniciada, e o Git está configurado 🎉
+
+## Passo 3: configure o GitHub
+
+Rode `usethis::use_github()` e confirme a pergunta que será feita. Aqui estou assumindo que você tem o Git/GitHub configurado na sua máquina. Se não estiver, siga o fluxo do livro [Happy Git With R](https://happygitwithr.com/https-pat.html).
+
+![](/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-E41E23E9.png)
+
+Se tudo der certo, seu pacote já estará disponível no seu GitHub!
+
+## Passo 4: Crie sua função
+
+Exemplo:
+
+```{r eval=FALSE}
+#' Soma 2
+#'
+#' Recebe um vetor de números e retorna um vetor de números somando dois
+#'
+#' @param x vetor de números.
+#'
+#' @export
+soma_2 <- function(x) {
+  x + 2
+}
+```
+
+1.  Crie a função dentro de um arquivo com extensão `.R` na pasta `R` . Se quiser, você pode usar a função `usethis::use_r()` .
+2.  As informações que começam com `#'` acima da função servem para documentar. Nesse caso,
+    -   a primeira linha é o título
+    -   a segunda linha é a descrição
+    -   a parte que começa com `@param` descreve o que é o parâmetro de entrada
+    -   a parte que começa com `@export` diz para o pacote que essa função deve estar disponível para o usuário quando ele rodar `library(nomeDoPacote)`.
+
+## Passo 5: document, commit e push!
+
+1.  Rode `devtools::document()`.
+2.  Commite suas alterações.
+3.  Dê um push!
+
+Se não saba o que é commitar e pushar, veja o artigo do [Athos](http://curso-r.com/author/athos/) sobre [o uso do git e do GitHub](http://curso-r.com/blog/2017/07/17/2017-07-17-rstudio-e-github/).
+
+## Passo 6: Instalar o pacote em outra máquina
+
+1.  Mande o nome do seu usuário do GitHub e o nome do seu pacote para sua migue.
+2.  Peça para ela rodar:
+
+```{r eval=FALSE}
+devtools::install_github('usuario/nomeDoPacote')
+```
+
+1.  Agora ela poderá usar sua função!
+
+```{r eval=FALSE}
+library(nomeDoPacote)
+soma_2(1:10)
+# [1]  3  4  5  6  7  8  9 10 11 12
+```
+
+Você também pode ver o help da função com `?soma_2`:
+
+![](/images/posts/conteudo/pacote-miojo/documentacao.webp)
+
+FIM!
+
+## Conclusões
+
+-   Agora você não tem desculpa para não empacotar suas soluções em R.
+-   Esse tutorial é incompleto! Para acessar mais detalhes, veja <http://r-pkgs.had.co.nz>, elaborado por você sabe quem.
+
+## Outras pequenas dicas práticas
+
+-   Use sempre `devtools::check()` para checar se seu pacote está 100% bem construído.
+-   Use `usethis::use_package()` para usar funções de outros pacotes.
+-   Sempre use os `::` para chamar as funções e nunca rode `library()` ou `require()` dentro de um pacote.
+-   Use `usethis::use_mit_license()` para adicionar um arquivo `LICENSE` ao seu pacote.
+-   Use `usethis::use_data()` para adicionar dados ao seu pacote.
+-   Use `usethis::use_vignettes()` para escrever um tutorial sobre seu pacote, [igual a esse do dplyr, por exemplo](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html).
+
+É isso. Happy coding ;)
