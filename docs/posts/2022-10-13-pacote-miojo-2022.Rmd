@@ -31,7 +31,7 @@ Essa é a solução que eu acho mais segura e rápida. Você também pode [usar 
 
 Ao fazer isso, o `{usethis}` abrirá uma nova tela do RStudio, já na estrutura de pacote!
 
-![](images/paste-4C36371F.png)
+![](/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-4C36371F.png)
 
 Na tela em que você escreveu `usethis::create_package()`, o console ficará assim:
 

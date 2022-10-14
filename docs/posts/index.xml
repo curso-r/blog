@@ -6,16 +6,7 @@
     <description>Recent content in Blog on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Thu, 13 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Pacotes miojo - como fazer um pacote no R em 3 minutos [atualizado]</title>
-      <link>https://blog.curso-r.com/posts/2022-10-13-pacote-miojo-2022/</link>
-      <pubDate>Thu, 13 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/posts/2022-10-13-pacote-miojo-2022/</guid>
-      <description>[atualizado] Veja como fazer um pacote em R e fazer seus códigos voarem na velocidade da luz</description>
-    </item>
-    
+    <lastBuildDate>Tue, 13 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Como usar senhas sem escreve-las nos scripts</title>
       <link>https://blog.curso-r.com/posts/2022-09-13-senha-no-script/</link>

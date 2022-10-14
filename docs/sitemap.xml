@@ -3,30 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.curso-r.com/posts/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/categories/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/tags/miojo/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/posts/2022-10-13-pacote-miojo-2022/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/tags/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/categories/tutoriais/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/boas-pr%C3%A1ticas/</loc>
     <lastmod>2022-09-13T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://blog.curso-r.com/categories/</loc>
+    <lastmod>2022-09-13T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://blog.curso-r.com/posts/2022-09-13-senha-no-script/</loc>
+    <lastmod>2022-09-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/</loc>
     <lastmod>2022-09-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/categories/tutorial/</loc>
@@ -54,6 +45,9 @@
     <lastmod>2022-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/rstudio/</loc>
+    <lastmod>2022-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/categories/tutoriais/</loc>
     <lastmod>2022-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/vscode/</loc>
@@ -985,6 +979,9 @@
   </url><url>
     <loc>https://blog.curso-r.com/posts/2017-09-13-brcrimr/</loc>
     <lastmod>2017-09-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/miojo/</loc>
+    <lastmod>2017-09-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2017-09-07-pacote-miojo/</loc>
     <lastmod>2017-09-07T00:00:00+00:00</lastmod>
