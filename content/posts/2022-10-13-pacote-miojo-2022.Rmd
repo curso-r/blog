@@ -22,7 +22,7 @@ Duas restrições são
 1.  O pacote precisa ficar disponível no GitHub.
 2.  O pacote precisa ter pelo menos uma função.
 
-Essa é a solução que eu acho mais segura e rápida. Você também pode [usar o próprio RStudio para criar pacotes ou clonar coisas do github](http://curso-r.com/blog/2017/07/17/2017-07-17-rstudio-e-github/), mas isso pode dar mais trabalho.
+Essa é a solução que eu acho mais segura e rápida. Você também pode [usar o próprio RStudio para criar pacotes ou clonar coisas do github](https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/), mas isso pode dar mais trabalho.
 
 ## Passo 1: Crie um projeto de pacote no R
 
@@ -85,7 +85,7 @@ soma_2 <- function(x) {
 2.  Commite suas alterações.
 3.  Dê um push!
 
-Se não saba o que é commitar e pushar, veja o artigo do [Athos](http://curso-r.com/author/athos/) sobre [o uso do git e do GitHub](http://curso-r.com/blog/2017/07/17/2017-07-17-rstudio-e-github/).
+Se não saba o que é commitar e pushar, veja o artigo do [Athos](https://blog.curso-r.com/search/?s=Athos) sobre [o uso do git e do GitHub](https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/).
 
 ## Passo 6: Instalar o pacote em outra máquina
 
@@ -93,7 +93,7 @@ Se não saba o que é commitar e pushar, veja o artigo do [Athos](http://curso-r
 2.  Peça para ela rodar:
 
 ```{r eval=FALSE}
-devtools::install_github('usuario/nomeDoPacote')
+remotes::install_github('usuario/nomeDoPacote')
 ```
 
 1.  Agora ela poderá usar sua função!
