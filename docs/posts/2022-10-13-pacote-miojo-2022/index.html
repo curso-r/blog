@@ -165,7 +165,7 @@
 <li>O pacote precisa ficar disponível no GitHub.</li>
 <li>O pacote precisa ter pelo menos uma função.</li>
 </ol>
-<p>Essa é a solução que eu acho mais segura e rápida. Você também pode <a href="http://curso-r.com/blog/2017/07/17/2017-07-17-rstudio-e-github/">usar o próprio RStudio para criar pacotes ou clonar coisas do github</a>, mas isso pode dar mais trabalho.</p>
+<p>Essa é a solução que eu acho mais segura e rápida. Você também pode <a href="https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/">usar o próprio RStudio para criar pacotes ou clonar coisas do github</a>, mas isso pode dar mais trabalho.</p>
 <div id="passo-1-crie-um-projeto-de-pacote-no-r" class="section level2">
 <h2>Passo 1: Crie um projeto de pacote no R</h2>
 <ul>
@@ -173,7 +173,7 @@
 <li>Escreva o nome do seu pacote. O nome do pacote não pode ter espaços, underline (<code>_</code>) nem hífen (<code>-</code>) nem começar com números.</li>
 </ul>
 <p>Ao fazer isso, o <code>{usethis}</code> abrirá uma nova tela do RStudio, já na estrutura de pacote!</p>
-<p><img src="images/paste-4C36371F.png" /></p>
+<p><img src="/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-4C36371F.png" /></p>
 <p>Na tela em que você escreveu <code>usethis::create_package()</code>, o console ficará assim:</p>
 <p><img src="/images/posts/conteudo/2022-10-13-pkg-miojo-2022/paste-4CF58355.png" width="458" /></p>
 <p><strong>Obs</strong>: cuidado para não criar um pacote dentro de um repositório Git (por exemplo, dentro de um projeto que você já está trabalhando). Isso pode dar problemas de conflito.</p>
@@ -221,7 +221,7 @@ soma_2 &lt;- function(x) {
 <li>Commite suas alterações.</li>
 <li>Dê um push!</li>
 </ol>
-<p>Se não saba o que é commitar e pushar, veja o artigo do <a href="http://curso-r.com/author/athos/">Athos</a> sobre <a href="http://curso-r.com/blog/2017/07/17/2017-07-17-rstudio-e-github/">o uso do git e do GitHub</a>.</p>
+<p>Se não saba o que é commitar e pushar, veja o artigo do <a href="https://blog.curso-r.com/search/?s=Athos">Athos</a> sobre <a href="https://blog.curso-r.com/posts/2017-07-17-rstudio-e-github/">o uso do git e do GitHub</a>.</p>
 </div>
 <div id="passo-6-instalar-o-pacote-em-outra-máquina" class="section level2">
 <h2>Passo 6: Instalar o pacote em outra máquina</h2>
@@ -229,7 +229,7 @@ soma_2 &lt;- function(x) {
 <li>Mande o nome do seu usuário do GitHub e o nome do seu pacote para sua migue.</li>
 <li>Peça para ela rodar:</li>
 </ol>
-<pre class="r"><code>devtools::install_github(&#39;usuario/nomeDoPacote&#39;)</code></pre>
+<pre class="r"><code>remotes::install_github(&#39;usuario/nomeDoPacote&#39;)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Agora ela poderá usar sua função!</li>
 </ol>
