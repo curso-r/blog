@@ -49,6 +49,8 @@ link = "plugins/search/mark.js"
 link = "plugins/search/search.js"
 [[params.plugins.js]]
 link = "js/highlight.pack.js"
+[[params.plugins.js]]
+link = "https://platform.illow.io/banner.js?siteId=962b4071-1b48-4756-8b80-68101acc70df"
 
 # navigation
 
