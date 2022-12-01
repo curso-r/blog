@@ -40,7 +40,7 @@ baixar os desafios e as suas entradas o mais rápido possível.
 ### Instalação
 
 Você pode instalar a versão em desenvolvimento do {aor} do
-[GitHub](https://github.com/) usando o comando abaixo:
+[GitHub](https://github.com/clente/aor) usando o comando abaixo:
 
 ``` r
 # install.packages("devtools")
