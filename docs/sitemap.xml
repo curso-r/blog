@@ -2,25 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.curso-r.com/tags/advent-of-r/</loc>
+    <lastmod>2022-12-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://blog.curso-r.com/posts/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
+    <lastmod>2022-12-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
+    <lastmod>2022-12-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/categories/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
+    <lastmod>2022-12-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/pacote/</loc>
+    <lastmod>2022-12-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/</loc>
+    <lastmod>2022-12-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/categories/tutoriais/</loc>
+    <lastmod>2022-12-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/posts/2022-12-01-advent-of-r-2022/</loc>
+    <lastmod>2022-12-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/miojo/</loc>
     <lastmod>2022-10-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2022-10-13-pacote-miojo-2022/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/tags/</loc>
-    <lastmod>2022-10-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/categories/tutoriais/</loc>
     <lastmod>2022-10-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/boas-pr%C3%A1ticas/</loc>
@@ -195,9 +204,6 @@
     <lastmod>2021-12-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2021-12-25-advent-of-r-25/</loc>
-    <lastmod>2021-12-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/tags/advent-of-r/</loc>
     <lastmod>2021-12-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/tidyverse/</loc>
@@ -545,9 +551,6 @@
     <loc>https://blog.curso-r.com/posts/2021-01-28-testes-de-normalidade/</loc>
     <lastmod>2021-01-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.curso-r.com/posts/2021-01-08-tabulizer/</loc>
-    <lastmod>2021-01-08T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://blog.curso-r.com/tags/pdf/</loc>
     <lastmod>2021-01-08T00:00:00+00:00</lastmod>
   </url><url>
@@ -555,6 +558,9 @@
     <lastmod>2021-01-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/tabulizer/</loc>
+    <lastmod>2021-01-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/posts/2021-01-08-tabulizer/</loc>
     <lastmod>2021-01-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2020-12-18-stockfish/</loc>
@@ -917,13 +923,13 @@
     <loc>https://blog.curso-r.com/posts/2018-03-19-scraper-cetesb/</loc>
     <lastmod>2018-03-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.curso-r.com/posts/2018-03-11-python/</loc>
-    <lastmod>2018-03-11T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://blog.curso-r.com/tags/python/</loc>
     <lastmod>2018-03-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/reticulate/</loc>
+    <lastmod>2018-03-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/posts/2018-03-11-python/</loc>
     <lastmod>2018-03-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2018-03-05-shiny-now/</loc>
@@ -1082,10 +1088,10 @@
     <loc>https://blog.curso-r.com/tags/fatores/</loc>
     <lastmod>2017-07-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.curso-r.com/tags/forcats/</loc>
+    <loc>https://blog.curso-r.com/posts/2017-07-01-forcats/</loc>
     <lastmod>2017-07-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.curso-r.com/posts/2017-07-01-forcats/</loc>
+    <loc>https://blog.curso-r.com/tags/forcats/</loc>
     <lastmod>2017-07-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2017-06-29-captcha-intro/</loc>
@@ -1109,10 +1115,10 @@
     <loc>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</loc>
     <lastmod>2017-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.curso-r.com/tags/environments/</loc>
+    <loc>https://blog.curso-r.com/posts/2017-06-19-environments/</loc>
     <lastmod>2017-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.curso-r.com/posts/2017-06-19-environments/</loc>
+    <loc>https://blog.curso-r.com/tags/environments/</loc>
     <lastmod>2017-06-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/skimr/</loc>

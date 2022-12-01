@@ -1,0 +1,120 @@
+---
+title: "{aor}: pacote do Advent of R!"
+date: "2022-12-01"
+tags: ["advent-of-r", "pacote"]
+categories: ["tutoriais"]
+image: "images/posts/banner/aor.webp"
+author: ["Caio"]
+summary: "Um pacote para ajudar a resolver o Advent of Code 2022 com R."
+draft: false
+---
+
+
+
+<p>Quem acompanha o nosso blog talvez se lembre que ano passado eu fiz uma <a href="https://blog.curso-r.com/tags/advent-of-r/">série
+de posts</a> resolvendo todos os
+problemas do <a href="https://adventofcode.com/">Advent of Code</a> de 2021 em R. Este ano
+eu voltei para a festa, mas com um presente para todo mundo 🎁</p>
+<div id="o-evento" class="section level2">
+<h2>O evento</h2>
+<p>Se você não está por dentro, o Advent of Code é um <a href="https://pt.wikipedia.org/wiki/Calend%C3%A1rio_do_Advento">Calendário do
+Advento</a> para quem
+programa. Entre 1º de dezembro e o Natal de cada ano, os organizadores vão
+disponibilizando 1 problema de programação por dia e o objetivo é chegar em 25
+de dezembro com todos os 25 exercícios resolvidos.</p>
+<p>Ano passado, no que eu chamei de Advent of R, eu me desafiei a de fato entrar no
+ritmo e resolver todos os problemas <em>no dia em que eles fossem publicados</em>, em R
+e documentando o processo no blog. Eu até consegui, mas foi extremamente
+difícil! Este ano eu vou pegar mais leve e fazer as coisas com mais calma.</p>
+<p>Mas eu não queria deixar o evento passar em branco… Em 2022, minha
+contribuição para o Advent of R é um pacote para ajudar a comunidade toda 🎉</p>
+</div>
+<div id="o-pacote-aor" class="section level2">
+<h2>O pacote {aor}</h2>
+<p>O objetivo do {aor} é ajudar todo mundo que programa R a resolver o Advent of
+Code usando essa linguagem maravilhosa. Ele tem algumas funções que ajudam a
+baixar os desafios e as suas entradas o mais rápido possível.</p>
+<div id="instalação" class="section level3">
+<h3>Instalação</h3>
+<p>Você pode instalar a versão em desenvolvimento do {aor} do
+<a href="https://github.com/">GitHub</a> usando o comando abaixo:</p>
+<pre class="r"><code># install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;clente/aor&quot;)</code></pre>
+</div>
+<div id="exemplo" class="section level3">
+<h3>Exemplo</h3>
+<p>O uso básico do {aor} gira em torno das funções <code>day_start()</code> e
+<code>day_continue()</code>. Por padrão, ambas as funções baixam os enunciados <em>do dia
+atual</em>, mas vou usar um dia fixo (01/12/2022) para ficar mais fácil de entender:</p>
+<pre class="r"><code># Começar o problema do dia 01/12/2022 na pasta aoc2022/
+aor::day_start(&quot;2022-12-01&quot;, &quot;aoc2022/&quot;)
+#&gt; ✔ Fetched title.
+#&gt; ✔ Fetched puzzle.
+#&gt; ✔ Fetched input.
+
+# Arquivos criados
+fs::dir_tree(&quot;aoc2022/&quot;)
+#&gt; aoc2022/
+#&gt; └── 01_calorie_counting
+#&gt;     ├── input.txt
+#&gt;     └── puzzle.R</code></pre>
+<p>Essa é a cara do arquivo <code>aoc2022/01_calorie_counting/puzzle.R</code> (note que eu
+estou omitindo a maior parte das linhas do enunciado para que a saída não fique
+muito longa):</p>
+<pre class="r"><code># --- Day 1: Calorie Counting ---
+#
+# Santa&#39;s reindeer typically eat regular reindeer food, but they need a
+# lot of [magical energy](/2018/day/25) to deliver presents on Christmas.
+# For that, their favorite snack is a special type of *star* fruit that
+# only grows deep in the jungle. The Elves have brought you on their
+# annual expedition to the grove where the fruit grows.
+#
+# ...
+#
+# Find the Elf carrying the most Calories. *How many total Calories is
+# that Elf carrying?*
+
+# Your input can be found on the file below:
+input &lt;- &quot;aoc2022/01_calorie_counting/input.txt&quot;
+
+# Once you&#39;re done with part 1, run the following line to fetch part 2:
+aor::day_continue(&quot;2022-12-01&quot;, &quot;aoc2022/01_calorie_counting/puzzle.R&quot;)</code></pre>
+<p>Quando você resolver a parte 1 do exercício, você pode rodar a última linha do
+arquivo para automaticamente baixar a parte 2 ali mesmo!</p>
+<pre class="r"><code>aor::day_continue(&quot;2022-12-01&quot;, &quot;aoc2022/01_calorie_counting/puzzle.R&quot;)
+#&gt; ✔ Fetched puzzle.</code></pre>
+<p>E essa é a cara do arquivo logo depois de rodar <code>day_continue()</code> (de novo
+omitindo a maior parte das linhas):</p>
+<pre class="r"><code># --- Day 1: Calorie Counting ---
+#
+# Santa&#39;s reindeer typically eat regular reindeer food, but they need a
+# lot of [magical energy](/2018/day/25) to deliver presents on Christmas.
+# For that, their favorite snack is a special type of *star* fruit that
+# only grows deep in the jungle. The Elves have brought you on their
+# annual expedition to the grove where the fruit grows.
+#
+# ...
+#
+# Find the Elf carrying the most Calories. *How many total Calories is
+# that Elf carrying?*
+
+# Your input can be found on the file below:
+input &lt;- &quot;aoc2022/01_calorie_counting/input.txt&quot;
+
+# Once you&#39;re done with part 1, run the following line to fetch part 2:
+aor::day_continue(&quot;2022-12-01&quot;, &quot;aoc2022/01_calorie_counting/puzzle.R&quot;)
+
+# --- Part Two ---
+#
+# By the time you calculate the answer to the Elves&#39; question, they&#39;ve
+# already realized that the Elf carrying the most Calories of food might
+# eventually *run out of snacks*.
+#
+# ...
+#
+# Find the top three Elves carrying the most Calories. *How many Calories
+# are those Elves carrying in total?*</code></pre>
+<p>Espero que vocês aproveitem o Advent of R com o {aor}! Boa sorte e boas festas
+🎄</p>
+</div>
+</div>
