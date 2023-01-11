@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Como gerar números aleatórios com CSS</title>
+  <meta name="title" content="Como gerar números aleatórios com CSS">
+  <meta name="description" content="Como criar um site para rolar dados sem usar nenhum JavaScript.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/">
+  <meta property="og:title" content="Como gerar números aleatórios com CSS">
+  <meta property="og:description" content="Como criar um site para rolar dados sem usar nenhum JavaScript.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/css-aleatorio.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/">
+  <meta property="twitter:title" content="Como gerar números aleatórios com CSS">
+  <meta property="twitter:description" content="Como criar um site para rolar dados sem usar nenhum JavaScript.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/css-aleatorio.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/css-aleatorio.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Como gerar números aleatórios com CSS</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            10 de
+            janeiro de
+            2023
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/web">web</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/probabilidade">probabilidade</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/programa%c3%a7%c3%a3o">programação</a></li>
+        </ul>
+        <article class="content">
+          
+            
+
+
+<p>Neste post eu vou desviar um pouco do tópico central do blog da Curso-R. Hoje
+não vamos falar de R ou Python ou qualquer outra linguagem de ciência de dados;
+hoje vamos falar sobre CSS e talvez aprender uma lição ou outra no caminho…</p>
+<p>O hexágono abaixo é um gerador de números aleatórios. Clique nele uma vez para
+obter um número de 1 a 20 e clique novamente para apagar o último resultado.</p>
+<style>
+#Capa_1 {
+  transform: rotate(90deg);
+}
+
+#roller {
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -69%);
+}
+
+#die {
+  z-index: 10;
+  padding: 0px 40px 0 0;
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+
+#counter {
+  height: 1em;
+  margin-bottom: -9px;
+  font-size: 30px;
+  overflow: hidden;
+}
+
+.digits {
+  float:left;
+  list-style-type: none;
+  font-size: 30px;
+  line-height: 30px;
+}
+
+.digits-first {
+  margin-top: 0em;
+}
+
+input:checked + label .luckie {
+  color: white;
+  animation-play-state: running;
+}
+
+.luckie {
+  color: #585757;
+  animation-name: luckie;
+  animation: luckie 400ms steps(20, end) infinite;
+  animation-play-state: paused;
+}
+
+input {
+  height: 0;
+  width: 0;
+  border: none;
+  outline: none;
+  display: none;
+}
+
+@keyframes luckie {
+  0% {
+    margin-top: 0;
+  }
+  100% {
+    margin-top: -1000px;
+  }
+}
+</style>
+
+<div xmlns="http://www.w3.org/1999/xhtml" id="die">
+  <div id="counter" class="animated">
+    <input type="checkbox" id="d20" checked>
+    <label for="d20">
+      <ul class="digits digits-first luckie">
+        <li> 01
+        <li> 02
+        <li> 03
+        <li> 04
+        <li> 05
+        <li> 06
+        <li> 07
+        <li> 08
+        <li> 09
+        <li> 10
+        <li> 11
+        <li> 12
+        <li> 13
+        <li> 14
+        <li> 15
+        <li> 16
+        <li> 17
+        <li> 18
+        <li> 19
+        <li> 20
+      </ul>
+    </label>
+  </div>
+</div>
+
+<div id="roller">
+  <svg fill="#585757" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="64px" viewBox="0 0 485.69 485.69" xml:space="preserve" stroke="#dddddd" stroke-width="0.00485688"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="9.71376"> <g> <g> <path d="M364.269,453.155H121.416L0,242.844L121.416,32.533h242.853l121.419,210.312L364.269,453.155z M131.905,434.997h221.878 l110.939-192.152L353.783,50.691H131.905L20.966,242.844L131.905,434.997z"></path> </g> </g> </g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M364.269,453.155H121.416L0,242.844L121.416,32.533h242.853l121.419,210.312L364.269,453.155z M131.905,434.997h221.878 l110.939-192.152L353.783,50.691H131.905L20.966,242.844L131.905,434.997z"></path> </g> </g> </g></svg>
+</div>
+<div id="como-funciona" class="section level2">
+<h2>Como funciona</h2>
+<p>Quem tem costume de jogar RPG sabe que o D20 é um dos dados mais importantes de
+todos. Se você procurar o termo <a href="https://www.google.com/search?q=d20">“D20”</a> no
+Google, ele vai inclusive mostrar pra você uma animação bonitinha que rola um um
+dado de 20 lados.</p>
+<p>Mas qual é a graça de usar o Google para rolar um D20? Eu queria fazer o meu
+próprio rolador e, como um desafio extra, eu resolvi não usar nenhum
+<a href="https://pt.wikipedia.org/wiki/JavaScript">JavaScript</a> para isso.</p>
+<div id="eu-não-gosto-de-javascript" class="section level3">
+<h3>Eu não gosto de JavaScript</h3>
+<p>Se você não sabe o que é JavaScript ou por que isso importa, me permita fazer um
+breve resumo: JS é uma das linguagens de programação mais populares do mundo
+(ela é usada em <a href="https://w3techs.com/technologies/details/cp-javascript/">98%</a>
+de todos os websites!) e ele permite que o seu navegador faça coisas incríveis
+como logar no seu Gmail ou assistir os vídeos da Curso-R no
+<a href="https://www.youtube.com/@CursoR6">YouTube</a>.</p>
+<p>O problema é que o JS é tão sensacional que as pessoas começaram a usar ele em
+<em>todo lugar</em>. Apesar de o JS ser de fato necessário para criar páginas
+dinâmicas, ele não é necessário na maioria dos lugares; o termo <a href="https://idlewords.com/talks/website_obesity.htm">“crise de
+obesidade dos websites”</a>
+começou a ser usado para descrever o fato de que, hoje em dia, a maior parte dos
+sites focam muito mais no visual e em dinamismos desnecessários do que no
+conteúdo e na acessibilidade.</p>
+<p>Eu poderia ficar aqui falando sobre como o JS deixa as páginas mais
+<a href="https://pt.wikipedia.org/wiki/JavaScript#Seguran%C3%A7a">inseguras</a>, ele
+normalmente <a href="https://motherfuckingwebsite.com/">nem é necessário</a> e é um custo
+<a href="https://danluu.com/web-bloat/">absurdo</a> para quem tem uma conexão lenta de
+internet, mas acho que você já entendeu o meu ponto. Eu queria fazer um rolador
+de dados (ou seja, um gerador de números aleatórios) leve e sem JavaScript.</p>
+</div>
+<div id="css-salvou-o-dia" class="section level3">
+<h3>CSS salvou o dia</h3>
+<p>Além do JS, um dos maiores componentes do desenvolvimento web é o
+<a href="https://pt.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a>, que descreve a
+aparência das coisas na página. Mas o que isso tem a ver com o gerador de
+números? Bem, primeiramente, o CSS é super leve e 100% seguro, mas ele também
+tem uma funcionalidade ignorada por muitos chamada Animations
+<a href="https://en.wikipedia.org/wiki/CSS_animations">Animations</a>.</p>
+<p>Eu quase não acreditei quando eu li pela primeira vez o post <a href="https://uxdesign.cc/creating-randomness-with-pure-css-a990dafcd569"><em>Creating
+randomness with pure
+CSS</em></a>. O
+resumo do artigo é que você pode usar CSS para mover uma imagem de um lado para
+o outro por trás de uma fenda virtual e parar ela só quando o usuário clica em
+um botão. Se a sua imagem for um monte de cartas de baralho lado-a-lado, apenas
+uma delas vai aparecer quando a animação parar.</p>
+<p>A grande sacada é que, se a animação for rápida o suficiente, as pequenas
+variações nos cliques do usuário vão efetivamente fazer com a que a fenda mostre
+uma carta aleatória cada vez que ela for clicada!</p>
+<p>Esse era o substituto do JS que eu precisava. Agora tudo que eu precisava fazer
+era aplicar esse método a uma lista de números ao invés de uma imagem. Demorou
+um tempo, mas eu vasculhei a internet em busca de uma solução e eventualmente eu
+encontrei ela no <a href="https://gist.github.com/iokaravas/8274608">caça-níqueis</a> sem
+JS do iokaravas.</p>
+<p>O código dele recebe três listas de números e anima elas para cima e para baixo
+até que elas caiam na combinação configurada por quem fez o programa. Apesar de
+ser determinístico, isso poderia ser integrado com a técnica do <em>Creating
+randomness</em> para criar exatamente o que você vê agora no topo desta página.</p>
+</div>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Resumindo: no gerador de números aleatórios acima há, na verdade, uma lista
+invisível de números subindo e descendo que para quando você clica nela. A
+aleatoriedade vem do fato de que ela está se movendo rápido demais para qualquer
+pessoa ser capaz de cronometrá-la.</p>
+<p>Alguns fatos interessantes sobre o D20:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Ele não usa JavaScript nenhum.</strong> Você pode verificar isso por conta própria
+inspecionando o código desta página com a aba
+<a href="https://www.freecodecamp.org/news/chrome-devtools-network-tab-tricks/">Network</a>
+do seu navegador.</p></li>
+<li><p><strong>Ele é leve.</strong> Enquanto o rolador de dados do Google pesa 2,6MB e carrega em
+1,6s, a versão original deste aqui pesa 7,1kB (~360x mais leve) e carrega em
+50ms (~30x mais rápida).</p></li>
+<li><p><strong>Ele é justo.</strong> Eu fiz um teste
+<a href="https://pt.wikipedia.org/wiki/Qui-quadrado">Qui-quadrado</a> com 1000 amostras em
+intervalos de tempo aleatórios e o dado de fato é justo (p = 0,7575).</p></li>
+</ol>
+<p>Às vezes não precisamos das ferramentas mais chiques para fazer algo legal! Até
+a próxima :)</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/css-aleatorio.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/">Como gerar números aleatórios com CSS</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-12-01-advent-of-r-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/aor.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-12-01-advent-of-r-2022/">{aor}: pacote do Advent of R!</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-10-13-pacote-miojo-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/package.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-10-13-pacote-miojo-2022/">Pacotes miojo - como fazer um pacote no R em 3 minutos [atualizado]</a></h5>
+        <p>Por Julio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+<script src="https://platform.illow.io/banner.js?siteId=962b4071-1b48-4756-8b80-68101acc70df"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

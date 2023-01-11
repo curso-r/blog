@@ -6,7 +6,34 @@
     <description>Recent content in Tags on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Thu, 01 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>probabilidade</title>
+      <link>https://blog.curso-r.com/tags/probabilidade/</link>
+      <pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/tags/probabilidade/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programação</title>
+      <link>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</link>
+      <pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://blog.curso-r.com/tags/web/</link>
+      <pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/tags/web/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>advent-of-r</title>
       <link>https://blog.curso-r.com/tags/advent-of-r/</link>
@@ -449,15 +476,6 @@
     </item>
     
     <item>
-      <title>probabilidade</title>
-      <link>https://blog.curso-r.com/tags/probabilidade/</link>
-      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/tags/probabilidade/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>rlang</title>
       <link>https://blog.curso-r.com/tags/rlang/</link>
       <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
@@ -566,15 +584,6 @@
     </item>
     
     <item>
-      <title>programação</title>
-      <link>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</link>
-      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>R Markdown</title>
       <link>https://blog.curso-r.com/tags/r-markdown/</link>
       <pubDate>Wed, 05 May 2021 00:00:00 +0000</pubDate>
@@ -661,15 +670,6 @@
       <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/blogdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>web</title>
-      <link>https://blog.curso-r.com/tags/web/</link>
-      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/tags/web/</guid>
       <description></description>
     </item>
     
