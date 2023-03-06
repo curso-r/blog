@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Ordenando strings no R</title>
+  <meta name="title" content="Ordenando strings no R">
+  <meta name="description" content="Nem sempre é simples ordenar strings no R corretamente!">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/">
+  <meta property="og:title" content="Ordenando strings no R">
+  <meta property="og:description" content="Nem sempre é simples ordenar strings no R corretamente!">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/ordenando-strings.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/">
+  <meta property="twitter:title" content="Ordenando strings no R">
+  <meta property="twitter:description" content="Nem sempre é simples ordenar strings no R corretamente!">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/ordenando-strings.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/ordenando-strings.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Ordenando strings no R</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            6 de
+            março de
+            2023
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/programa%c3%a7%c3%a3o">programação</a></li>
+        </ul>
+        <article class="content">
+          
+            
+
+
+<p>Recentemente a <a href="https://twitter.com/beamilz">Beatriz Milz</a> trouxe para o Slack
+da Curso-R uma dúvida intrigante:</p>
+<blockquote>
+<p>[…] Quando ordeno com arrange uma coluna, tem um valor que começa com A que
+aparece no final da lista!</p>
+</blockquote>
+<p>O exemplo dela envolvia ordenar uma coluna de textos de uma tabela. A ordenação
+funcionava normalmente com <code>sort()</code>, mas não com <code>arrange()</code>. Veja a
+demonstração a seguir:</p>
+<pre class="r"><code># Tabela exemplo
+df &lt;- tibble::tibble(bebida = c(
+  &quot;Cerveja&quot;,
+  &quot;Cachaça&quot;,
+  &quot;Água&quot;,
+  &quot;Vinho&quot;,
+  &quot;Gim&quot;
+))
+
+# Tudo certo por aqui
+sort(df$bebida)
+#&gt; [1] &quot;Água&quot;    &quot;Cachaça&quot; &quot;Cerveja&quot; &quot;Gim&quot;     &quot;Vinho&quot;
+
+# Água fica por último!
+dplyr::arrange(df, bebida)
+#&gt; # A tibble: 5 × 1
+#&gt;   bebida
+#&gt;   &lt;chr&gt;
+#&gt; 1 Cachaça
+#&gt; 2 Cerveja
+#&gt; 3 Gim
+#&gt; 4 Vinho
+#&gt; 5 Água</code></pre>
+<p>O nosso principal suspeito era o mesmo de qualquer problema com strings:
+encoding ou, em bom português,
+<a href="https://pt.wikipedia.org/wiki/Codifica%C3%A7%C3%A3o">codificação</a>. Contudo,
+desta vez ele não é o culpado; os caracteres do texto estão sendo interpretados
+e exibidos corretamente na saída de ambos os comandos, indicando que a causa da
+ordenação incorreta era outra.</p>
+<p>Em busca de uma resposta, resolvi ler a documentação da função <code>arrange()</code>. Para
+a minha surpresa, descobri que ela tem um argumento <code>.locale</code> cujo valor por
+padrão é “o locale <code>"C"</code>”… Mas, o que isso significa? Normalmente vemos
+problemas de <a href="https://pt.wikipedia.org/wiki/Locale">locale</a> quando lidamos com
+tempo, porque essa é a opção que determina o formato de exibição das datas
+(<code>DD/MM/AAAA</code> no Brasil, <code>MM/DD/AAAA</code> nos EUA, etc.). Será que ela poderia ter
+alguma coisa a ver com a ordenação de textos?</p>
+<p>Seguindo as pistas na documentação da <code>arrange()</code>, eventualmente cheguei na
+função <code>stringi::stri_opts_collator()</code>, que ajusta as opções do <em>ICU Collator</em>.
+E foi aí que tudo fez sentido.</p>
+<div id="collation" class="section level2">
+<h2>Collation</h2>
+<p><a href="https://en.wikipedia.org/wiki/Collation"><em>Collation</em></a> é um termo em inglês que
+descreve a compilação e ordenação de qualquer tipo de informação. A
+(surpreendente!) realidade é que cada país e idioma tem regras diferentes de
+ordenação alfabética, então é necessário escolher qual método de <em>collation</em> o R
+vai usar através do locale.</p>
+<p>Para ilustrar a função do locale, imagine um problema mais simples: queremos que
+o R leia adequadamente uma data em alemão. Obviamente, ele não vai conseguir:</p>
+<pre class="r"><code>lubridate::dmy(&quot;6. März 2023&quot;)
+#&gt; Warning: All formats failed to parse. No formats found.
+#&gt; [1] NA</code></pre>
+<p>Para corrigir isso, precisamos especificar o argumento <code>locale</code>, indicando para
+o R que o conteúdo está escrito em alemão (<code>"de_DE"</code> para alemão da Alemanha):</p>
+<pre class="r"><code>lubridate::dmy(&quot;6. März 2023&quot;, locale = &quot;de_DE&quot;)
+#&gt; [1] &quot;2023-03-06&quot;</code></pre>
+<p>O chocante é que o mesmo vale para a ordem alfabética. Nós geralmente não
+percebemos que tem algo errado com o locale da <em>collation</em> porque as regras de
+ordenação são muito parecidas em todos os países, mas existem diferenças sutis
+que causam problemas como o da Bea.</p>
+<p>O programa que está tomando essas decisões de locale por trás dos panos se chama
+<a href="https://github.com/unicode-org/icu">ICU</a>; esta biblioteca do C é a base do
+stringi, o motor por trás do stringr e da <code>arrange()</code>. Como você pode imaginar,
+o locale padrão da ICU é o da linguagem C de programação, que coloca letras
+acentuadas no fim do alfabeto.</p>
+<p>Sendo assim, podemos resolver a questão do <code>arrange()</code> especificando o nosso
+locale (<code>"pt_BR"</code> para português do Brasil):</p>
+<pre class="r"><code>dplyr::arrange(df, bebida, .locale = &quot;pt_BR&quot;)
+#&gt; # A tibble: 5 × 1
+#&gt;   bebida
+#&gt;   &lt;chr&gt;
+#&gt; 1 Água
+#&gt; 2 Cachaça
+#&gt; 3 Cerveja
+#&gt; 4 Gim
+#&gt; 5 Vinho</code></pre>
+<p>É muito interessante ler a
+<a href="https://unicode-org.github.io/icu/userguide/collation/">documentação</a> do ICU
+sobre <em>collation</em>, pois ela deixa muito claro que é absolutamente impossível
+criar um locale que atenda às necessidades de todos os países:</p>
+<ul>
+<li>Em lituano, o “y” fica entre o “i” e o “k”.</li>
+<li>No espanhol tradicional, “ch” é tratado como uma única letra entre o “c” e o
+“d”.</li>
+<li>Em dinamarquês, “Å” é considerada uma letra separada que fica depois do “Z”.</li>
+<li>Na Suécia, “v” e “w” são consideradas variações de uma mesma letra.</li>
+<li>Em dicionários alemães, “öf” vem antes de “of”, mas em listas telefônicas a
+ordem preferida é a contrária.</li>
+</ul>
+<p>O bom é que isso também esclarece o porquê da <code>sort()</code> funcionar, mas a
+<code>arrange()</code> não. Enquanto a segunda usa o locale <code>"C"</code> por padrão, a primeira
+usa o locale americano (<code>"en_US"</code> para inglês dos EUA)! Apesar de o locale
+americano nos causar problemas com datas, ele é muito parecido com o brasileiro
+na ordem alfabética e essencialmente ignora os acentos durante a <em>collation</em>.</p>
+</div>
+<div id="resumo" class="section level2">
+<h2>Resumo</h2>
+<p>A função <code>arrange()</code> pode causar problemas na hora de ordenar textos em
+português. Isso ocorre porque o locale de <em>collation</em> padrão coloca todas as
+letras acentuadas no final do alfabeto, algo muito pouco usual no nosso idioma.
+A solução é especificar o argumento <code>.locale = "pt_BR"</code> para que ela use o
+locale apropriado ao nosso alfabeto.</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/ordenando-strings.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/">Ordenando strings no R</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/css-aleatorio.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/">Como gerar números aleatórios com CSS</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2022-12-01-advent-of-r-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/aor.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-12-01-advent-of-r-2022/">{aor}: pacote do Advent of R!</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+<script src="https://platform.illow.io/banner.js?siteId=962b4071-1b48-4756-8b80-68101acc70df"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>r on Blog | Curso-R</title>
+    <link>https://blog.curso-r.com/tags/r/</link>
+    <description>Recent content in r on Blog | Curso-R</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 06 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/r/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ordenando strings no R</title>
+      <link>https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/</link>
+      <pubDate>Mon, 06 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/</guid>
+      <description>Nem sempre é simples ordenar strings no R corretamente!</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,22 +6,31 @@
     <description>Recent content in Tags on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Tue, 10 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>programação</title>
+      <link>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</link>
+      <pubDate>Mon, 06 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>r</title>
+      <link>https://blog.curso-r.com/tags/r/</link>
+      <pubDate>Mon, 06 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/tags/r/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>probabilidade</title>
       <link>https://blog.curso-r.com/tags/probabilidade/</link>
       <pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/tags/probabilidade/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programação</title>
-      <link>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</link>
-      <pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</guid>
       <description></description>
     </item>
     
