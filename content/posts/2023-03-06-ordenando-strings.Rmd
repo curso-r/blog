@@ -1,0 +1,143 @@
+---
+title: "Ordenando strings no R"
+date: "2023-03-06"
+tags: ["r", "programação"]
+categories: ["tutoriais"]
+image: "images/posts/banner/ordenando-strings.webp"
+author: ["Caio"]
+summary: "Nem sempre é simples ordenar strings no R corretamente!"
+draft: false
+---
+
+Recentemente a [Beatriz Milz](https://twitter.com/beamilz) trouxe para o Slack
+da Curso-R uma dúvida intrigante:
+
+> [...] Quando ordeno com arrange uma coluna, tem um valor que começa com A que
+> aparece no final da lista!
+
+O exemplo dela envolvia ordenar uma coluna de textos de uma tabela. A ordenação
+funcionava normalmente com `sort()`, mas não com `arrange()`. Veja a
+demonstração a seguir:
+
+```r
+# Tabela exemplo
+df <- tibble::tibble(bebida = c(
+  "Cerveja",
+  "Cachaça",
+  "Água",
+  "Vinho",
+  "Gim"
+))
+
+# Tudo certo por aqui
+sort(df$bebida)
+#> [1] "Água"    "Cachaça" "Cerveja" "Gim"     "Vinho"
+
+# Água fica por último!
+dplyr::arrange(df, bebida)
+#> # A tibble: 5 × 1
+#>   bebida
+#>   <chr>
+#> 1 Cachaça
+#> 2 Cerveja
+#> 3 Gim
+#> 4 Vinho
+#> 5 Água
+```
+
+O nosso principal suspeito era o mesmo de qualquer problema com strings:
+encoding ou, em bom português,
+[codificação](https://pt.wikipedia.org/wiki/Codifica%C3%A7%C3%A3o). Contudo,
+desta vez ele não é o culpado; os caracteres do texto estão sendo interpretados
+e exibidos corretamente na saída de ambos os comandos, indicando que a causa da
+ordenação incorreta era outra.
+
+Em busca de uma resposta, resolvi ler a documentação da função `arrange()`. Para
+a minha surpresa, descobri que ela tem um argumento `.locale` cujo valor por
+padrão é "o locale `"C"`"... Mas, o que isso significa? Normalmente vemos
+problemas de [locale](https://pt.wikipedia.org/wiki/Locale) quando lidamos com
+tempo, porque essa é a opção que determina o formato de exibição das datas
+(`DD/MM/AAAA` no Brasil, `MM/DD/AAAA` nos EUA, etc.). Será que ela poderia ter
+alguma coisa a ver com a ordenação de textos?
+
+Seguindo as pistas na documentação da `arrange()`, eventualmente cheguei na
+função `stringi::stri_opts_collator()`, que ajusta as opções do _ICU Collator_.
+E foi aí que tudo fez sentido.
+
+## Collation
+
+[_Collation_](https://en.wikipedia.org/wiki/Collation) é um termo em inglês que
+descreve a compilação e ordenação de qualquer tipo de informação. A
+(surpreendente!) realidade é que cada país e idioma tem regras diferentes de
+ordenação alfabética, então é necessário escolher qual método de _collation_ o R
+vai usar através do locale.
+
+Para ilustrar a função do locale, imagine um problema mais simples: queremos que
+o R leia adequadamente uma data em alemão. Obviamente, ele não vai conseguir:
+
+```r
+lubridate::dmy("6. März 2023")
+#> Warning: All formats failed to parse. No formats found.
+#> [1] NA
+```
+
+Para corrigir isso, precisamos especificar o argumento `locale`, indicando para
+o R que o conteúdo está escrito em alemão (`"de_DE"` para alemão da Alemanha):
+
+```r
+lubridate::dmy("6. März 2023", locale = "de_DE")
+#> [1] "2023-03-06"
+```
+
+O chocante é que o mesmo vale para a ordem alfabética. Nós geralmente não
+percebemos que tem algo errado com o locale da _collation_ porque as regras de
+ordenação são muito parecidas em todos os países, mas existem diferenças sutis
+que causam problemas como o da Bea.
+
+O programa que está tomando essas decisões de locale por trás dos panos se chama
+[ICU](https://github.com/unicode-org/icu); esta biblioteca do C é a base do
+stringi, o motor por trás do stringr e da `arrange()`. Como você pode imaginar,
+o locale padrão da ICU é o da linguagem C de programação, que coloca letras
+acentuadas no fim do alfabeto.
+
+Sendo assim, podemos resolver a questão do `arrange()` especificando o nosso
+locale (`"pt_BR"` para português do Brasil):
+
+```r
+dplyr::arrange(df, bebida, .locale = "pt_BR")
+#> # A tibble: 5 × 1
+#>   bebida
+#>   <chr>
+#> 1 Água
+#> 2 Cachaça
+#> 3 Cerveja
+#> 4 Gim
+#> 5 Vinho
+```
+
+É muito interessante ler a
+[documentação](https://unicode-org.github.io/icu/userguide/collation/) do ICU
+sobre _collation_, pois ela deixa muito claro que é absolutamente impossível
+criar um locale que atenda às necessidades de todos os países:
+
+- Em lituano, o "y" fica entre o "i" e o "k".
+- No espanhol tradicional, "ch" é tratado como uma única letra entre o "c" e o
+  "d".
+- Em dinamarquês, "Å" é considerada uma letra separada que fica depois do "Z".
+- Na Suécia, "v" e "w" são consideradas variações de uma mesma letra.
+- Em dicionários alemães, "öf" vem antes de "of", mas em listas telefônicas a
+  ordem preferida é a contrária.
+
+O bom é que isso também esclarece o porquê da `sort()` funcionar, mas a
+`arrange()` não. Enquanto a segunda usa o locale `"C"` por padrão, a primeira
+usa o locale americano (`"en_US"` para inglês dos EUA)! Apesar de o locale
+americano nos causar problemas com datas, ele é muito parecido com o brasileiro
+na ordem alfabética e essencialmente ignora os acentos durante a _collation_.
+
+## Resumo
+
+A função `arrange()` pode causar problemas na hora de ordenar textos em
+português. Isso ocorre porque o locale de _collation_ padrão coloca todas as
+letras acentuadas no final do alfabeto, algo muito pouco usual no nosso idioma.
+A solução é especificar o argumento `.locale = "pt_BR"` para que ela use o
+locale apropriado ao nosso alfabeto.
