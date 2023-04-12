@@ -274,10 +274,7 @@ tab &lt;- extract_tables(&#39;caminho/para/pdf_compras.pdf&#39;)</code></pre>
   janitor::row_to_names(1) |&gt; 
   janitor::clean_names() |&gt; 
   # tira espaços extras
-  mutate(across(
-    everything(), 
-    \(x) str_trim(str_replace_all(x, &#39;[[:space:]]+&#39;, &#39; &#39;))
-  ))</code></pre>
+  mutate(across(everything(), str_squish))</code></pre>
 <p>A tabela abaixo mostra as primeiras cinco linhas do resultado.</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">

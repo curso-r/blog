@@ -180,10 +180,7 @@ tab_tidy <- tab |>
   janitor::row_to_names(1) |> 
   janitor::clean_names() |> 
   # tira espaços extras
-  mutate(across(
-    everything(), 
-    \(x) str_trim(str_replace_all(x, '[[:space:]]+', ' '))
-  ))
+  mutate(across(everything(), str_squish))
 ```
 
 A tabela abaixo mostra as primeiras cinco linhas do resultado.
