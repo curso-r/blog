@@ -6,7 +6,16 @@
     <description>Recent content in Blog on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Mon, 06 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Apr 2023 05:07:31 +0200</lastBuildDate><atom:link href="https://blog.curso-r.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PDF e OCR (atualizado!)</title>
+      <link>https://blog.curso-r.com/posts/2023-04-12-ocr/</link>
+      <pubDate>Wed, 12 Apr 2023 05:07:31 +0200</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2023-04-12-ocr/</guid>
+      <description>Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com jurimetria e preciso extrair dados de diários oficiais, petições, sentenças, então já viu né&amp;hellip; A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é digital ou digitalizado?</description>
+    </item>
+    
     <item>
       <title>Ordenando strings no R</title>
       <link>https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/</link>
@@ -1921,7 +1930,7 @@
       <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-06-19-brbloggers/</guid>
-      <description>Está no ar o bR Bloggers! bR Bloggers é um agregador de blogs sobre R escritos em língua portuguesa.</description>
+      <description>Está no ar o bR Bloggers! bR Bloggers é um agregadorde blogs sobre R escritos em língua portuguesa.</description>
     </item>
     
     <item>
@@ -2155,7 +2164,7 @@
       <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-18-all-things-r-and-rstudio/</guid>
-      <description>No início de Janeiro desse ano ocorreu a primeira rstudio::conf, uma conferência sobre R promovida pela Rstudio.</description>
+      <description>No início de Janeiro desse ano ocorreu a primeira rstudio::conf,uma conferência sobre R promovida pela Rstudio.</description>
     </item>
     
     <item>
@@ -2218,7 +2227,7 @@
       <pubDate>Wed, 15 Feb 2017 13:07:31 +0200</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-15-blog-curso-r/</guid>
-      <description>Esse é o blog do Curso-R. Nós somos o Athos, Daniel, Fernando, Julio e William e seremos os autores dos posts desse blog.</description>
+      <description>Esse é o blog do Curso-R. Nós somos o Athos, Daniel, Fernando, Julio e William eseremos os autores dos posts desse blog.</description>
     </item>
     
     <item>
@@ -2227,7 +2236,7 @@
       <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.curso-r.com/posts/2017-02-16-manifesto-tidy/</guid>
-      <description>O manifesto das ferramentas tidy do Hadley Wickham é um dos documentos mais importantes sobre R dos últimos tempos.</description>
+      <description>O manifesto das ferramentas tidydo Hadley Wickham é um dos documentos mais importantes sobre R dos últimos tempos.</description>
     </item>
     
   </channel>

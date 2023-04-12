@@ -24,7 +24,7 @@
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta name="generator" content="Hugo 0.85.0" />
+  <meta name="generator" content="Hugo 0.98.0" />
 
   <!-- plugins -->
   
@@ -161,26 +161,26 @@
 <p>Enquanto isso, já em 2014, o Django passou a adotar a terminologia <em>primary/replica</em> (primário/réplica) e foi seguido pelo Drupal. Em 2017, o Internet Systems Consortium optou por <em>primary/secondary</em> (primário/secundário). Como se pode ver, não faltam alternativas para uma referência à escravidão.</p>
 <p>Enfim, este ano foi a vez do GitHub. Desde sua criação, a plataforma de controle de versão tem utilizado o termo <em>master</em> para tratar do <em>branch</em> principal de um repositório e, apesar de nem existir uma analogia para algo como um <em>slave branch</em>, a palavra continua até hoje. Antes tarde do que nunca, a empresa <a href="https://www.vice.com/en_us/article/k7qbyv/github-to-remove-masterslave-terminology-from-its-platform">anunciou</a> que vai fazer uma transição em breve para o termo <em>main</em> (principal) e aposentar seu antecessor.</p>
 <p>Justamente por pretender ser uma comunidade inclusiva e aberta, alguns programadores de R já começaram a transferir seus repositórios do GitHub para o novo modelo. Em seu blog, <a href="https://stevenmortimer.com/5-steps-to-change-github-default-branch-from-master-to-main/">Steven Mortimer</a> forneceu o passo-a-passo para fazermos o mesmo. Os comandos são bastante simples e estão listados abaixo:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># Passo 1</span>
-<span style="color:#75715e"># Crie o branch &#39;main&#39; localmente trazendo o histórico do &#39;master&#39;</span>
-git branch -m master main
-
-<span style="color:#75715e"># Passo 2</span>
-<span style="color:#75715e"># Faça o push do novo branch para o GitHub</span>
-git push -u origin main
-
-<span style="color:#75715e"># Passo 3</span>
-<span style="color:#75715e"># Substitua o HEAD do &#39;master&#39; para o &#39;main&#39;</span>
-git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
-
-<span style="color:#75715e"># Passo 4</span>
-<span style="color:#75715e"># Troque o branch padrão no GitHub para o &#39;main&#39;</span>
-<span style="color:#75715e"># https://docs.github.com/pt/github/administering-a-repository/setting-the-default-branch</span>
-
-<span style="color:#75715e"># Passo 5</span>
-<span style="color:#75715e"># Delete o &#39;master&#39;</span>
-git push origin --delete master
-</code></pre></div><p>Note apenas que o Passo 4 deve ser realizado diretamente no GitHub de acordo com a <a href="https://docs.github.com/pt/github/administering-a-repository/setting-the-default-branch">documentação</a> (disponível em português).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># Passo 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Crie o branch &#39;main&#39; localmente trazendo o histórico do &#39;master&#39;</span>
+</span></span><span style="display:flex;"><span>git branch -m master main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Passo 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Faça o push do novo branch para o GitHub</span>
+</span></span><span style="display:flex;"><span>git push -u origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Passo 3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Substitua o HEAD do &#39;master&#39; para o &#39;main&#39;</span>
+</span></span><span style="display:flex;"><span>git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Passo 4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Troque o branch padrão no GitHub para o &#39;main&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://docs.github.com/pt/github/administering-a-repository/setting-the-default-branch</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Passo 5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Delete o &#39;master&#39;</span>
+</span></span><span style="display:flex;"><span>git push origin --delete master
+</span></span></code></pre></div><p>Note apenas que o Passo 4 deve ser realizado diretamente no GitHub de acordo com a <a href="https://docs.github.com/pt/github/administering-a-repository/setting-the-default-branch">documentação</a> (disponível em português).</p>
 <p>Caso você queira que o processo seja completamente automatizado, existe um <a href="https://eyqs.ca/tools/rename/">aplicativo web</a> que faz tudo para você. Para saber mais sobre os esforços do próprio GitHub, acesse <a href="https://github.com/github/renaming">a página</a> na qual estão sendo discutidas as mudanças.</p>
 
           
@@ -189,7 +189,7 @@ git push origin --delete master
   <div class="disqus-comments">
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -220,6 +220,16 @@ git push origin --delete master
     
     <div class="media mb-4">
       <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-04-12-ocr/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/pdf-to-text.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-04-12-ocr/">PDF e OCR (atualizado!)</a></h5>
+        <p>Por Julio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
         <a href="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/ordenando-strings.webp"></a>
       </div>
       <div class="media-body">
@@ -234,16 +244,6 @@ git push origin --delete master
       </div>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/">Como gerar números aleatórios com CSS</a></h5>
-        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
-      </div>
-    </div>
-    
-    <div class="media mb-4">
-      <div class="post-thumb-sm mr-3">
-        <a href="https://blog.curso-r.com/posts/2022-12-01-advent-of-r-2022/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/aor.webp"></a>
-      </div>
-      <div class="media-body">
-        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2022-12-01-advent-of-r-2022/">{aor}: pacote do Advent of R!</a></h5>
         <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>

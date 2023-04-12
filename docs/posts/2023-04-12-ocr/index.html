@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>PDF e OCR (atualizado!)</title>
+  <meta name="title" content="PDF e OCR (atualizado!)">
+  <meta name="description" content="Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com jurimetria e preciso extrair dados de diários oficiais, petições, sentenças, então já viu né&hellip; A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é digital ou digitalizado?">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2023-04-12-ocr/">
+  <meta property="og:title" content="PDF e OCR (atualizado!)">
+  <meta property="og:description" content="Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com jurimetria e preciso extrair dados de diários oficiais, petições, sentenças, então já viu né&hellip; A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é digital ou digitalizado?">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/pdf-to-text.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2023-04-12-ocr/">
+  <meta property="twitter:title" content="PDF e OCR (atualizado!)">
+  <meta property="twitter:description" content="Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com jurimetria e preciso extrair dados de diários oficiais, petições, sentenças, então já viu né&hellip; A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é digital ou digitalizado?">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/pdf-to-text.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.98.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/pdf-to-text.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">PDF e OCR (atualizado!)</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Julio">Julio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            12 de
+            abril de
+            2023
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/pdf">pdf</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/pacotes">pacotes</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/ocr">ocr</a></li>
+        </ul>
+        <article class="content">
+          
+            
+<link href="/rmarkdown-libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/pagedtable/js/pagedtable.js"></script>
+
+
+<blockquote>
+<p>Post atualizado! A versão original do post está <a href="https://blog.curso-r.com/posts/2017-05-27-ocr/">aqui</a>!</p>
+</blockquote>
+<p>Já precisou extrair dados de arquivos pdf? Bom, eu já. Eu trabalho com <a href="http://abj.org.br">jurimetria</a> e preciso extrair dados de diários de justiça, petições, sentenças, então já viu né…</p>
+<p>A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é <em>digital</em> ou <em>digitalizado</em>?</p>
+<ul>
+<li>Se for digital, significa que ele pode ser transcrito diretamente para vários formatos: texto, html, xml e até mesmo <code>data.frame</code>s diretamente.</li>
+</ul>
+<p><a href="/posts/2023-04-12-ocr/pdf_digital.pdf">Vamos usar esse exemplo de PDF digital</a></p>
+<p>Se estiver no desktop, é possível ver o documento abaixo:</p>
+<object data="/posts/2023-04-12-ocr/pdf_digital.pdf" width="100%" height="375" type="application/pdf">
+</object>
+<ul>
+<li>Se for digitalizado, você precisará passar um algoritmo de OCR (Optical Character Recognition) para extrair os dados. Provavelmente seu output nesse caso será sempre texto.</li>
+</ul>
+<p><a href="/posts/2023-04-12-ocr/pdf_digitalizado.pdf">Vamos usar esse exemplo de PDF digitalizado</a></p>
+<p>Se estiver no desktop, é possível ver o documento abaixo:</p>
+<object data="/posts/2023-04-12-ocr/pdf_digitalizado.pdf" width="100%" height="375" type="application/pdf">
+</object>
+<p><strong>Obs:</strong> é possível que seu arquivo seja digitalizado, mas já com uma OCR passada no próprio arquivo. Nesse caso, você pode tratar o documento como digital.</p>
+<p>Os créditos dos pacotes abaixo vão todos para o <a href="https://github.com/jeroen">Jeroen Ooms</a>, um dos maiores autores de pacotes da comunidade <code>R</code> nos últimos dez anos. Sou fã desse cara!</p>
+<div id="pacote-pdftools-para-pdfs-digitais" class="section level2">
+<h2>Pacote <code>{pdftools}</code> para PDFs digitais</h2>
+<p>Para instalar o <code>{pdftools}</code> no Windows e no Mac, basta rodar</p>
+<pre class="r"><code>install.packages(&quot;pdftools&quot;)</code></pre>
+<p>Para instalar no Linux, siga as instruções <a href="https://github.com/ropensci/pdftools">desse link</a>.</p>
+<div id="pdf-para-texto" class="section level3">
+<h3>PDF para texto</h3>
+<pre class="r"><code>library(tidyverse)
+library(pdftools)
+pdf &lt;- &#39;caminho/para/pdf_digital.pdf&#39;
+txt &lt;- pdf_text(pdf)
+
+# imprimindo só os 500 primeiros caracteres da primeira página
+cat(str_trunc(txt[1], 500))</code></pre>
+<pre><code>## TJ/SP - Comarca de São Paulo
+## Movimento Judiciário
+## 
+## Referência: Janeiro de 2011
+## Foro: ADAMANTINA
+## Unidade: 02 CUMULATIVA
+## Planilha: CIVEL
+## 
+## 
+## Dados da Unidade
+## 1. Total de feitos em andamento                                            2756
+## 2. Precatórias                                                                6
+## 3. Processos
+##   3.1 Processos cíveis                                                     2078
+##     3.1.1 De Conhecimento                                                  1111
+##   3.1.2 De...</code></pre>
+</div>
+<div id="pdf-para-html-ou-xml" class="section level3">
+<h3>PDF para HTML ou XML</h3>
+<p>Muitas vezes queremos pegar estruturas no texto que dependem da posição dos elementos. Por exemplo, o texto em um PDF pode estar dividido em várias colunas. Para isso, o ideal seria transformar o arquivo em dados semi-estruturados como HTML ou XML, que separam os elementos do conteúdo do PDF em <em>tags</em>.</p>
+<p>Infelizmente, o <code>pdftools</code> não transforma em HTML nem XML. Para soltar um HTML, vamos montar uma função que chama <code>pdftohtml</code> do <code>poppler</code> por command line.</p>
+<pre class="r"><code>pdf_html &lt;- function(pdf) {
+  infos &lt;- pdf_info(pdf)              # pega infos do pdf
+  html &lt;- tempfile(fileext = &#39;.html&#39;) # cria arquivo temporário
+
+  # monta comando a ser executado.
+  # no windows, você pode instalar o Poppler por aqui:
+  # https://blog.alivate.com.au/poppler-windows/
+  command &lt;- sprintf(
+    &#39;pdftohtml -f 1 -l %s -q -i -s -noframes %s %s&#39;,
+    infos$pages,
+    normalizePath(pdf),
+    html
+  )
+
+  system(command)                     # roda comando e salva
+  txt &lt;- readr::read_file(html)       # lê arquivo salvo
+  file.remove(html)                   # remove arquivo temporário
+  txt
+}</code></pre>
+<p>Você pode brincar com o HTML usando o pacote <code>xml2</code>:</p>
+<pre class="r"><code>library(xml2)</code></pre>
+<pre class="r"><code>html &lt;- pdf_html(pdf)</code></pre>
+<pre class="r"><code>html |&gt;
+  read_html() |&gt;
+  xml_find_all(&#39;//div&#39;) |&gt;
+  head()
+## {xml_nodeset (6)}
+## [1] &lt;div id=&quot;page1-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [2] &lt;div id=&quot;page2-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [3] &lt;div id=&quot;page3-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [4] &lt;div id=&quot;page4-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [5] &lt;div id=&quot;page5-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...
+## [6] &lt;div id=&quot;page6-div&quot; style=&quot;position:relative;width:1263px;height:892px;&quot;&gt; ...</code></pre>
+</div>
+<div id="pdf-para-tabelas" class="section level3">
+<h3>PDF para tabelas</h3>
+<p>Use o <code>{tabulizer}</code>! Apesar de depender do polêmico <code>{rJava}</code> (que é um pacote chato de instalar e configurar) o <code>{tabulizer}</code> é capaz de extrair os dados diretamente para tabelas, de forma simples e intuitiva.</p>
+<p>Para instalar o <code>{tabulizer}</code>, siga as instruções <a href="https://github.com/ropensci/tabulizer">dessa página</a>. Já adianto que pode não ser uma tarefa fácil, principalmente por conta do <code>{rJava}</code>.</p>
+<p><strong>Exemplo</strong>: Uma vez montei esse código para estruturar um pdf contendo gastos em obras públicas. Além de usar o <code>{tabulizer}</code>, usei os pacotes usuais do <code>{tidyverse}</code> e o <code>{janitor}</code> para arrumar os nomes das colunas.</p>
+<pre class="r"><code>library(tabulizer)</code></pre>
+<p>Vamos usar <a href="/posts/2023-04-12-ocr/pdf_compras.pdf">esse pdf de exemplo</a>.</p>
+<p>Se estiver no desktop, é possível ver o documento abaixo:</p>
+<object data="/posts/2023-04-12-ocr/pdf_compras.pdf" width="100%" type="application/pdf" height="375">
+</object>
+<pre class="r"><code># No meu pc demorou 40 segundos.
+tab &lt;- extract_tables(&#39;caminho/para/pdf_compras.pdf&#39;)</code></pre>
+<p>Agora veja a magia do <code>{tidyverse}</code> e do pacote <code>{janitor}</code> posta em prática:</p>
+<pre class="r"><code>tab_tidy &lt;- tab |&gt;
+  # transforma matrizes em tibbles
+  map(as_tibble) |&gt;
+  # empilha
+  bind_rows() |&gt;
+  # arruma nomes a partir da primeira linha
+  janitor::row_to_names(1) |&gt; 
+  janitor::clean_names() |&gt; 
+  # tira espaços extras
+  mutate(across(
+    everything(), 
+    \(x) str_trim(str_replace_all(x, &#39;[[:space:]]+&#39;, &#39; &#39;))
+  ))</code></pre>
+<p>A tabela abaixo mostra as primeiras cinco linhas do resultado.</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["uf"],"name":[1],"type":["chr"],"align":["left"]},{"label":["municipios_atendidos"],"name":[2],"type":["chr"],"align":["left"]},{"label":["tipo"],"name":[3],"type":["chr"],"align":["left"]},{"label":["subtipo"],"name":[4],"type":["chr"],"align":["left"]},{"label":["nome_do_empreendimento"],"name":[5],"type":["chr"],"align":["left"]},{"label":["percent_de_execucao"],"name":[6],"type":["chr"],"align":["left"]},{"label":["total_pac_r_milhoes"],"name":[7],"type":["chr"],"align":["left"]},{"label":["orgao"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"BA","2":"ILHÉUS/BA","3":"Aeroporto","4":"Terminal de Passageiros","5":"Aeroporto de Ilhéus - PROJETO DE INFRAESTRUTURA E IMPLANTAÇÃO DO MOP","6":"Menor que 50%","7":"2,1","8":"Empresa Brasileira de Infraestrutura Aeroportuária"},{"1":"PR","2":"LONDRINA/PR","3":"Aeroporto","4":"Terminal de Passageiros","5":"Aeroporto de Londrina - IMPLANTAÇÃO DO MÓDULO OPERACIONAL - MOP NO PROCESSAMENTO DE EMBARQUE","6":"Maior que 50%","7":"4,0","8":"Empresa Brasileira de Infraestrutura Aeroportuária"},{"1":"PA","2":"MARABÁ/PA","3":"Aeroporto","4":"Terminal de Passageiros","5":"Aeroporto de Marabá - REFORMA COM AMPLIAÇÃO DO TPS EXISTENTE","6":"Maior que 50%","7":"7,1","8":"Empresa Brasileira de Infraestrutura Aeroportuária"},{"1":"CE","2":"ACOPIARA/CE","3":"Centro de Artes e Esportes Unificados","4":"Modelo 3000m²","5":"Praças - Acopiara - CE - Modelo 3000m²","6":"Menor que 50%","7":"2,0","8":"Ministério da Cultura"},{"1":"SP","2":"AMERICANA/SP","3":"Centro de Artes e Esportes Unificados","4":"Modelo 3000m²","5":"Praças - Americana - SP - Modelo 3000m²","6":"Menor que 50%","7":"2,4","8":"Ministério da Cultura"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="pacote-tesseract-para-pdfs-digitalizados" class="section level2">
+<h2>Pacote <code>{tesseract}</code> para PDFs digitalizados</h2>
+<p>O <code>{tesseract}</code> é uma biblioteca escrita em <code>C</code> e é uma das mais famosas ferramentas abertas para extração de textos a partir de imagens. O pacote em <code>R</code> de mesmo nome serve para usar essa biblioteca pelo <code>R</code> sem causar dores de cabeça.</p>
+<p>Para nossa felicidade, hoje em dia os pacotes <code>{pdftools}</code> e <code>{tesseract}</code> estão integrados. Dessa forma, podemos utilizar a função <code>pdftools::pdf_text_ocr()</code> para extrair o texto de um PDF usando OCR.</p>
+<p>Vamos usar <a href="/posts/2023-04-12-ocr/pdf_digitalizado.pdf">esse pdf de exemplo</a>.</p>
+<p>Se estiver no computador, é possível ver o documento abaixo:</p>
+<object data="/posts/2023-04-12-ocr/pdf_digitalizado.pdf" width="100%" type="application/pdf" height="375">
+</object>
+<pre class="r"><code>pdf &lt;- &#39;caminho/para/pdf_digitalizado.pdf&#39;
+txt &lt;- pdf_ocr_text(
+  pdf = pdf,    # caminho do arquivo
+  page = 1     # índice da página
+)</code></pre>
+<pre><code>## Converting page 1 to pdf_digitalizado_1.png... done!</code></pre>
+<p>Se o PDF tiver mais páginas, basta colocar os índices no texto.</p>
+<pre class="r"><code># imprimindo só os 300 primeiros caracteres do resultado
+cat(str_trunc(txt, 300))</code></pre>
+<pre><code>## This is a sample document to test the PDF Image+Text OCR Engine.
+## This is a sample document to test the PDF Image+Text OCR Engine.
+## This is a sample document to test the PDF Image+Text OCR Engine.
+## This is a sample document to test the PDF Image+Text OCR Engine.
+## This is a sample document to test the...</code></pre>
+</div>
+<div id="wrap-up" class="section level2">
+<h2>Wrap-up</h2>
+<ul>
+<li>Se seu pdf for digital, use <code>pdftools::pdf_text()</code>.</li>
+<li>Se seu pdf for digitalizado, <code>pdftools::pdf_text_ocr()</code>, que usa o pacote <code>{tesseract}</code> por trás.</li>
+<li>Existem alternativas úteis, como o Poppler em linha de comando e o pacote <code>{tabulizer}</code>.</li>
+</ul>
+<p>É isso. Happy coding ;)</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-04-12-ocr/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/pdf-to-text.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-04-12-ocr/">PDF e OCR (atualizado!)</a></h5>
+        <p>Por Julio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/ordenando-strings.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/">Ordenando strings no R</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/css-aleatorio.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/">Como gerar números aleatórios com CSS</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+<script src="https://platform.illow.io/banner.js?siteId=962b4071-1b48-4756-8b80-68101acc70df"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>
