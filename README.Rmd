@@ -16,21 +16,21 @@ library(magrittr)
 
 ```{r}
 yaml_to_tibble <- function(file) {
-  rmarkdown::yaml_front_matter(file) %>% 
-    purrr::map(paste, collapse = "|") %>% 
-    tibble::as_tibble() %>% 
+  rmarkdown::yaml_front_matter(file) |> 
+    purrr::map(paste, collapse = "|") |> 
+    tibble::as_tibble() |> 
     dplyr::mutate(arquivo = file)
 }
 
 grafico_freq <- function(tab, var) {
-  tab %>% 
-    dplyr::pull({{var}}) %>% 
-    stringr::str_split(pattern = "\\|") %>%
-    purrr::flatten_chr() %>% 
-    tibble::tibble(varivael = .) %>% 
-    dplyr::count(varivael)%>% 
-      dplyr::mutate(varivael = forcats::fct_reorder(varivael, n)) %>% 
-    ggplot2::ggplot(ggplot2::aes(x = n, y = varivael)) +
+  tab |> 
+    dplyr::pull({{var}}) |> 
+    stringr::str_split(pattern = "\\|") |>
+    purrr::flatten_chr() |> 
+    tibble::enframe("name", "variavel") |> 
+    dplyr::count(variavel) |> 
+    dplyr::mutate(variavel = forcats::fct_reorder(variavel, n)) |> 
+    ggplot2::ggplot(ggplot2::aes(x = n, y = variavel)) +
     ggplot2::geom_col(fill = "orange") +
     ggplot2::geom_label(ggplot2::aes(label = n)) +
     ggplot2::theme_minimal() +
@@ -41,9 +41,9 @@ grafico_freq <- function(tab, var) {
 ```{r}
 arquivos <- list.files("content/posts/", pattern = ".Rmd$", full.names = TRUE)
 
-tab <- arquivos %>% 
-  purrr::map_dfr(yaml_to_tibble) %>%  
-  dplyr::filter(is.na(draft) | draft == "FALSE") %>% 
+tab <- arquivos |> 
+  purrr::map_dfr(yaml_to_tibble) |>  
+  dplyr::filter(is.na(draft) | draft == "FALSE") |> 
   dplyr::mutate(categories = tolower(categories)) |> 
   dplyr::mutate(author = stringr::str_replace(author, "Beatriz Milz", "Beatriz"))
 ```
@@ -65,11 +65,11 @@ grafico_freq(tab, categories)
 ## Por ano
 
 ```{r}
-tab %>% 
+tab |> 
   dplyr::mutate(
     date = as.Date(date),
     ano = lubridate::year(date)
-  ) %>% 
+  ) |> 
   grafico_freq(ano) +
   ggplot2::coord_flip() +
   ggplot2::scale_y_discrete(limits = as.character(2017:lubridate::year(Sys.Date())))
@@ -79,14 +79,14 @@ tab %>%
 ## Por mês/ano
 
 ```{r}
-tab %>% 
+tab |> 
   dplyr::mutate(
     date = as.Date(date),
     ano = lubridate::year(date),
     mes = lubridate::month(date),
     mes_ano = lubridate::make_date(ano, mes, 1)
-  ) %>% 
-  dplyr::count(mes_ano) %>% 
+  ) |> 
+  dplyr::count(mes_ano) |> 
   ggplot2::ggplot(ggplot2::aes(x = mes_ano, y = n)) +
   ggplot2::geom_col(fill = "orange") +
   ggplot2::theme_minimal() +
@@ -96,11 +96,11 @@ tab %>%
 ## Por mês
 
 ```{r}
-tab %>% 
+tab |> 
   dplyr::mutate(
     date = as.Date(date),
     mes = lubridate::month(date)
-  ) %>% 
+  ) |> 
   grafico_freq(mes) +
   ggplot2::coord_flip() +
   ggplot2::scale_y_discrete(limits = as.character(1:12))
@@ -109,11 +109,11 @@ tab %>%
 ## Autoria vs categoria
 
 ```{r}
-tab %>% 
-  dplyr::filter(!stringr::str_detect(author, "\\|")) %>% 
-  dplyr::group_by(author) %>% 
-  dplyr::filter(dplyr::n() >= 10) %>% 
-  dplyr::count(author, categories) %>% 
+tab |> 
+  dplyr::filter(!stringr::str_detect(author, "\\|")) |> 
+  dplyr::group_by(author) |> 
+  dplyr::filter(dplyr::n() >= 10) |> 
+  dplyr::count(author, categories) |> 
   ggplot2::ggplot(ggplot2::aes(x = n, y = author)) +
   ggplot2::geom_col(fill = "orange") +
   ggplot2::facet_wrap(dplyr::vars(categories)) +
@@ -124,9 +124,9 @@ tab %>%
 ## Posts aposentados
 
 ```{r}
-tab %>% 
-  dplyr::filter(retired == "TRUE") %>% 
-  dplyr::select(date, title, author) %>% 
+tab |> 
+  dplyr::filter(retired == "TRUE") |> 
+  dplyr::select(date, title, author) |> 
   knitr::kable()
 ```
 
