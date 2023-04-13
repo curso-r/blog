@@ -22,7 +22,7 @@ A primeira pergunta que você precisa fazer antes de ler um pdf é: o arquivo é
 
 - Se for digital, significa que ele pode ser transcrito diretamente para vários formatos: texto, html, xml e até mesmo `data.frame`s diretamente.
 
-[Vamos usar esse exemplo de PDF digital](/posts/2023-04-12-ocr/pdf_digital.pdf)
+<a href="/posts/2023-04-12-ocr/pdf_digital.pdf" target="_blank">Vamos usar esse exemplo de PDF digital</a>
 
 Se estiver no desktop, é possível ver o documento abaixo:
 
@@ -30,7 +30,7 @@ Se estiver no desktop, é possível ver o documento abaixo:
 
 - Se for digitalizado, você precisará passar um algoritmo de OCR (Optical Character Recognition) para extrair os dados. Provavelmente seu output nesse caso será sempre texto.
 
-[Vamos usar esse exemplo de PDF digitalizado](/posts/2023-04-12-ocr/pdf_digitalizado.pdf)
+<a href="/posts/2023-04-12-ocr/pdf_digitalizado.pdf" target="_blank">Vamos usar esse exemplo de PDF digitalizado</a>
 
 Se estiver no desktop, é possível ver o documento abaixo:
 
@@ -38,7 +38,7 @@ Se estiver no desktop, é possível ver o documento abaixo:
 
 **Obs:** é possível que seu arquivo seja digitalizado, mas já com uma OCR passada no próprio arquivo. Nesse caso, você pode tratar o documento como digital.
 
-Os créditos dos pacotes abaixo vão todos para o [Jeroen Ooms](https://github.com/jeroen), um dos maiores autores de pacotes da comunidade `R` nos últimos dez anos. Sou fã desse cara!
+Os créditos dos pacotes abaixo vão todos para o <a href="https://github.com/jeroen" target="_blank">Jeroen Ooms</a>, um dos maiores autores de pacotes da comunidade `R` nos últimos dez anos. Sou fã desse cara!
 
 ## Pacote `{pdftools}` para PDFs digitais
 
@@ -49,10 +49,9 @@ Para instalar o `{pdftools}` no Windows e no Mac, basta rodar
 install.packages("pdftools")
 ```
 
-Para instalar no Linux, siga as instruções [desse link](https://github.com/ropensci/pdftools).
+Para instalar no Linux, siga as instruções <a href="https://github.com/ropensci/pdftools" target="blank">desse link</a>.
 
 ### PDF para texto
-
 
 ```{r}
 #| message: false 
@@ -85,7 +84,7 @@ cat(str_trunc(txt[1], 500))
 
 Muitas vezes queremos pegar estruturas no texto que dependem da posição dos elementos. Por exemplo, o texto em um PDF pode estar dividido em várias colunas. Para isso, o ideal seria transformar o arquivo em dados semi-estruturados como HTML ou XML, que separam os elementos do conteúdo do PDF em *tags*.
 
-Infelizmente, o `pdftools` não transforma em HTML nem XML. Para soltar um HTML, vamos montar uma função que chama `pdftohtml` do `poppler` por command line.
+Infelizmente, o `pdftools` não transforma em HTML nem em XML. Para soltar um HTML, vamos montar uma função que chama `pdftohtml` do `poppler` por command line.
 
 ```{r}
 pdf_html <- function(pdf) {
@@ -138,7 +137,7 @@ html |>
 
 Use o `{tabulizer}`! Apesar de depender do polêmico `{rJava}` (que é um pacote chato de instalar e configurar) o `{tabulizer}` é capaz de extrair os dados diretamente para tabelas, de forma simples e intuitiva.
 
-Para instalar o `{tabulizer}`, siga as instruções [dessa página](https://github.com/ropensci/tabulizer). Já adianto que pode não ser uma tarefa fácil, principalmente por conta do `{rJava}`.
+Para instalar o `{tabulizer}`, siga as instruções <a href="https://github.com/ropensci/tabulizer" target="_blank">dessa página</a>. Já adianto que pode não ser uma tarefa fácil, principalmente por conta do `{rJava}`.
 
 **Exemplo**: Uma vez montei esse código para estruturar um pdf contendo gastos em obras públicas. Além de usar o `{tabulizer}`, usei os pacotes usuais do `{tidyverse}` e o `{janitor}` para arrumar os nomes das colunas.
 
@@ -149,7 +148,7 @@ Para instalar o `{tabulizer}`, siga as instruções [dessa página](https://gith
 library(tabulizer)
 ```
 
-Vamos usar [esse pdf de exemplo](/posts/2023-04-12-ocr/pdf_compras.pdf).
+Vamos usar <a href="/posts/2023-04-12-ocr/pdf_compras.pdf" target="_blank">esse pdf de exemplo</a>.
 
 Se estiver no desktop, é possível ver o documento abaixo:
 
@@ -200,7 +199,9 @@ O `{tesseract}` é uma biblioteca escrita em `C` e é uma das mais famosas ferra
 
 Para nossa felicidade, hoje em dia os pacotes `{pdftools}` e `{tesseract}` estão integrados. Dessa forma, podemos utilizar a função `pdftools::pdf_text_ocr()` para extrair o texto de um PDF usando OCR.
 
-Vamos usar [esse pdf de exemplo](/posts/2023-04-12-ocr/pdf_digitalizado.pdf).
+Vamos usar <a href="/posts/2023-04-12-ocr/pdf_digitalizado.pdf" target="_blank">esse pdf de exemplo</a>.
+
+
 
 Se estiver no computador, é possível ver o documento abaixo:
 
