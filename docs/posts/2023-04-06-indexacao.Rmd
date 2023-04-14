@@ -1,0 +1,191 @@
+---
+title: "Indexando listas no R"
+date: "2023-04-06"
+tags: ["r", "programação"]
+categories: ["tutoriais"]
+image: "images/posts/banner/indexacao.webp"
+author: ["Caio"]
+summary: "Vamos aprender, de uma vez por todas, a indexar listas no R"
+draft: false
+---
+
+Uma peculiaridade do R que assusta muita gente é a indexação de listas.
+Indexar vetores é simples, basta usar a sintaxe `vetor[i]`, onde `i` é o
+número do elemento que você quer, mas as listas têm o problema do
+colchete duplo: `lista[[i]]`. Qual é a diferença entre os dois? Vamos
+tentar entender de uma vez por todas.
+
+## Introdução
+
+Se você não sabe o que é uma lista, o conceito é na verdade bastante
+simples: elas funcionam como vetores, mas aceitam objetos de vários
+tipos (incluindo sub-listas). Abaixo estou criando uma lista `l` e
+exibindo a sua estrutura com a função `str()`.
+
+``` r
+l <- list(
+  objeto = "abc",
+  vetor = c(1, 2, 3),
+  lista = list(TRUE, FALSE)
+)
+
+str(l)
+#> List of 3
+#>  $ objeto: chr "abc"
+#>  $ vetor : num [1:3] 1 2 3
+#>  $ lista :List of 2
+#>   ..$ : logi TRUE
+#>   ..$ : logi FALSE
+```
+
+Repare em algumas propriedades das listas:
+
+1.  Podemos nomear os seus elementos, mas também podemos deixá-los sem
+    nome nenhum. Isso também é possível com vetores, mas por algum
+    motivo é mais comum ver listas nomeadas.
+
+2.  Diferentemente de vetores, podemos colocar elementos de qualquer
+    comprimento dentro de uma lista.
+
+3.  Uma lista pode ter sub-listas (e sub-sub-listas, sub-sub-sub-listas,
+    etc.) Isso não afeta em nada o seu comportamento, mas vamos precisar
+    aprender a fazer indexações profundas.
+
+## indexação
+
+Acessar elementos de listas é um pouco mais complicado do que vetores. A
+base é a mesma: `[i]` retorna a `i`-ésima posição. O problema é que, nas
+listas, existe uma diferença entre a **posição** de um elemento e o
+**elemento** em si.
+
+A `i`-ésima posição, em uma lista, sempre é uma lista. Para pegar o
+`i`-ésimo elemento, precisamos usar `[[i]]`! Alternativamente, em listas
+nomeadas, podemos usar `["nome"]` e `[["nome"]]` (equivalente a
+`$nome`).
+
+``` r
+l[1]
+#> $objeto
+#> [1] "abc"
+```
+
+``` r
+l[[1]]
+#> [1] "abc"
+```
+
+``` r
+l["objeto"]
+#> $objeto
+#> [1] "abc"
+```
+
+``` r
+l[["objeto"]]
+#> [1] "abc"
+```
+
+``` r
+l$objeto
+#> [1] "abc"
+```
+
+É aqui que começa o nosso problema. É conceitualmente difícil de
+entender a diferença entre uma posição e um elemento, ou seja, quando
+usar `[]` e quando usar `[[]]`. Para tentar ilustrar melhor, vamos usar
+a metáfora da rua.
+
+## Metáfora da rua
+
+Vamos pensar em listas como ruas. Quando usarmos `[]` obteremos um
+trecho da rua e quando usarmos `[[]]` obteremos a família da casa
+correspondente. Seguindo a lógica da metáfora, um elemento-vetor é uma
+casa com vários moradores e um elemento-lista é uma vila que pode ter
+várias casas dentro.
+
+![](/images/posts/conteudo/2023-04-06-indexacao/l.png")
+
+Se quisermos pegar o trecho da rua que contém a primeira casa, podemos
+usar `[i]` ou `["nome"]`. Ambos funcionam igual:
+
+``` r
+l[1]
+l["objeto"]
+```
+
+![](/images/posts/conteudo/2023-04-06-indexacao/l[1].png")
+
+Quando estamos falando de trechos da rua (segmentos da lista), podemos
+fazer seleções maiores. Abaixo, por exemplo, estamos selecionando as 2
+últimas casas ou, alternativamente, todas as casas menos a primeira.
+
+``` r
+l[2:3]
+l[c("vetor", "lista")]
+l[-1]
+```
+
+![](/images/posts/conteudo/2023-04-06-indexacao/l[-1].png")
+
+Se quisermos selecionar os integrantes de uma casa (um elemento da
+lista), aí precisamos usar `[[i]]`, `[["nome"]]` ou `$nome`. Note que a
+última opção é igual à seleção de colunas em um data frame.
+
+``` r
+l[[1]]
+l[["objeto"]]
+l$objeto
+```
+
+![](/images/posts/conteudo/2023-04-06-indexacao/l[[1]].png")
+
+O processo para selecionar a família da casa 2 é idêntico, não importa
+que a casa 2 contém um vetor e a casa 1 contém um objeto simples.
+
+``` r
+l[[2]]
+l[["vetor"]]
+l$vetor
+```
+
+![](/images/posts/conteudo/2023-04-06-indexacao/l[[2]].png")
+
+Idem para a casa 3, ou seja, a vila da nossa rua. O endereço é um só,
+mas dentro deste endereço temos uma nova casa 1 e uma nova casa 2.
+
+``` r
+l[[3]]
+l[["lista"]]
+l$lista
+```
+
+![](/images/posts/conteudo/2023-04-06-indexacao/l[[3]].png")
+
+Se quisermos acessar a casa 1 da vila, podemos fazer indexação profunda.
+Para isso, basta colocar no final da nossa expressão mais um `[1]`!
+Funcionaria exatamente igual se nós quiséssemos pegar o primeiro
+elemento do vetor `l$vetor`.
+
+``` r
+l[[3]][1]
+l[["lista"]][1]
+l$lista[1]
+```
+
+![](/images/posts/conteudo/2023-04-06-indexacao/l[[3]][1].png")
+
+Por fim, se quisermos pegar os integrantes da casa 1 da vila, basta
+adicionar um `[[1]]` na nossa indexação da vila analogamente ao que
+fizemos acima. No limite, não importa quantas sub-listas você tem, basta
+adicionar mais colchetes duplos conforme a necessidade.
+
+``` r
+l[[3]][[1]]
+l[["lista"]][[1]]
+l$lista[[1]]
+```
+
+![](/images/posts/conteudo/2023-04-06-indexacao/l[[3]][[1]].png")
+
+Deu para entender agora? Diga para gente nos comentários o que você
+achou desse exemplo e se você ficou com alguma dúvida. Até a próxima!

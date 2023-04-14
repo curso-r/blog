@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Indexando listas no R</title>
+  <meta name="title" content="Indexando listas no R">
+  <meta name="description" content="Vamos aprender, de uma vez por todas, a indexar listas no R">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2023-04-06-indexacao/">
+  <meta property="og:title" content="Indexando listas no R">
+  <meta property="og:description" content="Vamos aprender, de uma vez por todas, a indexar listas no R">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/indexacao.webp?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2023-04-06-indexacao/">
+  <meta property="twitter:title" content="Indexando listas no R">
+  <meta property="twitter:description" content="Vamos aprender, de uma vez por todas, a indexar listas no R">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/indexacao.webp">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.85.0" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/indexacao.webp')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Indexando listas no R</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Caio">Caio</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+            6 de
+            abril de
+            2023
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/r">r</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/programa%c3%a7%c3%a3o">programação</a></li>
+        </ul>
+        <article class="content">
+          
+            
+
+
+<p>Uma peculiaridade do R que assusta muita gente é a indexação de listas.
+Indexar vetores é simples, basta usar a sintaxe <code>vetor[i]</code>, onde <code>i</code> é o
+número do elemento que você quer, mas as listas têm o problema do
+colchete duplo: <code>lista[[i]]</code>. Qual é a diferença entre os dois? Vamos
+tentar entender de uma vez por todas.</p>
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Se você não sabe o que é uma lista, o conceito é na verdade bastante
+simples: elas funcionam como vetores, mas aceitam objetos de vários
+tipos (incluindo sub-listas). Abaixo estou criando uma lista <code>l</code> e
+exibindo a sua estrutura com a função <code>str()</code>.</p>
+<pre class="r"><code>l &lt;- list(
+  objeto = &quot;abc&quot;,
+  vetor = c(1, 2, 3),
+  lista = list(TRUE, FALSE)
+)
+
+str(l)
+#&gt; List of 3
+#&gt;  $ objeto: chr &quot;abc&quot;
+#&gt;  $ vetor : num [1:3] 1 2 3
+#&gt;  $ lista :List of 2
+#&gt;   ..$ : logi TRUE
+#&gt;   ..$ : logi FALSE</code></pre>
+<p>Repare em algumas propriedades das listas:</p>
+<ol style="list-style-type: decimal">
+<li><p>Podemos nomear os seus elementos, mas também podemos deixá-los sem
+nome nenhum. Isso também é possível com vetores, mas por algum
+motivo é mais comum ver listas nomeadas.</p></li>
+<li><p>Diferentemente de vetores, podemos colocar elementos de qualquer
+comprimento dentro de uma lista.</p></li>
+<li><p>Uma lista pode ter sub-listas (e sub-sub-listas, sub-sub-sub-listas,
+etc.) Isso não afeta em nada o seu comportamento, mas vamos precisar
+aprender a fazer indexações profundas.</p></li>
+</ol>
+</div>
+<div id="indexação" class="section level2">
+<h2>indexação</h2>
+<p>Acessar elementos de listas é um pouco mais complicado do que vetores. A
+base é a mesma: <code>[i]</code> retorna a <code>i</code>-ésima posição. O problema é que, nas
+listas, existe uma diferença entre a <strong>posição</strong> de um elemento e o
+<strong>elemento</strong> em si.</p>
+<p>A <code>i</code>-ésima posição, em uma lista, sempre é uma lista. Para pegar o
+<code>i</code>-ésimo elemento, precisamos usar <code>[[i]]</code>! Alternativamente, em listas
+nomeadas, podemos usar <code>["nome"]</code> e <code>[["nome"]]</code> (equivalente a
+<code>$nome</code>).</p>
+<pre class="r"><code>l[1]
+#&gt; $objeto
+#&gt; [1] &quot;abc&quot;</code></pre>
+<pre class="r"><code>l[[1]]
+#&gt; [1] &quot;abc&quot;</code></pre>
+<pre class="r"><code>l[&quot;objeto&quot;]
+#&gt; $objeto
+#&gt; [1] &quot;abc&quot;</code></pre>
+<pre class="r"><code>l[[&quot;objeto&quot;]]
+#&gt; [1] &quot;abc&quot;</code></pre>
+<pre class="r"><code>l$objeto
+#&gt; [1] &quot;abc&quot;</code></pre>
+<p>É aqui que começa o nosso problema. É conceitualmente difícil de
+entender a diferença entre uma posição e um elemento, ou seja, quando
+usar <code>[]</code> e quando usar <code>[[]]</code>. Para tentar ilustrar melhor, vamos usar
+a metáfora da rua.</p>
+</div>
+<div id="metáfora-da-rua" class="section level2">
+<h2>Metáfora da rua</h2>
+<p>Vamos pensar em listas como ruas. Quando usarmos <code>[]</code> obteremos um
+trecho da rua e quando usarmos <code>[[]]</code> obteremos a família da casa
+correspondente. Seguindo a lógica da metáfora, um elemento-vetor é uma
+casa com vários moradores e um elemento-lista é uma vila que pode ter
+várias casas dentro.</p>
+<p><img src="/images/posts/conteudo/2023-04-06-indexacao/l.png%22" /></p>
+<p>Se quisermos pegar o trecho da rua que contém a primeira casa, podemos
+usar <code>[i]</code> ou <code>["nome"]</code>. Ambos funcionam igual:</p>
+<pre class="r"><code>l[1]
+l[&quot;objeto&quot;]</code></pre>
+<p><img src="/images/posts/conteudo/2023-04-06-indexacao/l%5B1%5D.png%22" /></p>
+<p>Quando estamos falando de trechos da rua (segmentos da lista), podemos
+fazer seleções maiores. Abaixo, por exemplo, estamos selecionando as 2
+últimas casas ou, alternativamente, todas as casas menos a primeira.</p>
+<pre class="r"><code>l[2:3]
+l[c(&quot;vetor&quot;, &quot;lista&quot;)]
+l[-1]</code></pre>
+<p><img src="/images/posts/conteudo/2023-04-06-indexacao/l%5B-1%5D.png%22" /></p>
+<p>Se quisermos selecionar os integrantes de uma casa (um elemento da
+lista), aí precisamos usar <code>[[i]]</code>, <code>[["nome"]]</code> ou <code>$nome</code>. Note que a
+última opção é igual à seleção de colunas em um data frame.</p>
+<pre class="r"><code>l[[1]]
+l[[&quot;objeto&quot;]]
+l$objeto</code></pre>
+<p><img src="/images/posts/conteudo/2023-04-06-indexacao/l%5B%5B1%5D%5D.png%22" /></p>
+<p>O processo para selecionar a família da casa 2 é idêntico, não importa
+que a casa 2 contém um vetor e a casa 1 contém um objeto simples.</p>
+<pre class="r"><code>l[[2]]
+l[[&quot;vetor&quot;]]
+l$vetor</code></pre>
+<p><img src="/images/posts/conteudo/2023-04-06-indexacao/l%5B%5B2%5D%5D.png%22" /></p>
+<p>Idem para a casa 3, ou seja, a vila da nossa rua. O endereço é um só,
+mas dentro deste endereço temos uma nova casa 1 e uma nova casa 2.</p>
+<pre class="r"><code>l[[3]]
+l[[&quot;lista&quot;]]
+l$lista</code></pre>
+<p><img src="/images/posts/conteudo/2023-04-06-indexacao/l%5B%5B3%5D%5D.png%22" /></p>
+<p>Se quisermos acessar a casa 1 da vila, podemos fazer indexação profunda.
+Para isso, basta colocar no final da nossa expressão mais um <code>[1]</code>!
+Funcionaria exatamente igual se nós quiséssemos pegar o primeiro
+elemento do vetor <code>l$vetor</code>.</p>
+<pre class="r"><code>l[[3]][1]
+l[[&quot;lista&quot;]][1]
+l$lista[1]</code></pre>
+<p><img src="/images/posts/conteudo/2023-04-06-indexacao/l%5B%5B3%5D%5D%5B1%5D.png%22" /></p>
+<p>Por fim, se quisermos pegar os integrantes da casa 1 da vila, basta
+adicionar um <code>[[1]]</code> na nossa indexação da vila analogamente ao que
+fizemos acima. No limite, não importa quantas sub-listas você tem, basta
+adicionar mais colchetes duplos conforme a necessidade.</p>
+<pre class="r"><code>l[[3]][[1]]
+l[[&quot;lista&quot;]][[1]]
+l$lista[[1]]</code></pre>
+<p><img src="/images/posts/conteudo/2023-04-06-indexacao/l%5B%5B3%5D%5D%5B%5B1%5D%5D.png%22" /></p>
+<p>Deu para entender agora? Diga para gente nos comentários o que você
+achou desse exemplo e se você ficou com alguma dúvida. Até a próxima!</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-04-12-ocr/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/pdf-to-text.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-04-12-ocr/">PDF e OCR (atualizado!)</a></h5>
+        <p>Por Julio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-04-06-indexacao/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/indexacao.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-04-06-indexacao/">Indexando listas no R</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/ordenando-strings.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/">Ordenando strings no R</a></h5>
+        <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+<script src="https://platform.illow.io/banner.js?siteId=962b4071-1b48-4756-8b80-68101acc70df"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>
