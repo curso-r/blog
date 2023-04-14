@@ -3,13 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.curso-r.com/posts/</loc>
-    <lastmod>2023-04-12T05:07:31+02:00</lastmod>
+    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/</loc>
-    <lastmod>2023-04-12T05:07:31+02:00</lastmod>
+    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/categories/</loc>
-    <lastmod>2023-04-12T05:07:31+02:00</lastmod>
+    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/posts/2023-04-14-indexacao/</loc>
+    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</loc>
+    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/r/</loc>
+    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/</loc>
+    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/categories/tutoriais/</loc>
+    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/ocr/</loc>
     <lastmod>2023-04-12T05:07:31+02:00</lastmod>
@@ -23,19 +38,7 @@
     <loc>https://blog.curso-r.com/posts/2023-04-12-ocr/</loc>
     <lastmod>2023-04-12T05:07:31+02:00</lastmod>
   </url><url>
-    <loc>https://blog.curso-r.com/tags/</loc>
-    <lastmod>2023-04-12T05:07:31+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/categories/tutoriais/</loc>
-    <lastmod>2023-04-12T05:07:31+02:00</lastmod>
-  </url><url>
     <loc>https://blog.curso-r.com/posts/2023-03-06-ordenando-strings/</loc>
-    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</loc>
-    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/tags/r/</loc>
     <lastmod>2023-03-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2023-01-10-css-aleatorio/</loc>

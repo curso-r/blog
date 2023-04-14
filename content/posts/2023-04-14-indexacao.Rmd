@@ -1,11 +1,11 @@
 ---
 title: "Indexando listas no R"
-date: "2023-04-06"
+date: "2023-04-14"
 tags: ["r", "programação"]
 categories: ["tutoriais"]
 image: "images/posts/banner/indexacao.webp"
 author: ["Caio"]
-summary: "Vamos aprender, de uma vez por todas, a indexar listas no R"
+summary: "Vamos aprender de uma vez por todas a indexar listas no R"
 draft: false
 ---
 
@@ -103,7 +103,7 @@ correspondente. Seguindo a lógica da metáfora, um elemento-vetor é uma
 casa com vários moradores e um elemento-lista é uma vila que pode ter
 várias casas dentro.
 
-![](/images/posts/conteudo/2023-04-06-indexacao/l.png")
+![](/images/posts/conteudo/2023-04-14-indexacao/l.png")
 
 Se quisermos pegar o trecho da rua que contém a primeira casa, podemos
 usar `[i]` ou `["nome"]`. Ambos funcionam igual:
@@ -113,7 +113,7 @@ l[1]
 l["objeto"]
 ```
 
-![](/images/posts/conteudo/2023-04-06-indexacao/l[1].png")
+![](/images/posts/conteudo/2023-04-14-indexacao/l[1].png")
 
 Quando estamos falando de trechos da rua (segmentos da lista), podemos
 fazer seleções maiores. Abaixo, por exemplo, estamos selecionando as 2
@@ -125,7 +125,7 @@ l[c("vetor", "lista")]
 l[-1]
 ```
 
-![](/images/posts/conteudo/2023-04-06-indexacao/l[-1].png")
+![](/images/posts/conteudo/2023-04-14-indexacao/l[-1].png")
 
 Se quisermos selecionar os integrantes de uma casa (um elemento da
 lista), aí precisamos usar `[[i]]`, `[["nome"]]` ou `$nome`. Note que a
@@ -137,7 +137,7 @@ l[["objeto"]]
 l$objeto
 ```
 
-![](/images/posts/conteudo/2023-04-06-indexacao/l[[1]].png")
+![](/images/posts/conteudo/2023-04-14-indexacao/l[[1]].png")
 
 O processo para selecionar a família da casa 2 é idêntico, não importa
 que a casa 2 contém um vetor e a casa 1 contém um objeto simples.
@@ -148,7 +148,7 @@ l[["vetor"]]
 l$vetor
 ```
 
-![](/images/posts/conteudo/2023-04-06-indexacao/l[[2]].png")
+![](/images/posts/conteudo/2023-04-14-indexacao/l[[2]].png")
 
 Idem para a casa 3, ou seja, a vila da nossa rua. O endereço é um só,
 mas dentro deste endereço temos uma nova casa 1 e uma nova casa 2.
@@ -159,7 +159,7 @@ l[["lista"]]
 l$lista
 ```
 
-![](/images/posts/conteudo/2023-04-06-indexacao/l[[3]].png")
+![](/images/posts/conteudo/2023-04-14-indexacao/l[[3]].png")
 
 Se quisermos acessar a casa 1 da vila, podemos fazer indexação profunda.
 Para isso, basta colocar no final da nossa expressão mais um `[1]`!
@@ -172,7 +172,7 @@ l[["lista"]][1]
 l$lista[1]
 ```
 
-![](/images/posts/conteudo/2023-04-06-indexacao/l[[3]][1].png")
+![](/images/posts/conteudo/2023-04-14-indexacao/l[[3]][1].png")
 
 Por fim, se quisermos pegar os integrantes da casa 1 da vila, basta
 adicionar um `[[1]]` na nossa indexação da vila analogamente ao que
@@ -185,7 +185,7 @@ l[["lista"]][[1]]
 l$lista[[1]]
 ```
 
-![](/images/posts/conteudo/2023-04-06-indexacao/l[[3]][[1]].png")
+![](/images/posts/conteudo/2023-04-14-indexacao/l[[3]][[1]].png")
 
 Deu para entender agora? Diga para gente nos comentários o que você
 achou desse exemplo e se você ficou com alguma dúvida. Até a próxima!

@@ -6,7 +6,16 @@
     <description>Recent content on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Wed, 12 Apr 2023 05:07:31 +0200</lastBuildDate><atom:link href="https://blog.curso-r.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Indexando listas no R</title>
+      <link>https://blog.curso-r.com/posts/2023-04-14-indexacao/</link>
+      <pubDate>Fri, 14 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2023-04-14-indexacao/</guid>
+      <description>Vamos aprender de uma vez por todas a indexar listas no R</description>
+    </item>
+    
     <item>
       <title>PDF e OCR (atualizado!)</title>
       <link>https://blog.curso-r.com/posts/2023-04-12-ocr/</link>
