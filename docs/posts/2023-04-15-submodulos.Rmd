@@ -1,0 +1,122 @@
+---
+title: "Submódulos no Git"
+date: "2023-04-15"
+tags: ["programação", "git"]
+categories: ["tutoriais"]
+image: "images/posts/banner/submodulos.webp"
+author: ["Caio"]
+summary: "Um pequeno tutorial para quem quer começar a usar submódulos no Git"
+draft: false
+---
+
+Ano passado, o time da [Curso-R](https://curso-r.com/) se reuniu para conversar
+sobre a nova estrutura dos nossos [cursos](https://loja.curso-r.com/). Um dos
+pontos da pauta era a organização dos nossos repositórios que, ao longo dos
+anos, foi ficando cada vez mais difícil de manter.
+
+Cada oferecimento de cada curso tem um repositório no
+[GitHub](https://github.com/curso-r), o que nos permite personalizar o conteúdo
+de uma turma sem afetar as outras. Mas essa granularidade cria um problema: o
+que fazer com o material que é comum a todas as turmas de um mesmo curso?
+
+## O problema
+
+Imagine que existe uma **turma A**, que participou do curso [_R para Ciência de
+Dados III_](https://loja.curso-r.com/r-para-ciencia-de-dados-3.html) este ano, e
+uma **turma B**, que vai fazer o curso no ano que vem.
+
+No passado nós copiávamos todo o conteúdo do repo A para o repo B, mas hoje em
+dia nós criamos os repositórios dos cursos com antecedência. Isso significa que
+qualquer alteração no material durante o oferecimento A precisaria ser propagada
+cuidadosamente para para o oferecimento B; infelizmente isso pode dar muito
+trabalho.
+
+A solução que encontramos foi criar um repositório `main` para cada curso, ou
+seja, um repo central que contém apenas os slides. Assim, os repos das turmas só
+precisam hospedar o conteúdo que muda de um oferecimento para o outro
+(exercícios, anexos, comentários, etc.) e qualquer alteração nos slides
+imediatamente se aplica a todos os repos satélites.
+
+Tudo funcionou perfeitamente bem até que decidimos fazer a primeira mudança na
+_ementa_ de um curso. O problema desta estratégia é qualquer alteração no `main`
+é propagada para o passado; logo, se durante o oferecimento B resolvermos fazer
+uma reestruturação grande no material, a turma A vai perder a versão dela e
+ficará sem as suas referências.
+
+O ideal seria ter uma maneira de atualizar os slides seletivamente, ou seja,
+manter a turma A na versão anterior do `main` e passar a B para a versão nova.
+Isso tudo sem quebrar os repos feitos com antecedência.
+
+## Submódulos
+
+É aí que entram os submódulos. De acordo com a
+[documentação](https://git-scm.com/book/en/v2/Git-Tools-Submodules), eles são
+essencialmente repos dentro de outros repos, ou seja, clonamos um repo (o
+submódulo) dentro de um repo hospedeiro. Inception.
+
+Como eu posso usar submódulos para resolver meu problema com as turmas? Eu posso
+continuar usando o repo `main` para armazenar os slides, mas, ao invés de
+deixá-lo isolado, ele seria clonado como submódulo dentro do repo de cada turma.
+Neste arranjo, eu posso apontar o submódulo da turma A para a versão antiga do
+`main` e manter o da turma B apontado para a versão mais nova.
+
+Para começar a usar submódulos, eu recomendo executar os seguintes comandos Git,
+pois eles garantem que o seu ambiente estará adequadamente preparado:
+
+```sh
+git config --global submodule.recurse true
+git config --global push.recurseSubmodules check
+```
+
+Agora, dentro do repositório desejado, eu posso rodar o comando abaixo para
+trazer o repo `main` como um submódulo:
+
+```sh
+git submodule add https://github.com/curso-r/main-r4ds-3.git materiais/
+```
+
+Isso é muito similar a fazer um clone normal! No caso, o repositório
+`main-r4ds-3` será clonado na pasta `materiais/` no repo hospedeiro.
+
+A partir de agora, eu posso usar sempre o repo hospedeiro, sem me preocupar com
+o `main`. Se eu fizer uma alteração na pasta `materiais/`, basta fazer um commit
+como qualquer outro! A atualização não vai para o repo da turma, mas sim para o
+`main`.
+
+```sh
+cd materiais/
+git add -A
+git commit -m "Alteração no main"
+git push
+```
+
+Se voltarmos para a pasta um nível acima e executarmos `git status`, vamos ver
+que houve uma alteração em um arquivo chamado `.gitmodules`. Isso quer dizer que
+o submódulo foi atualizado no GitHub, não que ele foi atualizado no repo da
+turma.
+
+Este é o pulo do gato: podemos atualizar o `main` quantas vezes quisermos, mas
+as atualizações só serão propagadas para o repo da turma se aceitarmos a
+alteração.
+
+```sh
+cd ../
+git status
+git add -A
+git commit -m "Aceitando alterações do main"
+git push
+```
+
+Isso permite que o repo de uma turma antiga como a A mantenha a sua referência a
+uma versão anterior do `main` ao mesmo passo que o repo das turmas novas podem
+ter suas referências atualizadas com facilidade. Se você quiser um exemplo de
+como fica uma referência no GitHub, dê uma olhada na demo de submódulos que
+fizemos na Curso-R:
+[https://github.com/curso-r/202211-demo-submod](https://github.com/curso-r/202211-demo-submod).
+
+E isso é tudo! Se você quiser uma demonstração em vídeo, a referência que eu
+usei foi [essa aqui](https://www.youtube.com/watch?v=gSlXo2iLBro) do Redhwan
+Nacef. Se você tiver qualquer dúvida, faça um comentário aqui no post ou no
+nosso [Discourse](https://discourse.curso-r.com/) que nós vamos tentar ajudar o
+máximo possível. Até a próxima :)
+

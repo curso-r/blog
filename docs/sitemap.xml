@@ -3,27 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.curso-r.com/posts/</loc>
-    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2023-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/</loc>
-    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2023-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/categories/</loc>
-    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2023-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/git/</loc>
+    <lastmod>2023-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</loc>
+    <lastmod>2023-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/posts/2023-04-15-submodulos/</loc>
+    <lastmod>2023-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/tags/</loc>
+    <lastmod>2023-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.curso-r.com/categories/tutoriais/</loc>
+    <lastmod>2023-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2023-04-14-indexacao/</loc>
     <lastmod>2023-04-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.curso-r.com/tags/programa%C3%A7%C3%A3o/</loc>
-    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://blog.curso-r.com/tags/r/</loc>
-    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/tags/</loc>
-    <lastmod>2023-04-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/categories/tutoriais/</loc>
     <lastmod>2023-04-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/ocr/</loc>
@@ -198,9 +204,6 @@
     <lastmod>2022-02-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/posts/2022-02-19-api-github-1/</loc>
-    <lastmod>2022-02-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.curso-r.com/tags/git/</loc>
     <lastmod>2022-02-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.curso-r.com/tags/github/</loc>
