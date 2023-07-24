@@ -6,7 +6,16 @@
     <description>Recent content on Blog | Curso-R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 15 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.curso-r.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Explorando o pacote dplyr: lag/lead</title>
+      <link>https://blog.curso-r.com/posts/2023-07-24-dplyr-lead-lag/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.curso-r.com/posts/2023-07-24-dplyr-lead-lag/</guid>
+      <description>Neste post, vamos mostrar como usar duas funções muito úteis do &lt;code&gt;dplyr&lt;/code&gt;: lag e lead.</description>
+    </item>
+    
     <item>
       <title>Submódulos no Git</title>
       <link>https://blog.curso-r.com/posts/2023-04-15-submodulos/</link>

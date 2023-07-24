@@ -1,0 +1,11 @@
+---
+title: "Autenticação de Shiny apps com o pacote firebase"
+date: "2023-01-16"
+tags: ["shiny", "firebase"]
+categories: ["tutoriais"]
+image: "images/posts/banner/firebase.png"
+author: ["William"]
+summary: "Como utilizar o pacote firebase para autenticar os seus aplicativos Shiny"
+draft: true
+---
+

@@ -24,7 +24,7 @@
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta name="generator" content="Hugo 0.85.0" />
+  <meta name="generator" content="Hugo 0.108.0">
 
   <!-- plugins -->
   
@@ -178,33 +178,33 @@ tem um IP diferente, (2) salvar os HTMLs raspados é fácil com o Google Cloud
 Storage e (3) o processo pode ser facilmente ativado/desativado a qualquer
 momento.</p>
 <p>Neste tutorial a função a ser paralelizada é a seguinte:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Scrapear um vetor de caracteres de URLs</span>
-scrape_urls <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(urls) {
-
-  <span style="color:#75715e"># Criar um diretório</span>
-  dir <span style="color:#f92672">&lt;-</span> fs<span style="color:#f92672">::</span><span style="color:#a6e22e">dir_create</span>(<span style="color:#e6db74">&#34;scraped&#34;</span>)
-
-  <span style="color:#75715e"># Iterar nos URLs</span>
-  paths <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
-  <span style="color:#a6e22e">for </span>(url in urls) {
-    path <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste0</span>(dir, <span style="color:#e6db74">&#34;/&#34;</span>, stringr<span style="color:#f92672">::</span><span style="color:#a6e22e">str_remove_all</span>(url, <span style="color:#e6db74">&#34;[^a-z]&#34;</span>), <span style="color:#e6db74">&#34;.html&#34;</span>)
-    paths <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">append</span>(paths, path)
-    
-    httr<span style="color:#f92672">::</span><span style="color:#a6e22e">GET</span>(url, httr<span style="color:#f92672">::</span><span style="color:#a6e22e">write_disk</span>(path, overwrite <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
-  }
-
-  <span style="color:#a6e22e">return</span>(paths)
-}
-</code></pre></div><p>Em suma, essa função recebe um vetor de URLs, os raspa e salva os HTMLs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Scrapear um vetor de caracteres de URLs</span>
+</span></span><span style="display:flex;"><span>scrape_urls <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(urls) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Criar um diretório</span>
+</span></span><span style="display:flex;"><span>  dir <span style="color:#f92672">&lt;-</span> fs<span style="color:#f92672">::</span><span style="color:#a6e22e">dir_create</span>(<span style="color:#e6db74">&#34;scraped&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Iterar nos URLs</span>
+</span></span><span style="display:flex;"><span>  paths <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for </span>(url in urls) {
+</span></span><span style="display:flex;"><span>    path <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste0</span>(dir, <span style="color:#e6db74">&#34;/&#34;</span>, stringr<span style="color:#f92672">::</span><span style="color:#a6e22e">str_remove_all</span>(url, <span style="color:#e6db74">&#34;[^a-z]&#34;</span>), <span style="color:#e6db74">&#34;.html&#34;</span>)
+</span></span><span style="display:flex;"><span>    paths <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">append</span>(paths, path)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    httr<span style="color:#f92672">::</span><span style="color:#a6e22e">GET</span>(url, httr<span style="color:#f92672">::</span><span style="color:#a6e22e">write_disk</span>(path, overwrite <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(paths)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Em suma, essa função recebe um vetor de URLs, os raspa e salva os HTMLs
 resultantes em um diretório local.</p>
 <h2 id="criando-o-cluster">Criando o cluster</h2>
 <p>Agora para o Kuber. Se tudo estiver instalado corretamente, você deveria ser
 capaz de criar um cluster simples com o seguinte comando:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(kuber)
-
-<span style="color:#a6e22e">kub_create_cluster</span>(<span style="color:#e6db74">&#34;toy-cluster&#34;</span>, machine_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;f1-micro&#34;</span>)
-<span style="color:#75715e">#&gt; ✔  Creating cluster</span>
-</code></pre></div><p>Vá para o
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(kuber)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">kub_create_cluster</span>(<span style="color:#e6db74">&#34;toy-cluster&#34;</span>, machine_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;f1-micro&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Creating cluster</span>
+</span></span></code></pre></div><p>Vá para o
 <a href="https://console.cloud.google.com/kubernetes/list">Kubernetes console</a> para
 ver se tudo funcionou corretamente. Não se preocupe se você receber um monte
 de alertas, a maioria deles é referente à versão do SDK.</p>
@@ -215,21 +215,21 @@ cluster, pacote, imagem e conta de serviço. Para executar o comando abaixo,
 apenas <code>toy-key.json</code> (a chave da conta de serviço baixada na vignette
 &ldquo;Getting started&rdquo;) já precisa existir no caminho indicado; o resto é todo
 criado para você.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">kub_create_task</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>, <span style="color:#e6db74">&#34;toy-cluster&#34;</span>, <span style="color:#e6db74">&#34;toy-bucket&#34;</span>, <span style="color:#e6db74">&#34;toy-image&#34;</span>, <span style="color:#e6db74">&#34;~/toy-key.json&#34;</span>)
-<span style="color:#75715e">#&gt; ✔  Fetching cluster information</span>
-<span style="color:#75715e">#&gt; ✔  Fetching bucket information</span>
-<span style="color:#75715e">#&gt; ✔  Creating bucket</span>
-<span style="color:#75715e">#&gt; ●  Edit `~/toy-dir/exec.R`</span>
-<span style="color:#75715e">#&gt; ●  Create `~/toy-dir/list.rds` with usable parameters</span>
-<span style="color:#75715e">#&gt; ●  Run `kub_push_task(&#34;~/toy-dir&#34;)`</span>
-</code></pre></div><h2 id="editando-o-execr-e-o-listrds">Editando o exec.R e o list.rds</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">kub_create_task</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>, <span style="color:#e6db74">&#34;toy-cluster&#34;</span>, <span style="color:#e6db74">&#34;toy-bucket&#34;</span>, <span style="color:#e6db74">&#34;toy-image&#34;</span>, <span style="color:#e6db74">&#34;~/toy-key.json&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Fetching cluster information</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Fetching bucket information</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Creating bucket</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ●  Edit `~/toy-dir/exec.R`</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ●  Create `~/toy-dir/list.rds` with usable parameters</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ●  Run `kub_push_task(&#34;~/toy-dir&#34;)`</span>
+</span></span></code></pre></div><h2 id="editando-o-execr-e-o-listrds">Editando o exec.R e o list.rds</h2>
 <p>O diretório criado por <code>kub_create_task()</code> tem alguns arquivos que são
 explorados em detalhe na documentação da própria função, mas os dois mais
 importantes são <code>exec.R</code> e <code>list.rds</code>. O primeiro contém o arquivo R a ser
 executado pela imagem docker, enquanto o segundo tem todos os objetos que
 cada máquina precisa para rodar o seu próprio <code>exec.R</code>.</p>
 <p>Começando pelo <code>exec.R</code>, o arquivo já está populado com um exemplo simples:</p>
-<pre><code>#!/usr/bin/env Rscript
+<pre tabindex="0"><code>#!/usr/bin/env Rscript
 args &lt;- commandArgs(trailingOnly = TRUE)
 
 # Arguments
@@ -238,13 +238,13 @@ bucket &lt;- as.character(args[2])
 
 # Use this function to save your results
 save_path &lt;- function(path) {
-  system(paste0(&quot;gsutil cp -r &quot;, file_, &quot; gs://&quot;, bucket, &quot;/&quot;, gsub(&quot;/.+&quot;, &quot;&quot;, file_)))
+  system(paste0(&#34;gsutil cp -r &#34;, file_, &#34; gs://&#34;, bucket, &#34;/&#34;, gsub(&#34;/.+&#34;, &#34;&#34;, file_)))
   do.call(file.remove, list(list.files(path, full.names = TRUE)))
   return(path)
 }
 
 # Get object passed in list[[idx]]
-obj &lt;- readRDS(&quot;list.rds&quot;)[[idx]]
+obj &lt;- readRDS(&#34;list.rds&#34;)[[idx]]
 
 ###########################
 ## INSERT YOUR CODE HERE ##
@@ -257,7 +257,7 @@ script lê <code>list.rds</code> e seleciona o objeto guardado no índice <code>
 <p>Agora é hora de adicionar <code>scrape_urls()</code> para o arquivo. Não há muitas
 mudanças na função em si, apenas em como os arquivos resultantes são
 gerenciados. Aqui está a versão final do <code>exec.R</code>:</p>
-<pre><code>#!/usr/bin/env Rscript
+<pre tabindex="0"><code>#!/usr/bin/env Rscript
 args &lt;- commandArgs(trailingOnly = TRUE)
 
 # Arguments
@@ -266,24 +266,24 @@ bucket &lt;- as.character(args[2])
 
 # Use this function to save your results
 save_path &lt;- function(path) {
-  system(paste0(&quot;gsutil cp -r &quot;, file_, &quot; gs://&quot;, bucket, &quot;/&quot;, gsub(&quot;/.+&quot;, &quot;&quot;, file_)))
+  system(paste0(&#34;gsutil cp -r &#34;, file_, &#34; gs://&#34;, bucket, &#34;/&#34;, gsub(&#34;/.+&#34;, &#34;&#34;, file_)))
   do.call(file.remove, list(list.files(path, full.names = TRUE)))
   return(path)
 }
 
 # Get object passed in list[[idx]]
-obj &lt;- readRDS(&quot;list.rds&quot;)[[idx]]
+obj &lt;- readRDS(&#34;list.rds&#34;)[[idx]]
 
 # Scrapear um vetor de caracteres de URLs
 scrape_urls &lt;- function(urls) {
 
   # Criar um diretório
-  dir &lt;- fs::dir_create(&quot;scraped&quot;)
+  dir &lt;- fs::dir_create(&#34;scraped&#34;)
 
   # Iterar nos URLs
   paths &lt;- c()
   for (url in urls) {
-    path &lt;- paste0(dir, &quot;/&quot;, stringr::str_remove_all(url, &quot;[^a-z]&quot;), &quot;.html&quot;)
+    path &lt;- paste0(dir, &#34;/&#34;, stringr::str_remove_all(url, &#34;[^a-z]&#34;), &#34;.html&#34;)
     paths &lt;- append(paths, path)
     
     httr::GET(url, httr::write_disk(path, overwrite = TRUE))
@@ -310,16 +310,16 @@ quebrada em um bloco para cada máquina. Como neste exemplo toy-cluster foi
 criado com o número padrão de máquinas (3), <code>list.rds</code> vai ser uma lista
 com 3 elementos. Os comandos a seguir devem ser rodados na sua máquina
 local:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># URLs a serem raspados, blocados por máquina</span>
-url_list <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(
-  <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;google.com&#34;</span>, <span style="color:#e6db74">&#34;duckduckgo.com&#34;</span>),
-  <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;wikipedia.org&#34;</span>),
-  <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;facebook.com&#34;</span>, <span style="color:#e6db74">&#34;twitter.com&#34;</span>, <span style="color:#e6db74">&#34;instagram.com&#34;</span>)
-)
-
-<span style="color:#75715e"># Sobrescrever o list.rds com a lista de URLs</span>
-readr<span style="color:#f92672">::</span><span style="color:#a6e22e">write_rds</span>(url_list, <span style="color:#e6db74">&#34;~/toy-dir/list.rds&#34;</span>)
-</code></pre></div><p>Com esse <code>list.rds</code>, o primeiro nó vai raspar motores de busca, o segundo
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># URLs a serem raspados, blocados por máquina</span>
+</span></span><span style="display:flex;"><span>url_list <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;google.com&#34;</span>, <span style="color:#e6db74">&#34;duckduckgo.com&#34;</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;wikipedia.org&#34;</span>),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;facebook.com&#34;</span>, <span style="color:#e6db74">&#34;twitter.com&#34;</span>, <span style="color:#e6db74">&#34;instagram.com&#34;</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sobrescrever o list.rds com a lista de URLs</span>
+</span></span><span style="display:flex;"><span>readr<span style="color:#f92672">::</span><span style="color:#a6e22e">write_rds</span>(url_list, <span style="color:#e6db74">&#34;~/toy-dir/list.rds&#34;</span>)
+</span></span></code></pre></div><p>Com esse <code>list.rds</code>, o primeiro nó vai raspar motores de busca, o segundo
 vai raspar a Wikipédia e o terceiro vai raspar mídias sociais.</p>
 <h2 id="dando-push-e-executando-a-tarefa">Dando push e executando a tarefa</h2>
 <p>Por último mas não menos importante, a tarefa deve ser pushada para o Google
@@ -328,32 +328,32 @@ vai raspar a Wikipédia e o terceiro vai raspar mídias sociais.</p>
 de versão para todas as tarefas e permitem que elas sejam executadas de
 outro computador, mas pode levar um bom tempo para rodar da primeira vez que
 você cria uma tarefa.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">kub_push_task</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>)
-<span style="color:#75715e">#&gt; ✔  Building image</span>
-<span style="color:#75715e">#&gt; ✔  Authenticating</span>
-<span style="color:#75715e">#&gt; ✔  Pushing image</span>
-<span style="color:#75715e">#&gt; ✔  Removing old jobs</span>
-<span style="color:#75715e">#&gt; ✔  Creating new jobs</span>
-</code></pre></div><p>Se tudo funcionou até agora, o último comando obrigatório é executar a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">kub_push_task</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Building image</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Authenticating</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Pushing image</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Removing old jobs</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Creating new jobs</span>
+</span></span></code></pre></div><p>Se tudo funcionou até agora, o último comando obrigatório é executar a
 tarefa:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">kub_run_task</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>)
-<span style="color:#75715e">#&gt; ✔  Authenticating</span>
-<span style="color:#75715e">#&gt; ✔  Setting cluster context</span>
-<span style="color:#75715e">#&gt; ✔  Creating jobs</span>
-<span style="color:#75715e">#&gt; ●  Run `kub_list_pods()` to follow up on the pods</span>
-</code></pre></div><h2 id="gerenciando-o-progresso-da-tarefa">Gerenciando o progresso da tarefa</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">kub_run_task</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Authenticating</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Setting cluster context</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Creating jobs</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ●  Run `kub_list_pods()` to follow up on the pods</span>
+</span></span></code></pre></div><h2 id="gerenciando-o-progresso-da-tarefa">Gerenciando o progresso da tarefa</h2>
 <p>A duas formas principais de gerenciar o progresso de uma tarefa: listando os
 pods atualmente ativos e listando os arquivos guardados em um bucket. As
 letras estranhas no nome de cada processo é um identificador único gerado
 pelo Kuber para gerenciar aqueles pods.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">kub_list_pods</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>)
-<span style="color:#75715e">#&gt; ✔  Setting cluster context</span>
-<span style="color:#75715e">#&gt; ✔  Fetching pods</span>
-<span style="color:#75715e">#&gt;                          NAME READY  STATUS RESTARTS AGE</span>
-<span style="color:#75715e">#&gt; 1 process-mkewsr-item-1-8kpg7   1/1 Running        0  1m</span>
-<span style="color:#75715e">#&gt; 2 process-mkewsr-item-2-cph8z   1/1 Running        0  1m</span>
-<span style="color:#75715e">#&gt; 3 process-mkewsr-item-3-kpn5f   1/1 Running        0  1m</span>
-</code></pre></div><p>Se o
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">kub_list_pods</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Setting cluster context</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Fetching pods</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;                          NAME READY  STATUS RESTARTS AGE</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; 1 process-mkewsr-item-1-8kpg7   1/1 Running        0  1m</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; 2 process-mkewsr-item-2-cph8z   1/1 Running        0  1m</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; 3 process-mkewsr-item-3-kpn5f   1/1 Running        0  1m</span>
+</span></span></code></pre></div><p>Se o
 <a href="(https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)">status dos seus pods</a>
 indicar algo ruim, pode ser que você precise depurar o seu arquivo <code>exec.R</code>.
 Isso é absolutamente normal e pode ser que sejam necessárias várias
@@ -364,18 +364,18 @@ precisar de ajuda na depuração da sua tarefa, dê uma olhada na vignette
 especificar o diretório dentro do bucket e se a listagem deve ser feita
 recursivamente. Aqui é possível ver que todo download terminou de rodar
 corretamente.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">kub_list_bucket</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>, folder <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;scraped&#34;</span>)
-<span style="color:#75715e">#&gt; ✔  Listing content</span>
-<span style="color:#75715e">#&gt; [1] &#34;googlecom.html&#34;     &#34;duckduckgocom.html&#34; &#34;wikipediaorg.html&#34; </span>
-<span style="color:#75715e">#&gt; [4] &#34;facebookcom.html&#34;   &#34;twittercom.html&#34;    &#34;instagramcom.html&#34; </span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">kub_list_bucket</span>(<span style="color:#e6db74">&#34;~/toy-dir&#34;</span>, folder <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;scraped&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; ✔  Listing content</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; [1] &#34;googlecom.html&#34;     &#34;duckduckgocom.html&#34; &#34;wikipediaorg.html&#34; </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt; [4] &#34;facebookcom.html&#34;   &#34;twittercom.html&#34;    &#34;instagramcom.html&#34; </span>
+</span></span></code></pre></div>
           
         </article>
         
   <div class="disqus-comments">
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -406,6 +406,16 @@ corretamente.</p>
     
     <div class="media mb-4">
       <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-07-24-dplyr-lead-lag/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/exploring-dplyr.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-07-24-dplyr-lead-lag/">Explorando o pacote dplyr: lag/lead</a></h5>
+        <p>Por William em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
         <a href="https://blog.curso-r.com/posts/2023-04-15-submodulos/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/submodulos.webp"></a>
       </div>
       <div class="media-body">
@@ -421,16 +431,6 @@ corretamente.</p>
       <div class="media-body">
         <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-04-14-indexacao/">Indexando listas no R</a></h5>
         <p>Por Caio em <a href="/categories/tutoriais">Tutoriais</a></p>
-      </div>
-    </div>
-    
-    <div class="media mb-4">
-      <div class="post-thumb-sm mr-3">
-        <a href="https://blog.curso-r.com/posts/2023-04-12-ocr/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/pdf-to-text.webp"></a>
-      </div>
-      <div class="media-body">
-        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-04-12-ocr/">PDF e OCR (atualizado!)</a></h5>
-        <p>Por Julio em <a href="/categories/tutoriais">Tutoriais</a></p>
       </div>
     </div>
     
