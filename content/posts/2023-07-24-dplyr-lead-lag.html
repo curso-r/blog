@@ -1,0 +1,139 @@
+---
+title: "Explorando o pacote dplyr: lag/lead"
+date: "2023-07-24"
+tags: ["programação", "dplyr"]
+categories: ["tutoriais"]
+image: "images/posts/banner/exploring-dplyr.webp"
+author: ["William"]
+summary: "Neste post, vamos mostrar como usar duas funções muito úteis do `dplyr`: lag e lead."
+draft: false
+---
+
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>As funções <code>lag()</code> e <code>lead()</code> são recursos poderosos do pacote <code>dplyr</code> no R que nos permitem analisar diferenças e tendências temporais em conjuntos de dados. Com essas funções, podemos facilmente comparar valores anteriores e posteriores em uma sequência, o que é útil para identificar padrões, mudanças e comportamentos ao longo do tempo. Neste post, exploraremos a funcionalidade dessas funções usando um exemplo prático.</p>
+<p>Antes de prosseguirmos, certifique-se de ter instalado o pacote <code>dplyr</code>.</p>
+<pre class="r"><code>install.packages(&quot;dplyr&quot;)</code></pre>
+</div>
+<div id="sintaxe" class="section level2">
+<h2>Sintaxe</h2>
+<p>A sintaxe básica da função <code>lag()</code> é a seguinte:</p>
+<pre class="r"><code>dplyr::lag(x, n = 1L, default = NULL, order_by = NULL, ...)</code></pre>
+<ul>
+<li><p><code>x</code>: um vetor.</p></li>
+<li><p><code>n</code>: o número de posições para trás que queremos retroceder. Por padrão, é 1, o que significa que a função retornará o valor anterior à posição atual.</p></li>
+<li><p><code>default</code>: valor padrão a ser retornado caso não haja valor anterior disponível. Por padrão, é definido como <code>NULL</code>, o que significa que, se não houver valor anterior, a função retornará <code>NA</code>.</p></li>
+<li><p><code>order_by</code>: uma coluna usada para ordenar os dados. Se não for especificado, a função <code>lag()</code> assumirá que os dados estão na ordem em que aparecem no conjunto de dados.</p></li>
+</ul>
+</div>
+<div id="exemplo-simples" class="section level2">
+<h2>Exemplo simples</h2>
+<p>Considere o seguinte conjunto de dados:</p>
+<pre class="r"><code>tab &lt;- tibble::tibble(
+  medida = c(1, 2, 1, 3, 4, 1, 2, 0)
+)</code></pre>
+<p>Neste exemplo, temos uma coluna chamada “medida” que contém valores numéricos. Vamos começar utilizando a função lag() para criar uma nova coluna chamada “lag_medida”, que armazenará o valor anterior de “medida” em cada linha:</p>
+<pre class="r"><code>tab |&gt;
+  dplyr::mutate(
+    lag_medida = dplyr::lag(medida)
+  )</code></pre>
+<pre><code>## # A tibble: 8 × 2
+##   medida lag_medida
+##    &lt;dbl&gt;      &lt;dbl&gt;
+## 1      1         NA
+## 2      2          1
+## 3      1          2
+## 4      3          1
+## 5      4          3
+## 6      1          4
+## 7      2          1
+## 8      0          2</code></pre>
+<p>Observe que a primeira linha da coluna “lag_medida” é <code>NA</code> porque não há um valor anterior para a primeira observação.</p>
+<p>Agora, vamos criar uma nova coluna chamada “flag_aumentou”, que indicará se o valor atual de “medida” é maior que o valor anterior:</p>
+<pre class="r"><code>tab |&gt; 
+  dplyr::mutate(
+    lag_medida = dplyr::lag(medida),
+    flag_aumentou = medida &gt; lag_medida
+  )</code></pre>
+<pre><code>## # A tibble: 8 × 3
+##   medida lag_medida flag_aumentou
+##    &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;        
+## 1      1         NA NA           
+## 2      2          1 TRUE         
+## 3      1          2 FALSE        
+## 4      3          1 TRUE         
+## 5      4          3 TRUE         
+## 6      1          4 FALSE        
+## 7      2          1 TRUE         
+## 8      0          2 FALSE</code></pre>
+<p>A coluna flag_aumentou nos informa se a medida atual é maior que a medida anterior (<code>TRUE</code>) ou não (<code>FALSE</code>). Esse tipo de informação pode ser útil para identificar momentos de crescimento ou decrescimento em séries temporais.</p>
+</div>
+<div id="exemplo-com-dados-agrupados" class="section level2">
+<h2>Exemplo com dados agrupados</h2>
+<p>Vamos agora explorar como utilizá-la em dados agrupados por indivíduo. Essa situação é comum quando temos uma série temporal para cada indivíduo em nosso conjunto de dados e desejamos analisar as variações dentro de cada grupo ao longo do tempo. Considere a tabela:</p>
+<pre class="r"><code>tab &lt;- tibble::tibble(
+  individuo = rep(1:2, each = 4), # Dois indivíduos com 4 medidas cada
+  medida = c(1, 2 , 1, 3, 4, 1, 2, 0)
+)
+
+tab</code></pre>
+<pre><code>## # A tibble: 8 × 2
+##   individuo medida
+##       &lt;int&gt;  &lt;dbl&gt;
+## 1         1      1
+## 2         1      2
+## 3         1      1
+## 4         1      3
+## 5         2      4
+## 6         2      1
+## 7         2      2
+## 8         2      0</code></pre>
+<p>A seguir, utilizamos a função <code>lag()</code> para criar uma nova coluna com a medida anterior, agrupado por indivíduo.</p>
+<pre class="r"><code>tab |&gt; 
+  dplyr::group_by(individuo) |&gt; 
+  dplyr::mutate(
+    lag_medida = dplyr::lag(medida)
+  )</code></pre>
+<pre><code>## # A tibble: 8 × 3
+## # Groups:   individuo [2]
+##   individuo medida lag_medida
+##       &lt;int&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+## 1         1      1         NA
+## 2         1      2          1
+## 3         1      1          2
+## 4         1      3          1
+## 5         2      4         NA
+## 6         2      1          4
+## 7         2      2          1
+## 8         2      0          2</code></pre>
+<p>Observe que a coluna <code>lag_medida</code> agora contém a medida anterior para cada indivíduo, respeitando os grupos criados pela coluna <code>individuo.</code></p>
+<p>Vamos dar um passo adiante e criar uma nova coluna chamada flag_aumentou, assim como fizemos no exemplo anterior:</p>
+<pre class="r"><code>tab |&gt; 
+  dplyr::group_by(individuo) |&gt; 
+  dplyr::mutate(
+    lag_medida = dplyr::lag(medida),
+    flag_aumentou = medida &gt; lag_medida
+  )</code></pre>
+<pre><code>## # A tibble: 8 × 4
+## # Groups:   individuo [2]
+##   individuo medida lag_medida flag_aumentou
+##       &lt;int&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;        
+## 1         1      1         NA NA           
+## 2         1      2          1 TRUE         
+## 3         1      1          2 FALSE        
+## 4         1      3          1 TRUE         
+## 5         2      4         NA NA           
+## 6         2      1          4 FALSE        
+## 7         2      2          1 TRUE         
+## 8         2      0          2 FALSE</code></pre>
+<p>Agora temos a coluna <code>flag_aumentou</code> indicando se a medida atual é maior que a medida anterior, dentro de cada grupo de indivíduo.</p>
+</div>
+<div id="a-função-lead." class="section level2">
+<h2>A função <code>lead()</code>.</h2>
+<p>Enquanto <code>lag()</code> retorna valores anteriores de uma coluna, a função <code>lead()</code> retorna valores seguintes de uma coluna em relação à posição atual.</p>
+<p>Como exercício, usando a função <code>lead()</code>, tente reproduzir os dois exemplos acima comparando o valor atual da coluna <code>medida</code> agora com o seu valor posterior (e não mais com o anterior).</p>
+<hr />
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
+</div>
