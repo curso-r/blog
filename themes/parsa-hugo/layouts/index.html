@@ -60,7 +60,7 @@
 <section class="section">
   <div class="container">
     <h4 class="mb-4">POSTS MAIS RECENTES</h4>
-    {{ $paginator := .Paginate ( where (where site.RegularPages "Type" "posts") ".Params.draft" false ) }}
+    {{ $paginator := .Paginate ( where (where site.RegularPages.ByLastmod.Reverse "Type" "posts") ".Params.draft" false ) }}
     {{ if eq site.Params.layout "1" }}
     <div class="row masonry-container">
       {{ range $paginator.Pages}}
@@ -81,6 +81,11 @@
               em {{ .Params.Date.Day }} de
             {{ index $.Site.Data.mes (printf "%d" .Params.Date.Month) }} de
             {{ .Params.Date.Year }}
+            {{ if .Params.updateAuthor }}
+            <br>
+            Atualizado em  {{ .Params.lastMod.Day }} de {{ index $.Site.Data.mes (printf "%d" .Params.lastMod.Month) }} de
+            {{ .Params.lastMod.Year }}
+            {{ end }}
             </p>
               <p>{{.Summary}}</p>
               <a href="{{.Permalink}}" class="btn btn-transparent">Leia mais</a>
