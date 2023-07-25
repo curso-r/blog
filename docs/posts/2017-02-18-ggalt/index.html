@@ -141,12 +141,17 @@
             
             em
             <a href="/categories/tutoriais">Tutoriais</a>
+            
+            <br>
+            <i class="ti-reload mr-2"></i>
+            Atualizado por
+            <a href = "https://blog.curso-r.com/search/?s=William">William</a>
+            em 25/07/2023
+            
           </li>
           <li class="list-inline-item">
             <i class="ti-calendar mr-2"></i>
-            18 de
-            fevereiro de
-            2017
+              18/02/2017
           </li>
         </ul>
         <ul class="list-inline tag-list">
@@ -272,10 +277,10 @@ knitr::kable(head(d_km))</code></pre>
 </table>
 <p>O gráfico da Figura <a href="#fig:ruim">1</a> usa a função <code>geom_ribbon()</code> para gerar os intervalos de confiança. Essa função liga os pontos da faixa diretamente, o que é inadequado do ponto de vista estatístico.</p>
 <pre class="r"><code>ggplot(d_km, aes(x = time, y = estimate, colour = strata)) +
-  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = strata),
-              alpha = .1, size = .1) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = strata), alpha = .1, size = .1) +
+  labs(x = &quot;Tempo&quot;, y = &quot;Estimativa&quot;) +
   geom_step() +
-  theme_bw(16)</code></pre>
+  theme_bw(14)</code></pre>
 <div class="figure"><span style="display:block;" id="fig:ruim"></span>
 <img src="/posts/2017-02-18-ggalt_files/figure-html/ruim-1.png" alt="Intervalos de confiança usando apenas `ggplot2` e `geom_ribbon()`." width="672" />
 <p class="caption">
@@ -294,6 +299,8 @@ Figura 1: Intervalos de confiança usando apenas <code>ggplot2</code> e <code>ge
 Figura 2: Intervalos de confiança usando <code>stat = 'stepribbon'</code>.
 </p>
 </div>
+<hr />
+<p>É isso! Dúvidas, sugestões e críticas, mande aqui nos comentários.</p>
 
           
         </article>
