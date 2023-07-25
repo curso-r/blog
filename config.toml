@@ -8,6 +8,8 @@ paginate = 6
 publishdir = "docs"
 disqusShortname = "curso-r-com"
 
+lastmod = ["lastmod", ":fileModTime", ":default"]
+
 # output
 [outputs]
 home = ["HTML", "RSS", "JSON"]
