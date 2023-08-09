@@ -4,7 +4,7 @@ date: "2017-03-11"
 lastMod: "2023-08-09"
 tags: ["tidyverse", "dplyr", "purrr"]
 categories: ["Tutoriais"]
-image: "images/posts/banner/quartis.webp"
+image: "images/posts/banner/laptop.webp"
 author: ["Julio"]
 updateAuthor: ["William"]
 draft: false
