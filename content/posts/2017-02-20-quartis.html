@@ -1,10 +1,12 @@
 ---
 title: "Medidas-resumo no tidyverse"
 date: "2017-03-11"
+lastMod: "2023-08-09"
 tags: ["tidyverse", "dplyr", "purrr"]
 categories: ["Tutoriais"]
 image: "images/posts/banner/quartis.webp"
 author: ["Julio"]
+updateAuthor: ["William"]
 draft: false
 summary: "Hoje estava fazendo uma análise exploratória e precisava estudar os quartis de uma variável contínua. A solução usando o tidyverse é tão elegante que valeu um post no blog."
 ---
@@ -14,36 +16,43 @@ summary: "Hoje estava fazendo uma análise exploratória e precisava estudar os 
 
 
 <p>Hoje estava fazendo uma análise exploratória e precisava estudar os quartis de uma variável contínua. A solução usando o <code>tidyverse</code> é tão elegante que valeu um post no blog.</p>
-<p>Usaremos os pacotes <code>tibble</code>, <code>dplyr</code>, <code>tidyr</code> e <code>purrr</code>:</p>
-<pre class="r"><code>library(tibble)
-library(dplyr)
-library(tidyr)
-library(purrr)</code></pre>
-<p>Nesse exemplo, usamos a famosa base <code>mtcars</code></p>
-<pre class="r"><code>tab &lt;- mtcars %&gt;%
-  group_by(am, vs) %&gt;%
-  nest() %&gt;%
-  mutate(quartis = map(data, ~enframe(quantile(.x$mpg, 1:3 / 4)))) %&gt;%
-  unnest_legacy(quartis) %&gt;%
-  spread(name, value)
+<p>Usaremos os pacotes <code>tibble</code>, <code>dplyr</code>, <code>tidyr</code> e <code>purrr</code>. Caso você não tenha qualquer um deles instalado, basta rodar os códigos abaixo.</p>
+<pre class="r"><code>install.packages(tibble)
+install.packages(dplyr)
+install.packages(tidyr)
+install.packages(purrr)</code></pre>
+<p>Nesse exemplo, usamos a famosa base <code>mtcars</code>:</p>
+<pre class="r"><code>tab &lt;- mtcars |&gt; 
+  dplyr::group_by(am, vs) |&gt; 
+  tidyr::nest() |&gt; 
+  dplyr::mutate(
+    quartis = purrr::map(data, ~ tibble::enframe(quantile(.x$mpg, 1:4 / 4)))
+  ) |&gt; 
+  tidyr::unnest(quartis) |&gt;
+  tidyr::pivot_wider(
+    names_from = name,
+    values_from = value
+  ) |&gt; 
+  dplyr::select(-data)
+
 tab
-## # A tibble: 4 × 5
+## # A tibble: 4 × 6
 ## # Groups:   am, vs [4]
-##      vs    am `25%` `50%` `75%`
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0     0  14.0  15.2  16.6
-## 2     0     1  16.8  20.4  21  
-## 3     1     0  18.6  21.4  22.2
-## 4     1     1  25.0  30.4  31.4</code></pre>
+##      vs    am `25%` `50%` `75%` `100%`
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0     1  16.8  20.4  21     26  
+## 2     1     1  25.0  30.4  31.4   33.9
+## 3     1     0  18.6  21.4  22.2   24.4
+## 4     0     0  14.0  15.2  16.6   19.2</code></pre>
 <ul>
 <li>A função <code>dplyr::group_by()</code> faz um grupo para cada combinação de <code>am</code> e <code>vs</code>.</li>
 <li>A função <code>tidyr::nest()</code> guarda os dados de cada grupo numa <em>list-column</em> chamada <code>data</code>.</li>
 <li>A função <code>purrr::map()</code> aplica elegantemente a função <code>quantile()</code> para cada grupo de datas, sendo ajudada pela função <code>tibble::enframe()</code>, que coloca o resultado de <code>quantile()</code> em uma <code>tibble</code>.</li>
-<li>A função <code>tidyr::unnest_legacy()</code> coloca os resultados de volta em colunas-vetores.</li>
-<li>Terminamos com <code>tidyr::spread()</code> para espalhar os quartis nas colunas.</li>
+<li>A função <code>tidyr::unnest()</code> coloca os resultados de volta em colunas-vetores.</li>
+<li>Terminamos com <code>tidyr::pivot_wider()</code> para espalhar os quartis nas colunas e a função <code>dplyr::select()</code> para remover a <em>list-column</em> <code>data</code> que não precisamos mais.</li>
 </ul>
 <p>O resultado pode ser jogado diretamente numa tabela:</p>
-<pre class="r"><code>knitr::kable(tab) %&gt;%
+<pre class="r"><code>knitr::kable(tab) |&gt;
   kableExtra::kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -63,26 +72,12 @@ am
 <th style="text-align:right;">
 75%
 </th>
+<th style="text-align:right;">
+100%
+</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-14.050
-</td>
-<td style="text-align:right;">
-15.20
-</td>
-<td style="text-align:right;">
-16.625
-</td>
-</tr>
 <tr>
 <td style="text-align:right;">
 0
@@ -99,22 +94,8 @@ am
 <td style="text-align:right;">
 21.000
 </td>
-</tr>
-<tr>
 <td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-18.650
-</td>
-<td style="text-align:right;">
-21.40
-</td>
-<td style="text-align:right;">
-22.150
+26.0
 </td>
 </tr>
 <tr>
@@ -133,21 +114,64 @@ am
 <td style="text-align:right;">
 31.400
 </td>
+<td style="text-align:right;">
+33.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+18.650
+</td>
+<td style="text-align:right;">
+21.40
+</td>
+<td style="text-align:right;">
+22.150
+</td>
+<td style="text-align:right;">
+24.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+14.050
+</td>
+<td style="text-align:right;">
+15.20
+</td>
+<td style="text-align:right;">
+16.625
+</td>
+<td style="text-align:right;">
+19.2
+</td>
 </tr>
 </tbody>
 </table>
 <p>É possível mudar esse código para ter outras medidas-resumo, por exemplo. Para isso, podemos usar a função <code>summary()</code>, por exemplo, ou criar nossa própria função.</p>
-<pre class="r"><code>mtcars %&gt;%
-  group_by(am, vs) %&gt;%
-  nest() %&gt;%
-  mutate(
-    s = map(data, ~enframe(summary(.x$mpg))),
-    s = map(s, ~ .x %&gt;% mutate(value = as.numeric(value)))
-  ) %&gt;%
-  select(vs, am, s) %&gt;%
-  unnest_legacy(s) %&gt;%
-  spread(name, value) %&gt;%
-  knitr::kable() %&gt;%
+<pre class="r"><code>mtcars |&gt;
+  dplyr::group_by(am, vs) |&gt;
+  tidyr::nest() |&gt;
+  dplyr::mutate(
+    s = purrr::map(data, ~tibble::enframe(summary(.x$mpg))),
+    s = purrr::map(s, ~ .x |&gt; dplyr::mutate(value = as.numeric(value)))
+  ) |&gt;
+  dplyr::select(vs, am, s) |&gt;
+  tidyr::unnest(s) |&gt;
+  tidyr::pivot_wider(names_from = name, values_from = value) |&gt;
+  knitr::kable() |&gt;
   kableExtra::kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -159,22 +183,22 @@ vs
 am
 </th>
 <th style="text-align:right;">
+Min.
+</th>
+<th style="text-align:right;">
 1st Qu.
+</th>
+<th style="text-align:right;">
+Median
+</th>
+<th style="text-align:right;">
+Mean
 </th>
 <th style="text-align:right;">
 3rd Qu.
 </th>
 <th style="text-align:right;">
 Max.
-</th>
-<th style="text-align:right;">
-Mean
-</th>
-<th style="text-align:right;">
-Median
-</th>
-<th style="text-align:right;">
-Min.
 </th>
 </tr>
 </thead>
@@ -184,36 +208,19 @@ Min.
 0
 </td>
 <td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-14.050
-</td>
-<td style="text-align:right;">
-16.625
-</td>
-<td style="text-align:right;">
-19.2
-</td>
-<td style="text-align:right;">
-15.05000
-</td>
-<td style="text-align:right;">
-15.20
-</td>
-<td style="text-align:right;">
-10.4
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
 16.775
+</td>
+<td style="text-align:right;">
+20.35
+</td>
+<td style="text-align:right;">
+19.75000
 </td>
 <td style="text-align:right;">
 21.000
@@ -221,14 +228,31 @@ Min.
 <td style="text-align:right;">
 26.0
 </td>
+</tr>
+<tr>
 <td style="text-align:right;">
-19.75000
+1
 </td>
 <td style="text-align:right;">
-20.35
+1
 </td>
 <td style="text-align:right;">
-15.0
+21.4
+</td>
+<td style="text-align:right;">
+25.050
+</td>
+<td style="text-align:right;">
+30.40
+</td>
+<td style="text-align:right;">
+28.37143
+</td>
+<td style="text-align:right;">
+31.400
+</td>
+<td style="text-align:right;">
+33.9
 </td>
 </tr>
 <tr>
@@ -239,7 +263,16 @@ Min.
 0
 </td>
 <td style="text-align:right;">
+17.8
+</td>
+<td style="text-align:right;">
 18.650
+</td>
+<td style="text-align:right;">
+21.40
+</td>
+<td style="text-align:right;">
+20.74286
 </td>
 <td style="text-align:right;">
 22.150
@@ -247,40 +280,31 @@ Min.
 <td style="text-align:right;">
 24.4
 </td>
-<td style="text-align:right;">
-20.74286
-</td>
-<td style="text-align:right;">
-21.40
-</td>
-<td style="text-align:right;">
-17.8
-</td>
 </tr>
 <tr>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:right;">
-25.050
+10.4
 </td>
 <td style="text-align:right;">
-31.400
+14.050
 </td>
 <td style="text-align:right;">
-33.9
+15.20
 </td>
 <td style="text-align:right;">
-28.37143
+15.05000
 </td>
 <td style="text-align:right;">
-30.40
+16.625
 </td>
 <td style="text-align:right;">
-21.4
+19.2
 </td>
 </tr>
 </tbody>
