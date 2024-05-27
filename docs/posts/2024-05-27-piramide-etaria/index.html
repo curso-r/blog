@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  <meta charset="utf-8">
+
+  
+  <title>Criando uma pirâmide etária com dados do Censo 2022, usando o R e o pacote ggplot2</title>
+  <meta name="title" content="Criando uma pirâmide etária com dados do Censo 2022, usando o R e o pacote ggplot2">
+  <meta name="description" content="Neste post, vamos mostrar como usar duas funções muito úteis do dplyr: lag e lead.">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://blog.curso-r.com/posts/2024-05-27-piramide-etaria/">
+  <meta property="og:title" content="Criando uma pirâmide etária com dados do Censo 2022, usando o R e o pacote ggplot2">
+  <meta property="og:description" content="Neste post, vamos mostrar como usar duas funções muito úteis do dplyr: lag e lead.">
+  <meta property="og:image" content="https://blog.curso-r.com/images/posts/banner/piramide-etaria.png?nf_resize=fit&w=300">
+
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://blog.curso-r.com/posts/2024-05-27-piramide-etaria/">
+  <meta property="twitter:title" content="Criando uma pirâmide etária com dados do Censo 2022, usando o R e o pacote ggplot2">
+  <meta property="twitter:description" content="Neste post, vamos mostrar como usar duas funções muito úteis do dplyr: lag e lead.">
+  <meta property="twitter:image" content="https://blog.curso-r.com/images/posts/banner/piramide-etaria.png">
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="generator" content="Hugo 0.111.2">
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/custom.css ">
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/github.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.curso-r.com/css/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.curso-r.com/images/favicon.png " type="image/x-icon">
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  <div class="loader">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- preloader end -->
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="https://blog.curso-r.com/"><img class="img-fluid" src="https://blog.curso-r.com/images/logo.webp" alt="Blog | Curso-R" width = "200px", height="100px"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/">Blog</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://blog.curso-r.com/categories/desafio">Desafios</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com/cursos">Cursos</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://discourse.curso-r.com/">Fórum</a>
+        </li>
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="https://www.curso-r.com">Curso-R</a>
+        </li>
+        
+        
+      </ul>
+      
+      <!-- search -->
+      <form class="form-inline position-relative ml-lg-4 form-searh" action="/search">
+        <input class="form-control px-0" type="search" placeholder="" id="search-query" name="s">
+        <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+      </form>
+      
+    </div>
+  </nav>
+</header>
+
+
+
+<section class="section bg-posts" style = "background-image: url('https://blog.curso-r.com/images/posts/banner/piramide-etaria.png')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class = "titulo-post">Criando uma pirâmide etária com dados do Censo 2022, usando o R e o pacote ggplot2</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <ul class="list-inline d-flex justify-content-between py-3">
+          <li class="list-inline-item">
+            <i class="ti-user mr-2"></i>
+            Escrito por
+            
+            
+              <a href = "https://blog.curso-r.com/search/?s=Beatriz%20Milz">Beatriz Milz</a>
+            
+            em
+            <a href="/categories/tutoriais">Tutoriais</a>
+            
+          </li>
+          <li class="list-inline-item">
+            <i class="ti-calendar mr-2"></i>
+              27/05/2024
+          </li>
+        </ul>
+        <ul class="list-inline tag-list">
+          
+            <li class="list-inline-item m-1"><a href="/tags/programa%c3%a7%c3%a3o">programação</a></li>
+            <li class="list-inline-item m-1"><a href="/tags/ggplot2">ggplot2</a></li>
+        </ul>
+        <article class="content">
+          
+            
+
+
+<div id="introdução" class="section level2">
+<h2>Introdução</h2>
+<p>Alguns dias atrás eu estava ministrando uma aula no curso de Visualização de Dados, da <a href="https://curso-r.com/">Curso-R</a>, e uma aluna (a querida <a href="https://www.linkedin.com/in/aprocha/">Ana Paula Rocha</a>, que também é uma das co-organizadoras da <a href="https://rladies-sp.org/">R-Ladies São Paulo</a>) me perguntou:</p>
+<blockquote>
+<p><strong>Como podemos fazer uma pirâmide etária com ggplot2?</strong></p>
+</blockquote>
+<p>Eu achei o exercício tão divertido, que além de ter mostrado na aula (a Ana ficou feliz!), também trago em formato de tutorial.</p>
+<p>Antes de iniciar, importante agradecer as pessoas da turma, principalmente quem estava na aula e enviou sugestões no chat durante esse exercício!</p>
+<p>Para iniciar, vamos carregar o pacote <code>ggplot2</code>:</p>
+<pre class="r"><code>library(ggplot2)
+library(tidyverse)</code></pre>
+<p>Obs 1: o meu código é cheio do operador <code>::</code>. Caso você não conheça, ele serve para indicar em qual pacote uma função está, por exemplo: <code>pacote::funcao()</code>.</p>
+</div>
+<div id="o-que-é-uma-pirâmide-etária" class="section level2">
+<h2>O que é uma pirâmide etária?</h2>
+<p>Caso você não lembre por nome, acredito que você já tenha visto um gráfico com pirâmide etária por aí.</p>
+<p><strong>Uma pirâmide etária é uma representação gráfica da distribuição da população por faixa etária e sexo.</strong></p>
+<p>Por exemplo: a seguir, temos uma pirâmide etária da população brasileira, elaborado pelo <a href="https://educa.ibge.gov.br/jovens/conheca-o-brasil/populacao/18318-piramide-etaria.html">IBGE</a>:</p>
+<div class="float">
+<img src="/images/posts/conteudo/2024-05-27-piramide-etaria/piramide_etaria_ibge.png" alt="IBGE: Pirâmide etária do Brasil" />
+<div class="figcaption">IBGE: Pirâmide etária do Brasil</div>
+</div>
+<p>Outra pirâmide etária que encontrei ao elaborar esse post foi essa publicada no <a href="https://www.nexojornal.com.br/grafico/2023/10/27/a-piramide-etaria-do-brasil-segundo-o-censo-do-ibge">Nexo</a>:</p>
+<div class="float">
+<img src="/images/posts/conteudo/2024-05-27-piramide-etaria/piramide-etaria-nexo.png" alt="Nexo: Pirâmide etária do Brasil" />
+<div class="figcaption">Nexo: Pirâmide etária do Brasil</div>
+</div>
+</div>
+<div id="dados" class="section level2">
+<h2>Dados</h2>
+<p>Agora que está claro o que é uma pirâmide etária, podemos buscar os dados.</p>
+<p>Como dito no título do texto, o objetivo é criar uma pirâmide etária utilizando os dados do Censo 2022.</p>
+<p>Como o IBGE ainda não divulgou os microdados, podemos baixar os dados sumarizados no site <a href="https://censo2022.ibge.gov.br/panorama/">Panorama Censo 2022</a>. Como os dados já vem agregados e disponibilizados por UF ou município, precisamos baixar separadamente cada município ou UF que desejamos visualizar.</p>
+<p>Primeiro, pesquisamos na página o município ou UF, e clicamos no botão de download. O site permite fazer download dos arquivos em CSV (arquivos de planilhas em textos separados por vírgula, ou ponto-e-vírgula) e XLSX (arquivos Excel).</p>
+<div class="float">
+<img src="/images/posts/conteudo/2024-05-27-piramide-etaria/panorama.png" alt="Panorama Censo 2022 - Pesquisa por município ou UF, e botão de download" />
+<div class="figcaption">Panorama Censo 2022 - Pesquisa por município ou UF, e botão de download</div>
+</div>
+<p>Para fazer esse post, vou fazer o download dos dados para dois municípios do estado de São Paulo: Diadema (o município onde eu nasci) e Osasco (o município onde eu moro atualmente).</p>
+<p>Os arquivos estão em um <code>.zip</code>, que é uma pasta compactada. Precisamos extrair os dados do <code>.zip</code>. Como foram apenas 2 arquivos, realizei isso manualmente, mas caso você precise fazer isso para muitos arquivos, recomendo checar a função <code>utils::unzip()</code>. Salvei os arquivos na pasta <code>dados</code>:</p>
+<pre class="r"><code>fs::dir_ls(&quot;dados&quot;)</code></pre>
+<pre><code>dados/Censo 2022 - Características dos domicílios - Diadema (SP).csv
+dados/Censo 2022 - Características dos domicílios - Osasco (SP).csv
+dados/Censo 2022 - Crescimento Populacional - Diadema (SP).csv
+dados/Censo 2022 - Crescimento Populacional - Osasco (SP).csv
+dados/Censo 2022 - Pirâmide etária - Diadema (SP).csv
+dados/Censo 2022 - Pirâmide etária - Osasco (SP).csv
+dados/Censo 2022 - População por cor ou raça - Diadema (SP).csv
+dados/Censo 2022 - População por cor ou raça - Osasco (SP).csv
+dados/Censo 2022 - População por sexo - Diadema (SP).csv
+dados/Censo 2022 - População por sexo - Osasco (SP).csv
+dados/Censo 2022 - Território - Diadema (SP).csv
+dados/Censo 2022 - Território - Osasco (SP).csv</code></pre>
+</div>
+<div id="leitura-dos-dados" class="section level2">
+<h2>Leitura dos dados</h2>
+<p>Percebemos que no <code>.zip</code> temos mais tabelas do que necessário! Vamos utilizar apenas as tabelas de pirâmide etária.</p>
+<p>Para ler os arquivos (no nosso caso, 2 arquivos, mas funcionaria com mais), precisamos de um vetor com os caminhos (um texto que indica ao computador onde os arquivos estão guardados) e também uma função para ler esses arquivos.</p>
+<p>Vamos primeiro criar um vetor com os caminhos:</p>
+<pre class="r"><code>arquivos_piramide &lt;- fs::dir_ls(&quot;dados&quot;, regexp = &quot;Pirâmide&quot;)
+arquivos_piramide</code></pre>
+<pre><code>dados/Censo 2022 - Pirâmide etária - Diadema (SP).csv
+dados/Censo 2022 - Pirâmide etária - Osasco (SP).csv</code></pre>
+<p>Para ler os arquivos, podemos usar a função <code>readr::read_csv2()</code>, que permite ler arquivos CSV cujo separador seja o ponto-e-vírgula.</p>
+<p>Sabendo como importar um arquivos, podemos usar a função <code>purrr::map()</code> para aplicar a função <code>readr::read_csv2()</code> em todos os arquivos do vetor que criamos anteriormente (que chamamos de <code>arquivos_piramide</code>). Vamos empilhar os dados em uma única tabela utilizando a função <code>purrr::list_rbind()</code>.</p>
+<pre class="r"><code>dados_brutos &lt;- arquivos_piramide |&gt; 
+  purrr::map(readr::read_csv2) |&gt; 
+  purrr::list_rbind()</code></pre>
+<p>Espiando os dados importados, para descobrir quais variáveis temos:</p>
+<pre class="r"><code>dplyr::glimpse(dados_brutos)</code></pre>
+<pre><code>Rows: 42
+Columns: 6
+$ `Grupo de idade`               &lt;chr&gt; &quot;100 anos ou mais&quot;, &quot;95 a 99 anos&quot;, &quot;90…
+$ `População feminina(pessoas)`  &lt;dbl&gt; 30, 138, 477, 1136, 2080, 3501, 5876, 8…
+$ `População masculina(pessoas)` &lt;dbl&gt; 6, 52, 193, 536, 1205, 2416, 4261, 6052…
+$ Município                      &lt;chr&gt; &quot;Diadema&quot;, &quot;Diadema&quot;, &quot;Diadema&quot;, &quot;Diade…
+$ `Sigla UF`                     &lt;chr&gt; &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP…
+$ `Código do Município`          &lt;dbl&gt; 3513801, 3513801, 3513801, 3513801, 351…</code></pre>
+</div>
+<div id="arrumando-os-dados" class="section level2">
+<h2>Arrumando os dados</h2>
+<p>A primeira coisa que eu costumo fazer quando importo uma nova base de dados é padronizar os nomes. Para isso, eu gosto muito da função <code>janitor::clean_names()</code>. Isso facilita muito para escrever o nome das variáveis ao longo do código e evita erros de encoding:</p>
+<pre class="r"><code>dados_nomes_limpos &lt;- janitor::clean_names(dados_brutos)</code></pre>
+<pre class="r"><code>dplyr::glimpse(dados_nomes_limpos)</code></pre>
+<pre><code>Rows: 42
+Columns: 6
+$ grupo_de_idade              &lt;chr&gt; &quot;100 anos ou mais&quot;, &quot;95 a 99 anos&quot;, &quot;90 a …
+$ populacao_feminina_pessoas  &lt;dbl&gt; 30, 138, 477, 1136, 2080, 3501, 5876, 8039…
+$ populacao_masculina_pessoas &lt;dbl&gt; 6, 52, 193, 536, 1205, 2416, 4261, 6052, 8…
+$ municipio                   &lt;chr&gt; &quot;Diadema&quot;, &quot;Diadema&quot;, &quot;Diadema&quot;, &quot;Diadema&quot;…
+$ sigla_uf                    &lt;chr&gt; &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, …
+$ codigo_do_municipio         &lt;dbl&gt; 3513801, 3513801, 3513801, 3513801, 351380…</code></pre>
+<p>Boa!!</p>
+<p>Será que deu certo e temos dados dos dois municípios? Podemos conferir:</p>
+<pre class="r"><code>unique(dados_nomes_limpos$municipio)</code></pre>
+<pre><code>[1] &quot;Diadema&quot; &quot;Osasco&quot; </code></pre>
+<p>Sim! Temos dados para Diadema e Osasco.</p>
+<p>Agora, é necessário realizar um processo de ir pensando na criação do gráfico, para planejar quais são os tratamentos que serão necessários. Esse processo é difícil de descrever em texto, mas acredito que é interessante mostrar esse “vai e volta” entre a criação do gráfico e o tratamento dos dados, pois é assim que normalmente precisamos fazer no dia-a-dia.</p>
+<p>Se você está sem paciência de ver o raciocínio da construção do gráfico, recomendo pular para o final do texto e ver o resultado! Também é possível acessar um código similar <a href="https://gist.github.com/beatrizmilz/878851ec806ad36f20e2a75ad3892b85">nesse Gist</a>.</p>
+</div>
+<div id="estrutura-de-um-ggplot" class="section level2">
+<h2>Estrutura de um ggplot</h2>
+<p>Quando criamos o ggplot, pensamos nos seguintes elementos:</p>
+<ul>
+<li><p>Quais são as variáveis que precisamos utilizar?</p></li>
+<li><p>Em qual atributo estético (<code>aes()</code>) vamos mapear cada variável?</p></li>
+<li><p>Qual é a geometria (<code>geom_*()</code>) precisamos usar?</p></li>
+</ul>
+</div>
+<div id="imaginando-o-nosso-gráfico" class="section level2">
+<h2>Imaginando o nosso gráfico</h2>
+<p>Primeiro vamos pensar nas variáveis necessárias: Grupo de idade, população e sexo.</p>
+<p>Vamos pensar agora onde cada variável é mapeada:</p>
+<ul>
+<li><p>Grupo de idade: eixo Y.</p></li>
+<li><p>População: eixo X.</p></li>
+<li><p>Sexo: cor de preenchimento da barra.</p></li>
+</ul>
+<p>E qual é a geometria usada? Nesse caso, é um gráfico de barras. Neste caso, utilizamos o <code>geom_col()</code>.</p>
+</div>
+<div id="alterando-o-formato-da-base-pivoting" class="section level2">
+<h2>Alterando o formato da base: pivoting!</h2>
+<p>Ao imaginar o gráfico, percebemos que existe um certo problema: precisamos de uma coluna com a população, e outra com o sexo, para utilizar no gráfico. Porém na tabela temos duas colunas separadas, que apresenta uma das variáveis relevantes no nome da coluna: populacao_feminina_pessoas e populacao_masculina_pessoas.</p>
+<p>Percebe? A informação do sexo está no nome da coluna!</p>
+<p>Precisamos alterar isso então, com o que chamamos de “pivotagem”. Existem duas funções de pivotagem: <code>tidyr::pivot_longer()</code> (o resultado é uma base “mais longa”) e <code>tidyr::pivot_wider()</code> (o resultado é uma base “mais larga”).</p>
+<p>Nesse caso, temos informações no nome das colunas (<code>"populacao_feminina_pessoas"</code> e <code>"populacao_masculina_pessoas"</code>), que queremos transformar em uma variável chamada “sexo”.</p>
+<p>Tentei demonstrar abaixo um exemplo curto:</p>
+<ol style="list-style-type: decimal">
+<li>Essa é uma linha da tabela original: temos uma linha por combinação de <code>grupo_de_idade</code> e <code>municipio</code>. A informação sobre o sexo está no nome das colunas.</li>
+</ol>
+<table style="width:100%;">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">grupo_de_idade</th>
+<th align="right">populacao_feminina_pessoas</th>
+<th align="right">populacao_masculina_pessoas</th>
+<th align="left">municipio</th>
+<th align="left">sigla_uf</th>
+<th align="right">codigo_do_municipio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">100 anos ou mais</td>
+<td align="right">30</td>
+<td align="right">6</td>
+<td align="left">Diadema</td>
+<td align="left">SP</td>
+<td align="right">3513801</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: decimal">
+<li>Esse é o formato que queremos! Agora temos uma coluna para o sexo, e outra coluna para a população. Veja que agora temos DUAS linhas para cada combinação de <code>grupo_de_idade</code> e <code>municipio</code>. Por isso, esse tipo de transformação deixa a base “mais longa”.</li>
+</ol>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="17%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">grupo_de_idade</th>
+<th align="left">municipio</th>
+<th align="left">sigla_uf</th>
+<th align="right">codigo_do_municipio</th>
+<th align="left">sexo</th>
+<th align="right">populacao</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">100 anos ou mais</td>
+<td align="left">Diadema</td>
+<td align="left">SP</td>
+<td align="right">3513801</td>
+<td align="left">populacao_feminina_pessoas</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">100 anos ou mais</td>
+<td align="left">Diadema</td>
+<td align="left">SP</td>
+<td align="right">3513801</td>
+<td align="left">populacao_masculina_pessoas</td>
+<td align="right">6</td>
+</tr>
+</tbody>
+</table>
+<p>Usando a função <code>tidyr::pivot_longer()</code>, indicamos quais são as colunas que vamos utilizar para a “pivotagem”. Depois, eu renomeio as variáveis para ficar fácil de entender o que cada coluna representa.</p>
+<pre class="r"><code>dados_piramide_longo &lt;- dados_nomes_limpos |&gt;
+  tidyr::pivot_longer(cols = c(
+    &quot;populacao_feminina_pessoas&quot;,
+    &quot;populacao_masculina_pessoas&quot;
+  )) |&gt;
+  dplyr::rename(populacao = value, sexo = name)</code></pre>
+<p>Agora temos a coluna de sexo e população separadas, e a tabela também ficou com o dobro de linhas!</p>
+<pre class="r"><code>dplyr::glimpse(dados_piramide_longo)</code></pre>
+<pre><code>Rows: 84
+Columns: 6
+$ grupo_de_idade      &lt;chr&gt; &quot;100 anos ou mais&quot;, &quot;100 anos ou mais&quot;, &quot;95 a 99 a…
+$ municipio           &lt;chr&gt; &quot;Diadema&quot;, &quot;Diadema&quot;, &quot;Diadema&quot;, &quot;Diadema&quot;, &quot;Diade…
+$ sigla_uf            &lt;chr&gt; &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;SP&quot;, &quot;S…
+$ codigo_do_municipio &lt;dbl&gt; 3513801, 3513801, 3513801, 3513801, 3513801, 35138…
+$ sexo                &lt;chr&gt; &quot;populacao_feminina_pessoas&quot;, &quot;populacao_masculina…
+$ populacao           &lt;dbl&gt; 30, 6, 138, 52, 477, 193, 1136, 536, 2080, 1205, 3…</code></pre>
+</div>
+<div id="primeira-tentativa-de-criar-um-gráfico" class="section level2">
+<h2>Primeira tentativa de criar um gráfico</h2>
+<p>Vamos para a primeira tentativa de criar um gráfico. Já aviso: não vai dar certo, pois a base ainda não está pronta!</p>
+<p>Por enquanto, vamos usar apenas os dados de Osasco:</p>
+<pre class="r"><code>dados_piramide_longo |&gt;
+  # Filtrando apenas dados para o município de Osasco
+  dplyr::filter(municipio == &quot;Osasco&quot;) |&gt; 
+  # Iniciando o ggplot
+  ggplot() +
+  # Quais são as variáveis que queremos mapear?
+  aes(y = grupo_de_idade, x = populacao, fill = sexo) +
+  # Qual é a geometria?
+  geom_col()</code></pre>
+<p><img src="/images/posts/conteudo/2024-05-27-piramide-etaria/grafico-1-1.png" /></p>
+<p>Bom, como eu já tinha avisado, deu bem errado.</p>
+<p>Um passo importante é parar, respirar, e tentar anotar TODAS as coisas que a gente acha que precisa melhorar nesse gráfico (se você quiser, faça isso antes de continuar a ler).</p>
+</div>
+<div id="lista-do-papai-noel-o-que-precisamos-melhorar" class="section level2">
+<h2>Lista do papai noel: o que precisamos melhorar?</h2>
+<p>Vamos lá criar nossa lista do papai noel de coisas que precisamos arrumar no gráfico que dependem do tratamento de dados:</p>
+<ol style="list-style-type: decimal">
+<li><p>As barras não estão formando uma pirâmide. Elas estão acumulando para o mesmo lado!</p></li>
+<li><p>A variável <code>grupo_de_idade</code> está seguindo a ordem alfabética, e não a ordem das faixas etárias!</p></li>
+<li><p>Os valores da variável <code>sexo</code> estão com o texto completo do nome das colunas que elas foram extraídas. Precisamos arrumar.</p></li>
+</ol>
+</div>
+<div id="tratando-os-dados-segundo-nossa-lista-do-papai-noel" class="section level2">
+<h2>Tratando os dados segundo nossa lista do papai noel</h2>
+<p>Alguns dos itens acima necessitam ser arrumados no tratamento dos dados, e vamos fazer um por vez, seguindo os pontos acima.</p>
+<div id="formato-da-pirâmide" class="section level3">
+<h3>1) Formato da pirâmide</h3>
+<ol style="list-style-type: decimal">
+<li>“As barras não estão formando uma pirâmide. Elas estão acumulando para o mesmo lado!” - Na pirâmide, o “centro” é o valor 0 no eixo x. Portanto, podemos multiplicar os valores de população de um dos sexos por -1, deixando-os negativo. Fiz com a função <code>dplyr::case_when()</code>, e a regra usada para cada linha foi:</li>
+</ol>
+<ul>
+<li><p>Quando o valor da variável <code>sexo</code> for igual á <code>"populacao_masculina_pessoas"</code>, queremos que o valor da população seja multiplicado por -1;</p></li>
+<li><p>Quando o valor da variável <code>sexo</code> for igual á <code>"populacao_feminina_pessoas"</code>, queremos manter o valor original para população.</p></li>
+</ul>
+<pre class="r"><code>dados_piramide_longo_2 &lt;- dados_piramide_longo |&gt;
+  dplyr::mutate(
+    pop = dplyr::case_when(
+      sexo == &quot;populacao_masculina_pessoas&quot; ~ populacao * -1,
+      sexo == &quot;populacao_feminina_pessoas&quot; ~ populacao
+    )
+  )</code></pre>
+<p>Criando o gráfico com essa versão da tabela:</p>
+<pre class="r"><code>dados_piramide_longo_2 |&gt;
+  # Filtrando apenas dados para o município de Osasco
+  dplyr::filter(municipio == &quot;Osasco&quot;) |&gt; 
+  # Iniciando o ggplot
+  ggplot() +
+  # Quais são as variáveis que queremos mapear?
+  aes(y = grupo_de_idade, x = pop, fill = sexo) +
+  # Qual é a geometria?
+  geom_col()</code></pre>
+<p><img src="/images/posts/conteudo/2024-05-27-piramide-etaria/grafico-2-1.png" /></p>
+<p>Agora já estamos um pouco mais perto!</p>
+</div>
+<div id="ordem-em-grupo_de_idade" class="section level3">
+<h3>2) Ordem em <code>grupo_de_idade</code></h3>
+<p>Por padrão, categorias são representadas no ggplot2 em ordem alfabética. Para arrumar isso, precisamos transformar a variável <code>grupo_de_idade</code> em um fator, e declarar a ordem das categorias:</p>
+<pre class="r"><code>dados_piramide_longo_3 &lt;- dados_piramide_longo_2 |&gt;
+  dplyr::mutate(
+    grupo_de_idade_fct = factor(
+    grupo_de_idade,
+    levels = c(
+      &quot;0 a 4 anos&quot;,
+      &quot;5 a 9 anos&quot;,
+      &quot;10 a 14 anos&quot;,
+      &quot;15 a 19 anos&quot;,
+      &quot;20 a 24 anos&quot;,
+      &quot;25 a 29 anos&quot;,
+      &quot;30 a 34 anos&quot;,
+      &quot;35 a 39 anos&quot;,
+      &quot;40 a 44 anos&quot;,
+      &quot;45 a 49 anos&quot;,
+      &quot;50 a 54 anos&quot;,
+      &quot;55 a 59 anos&quot;,
+      &quot;60 a 64 anos&quot;,
+      &quot;65 a 69 anos&quot;,
+      &quot;70 a 74 anos&quot;,
+      &quot;75 a 79 anos&quot;,
+      &quot;80 a 84 anos&quot;,
+      &quot;85 a 89 anos&quot;,
+      &quot;90 a 94 anos&quot;,
+      &quot;95 a 99 anos&quot;,
+      &quot;100 anos ou mais&quot;
+    )
+  ))</code></pre>
+<p>Criando o gráfico com essa versão da tabela:</p>
+<pre class="r"><code>dados_piramide_longo_3 |&gt;
+  # Filtrando apenas dados para o município de Osasco
+  dplyr::filter(municipio == &quot;Osasco&quot;) |&gt; 
+  # Iniciando o ggplot
+  ggplot() +
+  # Quais são as variáveis que queremos mapear?
+  aes(y = grupo_de_idade_fct, x = pop, fill = sexo) +
+  # Qual é a geometria?
+  geom_col()</code></pre>
+<p><img src="/images/posts/conteudo/2024-05-27-piramide-etaria/grafico-3-1.png" /></p>
+<p>Agora sim, parece o formato mais próximo de uma pirâmide etária (sem aqueles buracos no meio!).</p>
+</div>
+<div id="arrumar-a-variável-sexo" class="section level3">
+<h3>3) Arrumar a variável <code>sexo</code></h3>
+<p>Os valores da variável <code>sexo</code> estão com o texto completo do nome das colunas que elas foram extraídas. Podemos arrumar com a função <code>dplyr::case_when()</code>, com um procedimento similar ao que fizemos no ponto 1:</p>
+<pre class="r"><code>dados_piramide_longo_4 &lt;- dados_piramide_longo_3 |&gt;
+  dplyr::mutate(
+    sexo_renomeado = dplyr::case_when(
+      sexo == &quot;populacao_masculina_pessoas&quot; ~ &quot;Masculino&quot;,
+      sexo == &quot;populacao_feminina_pessoas&quot; ~ &quot;Feminino&quot;
+    ),
+    sexo_renomeado = factor(sexo_renomeado, levels = c(&quot;Masculino&quot;, &quot;Feminino&quot;))
+  )</code></pre>
+<p>Criando o gráfico com essa versão da tabela:</p>
+<pre class="r"><code>dados_piramide_longo_4 |&gt;
+  # Filtrando apenas dados para o município de Osasco
+  dplyr::filter(municipio == &quot;Osasco&quot;) |&gt; 
+  # Iniciando o ggplot
+  ggplot() +
+  # Quais são as variáveis que queremos mapear?
+  aes(y = grupo_de_idade_fct, x = pop, fill = sexo_renomeado) +
+  # Qual é a geometria?
+  geom_col()</code></pre>
+<p><img src="/images/posts/conteudo/2024-05-27-piramide-etaria/grafico-4-1.png" /></p>
+</div>
+</div>
+<div id="visualizando-os-dados" class="section level2">
+<h2>Visualizando os dados</h2>
+<p>Agora que já arrumamos os dados, podemos trabalhar em melhorar o gráfico. Vamos criar nossa listinha de papai-noel parte 2:</p>
+<ol style="list-style-type: decimal">
+<li><p>A primeira coisa que me chama atenção é: ninguém merece essa paleta de cores “meninas usam rosa, meninos usam azul”!</p></li>
+<li><p>Aparecem valores negativos no eixo X. Mas não faz sentido população negativa, certo?</p></li>
+<li><p>Vamos deixar mais bonito? Colocar os textos, mudar o tema, etc…</p></li>
+</ol>
+<pre class="r"><code>dados_piramide_longo_4 |&gt;
+  # Filtrando apenas dados para o município de Osasco
+  dplyr::filter(municipio == &quot;Osasco&quot;) |&gt; 
+  # Iniciando o ggplot
+  ggplot() +
+  # Quais são as variáveis que queremos mapear?
+  aes(y = grupo_de_idade_fct, x = pop, fill = sexo_renomeado) +
+  # Qual é a geometria?
+  geom_col() +
+  # Alterando as cores de preenchimento usadas
+  scale_fill_manual(values = c(&quot;#ed9400&quot;, &quot;#049899&quot;)) +
+  # Queremos que os valores do eixo X sejam sempre 
+  # positivos. Portanto, podemos usar a função abs()
+  # nos labels (essa função transforma qualquer número)
+  # em positivo.
+  scale_x_continuous(labels = abs) +
+  # Alterando o tema
+  theme_minimal() +
+  # Alterando os textos
+  labs(
+    x = &quot;População&quot;, 
+    y = &quot;Faixa etária&quot;,
+    fill = &quot;Sexo&quot;,
+    title = &quot;Pirâmide etária - Osasco - 2022&quot;,
+    caption = &quot;Fonte: Censo demográfico 2022, realizado pelo IBGE. Gráfico elaborado por Beatriz Milz.&quot;
+  )</code></pre>
+<p><img src="/images/posts/conteudo/2024-05-27-piramide-etaria/grafico-5-1.png" /></p>
+</div>
+<div id="visualizando-dados-de-2-municípios" class="section level2">
+<h2>Visualizando dados de 2 municípios</h2>
+<p>Para ver os dados dos dois municípios, podemos usar a função <code>facet_wrap()</code> do ggplot2!</p>
+<p>Porém, como a população desses municípios é bem diferente, para facilitar a visualização da diferença na pirâmide, o melhor é “liberar” as escalas do eixo X (usando o argumento <code>scales = "free_x"</code>). Isso é um pouco perigoso, pois os valores do eixo X ficam diferentes, e as pessoas precisam prestar mais atenção quando for comparar. Porém, se a gente não fizer isso, a pirâmide de Diadema fica “esmagada”, por ter uma população menor.</p>
+<pre class="r"><code>dados_piramide_longo_4 |&gt;
+  # Iniciando o ggplot
+  ggplot() +
+  # Quais são as variáveis que queremos mapear?
+  aes(y = grupo_de_idade_fct, x = pop, fill = sexo_renomeado) +
+  # Qual é a geometria?
+  geom_col() +
+  facet_wrap(~municipio, scales = &quot;free_x&quot;) + 
+  # Alterando as cores de preenchimento usadas
+  scale_fill_manual(values = c(&quot;#ed9400&quot;, &quot;#049899&quot;)) +
+  # Queremos que os valores do eixo X sejam sempre 
+  # positivos. Portanto, podemos usar a função abs()
+  # nos labels (essa função transforma qualquer número)
+  # em positivo.
+  scale_x_continuous(labels = abs) +
+  # Alterando o tema
+  theme_minimal() +
+  # Alterando os textos
+  labs(
+    x = &quot;População&quot;, 
+    y = &quot;Faixa etária&quot;,
+    fill = &quot;Sexo&quot;,
+    title = &quot;Pirâmide etária - 2022&quot;,
+    caption = &quot;Fonte: Censo demográfico 2022, realizado pelo IBGE. Gráfico elaborado por Beatriz Milz.&quot;
+  ) +
+  theme(
+    legend.position = &quot;bottom&quot;
+  )</code></pre>
+<p><img src="/images/posts/conteudo/2024-05-27-piramide-etaria/grafico-6-1.png" /></p>
+<p>A discussão sobre possíveis diferenças (ou semelhanças) entre os municípios não está no escopo deste post. Quem sabe em um outro futuro?</p>
+</div>
+<div id="conclusão" class="section level2">
+<h2>Conclusão</h2>
+<p>Neste tutorial, vimos um pouco sobre como é possível criar uma pirâmide etária com ggplot2.</p>
+<p>Eu espero que o texto tenha ficado compreensível!</p>
+<p>Caso alguém tenha alguma sugestão (ou alguma parte não ficou claro), me avisem por favor!!</p>
+<p>Muito obrigada vocês pela leitura, e novamente, agradeço a <a href="https://curso-r.com/">Curso-R</a> e as pessoas participantes do curso de Visualização de Dados!</p>
+</div>
+
+          
+        </article>
+        
+  <div class="disqus-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "curso-r-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+
+      </div>
+      <div class="col-lg-1">
+</div>
+<div class="col-lg-3">
+  
+  <div class="widget">
+    <h4 class="mb-4">POSTS MAIS RECENTES</h4>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2024-05-26-piramide-etaria/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/piramide-etaria.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2024-05-26-piramide-etaria/">Criando uma pirâmide etária com dados do Censo 2022, usando o R e o pacote ggplot2</a></h5>
+        <p>Por Beatriz Milz em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2024-05-27-piramide-etaria/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/piramide-etaria.png"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2024-05-27-piramide-etaria/">Criando uma pirâmide etária com dados do Censo 2022, usando o R e o pacote ggplot2</a></h5>
+        <p>Por Beatriz Milz em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+    <div class="media mb-4">
+      <div class="post-thumb-sm mr-3">
+        <a href="https://blog.curso-r.com/posts/2023-07-24-dplyr-lead-lag/"><img class="mr-3 post-thumb-sm" src="https://blog.curso-r.com/images/posts/banner/exploring-dplyr.webp"></a>
+      </div>
+      <div class="media-body">
+        <h5><a class="text-dark" href="https://blog.curso-r.com/posts/2023-07-24-dplyr-lead-lag/">Explorando o pacote dplyr: lag/lead</a></h5>
+        <p>Por William em <a href="/categories/tutoriais">Tutoriais</a></p>
+      </div>
+    </div>
+    
+  </div>
+  <div class="widget">
+    <h4 class="mb-4">LEIA MAIS SOBRE</h4>
+    <ul class="list-inline tag-list">
+      <li class="list-inline-item m-1"><a href="/categories/an%c3%a1lises">Análises</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/boas-pr%c3%a1ticas">Boas práticas</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/conceitos">Conceitos</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/debugging">Debugging</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/desafio">Desafio</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/discuss%c3%b5es">Discussões</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/divulga%c3%a7%c3%a3o">Divulgação</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/erros">Erros</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/pacotes">Pacotes</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/r">R</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/top-10">Top 10</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutoriais">Tutoriais</a></li>
+      <li class="list-inline-item m-1"><a href="/categories/tutorial">Tutorial</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<footer class="bg-footer" style = "background-image: url('https://blog.curso-r.com/images/footerImage.webp')">
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="https://www.curso-r.com"><img src="https://blog.curso-r.com/images/footerLogo.webp" alt="Blog | Curso-R" class="img-fluid"></a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Dúvidas de R?</h6>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark"><a href="https://discourse.curso-r.com/">Acesse nosso fórum</a></li>
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          
+          <h6>Fale com a gente</h6>
+          <ul class="list-unstyled">
+            
+            
+            <li class="font-secondary text-dark"><a href="mailto:contato@curso-r.com">contato@curso-r.com</a></li>
+            
+          </ul>
+          
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h6>Siga a Curso-R</h6>
+          <ul class="list-inline d-inline-block">
+            
+            <li class="list-inline-item"><a href="https://github.com/curso-r" class="text-dark" target = "_blank"><i class="ti-github"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://twitter.com/curso_r" class="text-dark" target = "_blank"><i class="ti-twitter-alt"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.instagram.com/cursoo_r/" class="text-dark" target = "_blank"><i class="ti-instagram"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://br.linkedin.com/company/curso-r" class="text-dark" target = "_blank"><i class="ti-linkedin"></i></a></li>
+            
+            <li class="list-inline-item"><a href="https://www.facebook.com/cursodeR/" class="text-dark" target = "_blank"><i class="ti-facebook"></i></a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="text-center pb-3 copyright">
+        <h6 class="mb-0">Copyright © 2021 Curso-R</h6>
+        <p class="mb-0" style = "font-size: 0.8em;"> Site feito em <a href = "https://gohugo.io/" target = "_blank">Hugo</a>, com o pacote <a href = "https://bookdown.org/yihui/blogdown/" target = "_blank">Blogdown</a>. Tema por <a href = "https://themefisher.com/" target = "_blank">Themefisher</a>.</p>
+    </div>
+</footer>
+
+
+
+<script>
+  var indexURL = "https://blog.curso-r.com/index.json"
+</script>
+
+
+<!-- JS Plugins -->
+
+<script src="https://blog.curso-r.com/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/headroom/headroom.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/instafeed/instafeed.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/masonry/masonry.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/reading-time/readingTime.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/smooth-scroll/smooth-scroll.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/mark.js"></script>
+
+<script src="https://blog.curso-r.com/plugins/search/search.js"></script>
+
+<script src="https://blog.curso-r.com/js/highlight.pack.js"></script>
+
+<script src="https://platform.illow.io/banner.js?siteId=962b4071-1b48-4756-8b80-68101acc70df"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- Main Script -->
+
+<script src="https://blog.curso-r.com/js/script.min.js"></script>
+
+<!-- google analitycs -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-87272102-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</body>
+</html>
