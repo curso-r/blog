@@ -72,14 +72,9 @@ url = "https://www.curso-r.com/cursos"
 weight = 3
 
 [[menu.main]]
-name = "Fórum"
-url = "https://discourse.curso-r.com/"
-weight = 4
-
-[[menu.main]]
 name = "Curso-R"
 url = "https://www.curso-r.com"
-weight = 5
+weight = 4
 
 # deult parameter
 [params]
